@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, Zap, Cloud, Building, Home } from 'lucide-react';
+import { Cpu, Zap, TreePine, Home } from 'lucide-react';
 import { Link } from 'react-router';
 import type { BenchmarkSuite, SuiteInfo } from '../types';
 
@@ -21,16 +21,10 @@ const suiteInfos: SuiteInfo[] = [
         type: 'GPU',
     },
     {
-        id: 'ExascaleClimate',
-        name: 'Exascale Climate Emulator',
-        description: 'Climate Modeling Performance',
-        type: 'Climate',
-    },
-    {
-        id: 'StructuralSimulation',
-        name: 'Structural Simulation Toolkit',
-        description: 'Structural Analysis Performance',
-        type: 'Structural',
+        id: 'IQTree',
+        name: 'IQ-TREE (Phylogenetics)',
+        description: 'Phylogenetic Tree Inference',
+        type: 'Phylogenetics',
     },
 ];
 
@@ -40,10 +34,8 @@ const getIcon = (type: string) => {
             return <Cpu className="w-5 h-5" />;
         case 'GPU':
             return <Zap className="w-5 h-5" />;
-        case 'Climate':
-            return <Cloud className="w-5 h-5" />;
-        case 'Structural':
-            return <Building className="w-5 h-5" />;
+        case 'Phylogenetics':
+            return <TreePine className="w-5 h-5" />;
         default:
             return <Cpu className="w-5 h-5" />;
     }
@@ -51,36 +43,36 @@ const getIcon = (type: string) => {
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     return (
-        <nav className="bg-white border-b border-gray-200">
+        <nav className="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="flex justify-between items-center py-4">
-                    <div className="flex items-center space-x-3">
-                        <div className="bg-blue-600 p-2 rounded-lg">
+                    <a href="https://github.com/ANUHPC/ANUHPC-Leaderboard" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 group">
+                        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-2.5 rounded-xl shadow-md group-hover:shadow-blue-500/25 transition-shadow">
                             <Zap className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold text-gray-900">
-                                HPC Xenon Cluster Leaderboard Website
+                            <h1 className="text-xl font-bold text-white tracking-tight">
+                                ANUHPC Leaderboard
                             </h1>
-                            <p className="text-sm text-gray-600">
-                                https://github.com/anuhpc2025/HPC-Xenon-Cluster
+                            <p className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">
+                                ANU High Performance Computing
                             </p>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 {/* Suite Navigation */}
-                <div className="flex justify-between items-center pb-4">
+                <div className="flex justify-between items-center pb-3">
                     <div className="flex space-x-1 overflow-x-auto">
                         {suiteInfos.map((suite) => (
                             <Link
                                 key={suite.id}
                                 to={`/${suite.id}`}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-colors ${
+                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
                                     activeSuite === suite.id
-                                        ? 'bg-blue-100 text-blue-700 border-2 border-blue-300'
-                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100 border-2 border-transparent'
+                                        ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30'
+                                        : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
                                 }`}
                             >
                                 {getIcon(suite.type)}
@@ -90,11 +82,13 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
                     </div>
 
                     <a
-                        href="https://anuhpc2025.github.io/Main-Website/"
-                        className="flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap text-gray-600 hover:text-gray-900 hover:bg-gray-100 border-2 border-transparent"
+                        href="https://github.com/ANUHPC"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/10 border border-transparent transition-all"
                     >
                         <Home className="w-5 h-5" />
-                        <span>Main Website</span>
+                        <span>GitHub Org</span>
                     </a>
                 </div>
             </div>

@@ -343,32 +343,6 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
         );
     }
 
-    // "Coming soon" suites (only when no runs at all)
-    if (
-        !hasAnyRuns &&
-        (suite === 'ExascaleClimate' || suite === 'StructuralSimulation')
-    ) {
-        return (
-            <div className="space-y-6">
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
-                    <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                        <BarChart3 className="w-8 h-8 text-gray-400" />
-                    </div>
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                        {suiteName}
-                    </h2>
-                    <p className="text-gray-600 mb-4">{description}</p>
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-md mx-auto">
-                        <p className="text-blue-800 text-sm">
-                            This benchmark suite is coming soon. Data collection and
-                            analysis tools are currently being developed.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="space-y-6">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
