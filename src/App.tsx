@@ -16,6 +16,11 @@ const suiteDetails = {
         description: 'GPU-accelerated High Performance Linpack benchmark leveraging NVIDIA CUDA cores for maximum computational throughput.',
         background:"bg-green-50",
     },
+    IQTree: {
+        name: 'IQ-TREE (Phylogenetics)',
+        description: 'Maximum-likelihood phylogenetic tree inference benchmark using IQ-TREE. Measures runtime and log-likelihood across clusters.',
+        background:"bg-purple-50",
+    },
     ExascaleClimate: {
         name: 'Exascale Climate Emulator',
         description: 'Advanced climate modeling and simulation benchmark designed for exascale computing environments.',

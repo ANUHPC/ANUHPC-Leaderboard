@@ -1,19 +1,31 @@
+export interface HplBest {
+    gflops: number;
+    N: number;
+    NB: number;
+    timeSec: number;
+}
+
+export interface IqtreeBest {
+    logL: number;
+    BIC: number | null;
+    model: string | null;
+    numTaxa: number | null;
+    numSites: number | null;
+    timeSec: number;
+}
+
 export interface BenchmarkRun {
     id: string;
     suite: string;
     group: string;
     run: string;
-    best: {
-        gflops: number;
-        N: number;
-        NB: number;
-        timeSec: number;
-    };
+    cluster: string | null;
+    best: HplBest | IqtreeBest | null;
     outSummary: {
-        testsTotal: number;
-        testsPassed: number;
-        testsFailed: number;
-        testsSkipped: number;
+        testsTotal: number | null;
+        testsPassed: number | null;
+        testsFailed: number | null;
+        testsSkipped: number | null;
     };
     hasErr: boolean;
 }
@@ -23,7 +35,7 @@ export interface BenchmarkData {
     runs: BenchmarkRun[];
 }
 
-export type BenchmarkSuite = 'HPL' | 'HPL_NVIDIA' | 'ExascaleClimate' | 'StructuralSimulation';
+export type BenchmarkSuite = 'HPL' | 'HPL_NVIDIA' | 'IQTree' | 'ExascaleClimate' | 'StructuralSimulation';
 
 export interface SuiteInfo {
     id: BenchmarkSuite;

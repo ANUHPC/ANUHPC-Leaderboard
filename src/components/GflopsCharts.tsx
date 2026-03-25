@@ -56,7 +56,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
 };
 
 export const GflopsCharts: React.FC<GflopsChartsProps> = ({ runs }) => {
-    // Flatten all runs into { N, NB, gflops, label }
+    // Flatten HPL-style runs only (skip IQTree and other non-GFLOPS suites)
     const chartData = useMemo(() => {
         const points: {
             N: number;
@@ -66,16 +66,22 @@ export const GflopsCharts: React.FC<GflopsChartsProps> = ({ runs }) => {
         }[] = [];
 
         runs.forEach((r) => {
+            if (!r.best || !('gflops' in r.best)) return;
+            const best = r.best as import('../types').HplBest;
+            if (!Number.isFinite(best.gflops) || !Number.isFinite(best.N)) return;
             points.push({
-                N: r.best.N,
-                NB: r.best.NB,
-                gflops: r.best.gflops,
+                N: best.N,
+                NB: best.NB,
+                gflops: best.gflops,
                 label: `${r.group}/${r.run}`,
             });
         });
 
         return points;
     }, [runs]);
+
+    // If no HPL-style data (e.g. IQTree suite), render nothing
+    if (chartData.length === 0) return null;
 
     // Compute axis extents with padding
     const nExtent = useMemo(() => {

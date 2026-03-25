@@ -16,7 +16,7 @@ interface LeaderboardTableProps {
     suite: string;
 }
 
-type SortField = 'gflops' | 'group' | 'run' | 'timeSec' | 'testsPassed';
+type SortField = 'gflops' | 'group' | 'run' | 'timeSec' | 'testsPassed' | 'cluster';
 type SortDirection = 'asc' | 'desc';
 
 export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite }) => {
@@ -49,10 +49,18 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
         }
     };
 
+    const getPrimaryMetric = (run: BenchmarkRun): number => {
+        if (!run.best) return -Infinity;
+        // IQTree: higher log-likelihood is better
+        if ('logL' in run.best) return run.best.logL ?? -Infinity;
+        if ('gflops' in run.best) return run.best.gflops ?? -Infinity;
+        return -Infinity;
+    };
+
     // Get best run per group
     const bestPerGroupRuns = Object.values(
         runs.reduce<Record<string, BenchmarkRun>>((acc, run) => {
-            if (!acc[run.group] || run.best.gflops > acc[run.group].best.gflops) {
+            if (!acc[run.group] || getPrimaryMetric(run) > getPrimaryMetric(acc[run.group])) {
                 acc[run.group] = run;
             }
             return acc;
@@ -68,16 +76,16 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
 
         switch (sortField) {
             case 'gflops':
-                aValue = a.best.gflops;
-                bValue = b.best.gflops;
+                aValue = getPrimaryMetric(a);
+                bValue = getPrimaryMetric(b);
                 break;
             case 'timeSec':
-                aValue = a.best.timeSec;
-                bValue = b.best.timeSec;
+                aValue = (a.best && 'timeSec' in a.best ? a.best.timeSec : null) ?? 0;
+                bValue = (b.best && 'timeSec' in b.best ? b.best.timeSec : null) ?? 0;
                 break;
             case 'testsPassed':
-                aValue = a.outSummary.testsPassed;
-                bValue = b.outSummary.testsPassed;
+                aValue = a.outSummary.testsPassed ?? 0;
+                bValue = b.outSummary.testsPassed ?? 0;
                 break;
             case 'group':
                 aValue = a.group;
@@ -87,9 +95,13 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                 aValue = a.run;
                 bValue = b.run;
                 break;
+            case 'cluster':
+                aValue = a.cluster ?? '';
+                bValue = b.cluster ?? '';
+                break;
             default:
-                aValue = a.best.gflops;
-                bValue = b.best.gflops;
+                aValue = getPrimaryMetric(a);
+                bValue = getPrimaryMetric(b);
         }
 
         if (typeof aValue === 'string' && typeof bValue === 'string') {
@@ -112,6 +124,21 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
         }
     };
 
+    const CLUSTER_STYLES: Record<string, string> = {
+        Xenon:  'bg-blue-100 text-blue-800',
+        Raijin: 'bg-orange-100 text-orange-800',
+    };
+
+    const clusterBadge = (cluster: string | null) => {
+        if (!cluster) return null;
+        const cls = CLUSTER_STYLES[cluster] ?? 'bg-gray-100 text-gray-700';
+        return (
+            <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded-full ${cls}`}>
+                {cluster}
+            </span>
+        );
+    };
+
     const formatGflops = (gflops: number) => {
         if (gflops >= 1000) {
             return `${(gflops / 1000).toFixed(2)}T`;
@@ -119,9 +146,57 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
         return gflops.toFixed(3);
     };
 
+    const renderPrimaryMetric = (run: BenchmarkRun) => {
+        if (!run.best) return <span className="text-gray-400">N/A</span>;
+        if ('logL' in run.best) {
+            return (
+                <>
+                    <div className="text-sm font-bold text-purple-600">
+                        lnL = {run.best.logL?.toFixed(2) ?? 'N/A'}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                        {run.best.model ?? ''}
+                    </div>
+                </>
+            );
+        }
+        const best = run.best as import('../types').HplBest;
+        return (
+            <>
+                <div className="text-lg font-bold text-blue-600">
+                    {formatGflops(best.gflops)}
+                </div>
+                <div className="text-xs text-gray-500">
+                    {best.gflops.toLocaleString()} GFLOPS
+                </div>
+            </>
+        );
+    };
+
+    const renderSizeColumn = (run: BenchmarkRun) => {
+        if (!run.best) return <span className="text-gray-400">N/A</span>;
+        if ('logL' in run.best) {
+            const b = run.best as import('../types').IqtreeBest;
+            return (
+                <>
+                    <div className="text-sm text-gray-900">{b.numTaxa ?? '?'} taxa</div>
+                    <div className="text-xs text-gray-500">{b.numSites ?? '?'} sites</div>
+                </>
+            );
+        }
+        const b = run.best as import('../types').HplBest;
+        return (
+            <>
+                <div className="text-sm text-gray-900">N={b.N?.toLocaleString() ?? '?'}</div>
+                <div className="text-xs text-gray-500">NB={b.NB ?? '?'}</div>
+            </>
+        );
+    };
+
     const getSuccessRate = (summary: BenchmarkRun['outSummary']) => {
-        const rate = (summary.testsPassed / summary.testsTotal) * 100;
-        return rate;
+        const passed = summary.testsPassed ?? 0;
+        const total = summary.testsTotal ?? 1;
+        return (passed / total) * 100;
     };
 
     const SortIcon = ({ field }: { field: SortField }) => {
@@ -161,6 +236,15 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                             </th>
                             <th
                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                                onClick={() => handleSort('cluster')}
+                            >
+                                <div className="flex items-center space-x-1">
+                                    <span>Cluster</span>
+                                    <SortIcon field="cluster" />
+                                </div>
+                            </th>
+                            <th
+                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                                 onClick={() => handleSort('group')}
                             >
                                 <div className="flex items-center space-x-1">
@@ -182,7 +266,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                 onClick={() => handleSort('gflops')}
                             >
                                 <div className="flex items-center space-x-1">
-                                    <span>Performance (GFLOPS)</span>
+                                    <span>Performance</span>
                                     <SortIcon field="gflops" />
                                 </div>
                             </th>
@@ -224,6 +308,9 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                     <div className="flex items-center">{getRankIcon(index)}</div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
+                                    {clusterBadge(run.cluster)}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
                                         {run.group}
                                     </div>
@@ -232,16 +319,13 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                     <div className="text-sm text-gray-900">{run.run}</div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-lg font-bold text-blue-600">
-                                        {formatGflops(run.best.gflops)}
-                                    </div>
-                                    <div className="text-xs text-gray-500">
-                                        {run.best.gflops.toLocaleString()} GFLOPS
-                                    </div>
+                                    {renderPrimaryMetric(run)}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm text-gray-900">
-                                        {run.best.timeSec > 0 ? `${run.best.timeSec}s` : 'N/A'}
+                                        {run.best && 'timeSec' in run.best && (run.best.timeSec ?? 0) > 0
+                                            ? `${run.best.timeSec}s`
+                                            : 'N/A'}
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -264,12 +348,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                     )}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm text-gray-900">
-                                        N={run.best.N.toLocaleString()}
-                                    </div>
-                                    <div className="text-xs text-gray-500">
-                                        NB={run.best.NB}
-                                    </div>
+                                    {renderSizeColumn(run)}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <button

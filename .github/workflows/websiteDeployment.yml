@@ -32,6 +32,9 @@ jobs:
             npm install
           fi
 
+      - name: Generate index.json
+        run: node scripts/generate-index.mjs
+
       - name: Build site
         run: npm run build
         env:

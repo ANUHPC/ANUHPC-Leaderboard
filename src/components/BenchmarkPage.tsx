@@ -39,6 +39,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
 
     // Filters and controls
     const [searchQuery, setSearchQuery] = useState('');
+    const [clusterFilter, setClusterFilter] = useState<string>('all');
     const [statusFilter, setStatusFilter] = useState<StatusFilter>('pass');
 
     // Sort options (no toggle, explicit options only)
@@ -134,26 +135,41 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
         return data ? data.runs.filter((r: any) => r.suite === suite) : [];
     }, [data, suite]);
 
+    // Unique clusters present in this suite
+    const availableClusters = useMemo(() => {
+        const clusters = new Set<string>();
+        filteredRuns.forEach((r: any) => { if (r.cluster) clusters.add(r.cluster); });
+        return Array.from(clusters).sort();
+    }, [filteredRuns]);
+
     const hasAnyRuns = filteredRuns.length > 0;
+
+    // Cluster-filtered base
+    const clusterFilteredRuns = useMemo(() => {
+        if (clusterFilter === 'all') return filteredRuns;
+        return filteredRuns.filter((r: any) => r.cluster === clusterFilter);
+    }, [filteredRuns, clusterFilter]);
 
     // Split runs by validity
     const errorRuns = useMemo(
-        () => filteredRuns.filter((r: any) => r.hasErr),
-        [filteredRuns]
+        () => clusterFilteredRuns.filter((r: any) => r.hasErr),
+        [clusterFilteredRuns]
     );
 
     const validPerfRuns = useMemo(
         () =>
-            filteredRuns.filter((r: any) => {
+            clusterFilteredRuns.filter((r: any) => {
                 if (r.hasErr) return false;
+                // IQTree runs are valid even without gflops
+                if (suite === 'IQTree') return true;
                 const g = getGflops(r);
                 return Number.isFinite(g);
             }),
-        [filteredRuns]
+        [clusterFilteredRuns, suite]
     );
 
     // Stats (ignore error runs for performance metrics)
-    const totalRuns = filteredRuns.length;
+    const totalRuns = clusterFilteredRuns.length;
     const errorCount = errorRuns.length;
 
     const avgGflops =
@@ -469,6 +485,25 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                                     />
                                 </div>
                             </div>
+
+                            {/* Cluster filter */}
+                            {availableClusters.length > 1 && (
+                                <div className="md:col-span-2">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Cluster
+                                    </label>
+                                    <select
+                                        value={clusterFilter}
+                                        onChange={(e) => setClusterFilter(e.target.value)}
+                                        className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    >
+                                        <option value="all">All clusters</option>
+                                        {availableClusters.map((c) => (
+                                            <option key={c} value={c}>{c}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )}
 
                             {/* Status (compact) */}
                             <div className="md:col-span-1">
