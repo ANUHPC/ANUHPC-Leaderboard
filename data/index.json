@@ -1,11 +1,26 @@
 {
-  "generatedAt": "2026-03-26T10:28:41.404Z",
+  "generatedAt": "2026-03-26T10:32:49.546Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
       "suite": "HPL",
       "group": "Ayush",
       "run": "26-03-26",
+      "cluster": null,
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/Second-raijin",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Second-raijin",
       "cluster": null,
       "best": null,
       "outSummary": {
