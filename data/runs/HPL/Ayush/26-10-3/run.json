@@ -1,0 +1,111 @@
+{
+  "id": "HPL/Ayush/26-10-3",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "26-10-3",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nCustom quick test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n339968       Ns\n5            # of NBs\n512         NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n16           Ps\n16           Qs\n16.0         threshold\n1            # of panel fact\n2            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n1            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n2            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n64           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Custom quick test"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        339968
+      ],
+      "numNBs": 5,
+      "NBs": [
+        512
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        16
+      ],
+      "Qs": [
+        16
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        1,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 64,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 8
+    },
+    "path": "/raw/HPL/Ayush/26-10-3/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-hero\n#SBATCH --nodes=4\n#SBATCH --ntasks=256             \n#SBATCH --ntasks-per-node=64     \n#SBATCH --cpus-per-task=1\n#SBATCH --time=24:00:00\n\n# --- Spack / env setup ---\nexport SPACK_USER_CONFIG_PATH=/tmp/spack-config\nexport SPACK_USER_CACHE_PATH=/tmp/spack-cache\nexport SPACK_ROOT=/opt/spack\nsource ${SPACK_ROOT}/share/spack/setup-env.sh\n\n# Load the exact OpenMPI + AOCL-tuned HPL you built\nspack load /buou2hh         \nspack load hpl %aocc \n\n\nexport PATH=$(spack location -i /buou2hh)/bin:$PATH\nexport LD_LIBRARY_PATH=$(spack location -i /buou2hh)/lib:$LD_LIBRARY_PATH\n\n# --- MPI transport / launch ---\nunset OMPI_MCA_osc                      # avoid shared memory RMA oddities\nexport OMPI_MCA_btl=self,vader,tcp      # tcp over Ethernet\nexport OMPI_MCA_btl_tcp_if_include=eth0\nexport OMPI_MCA_oob_tcp_if_include=eth0\nexport OMPI_MCA_pml=ob1\n\n# Let OpenMPI auto-pick collective algs at this scale\nunset OMPI_MCA_coll_tuned_use_dynamic_rules\nunset OMPI_MCA_coll_tuned_bcast_algorithm\nunset OMPI_MCA_coll_tuned_allreduce_algorithm\n\n# Slurm integration (mpirun knows we're under Slurm)\nexport OMPI_MCA_plm=slurm\nunset OMPI_MCA_orte_launch\n\n# --- Threading / binding ---\nexport OMP_NUM_THREADS=1           # 1 thread per rank, critical\nexport BLIS_NUM_THREADS=1          # force AOCL BLIS single-thread\nexport OMP_PLACES=cores\nexport OMP_PROC_BIND=close         # keep rank near its core/L3\n\n# BLIS low-level knobs: keep them simple and consistent with 1 thread.\nexport BLIS_ENABLE_OPENMP=0       \nexport BLIS_DYNAMIC_SCHED=0\nexport BLIS_JC_NT=1\nexport BLIS_IC_NT=1\nexport BLIS_JR_NT=1\nexport BLIS_IR_NT=1\n\n# Tell OMPI/hwloc: bind to physical cores, not SMT siblings\nexport OMPI_MCA_hwloc_base_binding_policy=core\nexport OMPI_MCA_hwloc_base_use_hwthreads_as_cpus=0\n\n# --- System hygiene ---\nulimit -l unlimited\nulimit -n 65536\nsync   \n\nnumactl --interleave=all \\\n  mpirun --bind-to core --map-by ppr:64:node:pe=1 --report-bindings \\\n    $(spack location -i hpl)/bin/xhpl",
+    "sbatch": {
+      "job-name": "hpl-hero",
+      "nodes": 4,
+      "ntasks": 256,
+      "ntasks-per-node": 64,
+      "cpus-per-task": 1,
+      "time": "24:00:00"
+    },
+    "path": "/raw/HPL/Ayush/26-10-3/run.sh"
+  },
+  "out": {
+    "path": "/raw/HPL/Ayush/26-10-3/run.sh-1370.out",
+    "runs": [],
+    "summary": {
+      "testsTotal": null,
+      "testsPassed": null,
+      "testsFailed": null,
+      "testsSkipped": null
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/Ayush/26-10-3/run.sh-1370.err",
+    "size": 21241
+  },
+  "best": null
+}
