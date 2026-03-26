@@ -151,17 +151,21 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
     }, [filteredRuns, clusterFilter]);
 
     // Split runs by validity
+    // A run is an "error" if it produced no valid results (best is null)
+    // Having stderr output (hasErr) is normal — MPI binding info goes there
     const errorRuns = useMemo(
-        () => clusterFilteredRuns.filter((r: any) => r.hasErr),
-        [clusterFilteredRuns]
+        () => clusterFilteredRuns.filter((r: any) => {
+            if (suite === 'IQTree') return r.best == null;
+            return r.best == null && (r.outSummary == null || r.outSummary.testsPassed === 0);
+        }),
+        [clusterFilteredRuns, suite]
     );
 
     const validPerfRuns = useMemo(
         () =>
             clusterFilteredRuns.filter((r: any) => {
-                if (r.hasErr) return false;
                 // IQTree runs are valid even without gflops
-                if (suite === 'IQTree') return true;
+                if (suite === 'IQTree') return r.best != null;
                 const g = getGflops(r);
                 return Number.isFinite(g);
             }),
@@ -678,10 +682,11 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                                     const errMsg =
                                         r?.errorMessage ??
                                         r?.errMessage ??
-                                        r?.err ??
-                                        r?.outErr ??
-                                        r?.failure ??
-                                        'Unknown error';
+                                        (r?.outSummary == null && r?.best == null
+                                            ? (r?.hasErr ? 'No HPL output produced (check stderr)' : 'No output file found')
+                                            : r?.outSummary?.testsFailed > 0
+                                                ? `${r.outSummary.testsFailed} test(s) failed residual checks`
+                                                : 'Unknown error');
                                     return (
                                         <div
                                             key={r?.id ?? r?.runId ?? r?.name ?? idx}
