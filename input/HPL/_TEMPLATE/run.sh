@@ -6,6 +6,8 @@
 #SBATCH --time=00:10:00           # Time limit hh:mm:ss
 #SBATCH --nodes=4                 # Number of nodes
 #SBATCH --nodelist=node1,node2,node3,node4    # nodes 1 and 2 are the only ones with hpcx for now
+#SBATCH --output=run.sh-%j.out    # Standard output log
+#SBATCH --error=run.sh-%j.err     # Standard error log
 
 # Load MPI module (adjust for your system)
 # module load openmpi
