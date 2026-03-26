@@ -22,3 +22,4 @@ echo "==================="
 mpirun --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core \
   --mca btl ^openib \
   ./xhpl
+  
