@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-26T10:32:31.069Z",
+  "generatedAt": "2026-03-26T10:34:59.767Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
@@ -15,6 +15,15 @@
       "suite": "HPL",
       "group": "Ayush",
       "run": "Second-raijin",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/test",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "test",
       "best": null,
       "outSummary": null,
       "hasErr": true
