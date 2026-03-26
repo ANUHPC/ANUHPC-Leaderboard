@@ -1,18 +1,13 @@
 {
-  "generatedAt": "2026-03-26T10:11:59.882Z",
+  "generatedAt": "2026-03-26T10:28:24.495Z",
   "runs": [
     {
-      "id": "HPL/Ayush/Raijin-test",
+      "id": "HPL/Ayush/26-03-26",
       "suite": "HPL",
       "group": "Ayush",
-      "run": "Raijin-test",
+      "run": "26-03-26",
       "best": null,
-      "outSummary": {
-        "testsTotal": null,
-        "testsPassed": null,
-        "testsFailed": null,
-        "testsSkipped": null
-      },
+      "outSummary": null,
       "hasErr": true
     }
   ]
