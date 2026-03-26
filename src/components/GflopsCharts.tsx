@@ -111,8 +111,8 @@ export const GflopsCharts: React.FC<GflopsChartsProps> = ({ runs }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* GFLOPS vs N */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-                <h3 className="text-md font-semibold text-gray-800 mb-3">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+                <h3 className="text-md font-semibold text-gray-900 mb-4">
                     GFLOPS vs N (matrix size)
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
@@ -136,8 +136,8 @@ export const GflopsCharts: React.FC<GflopsChartsProps> = ({ runs }) => {
             </div>
 
             {/* GFLOPS vs NB */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-                <h3 className="text-md font-semibold text-gray-800 mb-3">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+                <h3 className="text-md font-semibold text-gray-900 mb-4">
                     GFLOPS vs Block Size (NB)
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>

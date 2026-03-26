@@ -349,14 +349,14 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
 
     return (
         <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
                     {suiteName}
                 </h1>
-                <p className="text-gray-600">{description}</p>
+                <p className="text-gray-500 mt-2 text-lg">{description}</p>
 
                 {data && (
-                    <div className="mt-4 text-sm text-gray-500">
+                    <div className="mt-4 text-sm text-gray-400">
                         Last updated: {new Date(data.generatedAt).toLocaleString()}
                     </div>
                 )}
@@ -365,57 +365,61 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
             {hasAnyRuns && (
                 <>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <div className="flex items-center space-x-3">
-                                <BarChart3 className="w-8 h-8 text-blue-600" />
+                        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg shadow-blue-500/20">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <div className="text-2xl font-bold text-gray-900">
-                                        {totalRuns}
-                                    </div>
-                                    <div className="text-sm text-gray-600">Total Runs</div>
+                                    <div className="text-sm font-medium text-blue-100">Total Runs</div>
+                                    <div className="text-3xl font-bold mt-1">{totalRuns}</div>
+                                </div>
+                                <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
+                                    <BarChart3 className="w-6 h-6" />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <div className="flex items-center space-x-3">
-                                <AlertCircle className="w-8 h-8 text-red-600" />
+                        <div className="bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl p-6 text-white shadow-lg shadow-red-500/20">
+                            <div className="flex items-center justify-between">
                                 <div>
-                                    <div className="text-2xl font-bold text-gray-900">
-                                        {errorCount}
-                                    </div>
-                                    <div className="text-sm text-gray-600">Error Runs</div>
+                                    <div className="text-sm font-medium text-red-100">Error Runs</div>
+                                    <div className="text-3xl font-bold mt-1">{errorCount}</div>
+                                </div>
+                                <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
+                                    <AlertCircle className="w-6 h-6" />
                                 </div>
                             </div>
                         </div>
 
                         {maxGflops !== null && (
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <div className="flex items-center space-x-3">
-                                    <Clock className="w-8 h-8 text-green-600" />
+                            <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-6 text-white shadow-lg shadow-emerald-500/20">
+                                <div className="flex items-center justify-between">
                                     <div>
-                                        <div className="text-2xl font-bold text-gray-900">
+                                        <div className="text-sm font-medium text-emerald-100">Peak GFLOPS</div>
+                                        <div className="text-3xl font-bold mt-1">
                                             {maxGflops >= 1000
                                                 ? `${(maxGflops / 1000).toFixed(1)}T`
                                                 : maxGflops.toFixed(1)}
                                         </div>
-                                        <div className="text-sm text-gray-600">Peak GFLOPS</div>
+                                    </div>
+                                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
+                                        <Clock className="w-6 h-6" />
                                     </div>
                                 </div>
                             </div>
                         )}
 
                         {avgGflops !== null && (
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <div className="flex items-center space-x-3">
-                                    <BarChart3 className="w-8 h-8 text-purple-600" />
+                            <div className="bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg shadow-purple-500/20">
+                                <div className="flex items-center justify-between">
                                     <div>
-                                        <div className="text-2xl font-bold text-gray-900">
+                                        <div className="text-sm font-medium text-violet-100">Avg GFLOPS</div>
+                                        <div className="text-3xl font-bold mt-1">
                                             {avgGflops >= 1000
                                                 ? `${(avgGflops / 1000).toFixed(1)}T`
                                                 : avgGflops.toFixed(1)}
                                         </div>
-                                        <div className="text-sm text-gray-600">Avg GFLOPS</div>
+                                    </div>
+                                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
+                                        <BarChart3 className="w-6 h-6" />
                                     </div>
                                 </div>
                             </div>
@@ -423,21 +427,22 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                     </div>
 
                     {errorCount > 0 && (
-                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start space-x-3">
-                            <AlertCircle className="w-5 h-5 text-amber-700 mt-0.5" />
-                            <p className="text-amber-800 text-sm">
+                        <div className="bg-red-50/60 border border-red-100 rounded-2xl p-4 flex items-center gap-3">
+                            <div className="bg-red-100 rounded-lg p-2 shrink-0">
+                                <AlertCircle className="w-4 h-4 text-red-500" />
+                            </div>
+                            <p className="text-red-600/90 text-sm">
                                 {errorCount} run{errorCount === 1 ? '' : 's'} encountered
-                                errors and are excluded from performance and success-rate
-                                statistics, as well as the leaderboard.
+                                errors and {errorCount === 1 ? 'is' : 'are'} excluded from performance statistics and the leaderboard.
                             </p>
                         </div>
                     )}
 
                     {/* Filters */}
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6">
+                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 md:p-6">
                         <div className="flex items-center gap-2 mb-4">
-                            <FilterIcon className="w-4 h-4 text-gray-700" />
-                            <h3 className="text-sm font-semibold text-gray-800">
+                            <FilterIcon className="w-4 h-4 text-gray-400" />
+                            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
                                 Filters
                             </h3>
                         </div>
@@ -623,7 +628,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                         visibleRuns.length > 0 ? (
                             <LeaderboardTable runs={visibleRuns as any[]} suite={suite} />
                         ) : (
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
                                 <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                                 <h3 className="text-lg font-medium text-gray-900 mb-2">
                                     No matching results
@@ -634,7 +639,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                             </div>
                         )
                     ) : hasAnyRuns ? (
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
                             <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             <h3 className="text-lg font-medium text-gray-900 mb-2">
                                 No Successful Runs Yet
@@ -650,7 +655,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                             )}
                         </div>
                     ) : (
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
                             <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             <h3 className="text-lg font-medium text-gray-900 mb-2">
                                 No Data Available
@@ -663,9 +668,9 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                 ) : // Fail status view
                 errorRuns.length > 0 ? (
                     visibleRuns.length > 0 ? (
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                            <div className="px-6 py-4 border-b border-gray-200">
-                                <h3 className="text-lg font-medium text-gray-900">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div className="px-6 py-5 border-b border-gray-100">
+                                <h3 className="text-lg font-bold text-gray-900 tracking-tight">
                                     Failed Runs
                                 </h3>
                             </div>
@@ -724,7 +729,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                             </div>
                         </div>
                     ) : (
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
                             <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             <h3 className="text-lg font-medium text-gray-900 mb-2">
                                 No matching failed runs
@@ -735,7 +740,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                         </div>
                     )
                 ) : (
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
                         <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                         <h3 className="text-lg font-medium text-gray-900 mb-2">
                             No Failed Runs
