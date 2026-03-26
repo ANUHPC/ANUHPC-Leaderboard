@@ -94,7 +94,19 @@
     },
     "path": "/raw/HPL/Ayush/Raijin-test/run.sh"
   },
-  "out": null,
-  "err": null,
+  "out": {
+    "path": "/raw/HPL/Ayush/Raijin-test/run.sh-2.out",
+    "runs": [],
+    "summary": {
+      "testsTotal": null,
+      "testsPassed": null,
+      "testsFailed": null,
+      "testsSkipped": null
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/Ayush/Raijin-test/run.sh-2.err",
+    "size": 726
+  },
   "best": null
 }
