@@ -1,19 +1,13 @@
 {
-  "generatedAt": "2026-03-26T11:06:45.145Z",
+  "generatedAt": "2026-03-26T11:07:58.008Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
       "suite": "HPL",
       "group": "Ayush",
       "run": "26-03-26",
-      "cluster": null,
       "best": null,
-      "outSummary": {
-        "testsTotal": null,
-        "testsPassed": null,
-        "testsFailed": null,
-        "testsSkipped": null
-      },
+      "outSummary": null,
       "hasErr": true
     },
     {
@@ -21,14 +15,8 @@
       "suite": "HPL",
       "group": "Ayush",
       "run": "Second-raijin",
-      "cluster": null,
       "best": null,
-      "outSummary": {
-        "testsTotal": null,
-        "testsPassed": null,
-        "testsFailed": null,
-        "testsSkipped": null
-      },
+      "outSummary": null,
       "hasErr": true
     },
     {
@@ -36,14 +24,8 @@
       "suite": "HPL",
       "group": "Ayush",
       "run": "test",
-      "cluster": null,
       "best": null,
-      "outSummary": {
-        "testsTotal": null,
-        "testsPassed": null,
-        "testsFailed": null,
-        "testsSkipped": null
-      },
+      "outSummary": null,
       "hasErr": true
     },
     {
@@ -51,7 +33,6 @@
       "suite": "HPL",
       "group": "Ayush",
       "run": "test-2",
-      "cluster": null,
       "best": {
         "gflops": 178.91,
         "N": 20000,
@@ -59,10 +40,10 @@
         "timeSec": 29.81
       },
       "outSummary": {
-        "testsTotal": null,
-        "testsPassed": null,
-        "testsFailed": null,
-        "testsSkipped": null
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
       },
       "hasErr": true
     }
