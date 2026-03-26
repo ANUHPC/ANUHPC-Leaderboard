@@ -16,9 +16,8 @@ jobs:
     timeout-minutes: 7200
     if: >-
       github.event_name == 'push' &&
-      github.ref == 'refs/heads/main' &&
-      contains(fromJSON('["AyushRai09","u7508601","Xeno-Tek"]'), github.actor)
-
+      github.ref == 'refs/heads/main'
+      
     steps:
       - name: Reject unauthorized actors
         run: |
