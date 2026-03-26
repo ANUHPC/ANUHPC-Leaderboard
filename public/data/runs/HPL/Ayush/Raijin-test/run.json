@@ -1,0 +1,100 @@
+{
+  "id": "HPL/Ayush/Raijin-test",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "Raijin-test",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nInnovative Computing Laboratory, University of Tennessee\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n5000         Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n2            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n4            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n64           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n# test trigger\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Innovative Computing Laboratory, University of Tennessee"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        5000
+      ],
+      "numNBs": 1,
+      "NBs": [
+        192
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        2
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        4,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 64,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 8
+    },
+    "path": "/raw/HPL/Ayush/Raijin-test/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --job-name=HPL-test\n#SBATCH --partition=batch\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=8\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n\nexport OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\n\necho \"=== HPL Test Run ===\"\necho \"Date: $(date)\"\necho \"Nodes: $(scontrol show hostname $SLURM_JOB_NODELIST | paste -sd,)\"\necho \"Tasks: $SLURM_NTASKS\"\necho \"CPUs per task: $SLURM_CPUS_PER_TASK\"\necho \"OMP_NUM_THREADS: $OMP_NUM_THREADS\"\necho \"===================\"\n\nmpirun --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core \\\n  --mca btl ^openib \\\n  ./xhpl\n  ",
+    "sbatch": {
+      "job-name": "HPL-test",
+      "partition": "batch",
+      "nodes": 2,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 8,
+      "time": "00:30:00",
+      "exclusive": true
+    },
+    "path": "/raw/HPL/Ayush/Raijin-test/run.sh"
+  },
+  "out": null,
+  "err": null,
+  "best": null
+}
