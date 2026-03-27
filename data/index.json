@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-26T11:59:13.530Z",
+  "generatedAt": "2026-03-27T11:23:27.390Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
@@ -8,6 +8,26 @@
       "run": "26-03-26",
       "cluster": null,
       "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/Hero-Raijin",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Hero-Raijin",
+      "cluster": null,
+      "best": {
+        "gflops": 400.38,
+        "N": 82944,
+        "NB": 256,
+        "timeSec": 950.18
+      },
       "outSummary": {
         "testsTotal": null,
         "testsPassed": null,
