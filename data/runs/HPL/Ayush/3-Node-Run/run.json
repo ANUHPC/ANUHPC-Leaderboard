@@ -1,0 +1,106 @@
+{
+  "id": "HPL/Ayush/3-Node-Run",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "3-Node-Run",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 3-node run (90% memory)\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n107520       Ns\n1            # of NBs\n224          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n6            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n0            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n0            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 3-node run (90% memory)"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        107520
+      ],
+      "numNBs": 1,
+      "NBs": [
+        224
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        6
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        0,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "path": "/raw/HPL/Ayush/3-Node-Run/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-3node\n#SBATCH --nodes=3\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=8\n#SBATCH --partition=batch\n#SBATCH --time=02:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- OpenBLAS threading (8 cores per MPI task) ---\nexport OMP_NUM_THREADS=8\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\nexport OPENBLAS_NUM_THREADS=8\n\n# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---\nexport OMPI_MCA_btl=tcp,self\nexport OMPI_MCA_btl_tcp_if_include=enp32s0f0\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_plm=rsh\nexport OMPI_MCA_plm_rsh_agent=\"ssh -o StrictHostKeyChecking=no\"\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL\nmpirun --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core --report-bindings -x OMP_NUM_THREADS -x OMP_PROC_BIND -x OMP_PLACES -x OPENBLAS_NUM_THREADS ./xhpl",
+    "sbatch": {
+      "job-name": "hpl-3node",
+      "nodes": 3,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 8,
+      "partition": "batch",
+      "time": "02:00:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "output": "run.sh-%j.out",
+      "error": "run.sh-%j.err"
+    },
+    "path": "/raw/HPL/Ayush/3-Node-Run/run.sh"
+  },
+  "out": null,
+  "err": {
+    "path": "/raw/HPL/Ayush/3-Node-Run/run.sh-11.err",
+    "size": 1742
+  },
+  "best": null
+}
