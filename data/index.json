@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-28T09:21:35.148Z",
+  "generatedAt": "2026-03-28T09:54:50.383Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
@@ -8,6 +8,26 @@
       "run": "26-03-26",
       "cluster": null,
       "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/2Node-Ib-Max",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "2Node-Ib-Max",
+      "cluster": null,
+      "best": {
+        "gflops": 567.13,
+        "N": 108544,
+        "NB": 256,
+        "timeSec": 1503.32
+      },
       "outSummary": {
         "testsTotal": null,
         "testsPassed": null,
