@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-28T05:43:34.876Z",
+  "generatedAt": "2026-03-28T05:48:58.881Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
@@ -162,6 +162,26 @@
         "N": 20000,
         "NB": 192,
         "timeSec": 63.33
+      },
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/test-ib-hero",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "test-ib-hero",
+      "cluster": null,
+      "best": {
+        "gflops": 396.02,
+        "N": 20000,
+        "NB": 192,
+        "timeSec": 13.47
       },
       "outSummary": {
         "testsTotal": null,
