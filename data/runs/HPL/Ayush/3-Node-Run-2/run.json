@@ -4,7 +4,7 @@
   "group": "Ayush",
   "run": "3-Node-Run-2",
   "dat": {
-    "raw": "HPLinpack benchmark input file\nRaijin 3-node run (90% memory)\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n107520       Ns\n1            # of NBs\n224          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n6            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n0            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n0            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "raw": "HPLinpack benchmark input file\nRaijin 3-node run (90% memory)\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n152096       Ns\n1            # of NBs\n224          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n6            Ps\n8            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n0            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n0            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
     "parsed": {
       "header": [
         "HPLinpack benchmark input file",
@@ -14,7 +14,7 @@
       "deviceOut": 6,
       "numProblemSizes": 1,
       "Ns": [
-        107520
+        152096
       ],
       "numNBs": 1,
       "NBs": [
@@ -23,10 +23,10 @@
       "pmap": 0,
       "numGrids": 1,
       "Ps": [
-        1
+        6
       ],
       "Qs": [
-        6
+        8
       ],
       "threshold": 16,
       "numPFACT": 1,
@@ -82,14 +82,14 @@
   },
   "job": {
     "filename": "run.sh",
-    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-3node\n#SBATCH --nodes=3\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=8\n#SBATCH --partition=batch\n#SBATCH --time=02:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- OpenBLAS threading (8 cores per MPI task) ---\nexport OMP_NUM_THREADS=8\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\nexport OPENBLAS_NUM_THREADS=8\n\n# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---\nexport OMPI_MCA_btl=tcp,self\nexport OMPI_MCA_btl_tcp_if_include=enp32s0f0\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_plm=rsh\nexport OMPI_MCA_plm_rsh_agent=\"ssh -o StrictHostKeyChecking=no\"\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL\nmpirun --mca routed direct \\\n       --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core --report-bindings \\\n       -x OMP_NUM_THREADS -x OMP_PROC_BIND -x OMP_PLACES -x OPENBLAS_NUM_THREADS ./xhpl",
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-3node\n#SBATCH --nodes=3\n#SBATCH --ntasks-per-node=16\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=05:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- Single-threaded BLAS (pure MPI, 1 process per core) ---\nexport OMP_NUM_THREADS=1\nexport OPENBLAS_NUM_THREADS=1\n\n# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---\nexport OMPI_MCA_btl=tcp,self\nexport OMPI_MCA_btl_tcp_if_include=enp32s0f0\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_plm=rsh\nexport OMPI_MCA_plm_rsh_agent=\"ssh -o StrictHostKeyChecking=no\"\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL\nmpirun --mca routed direct \\\n       --map-by core --bind-to core --report-bindings \\\n       -x OMP_NUM_THREADS -x OPENBLAS_NUM_THREADS ./xhpl",
     "sbatch": {
       "job-name": "hpl-3node",
       "nodes": 3,
-      "ntasks-per-node": 2,
-      "cpus-per-task": 8,
+      "ntasks-per-node": 16,
+      "cpus-per-task": 1,
       "partition": "batch",
-      "time": "02:00:00",
+      "time": "05:00:00",
       "exclusive": true,
       "hint": "nomultithread",
       "output": "run.sh-%j.out",
