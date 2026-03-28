@@ -1,7 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=hpl-3node
-#SBATCH --nodes=3
-#SBATCH --exclude=hpc-05
+#SBATCH --job-name=hpl-2node
+#SBATCH --nodes=2
 #SBATCH --ntasks-per-node=16
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=batch

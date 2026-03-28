@@ -1,14 +1,14 @@
 HPLinpack benchmark input file
-Raijin 3-node run (70% memory)
+Raijin 2-node run (70% memory, IB)
 HPL.out      output file name (if any)
 6            device out (6=stdout,7=stderr,file)
 1            # of problems sizes (N)
-82944        Ns
+108544       Ns
 1            # of NBs
 256          NBs
 0            PMAP process mapping (0=Row-,1=Column-major)
 1            # of process grids (P x Q)
-6            Ps
+4            Ps
 8            Qs
 16.0         threshold
 1            # of panel fact
