@@ -11,17 +11,20 @@
 #SBATCH --error=run.sh-%j.err
 
 # --- OpenBLAS threading (8 cores per MPI task) ---
-export OMP_NUM_THREADS=4
+export OMP_NUM_THREADS=2
 export OMP_PROC_BIND=close
 export OMP_PLACES=cores
-export OPENBLAS_NUM_THREADS=4
+export OPENBLAS_NUM_THREADS=2
 
-# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---
-export OMPI_MCA_btl=tcp,self
-export OMPI_MCA_btl_tcp_if_include=enp32s0f0
+# --- MPI transport: InfiniBand (56 Gb/s FDR) ---
+export OMPI_MCA_btl=openib,self,vader
+export OMPI_MCA_btl_openib_if_include=mlx4_0
+export OMPI_MCA_btl_openib_allow_ib=1
+export OMPI_MCA_btl_openib_warn_no_device_params_found=0
 export OMPI_MCA_pml=ob1
 export OMPI_MCA_plm=rsh
 export OMPI_MCA_plm_rsh_agent="ssh -o StrictHostKeyChecking=no"
+export OMPI_MCA_orte_keep_fqdn_hostnames=t
 
 # Ulimits
 ulimit -l unlimited
