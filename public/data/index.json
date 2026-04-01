@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01T05:48:12.863Z",
+  "generatedAt": "2026-04-01T05:50:04.963Z",
   "runs": [
     {
       "id": "HPL/Aden/test-1",
@@ -353,25 +353,6 @@
         "N": 12345,
         "NB": 192,
         "timeSec": 10.72
-      },
-      "outSummary": {
-        "testsTotal": 1,
-        "testsPassed": 1,
-        "testsFailed": 0,
-        "testsSkipped": 0
-      },
-      "hasErr": true
-    },
-    {
-      "id": "HPL/Maya/Yippee",
-      "suite": "HPL",
-      "group": "Maya",
-      "run": "Yippee",
-      "best": {
-        "gflops": 241.98,
-        "N": 31415,
-        "NB": 1024,
-        "timeSec": 85.42
       },
       "outSummary": {
         "testsTotal": 1,
