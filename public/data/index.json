@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-04-01T04:55:49.099Z",
+  "generatedAt": "2026-04-01T05:27:10.055Z",
   "runs": [
+    {
+      "id": "HPL/Aden/test-1",
+      "suite": "HPL",
+      "group": "Aden",
+      "run": "test-1",
+      "best": {
+        "gflops": 556.63,
+        "N": 108544,
+        "NB": 256,
+        "timeSec": 1531.68
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
     {
       "id": "HPL/Ayush/26-03-26",
       "suite": "HPL",
@@ -315,6 +334,44 @@
         "N": 2000,
         "NB": 192,
         "timeSec": 0.43
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Flynn/test-run-1",
+      "suite": "HPL",
+      "group": "Flynn",
+      "run": "test-run-1",
+      "best": {
+        "gflops": 117.05,
+        "N": 12345,
+        "NB": 192,
+        "timeSec": 10.72
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/Yippee",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "Yippee",
+      "best": {
+        "gflops": 241.98,
+        "N": 31415,
+        "NB": 1024,
+        "timeSec": 85.42
       },
       "outSummary": {
         "testsTotal": 1,
