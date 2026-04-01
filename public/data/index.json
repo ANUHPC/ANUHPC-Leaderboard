@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01T01:39:38.931Z",
+  "generatedAt": "2026-04-01T01:42:43.868Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
@@ -263,6 +263,25 @@
         "N": 20000,
         "NB": 192,
         "timeSec": 29.55
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Daniel/test",
+      "suite": "HPL",
+      "group": "Daniel",
+      "run": "test",
+      "best": {
+        "gflops": 12.274,
+        "N": 2000,
+        "NB": 192,
+        "timeSec": 0.43
       },
       "outSummary": {
         "testsTotal": 1,
