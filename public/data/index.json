@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01T01:11:44.867Z",
+  "generatedAt": "2026-04-01T01:21:07.830Z",
   "runs": [
     {
       "id": "HPL/Ayush/26-03-26",
@@ -152,6 +152,20 @@
         "testsPassed": 1,
         "testsFailed": 0,
         "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/Scream",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Scream",
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
       },
       "hasErr": true
     },
