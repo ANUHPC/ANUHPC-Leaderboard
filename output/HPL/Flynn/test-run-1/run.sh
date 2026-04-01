@@ -11,10 +11,10 @@
 #SBATCH --error=run.sh-%j.err
 
 # --- OpenBLAS threading (8 cores per MPI task) ---
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=16
 export OMP_PROC_BIND=close
 export OMP_PLACES=cores
-export OPENBLAS_NUM_THREADS=8
+export OPENBLAS_NUM_THREADS=16
 
 # --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---
 export OMPI_MCA_btl=tcp,self
