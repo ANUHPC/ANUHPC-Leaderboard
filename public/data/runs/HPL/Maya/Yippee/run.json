@@ -4,7 +4,7 @@
   "group": "Maya",
   "run": "Yippee",
   "dat": {
-    "raw": "HPLinpack benchmark input file\nRaijin 2-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n31415        Ns\n1            # of NBs\n1024          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n4            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "raw": "HPLinpack benchmark input file\nRaijin 2-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n90000        Ns\n1            # of NBs\n1024          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n4            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n5           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n8           memory alignment in double (> 0)",
     "parsed": {
       "header": [
         "HPLinpack benchmark input file",
@@ -14,7 +14,7 @@
       "deviceOut": 6,
       "numProblemSizes": 1,
       "Ns": [
-        31415
+        90000
       ],
       "numNBs": 1,
       "NBs": [
@@ -72,11 +72,11 @@
         0
       ],
       "swapMode": 1,
-      "swapThreshold": 16,
+      "swapThreshold": 5,
       "L1": 0,
       "U": 0,
       "equilibration": 1,
-      "memoryAlignment": 16
+      "memoryAlignment": 8
     },
     "path": "/raw/HPL/Maya/Yippee/HPL.dat"
   },
