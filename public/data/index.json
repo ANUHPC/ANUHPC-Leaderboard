@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-03T12:15:16.548Z",
+  "generatedAt": "2026-04-03T12:55:51.227Z",
   "runs": [
     {
       "id": "HPL/Aden/test-1",
@@ -154,6 +154,25 @@
       "best": null,
       "outSummary": null,
       "hasErr": false
+    },
+    {
+      "id": "HPL/Ayush/3Node-PureMPI-75Percent",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "3Node-PureMPI-75Percent",
+      "best": {
+        "gflops": 842.59,
+        "N": 134208,
+        "NB": 192,
+        "timeSec": 1912.66
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
     },
     {
       "id": "HPL/Ayush/3Node-ib-Max",
