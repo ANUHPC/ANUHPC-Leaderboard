@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01T09:10:34.700Z",
+  "generatedAt": "2026-04-03T11:13:44.710Z",
   "runs": [
     {
       "id": "HPL/Aden/test-1",
@@ -151,6 +151,15 @@
       "suite": "HPL",
       "group": "Ayush",
       "run": "3-Node-Run-IB-4",
+      "best": null,
+      "outSummary": null,
+      "hasErr": false
+    },
+    {
+      "id": "HPL/Ayush/3Node-ib-Max",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "3Node-ib-Max",
       "best": null,
       "outSummary": null,
       "hasErr": false
