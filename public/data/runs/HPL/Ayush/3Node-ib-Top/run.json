@@ -1,0 +1,136 @@
+{
+  "id": "HPL/Ayush/3Node-ib-Top",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "3Node-ib-Top",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 3-node InfiniBand test (80% memory)\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n141312       Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n3            Qs\n16.0         threshold\n1            # of panel fact\n2            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n4            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n64           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 3-node InfiniBand test (80% memory)"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        141312
+      ],
+      "numNBs": 1,
+      "NBs": [
+        192
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        2
+      ],
+      "Qs": [
+        3
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        4,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 64,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 8
+    },
+    "path": "/raw/HPL/Ayush/3Node-ib-Top/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-3node-ib\n#SBATCH --nodes=3\n#SBATCH --nodelist=hpc-02,hpc-03,hpc-04\n#SBATCH --exclude=hpc-05\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=8\n#SBATCH --partition=batch\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- OpenBLAS threading (8 cores per MPI task = 1 socket) ---\nexport OMP_NUM_THREADS=8\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\nexport OPENBLAS_NUM_THREADS=8\n\n# --- MPI transport: InfiniBand via OpenIB ---\nexport OMPI_MCA_btl=openib,vader,self\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_btl_openib_allow_ib=1\nexport OMPI_MCA_btl_openib_warn_default_gid_prefix=0\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL\nmpirun --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core --report-bindings \\\n  -x OMP_NUM_THREADS -x OMP_PROC_BIND -x OMP_PLACES -x OPENBLAS_NUM_THREADS \\\n  ./xhpl",
+    "sbatch": {
+      "job-name": "hpl-3node-ib",
+      "nodes": 3,
+      "nodelist": "hpc-02,hpc-03,hpc-04",
+      "exclude": "hpc-05",
+      "ntasks-per-node": 2,
+      "cpus-per-task": 8,
+      "partition": "batch",
+      "time": "01:00:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "output": "run.sh-%j.out",
+      "error": "run.sh-%j.err"
+    },
+    "path": "/raw/HPL/Ayush/3Node-ib-Top/run.sh"
+  },
+  "out": {
+    "path": "/raw/HPL/Ayush/3Node-ib-Top/run.sh-38.out",
+    "runs": [
+      {
+        "tv": "WR11C2R4",
+        "N": 141312,
+        "NB": 192,
+        "P": 2,
+        "Q": 3,
+        "timeSec": 2551.06,
+        "gflops": 737.45,
+        "startTime": "Fri Apr  3 11:24:40 2026",
+        "endTime": "Fri Apr  3 12:07:11 2026",
+        "residual": 0.00330770018,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/Ayush/3Node-ib-Top/run.sh-38.err",
+    "size": 2488
+  },
+  "best": {
+    "gflops": 737.45,
+    "N": 141312,
+    "NB": 192,
+    "timeSec": 2551.06
+  }
+}
