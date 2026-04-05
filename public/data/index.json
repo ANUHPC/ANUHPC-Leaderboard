@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-03T12:55:51.227Z",
+  "generatedAt": "2026-04-05T04:45:06.803Z",
   "runs": [
     {
       "id": "HPL/Aden/test-1",
@@ -165,6 +165,25 @@
         "N": 134208,
         "NB": 192,
         "timeSec": 1912.66
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/3Node-Top",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "3Node-Top",
+      "best": {
+        "gflops": 844.21,
+        "N": 141312,
+        "NB": 192,
+        "timeSec": 2228.44
       },
       "outSummary": {
         "testsTotal": 1,
