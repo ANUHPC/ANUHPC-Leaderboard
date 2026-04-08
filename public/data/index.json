@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-08T07:47:22.183Z",
+  "generatedAt": "2026-04-08T08:31:03.343Z",
   "runs": [
     {
       "id": "HPL/Aden/test-1",
@@ -218,6 +218,20 @@
         "testsPassed": 1,
         "testsFailed": 0,
         "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/4Node-ib-Max",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "4Node-ib-Max",
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
       },
       "hasErr": true
     },
