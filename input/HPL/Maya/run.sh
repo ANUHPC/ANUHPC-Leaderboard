@@ -15,8 +15,8 @@ export OMP_NUM_THREADS=8
 export OMP_PROC_BIND=true
 export OMP_PLACES=cores
 export OPENBLAS_NUM_THREADS=8
-
-# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---
+ 
+# --- MPI transport: TCP over Ethernet SSH launcher (no srun) ---
 export OMPI_MCA_pml=ucx
 export UCX_TLS=rc,self,sm
 export UCX_NET_DEVICES=mlx4_0

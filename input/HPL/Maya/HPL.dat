@@ -22,7 +22,7 @@ HPL.out      output file name (if any)
 1            # of broadcast
 1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)
 1            # of lookahead depth
-1            DEPTHs (>=0)
+2            DEPTHs (>=0)
 2            SWAP (0=bin-exch,1=long,2=mix)
 32           swapping threshold
 0            L1 in (0=transposed,1=no-transposed) form
