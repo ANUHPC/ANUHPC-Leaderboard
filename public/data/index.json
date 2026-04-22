@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-22T05:13:33.829Z",
+  "generatedAt": "2026-04-22T05:23:33.581Z",
   "runs": [
     {
       "id": "HPL/Aden/5node_run_1",
@@ -15,6 +15,15 @@
       "suite": "HPL",
       "group": "Aden",
       "run": "5node_run_2",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Aden/5node_run_3",
+      "suite": "HPL",
+      "group": "Aden",
+      "run": "5node_run_3",
       "best": null,
       "outSummary": null,
       "hasErr": true
@@ -586,6 +595,15 @@
       "suite": "HPL",
       "group": "Maya",
       "run": "folder",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/trial-2",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "trial-2",
       "best": null,
       "outSummary": null,
       "hasErr": true
