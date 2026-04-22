@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-22T05:36:53.536Z",
+  "generatedAt": "2026-04-22T05:39:33.031Z",
   "runs": [
     {
       "id": "HPL/Aden/5node_run_1",
@@ -606,6 +606,25 @@
         "testsPassed": null,
         "testsFailed": null,
         "testsSkipped": null
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Flynn/test-run-6",
+      "suite": "HPL",
+      "group": "Flynn",
+      "run": "test-run-6",
+      "best": {
+        "gflops": 214.45,
+        "N": 20000,
+        "NB": 192,
+        "timeSec": 24.87
+      },
+      "outSummary": {
+        "testsTotal": 2,
+        "testsPassed": 2,
+        "testsFailed": 0,
+        "testsSkipped": 0
       },
       "hasErr": true
     },
