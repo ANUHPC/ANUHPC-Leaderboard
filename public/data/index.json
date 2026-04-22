@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-04-21T23:40:22.175Z",
+  "generatedAt": "2026-04-22T03:58:01.393Z",
   "runs": [
+    {
+      "id": "HPL/Aden/5node_run_1",
+      "suite": "HPL",
+      "group": "Aden",
+      "run": "5node_run_1",
+      "best": null,
+      "outSummary": null,
+      "hasErr": false
+    },
     {
       "id": "HPL/Aden/test-1",
       "suite": "HPL",
@@ -506,6 +515,25 @@
       "outSummary": {
         "testsTotal": 1,
         "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Flynn/test-run-2",
+      "suite": "HPL",
+      "group": "Flynn",
+      "run": "test-run-2",
+      "best": {
+        "gflops": 27.951,
+        "N": 20000,
+        "NB": 192,
+        "timeSec": 190.83
+      },
+      "outSummary": {
+        "testsTotal": 20,
+        "testsPassed": 20,
         "testsFailed": 0,
         "testsSkipped": 0
       },
