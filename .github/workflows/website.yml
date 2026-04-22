@@ -1,6 +1,8 @@
 name: website.yml
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
   push:
     branches: [main]
     paths:
@@ -32,27 +34,21 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Show source tree (debug)
-        run: |
-          echo "Listing output (if exists):"
-          ls -la "output" || true
-          ls -la "output/HPL" || true
-          ls -la "output/HPL_NVIDIA" || true
-          echo "Sample deeper listing:"
-          find "output" -maxdepth 3 -type d -print || true
-
       - name: Generate website data from HPL outputs
-        run: |
-          node --version
-          node scripts/collect-hpl.js
-          echo "Listing generated data at /tmp/hpl-website-data (if any):"
-          ls -R "/tmp/hpl-website-data" || true
+        run: node scripts/collect-hpl.js
 
       - name: Checkout website branch
         uses: actions/checkout@v4
         with:
           ref: website
           path: website-branch
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: website-branch/node_modules
+          key: npm-${{ hashFiles('website-branch/package-lock.json', 'website-branch/package.json') }}
+          restore-keys: npm-
 
       - name: Sync data/raw into website branch public/
         run: |
@@ -65,12 +61,6 @@ jobs:
             echo "No /tmp/hpl-website-data/data directory to sync"
           fi
 
-          # if [ -d "/tmp/hpl-website-data/raw" ]; then
-          #  rsync -a --delete "/tmp/hpl-website-data/raw/" website-branch/public/raw/
-          #else
-          #  echo "No /tmp/hpl-website-data/raw directory to sync"
-          #fi
-
           cd website-branch
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -81,13 +71,13 @@ jobs:
             echo "No data changes to commit"
           fi
 
-      - name: Build React app
+      - name: Install dependencies
         working-directory: website-branch
         run: |
           if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-            npm ci
+            npm ci --prefer-offline
           else
-            npm install
+            npm install --prefer-offline
           fi
 
       - name: Build site
@@ -103,3 +93,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website-branch/dist
           publish_branch: gh-pages
+          force_orphan: true
