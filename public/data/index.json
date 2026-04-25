@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-25T07:19:35.643Z",
+  "generatedAt": "2026-04-25T07:22:10.383Z",
   "runs": [
     {
       "id": "HPL/Aden/5node_run_1",
@@ -369,6 +369,25 @@
         "testsPassed": null,
         "testsFailed": null,
         "testsSkipped": null
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/Ezy-Win",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Ezy-Win",
+      "best": {
+        "gflops": 799.2,
+        "N": 179200,
+        "NB": 192,
+        "timeSec": 4800.36
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
       },
       "hasErr": true
     },
