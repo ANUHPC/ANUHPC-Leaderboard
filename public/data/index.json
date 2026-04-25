@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-25T03:47:19.754Z",
+  "generatedAt": "2026-04-25T03:53:09.203Z",
   "runs": [
     {
       "id": "HPL/Aden/5node_run_1",
@@ -356,6 +356,20 @@
       "run": "5Node-ib-test",
       "best": null,
       "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/Ez-win",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Ez-win",
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
       "hasErr": true
     },
     {
