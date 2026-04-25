@@ -1,0 +1,116 @@
+{
+  "id": "HPL/Ayush/Ezz",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "Ezz",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 5-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n179200       Ns\n1            # of NBs\n224          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n8            Ps\n10           Qs\n16.0         threshold\n1            # of panel fact\n2            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n4            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n2            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n64           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 5-node test"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        179200
+      ],
+      "numNBs": 1,
+      "NBs": [
+        224
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        8
+      ],
+      "Qs": [
+        10
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        4,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        3,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 64,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "path": "/raw/HPL/Ayush/Ezz/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05,hpc-07\n#SBATCH --job-name=hpl-test\n#SBATCH --nodes=5\n#SBATCH --ntasks-per-node=16\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=02:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- Single-threaded BLAS (pure MPI, 1 process per core) ---\nexport OMP_NUM_THREADS=1\nexport OPENBLAS_NUM_THREADS=1\n\n# --- MPI transport: InfiniBand via OpenIB ---\nexport OMPI_MCA_btl=openib,vader,self\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_btl_openib_allow_ib=1\nexport OMPI_MCA_btl_openib_warn_default_gid_prefix=0\nexport OMPI_MCA_btl_openib_eager_limit=32768\nexport OMPI_MCA_btl_openib_rndv_eager_limit=32768\n\nexport OMPI_MCA_hwloc_base_binding_policy=core\nexport I_MPI_PIN_DOMAIN=core\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL — 1 rank per core\nmpirun --map-by ppr:8:socket:PE=1 --bind-to core --report-bindings \\\n  -x OMP_NUM_THREADS -x OPENBLAS_NUM_THREADS \\\n  ./xhpl",
+    "sbatch": {
+      "nodelist": "hpc-02,hpc-03,hpc-04,hpc-05,hpc-07",
+      "job-name": "hpl-test",
+      "nodes": 5,
+      "ntasks-per-node": 16,
+      "cpus-per-task": 1,
+      "partition": "batch",
+      "time": "02:00:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "output": "run.sh-%j.out",
+      "error": "run.sh-%j.err"
+    },
+    "path": "/raw/HPL/Ayush/Ezz/run.sh"
+  },
+  "out": {
+    "path": "/raw/HPL/Ayush/Ezz/run.sh-71.out",
+    "runs": [],
+    "summary": {
+      "testsTotal": null,
+      "testsPassed": null,
+      "testsFailed": null,
+      "testsSkipped": null
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/Ayush/Ezz/run.sh-71.err",
+    "size": 9646
+  },
+  "best": null
+}
