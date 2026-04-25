@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-25T07:22:10.383Z",
+  "generatedAt": "2026-04-25T07:44:15.415Z",
   "runs": [
     {
       "id": "HPL/Aden/5node_run_1",
@@ -388,6 +388,20 @@
         "testsPassed": 1,
         "testsFailed": 0,
         "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/Ezy-Winn",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Ezy-Winn",
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
       },
       "hasErr": true
     },
