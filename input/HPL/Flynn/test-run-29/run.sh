@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --nodelist=hpc-03,hpc-04,hpc-06,gpc-07
+#SBATCH --nodelist=hpc-03,hpc-04,hpc-06,hpc-07
 #SBATCH --job-name=hpl-tes
 #SBATCH --nodes=4
 #SBATCH --ntasks-per-node=16
