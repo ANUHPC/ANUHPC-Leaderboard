@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T04:57:56.324Z",
+  "generatedAt": "2026-05-13T05:25:49.516Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -941,6 +941,15 @@
       "suite": "HPL",
       "group": "Flynn",
       "run": "test-run-31",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Flynn/test-run-32",
+      "suite": "HPL",
+      "group": "Flynn",
+      "run": "test-run-32",
       "best": null,
       "outSummary": null,
       "hasErr": true
