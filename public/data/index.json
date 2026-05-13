@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-13T04:11:57.089Z",
+  "generatedAt": "2026-05-13T04:57:56.324Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -123,6 +123,25 @@
       "run": "5node_run_6",
       "best": null,
       "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Aden/6node_1task_1",
+      "suite": "HPL",
+      "group": "Aden",
+      "run": "6node_1task_1",
+      "best": {
+        "gflops": 1648.8,
+        "N": 178944,
+        "NB": 192,
+        "timeSec": 2316.86
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
       "hasErr": true
     },
     {
