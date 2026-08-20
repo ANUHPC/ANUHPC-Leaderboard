@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T05:16:53.350Z",
+  "generatedAt": "2026-08-20T05:46:18.212Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -154,6 +154,25 @@
         "N": 108544,
         "NB": 256,
         "timeSec": 1531.68
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Ayush/20-8-26",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "20-8-26",
+      "best": {
+        "gflops": 1657.2,
+        "N": 178944,
+        "NB": 192,
+        "timeSec": 2305.17
       },
       "outSummary": {
         "testsTotal": 1,
