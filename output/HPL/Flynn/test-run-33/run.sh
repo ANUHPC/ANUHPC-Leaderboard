@@ -39,6 +39,8 @@ export OMPI_MCA_btl_openib_warn_default_gid_prefix=0
 ulimit -l unlimited
 ulimit -n 65536
 
+source ~/.bashrc
+
 # =========================================================
 # VTune collection
 # =========================================================
