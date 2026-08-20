@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, Zap, TreePine, Home } from 'lucide-react';
+import { Cpu, Zap, TreePine, Home, GitBranch } from 'lucide-react';
 import { Link } from 'react-router';
 import type { BenchmarkSuite, SuiteInfo } from '../types';
 
@@ -26,6 +26,12 @@ const suiteInfos: SuiteInfo[] = [
         description: 'Phylogenetic Tree Inference',
         type: 'Phylogenetics',
     },
+    {
+        id: 'MFC',
+        name: 'MFC (Multi-Flow Component)',
+        description: 'Multi-Flow Component Benchmark',
+        type: 'Multi-Flow',
+    },
 ];
 
 const getIcon = (type: string) => {
@@ -36,6 +42,8 @@ const getIcon = (type: string) => {
             return <Zap className="w-5 h-5" />;
         case 'Phylogenetics':
             return <TreePine className="w-5 h-5" />;
+        case 'Multi-Flow':
+            return <GitBranch className="w-5 h-5" />;
         default:
             return <Cpu className="w-5 h-5" />;
     }

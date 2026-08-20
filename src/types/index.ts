@@ -35,11 +35,11 @@ export interface BenchmarkData {
     runs: BenchmarkRun[];
 }
 
-export type BenchmarkSuite = 'HPL' | 'HPL_NVIDIA' | 'IQTree';
+export type BenchmarkSuite = 'HPL' | 'HPL_NVIDIA' | 'IQTree' | 'MFC';
 
 export interface SuiteInfo {
     id: BenchmarkSuite;
     name: string;
     description: string;
-    type: 'CPU' | 'GPU' | 'Phylogenetics';
+    type: 'CPU' | 'GPU' | 'Phylogenetics' | 'Multi-Flow';
 }
