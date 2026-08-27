@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-27T03:24:47.661Z",
+  "generatedAt": "2026-08-27T03:30:31.697Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1199,6 +1199,25 @@
       "run": "n40 nb64 p4q4",
       "best": null,
       "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/run2",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "run2",
+      "best": {
+        "gflops": 210.76,
+        "N": 40000,
+        "NB": 32,
+        "timeSec": 202.46
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
       "hasErr": true
     },
     {
