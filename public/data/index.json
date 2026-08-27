@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-27T03:48:35.386Z",
+  "generatedAt": "2026-08-27T03:53:30.052Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1088,6 +1088,63 @@
       "run": "test-run-9",
       "best": null,
       "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/15n64nbp4q4",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "15n64nbp4q4",
+      "best": {
+        "gflops": 194.15,
+        "N": 15000,
+        "NB": 64,
+        "timeSec": 11.59
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/25n64nbp4q4",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "25n64nbp4q4",
+      "best": {
+        "gflops": 227.62,
+        "N": 25000,
+        "NB": 64,
+        "timeSec": 45.77
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/30n64nbp4q4",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "30n64nbp4q4",
+      "best": {
+        "gflops": 236.11,
+        "N": 30000,
+        "NB": 64,
+        "timeSec": 76.24
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
       "hasErr": true
     },
     {
