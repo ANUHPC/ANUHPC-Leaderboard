@@ -4,29 +4,29 @@
   "group": "Maya",
   "run": "trial-4-256NB",
   "dat": {
-    "raw": "HPLinpack benchmark input file\nRaijin 2-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n179968        Ns\n1            # of NBs\n256          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n8            Ps\n10            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "raw": "HPLinpack benchmark input file\nRaijin 1-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n10000        Ns\n1            # of NBs\n32           NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n0            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
     "parsed": {
       "header": [
         "HPLinpack benchmark input file",
-        "Raijin 2-node test"
+        "Raijin 1-node test"
       ],
       "outputFilename": "HPL.out",
       "deviceOut": 6,
       "numProblemSizes": 1,
       "Ns": [
-        179968
+        10000
       ],
       "numNBs": 1,
       "NBs": [
-        256
+        32
       ],
       "pmap": 0,
       "numGrids": 1,
       "Ps": [
-        8
+        2
       ],
       "Qs": [
-        10
+        2
       ],
       "threshold": 16,
       "numPFACT": 1,
@@ -68,7 +68,7 @@
       ],
       "numDEPTH": 1,
       "DEPTHs": [
-        1,
+        0,
         0
       ],
       "swapMode": 2,
