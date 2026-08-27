@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-27T03:14:47.085Z",
+  "generatedAt": "2026-08-27T03:17:45.099Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1180,7 +1180,7 @@
       "run": "n40 nb64 p4q4",
       "best": null,
       "outSummary": null,
-      "hasErr": false
+      "hasErr": true
     },
     {
       "id": "HPL/Maya/trial-2",
