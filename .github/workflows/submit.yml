@@ -2,11 +2,16 @@ name: Submit jobs
 
 # Replacement for node1.yml, suite-aware and built on the shared filesystem.
 #
-# NOT YET ENABLED. It is workflow_dispatch only until three things exist:
-#   1. a self-hosted runner under /cluster/runner
-#   2. a built toolchain (no gfortran/cmake/BLAS on the cluster today)
-#   3. HPL and MFC published under /apps
+# NOT YET ENABLED. It is workflow_dispatch only until:
+#   1. each cluster's runner carries its cluster label (see clusters/*/partitions.yml)
+#   2. the toolchain and benchmark binaries are published on that cluster
 # node1.yml stays in place and untouched until this has run green by hand.
+#
+# ROUTING. Raijin and Xenon are separate machines with no network path between
+# them, so each is reached only through its own self-hosted runner. Jobs are
+# routed by runner LABEL: a runner registered with the label "xenon" picks up
+# the xenon matrix leg. scripts/select-jobs.mjs decides which jobs belong to
+# which cluster, so a runner never touches another cluster's work.
 #
 # What changed versus node1.yml: because every node mounts the same /scratch,
 # the whole distribute-to-all-nodes and gather-from-all-nodes machinery is gone,
@@ -17,6 +22,11 @@ name: Submit jobs
 on:
   workflow_dispatch:
     inputs:
+      cluster:
+        description: "Cluster to submit on"
+        required: true
+        type: choice
+        options: [raijin, xenon]
       suite:
         description: "Suite to submit (HPL, MFC, or all)"
         required: false
@@ -30,7 +40,13 @@ env:
 
 jobs:
   submit:
-    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        cluster: ["${{ inputs.cluster }}"]
+    # The second label routes to that cluster's runner. A runner must be
+    # registered with its cluster name as a label for this to match.
+    runs-on: [self-hosted, "${{ matrix.cluster }}"]
     timeout-minutes: 480
     steps:
       - name: Reject unauthorized actors
@@ -43,6 +59,7 @@ jobs:
             exit 1
           fi
           echo "actor=${{ github.actor }} ref=${{ github.ref }} run=${{ github.run_id }}"
+          echo "cluster=${{ matrix.cluster }} on runner $(hostname -s)"
 
       - uses: actions/checkout@v4
         with: { fetch-depth: 1, ref: main }
@@ -56,23 +73,19 @@ jobs:
           STAGE="${SCRATCH_BASE}/${GITHUB_RUN_ID}"
           mkdir -p "$STAGE"
           echo "STAGE=$STAGE" >> "$GITHUB_ENV"
-          shopt -s nullglob
           n=0
-          for suite in input/*/; do
-            s="$(basename "$suite")"
+          # Only this cluster's jobs. Legacy runs with no job.yml are routed by
+          # the --nodelist in their run.sh.
+          while IFS= read -r run; do
+            [ -n "$run" ] || continue
+            s="$(echo "$run" | cut -d/ -f2)"
             [ "${{ inputs.suite }}" = "all" ] || [ "${{ inputs.suite }}" = "$s" ] || continue
-            for group in "$suite"*/; do
-              case "$(basename "$group")" in _*) continue ;; esac
-              for run in "$group"*/; do
-                [ -d "$run" ] || continue
-                dest="$STAGE/${run#input/}"
-                mkdir -p "$dest"
-                cp -r "$run". "$dest"/
-                echo "staged $run -> $dest"
-                n=$((n+1))
-              done
-            done
-          done
+            dest="$STAGE/${run#input/}"
+            mkdir -p "$dest"
+            cp -r "$run"/. "$dest"/
+            echo "staged $run -> $dest"
+            n=$((n+1))
+          done < <(node scripts/select-jobs.mjs "${{ matrix.cluster }}")
           echo "staged $n job(s)"
           echo "STAGED=$n" >> "$GITHUB_ENV"
 
@@ -141,7 +154,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "nothing to commit"
           else
-            git commit -m "Results from run ${GITHUB_RUN_ID} [skip ci]"
+            git commit -m "Results from ${{ matrix.cluster }} run ${GITHUB_RUN_ID} [skip ci]"
             for i in 1 2 3; do
               git push origin main && break
               git pull --no-rebase --no-edit origin main

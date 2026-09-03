@@ -69,8 +69,9 @@ tuning:
     gpu: none
     case_optimization: false
 
+clusters: [xenon]   # MFC needs a Fortran/MPI toolchain; only Xenon has one being built.
+
 limits:
-  partitions: [cpu, gpu]
   max_nodes: 2
   max_walltime: "04:00:00"
 

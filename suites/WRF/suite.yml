@@ -3,6 +3,7 @@
 name: WRF
 description: Weather Research and Forecasting model
 enabled: false
+clusters: []          # not wired to any cluster yet
 
 metric:
   key: throughput

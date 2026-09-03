@@ -7,8 +7,12 @@
 # partition, so its 72 cores are not schedulable. If that changes, add it here
 # and to slurm.conf together.
 
-cluster: anuhpc
+name: xenon
+label: Xenon
+description: 4-node cluster, 2x CPU + 2x A100 GPU nodes, 56 Gb FDR InfiniBand
 controller: cpu-node1
+runner_label: xenon      # GitHub Actions: runs-on [self-hosted, xenon]
+status: active
 
 nodes:
   cpu-node2:

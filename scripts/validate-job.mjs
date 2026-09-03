@@ -9,6 +9,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { parseYaml } from "./lib/yaml.mjs";
+import { loadClusters } from "./lib/cluster.mjs";
 
 const CWD = process.cwd();
 const problems = [];
@@ -41,9 +42,8 @@ function toSeconds(hms) {
 }
 
 async function main() {
-  const cluster = parseYaml((await readSafe(path.join(CWD, "cluster/partitions.yml"))) || "");
-  const chains  = parseYaml((await readSafe(path.join(CWD, "cluster/toolchains.yml"))) || "");
-  if (!cluster.partitions) { console.error("cluster/partitions.yml missing or unreadable"); process.exit(1); }
+  const clusters = await loadClusters(CWD);
+  if (!Object.keys(clusters).length) { console.error("no clusters found under clusters/"); process.exit(1); }
 
   const suites = {};
   for (const name of await listDirs(path.join(CWD, "suites"))) {
@@ -115,15 +115,32 @@ async function main() {
       }
     }
 
-    // --- resources against the real cluster ---
+    // --- which cluster? everything below depends on it ---
+    const cname = job.cluster;
+    const allowed = suite.clusters || [];
+    if (!cname) {
+      err(where, `job.yml must name a cluster; ${suiteName} runs on: ${allowed.join(", ") || "(none configured)"}`);
+      continue;
+    }
+    const cluster = clusters[cname];
+    if (!cluster) {
+      err(where, `unknown cluster "${cname}" (have: ${Object.keys(clusters).join(", ")})`); continue;
+    }
+    if (allowed.length && !allowed.includes(cname)) {
+      err(where, `${suiteName} is not set up on cluster "${cname}" (allowed: ${allowed.join(", ")})`); continue;
+    }
+    if (cluster.derived) {
+      warn(where, `cluster "${cname}" has DERIVED specs (inferred from past runs, not measured) — limits here are approximate`);
+    }
+
+    // --- resources against that cluster ---
     const r = job.resources || {};
     const pname = r.partition;
     const part = pname ? cluster.partitions[pname] : null;
 
     if (!pname) err(where, "resources.partition is required");
-    else if (!part) err(where, `partition "${pname}" does not exist (have: ${Object.keys(cluster.partitions).join(", ")})`);
-    else if (suite.limits?.partitions && !suite.limits.partitions.includes(pname)) {
-      err(where, `${suiteName} may not run on partition "${pname}" (allowed: ${suite.limits.partitions.join(", ")})`);
+    else if (!part) {
+      err(where, `partition "${pname}" does not exist on ${cname} (have: ${Object.keys(cluster.partitions).join(", ")})`);
     }
 
     if (part) {
@@ -131,7 +148,7 @@ async function main() {
       const nodes = r.nodes ?? 1;
       if (!Number.isFinite(nodes) || nodes < 1) err(where, `resources.nodes must be a positive integer`);
       else if (nodes > capNodes) {
-        err(where, `nodes=${nodes} exceeds the limit for partition "${pname}" (max ${capNodes}; it has ${part.nodes.length} node(s))`);
+        err(where, `nodes=${nodes} exceeds the limit for partition "${pname}" on ${cname} (max ${capNodes}; it has ${part.nodes.length} node(s))`);
       }
 
       const tpn = r.tasks_per_node ?? 1;
@@ -140,11 +157,11 @@ async function main() {
       const minCpus = specs.length ? Math.min(...specs.map((s) => s.cpus ?? Infinity)) : Infinity;
       const minGpus = specs.length ? Math.min(...specs.map((s) => s.gpus ?? 0)) : 0;
 
-      if (tpn > minCpus) err(where, `tasks_per_node=${tpn} exceeds the ${minCpus} CPUs on "${pname}"`);
+      if (tpn > minCpus) err(where, `tasks_per_node=${tpn} exceeds the ${minCpus} CPUs per node on ${cname}/${pname}`);
 
       const wantsGpu = (job.build?.gpu ?? "none") !== "none";
       if (wantsGpu) {
-        if (minGpus === 0) err(where, `build.gpu=${job.build.gpu} but partition "${pname}" has no GPUs — use the gpu partition`);
+        if (minGpus === 0) err(where, `build.gpu=${job.build.gpu} but ${cname}/${pname} has no GPUs`);
         else if (tpn > minGpus) err(where, `tasks_per_node=${tpn} exceeds the ${minGpus} GPUs per node; MFC wants one rank per device`);
         else if (tpn < minGpus) warn(where, `tasks_per_node=${tpn} leaves ${minGpus - tpn} of ${minGpus} GPUs per node idle`);
       }
@@ -153,17 +170,21 @@ async function main() {
       const capW = toSeconds(part.max_walltime) ?? toSeconds(suite.limits?.max_walltime);
       if (r.walltime && want == null) err(where, `walltime "${r.walltime}" is not HH:MM:SS`);
       else if (want != null && capW != null && want > capW) {
-        err(where, `walltime ${r.walltime} exceeds the ${part.max_walltime} limit on "${pname}"`);
+        err(where, `walltime ${r.walltime} exceeds the ${part.max_walltime} limit on ${cname}/${pname}`);
       }
     }
 
     // --- toolchain availability: a warning, not a failure ---
     const tc = job.build?.toolchain;
     if (tc) {
-      const def = chains.toolchains?.[tc];
-      if (!def) err(where, `unknown toolchain "${tc}" (have: ${Object.keys(chains.toolchains || {}).join(", ")})`);
+      const avail = cluster.toolchains?.toolchains || {};
+      const def = avail[tc];
+      if (!def) {
+        if (!Object.keys(avail).length) warn(where, `cluster "${cname}" declares no toolchains; cannot check "${tc}"`);
+        else err(where, `unknown toolchain "${tc}" on ${cname} (have: ${Object.keys(avail).join(", ")})`);
+      }
       else if (def.available === false) {
-        warn(where, `toolchain "${tc}" is not built yet — missing ${(def.missing || []).join(", ")}. The job will queue but cannot run.`);
+        warn(where, `toolchain "${tc}" is not built on ${cname} yet — missing ${(def.missing || []).join(", ")}. The job will queue but cannot run.`);
       }
     }
   }

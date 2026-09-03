@@ -1,0 +1,22 @@
+# HPL leaderboard entry.
+#
+# Copy this directory to  input/HPL/<your-name>/<run-name>/  and edit.
+# Supply HPL.dat alongside it. A run.sh is optional — one is generated if you
+# do not provide it.
+#
+# HPL is scored on Rmax in GFLOP/s, and HIGHER IS BETTER.
+# Choosing N, NB and the P x Q grid is the whole exercise, so nothing is pinned.
+
+suite: HPL
+
+# Which cluster. Results are ranked per cluster: Raijin is 7 x 32-thread CPU
+# nodes, Xenon is 1 schedulable CPU node plus 2 GPU nodes, so their numbers are
+# not comparable.
+cluster: raijin          # raijin | xenon
+
+resources:
+  partition: batch       # raijin: batch  |  xenon: cpu, gpu, all
+  nodes: 3
+  tasks_per_node: 16
+  cpus_per_task: 1
+  walltime: "02:00:00"

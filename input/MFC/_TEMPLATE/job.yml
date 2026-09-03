@@ -10,6 +10,11 @@
 
 suite: MFC
 
+# Which cluster to run on. MFC is only set up on Xenon; Raijin has no
+# Fortran/MPI toolchain published. Results are ranked per cluster, because a
+# Raijin number and a Xenon number measure different hardware.
+cluster: xenon
+
 # Which benchmark case. Must be one of the seven in suites/MFC/suite.yml.
 # The case is fixed so entries are comparable; you compete on how you run it.
 case: 5eq_rk3_weno3_hllc

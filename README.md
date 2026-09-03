@@ -1,7 +1,23 @@
-# ANUHPC Leaderboard — Xenon cluster
+# ANUHPC Leaderboard
 
-Benchmark leaderboard for the ANU Xenon cluster. Push a job spec, the cluster
+Benchmark leaderboard across the ANU HPC clusters. Push a job spec, the cluster
 runs it, the result lands on the board.
+
+## Clusters
+
+| Cluster | Nodes | Partitions | Runs | Status |
+|---------|-------|-----------|------|--------|
+| **Raijin** | 7 x `hpc-01..07`, 32 threads each | `batch` | 137 | original target |
+| **Xenon** | `cpu-node2` (72t) + 2 x GPU (4x A100) | `cpu` `gpu` `all` | 0 | new |
+
+The two are separate machines with no network path between them, so each is
+driven by its own self-hosted runner and jobs route by runner label. **Results
+are ranked per cluster** — a Raijin number and a Xenon number measure different
+hardware and are not comparable.
+
+Every job names its cluster in `job.yml`. The 137 runs committed before Xenon
+existed are attributed automatically from the node names they left behind
+(123 from output, 10 from a `--nodelist`, 4 by fallback).
 
 ## Suites
 
@@ -40,12 +56,14 @@ suites/<NAME>/
   collect.mjs    turns a finished run into a normalised result
   xenon.mako     (MFC) batch template for this cluster
   render.sh      (MFC) job.yml -> ./mfc.sh run
-cluster/
-  partitions.yml what the cluster actually offers — kept in step with slurm.conf
+clusters/<NAME>/
+  partitions.yml nodes, partitions and limits for that cluster
   toolchains.yml named toolchains, and what is not built yet
 scripts/
   collect.mjs        suite-agnostic collector; writes the website data
-  validate-job.mjs   PR-time checks
+  validate-job.mjs   PR-time checks, against the cluster the job names
+  select-jobs.mjs    routes each job to its cluster's runner
+  lib/cluster.mjs    cluster registry and attribution of legacy runs
   lib/yaml.mjs       zero-dependency YAML subset reader
   collect-hpl.js     superseded by collect.mjs; kept until the site is verified
 input/  output/      one directory per run, per suite, per person
@@ -62,7 +80,7 @@ MFC needs no parser: it writes `summary.yaml` (`exec` and `grind`) and
 `time_data.dat` itself. Note `time_data.dat` *appends* across runs, so the
 collector flags a run whose case directory was reused.
 
-## Cluster
+## Xenon
 
 4 nodes. cpu-node1 is the Slurm controller; cpu-node2 serves `/export` over NFS
 to `/apps`, `/cluster`, `/work`, `/scratch` on every node.
@@ -74,3 +92,10 @@ to `/apps`, `/cluster`, `/work`, `/scratch` on every node.
 
 A 56 Gb/s FDR InfiniBand fabric carries MPI and NFS between cpu-node2 and the
 GPU nodes; cpu-node1 is not on it yet.
+
+## Raijin
+
+7 nodes, `hpc-01` to `hpc-07`, single `batch` partition, 2 sockets x 8 cores
+with SMT (32 threads) per node. Its specs in `clusters/raijin/partitions.yml`
+are **derived** from the committed run output rather than measured — validation
+says so when you submit against it. Correct them when convenient.

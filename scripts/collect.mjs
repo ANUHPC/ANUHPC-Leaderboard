@@ -18,6 +18,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { parseYaml } from "./lib/yaml.mjs";
+import { loadClusters, inferCluster } from "./lib/cluster.mjs";
 
 const CWD       = process.cwd();
 const SUITE_DIR = path.join(CWD, "suites");
@@ -25,6 +26,9 @@ const SRC_ROOT  = path.join(CWD, "output");
 const OUT_ROOT  = process.env.WEBSITE_DATA_DIR || "/tmp/hpl-website-data";
 const DATA_ROOT = path.join(OUT_ROOT, "data");
 const RAW_ROOT  = path.join(OUT_ROOT, "raw");
+// Every run committed before Xenon existed came from Raijin. Used only when a
+// run leaves no node name anywhere to infer from.
+const LEGACY_CLUSTER = process.env.LEGACY_CLUSTER || "raijin";
 
 const ensureDir = (p) => fs.mkdir(p, { recursive: true });
 const exists = async (p) => { try { await fs.stat(p); return true; } catch { return false; } };
@@ -79,17 +83,29 @@ async function loadSuites() {
   return suites;
 }
 
+// Rank within each cluster separately: a Raijin number and a Xenon number
+// measure different hardware and are not comparable.
 function rank(entries, direction) {
-  const withMetric = entries.filter((e) => Number.isFinite(e.metric?.value));
-  const rest = entries.filter((e) => !Number.isFinite(e.metric?.value));
-  withMetric.sort((a, b) =>
-    direction === "lower" ? a.metric.value - b.metric.value : b.metric.value - a.metric.value
-  );
-  withMetric.forEach((e, i) => { e.rank = i + 1; });
-  return [...withMetric, ...rest];
+  const byCluster = new Map();
+  for (const e of entries) {
+    const k = e.cluster || "__unknown__";
+    if (!byCluster.has(k)) byCluster.set(k, []);
+    byCluster.get(k).push(e);
+  }
+  const out = [];
+  for (const [, group] of byCluster) {
+    const scored = group.filter((e) => Number.isFinite(e.metric?.value));
+    const rest   = group.filter((e) => !Number.isFinite(e.metric?.value));
+    scored.sort((a, b) =>
+      direction === "lower" ? a.metric.value - b.metric.value : b.metric.value - a.metric.value
+    );
+    scored.forEach((e, i) => { e.rank = i + 1; });
+    out.push(...scored, ...rest);
+  }
+  return out;
 }
 
-async function processSuite(suite, index) {
+async function processSuite(suite, index, clusters) {
   const root = path.join(SRC_ROOT, suite.name);
   if (!(await exists(root))) { console.log(`[collect] ${suite.name}: no output/, skipped`); return; }
 
@@ -97,6 +113,7 @@ async function processSuite(suite, index) {
   const runDirs = await findRunDirs(root);
   const entries = [];
   let fromResultJson = 0, fromParser = 0, unusable = 0;
+  const clusterCounts = {};
 
   for (const dir of runDirs) {
     const rel   = path.relative(root, dir);
@@ -143,6 +160,25 @@ async function processSuite(suite, index) {
 
     if (!result) { unusable++; continue; }
 
+    // Which machine produced this? Prefer what the run declares, else read the
+    // node names out of what it left behind.
+    let inferText = "", inferScript = "";
+    for (const f of files) {
+      if (/\.(out|err)$/i.test(f)) inferText += ((await read(f)) || "").slice(0, 20000);
+      else if (/\.sh$/i.test(f))   inferScript += ((await read(f)) || "").slice(0, 8000);
+    }
+    const ci = inferCluster({
+      clusters,
+      explicit: result.config?.cluster ?? result.provenance?.cluster ?? null,
+      text: inferText,
+      script: inferScript,
+      fallback: LEGACY_CLUSTER,
+    });
+    if (ci.source === "ambiguous") {
+      console.warn(`[collect] ${id}: node names from more than one cluster (${ci.candidates.join(", ")}) — left unattributed`);
+    }
+    clusterCounts[ci.source] = (clusterCounts[ci.source] || 0) + 1;
+
     // Copy the raw artefacts the site links to.
     const baseParts = [suite.name, ...parts];
     const rawPaths = {};
@@ -160,6 +196,8 @@ async function processSuite(suite, index) {
 
     const runJson = {
       id, suite: suite.name, group, run,
+      cluster: ci.cluster,
+      clusterSource: ci.source,
       metric,
       secondary: (result.secondary || []).map((s) => {
         const def = (suite.cfg.secondary || []).find((d) => d.key === s.key);
@@ -185,6 +223,8 @@ async function processSuite(suite, index) {
 
     entries.push({
       id, suite: suite.name, group, run,
+      cluster: ci.cluster,
+      clusterSource: ci.source,
       metric,
       secondary: runJson.secondary,
       config: runJson.config,
@@ -206,20 +246,32 @@ async function processSuite(suite, index) {
     `(${scored} scored, ${fromResultJson} via result.json, ${fromParser} parsed, ${unusable} unusable) ` +
     `ranked ${metricCfg.direction === "lower" ? "ascending" : "descending"} by ${metricCfg.key}`
   );
+  const attrib = Object.entries(clusterCounts).map(([k, v]) => `${v} ${k}`).join(", ");
+  if (attrib) console.log(`[collect] ${suite.name}: cluster attribution — ${attrib}`);
 }
 
 async function main() {
   await ensureDir(DATA_ROOT);
   await ensureDir(RAW_ROOT);
+  const clusters = await loadClusters(CWD);
+  if (!Object.keys(clusters).length) throw new Error("no clusters found under clusters/");
+  console.log(`[collect] clusters: ${Object.keys(clusters).join(", ")}`);
   const suites = await loadSuites();
   if (!suites.length) throw new Error("no suites found under suites/");
   console.log(`[collect] suites: ${suites.map((s) => s.name).join(", ")}`);
 
   const index = [];
-  for (const s of suites) await processSuite(s, index);
+  for (const s of suites) await processSuite(s, index, clusters);
 
   const meta = {
     generatedAt: new Date().toISOString(),
+    clusters: Object.values(clusters).map((c) => ({
+      name: c.name, label: c.label, description: c.description,
+      status: c.status, derived: c.derived,
+      nodes: Object.keys(c.nodes).length,
+      partitions: Object.keys(c.partitions),
+      count: index.filter((e) => e.cluster === c.name).length,
+    })),
     suites: suites.map((s) => ({
       name: s.name,
       description: s.cfg.description ?? "",

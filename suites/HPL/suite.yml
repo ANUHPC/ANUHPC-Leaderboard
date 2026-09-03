@@ -26,8 +26,9 @@ run:
   launcher: sbatch          # the user's own run.sh is submitted directly
   binary: /apps/benchmarks/hpl/current/bin/xhpl
 
+clusters: [raijin, xenon]   # HPL runs on both clusters.
+
 limits:
-  partitions: [cpu, gpu, all]
   max_nodes: 3
   max_walltime: "04:00:00"
 
