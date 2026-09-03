@@ -1,0 +1,155 @@
+name: Submit jobs
+
+# Replacement for node1.yml, suite-aware and built on the shared filesystem.
+#
+# NOT YET ENABLED. It is workflow_dispatch only until three things exist:
+#   1. a self-hosted runner under /cluster/runner
+#   2. a built toolchain (no gfortran/cmake/BLAS on the cluster today)
+#   3. HPL and MFC published under /apps
+# node1.yml stays in place and untouched until this has run green by hand.
+#
+# What changed versus node1.yml: because every node mounts the same /scratch,
+# the whole distribute-to-all-nodes and gather-from-all-nodes machinery is gone,
+# along with the "prune xhpl from output" step that only existed to clean up
+# after it. Two students pushing at once land in different $RUN_ID directories
+# instead of overwriting each other.
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Suite to submit (HPL, MFC, or all)"
+        required: false
+        default: "all"
+
+permissions:
+  contents: write
+
+env:
+  SCRATCH_BASE: /scratch/jobs
+
+jobs:
+  submit:
+    runs-on: self-hosted
+    timeout-minutes: 480
+    steps:
+      - name: Reject unauthorized actors
+        # node1.yml had a step with this name that only ran three echoes and
+        # rejected nothing. This one actually exits.
+        run: |
+          set -euo pipefail
+          if [ "${{ github.ref }}" != "refs/heads/main" ]; then
+            echo "refusing: jobs are only submitted from main (got ${{ github.ref }})"
+            exit 1
+          fi
+          echo "actor=${{ github.actor }} ref=${{ github.ref }} run=${{ github.run_id }}"
+
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1, ref: main }
+
+      - name: Validate before submitting anything
+        run: node scripts/validate-job.mjs
+
+      - name: Stage to shared scratch
+        run: |
+          set -euo pipefail
+          STAGE="${SCRATCH_BASE}/${GITHUB_RUN_ID}"
+          mkdir -p "$STAGE"
+          echo "STAGE=$STAGE" >> "$GITHUB_ENV"
+          shopt -s nullglob
+          n=0
+          for suite in input/*/; do
+            s="$(basename "$suite")"
+            [ "${{ inputs.suite }}" = "all" ] || [ "${{ inputs.suite }}" = "$s" ] || continue
+            for group in "$suite"*/; do
+              case "$(basename "$group")" in _*) continue ;; esac
+              for run in "$group"*/; do
+                [ -d "$run" ] || continue
+                dest="$STAGE/${run#input/}"
+                mkdir -p "$dest"
+                cp -r "$run". "$dest"/
+                echo "staged $run -> $dest"
+                n=$((n+1))
+              done
+            done
+          done
+          echo "staged $n job(s)"
+          echo "STAGED=$n" >> "$GITHUB_ENV"
+
+      - name: Submit and wait
+        if: env.STAGED != '0'
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          : > "$STAGE/joblist.txt"
+          for jobdir in "$STAGE"/*/*/*/; do
+            jobdir="${jobdir%/}"
+            suite="$(basename "$(dirname "$(dirname "$jobdir")")")"
+            case "$suite" in
+              MFC)
+                echo "::group::MFC $(basename "$jobdir")"
+                bash suites/MFC/render.sh "$jobdir" "$GITHUB_RUN_ID" || echo "FAILED $jobdir"
+                echo "::endgroup::"
+                ;;
+              HPL)
+                script="$(ls "$jobdir"/*.sh 2>/dev/null | head -1)"
+                [ -n "$script" ] || { echo "no .sh in $jobdir, skipping"; continue; }
+                jid=$(sbatch --parsable --chdir="$jobdir" \
+                        --output="$jobdir/run.out" --error="$jobdir/run.err" "$script")
+                echo "$jobdir:$jid" >> "$STAGE/joblist.txt"
+                ;;
+              *) echo "no submit path for suite $suite, skipping" ;;
+            esac
+          done
+          # Wait for anything submitted via sbatch (MFC waits internally via --wait).
+          if [ -s "$STAGE/joblist.txt" ]; then
+            ids=$(cut -d: -f2 "$STAGE/joblist.txt" | paste -sd,)
+            echo "waiting on: $ids"
+            while squeue -h -j "$ids" -o "%i" 2>/dev/null | grep -q .; do sleep 15; done
+          fi
+
+      - name: Harvest results
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -d "${STAGE:-}" ] || { echo "nothing staged"; exit 0; }
+          shopt -s nullglob
+          for jobdir in "$STAGE"/*/*/*/; do
+            jobdir="${jobdir%/}"
+            rel="${jobdir#$STAGE/}"
+            dest="output/$rel"
+            mkdir -p "$dest"
+            # Copy results only. The MFC working checkout under $STAGE/mfc is
+            # not part of any job directory, so it is never picked up here.
+            for f in "$jobdir"/*; do
+              [ -f "$f" ] || continue
+              case "$(basename "$f")" in xhpl|*.o|*.mod) continue ;; esac
+              cp "$f" "$dest"/
+            done
+            echo "harvested $rel"
+          done
+
+      - name: Commit
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --prune origin main && git checkout -B main && git pull --no-rebase --no-edit origin main
+          git add -A output/
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "Results from run ${GITHUB_RUN_ID} [skip ci]"
+            for i in 1 2 3; do
+              git push origin main && break
+              git pull --no-rebase --no-edit origin main
+            done
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Clean scratch
+        if: always()
+        run: rm -rf "${STAGE:-/nonexistent}"

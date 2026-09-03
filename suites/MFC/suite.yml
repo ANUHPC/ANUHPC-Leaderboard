@@ -1,0 +1,78 @@
+# MFC — Multi-component Flow Code. Exascale multiphase compressible flow solver.
+# https://github.com/MFlowCode/MFC
+name: MFC
+description: Exascale multiphase compressible flow solver
+
+metric:
+  key: grind
+  label: Grind time
+  unit: ns/gp/eq/rhs
+  direction: lower         # SMALLER is better — the opposite of HPL
+  precision: 4
+
+secondary:
+  - {key: exec,   label: Simulation wall time, unit: s,      direction: lower}
+  - {key: s_step, label: Seconds per step,     unit: s/step, direction: lower}
+  - {key: ranks,  label: MPI ranks,            unit: "",     direction: none}
+
+# Published reference points, for context on the board. A100-SXM4-40GB should
+# land above these. Source: MFC 5.0 (arXiv 2503.07953) and arXiv 2409.10729.
+reference:
+  - {device: "NVIDIA GH200",     grind: 0.32}
+  - {device: "NVIDIA H100 SXM5", grind: 0.38}
+
+inputs:
+  # job.yml is the entry. case.py is NOT required: for a ranked run the case
+  # comes from the pinned checkout in /apps/mfc, so everyone runs byte-identical
+  # physics and only names the case they want.
+  required: [job.yml]
+  # Supplying your own case.py is allowed, but it makes the run UNRANKED — it is
+  # not comparable with the fixed set. See ranking.custom below.
+  optional: [case.py]
+  # MFC generates its own batch script from the template below. A user-supplied
+  # .sh would be ignored, so reject it rather than silently dropping it.
+  forbidden: ["*.sh"]
+
+ranking:
+  # A run is ranked only if it used one of the pinned cases below.
+  requires_pinned_case: true
+  custom: unranked
+
+source:
+  repo: https://github.com/MFlowCode/MFC
+  pin: null                # set to a sha before the first ranked run
+  prefix: /apps/mfc
+
+run:
+  launcher: mfc
+  template: suites/MFC/xenon.mako
+  targets: [pre_process, simulation]
+  summary: summary.yaml
+  artifacts: [summary.yaml, time_data.dat]
+
+# The case set is FIXED so entries are comparable. Competitors tune how they
+# run it — decomposition, toolchain, build flags — not which physics they pick.
+# Mirrors MFC's own toolchain/bench.yaml.
+cases:
+  - {slug: 5eq_rk3_weno3_hllc,        path: benchmarks/5eq_rk3_weno3_hllc/case.py}
+  - {slug: 5eq_rk3_weno3_hll,         path: benchmarks/5eq_rk3_weno3_hll/case.py}
+  - {slug: 5eq_rk3_weno3_lf,          path: benchmarks/5eq_rk3_weno3_lf/case.py}
+  - {slug: viscous_weno5_sgb_acoustic, path: benchmarks/viscous_weno5_sgb_acoustic/case.py}
+  - {slug: ibm,                       path: benchmarks/ibm/case.py}
+  - {slug: hypo_hll,                  path: benchmarks/hypo_hll/case.py}
+  - {slug: igr,                       path: benchmarks/igr/case.py}
+
+tuning:
+  free: [nodes, tasks_per_node, gbpp, gpu, toolchain, case_optimization]
+  defaults:
+    gbpp: 16               # GB per rank; sets the problem size
+    gpu: none
+    case_optimization: false
+
+limits:
+  partitions: [cpu, gpu]
+  max_nodes: 2
+  max_walltime: "04:00:00"
+
+legacy:
+  parse_stdout: false      # MFC has always written summary.yaml

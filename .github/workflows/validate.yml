@@ -1,0 +1,55 @@
+name: Validate job specs
+
+# Runs on the pull request, where there is no cluster. Everything checked is
+# static: the suite definition and cluster/partitions.yml. A job asking for more
+# nodes than a partition has now fails here instead of queueing and dying.
+
+on:
+  pull_request:
+    paths:
+      - "input/**"
+      - "suites/**"
+      - "cluster/**"
+      - "scripts/**"
+  push:
+    branches: [main]
+    paths:
+      - "input/**"
+      - "suites/**"
+      - "cluster/**"
+      - "scripts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
+      - name: Validate submitted jobs
+        run: node scripts/validate-job.mjs
+
+      - name: Collector smoke test
+        # Proves the collector still parses every committed run before this
+        # change can reach main and break the website build.
+        run: |
+          WEBSITE_DATA_DIR="$RUNNER_TEMP/wd" node scripts/collect.mjs
+          node -e '
+            const fs=require("fs");
+            const i=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+"/wd/data/index.json","utf8"));
+            if (!i.runs.length) { console.error("collector produced no runs"); process.exit(1); }
+            const scored=i.runs.filter(r=>r.metric&&Number.isFinite(r.metric.value)).length;
+            console.log(`index has ${i.runs.length} runs, ${scored} scored`);
+            for (const s of i.suites) {
+              if (!s.metric || !s.metric.direction) {
+                console.error(`suite ${s.name} has no metric.direction`); process.exit(1);
+              }
+            }
+          '

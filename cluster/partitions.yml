@@ -1,0 +1,62 @@
+# What the Xenon cluster actually offers. Verified against sinfo and
+# /etc/slurm/slurm.conf on 2026-09-03. Keep in step with slurm.conf: a job that
+# asks for something not listed here is rejected at pull-request time instead of
+# failing after it has already queued.
+#
+# NOTE: cpu-node1 is the Slurm controller and is deliberately NOT in any
+# partition, so its 72 cores are not schedulable. If that changes, add it here
+# and to slurm.conf together.
+
+cluster: anuhpc
+controller: cpu-node1
+
+nodes:
+  cpu-node2:
+    sockets: 2
+    cores_per_socket: 18
+    threads_per_core: 2
+    cpus: 72
+    memory_mb: 500000
+    gpus: 0
+  gpu-node1:
+    sockets: 2
+    cores_per_socket: 16
+    threads_per_core: 2
+    cpus: 64
+    memory_mb: 2000000
+    gpus: 4
+    gpu_model: a100
+  gpu-node2:
+    sockets: 2
+    cores_per_socket: 16
+    threads_per_core: 2
+    cpus: 64
+    memory_mb: 2000000
+    gpus: 4
+    gpu_model: a100
+
+partitions:
+  cpu:
+    default: true
+    nodes: [cpu-node2]
+    max_nodes: 1
+    max_walltime: "04:00:00"
+  gpu:
+    default: false
+    nodes: [gpu-node1, gpu-node2]
+    max_nodes: 2
+    max_walltime: "04:00:00"
+    gres: "gpu:a100"
+    exclusive: true
+  all:
+    default: false
+    nodes: [cpu-node2, gpu-node1, gpu-node2]
+    max_nodes: 3
+    max_walltime: "04:00:00"
+
+filesystems:
+  apps: /apps
+  cluster: /cluster
+  work: /work
+  scratch: /scratch
+  local: /local

@@ -1,12 +1,12 @@
 name: website.yml
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "*/5 * * * *"
   push:
     branches: [main]
     paths:
       - "scripts/**"
+      - "suites/**"
+      - "cluster/**"
       - "package.json"
       - "output/**"
   workflow_run:
@@ -34,8 +34,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Generate website data from HPL outputs
-        run: node scripts/collect-hpl.js
+      - name: Generate website data from all suite outputs
+        run: node scripts/collect.mjs
 
       - name: Checkout website branch
         uses: actions/checkout@v4

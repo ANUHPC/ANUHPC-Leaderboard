@@ -1,0 +1,37 @@
+# HPL — High Performance Linpack. The suite the leaderboard started with.
+name: HPL
+description: High Performance Linpack, the Top500 benchmark
+
+metric:
+  key: gflops
+  label: Rmax
+  unit: GFLOP/s
+  direction: higher        # bigger is better
+  precision: 2
+
+secondary:
+  - {key: time,     label: Solve time, unit: s,  direction: lower}
+  - {key: residual, label: Residual,   unit: "", direction: lower}
+
+inputs:
+  required: [HPL.dat]
+  optional: [run.sh, job.yml]
+
+# HPL's tuning surface IS the exercise: N, NB and the P x Q grid are what the
+# competitor chooses. Unlike MFC there is no fixed case list.
+tuning:
+  free: [N, NB, P, Q, PFACT, RFACT, BCAST, DEPTH, SWAP]
+
+run:
+  launcher: sbatch          # the user's own run.sh is submitted directly
+  binary: /apps/benchmarks/hpl/current/bin/xhpl
+
+limits:
+  partitions: [cpu, gpu, all]
+  max_nodes: 3
+  max_walltime: "04:00:00"
+
+# Legacy runs (137 of them at time of writing) predate result.json and are
+# recovered by parsing HPL's stdout. Never remove this.
+legacy:
+  parse_stdout: true

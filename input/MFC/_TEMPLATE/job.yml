@@ -1,0 +1,33 @@
+# MFC leaderboard entry.
+#
+# Copy this directory to  input/MFC/<your-name>/<run-name>/  and edit.
+# Push to main; the runner picks it up, submits it, and the result appears on
+# the board. Validation runs on the pull request, so mistakes are caught before
+# anything queues.
+#
+# MFC is scored on GRIND TIME in ns/gp/eq/rhs, and LOWER IS BETTER — the
+# opposite of HPL. Published reference points: GH200 0.32, H100 SXM5 0.38.
+
+suite: MFC
+
+# Which benchmark case. Must be one of the seven in suites/MFC/suite.yml.
+# The case is fixed so entries are comparable; you compete on how you run it.
+case: 5eq_rk3_weno3_hllc
+
+resources:
+  partition: cpu          # cpu (cpu-node2, 72 cores) | gpu (2 x 4 A100)
+  nodes: 1
+  tasks_per_node: 8       # on gpu, use 4 — one rank per A100
+  walltime: "01:00:00"
+
+build:
+  gpu: none               # none | acc  (acc = OpenACC offload, gpu partition only)
+  toolchain: gcc-ompi5    # see cluster/toolchains.yml
+  # Hard-codes case parameters into the binary. Large GPU speedup, but it costs
+  # a full rebuild on your walltime and is badged on the board.
+  case_optimization: false
+
+tuning:
+  # GB of memory per rank. Sets the problem size:
+  #   cells ~= 500000 x ranks x gbpp
+  gbpp: 16

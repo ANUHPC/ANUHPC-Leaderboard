@@ -1,0 +1,40 @@
+# Named toolchains, resolved to what is actually installed under /apps.
+# "available: false" means the pieces are not built yet — validation reports
+# that as a clear message rather than letting a job fail at run time.
+#
+# Verified against /apps on 2026-09-03.
+
+toolchains:
+  gcc-ompi5:
+    description: System GCC with OpenMPI 5.0.10 over UCX
+    available: false
+    missing: [gfortran, cmake, blas]
+    modules: [mpi/openmpi/5.0.10, lib/ucx/1.22.0]
+    mpi:
+      prefix: /apps/openmpi/5.0.10
+      launcher: mpirun
+    env:
+      UCX_NET_DEVICES: mlx5_0:1
+
+  nvhpc-acc:
+    description: NVIDIA HPC SDK, OpenACC offload for the A100 nodes
+    available: false
+    missing: [nvhpc]
+    modules: []
+    gpu: acc
+
+installed:
+  # Present and verified under /apps today.
+  openmpi: {version: "5.0.10", prefix: /apps/openmpi/5.0.10}
+  ucx:     {version: "1.22.0", prefix: /apps/ucx/1.22.0}
+
+pending:
+  # Required before either suite can run. Tracked here so validation can say
+  # exactly what is missing.
+  - gfortran        # MFC is Fortran; HPL needs a working compiler set
+  - cmake           # MFC's build system
+  - blas            # OpenBLAS or BLIS, for HPL
+  - hpl             # /apps/benchmarks/hpl is empty
+  - mfc             # /apps/mfc is empty
+  - modules         # no Lmod or environment-modules installed
+  - nvhpc           # nvfortran, for MFC's GPU path
