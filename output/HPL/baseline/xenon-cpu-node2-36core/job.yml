@@ -1,0 +1,11 @@
+# First HPL run on Xenon. A BASELINE, not a tuned maximum: N is sized to ~80 GB
+# of cpu-node2's 500 GB so it completes quickly and proves the pipeline. A
+# competitive entry would push N to use ~80% of memory.
+suite: HPL
+cluster: xenon
+resources:
+  partition: cpu
+  nodes: 1
+  tasks_per_node: 4
+  cpus_per_task: 9        # 4 x 9 = 36 physical cores (SMT siblings left idle)
+  walltime: "01:00:00"
