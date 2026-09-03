@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T01:33:03.371Z",
+  "generatedAt": "2026-09-03T01:55:38.701Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1307,6 +1307,44 @@
       "hasErr": true
     },
     {
+      "id": "HPL/VarSweep/2 nodes 40n192nb2p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "2 nodes 40n192nb2p8q",
+      "best": {
+        "gflops": 238.66,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 178.79
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/2 nodes 40n192nb4p4q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "2 nodes 40n192nb4p4q",
+      "best": {
+        "gflops": 239.65,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 178.05
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
       "id": "HPL/VarSweep/2 nodes 40n256nb4p4q",
       "suite": "HPL",
       "group": "VarSweep",
@@ -1383,6 +1421,44 @@
       "hasErr": true
     },
     {
+      "id": "HPL/VarSweep/3 nodes 40n192nb2p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "3 nodes 40n192nb2p8q",
+      "best": {
+        "gflops": 237.09,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 179.97
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/3 nodes 40n192nb4p4q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "3 nodes 40n192nb4p4q",
+      "best": {
+        "gflops": 237.82,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 179.42
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
       "id": "HPL/VarSweep/3 nodes 40n256nb4p4q",
       "suite": "HPL",
       "group": "VarSweep",
@@ -1449,6 +1525,44 @@
         "N": 40000,
         "NB": 128,
         "timeSec": 169.01
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/4 nodes 40n192nb2p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "4 nodes 40n192nb2p8q",
+      "best": {
+        "gflops": 242.07,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 176.26
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/4 nodes 40n192nb4p4q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "4 nodes 40n192nb4p4q",
+      "best": {
+        "gflops": 244.8,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 174.3
       },
       "outSummary": {
         "testsTotal": 1,
@@ -1611,6 +1725,44 @@
       "hasErr": true
     },
     {
+      "id": "HPL/VarSweep/5 nodes 40n192nb2p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "5 nodes 40n192nb2p8q",
+      "best": {
+        "gflops": 242.7,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 175.81
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/5 nodes 40n192nb4p4q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "5 nodes 40n192nb4p4q",
+      "best": {
+        "gflops": 242.73,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 175.79
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
       "id": "HPL/VarSweep/5 nodes 40n256nb4p4q",
       "suite": "HPL",
       "group": "VarSweep",
@@ -1658,6 +1810,44 @@
         "N": 40000,
         "NB": 128,
         "timeSec": 172.5
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/6 nodes 40n192nb2p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "6 nodes 40n192nb2p8q",
+      "best": {
+        "gflops": 236.33,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 180.55
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/6 nodes 40n192nb4p4q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "6 nodes 40n192nb4p4q",
+      "best": {
+        "gflops": 239.27,
+        "N": 40000,
+        "NB": 192,
+        "timeSec": 178.33
       },
       "outSummary": {
         "testsTotal": 1,
