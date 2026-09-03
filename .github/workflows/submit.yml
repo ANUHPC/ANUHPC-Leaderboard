@@ -64,6 +64,10 @@ jobs:
       - uses: actions/checkout@v4
         with: { fetch-depth: 1, ref: main }
 
+      # The runner hosts have no node installed; the scripts below need one.
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
       - name: Validate before submitting anything
         run: node scripts/validate-job.mjs
 
