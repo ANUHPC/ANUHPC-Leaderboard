@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T03:55:35.920Z",
+  "generatedAt": "2026-09-03T04:07:50.365Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1110,63 +1110,6 @@
       "hasErr": true
     },
     {
-      "id": "HPL/Maya/2 nodes 60n192nb2p8q",
-      "suite": "HPL",
-      "group": "Maya",
-      "run": "2 nodes 60n192nb2p8q",
-      "best": {
-        "gflops": 252.91,
-        "N": 60000,
-        "NB": 192,
-        "timeSec": 569.4
-      },
-      "outSummary": {
-        "testsTotal": 1,
-        "testsPassed": 1,
-        "testsFailed": 0,
-        "testsSkipped": 0
-      },
-      "hasErr": true
-    },
-    {
-      "id": "HPL/Maya/3 nodes 60n192nb2p8q",
-      "suite": "HPL",
-      "group": "Maya",
-      "run": "3 nodes 60n192nb2p8q",
-      "best": {
-        "gflops": 251.14,
-        "N": 60000,
-        "NB": 192,
-        "timeSec": 573.41
-      },
-      "outSummary": {
-        "testsTotal": 1,
-        "testsPassed": 1,
-        "testsFailed": 0,
-        "testsSkipped": 0
-      },
-      "hasErr": true
-    },
-    {
-      "id": "HPL/Maya/4 nodes 60n192nb8p8q",
-      "suite": "HPL",
-      "group": "Maya",
-      "run": "4 nodes 60n192nb8p8q",
-      "best": {
-        "gflops": 284.62,
-        "N": 60000,
-        "NB": 192,
-        "timeSec": 505.96
-      },
-      "outSummary": {
-        "testsTotal": 1,
-        "testsPassed": 1,
-        "testsFailed": 0,
-        "testsSkipped": 0
-      },
-      "hasErr": true
-    },
-    {
       "id": "HPL/Maya/Yippee",
       "suite": "HPL",
       "group": "Maya",
@@ -1407,10 +1350,10 @@
       "group": "VarSweep",
       "run": "2 nodes 60n192nb2p8q",
       "best": {
-        "gflops": 252.61,
+        "gflops": 252.91,
         "N": 60000,
         "NB": 192,
-        "timeSec": 570.07
+        "timeSec": 569.4
       },
       "outSummary": {
         "testsTotal": 1,
@@ -1530,10 +1473,10 @@
       "group": "VarSweep",
       "run": "3 nodes 60n192nb2p8q",
       "best": {
-        "gflops": 250.88,
+        "gflops": 251.14,
         "N": 60000,
         "NB": 192,
-        "timeSec": 574.01
+        "timeSec": 573.41
       },
       "outSummary": {
         "testsTotal": 1,
@@ -1663,10 +1606,10 @@
       "group": "VarSweep",
       "run": "4 nodes 60n192nb8p8q",
       "best": {
-        "gflops": 284.06,
+        "gflops": 284.62,
         "N": 60000,
         "NB": 192,
-        "timeSec": 506.95
+        "timeSec": 505.96
       },
       "outSummary": {
         "testsTotal": 1,
