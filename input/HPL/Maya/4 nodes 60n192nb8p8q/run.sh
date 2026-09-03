@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=hpl-test
-#SBATCH --nodes=3
-#SBATCH --nodelist=hpc-02,hpc-03,hpc-04
+#SBATCH --nodes=4
+#SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05
 #SBATCH --ntasks-per-node=16
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=batch
@@ -11,7 +11,7 @@
 #SBATCH --output=run.sh-%j.out
 #SBATCH --error=run.sh-%j.err
 
-# --- OpenBLAS threading (8 cores per MPI task) ---
+# --- OpenBLAS threading (1 core per MPI task) ---
 export OMP_NUM_THREADS=8
 export OMP_PROC_BIND=close
 export OMP_PLACES=cores
