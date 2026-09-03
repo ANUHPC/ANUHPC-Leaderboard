@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=hpl-test
-#SBATCH --nodes=6
+#SBATCH --nodes=2
 #SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07
 #SBATCH --ntasks-per-node=16
 #SBATCH --cpus-per-task=1
