@@ -1,10 +1,10 @@
 {
-  "id": "HPL/Maya/5 nodes 60n192nb10p8q",
+  "id": "HPL/VarSweep/5 nodes 60n192nb9p9q",
   "suite": "HPL",
-  "group": "Maya",
-  "run": "5 nodes 60n192nb10p8q",
+  "group": "VarSweep",
+  "run": "5 nodes 60n192nb9p9q",
   "dat": {
-    "raw": "HPLinpack benchmark input file\nRaijin 5-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n60000        Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n10           Ps\n8            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n0            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "raw": "HPLinpack benchmark input file\nRaijin 5-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n60000        Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n9            Ps\n9            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n0            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
     "parsed": {
       "header": [
         "HPLinpack benchmark input file",
@@ -23,10 +23,10 @@
       "pmap": 0,
       "numGrids": 1,
       "Ps": [
-        10
+        9
       ],
       "Qs": [
-        8
+        9
       ],
       "threshold": 16,
       "numPFACT": 1,
@@ -78,7 +78,7 @@
       "equilibration": 1,
       "memoryAlignment": 16
     },
-    "path": "/raw/HPL/Maya/5 nodes 60n192nb10p8q/HPL.dat"
+    "path": "/raw/HPL/VarSweep/5 nodes 60n192nb9p9q/HPL.dat"
   },
   "job": {
     "filename": "run.sh",
@@ -96,11 +96,11 @@
       "output": "run.sh-%j.out",
       "error": "run.sh-%j.err"
     },
-    "path": "/raw/HPL/Maya/5 nodes 60n192nb10p8q/run.sh"
+    "path": "/raw/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh"
   },
   "out": null,
   "err": {
-    "path": "/raw/HPL/Maya/5 nodes 60n192nb10p8q/run.sh-227.err",
+    "path": "/raw/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh-228.err",
     "size": 4531
   },
   "best": null
