@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T01:55:38.701Z",
+  "generatedAt": "2026-09-03T01:57:22.006Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1459,6 +1459,15 @@
       "hasErr": true
     },
     {
+      "id": "HPL/VarSweep/3 nodes 40n192nb6p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "3 nodes 40n192nb6p8q",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
       "id": "HPL/VarSweep/3 nodes 40n256nb4p4q",
       "suite": "HPL",
       "group": "VarSweep",
@@ -1570,6 +1579,15 @@
         "testsFailed": 0,
         "testsSkipped": 0
       },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/4 nodes 40n192nb8p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "4 nodes 40n192nb8p8q",
+      "best": null,
+      "outSummary": null,
       "hasErr": true
     },
     {
@@ -1725,6 +1743,15 @@
       "hasErr": true
     },
     {
+      "id": "HPL/VarSweep/5 nodes 40n192nb10p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "5 nodes 40n192nb10p8q",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
       "id": "HPL/VarSweep/5 nodes 40n192nb2p8q",
       "suite": "HPL",
       "group": "VarSweep",
@@ -1760,6 +1787,15 @@
         "testsFailed": 0,
         "testsSkipped": 0
       },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/5 nodes 40n192nb9p9q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "5 nodes 40n192nb9p9q",
+      "best": null,
+      "outSummary": null,
       "hasErr": true
     },
     {
@@ -1817,6 +1853,15 @@
         "testsFailed": 0,
         "testsSkipped": 0
       },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/VarSweep/6 nodes 40n192nb12p8q",
+      "suite": "HPL",
+      "group": "VarSweep",
+      "run": "6 nodes 40n192nb12p8q",
+      "best": null,
+      "outSummary": null,
       "hasErr": true
     },
     {
