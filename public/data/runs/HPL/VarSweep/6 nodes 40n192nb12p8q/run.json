@@ -82,10 +82,10 @@
   },
   "job": {
     "filename": "run.sh",
-    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-test\n#SBATCH --nodes=6\n#SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07\n#SBATCH --ntasks-per-node=16\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- OpenBLAS threading (8 cores per MPI task) ---\nexport OMP_NUM_THREADS=8\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\nexport OPENBLAS_NUM_THREADS=8\n\n# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---\nexport OMPI_MCA_btl=tcp,self\nexport OMPI_MCA_btl_tcp_if_include=enp32s0f0\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_plm=rsh\nexport OMPI_MCA_plm_rsh_agent=\"ssh -o StrictHostKeyChecking=no\"\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL\nmpirun --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core --report-bindings -x OMP_NUM_THREADS -x OMP_PROC_BIND -x OMP_PLACES -x OPENBLAS_NUM_THREADS ./xhpl",
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-test\n#SBATCH --nodes=2\n#SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07\n#SBATCH --ntasks-per-node=16\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- OpenBLAS threading (8 cores per MPI task) ---\nexport OMP_NUM_THREADS=8\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\nexport OPENBLAS_NUM_THREADS=8\n\n# --- MPI transport: TCP over Ethernet, SSH launcher (no srun) ---\nexport OMPI_MCA_btl=tcp,self\nexport OMPI_MCA_btl_tcp_if_include=enp32s0f0\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_plm=rsh\nexport OMPI_MCA_plm_rsh_agent=\"ssh -o StrictHostKeyChecking=no\"\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL\nmpirun --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core --report-bindings -x OMP_NUM_THREADS -x OMP_PROC_BIND -x OMP_PLACES -x OPENBLAS_NUM_THREADS ./xhpl",
     "sbatch": {
       "job-name": "hpl-test",
-      "nodes": 6,
+      "nodes": 2,
       "nodelist": "hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07",
       "ntasks-per-node": 16,
       "cpus-per-task": 1,
@@ -100,7 +100,7 @@
   },
   "out": null,
   "err": {
-    "path": "/raw/HPL/VarSweep/6 nodes 40n192nb12p8q/run.sh-208.err",
+    "path": "/raw/HPL/VarSweep/6 nodes 40n192nb12p8q/run.sh-218.err",
     "size": 4531
   },
   "best": null
