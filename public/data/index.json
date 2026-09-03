@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T00:34:40.614Z",
+  "generatedAt": "2026-09-03T00:42:17.224Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1167,6 +1167,25 @@
       "hasErr": true
     },
     {
+      "id": "HPL/Maya/3 nodes 30n128nb4p4q ",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "3 nodes 30n128nb4p4q ",
+      "best": {
+        "gflops": 235.74,
+        "N": 30000,
+        "NB": 128,
+        "timeSec": 76.36
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
       "id": "HPL/Maya/30n64nbp4q4",
       "suite": "HPL",
       "group": "Maya",
@@ -1176,6 +1195,25 @@
         "N": 30000,
         "NB": 64,
         "timeSec": 76.24
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/4 nodes 30n128nb4p4q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "4 nodes 30n128nb4p4q",
+      "best": {
+        "gflops": 244.01,
+        "N": 30000,
+        "NB": 128,
+        "timeSec": 73.77
       },
       "outSummary": {
         "testsTotal": 1,
@@ -1271,6 +1309,44 @@
         "N": 40000,
         "NB": 64,
         "timeSec": 176.8
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/5 nodes 30n128nb4p4q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "5 nodes 30n128nb4p4q",
+      "best": {
+        "gflops": 242.24,
+        "N": 30000,
+        "NB": 128,
+        "timeSec": 74.31
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/6 nodes 30n128nb4p4q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "6 nodes 30n128nb4p4q",
+      "best": {
+        "gflops": 236.96,
+        "N": 30000,
+        "NB": 128,
+        "timeSec": 75.97
       },
       "outSummary": {
         "testsTotal": 1,
