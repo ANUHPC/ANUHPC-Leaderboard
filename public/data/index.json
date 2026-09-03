@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T01:59:56.154Z",
+  "generatedAt": "2026-09-03T02:06:54.043Z",
   "runs": [
     {
       "id": "HPL/Aden/1node_5_16task_1",
@@ -1105,6 +1105,51 @@
       "suite": "HPL",
       "group": "Flynn",
       "run": "test-run-9",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/3 nodes 40n192nb6p8q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "3 nodes 40n192nb6p8q",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/4 nodes 40n192nb8p8q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "4 nodes 40n192nb8p8q",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/5 nodes 40n192nb10p8q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "5 nodes 40n192nb10p8q",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/5 nodes 40n192nb9p9q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "5 nodes 40n192nb9p9q",
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "HPL/Maya/6 nodes 40n192nb12p8q",
+      "suite": "HPL",
+      "group": "Maya",
+      "run": "6 nodes 40n192nb12p8q",
       "best": null,
       "outSummary": null,
       "hasErr": true
