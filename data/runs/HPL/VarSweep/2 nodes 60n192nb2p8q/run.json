@@ -1,0 +1,42 @@
+{
+  "id": "HPL/VarSweep/2 nodes 60n192nb2p8q",
+  "suite": "HPL",
+  "group": "VarSweep",
+  "run": "2 nodes 60n192nb2p8q",
+  "dat": null,
+  "job": null,
+  "out": {
+    "path": "/raw/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.out",
+    "runs": [
+      {
+        "tv": "WR02C2C2",
+        "N": 60000,
+        "NB": 192,
+        "P": 4,
+        "Q": 4,
+        "timeSec": 569.4,
+        "gflops": 252.91,
+        "startTime": "Thu Sep  3 03:25:35 2026",
+        "endTime": "Thu Sep  3 03:35:04 2026",
+        "residual": 0.00343288457,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.err",
+    "size": 3682
+  },
+  "best": {
+    "gflops": 252.91,
+    "N": 60000,
+    "NB": 192,
+    "timeSec": 569.4
+  }
+}
