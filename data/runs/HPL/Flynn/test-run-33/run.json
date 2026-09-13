@@ -1,0 +1,107 @@
+{
+  "id": "HPL/Flynn/test-run-33",
+  "suite": "HPL",
+  "group": "Flynn",
+  "run": "test-run-33",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 5-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n10000       Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n5            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 5-node test"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        10000
+      ],
+      "numNBs": 1,
+      "NBs": [
+        192
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        2
+      ],
+      "Qs": [
+        5
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "path": "/raw/HPL/Flynn/test-run-33/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --nodelist=hpc-03\n#SBATCH --job-name=hpl-vtune\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=8\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=02:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=vtune-%j.out\n#SBATCH --error=vtune-%j.err\n\n# =========================================================\n# Load VTune / Intel environment\n# =========================================================\n# Uncomment or adjust if your cluster uses modules\n\n# module load intel\n# module load vtune\n\n# =========================================================\n# Pure MPI configuration\n# =========================================================\nexport OMP_NUM_THREADS=1\nexport OPENBLAS_NUM_THREADS=1\n\n# =========================================================\n# MPI / InfiniBand settings\n# =========================================================\nexport OMPI_MCA_btl=openib,vader,self\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_btl_openib_allow_ib=1\nexport OMPI_MCA_btl_openib_warn_default_gid_prefix=0\n\n# =========================================================\n# Ulimits\n# =========================================================\nulimit -l unlimited\nulimit -n 65536\n\nsource ~/.bashrc\n\n# =========================================================\n# VTune collection\n# =========================================================\nvtune -collect hotspots \\\n      -trace-mpi \\\n      -result-dir vtune_hotspots_${SLURM_JOB_ID} \\\n      -- mpirun \\\n         --map-by core \\\n         --bind-to core \\\n         --report-bindings \\\n         -x OMP_NUM_THREADS \\\n         -x OPENBLAS_NUM_THREADS \\\n         ./xhpl",
+    "sbatch": {
+      "nodelist": "hpc-03",
+      "job-name": "hpl-vtune",
+      "nodes": 1,
+      "ntasks-per-node": 8,
+      "cpus-per-task": 1,
+      "partition": "batch",
+      "time": "02:00:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "output": "vtune-%j.out",
+      "error": "vtune-%j.err"
+    },
+    "path": "/raw/HPL/Flynn/test-run-33/run.sh"
+  },
+  "out": null,
+  "err": {
+    "path": "/raw/HPL/Flynn/test-run-33/run.sh-140.err",
+    "size": 75
+  },
+  "best": null
+}

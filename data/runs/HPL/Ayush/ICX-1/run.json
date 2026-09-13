@@ -1,0 +1,135 @@
+{
+  "id": "HPL/Ayush/ICX-1",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "ICX-1",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 7-node run (hpc-01..hpc-07, 112 ranks)\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n207168       Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n8            Ps\n14           Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 7-node run (hpc-01..hpc-07, 112 ranks)"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        207168
+      ],
+      "numNBs": 1,
+      "NBs": [
+        192
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        8
+      ],
+      "Qs": [
+        14
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "path": "/raw/HPL/Ayush/ICX-1/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07\n#SBATCH --job-name=hpl-7node\n#SBATCH --nodes=6\n#SBATCH --ntasks-per-node=16\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=02:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\nset -o pipefail\n\n# =========================================================\n# 7 NODES: hpc-01 (head) + hpc-02..hpc-07 (SLURM), 16 ranks each = 112.\n#\n# SLURM only manages hpc-02..07, so sbatch reserves those six (preventing a\n# teammate's job landing on top of this run) and hpc-01 is appended to the\n# hostfile by hand.\n#\n# All nodes are addressed by their -ib names (10.0.0.0/24, /etc/hosts), NOT\n# their ethernet names. Two reasons:\n#   1. \"hpc-01\" on the management LAN routes through the external bastion via\n#      the ProxyJump entry in the NFS-shared ~/.ssh/config, which fails from\n#      inside the cluster.\n#   2. 192.168.2.105 is contested: a BMC holds the same address as hpc-05's\n#      host NIC, so `ssh hpc-05` from hpc-02/03/04/06 reaches the BMC's\n#      OpenSSH 5.5 instead of the node and fails host-key negotiation.\n# The IB fabric has no such conflict - verified 49/49 IPoIB paths, and\n# `ssh 10.0.0.5` returns the genuine hpc-05 from every node.\n# =========================================================\nHEAD_IB=hpc-01-ib\nRPN=16\n\n# =========================================================\n# BLAS: OpenBLAS, NOT MKL. Measured on this hardware (E5-2670, Sandy Bridge,\n# AVX but no AVX2/FMA):\n#   OpenBLAS 0.3.26  24.07 GF/s/core  -> Sandybridge AVX kernel\n#   MKL 2026.1       12.50 GF/s/core  -> dispatches SSE4.2, no AVX path exists\n# MKL_ENABLE_INSTRUCTIONS=AVX does not help. MKL costs ~46% here.\n# =========================================================\nexport OMP_NUM_THREADS=1\nexport OPENBLAS_NUM_THREADS=1\nexport OMP_PLACES=cores\nexport OMP_PROC_BIND=close\n\n# =========================================================\n# Transport: UCX over InfiniBand (confirmed on rc_verbs/ibp176s0, not TCP).\n# Measured in HPL itself, 6 nodes N=80000, back-to-back, same governor:\n#   pml=ucx    1.4921e+03 GF/s\n#   btl=openib 1.3999e+03 GF/s   -> UCX +6.6%\n# (8MB pingpong said ucx 47.3 / openib 37.1 / tcp 0.94 Gbit/s, but pingpong\n#  is a poor predictor here - HPL is dominated by many medium messages, not\n#  one big stream. The HPL A/B above is the number that decided this.)\n# tree-spawn off: node->node ssh would hit the broken hpc-01 ProxyJump entry.\n#\n# DO NOT pin UCX_NET_DEVICES to a single name. The IB device is named\n# inconsistently across this cluster (same MT4099 hardware, same firmware\n# 2.40.5000, different udev naming):\n#     ibp176s0 -> hpc-01, hpc-02, hpc-04, hpc-06, hpc-07\n#     mlx4_0   -> hpc-03, hpc-05\n# The common tuning snippet UCX_NET_DEVICES=ibp176s0:1 silently breaks the two\n# mlx4_0 nodes. Leaving it unset lets UCX autodetect, which also benchmarked\n# fastest (47.3 vs 42.7 Gbit/s when pinned). If you ever must pin it, set BOTH:\n#     UCX_NET_DEVICES=ibp176s0:1,mlx4_0:1\n# The preflight below verifies any value you do set exists on every node.\n# =========================================================\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl='^openib,tcp'\n\n# =========================================================\n# Transparent Huge Pages MUST stay at \"madvise\" (the Ubuntu default).\n# Setting THP=always with defrag=always was measured to HURT, and worse as\n# the matrix grows - the kernel synchronously compacts memory for the huge\n# allocations and khugepaged keeps rescanning a footprint that reaches\n# 47.6 GiB/node at N=207168:\n#   6 nodes N=80000  madvise 1.5012e+03 (74.3% of DGEMM ceiling)\n#   6 nodes N=80000  always  1.4264e+03 (70.6%)\n#   6 nodes N=120000 always  1.2678e+03 (62.8%)   <- efficiency falling with N\n# HPL never calls madvise(MADV_HUGEPAGE), so \"madvise\" simply means 4K pages.\n# =========================================================\n\nulimit -l unlimited\nulimit -n 65536\n\n# ---------- build hostfile: hpc-01 first, then the SLURM allocation ----------\nHOSTFILE=$(mktemp \"${TMPDIR:-/tmp}/hpl_hosts.XXXXXX\")\ntrap 'rm -f \"$HOSTFILE\"' EXIT\necho \"$HEAD_IB slots=$RPN\" > \"$HOSTFILE\"\nscontrol show hostnames \"$SLURM_JOB_NODELIST\" | awk -v s=\"$RPN\" '{print $1\"-ib slots=\"s}' >> \"$HOSTFILE\"\nNNODES=$(wc -l < \"$HOSTFILE\")\nNP=$(( NNODES * RPN ))\n\n# ---------- preflight ----------\nfail=0\necho \"== preflight ==\"\n\nif ! ldd ./xhpl 2>/dev/null | grep -qi openblas; then\n  echo \"  FAIL: ./xhpl is not linked against OpenBLAS\"; ldd ./xhpl; fail=1\nelse\n  echo \"  ok   xhpl -> $(ldd ./xhpl | awk '/openblas/{print $3}')\"\nfi\n\n# grid must match rank count\nP=$(awk 'NR==11{print $1}' HPL.dat); Q=$(awk 'NR==12{print $1}' HPL.dat)\nN=$(awk 'NR==6{print $1}' HPL.dat);  NB=$(awk 'NR==8{print $1}' HPL.dat)\nif [ $((P*Q)) -ne \"$NP\" ]; then\n  echo \"  FAIL: HPL.dat P*Q = $((P*Q)) but launching $NP ranks\"; fail=1\nelse\n  echo \"  ok   grid ${P}x${Q} = $NP ranks over $NNODES nodes\"\nfi\n\n# per-node memory: HPL distributes UNIFORMLY, so the smallest node caps N.\n# hpc-03/hpc-06 have 128GB but the surplus is unusable.\nNEED=$(python3 -c \"\nN=$N;P=$P;Q=$Q;NB=$NB;rpn=$RPN\nlr=-(-N//P); lc=-(-N//Q)\nprint(round(((lr*(lc+1)*8)+2*(lr*NB*8+NB*lc*8+NB*NB*8))*rpn/2**30,1))\")\necho \"  need ${NEED} GiB/node (N=$N NB=$NB, uniform across all $NNODES nodes)\"\nwhile read -r h _; do\n  info=$(ssh -n -o BatchMode=yes -o StrictHostKeyChecking=no \"$h\" '\n      awk \"/MemAvailable/{printf \\\"%.1f \\\", \\$2/1048576}\" /proc/meminfo\n      d=$(ls /sys/class/infiniband/ 2>/dev/null | head -1)\n      printf \"%s %s %s %s\" \"${d:-NONE}\" \\\n        \"$(cat /sys/class/infiniband/$d/ports/1/state 2>/dev/null | awk \"{print \\$2}\")\" \\\n        \"$(cat /sys/class/infiniband/$d/ports/1/rate 2>/dev/null | awk \"{print \\$1}\")\" \\\n        \"$(pgrep -c xhpl)\"' 2>/dev/null)\n  set -- $info; avail=$1; ibdev=$2; ibstate=$3; ibrate=$4; nxhpl=$5\n\n  if [ -z \"$avail\" ]; then echo \"  FAIL: $h unreachable\"; fail=1; continue; fi\n  if awk -v a=\"$avail\" -v n=\"$NEED\" 'BEGIN{exit !(a < n*1.05)}'; then\n    echo \"  FAIL: $h ${avail} GiB avail, needs ${NEED} (+5% margin)\"; fail=1; continue\n  fi\n  if [ \"$ibdev\" = NONE ] || [ \"$ibstate\" != ACTIVE ]; then\n    echo \"  FAIL: $h InfiniBand not ACTIVE (dev=$ibdev state=$ibstate)\"; fail=1; continue\n  fi\n  if [ \"${ibrate:-0}\" -lt 56 ] 2>/dev/null; then\n    echo \"  WARN: $h IB rate ${ibrate} Gb/s, expected 56\"\n  fi\n  if [ \"${nxhpl:-0}\" -gt 0 ]; then\n    echo \"  FAIL: $h already has $nxhpl xhpl processes running\"; fail=1; continue\n  fi\n  # if UCX_NET_DEVICES is pinned, it must name a device that exists on THIS node\n  if [ -n \"$UCX_NET_DEVICES\" ] && ! echo \"$UCX_NET_DEVICES\" | grep -q \"$ibdev\"; then\n    echo \"  FAIL: $h has $ibdev but UCX_NET_DEVICES='$UCX_NET_DEVICES' omits it\"; fail=1; continue\n  fi\n  thp=$(ssh -n -o BatchMode=yes \"$h\" 'cat /sys/kernel/mm/transparent_hugepage/enabled 2>/dev/null' 2>/dev/null)\n  case \"$thp\" in *\"[always]\"*) echo \"  WARN: $h has THP=always - measured ~20% slower at large N, set it to madvise\";; esac\n  echo \"  ok   $h ${avail} GiB, $ibdev $ibstate ${ibrate}Gb/s, no stray ranks\"\ndone < \"$HOSTFILE\"\n\n[ \"$fail\" -ne 0 ] && { echo \"PREFLIGHT FAILED - aborting\"; exit 1; }\n\necho \"== launching ==\"\necho \"  hostfile:\"; sed 's/^/    /' \"$HOSTFILE\"\n\n# --mca ras ^slurm: OpenMPI otherwise takes its node list from the SLURM\n# allocation and REJECTS hpc-01 as \"not present in the allocation\". Disabling\n# the slurm RAS module makes it honour the hostfile verbatim; plm rsh then\n# launches over ssh to all seven.\nmpirun --hostfile \"$HOSTFILE\" -np \"$NP\" \\\n  --map-by core --bind-to core \\\n  --mca ras ^slurm \\\n  --mca plm rsh --mca plm_rsh_no_tree_spawn 1 \\\n  -x OMP_NUM_THREADS -x OPENBLAS_NUM_THREADS \\\n  -x OMP_PLACES -x OMP_PROC_BIND \\\n  -x LD_LIBRARY_PATH \\\n  ./xhpl\n",
+    "sbatch": {
+      "nodelist": "hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07",
+      "job-name": "hpl-7node",
+      "nodes": 6,
+      "ntasks-per-node": 16,
+      "cpus-per-task": 1,
+      "partition": "batch",
+      "time": "02:30:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "output": "run.sh-%j.out",
+      "error": "run.sh-%j.err"
+    },
+    "path": "/raw/HPL/Ayush/ICX-1/run.sh"
+  },
+  "out": {
+    "path": "/raw/HPL/Ayush/ICX-1/run.sh-156.out",
+    "runs": [
+      {
+        "tv": "WR11C2C2",
+        "N": 207168,
+        "NB": 192,
+        "P": 8,
+        "Q": 14,
+        "timeSec": 4426.21,
+        "gflops": 1339.2,
+        "startTime": "Thu Aug 20 09:40:31 2026",
+        "endTime": "Thu Aug 20 10:54:18 2026",
+        "residual": 0.00164542431,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/Ayush/ICX-1/run.sh-156.err",
+    "size": 78
+  },
+  "best": {
+    "gflops": 1339.2,
+    "N": 207168,
+    "NB": 192,
+    "timeSec": 4426.21
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "id": "HPL/Aden/6node_1task_1",
+  "suite": "HPL",
+  "group": "Aden",
+  "run": "6node_1task_1",
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 5-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n178944       Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n8            Ps\n12            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 5-node test"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        178944
+      ],
+      "numNBs": 1,
+      "NBs": [
+        192
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        8
+      ],
+      "Qs": [
+        12
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "path": "/raw/HPL/Aden/6node_1task_1/HPL.dat"
+  },
+  "job": {
+    "filename": "run.sh",
+    "raw": "#!/bin/bash\n#SBATCH --nodelist=hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07\n#SBATCH --job-name=hpl-tes\n#SBATCH --nodes=6\n#SBATCH --ntasks-per-node=16\n#SBATCH --cpus-per-task=1\n#SBATCH --partition=batch\n#SBATCH --time=02:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --output=run.sh-%j.out\n#SBATCH --error=run.sh-%j.err\n\n# --- Single-threaded BLAS (pure MPI, 1 process per core) ---\nexport OMP_NUM_THREADS=1\nexport OPENBLAS_NUM_THREADS=1\n\n# --- MPI transport: InfiniBand via OpenIB ---\nexport OMPI_MCA_btl=openib,vader,self\nexport OMPI_MCA_pml=ob1\nexport OMPI_MCA_btl_openib_allow_ib=1\nexport OMPI_MCA_btl_openib_warn_default_gid_prefix=0\n\n# Ulimits\nulimit -l unlimited\nulimit -n 65536\n\n# Run HPL — 1 rank per core\nmpirun --map-by core --bind-to core --report-bindings \\\n  -x OMP_NUM_THREADS -x OPENBLAS_NUM_THREADS \\\n  ./xhpl",
+    "sbatch": {
+      "nodelist": "hpc-02,hpc-03,hpc-04,hpc-05,hpc-06,hpc-07",
+      "job-name": "hpl-tes",
+      "nodes": 6,
+      "ntasks-per-node": 16,
+      "cpus-per-task": 1,
+      "partition": "batch",
+      "time": "02:00:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "output": "run.sh-%j.out",
+      "error": "run.sh-%j.err"
+    },
+    "path": "/raw/HPL/Aden/6node_1task_1/run.sh"
+  },
+  "out": {
+    "path": "/raw/HPL/Aden/6node_1task_1/run.sh-138.out",
+    "runs": [
+      {
+        "tv": "WR11C2C2",
+        "N": 178944,
+        "NB": 192,
+        "P": 8,
+        "Q": 12,
+        "timeSec": 2316.86,
+        "gflops": 1648.8,
+        "startTime": "Wed May 13 04:17:52 2026",
+        "endTime": "Wed May 13 04:56:29 2026",
+        "residual": 0.00191910548,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    }
+  },
+  "err": {
+    "path": "/raw/HPL/Aden/6node_1task_1/run.sh-138.err",
+    "size": 13140
+  },
+  "best": {
+    "gflops": 1648.8,
+    "N": 178944,
+    "NB": 192,
+    "timeSec": 2316.86
+  }
+}
