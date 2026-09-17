@@ -1,18 +1,0 @@
-Warning: The creation of file is currently experimental.
-This file may contain errors and not support all features.
-  #        Conservative           Primitive
-    
-  1   alpha_{1} ho_{1}       alpha_{1} ho
-  2   alpha_{2} ho_{2}       alpha_{2} ho
-  3             ho u_x                 u_x
-  4             ho u_y                 u_y
-  5             ho u_z                 u_z
-  6               ho U                   p
-  7           alpha_{7}           alpha_{7}
-  8           alpha_{8}           alpha_{8}
-
-[1,2] Continuity
-[3,5] Momentum
-[6,6] Energy/Pressure
-[7,8] Advection
-[9,14] Stress

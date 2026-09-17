@@ -51,6 +51,39 @@ source:
   #     /work/mfc/current/zen3      -> partition gpu
   prefix: /work/mfc/current
 
+# What a finished run keeps, and under what name. MFC leaves 16 files in a case
+# directory -- its own .inp files, per-stage timing files, an indices table --
+# and harvesting all of them buried the four that matter under a wall of links.
+# The names on the left mirror HPL, so a run of either suite looks the same:
+# the input, the script, what it printed, and the numbers.
+#
+# Sources are globs because MFC names its batch files after the job
+# (mfc-<name>.out), which differs per run and makes a stable link impossible.
+artifacts:
+  case.py:       [case.py]           # the input, MFC's equivalent of HPL.dat
+  run.sh:        ["mfc-*.sh"]        # the batch script MFC generated
+  run.out:       ["mfc-*.out"]       # stdout: MFC's banner, per-step progress
+  run.err:       ["mfc-*.err"]       # stderr
+  summary.yaml:  [summary.yaml]      # MFC's own exec/grind report
+  time_data.dat: [time_data.dat]     # Ranks | s/step | ns/gp/eq/rhs
+  job.yml:       [job.yml]
+
+# Kept under their own names, all matches, not just the first. Rendered output
+# is named after whatever variable was plotted (alpha1.mp4, alpha1_2812.png),
+# so there is no canonical name to map it to -- but it is the most interesting
+# thing a visualisation run produces and must not be dropped.
+keep:
+  - "*.mp4"
+  - "*.png"
+
+# Kept for verification but not shown as user-facing artifacts: the collector
+# reads these to decide whether a run is rankable.
+metadata:
+  - mfc-provenance.json
+  - mfc-status.yml
+  # Listed here so the "mfc-*.sh" glob above cannot claim it as run.sh.
+  - mfc-environment.sh
+
 run:
   launcher: mfc
   template: suites/MFC/xenon.mako

@@ -30,6 +30,16 @@ inputs:
 tuning:
   free: [N, NB, P, Q, PFACT, RFACT, BCAST, DEPTH, SWAP]
 
+# What a finished run keeps. HPL's names are already canonical; declaring them
+# means harvest keeps the same four things for every suite instead of copying
+# whatever the job happened to leave behind.
+artifacts:
+  HPL.dat: [HPL.dat]
+  run.sh:  [run.sh, "run.*.sh"]
+  run.out: [run.out, "*.out"]
+  run.err: [run.err, "*.err"]
+  job.yml: [job.yml]
+
 run:
   launcher: sbatch
   binary: /apps/benchmarks/hpl-nvidia/current/bin/xhpl

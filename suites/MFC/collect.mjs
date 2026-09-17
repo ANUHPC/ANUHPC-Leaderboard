@@ -35,6 +35,92 @@ function parseTimeData(raw) {
   return rows;
 }
 
+// MFC's stdout is long but highly structured, so it is parsed rather than
+// embedded. A 3000-step run writes one progress line per step -- 399 KB and
+// 3137 lines at the largest measured here -- and putting that raw into every
+// run.json would add megabytes to the data the site downloads. HPL can embed
+// its stdout because HPL's is 3.6 KB.
+//
+// Four things are worth lifting out:
+//   * the banner MFC prints  (partition, nodes, walltime, engine)
+//   * the environment line our own template echoes (host, mpirun, fabric) --
+//     this is what shows a GPU run really used the A100s and InfiniBand
+//   * the per-step timing series, downsampled, so the run can be charted
+//   * the closing block (total time, exit code)
+export function parseMfcOut(raw) {
+  const text = String(raw);
+  const lines = text.split(/\r?\n/);
+
+  // "| * Start-time     08:32:01    * Start-date   08:32:01   |" — two
+  // key/value pairs per row inside MFC's box drawing.
+  const banner = {};
+  for (const line of lines) {
+    if (!line.startsWith("|")) continue;
+    for (const m of line.matchAll(/\*\s+([A-Za-z][A-Za-z\- ]*?)\s{2,}([^*|]+?)\s{2,}/g)) {
+      const k = m[1].trim().toLowerCase().replace(/[\s-]+/g, "_");
+      const v = m[2].trim();
+      if (k && v && v !== "N/A" && !(k in banner)) banner[k] = v;
+    }
+  }
+
+  // Emitted by suites/MFC/xenon.mako, not by MFC itself.
+  const one = (re) => { const m = text.match(re); return m ? m[1].trim() : null; };
+  const env = {
+    host: one(/^host\s*:\s*(.+)$/m),
+    nodesTasks: one(/^nodes\/tasks\s*:\s*(.+)$/m),
+    mpirun: one(/^mpirun\s*:\s*(.+)$/m),
+    fabric: one(/^fabric\s*:\s*(.+)$/m),
+  };
+
+  // " [ 24%]  Time step  6 of 21 @ t_step = 5 Time Avg = 1.07E+00 Time/step= 1.08E+00 ETA (HH:MM:SS) = 0:00:16"
+  const steps = [];
+  for (const line of lines) {
+    const m = line.match(
+      /\[\s*(\d+)%\]\s+Time step\s+(\d+)\s+of\s+(\d+).*?Time Avg\s*=\s*([0-9.eE+-]+)\s+Time\/step=\s*([0-9.eE+-]+)/
+    );
+    if (m) {
+      steps.push({
+        step: Number(m[2]),
+        total: Number(m[3]),
+        avg: Number(m[4]),
+        perStep: Number(m[5]),
+      });
+    }
+  }
+  // Downsample: a chart needs shape, not 3000 points.
+  const MAX = 120;
+  const series = steps.length > MAX
+    ? steps.filter((_, i) => i % Math.ceil(steps.length / MAX) === 0 || i === steps.length - 1)
+    : steps;
+
+  const perf = text.match(/Performance:\s+([0-9.eE+-]+)\s+ns\/gp\/eq\/rhs/);
+  const total = text.match(/Total-time:\s*(\d+)s/);
+  const exit = text.match(/Exit Code:\s*(\d+)/);
+
+  return {
+    banner,
+    env,
+    steps: series,
+    stepCount: steps.length,
+    performance: perf ? Number(perf[1]) : null,
+    totalTimeSec: total ? Number(total[1]) : null,
+    exitCode: exit ? Number(exit[1]) : null,
+    lines: lines.length,
+  };
+}
+
+// First and last few lines, so the modal can show the real text without
+// carrying the whole log.
+export function excerpt(raw, head = 24, tail = 28) {
+  const lines = String(raw).split(/\r?\n/);
+  if (lines.length <= head + tail) return { head: lines, tail: [], elided: 0 };
+  return {
+    head: lines.slice(0, head),
+    tail: lines.slice(-tail),
+    elided: lines.length - head - tail,
+  };
+}
+
 export async function collect(ctx) {
   const { files, read, suite } = ctx;
 
@@ -44,9 +130,12 @@ export async function collect(ctx) {
   const outName  = files.find((f) => /\.out$/i.test(f));
   const errName  = files.find((f) => /\.err$/i.test(f));
   const jobName  = files.find((f) => /^job\.ya?ml$/i.test(f));
+  // harvest.mjs renames MFC's mfc-<run>.sh to run.sh; older results still carry
+  // the original name, so accept either.
+  const shName   = files.find((f) => /^run\.sh$/i.test(f)) ?? files.find((f) => /\.sh$/i.test(f) && !/environment/i.test(f));
 
-  const [sumRaw, timeRaw, caseRaw, outRaw, errRaw, jobRaw] = await Promise.all(
-    [sumName, timeName, caseName, outName, errName, jobName]
+  const [sumRaw, timeRaw, caseRaw, outRaw, errRaw, jobRaw, shRaw] = await Promise.all(
+    [sumName, timeName, caseName, outName, errName, jobName, shName]
       .map((f) => (f ? read(f) : Promise.resolve(null)))
   );
 
@@ -133,11 +222,23 @@ export async function collect(ctx) {
     detail: {
       summary,
       timeData: rows,
-      case: caseRaw ? { file: caseName, raw: caseRaw } : null,
-      out: outRaw ? { file: outName, size: outRaw.length } : null,
-      err: errRaw ? { file: errName, size: errRaw.length } : null,
+      // Small enough to carry whole: the case is what defines the run, and the
+      // batch script is what actually ran. Largest measured: 8.6 KB and 7.8 KB.
+      case:   caseRaw ? { file: caseName, raw: caseRaw } : null,
+      script: shRaw   ? { file: shName,   raw: shRaw   } : null,
+      // stdout is parsed, not embedded -- see parseMfcOut. The excerpt gives
+      // the modal real text to show; the full file stays one link away.
+      out: outRaw ? {
+        file: outName,
+        size: outRaw.length,
+        parsed: parseMfcOut(outRaw),
+        excerpt: excerpt(outRaw),
+      } : null,
+      // stderr is small (8.8 KB at most) and is where a failure explains
+      // itself, so it is carried in full.
+      err: errRaw ? { file: errName, size: errRaw.length, raw: errRaw } : null,
     },
-    rawFiles: [caseName, sumName, timeName, outName, errName, jobName,
+    rawFiles: [caseName, sumName, timeName, outName, errName, jobName, shName,
       ...files.filter((f) => /\.(png|mp4)$/i.test(f)),
       ...["mfc-provenance.json", "mfc-status.yml"].filter((f) => files.includes(f))].filter(Boolean),
   };

@@ -121,17 +121,11 @@ jobs:
         run: |
           set -euo pipefail
           [ -d "${STAGE:-}" ] || exit 0
-          for jobdir in "$STAGE"/*/*/*/; do
-            [ -d "$jobdir" ] || continue
-            dest="output/$CLUSTER/${jobdir#$STAGE/}"
-            mkdir -p "$dest"
-            for f in "$jobdir"*; do
-              [ -f "$f" ] || continue
-              case "$(basename "$f")" in xhpl|*.o|*.mod) continue ;; esac
-              cp "$f" "$dest"/
-            done
-            echo "harvested ${jobdir#$STAGE/}"
-          done
+          # Each suite declares what to keep, and under what name, in its
+          # suite.yml. The old loop copied everything that was not xhpl/*.o/*.mod,
+          # which for MFC meant 16 files per run -- its .inp files, three timing
+          # files, an indices table -- burying the four that matter.
+          node scripts/harvest.mjs "$STAGE" "$CLUSTER"
 
       - name: Commit results
         if: always()
