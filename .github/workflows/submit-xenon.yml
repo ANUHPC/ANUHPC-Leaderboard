@@ -59,7 +59,15 @@ jobs:
           me="$(id -un)"; uid="$(id -u)"
           echo "runner account: $me ($uid)"
           bad=0
-          for n in $(sinfo -h -o '%N' | tr ',' ' ' | tr ' ' '\n' | sort -u) $(scontrol show config 2>/dev/null | awk -F= '/SlurmctldHost/{print $2}' | tr -d ' []0123456789'); do
+          # -N lists one node per line. Without it sinfo emits a COMPRESSED
+          # hostlist ("gpu-node[1-2]"), which is not a hostname and makes every
+          # ssh below fail, so this check failed on a healthy cluster.
+          nodes="$(sinfo -h -N -o '%N' | sort -u)"
+          # The [0] is part of the key ("SlurmctldHost[0] = cpu-node1"), so
+          # strip whitespace from the value only -- deleting digits turned the
+          # controller into "cpu-node".
+          ctld="$(scontrol show config 2>/dev/null | awk -F= '/^SlurmctldHost/{gsub(/[[:space:]]/,"",$2); print $2}')"
+          for n in $nodes $ctld; do
             [ -n "$n" ] || continue
             got="$(timeout 8 ssh -o BatchMode=yes -o ConnectTimeout=5 "$n" "id -u $me 2>/dev/null" 2>/dev/null || echo MISSING)"
             if [ "$got" != "$uid" ]; then
