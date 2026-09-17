@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T02:52:17.087Z",
+  "generatedAt": "2026-09-17T02:52:45.075Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 2
+      "count": 3
     }
   ],
   "suites": [
@@ -46,10 +46,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 139,
+      "count": 140,
       "countByCluster": {
         "raijin": 137,
-        "xenon": 2
+        "xenon": 3
       }
     },
     {
@@ -5633,6 +5633,32 @@
       },
       "hasErr": true,
       "rank": 2
+    },
+    {
+      "id": "xenon/HPL/Daniel/xenon_test",
+      "suite": "HPL",
+      "group": "Daniel",
+      "run": "xenon_test",
+      "cluster": "xenon",
+      "clusterSource": "path",
+      "metric": null,
+      "secondary": [],
+      "config": {
+        "N": 20000,
+        "NB": 192,
+        "P": 2,
+        "Q": 2,
+        "variant": "cpu",
+        "nodes": 1,
+        "tasks_per_node": 4,
+        "cpus_per_task": 9,
+        "partition": "cpu"
+      },
+      "status": "no-result",
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": false
     }
   ]
 }

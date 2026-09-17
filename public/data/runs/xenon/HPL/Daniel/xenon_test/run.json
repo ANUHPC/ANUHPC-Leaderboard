@@ -1,0 +1,221 @@
+{
+  "id": "xenon/HPL/Daniel/xenon_test",
+  "suite": "HPL",
+  "group": "Daniel",
+  "run": "xenon_test",
+  "cluster": "xenon",
+  "clusterSource": "path",
+  "metric": null,
+  "secondary": [],
+  "config": {
+    "N": 20000,
+    "NB": 192,
+    "P": 2,
+    "Q": 2,
+    "variant": "cpu",
+    "nodes": 1,
+    "tasks_per_node": 4,
+    "cpus_per_task": 9,
+    "partition": "cpu"
+  },
+  "provenance": {
+    "started": null,
+    "ended": null
+  },
+  "status": "no-result",
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/xenon/HPL/Daniel/xenon_test/HPL.dat",
+    "run.xenon.sh": "raw/xenon/HPL/Daniel/xenon_test/run.xenon.sh"
+  },
+  "best": null,
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nRaijin 2-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n20000        Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Raijin 2-node test"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        20000
+      ],
+      "numNBs": 1,
+      "NBs": [
+        192
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        2
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# HPL on Xenon. Copy this to your run directory AS run.sh:\n#     cp run.xenon.sh <your-run-dir>/run.sh\n# Do not use run.raijin.sh here -- it asks for --partition=batch, which does\n# not exist on Xenon, and forces MPI over Ethernet.\n\n#SBATCH --job-name=hpl-CHANGE-ME\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=4\n#SBATCH --cpus-per-task=9\n#SBATCH --partition=cpu\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# Partitions: cpu (cpu-node2, 72 threads) | gpu (2 x 4 A100) | all\n# ntasks-per-node x cpus-per-task must equal the physical cores you want.\n# --hint=nomultithread keeps HPL off the SMT siblings; HPL gains nothing from\n# them and loses to the cache contention.\n\nexport PATH=/apps/openmpi/5.0.10/bin:$PATH\nexport LD_LIBRARY_PATH=/apps/openmpi/5.0.10/lib:/apps/ucx/1.22.0/lib:${LD_LIBRARY_PATH:-}\n\n# Fabric: 56 Gb/s FDR InfiniBand on all four nodes.\n#\n# Do NOT set UCX_NET_DEVICES. The kernel names the HCA after its PCI slot and\n# the name differs by node type -- ibp129s0 on the cpu nodes, ibp161s0 on the\n# gpu nodes -- so any single value is wrong on half the cluster and UCX just\n# warns and falls back. Raijin measured autodetect faster than pinning anyway\n# (47.3 vs 42.7 Gbit/s). If you ever must pin it, name every device:\n#     UCX_NET_DEVICES=ibp129s0:1,ibp161s0:1\n#\n# UCX_TLS is the setting that matters: with rc (RDMA) and no tcp, UCX fails\n# loudly rather than quietly dropping to the 1 GbE management network and\n# handing you a multi-node number that means nothing.\nexport UCX_TLS=rc,sm,self\nexport PMIX_MCA_pcompress_base_silence_warning=1\n\n# No CUDA on the cpu partition; stop OpenMPI probing for it. Drop this line if\n# you are running on the gpu partition.\nexport OMPI_MCA_accelerator=^cuda\n\nexport OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-9}\nexport OPENBLAS_NUM_THREADS=${SLURM_CPUS_PER_TASK:-9}\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\n\nulimit -l unlimited\nulimit -n 65536\n\n# Never hardcode --nodelist. Let Slurm place the job; node names differ\n# between clusters and a stale nodelist fails only after it has queued.\n\necho \"node    : $(hostname -s)\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} threads\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho \"binary  : $(readlink -f ./xhpl)\"\n\n# xhpl is staged into this directory from /apps by the submit workflow.\nmpirun -np \"${SLURM_NTASKS}\" --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core ./xhpl\n",
+    "sbatch": {
+      "job-name": "hpl-CHANGE-ME",
+      "nodes": 1,
+      "ntasks-per-node": 4,
+      "cpus-per-task": 9,
+      "partition": "cpu",
+      "time": "01:00:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.xenon.sh"
+  },
+  "out": null,
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nRaijin 2-node test\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n20000        Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Raijin 2-node test"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          20000
+        ],
+        "numNBs": 1,
+        "NBs": [
+          192
+        ],
+        "pmap": 0,
+        "numGrids": 1,
+        "Ps": [
+          2
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 2,
+        "swapThreshold": 16,
+        "L1": 0,
+        "U": 0,
+        "equilibration": 1,
+        "memoryAlignment": 16
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# HPL on Xenon. Copy this to your run directory AS run.sh:\n#     cp run.xenon.sh <your-run-dir>/run.sh\n# Do not use run.raijin.sh here -- it asks for --partition=batch, which does\n# not exist on Xenon, and forces MPI over Ethernet.\n\n#SBATCH --job-name=hpl-CHANGE-ME\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=4\n#SBATCH --cpus-per-task=9\n#SBATCH --partition=cpu\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# Partitions: cpu (cpu-node2, 72 threads) | gpu (2 x 4 A100) | all\n# ntasks-per-node x cpus-per-task must equal the physical cores you want.\n# --hint=nomultithread keeps HPL off the SMT siblings; HPL gains nothing from\n# them and loses to the cache contention.\n\nexport PATH=/apps/openmpi/5.0.10/bin:$PATH\nexport LD_LIBRARY_PATH=/apps/openmpi/5.0.10/lib:/apps/ucx/1.22.0/lib:${LD_LIBRARY_PATH:-}\n\n# Fabric: 56 Gb/s FDR InfiniBand on all four nodes.\n#\n# Do NOT set UCX_NET_DEVICES. The kernel names the HCA after its PCI slot and\n# the name differs by node type -- ibp129s0 on the cpu nodes, ibp161s0 on the\n# gpu nodes -- so any single value is wrong on half the cluster and UCX just\n# warns and falls back. Raijin measured autodetect faster than pinning anyway\n# (47.3 vs 42.7 Gbit/s). If you ever must pin it, name every device:\n#     UCX_NET_DEVICES=ibp129s0:1,ibp161s0:1\n#\n# UCX_TLS is the setting that matters: with rc (RDMA) and no tcp, UCX fails\n# loudly rather than quietly dropping to the 1 GbE management network and\n# handing you a multi-node number that means nothing.\nexport UCX_TLS=rc,sm,self\nexport PMIX_MCA_pcompress_base_silence_warning=1\n\n# No CUDA on the cpu partition; stop OpenMPI probing for it. Drop this line if\n# you are running on the gpu partition.\nexport OMPI_MCA_accelerator=^cuda\n\nexport OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-9}\nexport OPENBLAS_NUM_THREADS=${SLURM_CPUS_PER_TASK:-9}\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\n\nulimit -l unlimited\nulimit -n 65536\n\n# Never hardcode --nodelist. Let Slurm place the job; node names differ\n# between clusters and a stale nodelist fails only after it has queued.\n\necho \"node    : $(hostname -s)\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} threads\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho \"binary  : $(readlink -f ./xhpl)\"\n\n# xhpl is staged into this directory from /apps by the submit workflow.\nmpirun -np \"${SLURM_NTASKS}\" --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core ./xhpl\n",
+      "sbatch": {
+        "job-name": "hpl-CHANGE-ME",
+        "nodes": 1,
+        "ntasks-per-node": 4,
+        "cpus-per-task": 9,
+        "partition": "cpu",
+        "time": "01:00:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.xenon.sh"
+    },
+    "out": null,
+    "err": null,
+    "best": null
+  }
+}
