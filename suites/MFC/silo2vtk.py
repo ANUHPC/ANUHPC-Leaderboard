@@ -55,9 +55,16 @@ def write_rectilinear(path, x, y, z, arrays):
         for name, data in arrays.items():
             w(f"SCALARS {name} float 1\n")
             w("LOOKUP_TABLE default\n")
-            # VTK expects x fastest. MFC hands back (x, y, z), so transpose to
-            # (z, y, x) before flattening or the field comes out mirrored.
-            f.write(np.asarray(data, dtype=">f4").transpose(2, 1, 0).ravel().tobytes())
+            # VTK expects x fastest. MFC hands back (x, y, ...) so the axes are
+            # reversed before flattening, or the field comes out mirrored.
+            #
+            # Reversed generically rather than transpose(2, 1, 0): a 2D case
+            # hands back a 2-D array and the fixed form raised
+            # "ValueError: axes don't match array", so this script worked only
+            # on 3D. 2D previews go through `mfc.sh viz` today and so never hit
+            # it, which is why it went unnoticed.
+            arr = np.asarray(data, dtype=">f4")
+            f.write(arr.transpose(*range(arr.ndim - 1, -1, -1)).ravel().tobytes())
             w("\n")
 
 
