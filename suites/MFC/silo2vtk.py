@@ -66,6 +66,7 @@ def main():
     ap.add_argument("case_dir")
     ap.add_argument("out_dir")
     ap.add_argument("--var", action="append", default=None)
+    ap.add_argument("--max-frames", type=int, default=None)
     args = ap.parse_args()
 
     root = _find_mfc_root(args.case_dir)
@@ -79,6 +80,12 @@ def main():
     steps = mfc_reader.discover_timesteps(args.case_dir, fmt)
     if not steps:
         sys.exit("silo2vtk: no timesteps found — did post_process run?")
+    # A 3000-step run saving every 50 steps has 60 evolved frames plus t=0.
+    # Retain the final 60 for a uniformly spaced animation ending at step 3000.
+    if args.max_frames is not None:
+        if args.max_frames < 1:
+            sys.exit("silo2vtk: --max-frames must be positive")
+        steps = steps[-args.max_frames:]
 
     os.makedirs(args.out_dir, exist_ok=True)
     print(f"silo2vtk: {len(steps)} timesteps from {args.case_dir}", flush=True)
