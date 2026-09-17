@@ -33,7 +33,8 @@ git add input/xenon/MFC/<your-name> && git commit -m "task 2 sweep" && git push
 That writes 18 jobs: resolutions 32–512 at WENO 1, 3 and 5, plus three
 low-CFL points explained below. Each runs in well under a minute.
 
-For a single point, copy [`job.yml`](job.yml) and edit `args`:
+For a single point, copy [`job.yml`](job.yml), or extract the
+[Task 2 starter ZIP](../downloads/scc26-task2-n128-weno5.zip), and edit `args`:
 
 ```yaml
 case: advection_1d
@@ -125,7 +126,7 @@ The system `python3` has no numpy or matplotlib. MFC ships both:
 /work/mfc/current/haswell/build/venv/bin/python your_plot.py
 ```
 
-Plot log(error) against log(N); the slope is the order.
+Plot log(error) against log(N); the negative slope is the observed order.
 
 ## Where the numbers come from
 

@@ -51,8 +51,11 @@ Use whichever node step 1 reported.
 `11111`. Connect, then `File → Open` and browse the **remote** filesystem:
 
 ```
-/scratch/jobs/<job-id>/MFC/<group>/<run>/silo_hdf5/collection.silo.series
+/scratch/jobs/visualizations/<Actions-run-ID>/MFC/<group>/<run>/silo_hdf5/collection.silo.series
 ```
+
+Use the preserved path from the Actions summary and the GitHub Actions run ID,
+not a Slurm job ID. The temporary staging directory is cleaned after harvesting.
 
 Open the `.silo.series` for the animation, or `collection_*.silo` for one
 step. Tick the variables you want in the Properties panel — they are off by

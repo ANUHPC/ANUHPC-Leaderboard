@@ -17,4 +17,5 @@ tuning:
   gbpp: 1                 # modest CPU grid; increase deliberately
 # Grind time: ns/gp/eq/rhs, LOWER is better.
 # For GPUs use gpu/job.yml. For SCC26 Problem 3 use practice-problem3/.
-# case_optimization and OpenMP GPU offload are not supported by this pipeline.
+# build.case_optimization: true is optional; each new setting may need a compile.
+# OpenMP GPU offload is not configured; use gpu: acc for GPUs.

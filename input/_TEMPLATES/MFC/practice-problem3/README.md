@@ -6,8 +6,9 @@ MFC source, `e2f0e267`, and its `examples/2D_shockdroplet/case.py`.
 
 A Mach-1.4 shock in air interacts with a water droplet. The example runs on
 four CPU ranks, saves Silo fields, and makes an MP4 plus a final PNG of
-`alpha1`, the water volume fraction. It is **unranked** because it supplies
-custom physics instead of one of the seven leaderboard benchmark cases.
+`alpha1`, the water volume fraction. It appears as a **Verified custom run**
+when execution succeeds and the staged case hash and source pin match. The
+practice study compares settings, cost and flow rather than entering a speed ranking.
 
 The starting grid is **240 × 60 cells** (`RESOLUTION = 0.2`), with
 `END_TIME = 1.0` and `CFL = 0.2`. This is a quick learning example, not a
@@ -44,8 +45,9 @@ Then open **Actions → Submit jobs (xenon)**. The runner automatically:
 
 In the output directory, click the MP4/PNG and use GitHub's download button.
 The [MFC page](https://anuhpc.github.io/ANUHPC-Leaderboard/#/MFC?cluster=xenon)
-links the same artifacts under **CPU → Demos and unranked runs** once deployment
-finishes. A pending Actions workflow or running simulation has no result yet.
+shows the run under **Runs & settings** once deployment finishes. Filter by
+your name and **CPU**, then open **Details → Video**. Select multiple rows to
+compare their retained settings and costs. A pending Actions workflow or running simulation has no result yet.
 
 ## Equivalent Git commands
 
@@ -66,6 +68,8 @@ git push origin main
 
 - `summary.yaml`: simulation `exec` in seconds and `grind` in ns/gp/eq/rhs.
 - `time_data.dat`: ranks, seconds per step and grind.
+- `simulation.inp`: grid, time step, solver and enabled physics actually passed
+  to MFC. Fields omitted by MFC remain unknown on the website.
 - `alpha1.mp4`: blue/low values indicate air; high values indicate water
   under the default viridis colormap. Only the upper half of the droplet is
   simulated; the lower boundary is a symmetry plane.
@@ -87,13 +91,32 @@ its settings, `exec`, `grind`, and what changes in the visualization.
 | Experiment | Change | What to compare |
 |---|---|---|
 | MPI scaling | `tasks_per_node: 1`, then `4` | Same physics and grid; compare time and grind |
-| Shock strength | `MACH = 1.8` in `case.py` | Droplet deformation and pressure; physics changes |
-| Resolution | `RESOLUTION = 0.4` | 480 × 120 cells, finer interface, more work |
-| Adaptive time step | `ADAPTIVE_DT = True` | Same target CFL; compare stability, time and solution |
-| CFL | `CFL = 0.1` | Smaller step size, more time steps |
+| Shock strength | `args: ["--mach", "1.8"]` | Droplet deformation and pressure; physics changes |
+| Resolution | `args: ["-N", "480"]` | 480 × 120 cells, finer interface, more work |
+| Adaptive time step | `args: ["--adap-dt"]` | Same target CFL; compare stability, time and solution |
+| CFL | `args: ["--cfl", "0.1"]` | Smaller step size, more time steps |
+| Viscosity | `args: ["--viscous"]` | Flow and seconds per step |
+| Surface tension | `args: ["--sigma", "0.0728"]` | Flow and seconds per step; equation count changes |
 | GPU execution | Changes below | Compare hardware with identical case.py |
 
-The editable constants are together near the top of `case.py`. The rest
+Pass options through `args` in job.yml; the constants near the top of case.py
+are defaults. Keep one case file for a sweep so settings, rather than code
+changes, explain differences. The CLI currently covers viscosity and surface
+tension. Bubble-model experiments require a separate custom case with the
+appropriate MFC bubble parameters; there is no `--bubbles` switch in this
+starter.
+
+For a registered study requiring only job.yml, use `case: shock_droplet_2d`
+and omit case.py. To generate the existing CPU or GPU parameter study:
+
+```bash
+bash input/_TEMPLATES/MFC/practice-problem3/make-sweep.sh <your-name> cpu
+# Review the generated job.yml files, then commit and push.
+```
+
+Review the requested sizes and wall times before submitting the entire sweep.
+Surface tension changes the equation count, so use seconds per step and
+simulation time alongside grind. The rest
 retains the pinned example's initial conditions and numerical scheme. The
 PDF calls the default scheme WENO-Z, but its pinned case file actually sets
 `mapped_weno: T`; this template follows the source rather than silently
@@ -139,9 +162,9 @@ cd /work/mfc/current/haswell
 Run it after the submission completes. Replace `ACTIONS_RUN_ID` with the
 GitHub Actions run ID, not the Slurm job ID. Coordinate use of the shared
 MFC tree with the cluster maintainer; do not run build/clean commands there.
-For Problem 4, the PDF specifically requires ParaView ≤5.11.2 or ≥6.1.0
-for these Silo files. The installed ParaView 5.13 is not the supported path;
-the GitHub preview avoids that dependency.
+For Task 4, use the installed `/work/pv-5.11.2` server with a matching
+ParaView 5.11.2 laptop client. Follow the [Task 4 connection guide](../practice-task4/README.md);
+the older `/work/paraview` 5.13 installation does not read the fields correctly.
 
 ## Verified starter run
 
@@ -150,5 +173,5 @@ four MPI ranks: 240 × 60 cells, 2812 steps, **53.49 s simulation time** and
 **56.1581 ns/gp/eq/rhs**. MFC's visualizer produced a **98-frame, 4.9 s MP4**
 and final PNG. This was a direct cluster verification using the repository's
 submission scripts; the GitHub submission under `demo/scc26-p3-cpu` is a
-separate run and may wait behind other jobs. These numbers are a starter
+separate completed run with its own measured values. These numbers are a starter
 reference, not a promise of identical performance or a ranked result.

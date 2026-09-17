@@ -151,8 +151,10 @@ build by a hash of the generated source: a new build is added alongside the
 existing ones and never replaces them. Cases whose initial conditions are
 plain numbers compile nothing and start immediately.
 
-`build.case_optimization` is still unsupported: unlike the above it bakes the
-whole case into every target, including `simulation`.
+`build.case_optimization: true` is supported as an opt-in. It specializes
+`simulation` for the case and can add a substantial first-build cost for each
+distinct parameter set. The runner resolves MFC's hashed target paths, reuses
+completed installs, and builds missing targets before submitting.
 OpenMP GPU offload is not configured here; use `acc`, not `omp` or a bare `--gpu`.
 The runner maps the YAML CPU value `none` to the pinned MFC CLI's `--gpu no`.
 
@@ -184,18 +186,21 @@ Both kinds rank identically. They differ only in what freezes them: an upstream
 case by MFC's commit pin, a contributed one by the file committed in this repo,
 which the collector re-hashes against every run.
 
-MFC reports **grind time in ns/gp/eq/rhs; lower is better**. The board separates
-cases, clusters, and CPU/GPU hardware. Only a successfully completed registered
-case with verified provenance ranks. Supplying your own `case.py` makes the run
-**unranked**, even if `job.yml` also names a case — grind time does not cancel
-out how expensive the physics is, so a free choice of case would reward picking
-cheap physics rather than running it well. PDF practice problems are learning
-exercises, not leaderboard benchmarks.
+MFC reports **grind time in ns/gp/eq/rhs**. A smaller value is useful only
+within a matching benchmark context. Surface tension, for example, adds an
+equation: grind can fall even while seconds per step rises. The website blocks
+grind ordering when equation counts differ or are unknown.
+
+Registered studies `advection_1d` (Task 2) and `shock_droplet_2d` (Task 3)
+verify execution provenance but do not join ranked benchmark boards. Your own
+`case.py` is also welcome: a completed run with matching staged hash and MFC
+pin is labelled **Verified custom run**. This is an execution check, not a
+certification of physical accuracy. Runs with missing or mismatched provenance
+are identified separately.
 
 ## Adding a case
 
-A case is a board, so adding one opens a new contest rather than an entry in an
-existing one. You may contribute one: put it in `suites/MFC/cases/<slug>/case.py`,
+A registered case can be a benchmark or a study (`ranked: false`). To contribute one: put it in `suites/MFC/cases/<slug>/case.py`,
 add an entry to `suite.yml`, open a pull request. CI runs it at every allowed
 node and rank count before it can merge.
 
@@ -215,8 +220,9 @@ decomposition rule it has to satisfy, are in
   `mfc-status.yml` records successful or failed completion.
 - After **website.yml** and **pages build and deployment** complete, open
   [MFC on Xenon](https://anuhpc.github.io/ANUHPC-Leaderboard/#/MFC?cluster=xenon).
-  Select **CPU** for the default template; the page initially shows **GPU**.
-  Custom cases appear under **Demos and unranked runs**. Running jobs do not
+  The **Runs & settings** view initially shows all hardware. Filter by your
+  name, case or CPU/GPU; select rows to compare. Open **Details → Video** for
+  previews, or **Convergence** for measured Task 2 errors. Running jobs do not
   appear until results are harvested and deployed.
 - With `visualize: true`, the Actions summary gives the preserved cluster
   directory `/scratch/jobs/visualizations/<Actions-run-ID>/MFC/<your-name>/<run-name>/`.
