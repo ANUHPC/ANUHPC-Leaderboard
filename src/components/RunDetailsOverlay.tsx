@@ -1,23 +1,32 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { RunDetailsModal } from './RunDetailsModal';
 
 export function RunDetailsOverlay() {
-    const { suiteId, group, "*": runPath } = useParams();
+    const { suiteId, cluster, group, "*": runPath } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [loading, setLoading] = useState(true);
     const [runData, setRunData] = useState<any>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        if (!suiteId || !group || !runPath) return;
+        // A link in the pre-cluster shape (/HPL/Ayush/ICX-2) parses as
+        // cluster=Ayush, group=ICX-2, runPath="" -- say so instead of
+        // leaving the modal on its spinner forever.
+        if (!suiteId || !cluster || !group || !runPath) {
+            setLoading(false);
+            setError('That link is missing the cluster; open the run from the table again.');
+            return;
+        }
 
         const fetchRun = async () => {
             setLoading(true);
             try {
                 const res = await fetch(
-                    `${import.meta.env.BASE_URL}data/runs/${suiteId}/${group}/${runPath}/run.json`
+                    // collect.mjs writes data/runs/<cluster>/<suite>/<group>/<run>/run.json
+                    `${import.meta.env.BASE_URL}data/runs/${cluster}/${suiteId}/${group}/${runPath}/run.json`
                 );
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 setRunData(await res.json());
@@ -29,11 +38,11 @@ export function RunDetailsOverlay() {
         };
 
         fetchRun();
-    }, [suiteId, group, runPath]);
+    }, [suiteId, cluster, group, runPath]);
 
     const handleClose = () => {
         // go back to suite root
-        if (suiteId) navigate(`/${suiteId}`);
+        if (suiteId) navigate(`/${suiteId}${location.search}`);
     };
 
     return (

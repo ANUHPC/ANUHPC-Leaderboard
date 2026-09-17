@@ -62,7 +62,7 @@ function App() {
             <Route path="/" element={<Navigate to="/HPL" replace />} />
             {/* Dynamic suite route */}
             <Route path="/:suiteId" element={<SuiteWrapper />}>
-                <Route path=":group/*" element={<RunDetailsOverlay />} />
+                <Route path=":cluster/:group/*" element={<RunDetailsOverlay />} />
             </Route>
         </Routes>
     );

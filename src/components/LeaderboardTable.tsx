@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import type { BenchmarkRun } from '../types';
 import { RunDetailsModal } from './RunDetailsModal';
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 interface LeaderboardTableProps {
     runs: BenchmarkRun[];
@@ -21,6 +21,7 @@ type SortDirection = 'asc' | 'desc';
 
 export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite }) => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { suiteId } = useParams();
 
     const [sortField, setSortField] = useState<SortField>('gflops');
@@ -294,7 +295,12 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <button
                                         onClick={() =>
-                                            navigate(`/${suiteId}/${run.group}/${run.run}`)
+                                            // The run id is cluster/suite/group/run, and the data
+                                            // files are laid out the same way. Omitting the cluster
+                                            // here is what made every Details click 404.
+                                            navigate(
+                                                `/${suiteId}/${run.cluster}/${run.group}/${run.run}${location.search}`
+                                            )
                                         }
                                         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-gray-500 hover:text-gray-900 hover:bg-gray-100 text-sm font-medium rounded-xl transition-all"
                                     >
