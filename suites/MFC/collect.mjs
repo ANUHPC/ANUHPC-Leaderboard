@@ -181,20 +181,68 @@ export async function collect(ctx) {
   try { provenance = JSON.parse(await read("mfc-provenance.json")); } catch { /* legacy result */ }
   try { completion = parseYaml(await read("mfc-status.yml")) ?? {}; } catch { /* legacy result */ }
   const successful = completion.state === "COMPLETED" && Number.isFinite(grind) && grind > 0;
-  const pinned = provenance.case_source === "pinned" &&
-    provenance.mfc_sha?.startsWith(suite?.source?.pin ?? "INVALID") &&
-    suite?.cases?.some((c) => c.slug === job?.case) && provenance.case === job?.case &&
-    provenance.case_sha256 === createHash("sha256").update(caseRaw ?? "").digest("hex");
+
+  // What the run actually executed. Everything below compares against this.
+  const ranHash = createHash("sha256").update(caseRaw ?? "").digest("hex");
+
+  const entry = suite?.cases?.find((c) => c.slug === job?.case) ?? null;
+  // Registry defaults, kept in step with case-path.mjs: entries written before
+  // contributed cases existed carry neither field and mean tree/gbpp.
+  const registry = entry?.source === "repo" ? "repo" : "tree";
+
+  // Common to both kinds of case: it came from the registry, not the entrant,
+  // and the harvested case.py is the file that was staged.
+  const staged = provenance.case_source === "pinned" &&
+    entry !== null && provenance.case === job?.case &&
+    provenance.case_sha256 === ranHash;
+
+  // The freeze differs by where the case lives.
+  //
+  //   tree  the case ships with MFC, so the guarantee is the commit pin: the
+  //         checkout it was copied from was at the pinned sha.
+  //   repo  the case is committed here, so the guarantee is direct -- re-hash
+  //         the file in this tree and require the run to match it. Stronger
+  //         than the tree check, because it verifies the content itself
+  //         rather than the provenance of the thing it was copied from.
+  let frozen = false;
+  let drifted = false;
+  if (staged) {
+    if (registry === "repo") {
+      const registered = await (ctx.readRepo?.(entry.path) ?? Promise.resolve(null));
+      if (registered != null) {
+        frozen = createHash("sha256").update(registered).digest("hex") === ranHash;
+        drifted = !frozen;
+      }
+      // registered == null: the case file is gone from the repo. Not drift --
+      // there is nothing to compare against -- so it stays unfrozen and the
+      // generic reason below applies.
+    } else {
+      frozen = Boolean(provenance.mfc_sha?.startsWith(suite?.source?.pin ?? "INVALID"));
+    }
+  }
+
+  const pinned = staged && frozen;
   const ranking = {
     eligible: Boolean(successful && pinned),
     reason: !successful ? "Run has no verified successful completion" :
-      !pinned ? "Custom or unverified case — unranked" : "Pinned benchmark case",
+      // Drift is worth naming: the run was legitimate when it happened, and
+      // the case was edited afterwards. Silently unranking it as "custom"
+      // would send the entrant looking for a fault in their own job.
+      drifted ? `Case "${job?.case}" has been edited since this run — re-run to rank` :
+      !pinned ? "Custom or unverified case — unranked" :
+      registry === "repo" ? "Contributed benchmark case" : "Pinned benchmark case",
     group: `${job?.case ?? "custom"}/${job?.build?.gpu === "acc" ? "GPU" : "CPU"}`,
   };
 
   return {
     metric: Number.isFinite(grind) && grind > 0 ? { key: "grind", value: grind } : null,
     ranking,
+    // When the run actually happened. MFC writes no date of its own -- its
+    // banner's Start-date and End-date both hold a time of day -- so
+    // submit-jobs.sh stamps this alongside the completion state. Runs from
+    // before that stamp existed return null and are dated from git history
+    // instead; scripts/collect.mjs records which source was used.
+    ranAt: typeof completion.finished_at === "string" ? completion.finished_at : null,
     secondary: [
       exec != null ? { key: "exec", value: exec } : null,
       last?.sPerStep != null ? { key: "s_step", value: last.sPerStep } : null,

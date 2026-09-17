@@ -101,9 +101,13 @@ build, clean, or change the shared installation as part of a submission.
 OpenMP GPU offload is not configured here; use `acc`, not `omp` or a bare `--gpu`.
 The runner maps the YAML CPU value `none` to the pinned MFC CLI's `--gpu no`.
 
-## Pinned cases and scoring
+## Registered cases and scoring
 
-These slugs select benchmark files from the pinned installation:
+`case:` takes one of these slugs. The list is
+[`suites/MFC/suite.yml`](../../../suites/MFC/suite.yml); run
+`node suites/MFC/case-path.mjs --list` for the current set.
+
+From MFC's own benchmark set, in the pinned installation:
 
 ```text
 5eq_rk3_weno3_hllc
@@ -115,11 +119,34 @@ hypo_hll
 igr
 ```
 
+Contributed here, in this repository:
+
+```text
+anu_tgv_3d      Taylor-Green vortex, 3D, weak-scaled
+```
+
+Both kinds rank identically. They differ only in what freezes them: an upstream
+case by MFC's commit pin, a contributed one by the file committed in this repo,
+which the collector re-hashes against every run.
+
 MFC reports **grind time in ns/gp/eq/rhs; lower is better**. The board separates
-cases, clusters, and CPU/GPU hardware. Only a successfully completed pinned
-benchmark with verified provenance ranks. Supplying any `case.py` makes the
-run **unranked**, even if `job.yml` also names a pinned case. PDF practice
-problems are learning exercises, not these seven leaderboard benchmarks.
+cases, clusters, and CPU/GPU hardware. Only a successfully completed registered
+case with verified provenance ranks. Supplying your own `case.py` makes the run
+**unranked**, even if `job.yml` also names a case — grind time does not cancel
+out how expensive the physics is, so a free choice of case would reward picking
+cheap physics rather than running it well. PDF practice problems are learning
+exercises, not leaderboard benchmarks.
+
+## Adding a case
+
+A case is a board, so adding one opens a new contest rather than an entry in an
+existing one. You may contribute one: put it in `suites/MFC/cases/<slug>/case.py`,
+add an entry to `suite.yml`, open a pull request. CI runs it at every allowed
+node and rank count before it can merge.
+
+Full instructions, including the interface a case must implement and the
+decomposition rule it has to satisfy, are in
+[`suites/MFC/cases/README.md`](../../../suites/MFC/cases/README.md).
 
 ## Find results and visualization data
 

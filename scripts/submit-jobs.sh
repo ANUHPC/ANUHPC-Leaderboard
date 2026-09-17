@@ -155,12 +155,23 @@ for jobdir in "$STAGE"/*/*/*/; do
       if [ ! -d "$MFC_ROOT" ]; then
         gh_error "$label: no MFC install at $MFC_ROOT — build it before submitting"; continue
       fi
+      # An MFC run carries no date of its own: MFC's banner prints Start-date
+      # and End-date but both hold a time of day. Without this line the only
+      # record of when a run happened is the git commit that adds its output,
+      # which is true but makes the website depend on full repo history.
+      mfc_started=$(date -u +%Y-%m-%dT%H:%M:%SZ)
       if bash "$REPO/suites/MFC/render.sh" "$jobdir" "$RUN_ID"; then
-        echo 'state: COMPLETED' > "$jobdir/mfc-status.yml"
+        { echo 'state: COMPLETED'
+          echo "started_at: $mfc_started"
+          echo "finished_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+        } > "$jobdir/mfc-status.yml"
         echo "  completed $label: $(result_line "$jobdir" MFC)"
         printf '| %s | %s | %s |\n' "$label" COMPLETED "$(result_line "$jobdir" MFC)" >> "$SUMMARY"
       else
-        echo 'state: FAILED' > "$jobdir/mfc-status.yml"
+        { echo 'state: FAILED'
+          echo "started_at: $mfc_started"
+          echo "finished_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+        } > "$jobdir/mfc-status.yml"
         dump_failure "$jobdir" unknown "$label"
         gh_error "$label: MFC submit failed"
         rejected=$((rejected+1))

@@ -36,6 +36,18 @@ jobs:
       - name: Verify MFC ranking and provenance
         run: node --test suites/MFC/collect.test.mjs scripts/lib/mfc-decomp.test.mjs
 
+      # Checks the case registry, which is what a case contribution changes.
+      # Runs every contributed case.py for real, at each allowed node/rank
+      # count, so a case that crashes, prints something other than a JSON
+      # dict, misdeclares its sizing, or produces a grid MFC cannot split
+      # fails here rather than after a queue wait on the cluster.
+      #
+      # This executes code from the pull request. validate.yml runs on
+      # `pull_request`, so a fork gets a read-only token and no secrets, and
+      # the same file would run on the cluster if merged.
+      - name: Validate MFC case registry
+        run: node scripts/validate-cases.mjs
+
       - name: Collector smoke test
         # Proves the collector still parses every committed run before this
         # change can reach main and break the website build.

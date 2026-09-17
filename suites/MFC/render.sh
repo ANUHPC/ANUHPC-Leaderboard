@@ -123,7 +123,6 @@ if [ -f "$JOB_DIR/case.py" ]; then
   echo "render: using the submitted case.py — this run is UNRANKED"
 else
   CASE_SOURCE=pinned
-  CASE_ARGS=(--gbpp "$GBPP")
   [ -n "$CASE" ] || die "job.yml sets no case, and no case.py was supplied"
   # Resolve the slug through a real parser, not grep: the case list is a YAML
   # sequence of maps and "grep -A1 slug:" returns the wrong path the moment
@@ -131,18 +130,44 @@ else
   if ! REL=$("$NODE_BIN" "$REPO/suites/MFC/case-path.mjs" "$CASE" 2>&1); then
     die "$REL"
   fi
-  SRC="$TREE/$REL"
-  [ -f "$SRC" ] || die "case '$CASE' resolves to $SRC, which does not exist in the pinned checkout"
+  CASE_ORIGIN=$("$NODE_BIN" "$REPO/suites/MFC/case-path.mjs" "$CASE" --field source)
+  CASE_SIZING=$("$NODE_BIN" "$REPO/suites/MFC/case-path.mjs" "$CASE" --field sizing)
+
+  # A registered case lives either in the pinned MFC checkout or in this repo.
+  # Both are frozen -- the first by the commit pin verified above, the second
+  # by git plus the hash check collect.mjs does on the harvested case.py.
+  if [ "$CASE_ORIGIN" = repo ]; then
+    SRC="$REPO/$REL"
+    [ -f "$SRC" ] || die "case '$CASE' is registered as source: repo at $REL, which does not exist in this checkout"
+  else
+    SRC="$TREE/$REL"
+    [ -f "$SRC" ] || die "case '$CASE' resolves to $SRC, which does not exist in the pinned checkout"
+  fi
+
+  # --gbpp goes only to cases that declare they take it. argparse in a
+  # fixed-grid case rejects an unrecognised option and the job dies in
+  # pre_process with a Python traceback rather than anything about MFC.
+  if [ "$CASE_SIZING" = fixed ]; then
+    CASE_ARGS=()
+    echo "render: case $CASE has a fixed grid; --gbpp ($GBPP) is not passed"
+  else
+    CASE_ARGS=(--gbpp "$GBPP")
+  fi
+
   cp "$SRC" "$JOB_DIR/case.py"
-  echo "render: case $CASE from $REL"
+  echo "render: case $CASE from $CASE_ORIGIN:$REL"
 fi
 
-python3 - "$JOB_DIR" "$CASE_SOURCE" "$HEAD" "$CASE" <<'PY'
+python3 - "$JOB_DIR" "$CASE_SOURCE" "$HEAD" "$CASE" "${CASE_ORIGIN:-tree}" <<'PY'
 import hashlib, json, pathlib, sys
-directory, origin, commit, slug = sys.argv[1:]
+directory, origin, commit, slug, registry = sys.argv[1:]
 p = pathlib.Path(directory)
 (p / 'mfc-provenance.json').write_text(json.dumps({
     'case_source': origin, 'mfc_sha': commit, 'case': slug or None,
+    # Which freeze applies: 'tree' cases are guaranteed by the commit pin,
+    # 'repo' cases by the file committed here. Absent on runs from before
+    # contributed cases existed, and read as 'tree'.
+    'case_registry': registry,
     'case_sha256': hashlib.sha256((p / 'case.py').read_bytes()).hexdigest(),
 }, indent=2) + '\n')
 PY

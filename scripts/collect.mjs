@@ -17,6 +17,7 @@
 
 import fs from "fs/promises";
 import path from "path";
+import { loadRunHistory, submitterOf } from "./lib/run-history.mjs";
 import { parseYaml } from "./lib/yaml.mjs";
 import { loadClusters, inferCluster } from "./lib/cluster.mjs";
 
@@ -106,6 +107,31 @@ function rank(entries, direction) {
   return out;
 }
 
+// Read a file committed in this repository, by repo-relative path.
+//
+// A suite needs this when a result must be checked against something the repo
+// itself declares rather than against the run's own artifacts. MFC uses it for
+// contributed cases: the run is ranked only if the case.py it executed still
+// hashes to the file registered in suites/MFC/cases/, which is what makes
+// "everyone runs byte-identical physics" true for cases that do not come from
+// the pinned upstream checkout.
+//
+// Returns null rather than throwing for a missing file: a registered case that
+// has been deleted is a reason not to rank, not a reason to fail the build.
+// The path is confined to the repo so a malformed registry entry cannot make
+// the collector read outside it.
+async function readRepo(rel) {
+  const target = path.resolve(CWD, rel);
+  if (target !== CWD && !target.startsWith(CWD + path.sep)) return null;
+  try {
+    return await fs.readFile(target, "utf8");
+  } catch {
+    return null;
+  }
+}
+
+let history = { submitted: new Map(), completed: new Map(), available: false };
+
 async function processSuite(suite, index, clusters, clusterName) {
   // Layout is output/<cluster>/<suite>/<group>/<run>. The cluster is part of
   // the path now, so it is read rather than inferred — inference survives only
@@ -159,7 +185,7 @@ async function processSuite(suite, index, clusters, clusterName) {
     //    run rendering — they all predate result.json.
     if (!result && suite.mod?.collect) {
       try {
-        result = await suite.mod.collect({ dir, files, read, suite: suite.cfg });
+        result = await suite.mod.collect({ dir, files, read, readRepo, suite: suite.cfg });
         if (result) fromParser++;
       } catch (e) {
         console.warn(`[collect] ${id}: collector threw (${e.message})`);
@@ -208,10 +234,32 @@ async function processSuite(suite, index, clusters, clusterName) {
           direction: metricCfg.direction ?? "higher" }
       : null;
 
+    // When it ran, and who sent it.
+    //
+    // Two sources, in that order of preference:
+    //   the run itself  MFC stamps finished_at into mfc-status.yml; HPL prints
+    //                   its own start time. Truthful, but only for runs that
+    //                   got far enough to write it.
+    //   git             the commit that added the results. Covers every run
+    //                   including the ones that failed early, and agrees with
+    //                   HPL's own timestamp to within an hour on 72 of the 74
+    //                   runs where both exist.
+    // dateSource records which was used, so an odd-looking date can be traced.
+    const ranAt = typeof result.ranAt === "string" ? result.ranAt : null;
+    const gitAt = history.completed.get(id)?.at ?? null;
+    const who = submitterOf(id, history);
+
     const runJson = {
       id, suite: suite.name, group, run,
       cluster: ci.cluster,
       clusterSource: ci.source,
+      date: ranAt ?? gitAt,
+      dateSource: ranAt ? "run" : gitAt ? "git" : null,
+      submittedAt: who.at,
+      // The folder the run lives in is the entrant. "house" marks the seeded
+      // reference entries -- benchmark, baseline, demo -- which are not
+      // anyone's attempt and should not be shown as a person's.
+      submitter: { name: who.name, house: who.house, by: who.by },
       metric,
       secondary: (result.secondary || []).map((s) => {
         const def = (suite.cfg.secondary || []).find((d) => d.key === s.key);
@@ -240,6 +288,14 @@ async function processSuite(suite, index, clusters, clusterName) {
       id, suite: suite.name, group, run,
       cluster: ci.cluster,
       clusterSource: ci.source,
+      // The index is what the board reads. A field that is only in run.json
+      // is invisible to any table -- run.json is fetched one run at a time,
+      // when a details panel opens -- so anything a list sorts or shows has
+      // to be projected here too.
+      date: runJson.date,
+      dateSource: runJson.dateSource,
+      submittedAt: runJson.submittedAt,
+      submitter: runJson.submitter,
       metric,
       secondary: runJson.secondary,
       config: runJson.config,
@@ -269,6 +325,16 @@ async function main() {
   await ensureDir(DATA_ROOT);
   await ensureDir(RAW_ROOT);
   const clusters = await loadClusters(CWD);
+
+  // One git pass for every run's dates and submitter, before any suite is
+  // processed. Needs full history: under a shallow clone this comes back
+  // empty and every run falls back to whatever timestamp it recorded itself.
+  history = await loadRunHistory(CWD);
+  console.log(
+    history.available
+      ? `[collect] git history: ${history.completed.size} run(s) dated, ${history.submitted.size} with a recorded submitter`
+      : "[collect] git history unavailable — runs will be dated only where they timestamp themselves"
+  );
   if (!Object.keys(clusters).length) throw new Error("no clusters found under clusters/");
   console.log(`[collect] clusters: ${Object.keys(clusters).join(", ")}`);
   const suites = await loadSuites();

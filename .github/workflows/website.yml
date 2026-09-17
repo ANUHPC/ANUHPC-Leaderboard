@@ -45,7 +45,14 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          # Full history, not a shallow clone. Dates and submitters are read
+          # from git: a job spec is added under input/ by whoever submitted it
+          # and the results under output/ when the job finishes, and no run
+          # artifact records either (MFC prints no date at all; HPL's own
+          # timestamp is present in 73 of 132 Raijin runs). At depth 1 there is
+          # one commit, so every run older than this build loses its date and
+          # the board cannot be ordered by recency.
+          fetch-depth: 0
           ref: main
           fetch-tags: false
 

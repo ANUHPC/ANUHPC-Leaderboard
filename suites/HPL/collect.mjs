@@ -444,6 +444,15 @@ function parseOutNvidia(raw) {
     };
 }
 
+// "Wed Apr  1 01:42:05 2026" -> "2026-04-01T01:42:05.000Z", or null if the
+// line was absent or unparseable. Date.parse handles asctime, but returns NaN
+// rather than throwing, so the result has to be checked.
+function toIso(asctime) {
+  if (typeof asctime !== "string" || !asctime.trim()) return null;
+  const t = Date.parse(asctime.trim() + " UTC");
+  return Number.isFinite(t) ? new Date(t).toISOString() : null;
+}
+
 function bestFromRuns(runs) {
     if (!runs || !runs.length) return null;
     let best = runs[0];
@@ -512,6 +521,13 @@ export async function collect(ctx) {
     },
     provenance: { started: parsed?.runs?.[0]?.startTime ?? null,
                   ended: parsed?.runs?.[0]?.endTime ?? null },
+    // When the run happened, as the run itself reports it. HPL prints
+    // "HPL_pdgesv() start time Wed Apr  1 01:42:05 2026" in C asctime format,
+    // which has no timezone -- it is local to the cluster that ran it, and is
+    // read as UTC here because that is the only consistent choice available.
+    // Present in 73 of 132 Raijin runs; the rest failed before reaching it and
+    // are dated from git history instead.
+    ranAt: toIso(parsed?.startTime ?? parsed?.runs?.[0]?.startTime ?? null),
     status: best?.gflops != null ? (passed === false ? "failed-residual" : "ok") : "no-result",
     detail: {
       dat: datRaw ? { raw: datRaw, parsed: dat, file: datName } : null,

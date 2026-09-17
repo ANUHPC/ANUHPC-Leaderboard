@@ -91,10 +91,33 @@ run:
   summary: summary.yaml
   artifacts: [summary.yaml, time_data.dat]
 
-# The case set is FIXED so entries are comparable. Competitors tune how they
-# run it — decomposition, toolchain, build flags — not which physics they pick.
-# Mirrors MFC's own toolchain/bench.yaml.
+# The case registry. A run is RANKED only if job.yml names a slug from here,
+# because grind time is normalised per grid point and per equation but NOT by
+# how expensive the physics is per cell -- our own seven cases span 4.2x on
+# identical hardware. If entrants supplied their own case, the shortest route
+# to the top of the board would be writing the cheapest physics that still
+# runs, so the case is held constant and everything else is yours to tune.
+#
+# Two kinds of entry, distinguished by `source`:
+#
+#   source: tree  (the default)  ships with MFC; `path` is relative to the
+#                 pinned checkout. Frozen by the commit pin above.
+#   source: repo                 contributed here; `path` is relative to the
+#                 repository root. Frozen by git -- collect.mjs re-hashes the
+#                 harvested case.py against the file in this tree.
+#
+# `sizing` says whether the case accepts --gbpp:
+#
+#   sizing: gbpp  (the default)  implements MFC's benchmark interface: reads
+#                 --gbpp and the --mfc dict and sizes its grid from the rank
+#                 count, so work per rank stays constant as nodes grow.
+#   sizing: fixed                the grid is written into the case; --gbpp is
+#                 not passed, because argparse would reject it.
+#
+# TO ADD A CASE: see suites/MFC/cases/README.md. Do not edit a registered
+# case -- that silently changes what every past run measured. Add a new slug.
 cases:
+  # --- upstream: MFC's own benchmark set, mirrors toolchain/bench.yaml -------
   - {slug: 5eq_rk3_weno3_hllc,        path: benchmarks/5eq_rk3_weno3_hllc/case.py}
   - {slug: 5eq_rk3_weno3_hll,         path: benchmarks/5eq_rk3_weno3_hll/case.py}
   - {slug: 5eq_rk3_weno3_lf,          path: benchmarks/5eq_rk3_weno3_lf/case.py}
@@ -102,6 +125,14 @@ cases:
   - {slug: ibm,                       path: benchmarks/ibm/case.py}
   - {slug: hypo_hll,                  path: benchmarks/hypo_hll/case.py}
   - {slug: igr,                       path: benchmarks/igr/case.py}
+
+  # --- contributed: cases added here, by pull request -----------------------
+  - slug: anu_tgv_3d
+    source: repo
+    path: suites/MFC/cases/anu_tgv_3d/case.py
+    sizing: gbpp
+    title: Taylor-Green vortex, 3D, weak-scaled
+    added: 2026-09-17
 
 tuning:
   free: [nodes, tasks_per_node, gbpp, gpu, toolchain]

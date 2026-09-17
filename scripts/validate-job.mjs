@@ -10,6 +10,7 @@ import fs from "fs/promises";
 import path from "path";
 import { parseYaml } from "./lib/yaml.mjs";
 import { mfcDecomposition, gridFromCase } from "./lib/mfc-decomp.mjs";
+import { evalCase, mfcDict, gridOf } from "./lib/mfc-case-eval.mjs";
 import { loadClusters } from "./lib/cluster.mjs";
 
 const CWD = process.cwd();
@@ -131,12 +132,50 @@ async function main() {
     }
 
     // --- can MFC actually decompose this grid over the ranks asked for? ---
-    if (hasCustomCase) {
+    //
+    // Checkable for two kinds of case: one the entrant supplied, and one
+    // registered with source: repo -- both are files in this checkout. A
+    // tree case lives in the MFC installation, which the pull-request runner
+    // does not have, so it is checked on the cluster by render.sh instead.
+    const registered = cases.find((c) => c.slug === job.case) ?? null;
+    const repoCasePath = hasCustomCase
+      ? path.join(CWD, rel, "case.py")
+      : registered?.source === "repo" && registered.path
+        ? path.join(CWD, registered.path)
+        : null;
+
+    if (repoCasePath) {
       const r = job.resources || {};
       const ranks = (r.nodes ?? 1) * (r.tasks_per_node ?? 1);
-      let caseText = "";
-      try { caseText = await fs.readFile(path.join(CWD, rel, "case.py"), "utf8"); } catch { /* reported elsewhere */ }
-      const g = gridFromCase(caseText);
+
+      // A registered case is run for real, with this job's own rank count, so
+      // a weak-scaled case reports the grid it will actually produce. Reading
+      // it with a regex only works when the grid is written as a literal,
+      // which for a scalable case it never is. An entrant's own case.py is
+      // still read rather than executed: it is unranked either way, and the
+      // regex costs nothing.
+      let g;
+      if (!hasCustomCase && registered?.source === "repo") {
+        const sizing = registered.sizing === "fixed" ? "fixed" : "gbpp";
+        const res = await evalCase(repoCasePath, {
+          dict: mfcDict({
+            nodes: r.nodes ?? 1,
+            tasksPerNode: r.tasks_per_node ?? 1,
+            gpu: job.build?.gpu === "acc",
+          }),
+          args: sizing === "fixed" ? [] : ["--gbpp", String(job.tuning?.gbpp ?? 16)],
+        });
+        if (!res.ok) {
+          err(where, `case "${job.case}" (${registered.path}) failed to run: ${res.error}`);
+          g = { m: null, n: null, p: null, weno: 5 };
+        } else {
+          g = gridOf(res.dict);
+        }
+      } else {
+        let caseText = "";
+        try { caseText = await fs.readFile(repoCasePath, "utf8"); } catch { /* reported elsewhere */ }
+        g = gridFromCase(caseText);
+      }
       if (g.m != null && g.n != null && g.p != null && ranks > 0) {
         const d = mfcDecomposition(g.m, g.n, g.p, ranks, g.weno);
         if (!d.ok) {
