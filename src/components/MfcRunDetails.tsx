@@ -47,6 +47,14 @@ export interface MfcRunData {
     // Summaries carried in index.json so a board row needs no extra fetch.
     wallSec?: number | null;
     hasMedia?: boolean;
+    // When it ran, and who entered it. dateSource is "run" when the run
+    // timestamped itself and "git" when the date comes from the commit that
+    // added its results -- worth surfacing, because the two mean slightly
+    // different things and only one is the run's own claim.
+    date?: string | null;
+    dateSource?: 'run' | 'git' | null;
+    submittedAt?: string | null;
+    submitter?: { name: string | null; house: boolean; by: string | null } | null;
 }
 
 const base = import.meta.env.BASE_URL;

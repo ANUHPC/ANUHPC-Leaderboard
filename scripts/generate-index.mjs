@@ -113,6 +113,16 @@ function scanRuns() {
                             // fetched only when a row is opened.
                             wallSec:     data.detail?.out?.parsed?.totalTimeSec ?? null,
                             hasMedia:    Object.keys(data.raw ?? {}).some((n) => /\.(mp4|png)$/i.test(n)),
+                            // When it ran and who sent it. Written by the
+                            // collector on main: a run's own timestamp where it
+                            // records one, otherwise the git commit that added
+                            // its results. dateSource says which, so a date
+                            // that looks wrong can be traced rather than
+                            // guessed at.
+                            date:        data.date ?? null,
+                            dateSource:  data.dateSource ?? null,
+                            submittedAt: data.submittedAt ?? null,
+                            submitter:   data.submitter ?? null,
                         });
                     } catch (e) {
                         console.warn(`  [warn] Skipping ${runJsonPath}: ${e.message}`);
