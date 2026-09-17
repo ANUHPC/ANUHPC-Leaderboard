@@ -1,0 +1,17 @@
+Warning: The creation of file is currently experimental.
+This file may contain errors and not support all features.
+  #        Conservative           Primitive
+    
+  1 \alpha_{1} \rho_{1}     \alpha_{1} \rho
+  2 \alpha_{2} \rho_{2}     \alpha_{2} \rho
+  3            \rho u_x                 u_x
+  4            \rho u_y                 u_y
+  5            \rho u_z                 u_z
+  6              \rho U                   p
+  7          \alpha_{7}          \alpha_{7}
+  8          \alpha_{8}          \alpha_{8}
+
+[1,2] Continuity
+[3,5] Momentum
+[6,6] Energy/Pressure
+[7,8] Advection

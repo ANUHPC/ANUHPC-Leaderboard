@@ -1,0 +1,16 @@
+Warning: The creation of file is currently experimental.
+This file may contain errors and not support all features.
+  #        Conservative           Primitive
+    
+  1   alpha_{1} ho_{1}       alpha_{1} ho
+  2             ho u_x                 u_x
+  3             ho u_y                 u_y
+  4             ho u_z                 u_z
+  5               ho U                   p
+  6           alpha_{6}           alpha_{6}
+
+[1,1] Continuity
+[2,4] Momentum
+[5,5] Energy/Pressure
+[6,6] Advection
+[7,8] Bubbles

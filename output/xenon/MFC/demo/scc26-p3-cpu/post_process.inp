@@ -1,0 +1,27 @@
+&user_inputs
+m = 239
+n = 59
+p = 0
+t_step_start = 0
+t_step_stop = 2812
+t_step_save = 29
+model_eqns = 2
+alt_soundspeed = F
+num_fluids = 2
+mpp_lim = F
+mixture_err = F
+weno_order = 3
+avg_state = 2
+bc_x%beg = -6
+bc_x%end = -6
+bc_y%beg = -2
+bc_y%end = -3
+format = 1
+precision = 2
+prim_vars_wrt = T
+parallel_io = T
+fluid_pp(1)%gamma = 0.1953125
+fluid_pp(1)%pi_inf = 409992187.5
+fluid_pp(2)%gamma = 2.5000000000000004
+fluid_pp(2)%pi_inf = 0.0
+&end/
