@@ -20,4 +20,6 @@ decide — the path is the routing.
 Results are ranked **per cluster** — the two measure different hardware.
 
 Don't copy a `run.sh` between clusters: node names differ, and a Raijin
-`--nodelist` submitted on Xenon fails after it has already queued.
+`--nodelist` submitted on Xenon fails after it has already queued. The HPL
+template ships one `run.*.sh` per cluster for this reason — copy the matching
+one and rename it to `run.sh`.

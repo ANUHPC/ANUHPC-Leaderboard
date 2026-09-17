@@ -100,9 +100,18 @@ for jobdir in "$STAGE"/*/*/*/; do
         gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; continue
       fi
       cp "$HPL_BIN" "$jobdir/xhpl" && chmod +x "$jobdir/xhpl"
-      script="$(ls "$jobdir"/*.sh 2>/dev/null | head -1)"
-      if [ -z "$script" ]; then
-        gh_error "$label: no run.sh (copy one from input/_TEMPLATES/HPL)"; continue
+      # Insist on the name run.sh. Globbing *.sh and taking the first match
+      # would pick run.raijin.sh out of a wholesale copy of the template
+      # directory -- alphabetically first, and wrong on this cluster.
+      script="$jobdir/run.sh"
+      if [ ! -f "$script" ]; then
+        other="$(cd "$jobdir" && ls run.*.sh 2>/dev/null | tr '\n' ' ')"
+        if [ -n "$other" ]; then
+          gh_error "$label: found $other but no run.sh — rename the one for this cluster: mv run.$CLUSTER.sh run.sh"
+        else
+          gh_error "$label: no run.sh (cp input/_TEMPLATES/HPL/run.$CLUSTER.sh input/$CLUSTER/$label/run.sh)"
+        fi
+        continue
       fi
       # A run.sh carried over from another cluster names nodes that do not exist
       # here and fails only after it has queued.
