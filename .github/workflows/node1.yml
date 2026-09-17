@@ -13,6 +13,12 @@ on:
       # three workflows, and Raijin re-running jobs nobody asked for.
       - "input/raijin/**"
 
+# Raijin submits from a single directory tree; two overlapping runs would
+# fight over the same job directories. submit-xenon/raijin already do this.
+concurrency:
+  group: submit-raijin
+  cancel-in-progress: false
+
 jobs:
   run-slurm:
     runs-on: self-hosted

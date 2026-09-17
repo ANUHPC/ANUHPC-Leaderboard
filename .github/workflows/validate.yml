@@ -4,15 +4,12 @@ name: Validate job specs
 # static: the suite definition and cluster/partitions.yml. A job asking for more
 # nodes than a partition has now fails here instead of queueing and dying.
 
+# A pull-request gate. It deliberately does NOT run on push to main:
+# every submit-<cluster> workflow runs validate-job.mjs as its first step, and
+# website.yml runs it before building, so a push to main was validating the
+# same tree two or three times and filling the Actions list with duplicates.
 on:
   pull_request:
-    paths:
-      - "input/**"
-      - "suites/**"
-      - "clusters/**"
-      - "scripts/**"
-  push:
-    branches: [main]
     paths:
       - "input/**"
       - "suites/**"

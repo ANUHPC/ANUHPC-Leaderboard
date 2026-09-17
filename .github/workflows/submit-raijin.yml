@@ -6,11 +6,22 @@ name: Submit jobs (raijin)
 #
 # The runner MUST carry the "raijin" label or this never matches.
 
+# NOT wired to push yet. This workflow needs a runner carrying the "raijin"
+# label (see runs-on below) and Raijin's runner does not have one, so a push
+# trigger here would queue forever while node1.yml did the actual work --
+# every Raijin push lighting up two workflows, one of which can never start.
+#
+# node1.yml remains Raijin's push driver until that label exists. To switch:
+#   1. add the label "raijin" to Raijin's self-hosted runner
+#   2. add the push/paths block below back here
+#   3. delete node1.yml, which still deletes job specs after submitting and
+#      so makes its runs unreproducible
+#
+#   push:
+#     branches: [main]
+#     paths:
+#       - "input/raijin/**"
 on:
-  push:
-    branches: [main]
-    paths:
-      - "input/raijin/**"
   workflow_dispatch:
     inputs:
       suite:

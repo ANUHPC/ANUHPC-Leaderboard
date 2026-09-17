@@ -10,7 +10,10 @@ on:
       - "suites/**"
       - "clusters/**"
       - "package.json"
-      - "output/**"
+      # output/** is deliberately absent: results are committed by the submit
+      # workflows with [skip ci], and the deploy is chained from their
+      # completion via workflow_run below. Listing it here would either do
+      # nothing or double-deploy.
       - "src/**"
       - "public/**"
       - "index.html"
@@ -29,6 +32,14 @@ on:
 permissions:
   contents: write
 
+# One deploy at a time, newest wins. A commit that touches both a job and the
+# collector fires this from the push AND again when the submit workflow
+# finishes; without this they race and the older one can overwrite the newer
+# data. cancel-in-progress keeps the run that has the results.
+concurrency:
+  group: website-deploy
+  cancel-in-progress: true
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -45,6 +56,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      # validate.yml is a pull-request gate now, so this is what keeps a
+      # direct push to main honest. It is the same script, and it is cheap.
+      - name: Validate job specs
+        run: node scripts/validate-job.mjs
 
       - name: Generate website data from all suite outputs
         run: node scripts/collect.mjs
