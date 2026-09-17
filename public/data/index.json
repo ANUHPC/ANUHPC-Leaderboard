@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T12:05:46.961Z",
+  "generatedAt": "2026-09-17T12:07:30.174Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 13
+      "count": 14
     }
   ],
   "suites": [
@@ -102,10 +102,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 10,
+      "count": 11,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 10
+        "xenon": 11
       }
     }
   ],
@@ -7074,6 +7074,75 @@
         "eligible": true,
         "reason": "Pinned benchmark case",
         "group": "5eq_rk3_weno3_lf/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/anu_tgv_3d-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "anu_tgv_3d-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T12:06:58Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-17T12:02:33Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Claude"
+      },
+      "metric": {
+        "key": "grind",
+        "value": 0.49213492,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 31.9090898,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.187566,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "anu_tgv_3d",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Contributed benchmark case",
+        "group": "anu_tgv_3d/GPU"
       },
       "notes": [],
       "best": null,

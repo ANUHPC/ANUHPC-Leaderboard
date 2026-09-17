@@ -1,0 +1,595 @@
+{
+  "id": "xenon/MFC/benchmark/anu_tgv_3d-a100",
+  "suite": "MFC",
+  "group": "benchmark",
+  "run": "anu_tgv_3d-a100",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-17T12:06:58Z",
+  "dateSource": "run",
+  "submittedAt": "2026-09-17T12:02:33Z",
+  "submitter": {
+    "name": "benchmark",
+    "house": true,
+    "by": "Claude"
+  },
+  "metric": {
+    "key": "grind",
+    "value": 0.49213492,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 31.9090898,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.187566,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 8,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "config": {
+    "case": "anu_tgv_3d",
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "ranks": 8,
+    "partition": "gpu",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "pinned",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": "anu_tgv_3d",
+    "case_registry": "repo",
+    "case_sha256": "27cf22ac629bce1eb0ced341fb0023e81d53e5f57d749f3d047192fe6c8c0580",
+    "invocation": "run /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 2 -n 4 -p gpu -w 01:00:00 --name mfc-anu_tgv_3d-a100 -o /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/summary.yaml --no-build --clean --gpu acc --wait -- --gbpp 16",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": "Contributed benchmark case",
+    "group": "anu_tgv_3d/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/case.py",
+    "summary.yaml": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/time_data.dat",
+    "run.out": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/run.out",
+    "run.err": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/run.err",
+    "job.yml": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/job.yml",
+    "run.sh": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/run.sh",
+    "mfc-provenance.json": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/benchmark/anu_tgv_3d-a100/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "run.out",
+    "size": 6371,
+    "parsed": {
+      "banner": {
+        "start_time": "12:05:45",
+        "start_date": "12:05:45",
+        "partition": "gpu",
+        "walltime": "01:00:00",
+        "nodes": "2",
+        "job_name": "mfc-anu-tgv-3d-a100",
+        "engine": "batch",
+        "queue_system": "SLURM"
+      },
+      "env": {
+        "host": "gpu-node1",
+        "nodesTasks": "2 x 4",
+        "mpirun": "/work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+        "fabric": "ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)"
+      },
+      "steps": [
+        {
+          "step": 1,
+          "total": 21,
+          "avg": 0,
+          "perStep": 0
+        },
+        {
+          "step": 2,
+          "total": 21,
+          "avg": 0,
+          "perStep": 0.6361649
+        },
+        {
+          "step": 3,
+          "total": 21,
+          "avg": 0,
+          "perStep": 0.7201872
+        },
+        {
+          "step": 4,
+          "total": 21,
+          "avg": 0.7075078,
+          "perStep": 0.7075078
+        },
+        {
+          "step": 5,
+          "total": 21,
+          "avg": 0.699659,
+          "perStep": 0.6918101
+        },
+        {
+          "step": 6,
+          "total": 21,
+          "avg": 0.6885687,
+          "perStep": 0.666388
+        },
+        {
+          "step": 7,
+          "total": 21,
+          "avg": 0.6883045,
+          "perStep": 0.6875119
+        },
+        {
+          "step": 8,
+          "total": 21,
+          "avg": 0.688084,
+          "perStep": 0.687202
+        },
+        {
+          "step": 9,
+          "total": 21,
+          "avg": 0.6899398,
+          "perStep": 0.699219
+        },
+        {
+          "step": 10,
+          "total": 21,
+          "avg": 0.680864,
+          "perStep": 0.6264091
+        },
+        {
+          "step": 11,
+          "total": 21,
+          "avg": 0.6760081,
+          "perStep": 0.6420169
+        },
+        {
+          "step": 12,
+          "total": 21,
+          "avg": 0.675669,
+          "perStep": 0.672956
+        },
+        {
+          "step": 13,
+          "total": 21,
+          "avg": 0.6741244,
+          "perStep": 0.660223
+        },
+        {
+          "step": 14,
+          "total": 21,
+          "avg": 0.6770277,
+          "perStep": 0.7060611
+        },
+        {
+          "step": 15,
+          "total": 21,
+          "avg": 0.6743291,
+          "perStep": 0.644644
+        },
+        {
+          "step": 16,
+          "total": 21,
+          "avg": 0.6752062,
+          "perStep": 0.6857312
+        },
+        {
+          "step": 17,
+          "total": 21,
+          "avg": 0.6736119,
+          "perStep": 0.6528859
+        },
+        {
+          "step": 18,
+          "total": 21,
+          "avg": 0.6739691,
+          "perStep": 0.6789708
+        },
+        {
+          "step": 19,
+          "total": 21,
+          "avg": 0.6728337,
+          "perStep": 0.655802
+        },
+        {
+          "step": 20,
+          "total": 21,
+          "avg": 0.6714125,
+          "perStep": 0.648674
+        }
+      ],
+      "stepCount": 20,
+      "performance": 0.4921349170376964,
+      "totalTimeSec": 50,
+      "exitCode": 0,
+      "lines": 92
+    },
+    "excerpt": {
+      "head": [
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| MFC case # mfc-anu-tgv-3d-a100 @ /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/case.py:         |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| * Start-time     12:05:45                            * Start-date     12:05:45                            |",
+        "| * Partition      gpu                                 * Walltime       01:00:00                            |",
+        "| * Account        N/A                                 * Nodes          2                                   |",
+        "| * Job Name       mfc-anu-tgv-3d-a100                 * Engine         batch                               |",
+        "| * QoS            N/A                                 * Binary         N/A                                 |",
+        "| * Queue System   SLURM                               * Email          N/A                                 |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "",
+        "host        : gpu-node1",
+        "nodes/tasks : 2 x 4",
+        "mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+        "fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)",
+        "",
+        "mfc: OK > :) Running syscheck:",
+        "",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)"
+      ],
+      "tail": [
+        " [  0%]  Time step        1 of 21 @ t_step =        0 Time Avg = 0.000000E+00 Time/step= 0.000000E+00 ETA (HH:MM:SS) = 0:00:00",
+        " [  5%]  Time step        2 of 21 @ t_step =        1 Time Avg = 0.000000E+00 Time/step= 6.361649E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 10%]  Time step        3 of 21 @ t_step =        2 Time Avg = 0.000000E+00 Time/step= 7.201872E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 15%]  Time step        4 of 21 @ t_step =        3 Time Avg = 7.075078E-01 Time/step= 7.075078E-01 ETA (HH:MM:SS) = 0:00:12",
+        " [ 20%]  Time step        5 of 21 @ t_step =        4 Time Avg = 6.996590E-01 Time/step= 6.918101E-01 ETA (HH:MM:SS) = 0:00:11",
+        " [ 24%]  Time step        6 of 21 @ t_step =        5 Time Avg = 6.885687E-01 Time/step= 6.663880E-01 ETA (HH:MM:SS) = 0:00:10",
+        " [ 29%]  Time step        7 of 21 @ t_step =        6 Time Avg = 6.883045E-01 Time/step= 6.875119E-01 ETA (HH:MM:SS) = 0:00:09",
+        " [ 34%]  Time step        8 of 21 @ t_step =        7 Time Avg = 6.880840E-01 Time/step= 6.872020E-01 ETA (HH:MM:SS) = 0:00:08",
+        " [ 39%]  Time step        9 of 21 @ t_step =        8 Time Avg = 6.899398E-01 Time/step= 6.992190E-01 ETA (HH:MM:SS) = 0:00:08",
+        " [ 43%]  Time step       10 of 21 @ t_step =        9 Time Avg = 6.808640E-01 Time/step= 6.264091E-01 ETA (HH:MM:SS) = 0:00:07",
+        " [ 48%]  Time step       11 of 21 @ t_step =       10 Time Avg = 6.760081E-01 Time/step= 6.420169E-01 ETA (HH:MM:SS) = 0:00:06",
+        " [ 53%]  Time step       12 of 21 @ t_step =       11 Time Avg = 6.756690E-01 Time/step= 6.729560E-01 ETA (HH:MM:SS) = 0:00:06",
+        " [ 58%]  Time step       13 of 21 @ t_step =       12 Time Avg = 6.741244E-01 Time/step= 6.602230E-01 ETA (HH:MM:SS) = 0:00:05",
+        " [ 62%]  Time step       14 of 21 @ t_step =       13 Time Avg = 6.770277E-01 Time/step= 7.060611E-01 ETA (HH:MM:SS) = 0:00:04",
+        " [ 67%]  Time step       15 of 21 @ t_step =       14 Time Avg = 6.743291E-01 Time/step= 6.446440E-01 ETA (HH:MM:SS) = 0:00:04",
+        " [ 72%]  Time step       16 of 21 @ t_step =       15 Time Avg = 6.752062E-01 Time/step= 6.857312E-01 ETA (HH:MM:SS) = 0:00:03",
+        " [ 77%]  Time step       17 of 21 @ t_step =       16 Time Avg = 6.736119E-01 Time/step= 6.528859E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 81%]  Time step       18 of 21 @ t_step =       17 Time Avg = 6.739691E-01 Time/step= 6.789708E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 86%]  Time step       19 of 21 @ t_step =       18 Time Avg = 6.728337E-01 Time/step= 6.558020E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 91%]  Time step       20 of 21 @ t_step =       19 Time Avg = 6.714125E-01 Time/step= 6.486740E-01 ETA (HH:MM:SS) = 0:00:00",
+        " Performance:   0.4921349170376964      ns/gp/eq/rhs",
+        "",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| Finished mfc-anu-tgv-3d-a100:                                                                             |",
+        "| * Total-time:    50s                                 * Exit Code:     0                                   |",
+        "| * End-time:      12:06:35                            * End-date:      12:06:35                            |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        ""
+      ],
+      "elided": 40
+    }
+  },
+  "err": {
+    "file": "run.err",
+    "size": 392,
+    "raw": "+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\n"
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "-N",
+        "2",
+        "-n",
+        "4",
+        "-p",
+        "gpu",
+        "-w",
+        "01:00:00",
+        "--name",
+        "mfc-anu_tgv_3d-a100",
+        "-o",
+        "/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--",
+        "--gbpp",
+        "16"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 3.1679768
+      },
+      "pre_process": {
+        "exec": 14.9154355
+      },
+      "simulation": {
+        "exec": 31.9090898,
+        "grind": 0.49213492
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 8,
+        "sPerStep": 0.187566,
+        "grind": 0.49213492
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# Taylor-Green vortex, 3D, weak-scaled.  slug: anu_tgv_3d\n#\n# Contributed to the ANU leaderboard. Derived from MFC's own\n# examples/3D_TaylorGreenVortex, with three changes that make it a benchmark\n# rather than a demonstration:\n#\n#   1. The grid is sized from the rank count and --gbpp instead of a fixed\n#      N = 256, so work per rank is constant as nodes are added. Comparing a\n#      1-node and a 2-node run then measures the machine, not the grid.\n#   2. t_step_start is 0. The upstream example starts at 13529, which is a\n#      restart from a checkpoint nobody else has.\n#   3. Per-step output is off and the step count follows MFC's benchmark\n#      convention, so a run costs minutes rather than hours.\n#\n# Why this case is worth having on the board: the seven upstream benchmarks are\n# all shock-driven and inviscid except one. TGV is smooth, periodic and\n# viscous -- no discontinuities for WENO to detect, so the reconstruction takes\n# a different branch, and the viscous fluxes add a second halo exchange per\n# step. It stresses communication where the shock cases stress the Riemann\n# solver.\n#\n# The initial condition is MFC's hardcoded analytic patch 380\n# (src/common/include/3dHardcodedIC.fpp), which fixes Mach = 0.1 and L = 1.\n# Those two constants are therefore NOT free here -- the domain below must stay\n# 2*pi on a side for the IC to be periodic.\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(\n    prog=\"anu_tgv_3d\",\n    description=\"Taylor-Green vortex, weak-scaled for the ANU leaderboard.\",\n    formatter_class=argparse.ArgumentDefaultsHelpFormatter,\n)\nparser.add_argument(\"--mfc\", type=json.loads, default=\"{}\", metavar=\"DICT\", help=\"MFC's toolchain's internal state.\")\nparser.add_argument(\"--gbpp\", type=int, metavar=\"MEM\", default=16, help=\"Problem size per rank, in GB of device memory.\")\nparser.add_argument(\"--steps\", type=int, default=None, help=\"Override t_step_stop/t_step_save.\")\n\nARGS = vars(parser.parse_args())\nDICT = ARGS[\"mfc\"]\n\n# Copied verbatim from MFC's benchmarks/ so this case takes the same number of\n# steps as the seven it shares a board format with.\n#\n# It does not do what it appears to do. MFC passes gpu as a STRING -- 'no' for\n# a CPU run, 'acc' for offload -- and a non-empty string is truthy, so size is\n# always 1 and the step count is always 20, never 10. Verified: a CPU run of\n# this case reports \"Time step 1 of 21\".\n#\n# Left as-is deliberately. Fixing it here alone would make this case run half\n# as many steps as the others on CPU, which is a worse problem than the one it\n# fixes; it belongs upstream, in all eight cases at once.\nsize = 1 if DICT[\"gpu\"] else 0\n\n# 8e6 grid points per 16 GB per rank, matching benchmarks/. TGV is isotropic\n# and periodic, so unlike the shock cases the domain is a cube: one cube root\n# rather than the benchmarks' 2s x s x s.\nppg = 8000000 / 16.0\nprocs = DICT[\"nodes\"] * DICT[\"tasks_per_node\"]\nncells = math.floor(ppg * procs * ARGS[\"gbpp\"])\nN = math.floor(ncells ** (1 / 3))\n\n# --- physics, all fixed by hardcoded IC 380 --------------------------------\nRe = 1600        # Reynolds number of the classic TGV benchmark\nL = 1            # vortex length scale; hcid 380 hardcodes this\nP0 = 101325      # Pa\nC0 = math.sqrt(1.4 * P0)\nV0 = 0.1 * C0    # Mach 0.1; hcid 380 hardcodes this too\nmu = V0 * L / Re\n\ncfl = 0.5\ndx = 2 * math.pi * L / (N + 1)\ndt = cfl * dx / C0\n\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"F\",\n            # Computational Domain Parameters -- a 2*pi cube, periodic\n            \"x_domain%beg\": -math.pi * L,\n            \"x_domain%end\": math.pi * L,\n            \"y_domain%beg\": -math.pi * L,\n            \"y_domain%end\": math.pi * L,\n            \"z_domain%beg\": -math.pi * L,\n            \"z_domain%end\": math.pi * L,\n            \"m\": N,\n            \"n\": N,\n            \"p\": N,\n            \"cyl_coord\": \"F\",\n            \"dt\": dt,\n            \"t_step_start\": 0,\n            \"t_step_stop\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            \"t_step_save\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            # Simulation Algorithm Parameters\n            \"num_patches\": 1,\n            \"model_eqns\": \"5eq\",\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 1,\n            \"mixture_err\": \"T\",\n            \"time_stepper\": \"rk3\",\n            \"weno_order\": 5,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"T\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            \"avg_state\": \"arithmetic\",\n            # -1 is periodic on every face: TGV has no boundaries.\n            \"bc_x%beg\": -1,\n            \"bc_x%end\": -1,\n            \"bc_y%beg\": -1,\n            \"bc_y%end\": -1,\n            \"bc_z%beg\": -1,\n            \"bc_z%end\": -1,\n            # The reason this case is not just another shock tube: viscous\n            # fluxes add a second halo exchange per stage.\n            \"viscous\": \"T\",\n            # Formatted Database Files Structure Parameters\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"fd_order\": 4,\n            \"parallel_io\": \"T\",\n            # Patch 1: the whole domain, initialised analytically by hcid 380.\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": 0,\n            \"patch_icpp(1)%y_centroid\": 0,\n            \"patch_icpp(1)%z_centroid\": 0,\n            \"patch_icpp(1)%length_x\": 2 * math.pi * L,\n            \"patch_icpp(1)%length_y\": 2 * math.pi * L,\n            \"patch_icpp(1)%length_z\": 2 * math.pi * L,\n            \"patch_icpp(1)%vel(1)\": 0.0,\n            \"patch_icpp(1)%vel(2)\": 0.0,\n            \"patch_icpp(1)%vel(3)\": 0.0,\n            \"patch_icpp(1)%pres\": 0.0,\n            \"patch_icpp(1)%hcid\": 380,\n            \"patch_icpp(1)%alpha_rho(1)\": 1,\n            \"patch_icpp(1)%alpha(1)\": 1,\n            # Fluids Physical Parameters -- ideal air, viscous\n            \"fluid_pp(1)%gamma\": 1.0e00 / (1.4 - 1),\n            \"fluid_pp(1)%pi_inf\": 0,\n            \"fluid_pp(1)%Re(1)\": 1 / mu,\n        }\n    )\n)\n"
+    },
+    "script": {
+      "file": "run.sh",
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-anu-tgv-3d-a100\"\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4\n#SBATCH --output=\"mfc-anu-tgv-3d-a100.out\"\n#SBATCH --error=\"mfc-anu-tgv-3d-a100.err\"\n#SBATCH --time=01:00:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=gpu\n#SBATCH --gres=gpu:a100:4\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/zen3/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"gpu\"          \"Walltime\"   \"01:00:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"2\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-anu-tgv-3d-a100\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-anu-tgv-3d-a100 @ /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/mfc-environment.sh\" acc || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 2 x 4\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-anu-tgv-3d-a100:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+    },
+    "out": {
+      "file": "run.out",
+      "size": 6371,
+      "parsed": {
+        "banner": {
+          "start_time": "12:05:45",
+          "start_date": "12:05:45",
+          "partition": "gpu",
+          "walltime": "01:00:00",
+          "nodes": "2",
+          "job_name": "mfc-anu-tgv-3d-a100",
+          "engine": "batch",
+          "queue_system": "SLURM"
+        },
+        "env": {
+          "host": "gpu-node1",
+          "nodesTasks": "2 x 4",
+          "mpirun": "/work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+          "fabric": "ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)"
+        },
+        "steps": [
+          {
+            "step": 1,
+            "total": 21,
+            "avg": 0,
+            "perStep": 0
+          },
+          {
+            "step": 2,
+            "total": 21,
+            "avg": 0,
+            "perStep": 0.6361649
+          },
+          {
+            "step": 3,
+            "total": 21,
+            "avg": 0,
+            "perStep": 0.7201872
+          },
+          {
+            "step": 4,
+            "total": 21,
+            "avg": 0.7075078,
+            "perStep": 0.7075078
+          },
+          {
+            "step": 5,
+            "total": 21,
+            "avg": 0.699659,
+            "perStep": 0.6918101
+          },
+          {
+            "step": 6,
+            "total": 21,
+            "avg": 0.6885687,
+            "perStep": 0.666388
+          },
+          {
+            "step": 7,
+            "total": 21,
+            "avg": 0.6883045,
+            "perStep": 0.6875119
+          },
+          {
+            "step": 8,
+            "total": 21,
+            "avg": 0.688084,
+            "perStep": 0.687202
+          },
+          {
+            "step": 9,
+            "total": 21,
+            "avg": 0.6899398,
+            "perStep": 0.699219
+          },
+          {
+            "step": 10,
+            "total": 21,
+            "avg": 0.680864,
+            "perStep": 0.6264091
+          },
+          {
+            "step": 11,
+            "total": 21,
+            "avg": 0.6760081,
+            "perStep": 0.6420169
+          },
+          {
+            "step": 12,
+            "total": 21,
+            "avg": 0.675669,
+            "perStep": 0.672956
+          },
+          {
+            "step": 13,
+            "total": 21,
+            "avg": 0.6741244,
+            "perStep": 0.660223
+          },
+          {
+            "step": 14,
+            "total": 21,
+            "avg": 0.6770277,
+            "perStep": 0.7060611
+          },
+          {
+            "step": 15,
+            "total": 21,
+            "avg": 0.6743291,
+            "perStep": 0.644644
+          },
+          {
+            "step": 16,
+            "total": 21,
+            "avg": 0.6752062,
+            "perStep": 0.6857312
+          },
+          {
+            "step": 17,
+            "total": 21,
+            "avg": 0.6736119,
+            "perStep": 0.6528859
+          },
+          {
+            "step": 18,
+            "total": 21,
+            "avg": 0.6739691,
+            "perStep": 0.6789708
+          },
+          {
+            "step": 19,
+            "total": 21,
+            "avg": 0.6728337,
+            "perStep": 0.655802
+          },
+          {
+            "step": 20,
+            "total": 21,
+            "avg": 0.6714125,
+            "perStep": 0.648674
+          }
+        ],
+        "stepCount": 20,
+        "performance": 0.4921349170376964,
+        "totalTimeSec": 50,
+        "exitCode": 0,
+        "lines": 92
+      },
+      "excerpt": {
+        "head": [
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| MFC case # mfc-anu-tgv-3d-a100 @ /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/case.py:         |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| * Start-time     12:05:45                            * Start-date     12:05:45                            |",
+          "| * Partition      gpu                                 * Walltime       01:00:00                            |",
+          "| * Account        N/A                                 * Nodes          2                                   |",
+          "| * Job Name       mfc-anu-tgv-3d-a100                 * Engine         batch                               |",
+          "| * QoS            N/A                                 * Binary         N/A                                 |",
+          "| * Queue System   SLURM                               * Email          N/A                                 |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "",
+          "host        : gpu-node1",
+          "nodes/tasks : 2 x 4",
+          "mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+          "fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)",
+          "",
+          "mfc: OK > :) Running syscheck:",
+          "",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)"
+        ],
+        "tail": [
+          " [  0%]  Time step        1 of 21 @ t_step =        0 Time Avg = 0.000000E+00 Time/step= 0.000000E+00 ETA (HH:MM:SS) = 0:00:00",
+          " [  5%]  Time step        2 of 21 @ t_step =        1 Time Avg = 0.000000E+00 Time/step= 6.361649E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 10%]  Time step        3 of 21 @ t_step =        2 Time Avg = 0.000000E+00 Time/step= 7.201872E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 15%]  Time step        4 of 21 @ t_step =        3 Time Avg = 7.075078E-01 Time/step= 7.075078E-01 ETA (HH:MM:SS) = 0:00:12",
+          " [ 20%]  Time step        5 of 21 @ t_step =        4 Time Avg = 6.996590E-01 Time/step= 6.918101E-01 ETA (HH:MM:SS) = 0:00:11",
+          " [ 24%]  Time step        6 of 21 @ t_step =        5 Time Avg = 6.885687E-01 Time/step= 6.663880E-01 ETA (HH:MM:SS) = 0:00:10",
+          " [ 29%]  Time step        7 of 21 @ t_step =        6 Time Avg = 6.883045E-01 Time/step= 6.875119E-01 ETA (HH:MM:SS) = 0:00:09",
+          " [ 34%]  Time step        8 of 21 @ t_step =        7 Time Avg = 6.880840E-01 Time/step= 6.872020E-01 ETA (HH:MM:SS) = 0:00:08",
+          " [ 39%]  Time step        9 of 21 @ t_step =        8 Time Avg = 6.899398E-01 Time/step= 6.992190E-01 ETA (HH:MM:SS) = 0:00:08",
+          " [ 43%]  Time step       10 of 21 @ t_step =        9 Time Avg = 6.808640E-01 Time/step= 6.264091E-01 ETA (HH:MM:SS) = 0:00:07",
+          " [ 48%]  Time step       11 of 21 @ t_step =       10 Time Avg = 6.760081E-01 Time/step= 6.420169E-01 ETA (HH:MM:SS) = 0:00:06",
+          " [ 53%]  Time step       12 of 21 @ t_step =       11 Time Avg = 6.756690E-01 Time/step= 6.729560E-01 ETA (HH:MM:SS) = 0:00:06",
+          " [ 58%]  Time step       13 of 21 @ t_step =       12 Time Avg = 6.741244E-01 Time/step= 6.602230E-01 ETA (HH:MM:SS) = 0:00:05",
+          " [ 62%]  Time step       14 of 21 @ t_step =       13 Time Avg = 6.770277E-01 Time/step= 7.060611E-01 ETA (HH:MM:SS) = 0:00:04",
+          " [ 67%]  Time step       15 of 21 @ t_step =       14 Time Avg = 6.743291E-01 Time/step= 6.446440E-01 ETA (HH:MM:SS) = 0:00:04",
+          " [ 72%]  Time step       16 of 21 @ t_step =       15 Time Avg = 6.752062E-01 Time/step= 6.857312E-01 ETA (HH:MM:SS) = 0:00:03",
+          " [ 77%]  Time step       17 of 21 @ t_step =       16 Time Avg = 6.736119E-01 Time/step= 6.528859E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 81%]  Time step       18 of 21 @ t_step =       17 Time Avg = 6.739691E-01 Time/step= 6.789708E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 86%]  Time step       19 of 21 @ t_step =       18 Time Avg = 6.728337E-01 Time/step= 6.558020E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 91%]  Time step       20 of 21 @ t_step =       19 Time Avg = 6.714125E-01 Time/step= 6.486740E-01 ETA (HH:MM:SS) = 0:00:00",
+          " Performance:   0.4921349170376964      ns/gp/eq/rhs",
+          "",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| Finished mfc-anu-tgv-3d-a100:                                                                             |",
+          "| * Total-time:    50s                                 * Exit Code:     0                                   |",
+          "| * End-time:      12:06:35                            * End-date:      12:06:35                            |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          ""
+        ],
+        "elided": 40
+      }
+    },
+    "err": {
+      "file": "run.err",
+      "size": 392,
+      "raw": "+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\n"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+invocation:
+- run
+- /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- -N
+- '2'
+- -n
+- '4'
+- -p
+- gpu
+- -w
+- 01:00:00
+- --name
+- mfc-anu_tgv_3d-a100
+- -o
+- /scratch/jobs/35219169188/MFC/benchmark/anu_tgv_3d-a100/summary.yaml
+- --no-build
+- --clean
+- --gpu
+- acc
+- --wait
+- --
+- --gbpp
+- '16'
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: acc
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  3.1679768
+pre_process:
+    exec:  14.9154355
+simulation:
+    exec:  31.9090898
+    grind: 0.49213492
