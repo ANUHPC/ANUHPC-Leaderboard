@@ -36,13 +36,6 @@ jobs:
     runs-on: [self-hosted, xenon]
     timeout-minutes: 480
     steps:
-      - name: Confirm this runner belongs to $CLUSTER
-        # Labels are set at registration and can drift. Verify against the node
-        # list in clusters/<cluster>/partitions.yml before touching anything.
-        run: |
-          set -euo pipefail
-          echo "runner host: $(hostname -s), expecting a $CLUSTER node"
-
       - uses: actions/checkout@v4
         with: { fetch-depth: 1, ref: main }
 
@@ -50,20 +43,7 @@ jobs:
         with: { node-version: "20" }
 
       - name: Verify runner is on the right cluster
-        run: |
-          set -euo pipefail
-          node -e '
-            const fs=require("fs"), os=require("os");
-            const {parseYaml}=await import("./scripts/lib/yaml.mjs");
-            const c=parseYaml(fs.readFileSync("clusters/"+process.env.CLUSTER+"/partitions.yml","utf8"));
-            const me=os.hostname().split(".")[0];
-            const nodes=Object.keys(c.nodes||{});
-            if (!nodes.includes(me)) {
-              console.error(`refusing: this runner is ${me}, which is not a ${process.env.CLUSTER} node (${nodes.join(", ")})`);
-              process.exit(1);
-            }
-            console.log(`ok: ${me} is a ${process.env.CLUSTER} node`);
-          '
+        run: node scripts/verify-runner-cluster.mjs "$CLUSTER"
 
       - name: Validate
         run: node scripts/validate-job.mjs
