@@ -60,13 +60,22 @@ source:
 # Sources are globs because MFC names its batch files after the job
 # (mfc-<name>.out), which differs per run and makes a stable link impossible.
 artifacts:
-  case.py:       [case.py]           # the input, MFC's equivalent of HPL.dat
-  run.sh:        ["mfc-*.sh"]        # the batch script MFC generated
-  run.out:       ["mfc-*.out"]       # stdout: MFC's banner, per-step progress
-  run.err:       ["mfc-*.err"]       # stderr
-  summary.yaml:  [summary.yaml]      # MFC's own exec/grind report
-  time_data.dat: [time_data.dat]     # Ranks | s/step | ns/gp/eq/rhs
-  job.yml:       [job.yml]
+  case.py:        [case.py]           # the input you wrote
+  run.sh:         ["mfc-*.sh"]        # the batch script MFC generated
+  run.out:        ["mfc-*.out"]       # stdout: MFC's banner, per-step progress
+  run.err:        ["mfc-*.err"]       # stderr
+  summary.yaml:   [summary.yaml]      # MFC's own exec/grind report
+  time_data.dat:  [time_data.dat]     # Ranks | s/step | ns/gp/eq/rhs
+  job.yml:        [job.yml]
+  # The parameters MFC actually resolved and ran with -- grid, dt, weno_order,
+  # riemann_solver, viscosity, fluid properties. case.py is a PROGRAM, so it
+  # does not say what any given run used; this file does.
+  #
+  # These were dropped as clutter when this manifest was written, which was a
+  # mistake: comparing runs of one case at different settings is the point of
+  # the exercise, and without them a run does not record its own settings.
+  simulation.inp:  [simulation.inp]
+  pre_process.inp: [pre_process.inp]
 
 # Kept under their own names, all matches, not just the first. Rendered output
 # is named after whatever variable was plotted (alpha1.mp4, alpha1_2812.png),

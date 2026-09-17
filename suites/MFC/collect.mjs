@@ -18,6 +18,7 @@
 
 import { parseYaml } from "../../scripts/lib/yaml.mjs";
 import { createHash } from "node:crypto";
+import { parseInp, summarizeInp } from "./parse-inp.mjs";
 
 export const name = "MFC";
 
@@ -127,6 +128,7 @@ export async function collect(ctx) {
   const sumName  = files.find((f) => /^summary\.ya?ml$/i.test(f));
   const timeName = files.find((f) => /^time_data\.dat$/i.test(f));
   const caseName = files.find((f) => /^case\.py$/i.test(f));
+  const inpName  = files.find((f) => /^simulation\.inp$/i.test(f));
   const outName  = files.find((f) => /\.out$/i.test(f));
   const errName  = files.find((f) => /\.err$/i.test(f));
   const jobName  = files.find((f) => /^job\.ya?ml$/i.test(f));
@@ -134,8 +136,8 @@ export async function collect(ctx) {
   // the original name, so accept either.
   const shName   = files.find((f) => /^run\.sh$/i.test(f)) ?? files.find((f) => /\.sh$/i.test(f) && !/environment/i.test(f));
 
-  const [sumRaw, timeRaw, caseRaw, outRaw, errRaw, jobRaw, shRaw] = await Promise.all(
-    [sumName, timeName, caseName, outName, errName, jobName, shName]
+  const [sumRaw, timeRaw, caseRaw, outRaw, errRaw, jobRaw, shRaw, inpRaw] = await Promise.all(
+    [sumName, timeName, caseName, outName, errName, jobName, shName, inpName]
       .map((f) => (f ? read(f) : Promise.resolve(null)))
   );
 
@@ -243,6 +245,12 @@ export async function collect(ctx) {
     // before that stamp existed return null and are dated from git history
     // instead; scripts/collect.mjs records which source was used.
     ranAt: typeof completion.finished_at === "string" ? completion.finished_at : null,
+    // The settings this run actually used, read from simulation.inp. case.py
+    // is a program: it computes the grid from the rank count and derives dt
+    // from a CFL number, so it records what a run COULD do, not what it did.
+    // Without this, two runs of one case at different settings are
+    // indistinguishable -- which makes a parameter sweep unreadable.
+    parameters: inpRaw ? summarizeInp(parseInp(inpRaw)) : null,
     secondary: [
       exec != null ? { key: "exec", value: exec } : null,
       last?.sPerStep != null ? { key: "s_step", value: last.sPerStep } : null,
