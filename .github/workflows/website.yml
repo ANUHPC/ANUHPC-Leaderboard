@@ -2,15 +2,27 @@ name: website.yml
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    # Also watch the website branch: a change to the site's own source used to
+    # need an unrelated push to main before it would deploy.
+    branches: [main, website]
     paths:
       - "scripts/**"
       - "suites/**"
       - "clusters/**"
       - "package.json"
       - "output/**"
+      - "src/**"
+      - "public/**"
+      - "index.html"
+      - "vite.config.ts"
   workflow_run:
-    workflows: ["Run SLURM Jobs"]
+    # "Run SLURM Jobs" is node1.yml, still driving Raijin. The per-cluster
+    # workflows replace it; list all three so results deploy as soon as a run
+    # finishes rather than waiting on the next push.
+    workflows:
+      - "Run SLURM Jobs"
+      - "Submit jobs (xenon)"
+      - "Submit jobs (raijin)"
     types:
       - completed
 
@@ -65,7 +77,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/data public/raw
-          if git commit -m "Update HPL data artifacts from main"; then
+          if git commit -m "Update data artifacts from main [skip ci]"; then
             git push origin website
           else
             echo "No data changes to commit"
