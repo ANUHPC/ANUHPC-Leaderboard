@@ -5,6 +5,14 @@
   "run": "Yippee",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-04-01T05:54:26.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Maya",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 271.37,

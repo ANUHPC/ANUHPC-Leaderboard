@@ -5,6 +5,14 @@
   "run": "ICX-2",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-02T02:50:46.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 1878.6,

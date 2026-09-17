@@ -5,6 +5,14 @@
   "run": "5Node-ib-Please",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-04-13T06:04:09.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 1239.8,

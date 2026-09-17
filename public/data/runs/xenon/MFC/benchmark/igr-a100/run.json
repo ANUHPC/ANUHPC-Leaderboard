@@ -5,6 +5,14 @@
   "run": "igr-a100",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-17T08:50:06Z",
+  "dateSource": "git",
+  "submittedAt": "2026-09-17T05:38:02Z",
+  "submitter": {
+    "name": "benchmark",
+    "house": true,
+    "by": "Codex"
+  },
   "metric": {
     "key": "grind",
     "value": 0.50197132,

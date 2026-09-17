@@ -5,6 +5,14 @@
   "run": "5 nodes 30n128nb4p4q",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-03T00:40:17.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "VarSweep",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 242.24,

@@ -5,6 +5,14 @@
   "run": "bowshock-gpu",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-17T04:02:02Z",
+  "dateSource": "git",
+  "submittedAt": "2026-09-17T04:01:42Z",
+  "submitter": {
+    "name": "demo",
+    "house": true,
+    "by": "Claude"
+  },
   "metric": {
     "key": "grind",
     "value": 0.9124885,

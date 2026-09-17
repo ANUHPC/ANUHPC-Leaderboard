@@ -5,6 +5,14 @@
   "run": "test-run-3",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-04-22T05:13:12Z",
+  "dateSource": "git",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Flynn",
+    "house": false,
+    "by": null
+  },
   "metric": null,
   "secondary": [],
   "config": {

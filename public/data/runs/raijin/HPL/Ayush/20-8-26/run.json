@@ -5,6 +5,14 @@
   "run": "20-8-26",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-08-20T05:06:17.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 1657.2,

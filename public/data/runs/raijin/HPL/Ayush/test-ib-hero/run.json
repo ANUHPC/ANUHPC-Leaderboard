@@ -5,6 +5,14 @@
   "run": "test-ib-hero",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-03-28T05:47:47.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 396.02,

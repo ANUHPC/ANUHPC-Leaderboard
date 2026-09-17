@@ -5,6 +5,14 @@
   "run": "Hero-Raijin",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-03-27T11:02:56.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 400.38,

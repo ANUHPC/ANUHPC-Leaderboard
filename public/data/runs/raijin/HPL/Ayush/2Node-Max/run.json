@@ -5,6 +5,14 @@
   "run": "2Node-Max",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-03-27T12:21:57.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": {
     "key": "gflops",
     "value": 396.22,

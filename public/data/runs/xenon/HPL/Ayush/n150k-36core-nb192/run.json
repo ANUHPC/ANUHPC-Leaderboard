@@ -5,6 +5,14 @@
   "run": "n150k-36core-nb192",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-17T01:30:20.000Z",
+  "dateSource": "run",
+  "submittedAt": "2026-09-17T01:19:00Z",
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": "Claude"
+  },
   "metric": {
     "key": "gflops",
     "value": 793.12,

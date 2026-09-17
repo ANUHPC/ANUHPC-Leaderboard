@@ -5,6 +5,14 @@
   "run": "Second-raijin",
   "cluster": "raijin",
   "clusterSource": "path",
+  "date": "2026-03-26T10:32:11Z",
+  "dateSource": "git",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
   "metric": null,
   "secondary": [],
   "config": {

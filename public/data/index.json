@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T09:33:19.773Z",
+  "generatedAt": "2026-09-17T12:05:46.961Z",
   "clusters": [
     {
       "name": "raijin",
@@ -117,6 +117,14 @@
       "run": "ICX-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-02T02:50:46.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1878.6,
@@ -168,6 +176,14 @@
       "run": "20-8-26",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-20T05:06:17.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1657.2,
@@ -219,6 +235,14 @@
       "run": "6node_1task_1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-13T04:17:52.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1648.8,
@@ -270,6 +294,14 @@
       "run": "trial-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:49:41.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1373.1,
@@ -321,6 +353,14 @@
       "run": "trial-4-256NB",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T05:01:57.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1354.8,
@@ -372,6 +412,14 @@
       "run": "ICX-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-20T09:40:31.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1339.2,
@@ -423,6 +471,14 @@
       "run": "5node_2task_4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T03:53:48.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1271.6,
@@ -474,6 +530,14 @@
       "run": "5Node-ib-Please",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-13T06:04:09.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 1239.8,
@@ -525,6 +589,14 @@
       "run": "3Node-Top",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-05T04:06:24.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 844.21,
@@ -576,6 +648,14 @@
       "run": "3Node-PureMPI-75Percent",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-03T12:22:36.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 842.59,
@@ -627,6 +707,14 @@
       "run": "node2_40n192nbp8q8",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T04:18:24.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 753.63,
@@ -678,6 +766,14 @@
       "run": "3Node-ib-Top",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-03T11:24:40.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 737.45,
@@ -729,6 +825,14 @@
       "run": "2Node-Ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T09:27:52.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 567.13,
@@ -780,6 +884,14 @@
       "run": "test-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T04:56:47.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 556.63,
@@ -831,6 +943,14 @@
       "run": "new_run",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T04:25:07.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Daniel",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 491.68,
@@ -882,6 +1002,14 @@
       "run": "Hero-Raijin",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-27T11:02:56.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 400.38,
@@ -933,6 +1061,14 @@
       "run": "2Node-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-27T12:21:57.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 396.22,
@@ -984,6 +1120,14 @@
       "run": "test-ib-hero",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T05:47:47.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 396.02,
@@ -1035,6 +1179,14 @@
       "run": "4 nodes 60n192nb8p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T03:46:26.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 284.62,
@@ -1086,6 +1238,14 @@
       "run": "Yippee",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T05:54:26.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 271.37,
@@ -1137,6 +1297,14 @@
       "run": "5 nodes 40n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:55:54.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 253.57,
@@ -1188,6 +1356,14 @@
       "run": "2 nodes 60n192nb2p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T03:25:35.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 252.91,
@@ -1239,6 +1415,14 @@
       "run": "4 nodes 40n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:49:04.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 252.46,
@@ -1290,6 +1474,14 @@
       "run": "3 nodes 60n192nb2p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T03:36:10.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 251.14,
@@ -1341,6 +1533,14 @@
       "run": "n40 nb128 p4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:21:10.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 250.3,
@@ -1392,6 +1592,14 @@
       "run": "3 nodes 40n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:56:05.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 249.42,
@@ -1443,6 +1651,14 @@
       "run": "2 nodes 40n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:49:04.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 249.17,
@@ -1494,6 +1710,14 @@
       "run": "6 nodes 40n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:49:24.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 247.36,
@@ -1545,6 +1769,14 @@
       "run": "4 nodes 40n192nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:44:41.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 244.8,
@@ -1596,6 +1828,14 @@
       "run": "4 nodes 30n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:38:45.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 244.01,
@@ -1647,6 +1887,14 @@
       "run": "5 nodes 40n192nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:52:00.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 242.73,
@@ -1698,6 +1946,14 @@
       "run": "5 nodes 40n192nb2p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:48:35.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 242.7,
@@ -1749,6 +2005,14 @@
       "run": "5 nodes 30n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:40:17.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 242.24,
@@ -1800,6 +2064,14 @@
       "run": "4 nodes 40n192nb2p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:41:14.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 242.07,
@@ -1851,6 +2123,14 @@
       "run": "40n64nb4p4q run1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:33:45.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 241.34,
@@ -1902,6 +2182,14 @@
       "run": "2 nodes 30n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:32:34.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 240.14,
@@ -1953,6 +2241,14 @@
       "run": "2 nodes 40n192nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:44:44.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 239.65,
@@ -2004,6 +2300,14 @@
       "run": "40n198nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:56:43.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 239.56,
@@ -2055,6 +2359,14 @@
       "run": "6 nodes 40n192nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:45:04.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 239.27,
@@ -2106,6 +2418,14 @@
       "run": "n40nb192p4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T04:10:17.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 238.03,
@@ -2157,6 +2477,14 @@
       "run": "3 nodes 40n192nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:51:44.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 237.82,
@@ -2208,6 +2536,14 @@
       "run": "6 nodes 30n128nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:38:45.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 236.96,
@@ -2259,6 +2595,14 @@
       "run": "5 nodes 40n256nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:59:26.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 236.48,
@@ -2310,6 +2654,14 @@
       "run": "6 nodes 40n192nb2p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T01:41:34.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 236.33,
@@ -2361,6 +2713,14 @@
       "run": "30n64nbp4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:51:30.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 236.11,
@@ -2412,6 +2772,14 @@
       "run": "3 nodes 30n128nb4p4q ",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:40:17.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 235.74,
@@ -2463,6 +2831,14 @@
       "run": "4 nodes 40n256nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:52:24.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 235.66,
@@ -2514,6 +2890,14 @@
       "run": "40n256nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:44:37.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 231.42,
@@ -2565,6 +2949,14 @@
       "run": "6 nodes 40n256nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:52:54.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 230.74,
@@ -2616,6 +3008,14 @@
       "run": "25n64nbp4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:51:28.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 227.62,
@@ -2667,6 +3067,14 @@
       "run": "3 nodes 40n256nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:59:26.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 227.3,
@@ -2718,6 +3126,14 @@
       "run": "2 nodes 40n256nb4p4q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:52:26.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 225.76,
@@ -2769,6 +3185,14 @@
       "run": "n40 nb64 p8q2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:39:08.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 225.61,
@@ -2820,6 +3244,14 @@
       "run": "1node_5_16task_1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T05:21:53.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 215.13,
@@ -2871,6 +3303,14 @@
       "run": "test-run-6",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:38:01.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 214.45,
@@ -2922,6 +3362,14 @@
       "run": "40n198nb1p16q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:56:43.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 211.21,
@@ -2973,6 +3421,14 @@
       "run": "run2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:26:12.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 210.76,
@@ -3024,6 +3480,14 @@
       "run": "node2_40n192nbp8q8columnmajor",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T00:25:29.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 194.65,
@@ -3075,6 +3539,14 @@
       "run": "15n64nbp4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:51:25.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 194.15,
@@ -3126,6 +3598,14 @@
       "run": "test-run-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-26T11:57:54.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 180.49,
@@ -3177,6 +3657,14 @@
       "run": "test-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-26T10:41:57.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 178.91,
@@ -3228,6 +3716,14 @@
       "run": "test-run-18",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T08:02:18.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 159.34,
@@ -3279,6 +3775,14 @@
       "run": "test-run-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T05:23:24.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 117.05,
@@ -3330,6 +3834,14 @@
       "run": "test-ib-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T05:41:11.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 84.223,
@@ -3381,6 +3893,14 @@
       "run": "40n198nb2p2q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:57:22.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 74.944,
@@ -3432,6 +3952,14 @@
       "run": "n iter 1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T02:58:00.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 58.018,
@@ -3483,6 +4011,14 @@
       "run": "test-run-4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:23:55.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 27.963,
@@ -3534,6 +4070,14 @@
       "run": "test-run-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T00:22:52.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 27.951,
@@ -3585,6 +4129,14 @@
       "run": "test-run-5",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:31:17.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 27.736,
@@ -3636,6 +4188,14 @@
       "run": "test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T01:42:05.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Daniel",
+        "house": false,
+        "by": null
+      },
       "metric": {
         "key": "gflops",
         "value": 12.274,
@@ -3687,6 +4247,14 @@
       "run": "5node_2task_1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T05:54:35Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3713,6 +4281,14 @@
       "run": "5node_2task_2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T06:55:30Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3744,6 +4320,14 @@
       "run": "5node_2task_3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T13:03:15+10:00",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3770,6 +4354,14 @@
       "run": "5node_run_1",
       "cluster": "raijin",
       "clusterSource": "path",
+      "date": "2026-04-22T10:06:45+10:00",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3796,6 +4388,14 @@
       "run": "5node_run_2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T04:44:35Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3822,6 +4422,14 @@
       "run": "5node_run_3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:23:13Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3848,6 +4456,14 @@
       "run": "5node_run_4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:40:51Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3874,6 +4490,14 @@
       "run": "5node_run_5",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T06:37:56Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3900,6 +4524,14 @@
       "run": "5node_run_6",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T23:25:21+10:00",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3926,6 +4558,14 @@
       "run": "26-03-26",
       "cluster": "raijin",
       "clusterSource": "path",
+      "date": "2026-03-26T10:28:03Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3952,6 +4592,14 @@
       "run": "2Node-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T01:11:24Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -3983,6 +4631,14 @@
       "run": "3-Node-Run",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T05:34:53Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4014,6 +4670,14 @@
       "run": "3-Node-Run-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T02:25:10Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4045,6 +4709,14 @@
       "run": "3-Node-Run-IB",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T07:56:58Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4076,6 +4748,14 @@
       "run": "3-Node-Run-IB-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T08:37:17Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4107,6 +4787,14 @@
       "run": "3-Node-Run-IB-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T09:19:29Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4133,6 +4821,14 @@
       "run": "3-Node-Run-IB-4",
       "cluster": "raijin",
       "clusterSource": "path",
+      "date": "2026-03-28T09:21:11Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4159,6 +4855,14 @@
       "run": "3Node-ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-03T11:13:25Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4185,6 +4889,14 @@
       "run": "4Node-ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-08T08:30:41Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4216,6 +4928,14 @@
       "run": "4Node-ib-Trial",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-08T09:16:23Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4247,6 +4967,14 @@
       "run": "4Node-ib-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-08T17:31:56+10:00",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4273,6 +5001,14 @@
       "run": "5Node-ib-Scream",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-13T05:53:10Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4299,6 +5035,14 @@
       "run": "5Node-ib-Trial",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-13T05:42:58Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4325,6 +5069,14 @@
       "run": "5Node-ib-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-13T05:49:11Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4351,6 +5103,14 @@
       "run": "Scream",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T01:20:48Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4382,6 +5142,14 @@
       "run": "Scream-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-01T04:01:14Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4413,6 +5181,14 @@
       "run": "Second-raijin",
       "cluster": "raijin",
       "clusterSource": "path",
+      "date": "2026-03-26T10:32:11Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4439,6 +5215,14 @@
       "run": "test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-26T10:34:35Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4465,6 +5249,14 @@
       "run": "test-ib",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-03-28T05:36:17Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4491,6 +5283,14 @@
       "run": "test-run-10",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:11:11Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4517,6 +5317,14 @@
       "run": "test-run-11",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:23:27Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4548,6 +5356,14 @@
       "run": "test-run-12",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:29:31Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4579,6 +5395,14 @@
       "run": "test-run-13",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:35:51Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4610,6 +5434,14 @@
       "run": "test-run-14",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:47:09Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4636,6 +5468,14 @@
       "run": "test-run-15",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:48:10Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4662,6 +5502,14 @@
       "run": "test-run-16",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:52:53Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4693,6 +5541,14 @@
       "run": "test-run-17",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T08:01:24Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4724,6 +5580,14 @@
       "run": "test-run-19",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T08:07:37Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4755,6 +5619,14 @@
       "run": "test-run-20",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T08:09:01Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4781,6 +5653,14 @@
       "run": "test-run-21",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T08:12:27Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4807,6 +5687,14 @@
       "run": "test-run-22",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-05T23:59:53Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4833,6 +5721,14 @@
       "run": "test-run-23",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T01:11:52Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4859,6 +5755,14 @@
       "run": "test-run-24",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T01:23:27Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4885,6 +5789,14 @@
       "run": "test-run-25",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T01:55:11Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4911,6 +5823,14 @@
       "run": "test-run-26",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T02:09:26Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4942,6 +5862,14 @@
       "run": "test-run-27",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T02:42:28Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4973,6 +5901,14 @@
       "run": "test-run-28",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T02:43:34Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -4999,6 +5935,14 @@
       "run": "test-run-29",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T03:35:38Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5030,6 +5974,14 @@
       "run": "test-run-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:13:12Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5061,6 +6013,14 @@
       "run": "test-run-30",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T03:42:12Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5092,6 +6052,14 @@
       "run": "test-run-31",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-06T05:12:36Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5118,6 +6086,14 @@
       "run": "test-run-32",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-13T05:25:23Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5144,6 +6120,14 @@
       "run": "test-run-33",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-05-13T05:56:30Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5170,6 +6154,14 @@
       "run": "test-run-7",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:48:18Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5201,6 +6193,14 @@
       "run": "test-run-8",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:03:54Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5227,6 +6227,14 @@
       "run": "test-run-9",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-29T07:05:42Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5253,6 +6261,14 @@
       "run": "folder",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-02T15:49:42+11:00",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5279,6 +6295,14 @@
       "run": "iter 1 n",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:02:33Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5305,6 +6329,14 @@
       "run": "iter 1nb",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:08:43Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5331,6 +6363,14 @@
       "run": "iter 2n",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:05:38Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5357,6 +6397,14 @@
       "run": "trial-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-04-22T05:23:13Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Maya",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5383,6 +6431,14 @@
       "run": "3 nodes 40n192nb6p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T02:06:26Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5409,6 +6465,14 @@
       "run": "5 nodes 60n192nb10p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T03:21:22Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5435,6 +6499,14 @@
       "run": "5 nodes 60n192nb9p9q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T03:21:22Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5461,6 +6533,14 @@
       "run": "6 nodes 60n192nb12p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T03:21:22Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5487,6 +6567,14 @@
       "run": "iter 40n 32nb",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:10:53Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5513,6 +6601,14 @@
       "run": "n40 nb64 p4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-08-27T03:12:37Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "VarSweep",
+        "house": false,
+        "by": null
+      },
       "metric": null,
       "secondary": [],
       "config": {
@@ -5539,6 +6635,14 @@
       "run": "n150k-36core-nb192",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T01:30:20.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-17T01:19:00Z",
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": "Claude"
+      },
       "metric": {
         "key": "gflops",
         "value": 793.12,
@@ -5590,6 +6694,14 @@
       "run": "xenon-cpu-node2-36core",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-03T06:05:45.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-03T06:07:11Z",
+      "submitter": {
+        "name": "baseline",
+        "house": true,
+        "by": "Claude"
+      },
       "metric": {
         "key": "gflops",
         "value": 772.17,
@@ -5641,6 +6753,14 @@
       "run": "xenon_test",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T03:05:16.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-17T12:38:21+10:00",
+      "submitter": {
+        "name": "Daniel",
+        "house": false,
+        "by": "dehaansolo"
+      },
       "metric": {
         "key": "gflops",
         "value": 529.74,
@@ -5692,6 +6812,14 @@
       "run": "5eq_rk3_weno3_hll-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.17501602,
@@ -5753,6 +6881,14 @@
       "run": "5eq_rk3_weno3_hllc-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.17542157,
@@ -5814,6 +6950,14 @@
       "run": "5eq_rk3_weno3_hllc-cpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 96.27166188,
@@ -5875,6 +7019,14 @@
       "run": "5eq_rk3_weno3_lf-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.17167647,
@@ -5936,6 +7088,14 @@
       "run": "hypo_hll-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.16621504,
@@ -5997,6 +7157,14 @@
       "run": "ibm-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.69385272,
@@ -6058,6 +7226,14 @@
       "run": "igr-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.50197132,
@@ -6119,6 +7295,14 @@
       "run": "viscous_weno5_sgb_acoustic-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
+      "submitter": {
+        "name": "benchmark",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 0.44402156,
@@ -6180,6 +7364,14 @@
       "run": "bowshock-gpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T04:02:02Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T04:01:42Z",
+      "submitter": {
+        "name": "demo",
+        "house": true,
+        "by": "Claude"
+      },
       "metric": {
         "key": "grind",
         "value": 0.9124885,
@@ -6240,6 +7432,14 @@
       "run": "scc26-p3-cpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:58:59Z",
+      "submitter": {
+        "name": "demo",
+        "house": true,
+        "by": "Codex"
+      },
       "metric": {
         "key": "grind",
         "value": 55.9686851,
