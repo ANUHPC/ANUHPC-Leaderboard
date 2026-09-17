@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/ICX-2/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/ICX-2/run.sh",
-    "run.sh-176.out": "/raw/raijin/HPL/Ayush/ICX-2/run.sh-176.out",
-    "run.sh-176.err": "/raw/raijin/HPL/Ayush/ICX-2/run.sh-176.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/ICX-2/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/ICX-2/run.sh",
+    "run.sh-176.out": "raw/raijin/HPL/Ayush/ICX-2/run.sh-176.out",
+    "run.sh-176.err": "raw/raijin/HPL/Ayush/ICX-2/run.sh-176.err"
   },
   "best": {
     "gflops": 1878.6,

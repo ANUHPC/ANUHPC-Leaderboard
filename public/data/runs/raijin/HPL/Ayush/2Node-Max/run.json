@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/2Node-Max/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/2Node-Max/run.sh",
-    "run.sh-9.out": "/raw/raijin/HPL/Ayush/2Node-Max/run.sh-9.out",
-    "run.sh-9.err": "/raw/raijin/HPL/Ayush/2Node-Max/run.sh-9.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/2Node-Max/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/2Node-Max/run.sh",
+    "run.sh-9.out": "raw/raijin/HPL/Ayush/2Node-Max/run.sh-9.out",
+    "run.sh-9.err": "raw/raijin/HPL/Ayush/2Node-Max/run.sh-9.err"
   },
   "best": {
     "gflops": 396.22,

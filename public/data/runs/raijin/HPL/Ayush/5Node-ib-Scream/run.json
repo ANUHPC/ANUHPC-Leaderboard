@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/5Node-ib-Scream/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/5Node-ib-Scream/run.sh",
-    "run.sh-54.out": "/raw/raijin/HPL/Ayush/5Node-ib-Scream/run.sh-54.out",
-    "run.sh-54.err": "/raw/raijin/HPL/Ayush/5Node-ib-Scream/run.sh-54.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/5Node-ib-Scream/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/5Node-ib-Scream/run.sh",
+    "run.sh-54.out": "raw/raijin/HPL/Ayush/5Node-ib-Scream/run.sh-54.out",
+    "run.sh-54.err": "raw/raijin/HPL/Ayush/5Node-ib-Scream/run.sh-54.err"
   },
   "best": null,
   "dat": {

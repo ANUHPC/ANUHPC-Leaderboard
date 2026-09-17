@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "hpl.dat": "/raw/raijin/HPL/Maya/iter 2n/hpl.dat",
-    "run.sh": "/raw/raijin/HPL/Maya/iter 2n/run.sh",
-    "run.sh-159.out": "/raw/raijin/HPL/Maya/iter 2n/run.sh-159.out",
-    "run.sh-159.err": "/raw/raijin/HPL/Maya/iter 2n/run.sh-159.err"
+    "hpl.dat": "raw/raijin/HPL/Maya/iter 2n/hpl.dat",
+    "run.sh": "raw/raijin/HPL/Maya/iter 2n/run.sh",
+    "run.sh-159.out": "raw/raijin/HPL/Maya/iter 2n/run.sh-159.out",
+    "run.sh-159.err": "raw/raijin/HPL/Maya/iter 2n/run.sh-159.err"
   },
   "best": null,
   "dat": {

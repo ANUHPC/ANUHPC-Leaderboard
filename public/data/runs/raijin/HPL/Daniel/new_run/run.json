@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Daniel/new_run/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Daniel/new_run/run.sh",
-    "run.sh-25.out": "/raw/raijin/HPL/Daniel/new_run/run.sh-25.out",
-    "run.sh-25.err": "/raw/raijin/HPL/Daniel/new_run/run.sh-25.err"
+    "HPL.dat": "raw/raijin/HPL/Daniel/new_run/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Daniel/new_run/run.sh",
+    "run.sh-25.out": "raw/raijin/HPL/Daniel/new_run/run.sh-25.out",
+    "run.sh-25.err": "raw/raijin/HPL/Daniel/new_run/run.sh-25.err"
   },
   "best": {
     "gflops": 491.68,

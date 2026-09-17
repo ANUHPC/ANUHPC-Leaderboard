@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Maya/run2/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Maya/run2/run.sh",
-    "run.sh-164.out": "/raw/raijin/HPL/Maya/run2/run.sh-164.out",
-    "run.sh-164.err": "/raw/raijin/HPL/Maya/run2/run.sh-164.err"
+    "HPL.dat": "raw/raijin/HPL/Maya/run2/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Maya/run2/run.sh",
+    "run.sh-164.out": "raw/raijin/HPL/Maya/run2/run.sh-164.out",
+    "run.sh-164.err": "raw/raijin/HPL/Maya/run2/run.sh-164.err"
   },
   "best": {
     "gflops": 210.76,

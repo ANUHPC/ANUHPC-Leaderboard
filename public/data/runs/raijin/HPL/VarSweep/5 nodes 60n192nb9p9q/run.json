@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh",
-    "run.sh-228.out": "/raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh-228.out",
-    "run.sh-228.err": "/raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh-228.err"
+    "HPL.dat": "raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/HPL.dat",
+    "run.sh": "raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh",
+    "run.sh-228.out": "raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh-228.out",
+    "run.sh-228.err": "raw/raijin/HPL/VarSweep/5 nodes 60n192nb9p9q/run.sh-228.err"
   },
   "best": null,
   "dat": {

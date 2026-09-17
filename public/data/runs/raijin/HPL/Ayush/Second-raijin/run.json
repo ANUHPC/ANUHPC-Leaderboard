@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/Second-raijin/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/Second-raijin/run.sh",
-    "run.sh-4.out": "/raw/raijin/HPL/Ayush/Second-raijin/run.sh-4.out",
-    "run.sh-4.err": "/raw/raijin/HPL/Ayush/Second-raijin/run.sh-4.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/Second-raijin/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/Second-raijin/run.sh",
+    "run.sh-4.out": "raw/raijin/HPL/Ayush/Second-raijin/run.sh-4.out",
+    "run.sh-4.err": "raw/raijin/HPL/Ayush/Second-raijin/run.sh-4.err"
   },
   "best": null,
   "dat": {

@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/Scream/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/Scream/run.sh",
-    "run.sh-22.out": "/raw/raijin/HPL/Ayush/Scream/run.sh-22.out",
-    "run.sh-22.err": "/raw/raijin/HPL/Ayush/Scream/run.sh-22.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/Scream/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/Scream/run.sh",
+    "run.sh-22.out": "raw/raijin/HPL/Ayush/Scream/run.sh-22.out",
+    "run.sh-22.err": "raw/raijin/HPL/Ayush/Scream/run.sh-22.err"
   },
   "best": null,
   "dat": {

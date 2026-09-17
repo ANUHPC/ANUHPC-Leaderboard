@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Aden/test-1/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Aden/test-1/run.sh",
-    "run.sh-26.out": "/raw/raijin/HPL/Aden/test-1/run.sh-26.out",
-    "run.sh-26.err": "/raw/raijin/HPL/Aden/test-1/run.sh-26.err"
+    "HPL.dat": "raw/raijin/HPL/Aden/test-1/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Aden/test-1/run.sh",
+    "run.sh-26.out": "raw/raijin/HPL/Aden/test-1/run.sh-26.out",
+    "run.sh-26.err": "raw/raijin/HPL/Aden/test-1/run.sh-26.err"
   },
   "best": {
     "gflops": 556.63,

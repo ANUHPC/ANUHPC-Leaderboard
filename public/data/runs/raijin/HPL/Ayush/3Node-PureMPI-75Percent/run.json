@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/run.sh",
-    "run.sh-39.out": "/raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/run.sh-39.out",
-    "run.sh-39.err": "/raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/run.sh-39.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/run.sh",
+    "run.sh-39.out": "raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/run.sh-39.out",
+    "run.sh-39.err": "raw/raijin/HPL/Ayush/3Node-PureMPI-75Percent/run.sh-39.err"
   },
   "best": {
     "gflops": 842.59,

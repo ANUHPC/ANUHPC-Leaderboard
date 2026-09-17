@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/3-Node-Run/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/3-Node-Run/run.sh",
-    "run.sh-13.out": "/raw/raijin/HPL/Ayush/3-Node-Run/run.sh-13.out",
-    "run.sh-13.err": "/raw/raijin/HPL/Ayush/3-Node-Run/run.sh-13.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/3-Node-Run/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/3-Node-Run/run.sh",
+    "run.sh-13.out": "raw/raijin/HPL/Ayush/3-Node-Run/run.sh-13.out",
+    "run.sh-13.err": "raw/raijin/HPL/Ayush/3-Node-Run/run.sh-13.err"
   },
   "best": null,
   "dat": {

@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Aden/5node_run_5/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Aden/5node_run_5/run.sh",
-    "run.sh-69.out": "/raw/raijin/HPL/Aden/5node_run_5/run.sh-69.out",
-    "run.sh-69.err": "/raw/raijin/HPL/Aden/5node_run_5/run.sh-69.err"
+    "HPL.dat": "raw/raijin/HPL/Aden/5node_run_5/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Aden/5node_run_5/run.sh",
+    "run.sh-69.out": "raw/raijin/HPL/Aden/5node_run_5/run.sh-69.out",
+    "run.sh-69.err": "raw/raijin/HPL/Aden/5node_run_5/run.sh-69.err"
   },
   "best": null,
   "dat": {

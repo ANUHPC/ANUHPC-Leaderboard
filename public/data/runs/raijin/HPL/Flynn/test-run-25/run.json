@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Flynn/test-run-25/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Flynn/test-run-25/run.sh",
-    "run.sh-124.out": "/raw/raijin/HPL/Flynn/test-run-25/run.sh-124.out",
-    "run.sh-124.err": "/raw/raijin/HPL/Flynn/test-run-25/run.sh-124.err"
+    "HPL.dat": "raw/raijin/HPL/Flynn/test-run-25/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Flynn/test-run-25/run.sh",
+    "run.sh-124.out": "raw/raijin/HPL/Flynn/test-run-25/run.sh-124.out",
+    "run.sh-124.err": "raw/raijin/HPL/Flynn/test-run-25/run.sh-124.err"
   },
   "best": null,
   "dat": {

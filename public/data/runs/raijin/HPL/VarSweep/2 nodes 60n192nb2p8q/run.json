@@ -39,8 +39,8 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "run.sh-230.out": "/raw/raijin/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.out",
-    "run.sh-230.err": "/raw/raijin/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.err"
+    "run.sh-230.out": "raw/raijin/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.out",
+    "run.sh-230.err": "raw/raijin/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.err"
   },
   "best": {
     "gflops": 252.91,

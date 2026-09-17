@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/xenon/HPL/baseline/xenon-cpu-node2-36core/HPL.dat",
-    "run.sh": "/raw/xenon/HPL/baseline/xenon-cpu-node2-36core/run.sh",
-    "run.out": "/raw/xenon/HPL/baseline/xenon-cpu-node2-36core/run.out",
-    "run.err": "/raw/xenon/HPL/baseline/xenon-cpu-node2-36core/run.err"
+    "HPL.dat": "raw/xenon/HPL/baseline/xenon-cpu-node2-36core/HPL.dat",
+    "run.sh": "raw/xenon/HPL/baseline/xenon-cpu-node2-36core/run.sh",
+    "run.out": "raw/xenon/HPL/baseline/xenon-cpu-node2-36core/run.out",
+    "run.err": "raw/xenon/HPL/baseline/xenon-cpu-node2-36core/run.err"
   },
   "best": {
     "gflops": 772.17,

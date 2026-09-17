@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/run.sh",
-    "run.sh-175.out": "/raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/run.sh-175.out",
-    "run.sh-175.err": "/raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/run.sh-175.err"
+    "HPL.dat": "raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/HPL.dat",
+    "run.sh": "raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/run.sh",
+    "run.sh-175.out": "raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/run.sh-175.out",
+    "run.sh-175.err": "raw/raijin/HPL/VarSweep/node2_40n192nbp8q8/run.sh-175.err"
   },
   "best": {
     "gflops": 753.63,

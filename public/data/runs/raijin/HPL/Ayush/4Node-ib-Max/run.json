@@ -25,10 +25,10 @@
   "status": "no-result",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Ayush/4Node-ib-Max/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Ayush/4Node-ib-Max/run.sh",
-    "run.sh-42.out": "/raw/raijin/HPL/Ayush/4Node-ib-Max/run.sh-42.out",
-    "run.sh-42.err": "/raw/raijin/HPL/Ayush/4Node-ib-Max/run.sh-42.err"
+    "HPL.dat": "raw/raijin/HPL/Ayush/4Node-ib-Max/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Ayush/4Node-ib-Max/run.sh",
+    "run.sh-42.out": "raw/raijin/HPL/Ayush/4Node-ib-Max/run.sh-42.out",
+    "run.sh-42.err": "raw/raijin/HPL/Ayush/4Node-ib-Max/run.sh-42.err"
   },
   "best": null,
   "dat": {

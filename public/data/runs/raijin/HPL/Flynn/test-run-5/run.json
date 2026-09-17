@@ -39,10 +39,10 @@
   "status": "ok",
   "notes": [],
   "raw": {
-    "HPL.dat": "/raw/raijin/HPL/Flynn/test-run-5/HPL.dat",
-    "run.sh": "/raw/raijin/HPL/Flynn/test-run-5/run.sh",
-    "run.sh-64.out": "/raw/raijin/HPL/Flynn/test-run-5/run.sh-64.out",
-    "run.sh-64.err": "/raw/raijin/HPL/Flynn/test-run-5/run.sh-64.err"
+    "HPL.dat": "raw/raijin/HPL/Flynn/test-run-5/HPL.dat",
+    "run.sh": "raw/raijin/HPL/Flynn/test-run-5/run.sh",
+    "run.sh-64.out": "raw/raijin/HPL/Flynn/test-run-5/run.sh-64.out",
+    "run.sh-64.err": "raw/raijin/HPL/Flynn/test-run-5/run.sh-64.err"
   },
   "best": {
     "gflops": 27.736,
