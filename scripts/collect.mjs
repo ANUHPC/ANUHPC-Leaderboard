@@ -17,7 +17,7 @@
 
 import fs from "fs/promises";
 import path from "path";
-import { loadRunHistory, submitterOf } from "./lib/run-history.mjs";
+import { loadRunHistory, submitterOf, historyWarnings } from "./lib/run-history.mjs";
 import { parseYaml } from "./lib/yaml.mjs";
 import { loadClusters, inferCluster } from "./lib/cluster.mjs";
 
@@ -330,11 +330,21 @@ async function main() {
   // processed. Needs full history: under a shallow clone this comes back
   // empty and every run falls back to whatever timestamp it recorded itself.
   history = await loadRunHistory(CWD);
-  console.log(
-    history.available
-      ? `[collect] git history: ${history.completed.size} run(s) dated, ${history.submitted.size} with a recorded submitter`
-      : "[collect] git history unavailable — runs will be dated only where they timestamp themselves"
-  );
+  console.log(`[collect] git history: ${history.commits} commit(s), ${history.completed.size} run(s) dated, ` +
+              `${history.submitted.size} with a recorded submitter`);
+
+  // Wrong dates are worse than no dates: a board ordered by recency that puts
+  // 80 runs in the same second tells the reader something false, and says
+  // nothing about being broken. This exact thing reached production once --
+  // every git-dated run took the HEAD commit's timestamp -- so when the shape
+  // is detected the git dates are dropped rather than published. Runs that
+  // timestamp themselves are unaffected and keep theirs.
+  const warnings = historyWarnings(history);
+  for (const w of warnings) console.warn(`[collect] WARNING: ${w}`);
+  if (warnings.length) {
+    console.warn("[collect] discarding git-derived dates; only self-timestamped runs will be dated");
+    history = { ...history, completed: new Map(), submitted: new Map() };
+  }
   if (!Object.keys(clusters).length) throw new Error("no clusters found under clusters/");
   console.log(`[collect] clusters: ${Object.keys(clusters).join(", ")}`);
   const suites = await loadSuites();
