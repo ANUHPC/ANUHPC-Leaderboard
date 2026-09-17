@@ -138,3 +138,47 @@ test('a registered case declared ranked: false is verified but not ranked', asyn
   assert.equal(r.ranking.reason, 'Reference case — compared by settings, not ranked');
   assert.equal(r.metric.value, 0.42);      // the measurement still stands
 });
+
+test('resolved settings, explicit false flags and provenance survive collection', async () => {
+  const r = await fixture({ 'simulation.inp': '&user_inputs\nm = 239\nn = 59\np = 0\nmodel_eqns = 2\nnum_fluids = 2\nsurface_tension = F\nviscous = F\nbubbles_euler = T\nriemann_solver = 5\n&end/\n' });
+  assert.equal(r.parameters.grid, '240 × 60');
+  assert.equal(r.parameters.cells, 14400);
+  assert.equal(r.parameters.surfaceTension, false);
+  assert.equal(r.parameters.viscous, false);
+  assert.equal(r.parameters.bubbles, true);
+  assert.equal(r.parameters.equations, null); // bubble model adds equations
+  assert.equal(r.parameters.riemann, 'Lax–Friedrichs');
+  assert.equal(r.verification.kind, 'benchmark');
+  assert.ok(r.rawFiles.includes('simulation.inp'));
+  assert.equal((await fixture()).parameters, null);
+});
+
+test('custom successful execution is distinct from unverified provenance', async () => {
+  const custom = JSON.stringify({case_source:'custom', case_sha256:createHash('sha256').update(caseRaw).digest('hex'), mfc_sha:'e2f0e2671234'});
+  assert.equal((await fixture({'mfc-provenance.json':custom})).verification.kind, 'custom');
+  assert.equal((await fixture({'mfc-provenance.json':custom, 'case.py':'tampered'})).verification.kind, 'unverified');
+});
+
+test('only complete verified periodic returns become convergence points; refinement shares a series', async () => {
+  const run = async (n, overrides = {}) => {
+    const data = {
+      'case.py': caseRaw,
+      'job.yml': `case: advection_1d\nargs: ["-N", "${n}", "--cfl", "0.025"]\n`,
+      'simulation.inp': `m = ${n-1}\nn = 0\np = 0\ndt = ${1/n}\nt_step_start = 0\nt_step_stop = ${n}\nweno_order = 5\n`,
+      'time_data.dat':'1 0.01 1',
+      'mfc-status.yml':'state: COMPLETED',
+      'mfc-provenance.json':JSON.stringify({case_source:'pinned',case:'advection_1d',mfc_sha:'e2f0e2671234',case_sha256:createHash('sha256').update(caseRaw).digest('hex')}),
+      'convergence.json':JSON.stringify({N:n,first:0,last:n,L1:1e-6,L2:2e-6,Linf:3e-6,kind:'cons',variable:5}),
+      ...overrides,
+    };
+    return collect({suite:{source:{pin:'e2f0e267'},cases:[{slug:'advection_1d',ranked:false}]},files:Object.keys(data),read:async f=>data[f]??null});
+  };
+  const a = await run(32), b = await run(64);
+  assert.equal(a.verification.kind, 'study');
+  assert.equal(a.ranking.eligible, false);
+  assert.equal(a.convergence.series, b.convergence.series);
+  assert.equal((await run(32, {'convergence.json':'{"N":16}'})).convergence, null);
+  assert.equal((await run(32, {'mfc-status.yml':'state: FAILED'})).convergence, null);
+  const changed = await run(32, {'job.yml':'case: advection_1d\nargs: ["-N", "32", "--cfl", "0.4"]'});
+  assert.notEqual(changed.convergence.series, a.convergence.series);
+});

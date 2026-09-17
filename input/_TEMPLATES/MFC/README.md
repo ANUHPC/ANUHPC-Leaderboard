@@ -15,13 +15,29 @@ Committing templates under `input/_TEMPLATES/` does not submit a simulation.
 You need repository write access, or a PR that a maintainer can merge. You do
 not need SSH, a Slurm account, compilers, or MFC installed on your laptop.
 
+## SCC26 practice tasks
+
+Start with the task, then choose a run:
+
+| Task | How to run | What to examine |
+|---|---|---|
+| [1 — build and test](practice-task1/README.md) | Cluster test helper, CPU and GPU | Pass/fail and test logs |
+| [2 — convergence](practice-task2/README.md) | GitHub, one `job.yml` per grid and WENO order | Measured error versus resolution and execution cost |
+| [3 — shock and droplet](practice-problem3/README.md) | GitHub, `job.yml` and custom `case.py` | Physics settings, seconds per step and flow visualisation |
+| [4 — remote ParaView](practice-task4/README.md) | Cluster server, SSH tunnel and laptop client | Full fields rendered remotely |
+
+The [MFC page](https://anuhpc.github.io/ANUHPC-Leaderboard/#/MFC) opens with
+run settings and cost. Select up to four runs to compare them, or open
+**Convergence** to plot measured Task 2 errors. Filters can be shared by URL.
+**Benchmarks** is a secondary view for frozen benchmark cases.
+
 ## Choose the files to copy
 
 | Example | Files to submit | Result |
 |---|---|---|
 | Small ranked CPU benchmark | [`job.yml`](job.yml) only | Four CPU ranks, modest problem size |
 | Ranked A100 benchmark | [`gpu/job.yml`](gpu/job.yml) only | Four A100 GPUs on one node |
-| SCC26 PDF, Problem 3: shock–droplet | [`practice-problem3/job.yml`](practice-problem3/job.yml) **and** [`practice-problem3/case.py`](practice-problem3/case.py) | Custom 2D case with Silo data; unranked |
+| SCC26 PDF, Problem 3: shock–droplet | [`practice-problem3/job.yml`](practice-problem3/job.yml) **and** [`practice-problem3/case.py`](practice-problem3/case.py) | Custom 2D study with Silo data and execution provenance |
 
 Copy the selected files, **not this entire tree**. Do not include `run.sh`,
 `sbatch` scripts, binaries, or old results. MFC generates its batch script.

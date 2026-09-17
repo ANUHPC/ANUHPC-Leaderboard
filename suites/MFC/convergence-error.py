@@ -44,6 +44,7 @@ and both are physics rather than mistakes:
 
 import argparse
 import glob
+import json
 import math
 import os
 import re
@@ -101,6 +102,8 @@ def norms(case_dir, var=5, kind="cons"):
         if abs(a - b) > 1e-12 * max(1.0, abs(a)):
             raise RuntimeError(f"{case_dir}: grid differs between steps {first} and {last}")
 
+    if not q0 or not all(math.isfinite(v) for v in x0 + x1 + q0 + q1) or len(set(x0)) != len(x0):
+        raise RuntimeError(f"{case_dir}: empty, nonfinite or duplicate field data")
     d = [b - a for a, b in zip(q0, q1)]
     n = len(d)
     return {
@@ -119,7 +122,10 @@ def main():
     ap.add_argument("--kind", default="cons", choices=["cons", "prim"])
     ap.add_argument("--norm", default="L2", choices=["L1", "L2", "Linf"],
                     help="which norm the order column is computed from")
+    ap.add_argument("--json", action="store_true", help="emit one machine-readable run; use only for a full periodic return")
     args = ap.parse_args()
+    if args.json and len(args.case_dirs) != 1:
+        ap.error("--json requires exactly one case directory")
 
     rows, failed = [], False
     for d in args.case_dirs:
@@ -131,6 +137,10 @@ def main():
     if not rows:
         sys.exit(1)
 
+    if args.json:
+        print(json.dumps({**rows[0], "kind": args.kind, "variable": args.var}, allow_nan=False))
+        return
+
     rows.sort(key=lambda r: r["N"])
     key = args.norm
     print(f"{'N':>6} {'L1':>14} {'L2':>14} {'Linf':>14} {'order(' + key + ')':>13}")
@@ -139,7 +149,7 @@ def main():
     for r in rows:
         # p = log(err_coarse / err_fine) / log(N_fine / N_coarse)
         order = ""
-        if prev and r[key] > 0 and prev[key] > 0:
+        if prev and r["N"] > prev["N"] and r[key] > 0 and prev[key] > 0:
             order = f"{math.log(prev[key] / r[key]) / math.log(r['N'] / prev['N']):13.3f}"
         print(f"{r['N']:>6} {r['L1']:14.6e} {r['L2']:14.6e} {r['Linf']:14.6e} {order:>13}")
         prev = r

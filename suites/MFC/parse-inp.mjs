@@ -22,10 +22,10 @@ export function parseInp(raw) {
     if (!t || t.startsWith("&") || t.startsWith("!")) continue;
     const m = /^([A-Za-z_][\w%()]*)\s*=\s*(.+?)\s*$/.exec(t);
     if (!m) continue;
-    const [, key, rawVal] = m;
+    const key = m[1].toLowerCase(), rawVal = m[2];
     const v = rawVal.replace(/,$/, "").trim();
     // Fortran logicals are bare T and F.
-    if (v === "T" || v === "F") out[key] = v === "T";
+    if (/^(?:\.?true\.?|\.?false\.?|t|f)$/i.test(v)) out[key] = /^(?:\.?true\.?|t)$/i.test(v);
     else if (/^-?\d+$/.test(v)) out[key] = Number(v);
     else if (/^-?(\d+\.?\d*|\.\d+)([eEdD][-+]?\d+)?$/.test(v)) out[key] = Number(v.replace(/[dD]/, "e"));
     else out[key] = v.replace(/^['"]|['"]$/g, "");
@@ -41,29 +41,29 @@ export function parseInp(raw) {
 // index in x, not a count, and nobody tuning a case thinks in those terms.
 export function summarizeInp(inp) {
   if (!inp || typeof inp !== "object") return null;
-  const n = (k) => (Number.isFinite(inp[k]) ? inp[k] : null);
-  const cells = (k) => (n(k) == null ? null : n(k) + 1);
-
-  const nx = cells("m"), ny = cells("n"), nz = cells("p");
-  const dims = [nx, ny, nz].filter((d) => d && d > 1);
-
+  const n = (k) => Number.isFinite(inp[k]) ? inp[k] : null;
+  const flag = (k) => typeof inp[k] === "boolean" ? inp[k] : null;
+  const sizes = ["m", "n", "p"].map(k => n(k) != null && n(k) >= 0 ? n(k) + 1 : null);
+  const completeGrid = sizes.every(v => v != null);
+  const dims = sizes.filter(v => v > 1);
+  // Equation count is derived only for the ordinary 5-equation family.
+  // Advanced models remain unknown rather than receiving the wrong denominator.
+  const simple = n("model_eqns") === 2 && n("num_fluids") > 0 && completeGrid &&
+    !["bubbles_euler", "bubbles_lagrange", "mhd", "igr", "hypoelasticity", "cont_damage", "hyper_cleaning", "chemistry"]
+      .some(k => inp[k] === true) && flag("surface_tension") != null;
   return {
-    // 240 x 60, or 634 x 317 x 317 -- cells, not last indices.
-    grid: dims.length ? dims.join(" x ") : null,
-    cells: dims.length ? dims.reduce((a, b) => a * b, 1) : null,
-    dimensions: dims.length || null,
+    grid: completeGrid && dims.length ? dims.join(" × ") : null,
+    cells: completeGrid ? sizes.reduce((a, b) => a * b, 1) : null,
+    dimensions: completeGrid ? dims.length : null,
     dt: n("dt"),
-    steps: n("t_step_stop"),
-    wenoOrder: n("weno_order"),
-    // MFC spells these as integers in the .inp even when the case.py used a
-    // name, so translate back to the names the documentation uses.
-    riemann: { 1: "HLL", 2: "HLLC", 3: "exact", 4: "HLLD" }[n("riemann_solver")] ?? n("riemann_solver"),
-    timeStepper: n("time_stepper") ? `RK${n("time_stepper")}` : null,
-    modelEqns: n("model_eqns"),
-    numFluids: n("num_fluids"),
-    // The three Task 3 asks you to turn on and off.
-    viscous: inp.viscous === true || Number.isFinite(inp["fluid_pp(1)%Re(1)"]),
-    surfaceTension: inp.surface_tension === true || Number.isFinite(inp.sigma),
-    bubbles: inp.bubbles === true || inp.bubbles_euler === true,
+    steps: n("t_step_stop") != null && n("t_step_start") != null ? n("t_step_stop") - n("t_step_start") : null,
+    wenoOrder: n("weno_order"), wenoEps: n("weno_eps"),
+    riemann: { 1: "HLL", 2: "HLLC", 3: "exact", 4: "HLLD", 5: "Lax–Friedrichs" }[n("riemann_solver")] ?? n("riemann_solver"),
+    timeStepper: {1: "RK1", 2: "RK2", 3: "RK3"}[n("time_stepper")] ?? n("time_stepper"),
+    modelEqns: n("model_eqns"), numFluids: n("num_fluids"),
+    viscous: flag("viscous"), surfaceTension: flag("surface_tension"),
+    bubbles: flag("bubbles_euler") ?? flag("bubbles"),
+    equations: simple ? 2 * n("num_fluids") + dims.length + 1 + Number(inp.surface_tension) : null,
+    equationSource: simple ? "derived from resolved 5-equation model settings" : null,
   };
 }

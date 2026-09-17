@@ -74,6 +74,7 @@ artifacts:
   # These were dropped as clutter when this manifest was written, which was a
   # mistake: comparing runs of one case at different settings is the point of
   # the exercise, and without them a run does not record its own settings.
+  convergence.json: [convergence.json] # measured periodic-return error for Task 2
   simulation.inp:  [simulation.inp]
   pre_process.inp: [pre_process.inp]
 

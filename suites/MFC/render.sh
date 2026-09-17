@@ -332,3 +332,10 @@ if [ -n "$PREVIEW" ]; then
   ./mfc.sh viz "$JOB_DIR" --var "$PREVIEW" --step all --mp4 --fps 20 --output "$JOB_DIR"
   ./mfc.sh viz "$JOB_DIR" --var "$PREVIEW" --step last --png --output "$JOB_DIR"
 fi
+
+# Measure the registered one-period advection case before field data is left
+# on cluster storage. Custom simulations need their own exact solution.
+if [ "$CASE" = advection_1d ] && [ "$CASE_SOURCE" = pinned ]; then
+  python3 "$REPO/suites/MFC/convergence-error.py" "$JOB_DIR" --json > "$JOB_DIR/convergence.json.tmp"
+  mv "$JOB_DIR/convergence.json.tmp" "$JOB_DIR/convergence.json"
+fi

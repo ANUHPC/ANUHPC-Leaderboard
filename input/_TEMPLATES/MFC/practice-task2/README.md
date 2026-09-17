@@ -11,7 +11,7 @@ is therefore the initial condition, and whatever differs is purely the
 scheme's accumulated error:
 
 ```
-L2 = sqrt( mean( q(T) - q(0) )^2 )
+L2 = sqrt( mean( (q(T) - q(0))^2 ) )
 ```
 
 Halve the grid spacing and a *p*-th order scheme should cut that error by
@@ -42,9 +42,24 @@ args: ["-N", "128", "--order", "5"]
 
 ## Read the result
 
+Open the website's **Convergence** view and filter by your name or run names.
+New registered `advection_1d` runs automatically publish `convergence.json`
+with measured L1, L2 and L∞ errors. Different CFL arguments, solver settings,
+clusters and hardware form separate series. Repeated resolutions are shown
+without an order estimate until you filter to one sweep.
+
+Raw fields stay on Xenon; they are not copied into GitHub. If you are working
+in the full run directories on the cluster, the equivalent command is:
+
 ```bash
-python3 suites/MFC/convergence-error.py output/xenon/MFC/<you>/task2-n*-weno5
+python3 suites/MFC/convergence-error.py /scratch/jobs/<run>/.../task2-n*-weno5
 ```
+
+Use the actual staging path from the Actions log. The committed
+`output/xenon/MFC/<you>/<run>/convergence.json` contains the small error report;
+`simulation.inp` contains the settings actually passed to MFC. Example measured
+results from the initial cluster study follow (not automatically imported as
+website results):
 
 ```
      N             L1             L2           Linf     order(L2)

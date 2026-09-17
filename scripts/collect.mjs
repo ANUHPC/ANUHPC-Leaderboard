@@ -167,6 +167,9 @@ async function processSuite(suite, index, clusters, clusterName) {
         result = {
           metric: r.metric ?? null,
           secondary: r.secondary ?? [],
+          parameters: r.parameters ?? null,
+          verification: r.verification ?? null,
+          convergence: r.convergence ?? null,
           config: r.config ?? {},
           provenance: r.provenance ?? {},
           status: r.status ?? "ok",
@@ -265,6 +268,9 @@ async function processSuite(suite, index, clusters, clusterName) {
         const def = (suite.cfg.secondary || []).find((d) => d.key === s.key);
         return { ...s, unit: def?.unit ?? "", label: def?.label ?? s.key, direction: def?.direction ?? "none" };
       }),
+      parameters: result.parameters ?? null,
+      verification: result.verification ?? null,
+      convergence: result.convergence ?? null,
       config: result.config || {},
       provenance: result.provenance || {},
       status: result.status || "ok",
@@ -298,6 +304,9 @@ async function processSuite(suite, index, clusters, clusterName) {
       submitter: runJson.submitter,
       metric,
       secondary: runJson.secondary,
+      parameters: runJson.parameters,
+      verification: runJson.verification,
+      convergence: runJson.convergence,
       config: runJson.config,
       status: runJson.status,
       ranking: runJson.ranking,

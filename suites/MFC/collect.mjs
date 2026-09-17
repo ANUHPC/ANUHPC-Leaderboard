@@ -241,9 +241,33 @@ export async function collect(ctx) {
     group: `${job?.case ?? "custom"}/${job?.build?.gpu === "acc" ? "GPU" : "CPU"}`,
   };
 
+  const resolved = inpRaw ? parseInp(inpRaw) : null;
+  const customVerified = successful && provenance.case_source === "custom" &&
+    provenance.case_sha256 === ranHash && Boolean(provenance.mfc_sha?.startsWith(suite?.source?.pin ?? "INVALID"));
+  const verification = { kind: successful && pinned ? (ranks ? "benchmark" : "study") :
+    customVerified ? "custom" : "unverified", reason: customVerified ?
+    "Successful run; staged custom case hash and MFC source pin match. Physics is user supplied." : ranking.reason };
+  let convergence = null;
+  try {
+    const c = JSON.parse(await read("convergence.json"));
+    if (successful && pinned && job.case === "advection_1d" && resolved && c.kind === "cons" && c.variable === 5 &&
+        c.N === resolved.m + 1 && c.first === 0 && c.last === resolved.t_step_stop &&
+        [c.L1, c.L2, c.Linf].every(v => Number.isFinite(v) && v >= 0)) {
+      // Keep every resolved setting except refinement coordinates in the series
+      // identity. Include all case arguments except N: changing CFL or limiter
+      // must never connect two points into a misleading observed-order line.
+      const settings = Object.fromEntries(Object.entries(resolved).filter(([k]) =>
+        !["m", "dt", "t_step_start", "t_step_stop", "t_step_save"].includes(k)).sort(([a], [b]) => a.localeCompare(b)));
+      const args = (job.args ?? []).filter((v, i, a) => v !== "-N" && a[i - 1] !== "-N" && !String(v).startsWith("-N="));
+      convergence = { ...c, series: createHash("sha256").update(JSON.stringify([ranHash, settings, args])).digest("hex") };
+    }
+  } catch { /* older or incomplete runs have no measured error */ }
+
   return {
     metric: Number.isFinite(grind) && grind > 0 ? { key: "grind", value: grind } : null,
     ranking,
+    verification,
+    convergence,
     // When the run actually happened. MFC writes no date of its own -- its
     // banner's Start-date and End-date both hold a time of day -- so
     // submit-jobs.sh stamps this alongside the completion state. Runs from
@@ -263,6 +287,7 @@ export async function collect(ctx) {
     ].filter(Boolean),
     config: {
       case: job?.case ?? null,
+      args: job?.args ?? [],
       nodes: job?.resources?.nodes ?? null,
       tasks_per_node: job?.resources?.tasks_per_node ?? null,
       ranks: last?.ranks ?? null,
@@ -301,6 +326,6 @@ export async function collect(ctx) {
     },
     rawFiles: [caseName, sumName, timeName, outName, errName, jobName, shName,
       ...files.filter((f) => /\.(png|mp4)$/i.test(f)),
-      ...["mfc-provenance.json", "mfc-status.yml"].filter((f) => files.includes(f))].filter(Boolean),
+      ...["simulation.inp", "pre_process.inp", "convergence.json", "mfc-provenance.json", "mfc-status.yml"].filter((f) => files.includes(f))].filter(Boolean),
   };
 }
