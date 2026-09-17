@@ -21,9 +21,25 @@ jobs:
     steps:
       - name: Reject unauthorized actors
         run: |
+          set -euo pipefail
           echo "Authorized actor: ${{ github.actor }}"
           echo "Event: ${{ github.event_name }}"
           echo "Ref: ${{ github.ref }}"
+
+      - name: Refuse to run on a non-Raijin runner
+        # This workflow is Raijin-only: it copies a Raijin-specific xhpl path and
+        # submits scripts that name hpc-0N nodes. It has runs-on: self-hosted with
+        # no label, so GitHub can hand it to ANY self-hosted runner — including
+        # Xenon's. Without this guard it would run there and fail messily.
+        run: |
+          set -euo pipefail
+          me="$(hostname -s)"
+          case "$me" in
+            hpc-*) echo "ok: $me is a Raijin node" ;;
+            *) echo "refusing: this workflow is Raijin-only but landed on $me"
+               echo "Label Raijin's runner 'raijin' and use submit-raijin.yml instead."
+               exit 1 ;;
+          esac
 
       - name: Checkout repository
         uses: actions/checkout@v4

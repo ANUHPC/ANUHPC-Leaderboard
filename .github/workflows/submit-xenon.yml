@@ -1,0 +1,125 @@
+name: Submit jobs (xenon)
+
+# Fires only on a push under input/xenon/, and runs only on a runner labelled
+# "xenon". Cluster is the first path segment, so routing needs no file parsing
+# and a push can never reach the wrong machine.
+#
+# The runner MUST carry the "xenon" label or this never matches.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "input/xenon/**"
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Suite to submit (HPL, MFC, or all)"
+        required: false
+        default: "all"
+
+permissions:
+  contents: write
+
+concurrency:
+  # One submission at a time per cluster. Two overlapping runs would fight over
+  # the same job directories.
+  group: submit-xenon
+  cancel-in-progress: false
+
+env:
+  CLUSTER: xenon
+  SCRATCH_BASE: /scratch/jobs
+
+jobs:
+  submit:
+    runs-on: [self-hosted, xenon]
+    timeout-minutes: 480
+    steps:
+      - name: Confirm this runner belongs to $CLUSTER
+        # Labels are set at registration and can drift. Verify against the node
+        # list in clusters/<cluster>/partitions.yml before touching anything.
+        run: |
+          set -euo pipefail
+          echo "runner host: $(hostname -s), expecting a $CLUSTER node"
+
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1, ref: main }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
+      - name: Verify runner is on the right cluster
+        run: |
+          set -euo pipefail
+          node -e '
+            const fs=require("fs"), os=require("os");
+            const {parseYaml}=await import("./scripts/lib/yaml.mjs");
+            const c=parseYaml(fs.readFileSync("clusters/"+process.env.CLUSTER+"/partitions.yml","utf8"));
+            const me=os.hostname().split(".")[0];
+            const nodes=Object.keys(c.nodes||{});
+            if (!nodes.includes(me)) {
+              console.error(`refusing: this runner is ${me}, which is not a ${process.env.CLUSTER} node (${nodes.join(", ")})`);
+              process.exit(1);
+            }
+            console.log(`ok: ${me} is a ${process.env.CLUSTER} node`);
+          '
+
+      - name: Validate
+        run: node scripts/validate-job.mjs
+
+      - name: Stage, submit, wait
+        run: |
+          set -euo pipefail
+          STAGE="${SCRATCH_BASE}/${GITHUB_RUN_ID}"
+          mkdir -p "$STAGE"; echo "STAGE=$STAGE" >> "$GITHUB_ENV"
+          n=0
+          for jobdir in input/$CLUSTER/*/*/*/; do
+            [ -d "$jobdir" ] || continue
+            s="$(echo "$jobdir" | cut -d/ -f3)"
+            [ "${{ inputs.suite }}" = "all" ] || [ -z "${{ inputs.suite }}" ] || [ "${{ inputs.suite }}" = "$s" ] || continue
+            dest="$STAGE/${jobdir#input/$CLUSTER/}"
+            mkdir -p "$dest"; cp -r "$jobdir". "$dest"/
+            echo "staged ${jobdir#input/$CLUSTER/}"; n=$((n+1))
+          done
+          echo "STAGED=$n" >> "$GITHUB_ENV"
+          [ "$n" -gt 0 ] || { echo "no jobs for $CLUSTER"; exit 0; }
+          bash scripts/submit-jobs.sh "$STAGE" "$CLUSTER" "$GITHUB_RUN_ID"
+
+      - name: Harvest
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -d "${STAGE:-}" ] || exit 0
+          for jobdir in "$STAGE"/*/*/*/; do
+            [ -d "$jobdir" ] || continue
+            dest="output/$CLUSTER/${jobdir#$STAGE/}"
+            mkdir -p "$dest"
+            for f in "$jobdir"*; do
+              [ -f "$f" ] || continue
+              case "$(basename "$f")" in xhpl|*.o|*.mod) continue ;; esac
+              cp "$f" "$dest"/
+            done
+            echo "harvested ${jobdir#$STAGE/}"
+          done
+
+      - name: Commit results
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --prune origin main && git checkout -B main && git pull --no-rebase --no-edit origin main
+          # Results only. The input spec stays put so every run is reproducible.
+          git add -A output/$CLUSTER/
+          if git diff --cached --quiet; then echo "nothing to commit"; else
+            git commit -m "$CLUSTER results from run ${GITHUB_RUN_ID} [skip ci]"
+            for i in 1 2 3; do git push origin main && break; git pull --no-rebase --no-edit origin main; done
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Clean scratch
+        if: always()
+        run: rm -rf "${STAGE:-/nonexistent}"

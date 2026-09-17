@@ -1,0 +1,82 @@
+# Raijin — the cluster the leaderboard was originally built for.
+#
+# Not reachable from Xenon: no DNS entry, no route, nothing in known_hosts.
+# It is driven entirely by its own self-hosted GitHub Actions runner, which is
+# why jobs are routed by runner label rather than by ssh.
+#
+# The specs below are DERIVED from the 137 committed runs, not read off the
+# machines. MPI binding reports in output/ show 2 sockets with core indices
+# 0-15 and 2 hardware threads per core; run.sh files use --partition=batch and
+# up to --ntasks-per-node=16. Memory is inferred from the largest completed
+# run (N=207168 over 6 nodes needs ~57 GB/node for the matrix alone).
+# Correct these against the real machines when convenient.
+
+name: raijin
+label: Raijin
+description: 7-node CPU cluster (hpc-01..hpc-07), the original leaderboard target
+runner_label: raijin
+status: active
+derived: true            # specs inferred from committed output, not measured
+
+nodes:
+  # Expanded per node rather than using YAML anchors: the collector ships a
+  # deliberately minimal YAML reader (no npm install on the website runner).
+  hpc-01:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+  hpc-02:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+  hpc-03:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+  hpc-04:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+  hpc-05:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+  hpc-06:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+  hpc-07:
+    sockets: 2
+    cores_per_socket: 8
+    threads_per_core: 2
+    cpus: 32
+    memory_mb: null      # unknown; >= ~64000 based on the largest run
+    gpus: 0
+partitions:
+  batch:
+    default: true
+    nodes: [hpc-01, hpc-02, hpc-03, hpc-04, hpc-05, hpc-06, hpc-07]
+    max_nodes: 7
+    max_walltime: "24:00:00"
+
+filesystems:
+  # Raijin predates the /apps layout used on Xenon. Left unset rather than guessed.
+  scratch: null

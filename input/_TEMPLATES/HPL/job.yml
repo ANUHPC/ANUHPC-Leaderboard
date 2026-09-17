@@ -1,0 +1,23 @@
+# HPL leaderboard entry.
+#
+# Copy this whole directory to  input/<cluster>/HPL/<your-name>/<run-name>/
+# and edit. It already contains a working HPL.dat and run.sh to start from.
+# Both are REQUIRED: run.sh is where you control ranks, threads and binding,
+# which is most of the tuning.
+#
+# HPL is scored on Rmax in GFLOP/s, and HIGHER IS BETTER.
+# Choosing N, NB and the P x Q grid is the whole exercise, so nothing is pinned.
+
+suite: HPL
+
+# NOTE: the cluster is NOT set here. It comes from the directory you copy this
+# into — input/<cluster>/<suite>/<your-name>/<run-name>/. Filing a job under
+# input/xenon/ is what routes it to the Xenon runner.
+
+
+resources:
+  partition: batch       # raijin: batch  |  xenon: cpu, gpu, all
+  nodes: 3
+  tasks_per_node: 16
+  cpus_per_task: 1
+  walltime: "02:00:00"
