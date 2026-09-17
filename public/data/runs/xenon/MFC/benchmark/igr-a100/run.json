@@ -5,13 +5,13 @@
   "run": "igr-a100",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-09-17T08:50:06Z",
+  "date": "2026-09-17T12:07:00Z",
   "dateSource": "git",
-  "submittedAt": "2026-09-17T05:38:02Z",
+  "submittedAt": "2026-09-17T12:07:00Z",
   "submitter": {
     "name": "benchmark",
     "house": true,
-    "by": "Codex"
+    "by": "github-actions[bot]"
   },
   "metric": {
     "key": "grind",

@@ -7,11 +7,11 @@
   "clusterSource": "path (confirmed by output)",
   "date": "2026-09-03T06:05:45.000Z",
   "dateSource": "run",
-  "submittedAt": "2026-09-03T06:07:11Z",
+  "submittedAt": "2026-09-17T12:07:00Z",
   "submitter": {
     "name": "baseline",
     "house": true,
-    "by": "Claude"
+    "by": "github-actions[bot]"
   },
   "metric": {
     "key": "gflops",
