@@ -1,11 +1,12 @@
 # What the Xenon cluster actually offers. Verified against sinfo and
-# /etc/slurm/slurm.conf on 2026-09-03. Keep in step with slurm.conf: a job that
+# /etc/slurm/slurm.conf on 2026-09-17. Keep in step with slurm.conf: a job that
 # asks for something not listed here is rejected at pull-request time instead of
 # failing after it has already queued.
 #
-# NOTE: cpu-node1 is the Slurm controller and is deliberately NOT in any
-# partition, so its 72 cores are not schedulable. If that changes, add it here
-# and to slurm.conf together.
+# cores_available is the number a JOB can have, which is not cores_total.
+# cpu-node1 runs slurmctld, so CoreSpecCount=2 holds back two cores for the
+# daemon; asking for all 36 there gets "Requested node configuration is not
+# available" from sbatch, before anything queues.
 
 name: xenon
 label: Xenon
@@ -15,11 +16,29 @@ runner_label: xenon      # GitHub Actions: runs-on [self-hosted, xenon]
 status: active
 
 nodes:
+  cpu-node1:
+    # The controller, and since 2026-09-17 also a compute node.
+    sockets: 2
+    cores_per_socket: 18
+    threads_per_core: 2
+    cpus: 72
+    cores_total: 36
+    cores_reserved: 2          # CoreSpecCount, kept for slurmctld
+    cores_available: 34
+    memory_mb: 500000
+    gpus: 0
   cpu-node2:
     sockets: 2
     cores_per_socket: 18
     threads_per_core: 2
     cpus: 72
+    cores_total: 36
+    # CoreSpecCount=2 was applied here too, for symmetry with the controller.
+    # It costs 2 cores on the node that does the benchmarking and protects
+    # nothing (no slurmctld here) -- worth dropping back to 0 if the two
+    # cpu nodes do not need to be identical.
+    cores_reserved: 2
+    cores_available: 34
     memory_mb: 500000
     gpus: 0
   gpu-node1:
@@ -42,9 +61,11 @@ nodes:
 partitions:
   cpu:
     default: true
-    nodes: [cpu-node2]
-    max_nodes: 1
+    nodes: [cpu-node1, cpu-node2]
+    max_nodes: 2
     max_walltime: "04:00:00"
+    # Both cpu nodes currently offer 34 cores to jobs.
+    cores_per_node: 34
   gpu:
     default: false
     nodes: [gpu-node1, gpu-node2]
@@ -54,8 +75,8 @@ partitions:
     exclusive: true
   all:
     default: false
-    nodes: [cpu-node2, gpu-node1, gpu-node2]
-    max_nodes: 3
+    nodes: [cpu-node1, cpu-node2, gpu-node1, gpu-node2]
+    max_nodes: 4
     max_walltime: "04:00:00"
 
 filesystems:

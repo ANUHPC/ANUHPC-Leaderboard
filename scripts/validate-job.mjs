@@ -100,7 +100,10 @@ async function main() {
       // both invites them to disagree. None of Raijin's 137 runs has one.
       // MFC is different: its job.yml names which pinned case to run, which
       // exists nowhere else, so that stays required via suite.yml.
-      if (suiteName === "HPL" || suiteName === "HPL_NVIDIA") continue;
+      if (suiteName === "HPL" || suiteName === "HPL_NVIDIA") {
+        await checkSbatch(rel, where, files, clusters[pathCluster], pathCluster);
+        continue;
+      }
       err(where, "missing job.yml"); continue;
     }
 
@@ -207,3 +210,73 @@ async function main() {
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
+
+// HPL carries its resources in run.sh's #SBATCH lines rather than a job.yml,
+// so the checks that job.yml gets have to read the script instead. Catching a
+// bad core count here is the difference between a clear message on the pull
+// request and "Requested node configuration is not available" from sbatch,
+// after which the workflow used to go green having submitted nothing.
+async function checkSbatch(rel, where, files, cluster, cname) {
+  const name = files.find((f) => /^run(\.[a-z0-9_-]+)?\.sh$/i.test(f));
+  if (!name) { err(where, `no run.sh (or run.<cluster>.sh) — nothing to submit`); return; }
+
+  // run.raijin.sh sitting in an input/xenon/ directory is always a mistake.
+  const m = /^run\.([a-z0-9_-]+)\.sh$/i.exec(name);
+  if (m && m[1].toLowerCase() !== cname.toLowerCase()) {
+    err(where, `"${name}" is another cluster's script but this job is under input/${cname}/`);
+    return;
+  }
+
+  let text = "";
+  try { text = await fs.readFile(path.join(CWD, rel, name), "utf8"); }
+  catch (e) { err(where, `${name} is unreadable (${e.message})`); return; }
+
+  const directive = (k) => {
+    const re = new RegExp(`^\\s*#SBATCH\\s+--${k}[= ]\\s*([^\\s#]+)`, "im");
+    const mm = re.exec(text);
+    return mm ? mm[1] : null;
+  };
+
+  if (/CHANGE-ME/.test(text)) {
+    warn(where, `${name} still has the template placeholder in --job-name; give the run a real name`);
+  }
+
+  const pname = directive("partition");
+  if (!pname) { err(where, `${name} has no #SBATCH --partition`); return; }
+  const part = cluster?.partitions?.[pname];
+  if (!part) {
+    err(where, `${name} asks for partition "${pname}", which does not exist on ${cname} (have: ${Object.keys(cluster?.partitions || {}).join(", ")})`);
+    return;
+  }
+
+  const nodes = Number(directive("nodes") || 1);
+  if (part.max_nodes && nodes > part.max_nodes) {
+    err(where, `${name} asks for ${nodes} nodes but partition "${pname}" has ${part.max_nodes}`);
+  }
+
+  // The real trap: cores a job may have is cores_total minus CoreSpecCount.
+  const tasks = Number(directive("ntasks-per-node") || 0);
+  const cpt   = Number(directive("cpus-per-task") || 1);
+  if (tasks > 0) {
+    const want = tasks * cpt;
+    // A single-node job needs ONE node that fits, so the ceiling is the
+    // largest in the partition -- Slurm simply places it there. A multi-node
+    // job has to fit every node it lands on, so the ceiling is the smallest.
+    const names = part.nodes || [];
+    const avails = names
+      .map((n) => [n, cluster?.nodes?.[n]?.cores_available])
+      .filter(([, a]) => typeof a === "number");
+    let limit = Infinity, limiting = null;
+    if (avails.length) {
+      const pick = nodes > 1
+        ? avails.reduce((a, b) => (b[1] < a[1] ? b : a))
+        : avails.reduce((a, b) => (b[1] > a[1] ? b : a));
+      limiting = pick[0]; limit = pick[1];
+    }
+    if (Number.isFinite(limit) && want > limit) {
+      err(where, `${name} asks for ${tasks} x ${cpt} = ${want} cores per node, but ${limiting} offers ${limit} to jobs` +
+                 (cluster.nodes[limiting]?.cores_reserved ? ` (${cluster.nodes[limiting].cores_reserved} reserved for system use)` : "") +
+                 ` — sbatch will refuse this before it queues`);
+    }
+  }
+}

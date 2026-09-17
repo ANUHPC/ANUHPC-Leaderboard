@@ -23,6 +23,10 @@ POLL="${POLL_INTERVAL:-30}"
 SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/null}"
 
 joblist="$STAGE/.joblist"; : > "$joblist"
+# Jobs the scheduler refused. A run that stages work and submits none of it
+# must not report success -- that is how a broken template stayed green while
+# every student's job silently went nowhere.
+rejected=0
 shopt -s nullglob
 
 # ---------------------------------------------------------------- helpers ---
@@ -132,6 +136,14 @@ for jobdir in "$STAGE"/*/*/*/; do
         echo "  submitted $label -> job $jid"
       else
         gh_error "$label: sbatch refused: $jid"
+        # "Requested node configuration is not available" almost always means
+        # the script asks for more cores than a node actually offers. Cores
+        # reserved with CoreSpecCount do not count towards a job.
+        case "$jid" in
+          *"node configuration is not available"*)
+            gh_error "$label: check #SBATCH ntasks-per-node x cpus-per-task against 'scontrol show node' (CPUTot minus CoreSpecCount)" ;;
+        esac
+        rejected=$((rejected+1))
       fi
       ;;
     MFC)
@@ -142,6 +154,7 @@ for jobdir in "$STAGE"/*/*/*/; do
         echo "  submitted $label"
       else
         gh_error "$label: MFC submit failed"
+        rejected=$((rejected+1))
       fi
       ;;
     *) gh_warn "$label: no submit path for suite $suite" ;;
@@ -150,6 +163,10 @@ done
 endgroup
 
 if [ ! -s "$joblist" ]; then
+  if [ "$rejected" -gt 0 ]; then
+    gh_error "$rejected job(s) were staged but the scheduler refused every one — nothing ran"
+    exit 1
+  fi
   echo "Nothing queued via sbatch."
   exit 0
 fi

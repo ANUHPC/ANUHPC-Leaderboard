@@ -13,8 +13,19 @@
 #SBATCH --exclusive
 #SBATCH --hint=nomultithread
 
-# Partitions: cpu (cpu-node2, 72 threads) | gpu (2 x 4 A100) | all
-# ntasks-per-node x cpus-per-task must equal the physical cores you want.
+# Partitions: cpu (cpu-node1 + cpu-node2) | gpu (2 x 4 A100) | all
+#
+# ntasks-per-node x cpus-per-task must be <= the PHYSICAL cores a node offers
+# to jobs, which is not the same as the cores it has:
+#
+#     cpu-node2   36 physical, 36 to jobs     <- 4 x 9 fits
+#     cpu-node1   36 physical, 34 to jobs     <- 2 cores reserved for slurmctld
+#
+# So a SINGLE-node job can use 36, but a TWO-node job must fit the smaller
+# node: use 2 x 17 = 34, or 4 x 8 = 32. Ask for more and sbatch refuses the
+# whole job up front with "Requested node configuration is not available".
+# Check with: scontrol show node cpu-node1 | grep -E "CPUTot|CoreSpecCount"
+#
 # --hint=nomultithread keeps HPL off the SMT siblings; HPL gains nothing from
 # them and loses to the cache contention.
 
