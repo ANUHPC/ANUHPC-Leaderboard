@@ -50,6 +50,27 @@ jobs:
       - name: Verify runner is on the right cluster
         run: node scripts/verify-runner-cluster.mjs "$CLUSTER"
 
+      - name: Verify the runner account resolves cluster-wide
+        # Slurm resolves the submitting user on the controller and on every
+        # compute node. An account that exists only where the runner lives makes
+        # jobs requeue forever with Reason=BeginTime and no output at all.
+        run: |
+          set -euo pipefail
+          me="$(id -un)"; uid="$(id -u)"
+          echo "runner account: $me ($uid)"
+          bad=0
+          for n in $(sinfo -h -o '%N' | tr ',' ' ' | tr ' ' '\n' | sort -u) $(scontrol show config 2>/dev/null | awk -F= '/SlurmctldHost/{print $2}' | tr -d ' []0123456789'); do
+            [ -n "$n" ] || continue
+            got="$(timeout 8 ssh -o BatchMode=yes -o ConnectTimeout=5 "$n" "id -u $me 2>/dev/null" 2>/dev/null || echo MISSING)"
+            if [ "$got" != "$uid" ]; then
+              echo "::error::$me is $got on $n but $uid here — Slurm jobs will not launch"
+              bad=1
+            else
+              echo "  ok: $n has $me = $uid"
+            fi
+          done
+          [ "$bad" -eq 0 ] || exit 1
+
       - name: Validate
         run: node scripts/validate-job.mjs
 
