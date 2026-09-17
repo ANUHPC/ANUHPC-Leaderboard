@@ -112,8 +112,27 @@ if [ -n "$PIN" ] && [ "$PIN" != "null" ]; then
 fi
 echo "render: $ARCH tree $TREE @ ${HEAD:0:12}"
 
+# --- case optimization, opt-in --------------------------------------------
+#
+# MFC's own help calls this "10x faster with case optimization!". It bakes
+# parameters the solver would otherwise read at run time -- WENO order,
+# bubble model, number of fluids -- into simulation as compile-time
+# constants, which lets the compiler unroll and specialise.
+#
+# This was rejected here on the grounds that it "would rewrite the shared
+# tree every other job reads". That was wrong. It changes only the generated
+# source for simulation (case.py __get_sim_fpp), and build.py hashes that
+# generated source into the install path, so a case-optimized build lands in
+# its OWN directory beside the others and replaces nothing -- the same
+# property that makes building an analytic-IC case safe.
+#
+# The real cost is time, so it stays opt-in: every distinct parameter set
+# needs its own compile, roughly twelve minutes. For a single fast run that
+# is worth it; for a sweep of twenty points it is twenty compiles.
+CASE_OPT_ARGS=()
 if [ "$COPT" = "true" ]; then
-  die "case_optimization is not available yet: it recompiles MFC with the case baked in, which would rewrite the shared tree every other job reads. It needs a private per-job checkout, and staging one costs ~5 minutes of NFS metadata here."
+  CASE_OPT_ARGS=(--case-optimization)
+  echo "render: case optimization ON — simulation will be compiled for these exact parameters (first run adds ~12 min)"
 fi
 
 # --- arguments for the case itself -----------------------------------------
@@ -248,6 +267,8 @@ set -x
   --name "mfc-$(basename "$JOB_DIR")" \
   -o "$JOB_DIR/summary.yaml" \
   --clean \
+  -j 8 \
+  ${CASE_OPT_ARGS[0]+"${CASE_OPT_ARGS[@]}"} \
   --gpu "$MFC_GPU_MODE" \
   --wait \
   -- "${CASE_ARGS[@]}"

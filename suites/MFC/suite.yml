@@ -148,12 +148,13 @@ tuning:
   defaults:
     gbpp: 16               # GB per rank; sets the problem size
     gpu: none
-  unsupported:
-    # Recompiles MFC with the case baked in. Jobs share one checkout per
-    # architecture, so a case-optimized build would rewrite the tree every
-    # other job reads from. It needs a private checkout per job, and staging
-    # one costs about five minutes of NFS metadata here. render.sh rejects it
-    # with that explanation rather than silently ignoring the field.
+  # Opt-in, because it costs a compile rather than because it is unsafe.
+  # MFC's own help calls it "10x faster with case optimization": it bakes
+  # weno_order, the bubble model and similar into simulation as compile-time
+  # constants. It was listed as unsupported here on the grounds that it would
+  # rewrite the shared tree, which was wrong -- build.py hashes the generated
+  # source into the install path, so the build lands in its own directory.
+  opt_in:
     - case_optimization
 
 clusters: [xenon]   # MFC needs a Fortran/MPI toolchain; only Xenon has one being built.

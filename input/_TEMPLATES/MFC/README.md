@@ -82,6 +82,7 @@ retained MFC jobs**, so use a new directory for an ordinary experiment.
 | `build.gpu` | `none` for CPU execution, `acc` for NVIDIA OpenACC |
 | `build.toolchain` | `gcc-ompi5` with `none`; `nvhpc-acc` with `acc` |
 | `tuning.gbpp` | Positive integer sizing parameter for pinned benchmarks; start with `1` on CPU or `16` on A100 |
+| `args` | Options passed to your `case.py`, one list entry per argument: `args: ["-N", "128", "--order", "5"]` |
 
 Use up to 36 CPU ranks on one CPU node, or up to 34 per node on two CPU
 nodes (cpu-node1 reserves two cores). A GPU node has four A100-SXM4-40GB
@@ -93,11 +94,49 @@ small case. Decomposition must leave enough cells in each direction.
 actual memory use. Most pinned cases use about 500,000 cells per rank per GB.
 Custom cases set their own grid in `case.py`; `gbpp` is not passed to them.
 
+## Sweeping a parameter with `args`
+
+An MFC case is a Python program, and many take options. The 1D convergence
+example takes `-N` and `--order`, so a convergence study is the *same*
+`case.py` run at several resolutions:
+
+```yaml
+args: ["-N", "128", "--order", "5"]
+```
+
+Write one list entry per argument. `args: "-N 128"` and `args: ["-N 128"]`
+both arrive as a single argument containing a space, which the case rejects;
+validation catches both before the job is submitted.
+
+This matters for a sweep. Editing `case.py` between runs would also work, but
+then each point came from different code and the comparison means nothing —
+with `args` every point demonstrably came from the same file.
+
+Which settings a run actually used are recorded in its `simulation.inp`, kept
+with the results.
+
+## About the shared installation
+
 The installed MFC source is pinned to `e2f0e267` (the PDF uses the same commit's
 short prefix `e2f0e26`). CPU and GPU builds are ready under `/work/mfc/current`.
-The pipeline picks the architecture and MPI runtime automatically. Do not
-build, clean, or change the shared installation as part of a submission.
-`build.case_optimization` is unsupported because it recompiles shared binaries.
+The pipeline picks the architecture and MPI runtime automatically.
+
+**Your case may be compiled.** MFC turns an initial condition written as an
+expression —
+
+```python
+"patch_icpp(1)%alpha_rho(1)": "0.5 + 0.2 * sin(2.0 * pi * x / lx)"
+```
+
+— into Fortran, and a case that does this needs its own `pre_process` binary.
+The pipeline builds it on demand. That takes roughly twelve minutes the first
+time a given case is submitted and nothing thereafter, because MFC keys each
+build by a hash of the generated source: a new build is added alongside the
+existing ones and never replaces them. Cases whose initial conditions are
+plain numbers compile nothing and start immediately.
+
+`build.case_optimization` is still unsupported: unlike the above it bakes the
+whole case into every target, including `simulation`.
 OpenMP GPU offload is not configured here; use `acc`, not `omp` or a bare `--gpu`.
 The runner maps the YAML CPU value `none` to the pinned MFC CLI's `--gpu no`.
 

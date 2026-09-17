@@ -217,7 +217,13 @@ async function main() {
         if (job.visualize !== true) err(where, "preview needs visualize: true to generate Silo data");
       }
       if (pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
-      if (job.build?.case_optimization) err(where, "case_optimization would modify the shared MFC build and is unsupported");
+      // Was rejected here on the grounds that it modifies the shared build.
+      // It does not: MFC hashes the generated source into the install path,
+      // so a case-optimized build lands in its own directory. It is allowed,
+      // and costs a compile, which is worth saying once.
+      if (job.build?.case_optimization) {
+        warn(where, "case_optimization compiles simulation for these exact parameters — about 12 extra minutes the first time this combination is submitted, and once per point if you are sweeping");
+      }
 
       // args: is passed straight through to the case as separate argv
       // entries. A bare string is the tempting mistake -- args: "-N 128" --
