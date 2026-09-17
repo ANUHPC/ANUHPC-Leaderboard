@@ -1,0 +1,175 @@
+{
+  "id": "xenon/MFC/demo/bowshock-gpu",
+  "suite": "MFC",
+  "group": "demo",
+  "run": "bowshock-gpu",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "metric": {
+    "key": "grind",
+    "value": 0.9124885,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 8110.9059632,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.1837082,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 8,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "config": {
+    "case": null,
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "ranks": 8,
+    "partition": "gpu",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "custom",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": null,
+    "case_sha256": "8bf8c10dd14e0f02a31a4103eaf7f003b72b020ba0b926dcb2d11d53c560a948",
+    "invocation": "run /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation post_process -N 2 -n 4 -p gpu -w 02:00:00 --name mfc-bowshock-gpu -o /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml --no-build --clean --gpu acc --wait -- --gbpp 16",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": false,
+    "reason": "Custom or unverified case — unranked",
+    "group": "custom/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/demo/bowshock-gpu/case.py",
+    "summary.yaml": "raw/xenon/MFC/demo/bowshock-gpu/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/demo/bowshock-gpu/time_data.dat",
+    "mfc-bowshock-gpu.out": "raw/xenon/MFC/demo/bowshock-gpu/mfc-bowshock-gpu.out",
+    "mfc-bowshock-gpu.err": "raw/xenon/MFC/demo/bowshock-gpu/mfc-bowshock-gpu.err",
+    "job.yml": "raw/xenon/MFC/demo/bowshock-gpu/job.yml",
+    "mfc-provenance.json": "raw/xenon/MFC/demo/bowshock-gpu/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/demo/bowshock-gpu/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "mfc-bowshock-gpu.out",
+    "size": 398854
+  },
+  "err": {
+    "file": "mfc-bowshock-gpu.err",
+    "size": 525
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "post_process",
+        "-N",
+        "2",
+        "-n",
+        "4",
+        "-p",
+        "gpu",
+        "-w",
+        "02:00:00",
+        "--name",
+        "mfc-bowshock-gpu",
+        "-o",
+        "/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--",
+        "--gbpp",
+        "16"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 3.1509729
+      },
+      "pre_process": {
+        "exec": 8.535311
+      },
+      "simulation": {
+        "exec": 8110.9059632,
+        "grind": 0.9124885
+      },
+      "post_process": {
+        "exec": 298.0874905
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 8,
+        "sPerStep": 0.1837082,
+        "grind": 0.9124885
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "import json\nimport math\n\nMu = 1.84e-05\ngam_a = 1.4\n\nD = 0.1\n\n# Configuring case dictionary\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"T\",\n            # Computational Domain Parameters\n            # x direction\n            \"x_domain%beg\": -5 * D,\n            \"x_domain%end\": 5.0 * D,\n            # y direction\n            \"y_domain%beg\": -2.5 * D,\n            \"y_domain%end\": 2.5 * D,\n            # z direction\n            \"z_domain%beg\": -2.5 * D,\n            \"z_domain%end\": 2.5 * D,\n            \"cyl_coord\": \"F\",\n            \"m\": 512,\n            \"n\": 256,\n            \"p\": 256,\n            \"dt\": 1.0e-6,\n            \"t_step_start\": 0,\n            \"t_step_stop\": 3000,  # 3000\n            \"t_step_save\": 50,  # 60 frames for the video (upstream saves 10)\n            # Simulation Algorithm Parameters\n            # Only one patches are necessary, the air tube\n            \"num_patches\": 1,\n            # Use the 5 equation model\n            \"model_eqns\": \"5eq\",\n            # 6 equations model does not need the K \\div(u) term\n            \"alt_soundspeed\": \"F\",\n            # One fluids: air\n            \"num_fluids\": 1,\n            # time step\n            \"mpp_lim\": \"F\",\n            # Correct errors when computing speed of sound\n            \"mixture_err\": \"T\",\n            # Use TVD RK3 for time marching\n            \"time_stepper\": \"rk3\",\n            # Reconstruct the primitive variables to minimize spurious\n            # Use WENO5\n            \"weno_order\": 5,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"T\",\n            \"weno_avg\": \"T\",\n            \"avg_state\": \"arithmetic\",\n            \"mapped_weno\": \"T\",\n            \"null_weights\": \"F\",\n            \"mp_weno\": \"T\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            # We use ghost-cell extrapolation\n            \"bc_x%beg\": -3,\n            \"bc_x%end\": -3,\n            \"bc_y%beg\": -3,\n            \"bc_y%end\": -3,\n            \"bc_z%beg\": -3,\n            \"bc_z%end\": -3,\n            # Set IB to True and add 1 patch\n            \"ib\": \"T\",\n            \"num_ibs\": 1,\n            \"fd_order\": 2,\n            \"viscous\": \"T\",\n            # Formatted Database Files Structure Parameters\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"E_wrt\": \"T\",\n            \"parallel_io\": \"T\",\n            # Patch: Constant Tube filled with air\n            # Specify the cylindrical air tube grid geometry\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": 0.0,\n            # Uniform medium density, centroid is at the center of the domain\n            \"patch_icpp(1)%y_centroid\": 0.0,\n            \"patch_icpp(1)%z_centroid\": 0.0,\n            \"patch_icpp(1)%length_x\": 10 * D,\n            \"patch_icpp(1)%length_y\": 5 * D,\n            \"patch_icpp(1)%length_z\": 5 * D,\n            # Specify the patch primitive variables\n            \"patch_icpp(1)%vel(1)\": 527.2e00,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%vel(3)\": 0.0e00,\n            \"patch_icpp(1)%pres\": 10918.2549,\n            \"patch_icpp(1)%alpha_rho(1)\": 0.2199,\n            \"patch_icpp(1)%alpha(1)\": 1.0e00,\n            # Patch: Sphere Immersed Boundary\n            \"patch_ib(1)%geometry\": 8,\n            \"patch_ib(1)%x_centroid\": -3.0e-3,\n            \"patch_ib(1)%y_centroid\": 0.0,\n            \"patch_ib(1)%z_centroid\": 0.0,\n            \"patch_ib(1)%radius\": D / 2,\n            \"patch_ib(1)%slip\": \"T\",\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gam_a - 1.0e00),  # 2.50(Not 1.40)\n            \"fluid_pp(1)%pi_inf\": 0,\n            \"fluid_pp(1)%Re(1)\": 7535533.2,\n        }\n    )\n)\n"
+    },
+    "out": {
+      "file": "mfc-bowshock-gpu.out",
+      "size": 398854
+    },
+    "err": {
+      "file": "mfc-bowshock-gpu.err",
+      "size": 525
+    }
+  }
+}

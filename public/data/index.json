@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T05:59:21.124Z",
+  "generatedAt": "2026-09-17T07:58:04.654Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 3
+      "count": 4
     }
   ],
   "suites": [
@@ -102,10 +102,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 0,
+      "count": 1,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 0
+        "xenon": 1
       }
     }
   ],
@@ -5684,6 +5684,66 @@
       },
       "hasErr": true,
       "rank": 3
+    },
+    {
+      "id": "xenon/MFC/demo/bowshock-gpu",
+      "suite": "MFC",
+      "group": "demo",
+      "run": "bowshock-gpu",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.9124885,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 8110.9059632,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.1837082,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": null,
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": false,
+        "reason": "Custom or unverified case — unranked",
+        "group": "custom/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
     }
   ]
 }

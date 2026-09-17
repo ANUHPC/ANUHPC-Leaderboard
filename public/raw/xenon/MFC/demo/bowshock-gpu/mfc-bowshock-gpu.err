@@ -1,0 +1,4 @@
++ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck
++ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process
++ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation
++ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process
