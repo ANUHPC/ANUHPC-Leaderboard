@@ -107,6 +107,12 @@ function scanRuns() {
                             best:        extractBest(suite, data),
                             outSummary:  extractOutSummary(data),
                             hasErr:      data.hasErr ?? (data.err != null && data.err !== false),
+                            // Small summaries so a board can show wall time and
+                            // flag a rendered video without pulling every run's
+                            // full record. The detail itself stays in run.json,
+                            // fetched only when a row is opened.
+                            wallSec:     data.detail?.out?.parsed?.totalTimeSec ?? null,
+                            hasMedia:    Object.keys(data.raw ?? {}).some((n) => /\.(mp4|png)$/i.test(n)),
                         });
                     } catch (e) {
                         console.warn(`  [warn] Skipping ${runJsonPath}: ${e.message}`);
