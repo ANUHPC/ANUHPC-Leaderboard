@@ -17,6 +17,20 @@ case "${1:-none}" in
     export OMPI_PREFIX="$HPCX_DIR/ompi"
     export PATH="$NVHPC_ROOT/compilers/bin:$PATH"
     export LD_LIBRARY_PATH="$NVHPC_ROOT/compilers/lib:$NVHPC_ROOT/cuda/12.9/lib64:$NVHPC_ROOT/math_libs/12.9/lib64:$LD_LIBRARY_PATH"
+    # Name the compilers, do not merely put them on PATH.
+    #
+    # CMake does not search PATH preferentially for nvfortran -- it takes the
+    # first Fortran compiler it finds, which is /usr/bin/gfortran, and then
+    # dies with "CMake detected the GNU Fortran compiler v13.3.0 ... Failed to
+    # configure the syscheck target". That names neither MFC nor the case.
+    #
+    # This was dormant while render.sh passed --no-build and nothing ever
+    # compiled during a job. It went live the moment building was enabled, so
+    # a GPU submission whose case needs its own binary -- one with analytic
+    # initial conditions -- would have hit it. Matches /work/mfc/build-gpu.sh,
+    # which is how the working GPU tree was built.
+    export CC=nvc CXX=nvc++ FC=nvfortran
+    export MFC_CUDA_CC=80                 # A100 is sm_80
     # CUDA transports handle device buffers; inter-node traffic still uses RDMA.
     export UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc
     export UCX_MEMTYPE_CACHE=n

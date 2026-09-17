@@ -229,6 +229,14 @@ cp "$REPO/suites/MFC/environment.sh" "$JOB_DIR/mfc-environment.sh"
 # shellcheck source=suites/MFC/environment.sh
 . "$REPO/suites/MFC/environment.sh" "$GPU" || die "could not load the MFC environment for gpu=$GPU"
 command -v mpif90 >/dev/null || die "no mpif90 on PATH after loading the environment for gpu=$GPU; MFC cannot build a target that needs compiling"
+# mpif90 alone is not enough on the GPU side: nvfortran can be on PATH while
+# CMake still picks /usr/bin/gfortran, because it takes the first Fortran
+# compiler it finds rather than preferring PATH order. Check the variable that
+# actually decides, not just that a compiler exists somewhere.
+if [ "$GPU" = acc ]; then
+  [ "${FC:-}" = nvfortran ] || die "FC is '${FC:-unset}', not nvfortran — CMake would configure the GPU build with gfortran and fail in a way that names neither MFC nor the case"
+  command -v nvfortran >/dev/null || die "FC=nvfortran but nvfortran is not on PATH"
+fi
 cd "$TREE"
 
 # --clean matters more than it looks. simulation opens time_data.dat with
