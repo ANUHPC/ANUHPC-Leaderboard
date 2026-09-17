@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T14:31:07.160Z",
+  "generatedAt": "2026-09-17T14:32:18.512Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 14
+      "count": 17
     }
   ],
   "suites": [
@@ -102,10 +102,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 11,
+      "count": 14,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 11
+        "xenon": 14
       }
     }
   ],
@@ -8053,6 +8053,333 @@
         "eligible": false,
         "reason": "Custom or unverified case — unranked",
         "group": "custom/CPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "xenon/MFC/demo/task2-n128-weno5-cfl0025",
+      "suite": "MFC",
+      "group": "demo",
+      "run": "task2-n128-weno5-cfl0025",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T14:31:17Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-17T14:25:19Z",
+      "submitter": {
+        "name": "demo",
+        "house": true,
+        "by": "Xeno-Tek"
+      },
+      "metric": {
+        "key": "grind",
+        "value": 144.62860892,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 5.2562771,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.00011021,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 1,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "parameters": {
+        "grid": "128",
+        "cells": 128,
+        "dimensions": 1,
+        "dt": 0.0000894534394847482,
+        "steps": 11179,
+        "wenoOrder": 5,
+        "wenoEps": 1e-16,
+        "riemann": "HLLC",
+        "timeStepper": "RK3",
+        "modelEqns": 2,
+        "numFluids": 2,
+        "viscous": null,
+        "surfaceTension": null,
+        "bubbles": null,
+        "equations": null,
+        "equationSource": null
+      },
+      "verification": {
+        "kind": "study",
+        "reason": "Reference case — compared by settings, not ranked"
+      },
+      "convergence": {
+        "N": 128,
+        "first": 0,
+        "last": 11179,
+        "L1": 3.804135938981906e-9,
+        "L2": 4.225840822132736e-9,
+        "Linf": 5.976129979767819e-9,
+        "kind": "cons",
+        "variable": 5,
+        "series": "a9150e32f54ce715ec66c734f28de515dba91918d3a2c173856a7ae48f02da97"
+      },
+      "config": {
+        "case": "advection_1d",
+        "args": [
+          "-N",
+          "128",
+          "--order",
+          "5",
+          "--cfl",
+          "0.025"
+        ],
+        "nodes": 1,
+        "tasks_per_node": 1,
+        "ranks": 1,
+        "partition": "cpu",
+        "gpu": "none",
+        "case_optimization": null,
+        "gbpp": null,
+        "toolchain": "gcc-ompi5",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": false,
+        "reason": "Reference case — compared by settings, not ranked",
+        "group": "advection_1d/CPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "xenon/MFC/demo/task2-n32-weno5-cfl0025",
+      "suite": "MFC",
+      "group": "demo",
+      "run": "task2-n32-weno5-cfl0025",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T14:31:30Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-17T14:25:19Z",
+      "submitter": {
+        "name": "demo",
+        "house": true,
+        "by": "Xeno-Tek"
+      },
+      "metric": {
+        "key": "grind",
+        "value": 179.04301075,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 1.0435644,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.0000333,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 1,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "parameters": {
+        "grid": "32",
+        "cells": 32,
+        "dimensions": 1,
+        "dt": 0.00035778175313059033,
+        "steps": 2795,
+        "wenoOrder": 5,
+        "wenoEps": 1e-16,
+        "riemann": "HLLC",
+        "timeStepper": "RK3",
+        "modelEqns": 2,
+        "numFluids": 2,
+        "viscous": null,
+        "surfaceTension": null,
+        "bubbles": null,
+        "equations": null,
+        "equationSource": null
+      },
+      "verification": {
+        "kind": "study",
+        "reason": "Reference case — compared by settings, not ranked"
+      },
+      "convergence": {
+        "N": 32,
+        "first": 0,
+        "last": 2795,
+        "L1": 0.00000388213656219577,
+        "L2": 0.000004319939742785054,
+        "Linf": 0.000006078580320090232,
+        "kind": "cons",
+        "variable": 5,
+        "series": "a9150e32f54ce715ec66c734f28de515dba91918d3a2c173856a7ae48f02da97"
+      },
+      "config": {
+        "case": "advection_1d",
+        "args": [
+          "-N",
+          "32",
+          "--order",
+          "5",
+          "--cfl",
+          "0.025"
+        ],
+        "nodes": 1,
+        "tasks_per_node": 1,
+        "ranks": 1,
+        "partition": "cpu",
+        "gpu": "none",
+        "case_optimization": null,
+        "gbpp": null,
+        "toolchain": "gcc-ompi5",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": false,
+        "reason": "Reference case — compared by settings, not ranked",
+        "group": "advection_1d/CPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "xenon/MFC/demo/task2-n64-weno5-cfl0025",
+      "suite": "MFC",
+      "group": "demo",
+      "run": "task2-n64-weno5-cfl0025",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-17T14:31:44Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-17T14:25:19Z",
+      "submitter": {
+        "name": "demo",
+        "house": true,
+        "by": "Xeno-Tek"
+      },
+      "metric": {
+        "key": "grind",
+        "value": 163.46296296,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 1.8727586,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.00006179,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 1,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "parameters": {
+        "grid": "64",
+        "cells": 64,
+        "dimensions": 1,
+        "dt": 0.00017889087656529517,
+        "steps": 5590,
+        "wenoOrder": 5,
+        "wenoEps": 1e-16,
+        "riemann": "HLLC",
+        "timeStepper": "RK3",
+        "modelEqns": 2,
+        "numFluids": 2,
+        "viscous": null,
+        "surfaceTension": null,
+        "bubbles": null,
+        "equations": null,
+        "equationSource": null
+      },
+      "verification": {
+        "kind": "study",
+        "reason": "Reference case — compared by settings, not ranked"
+      },
+      "convergence": {
+        "N": 64,
+        "first": 0,
+        "last": 5590,
+        "L1": 1.2144669968988664e-7,
+        "L2": 1.3495849315842944e-7,
+        "Linf": 1.908050299981312e-7,
+        "kind": "cons",
+        "variable": 5,
+        "series": "a9150e32f54ce715ec66c734f28de515dba91918d3a2c173856a7ae48f02da97"
+      },
+      "config": {
+        "case": "advection_1d",
+        "args": [
+          "-N",
+          "64",
+          "--order",
+          "5",
+          "--cfl",
+          "0.025"
+        ],
+        "nodes": 1,
+        "tasks_per_node": 1,
+        "ranks": 1,
+        "partition": "cpu",
+        "gpu": "none",
+        "case_optimization": null,
+        "gbpp": null,
+        "toolchain": "gcc-ompi5",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": false,
+        "reason": "Reference case — compared by settings, not ranked",
+        "group": "advection_1d/CPU"
       },
       "notes": [],
       "best": null,

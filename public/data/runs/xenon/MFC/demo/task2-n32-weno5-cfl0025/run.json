@@ -1,0 +1,1819 @@
+{
+  "id": "xenon/MFC/demo/task2-n32-weno5-cfl0025",
+  "suite": "MFC",
+  "group": "demo",
+  "run": "task2-n32-weno5-cfl0025",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-17T14:31:30Z",
+  "dateSource": "run",
+  "submittedAt": "2026-09-17T14:25:19Z",
+  "submitter": {
+    "name": "demo",
+    "house": true,
+    "by": "Xeno-Tek"
+  },
+  "metric": {
+    "key": "grind",
+    "value": 179.04301075,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 1.0435644,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.0000333,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 1,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "parameters": {
+    "grid": "32",
+    "cells": 32,
+    "dimensions": 1,
+    "dt": 0.00035778175313059033,
+    "steps": 2795,
+    "wenoOrder": 5,
+    "wenoEps": 1e-16,
+    "riemann": "HLLC",
+    "timeStepper": "RK3",
+    "modelEqns": 2,
+    "numFluids": 2,
+    "viscous": null,
+    "surfaceTension": null,
+    "bubbles": null,
+    "equations": null,
+    "equationSource": null
+  },
+  "verification": {
+    "kind": "study",
+    "reason": "Reference case — compared by settings, not ranked"
+  },
+  "convergence": {
+    "N": 32,
+    "first": 0,
+    "last": 2795,
+    "L1": 0.00000388213656219577,
+    "L2": 0.000004319939742785054,
+    "Linf": 0.000006078580320090232,
+    "kind": "cons",
+    "variable": 5,
+    "series": "a9150e32f54ce715ec66c734f28de515dba91918d3a2c173856a7ae48f02da97"
+  },
+  "config": {
+    "case": "advection_1d",
+    "args": [
+      "-N",
+      "32",
+      "--order",
+      "5",
+      "--cfl",
+      "0.025"
+    ],
+    "nodes": 1,
+    "tasks_per_node": 1,
+    "ranks": 1,
+    "partition": "cpu",
+    "gpu": "none",
+    "case_optimization": null,
+    "gbpp": null,
+    "toolchain": "gcc-ompi5",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "pinned",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": "advection_1d",
+    "case_registry": "tree",
+    "case_sha256": "f03fad17cc88cf4275b1ef2f3dd81fe64a1636912e71e068af39a820c75d1654",
+    "invocation": "run /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 1 -n 1 -p cpu -w 00:20:00 --name mfc-task2-n32-weno5-cfl0025 -o /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml --clean --no-build --gpu no --wait -- -N 32 --order 5 --cfl 0.025",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "no",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": false,
+    "reason": "Reference case — compared by settings, not ranked",
+    "group": "advection_1d/CPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/case.py",
+    "summary.yaml": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/time_data.dat",
+    "run.out": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/run.out",
+    "run.err": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/run.err",
+    "job.yml": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/job.yml",
+    "run.sh": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/run.sh",
+    "simulation.inp": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/simulation.inp",
+    "pre_process.inp": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/pre_process.inp",
+    "convergence.json": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/convergence.json",
+    "mfc-provenance.json": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/demo/task2-n32-weno5-cfl0025/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "run.out",
+    "size": 363646,
+    "parsed": {
+      "banner": {
+        "start_time": "14:31:21",
+        "start_date": "14:31:21",
+        "partition": "cpu",
+        "walltime": "00:20:00",
+        "nodes": "1",
+        "job_name": "mfc-task2-n32-weno5-cfl0025",
+        "engine": "batch",
+        "queue_system": "SLURM"
+      },
+      "env": {
+        "host": "cpu-node1",
+        "nodesTasks": "1 x 1",
+        "mpirun": "/work/openmpi/5.0.10/bin/mpirun",
+        "fabric": "ibp129s0 (UCX_TLS=rc,sm,self)"
+      },
+      "steps": [
+        {
+          "step": 1,
+          "total": 2796,
+          "avg": 0,
+          "perStep": 0
+        },
+        {
+          "step": 25,
+          "total": 2796,
+          "avg": 0.0001097727,
+          "perStep": 0.000102
+        },
+        {
+          "step": 49,
+          "total": 2796,
+          "avg": 0.0001101739,
+          "perStep": 0.000103
+        },
+        {
+          "step": 73,
+          "total": 2796,
+          "avg": 0.0001088571,
+          "perStep": 0.000103
+        },
+        {
+          "step": 97,
+          "total": 2796,
+          "avg": 0.000108234,
+          "perStep": 0.000103
+        },
+        {
+          "step": 121,
+          "total": 2796,
+          "avg": 0.0001075339,
+          "perStep": 0.000103
+        },
+        {
+          "step": 145,
+          "total": 2796,
+          "avg": 0.0001070986,
+          "perStep": 0.000102
+        },
+        {
+          "step": 169,
+          "total": 2796,
+          "avg": 0.0001073313,
+          "perStep": 0.000115
+        },
+        {
+          "step": 193,
+          "total": 2796,
+          "avg": 0.0001070895,
+          "perStep": 0.000108
+        },
+        {
+          "step": 217,
+          "total": 2796,
+          "avg": 0.0001068131,
+          "perStep": 0.000102
+        },
+        {
+          "step": 241,
+          "total": 2796,
+          "avg": 0.0001067563,
+          "perStep": 0.000103
+        },
+        {
+          "step": 265,
+          "total": 2796,
+          "avg": 0.0001067366,
+          "perStep": 0.000103
+        },
+        {
+          "step": 289,
+          "total": 2796,
+          "avg": 0.0001066888,
+          "perStep": 0.000103
+        },
+        {
+          "step": 313,
+          "total": 2796,
+          "avg": 0.0001066645,
+          "perStep": 0.000103
+        },
+        {
+          "step": 337,
+          "total": 2796,
+          "avg": 0.0001066946,
+          "perStep": 0.000116
+        },
+        {
+          "step": 361,
+          "total": 2796,
+          "avg": 0.0001072654,
+          "perStep": 0.000103
+        },
+        {
+          "step": 385,
+          "total": 2796,
+          "avg": 0.0001072513,
+          "perStep": 0.000116
+        },
+        {
+          "step": 409,
+          "total": 2796,
+          "avg": 0.0001070911,
+          "perStep": 0.000103
+        },
+        {
+          "step": 433,
+          "total": 2796,
+          "avg": 0.0001069512,
+          "perStep": 0.000103
+        },
+        {
+          "step": 457,
+          "total": 2796,
+          "avg": 0.0001069075,
+          "perStep": 0.000103
+        },
+        {
+          "step": 481,
+          "total": 2796,
+          "avg": 0.0001067824,
+          "perStep": 0.000103
+        },
+        {
+          "step": 505,
+          "total": 2796,
+          "avg": 0.0001069143,
+          "perStep": 0.000103
+        },
+        {
+          "step": 529,
+          "total": 2796,
+          "avg": 0.0001068441,
+          "perStep": 0.000102
+        },
+        {
+          "step": 553,
+          "total": 2796,
+          "avg": 0.0001067927,
+          "perStep": 0.000131
+        },
+        {
+          "step": 577,
+          "total": 2796,
+          "avg": 0.0001067439,
+          "perStep": 0.000122
+        },
+        {
+          "step": 601,
+          "total": 2796,
+          "avg": 0.0001070853,
+          "perStep": 0.000103
+        },
+        {
+          "step": 625,
+          "total": 2796,
+          "avg": 0.0001070209,
+          "perStep": 0.000103
+        },
+        {
+          "step": 649,
+          "total": 2796,
+          "avg": 0.0001069381,
+          "perStep": 0.000107
+        },
+        {
+          "step": 673,
+          "total": 2796,
+          "avg": 0.0001068791,
+          "perStep": 0.000103
+        },
+        {
+          "step": 697,
+          "total": 2796,
+          "avg": 0.0001068559,
+          "perStep": 0.000102
+        },
+        {
+          "step": 721,
+          "total": 2796,
+          "avg": 0.0001067646,
+          "perStep": 0.000107
+        },
+        {
+          "step": 745,
+          "total": 2796,
+          "avg": 0.0001067129,
+          "perStep": 0.000103
+        },
+        {
+          "step": 769,
+          "total": 2796,
+          "avg": 0.0001067337,
+          "perStep": 0.000102
+        },
+        {
+          "step": 793,
+          "total": 2796,
+          "avg": 0.0001066962,
+          "perStep": 0.000116
+        },
+        {
+          "step": 817,
+          "total": 2796,
+          "avg": 0.0001066351,
+          "perStep": 0.000108
+        },
+        {
+          "step": 841,
+          "total": 2796,
+          "avg": 0.0001066074,
+          "perStep": 0.000103
+        },
+        {
+          "step": 865,
+          "total": 2796,
+          "avg": 0.0001065499,
+          "perStep": 0.000103
+        },
+        {
+          "step": 889,
+          "total": 2796,
+          "avg": 0.0001064955,
+          "perStep": 0.000102
+        },
+        {
+          "step": 913,
+          "total": 2796,
+          "avg": 0.0001064835,
+          "perStep": 0.000102
+        },
+        {
+          "step": 937,
+          "total": 2796,
+          "avg": 0.0001064679,
+          "perStep": 0.000103
+        },
+        {
+          "step": 961,
+          "total": 2796,
+          "avg": 0.0001064572,
+          "perStep": 0.000106
+        },
+        {
+          "step": 985,
+          "total": 2796,
+          "avg": 0.0001064613,
+          "perStep": 0.000131
+        },
+        {
+          "step": 1009,
+          "total": 2796,
+          "avg": 0.0001064722,
+          "perStep": 0.000102
+        },
+        {
+          "step": 1033,
+          "total": 2796,
+          "avg": 0.000106435,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1057,
+          "total": 2796,
+          "avg": 0.0001064298,
+          "perStep": 0.000104
+        },
+        {
+          "step": 1081,
+          "total": 2796,
+          "avg": 0.0001064054,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1105,
+          "total": 2796,
+          "avg": 0.0001063975,
+          "perStep": 0.00013
+        },
+        {
+          "step": 1129,
+          "total": 2796,
+          "avg": 0.0001064325,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1153,
+          "total": 2796,
+          "avg": 0.0001064235,
+          "perStep": 0.000128
+        },
+        {
+          "step": 1177,
+          "total": 2796,
+          "avg": 0.0001064114,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1201,
+          "total": 2796,
+          "avg": 0.0001064082,
+          "perStep": 0.000102
+        },
+        {
+          "step": 1225,
+          "total": 2796,
+          "avg": 0.0001064002,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1249,
+          "total": 2796,
+          "avg": 0.0001064157,
+          "perStep": 0.000123
+        },
+        {
+          "step": 1273,
+          "total": 2796,
+          "avg": 0.0001063961,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1297,
+          "total": 2796,
+          "avg": 0.0001063926,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1321,
+          "total": 2796,
+          "avg": 0.0001063513,
+          "perStep": 0.000112
+        },
+        {
+          "step": 1345,
+          "total": 2796,
+          "avg": 0.0001063271,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1369,
+          "total": 2796,
+          "avg": 0.0001063214,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1393,
+          "total": 2796,
+          "avg": 0.0001062971,
+          "perStep": 0.000107
+        },
+        {
+          "step": 1417,
+          "total": 2796,
+          "avg": 0.0001062645,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1441,
+          "total": 2796,
+          "avg": 0.0001062622,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1465,
+          "total": 2796,
+          "avg": 0.0001062449,
+          "perStep": 0.000107
+        },
+        {
+          "step": 1489,
+          "total": 2796,
+          "avg": 0.0001062275,
+          "perStep": 0.000114
+        },
+        {
+          "step": 1513,
+          "total": 2796,
+          "avg": 0.0001062199,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1537,
+          "total": 2796,
+          "avg": 0.0001062145,
+          "perStep": 0.000104
+        },
+        {
+          "step": 1561,
+          "total": 2796,
+          "avg": 0.0001062073,
+          "perStep": 0.000102
+        },
+        {
+          "step": 1585,
+          "total": 2796,
+          "avg": 0.0001062004,
+          "perStep": 0.000102
+        },
+        {
+          "step": 1609,
+          "total": 2796,
+          "avg": 0.000106193,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1633,
+          "total": 2796,
+          "avg": 0.0001062006,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1657,
+          "total": 2796,
+          "avg": 0.0001062134,
+          "perStep": 0.000115
+        },
+        {
+          "step": 1681,
+          "total": 2796,
+          "avg": 0.0001062396,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1705,
+          "total": 2796,
+          "avg": 0.0001062779,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1729,
+          "total": 2796,
+          "avg": 0.0001062723,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1753,
+          "total": 2796,
+          "avg": 0.0001062623,
+          "perStep": 0.000136
+        },
+        {
+          "step": 1777,
+          "total": 2796,
+          "avg": 0.0001062407,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1801,
+          "total": 2796,
+          "avg": 0.0001062336,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1825,
+          "total": 2796,
+          "avg": 0.0001062338,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1849,
+          "total": 2796,
+          "avg": 0.0001062031,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1873,
+          "total": 2796,
+          "avg": 0.0001062005,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1897,
+          "total": 2796,
+          "avg": 0.0001061874,
+          "perStep": 0.000102
+        },
+        {
+          "step": 1921,
+          "total": 2796,
+          "avg": 0.000106158,
+          "perStep": 0.000102
+        },
+        {
+          "step": 1945,
+          "total": 2796,
+          "avg": 0.0001061576,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1969,
+          "total": 2796,
+          "avg": 0.0001061546,
+          "perStep": 0.000103
+        },
+        {
+          "step": 1993,
+          "total": 2796,
+          "avg": 0.0001061377,
+          "perStep": 0.000124
+        },
+        {
+          "step": 2017,
+          "total": 2796,
+          "avg": 0.0001061246,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2041,
+          "total": 2796,
+          "avg": 0.0001061202,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2065,
+          "total": 2796,
+          "avg": 0.0001061062,
+          "perStep": 0.000107
+        },
+        {
+          "step": 2089,
+          "total": 2796,
+          "avg": 0.000106094,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2113,
+          "total": 2796,
+          "avg": 0.0001061237,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2137,
+          "total": 2796,
+          "avg": 0.000106134,
+          "perStep": 0.000116
+        },
+        {
+          "step": 2161,
+          "total": 2796,
+          "avg": 0.0001061733,
+          "perStep": 0.000107
+        },
+        {
+          "step": 2185,
+          "total": 2796,
+          "avg": 0.0001062443,
+          "perStep": 0.000129
+        },
+        {
+          "step": 2209,
+          "total": 2796,
+          "avg": 0.000106257,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2233,
+          "total": 2796,
+          "avg": 0.0001062574,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2257,
+          "total": 2796,
+          "avg": 0.0001062578,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2281,
+          "total": 2796,
+          "avg": 0.0001062783,
+          "perStep": 0.000118
+        },
+        {
+          "step": 2305,
+          "total": 2796,
+          "avg": 0.0001062554,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2329,
+          "total": 2796,
+          "avg": 0.0001062545,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2353,
+          "total": 2796,
+          "avg": 0.0001062464,
+          "perStep": 0.000115
+        },
+        {
+          "step": 2377,
+          "total": 2796,
+          "avg": 0.000106222,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2401,
+          "total": 2796,
+          "avg": 0.0001062219,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2425,
+          "total": 2796,
+          "avg": 0.0001062217,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2449,
+          "total": 2796,
+          "avg": 0.0001061966,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2473,
+          "total": 2796,
+          "avg": 0.0001062142,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2497,
+          "total": 2796,
+          "avg": 0.0001062053,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2521,
+          "total": 2796,
+          "avg": 0.0001061942,
+          "perStep": 0.000128
+        },
+        {
+          "step": 2545,
+          "total": 2796,
+          "avg": 0.0001061837,
+          "perStep": 0.000102
+        },
+        {
+          "step": 2569,
+          "total": 2796,
+          "avg": 0.0001061847,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2593,
+          "total": 2796,
+          "avg": 0.0001061737,
+          "perStep": 0.000106
+        },
+        {
+          "step": 2617,
+          "total": 2796,
+          "avg": 0.0001061771,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2641,
+          "total": 2796,
+          "avg": 0.0001061751,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2665,
+          "total": 2796,
+          "avg": 0.0001061642,
+          "perStep": 0.000106
+        },
+        {
+          "step": 2689,
+          "total": 2796,
+          "avg": 0.0001061497,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2713,
+          "total": 2796,
+          "avg": 0.0001061406,
+          "perStep": 0.000103
+        },
+        {
+          "step": 2737,
+          "total": 2796,
+          "avg": 0.0001061372,
+          "perStep": 0.000114
+        },
+        {
+          "step": 2761,
+          "total": 2796,
+          "avg": 0.0001061661,
+          "perStep": 0.000106
+        },
+        {
+          "step": 2785,
+          "total": 2796,
+          "avg": 0.0001061812,
+          "perStep": 0.000107
+        },
+        {
+          "step": 2795,
+          "total": 2796,
+          "avg": 0.0001062231,
+          "perStep": 0.000122
+        }
+      ],
+      "stepCount": 2795,
+      "performance": 179.04301075268816,
+      "totalTimeSec": 2,
+      "exitCode": 0,
+      "lines": 2853
+    },
+    "excerpt": {
+      "head": [
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py: |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| * Start-time     14:31:21                            * Start-date     14:31:21                            |",
+        "| * Partition      cpu                                 * Walltime       00:20:00                            |",
+        "| * Account        N/A                                 * Nodes          1                                   |",
+        "| * Job Name       mfc-task2-n32-weno5-cfl0025         * Engine         batch                               |",
+        "| * QoS            N/A                                 * Binary         N/A                                 |",
+        "| * Queue System   SLURM                               * Email          N/A                                 |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "",
+        "host        : cpu-node1",
+        "nodes/tasks : 1 x 1",
+        "mpirun      : /work/openmpi/5.0.10/bin/mpirun",
+        "fabric      : ibp129s0 (UCX_TLS=rc,sm,self)",
+        "",
+        "mfc: OK > :) Running syscheck:",
+        "",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)",
+        " [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)",
+        " [TEST] MPI: call assert(rank >= 0)",
+        " [TEST] MPI: call mpi_comm_size(MPI_COMM_WORLD, nRanks, ierr)",
+        " [TEST] MPI: call assert(nRanks > 0 .and. rank < nRanks)"
+      ],
+      "tail": [
+        " [100%]  Time step     2776 of 2796 @ t_step =     2775 Time Avg = 1.061713E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2777 of 2796 @ t_step =     2776 Time Avg = 1.061806E-04 Time/step= 1.320000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2778 of 2796 @ t_step =     2777 Time Avg = 1.061809E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2779 of 2796 @ t_step =     2778 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2780 of 2796 @ t_step =     2779 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2781 of 2796 @ t_step =     2780 Time Avg = 1.061811E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2782 of 2796 @ t_step =     2781 Time Avg = 1.061810E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2783 of 2796 @ t_step =     2782 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2784 of 2796 @ t_step =     2783 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2785 of 2796 @ t_step =     2784 Time Avg = 1.061812E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2786 of 2796 @ t_step =     2785 Time Avg = 1.061865E-04 Time/step= 1.210000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2787 of 2796 @ t_step =     2786 Time Avg = 1.061868E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2788 of 2796 @ t_step =     2787 Time Avg = 1.061867E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2789 of 2796 @ t_step =     2788 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2790 of 2796 @ t_step =     2789 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2791 of 2796 @ t_step =     2790 Time Avg = 1.061951E-04 Time/step= 1.300000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2792 of 2796 @ t_step =     2791 Time Avg = 1.061994E-04 Time/step= 1.180000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2793 of 2796 @ t_step =     2792 Time Avg = 1.062039E-04 Time/step= 1.190000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2794 of 2796 @ t_step =     2793 Time Avg = 1.062175E-04 Time/step= 1.440000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2795 of 2796 @ t_step =     2794 Time Avg = 1.062231E-04 Time/step= 1.220000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " Performance:   179.04301075268816      ns/gp/eq/rhs",
+        "",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| Finished mfc-task2-n32-weno5-cfl0025:                                                                     |",
+        "| * Total-time:    2s                                  * Exit Code:     0                                   |",
+        "| * End-time:      14:31:23                            * End-date:      14:31:23                            |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        ""
+      ],
+      "elided": 2801
+    }
+  },
+  "err": {
+    "file": "run.err",
+    "size": 2021,
+    "raw": "+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "-N",
+        "1",
+        "-n",
+        "1",
+        "-p",
+        "cpu",
+        "-w",
+        "00:20:00",
+        "--name",
+        "mfc-task2-n32-weno5-cfl0025",
+        "-o",
+        "/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml",
+        "--clean",
+        "--no-build",
+        "--gpu",
+        "no",
+        "--wait",
+        "--",
+        "-N",
+        "32",
+        "--order",
+        "5",
+        "--cfl",
+        "0.025"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "no",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 0.7002093
+      },
+      "pre_process": {
+        "exec": 0.7276516
+      },
+      "simulation": {
+        "exec": 1.0435644,
+        "grind": 179.04301075
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 1,
+        "sPerStep": 0.0000333,
+        "grind": 179.04301075
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n\"\"\"\n1D periodic advection convergence case.\n\nTwo identical fluids (same gamma, same density = 1) with a sine-wave volume\nfraction.  Since both EOS are identical, alpha_1 advects passively at u = 1\nwith no acoustic coupling.  After exactly one period (T = L/u = 1), the\nexact solution equals the IC, so L2(q_cons_vf1(T) - q_cons_vf1(0)) is\npurely the scheme's accumulated spatial truncation error.\n\"\"\"\n\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(description=\"1D advection convergence case\")\nparser.add_argument(\"--mfc\", type=json.loads, default=\"{}\", metavar=\"DICT\")\nparser.add_argument(\"-N\", type=int, default=64, help=\"Grid points (default: 64)\")\nparser.add_argument(\"--order\", type=int, default=5, help=\"WENO order: 1, 3, or 5\")\nparser.add_argument(\"--muscl\", action=\"store_true\", help=\"Use MUSCL-2 instead of WENO\")\nparser.add_argument(\"--cfl\", type=float, default=0.4, help=\"CFL number (default: 0.4)\")\nparser.add_argument(\"--mp-weno\", action=\"store_true\", help=\"Enable MP-WENO limiter\")\nparser.add_argument(\"--muscl-lim\", type=int, default=1, help=\"MUSCL limiter: 1=minmod 2=MC 3=VanAlbada 4=VanLeer 5=Superbee\")\nargs = parser.parse_args()\n\ngamma = 1.4\nN = args.N\nm = N - 1\nL = 1.0\ndx = L / N\n\n# Max wave speed: acoustic speed + convective speed\n# c_sound = sqrt(gamma * p / rho) = sqrt(gamma) ≈ 1.183 (for p=1, rho=1)\nc_max = math.sqrt(gamma) + 1.0\ndt = args.cfl * dx / c_max\nT_end = 1.0  # exactly one period: u=1, L=1\nNt = max(4, math.ceil(T_end / dt))\ndt = T_end / Nt  # snap to land exactly on T_end\n\nif args.muscl:\n    scheme_params = {\n        \"recon_type\": \"muscl\",\n        \"muscl_order\": \"second_order\",\n        \"muscl_lim\": args.muscl_lim,\n    }\nelse:\n    scheme_params = {\n        \"recon_type\": \"weno\",\n        \"weno_order\": args.order,\n        \"weno_eps\": 1.0e-16,\n        \"weno_Re_flux\": \"F\",\n        \"weno_avg\": \"F\",\n        \"mapped_weno\": \"F\" if args.order == 1 else \"T\",\n        \"null_weights\": \"F\",\n        \"mp_weno\": \"T\" if args.mp_weno else \"F\",\n    }\n\nprint(\n    json.dumps(\n        {\n            \"run_time_info\": \"F\",\n            \"x_domain%beg\": 0.0,\n            \"x_domain%end\": L,\n            \"m\": m,\n            \"n\": 0,\n            \"p\": 0,\n            \"dt\": dt,\n            \"t_step_start\": 0,\n            \"t_step_stop\": Nt,\n            \"t_step_save\": Nt,\n            \"num_patches\": 1,\n            \"model_eqns\": \"5eq\",\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"F\",\n            \"mixture_err\": \"F\",\n            \"time_stepper\": \"rk3\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            \"avg_state\": \"arithmetic\",\n            \"bc_x%beg\": -1,\n            \"bc_x%end\": -1,\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"F\",\n            \"patch_icpp(1)%geometry\": 1,\n            \"patch_icpp(1)%x_centroid\": 0.5,\n            \"patch_icpp(1)%length_x\": L,\n            \"patch_icpp(1)%vel(1)\": 1.0,\n            \"patch_icpp(1)%pres\": 1.0,\n            \"patch_icpp(1)%alpha_rho(1)\": \"0.5 + 0.2 * sin(2.0 * pi * x / lx)\",\n            \"patch_icpp(1)%alpha_rho(2)\": \"0.5 - 0.2 * sin(2.0 * pi * x / lx)\",\n            \"patch_icpp(1)%alpha(1)\": \"0.5 + 0.2 * sin(2.0 * pi * x / lx)\",\n            \"patch_icpp(1)%alpha(2)\": \"0.5 - 0.2 * sin(2.0 * pi * x / lx)\",\n            \"fluid_pp(1)%gamma\": 1.0 / (gamma - 1.0),\n            \"fluid_pp(1)%pi_inf\": 0.0,\n            \"fluid_pp(2)%gamma\": 1.0 / (gamma - 1.0),\n            \"fluid_pp(2)%pi_inf\": 0.0,\n            **scheme_params,\n        }\n    )\n)\n"
+    },
+    "script": {
+      "file": "run.sh",
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-task2-n32-weno5-cfl0025\"\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=1\n#SBATCH --output=\"mfc-task2-n32-weno5-cfl0025.out\"\n#SBATCH --error=\"mfc-task2-n32-weno5-cfl0025.err\"\n#SBATCH --time=00:20:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=cpu\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/haswell/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"cpu\"          \"Walltime\"   \"00:20:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"1\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-task2-n32-weno5-cfl0025\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/mfc-environment.sh\" none || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 1 x 1\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-task2-n32-weno5-cfl0025:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+    },
+    "out": {
+      "file": "run.out",
+      "size": 363646,
+      "parsed": {
+        "banner": {
+          "start_time": "14:31:21",
+          "start_date": "14:31:21",
+          "partition": "cpu",
+          "walltime": "00:20:00",
+          "nodes": "1",
+          "job_name": "mfc-task2-n32-weno5-cfl0025",
+          "engine": "batch",
+          "queue_system": "SLURM"
+        },
+        "env": {
+          "host": "cpu-node1",
+          "nodesTasks": "1 x 1",
+          "mpirun": "/work/openmpi/5.0.10/bin/mpirun",
+          "fabric": "ibp129s0 (UCX_TLS=rc,sm,self)"
+        },
+        "steps": [
+          {
+            "step": 1,
+            "total": 2796,
+            "avg": 0,
+            "perStep": 0
+          },
+          {
+            "step": 25,
+            "total": 2796,
+            "avg": 0.0001097727,
+            "perStep": 0.000102
+          },
+          {
+            "step": 49,
+            "total": 2796,
+            "avg": 0.0001101739,
+            "perStep": 0.000103
+          },
+          {
+            "step": 73,
+            "total": 2796,
+            "avg": 0.0001088571,
+            "perStep": 0.000103
+          },
+          {
+            "step": 97,
+            "total": 2796,
+            "avg": 0.000108234,
+            "perStep": 0.000103
+          },
+          {
+            "step": 121,
+            "total": 2796,
+            "avg": 0.0001075339,
+            "perStep": 0.000103
+          },
+          {
+            "step": 145,
+            "total": 2796,
+            "avg": 0.0001070986,
+            "perStep": 0.000102
+          },
+          {
+            "step": 169,
+            "total": 2796,
+            "avg": 0.0001073313,
+            "perStep": 0.000115
+          },
+          {
+            "step": 193,
+            "total": 2796,
+            "avg": 0.0001070895,
+            "perStep": 0.000108
+          },
+          {
+            "step": 217,
+            "total": 2796,
+            "avg": 0.0001068131,
+            "perStep": 0.000102
+          },
+          {
+            "step": 241,
+            "total": 2796,
+            "avg": 0.0001067563,
+            "perStep": 0.000103
+          },
+          {
+            "step": 265,
+            "total": 2796,
+            "avg": 0.0001067366,
+            "perStep": 0.000103
+          },
+          {
+            "step": 289,
+            "total": 2796,
+            "avg": 0.0001066888,
+            "perStep": 0.000103
+          },
+          {
+            "step": 313,
+            "total": 2796,
+            "avg": 0.0001066645,
+            "perStep": 0.000103
+          },
+          {
+            "step": 337,
+            "total": 2796,
+            "avg": 0.0001066946,
+            "perStep": 0.000116
+          },
+          {
+            "step": 361,
+            "total": 2796,
+            "avg": 0.0001072654,
+            "perStep": 0.000103
+          },
+          {
+            "step": 385,
+            "total": 2796,
+            "avg": 0.0001072513,
+            "perStep": 0.000116
+          },
+          {
+            "step": 409,
+            "total": 2796,
+            "avg": 0.0001070911,
+            "perStep": 0.000103
+          },
+          {
+            "step": 433,
+            "total": 2796,
+            "avg": 0.0001069512,
+            "perStep": 0.000103
+          },
+          {
+            "step": 457,
+            "total": 2796,
+            "avg": 0.0001069075,
+            "perStep": 0.000103
+          },
+          {
+            "step": 481,
+            "total": 2796,
+            "avg": 0.0001067824,
+            "perStep": 0.000103
+          },
+          {
+            "step": 505,
+            "total": 2796,
+            "avg": 0.0001069143,
+            "perStep": 0.000103
+          },
+          {
+            "step": 529,
+            "total": 2796,
+            "avg": 0.0001068441,
+            "perStep": 0.000102
+          },
+          {
+            "step": 553,
+            "total": 2796,
+            "avg": 0.0001067927,
+            "perStep": 0.000131
+          },
+          {
+            "step": 577,
+            "total": 2796,
+            "avg": 0.0001067439,
+            "perStep": 0.000122
+          },
+          {
+            "step": 601,
+            "total": 2796,
+            "avg": 0.0001070853,
+            "perStep": 0.000103
+          },
+          {
+            "step": 625,
+            "total": 2796,
+            "avg": 0.0001070209,
+            "perStep": 0.000103
+          },
+          {
+            "step": 649,
+            "total": 2796,
+            "avg": 0.0001069381,
+            "perStep": 0.000107
+          },
+          {
+            "step": 673,
+            "total": 2796,
+            "avg": 0.0001068791,
+            "perStep": 0.000103
+          },
+          {
+            "step": 697,
+            "total": 2796,
+            "avg": 0.0001068559,
+            "perStep": 0.000102
+          },
+          {
+            "step": 721,
+            "total": 2796,
+            "avg": 0.0001067646,
+            "perStep": 0.000107
+          },
+          {
+            "step": 745,
+            "total": 2796,
+            "avg": 0.0001067129,
+            "perStep": 0.000103
+          },
+          {
+            "step": 769,
+            "total": 2796,
+            "avg": 0.0001067337,
+            "perStep": 0.000102
+          },
+          {
+            "step": 793,
+            "total": 2796,
+            "avg": 0.0001066962,
+            "perStep": 0.000116
+          },
+          {
+            "step": 817,
+            "total": 2796,
+            "avg": 0.0001066351,
+            "perStep": 0.000108
+          },
+          {
+            "step": 841,
+            "total": 2796,
+            "avg": 0.0001066074,
+            "perStep": 0.000103
+          },
+          {
+            "step": 865,
+            "total": 2796,
+            "avg": 0.0001065499,
+            "perStep": 0.000103
+          },
+          {
+            "step": 889,
+            "total": 2796,
+            "avg": 0.0001064955,
+            "perStep": 0.000102
+          },
+          {
+            "step": 913,
+            "total": 2796,
+            "avg": 0.0001064835,
+            "perStep": 0.000102
+          },
+          {
+            "step": 937,
+            "total": 2796,
+            "avg": 0.0001064679,
+            "perStep": 0.000103
+          },
+          {
+            "step": 961,
+            "total": 2796,
+            "avg": 0.0001064572,
+            "perStep": 0.000106
+          },
+          {
+            "step": 985,
+            "total": 2796,
+            "avg": 0.0001064613,
+            "perStep": 0.000131
+          },
+          {
+            "step": 1009,
+            "total": 2796,
+            "avg": 0.0001064722,
+            "perStep": 0.000102
+          },
+          {
+            "step": 1033,
+            "total": 2796,
+            "avg": 0.000106435,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1057,
+            "total": 2796,
+            "avg": 0.0001064298,
+            "perStep": 0.000104
+          },
+          {
+            "step": 1081,
+            "total": 2796,
+            "avg": 0.0001064054,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1105,
+            "total": 2796,
+            "avg": 0.0001063975,
+            "perStep": 0.00013
+          },
+          {
+            "step": 1129,
+            "total": 2796,
+            "avg": 0.0001064325,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1153,
+            "total": 2796,
+            "avg": 0.0001064235,
+            "perStep": 0.000128
+          },
+          {
+            "step": 1177,
+            "total": 2796,
+            "avg": 0.0001064114,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1201,
+            "total": 2796,
+            "avg": 0.0001064082,
+            "perStep": 0.000102
+          },
+          {
+            "step": 1225,
+            "total": 2796,
+            "avg": 0.0001064002,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1249,
+            "total": 2796,
+            "avg": 0.0001064157,
+            "perStep": 0.000123
+          },
+          {
+            "step": 1273,
+            "total": 2796,
+            "avg": 0.0001063961,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1297,
+            "total": 2796,
+            "avg": 0.0001063926,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1321,
+            "total": 2796,
+            "avg": 0.0001063513,
+            "perStep": 0.000112
+          },
+          {
+            "step": 1345,
+            "total": 2796,
+            "avg": 0.0001063271,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1369,
+            "total": 2796,
+            "avg": 0.0001063214,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1393,
+            "total": 2796,
+            "avg": 0.0001062971,
+            "perStep": 0.000107
+          },
+          {
+            "step": 1417,
+            "total": 2796,
+            "avg": 0.0001062645,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1441,
+            "total": 2796,
+            "avg": 0.0001062622,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1465,
+            "total": 2796,
+            "avg": 0.0001062449,
+            "perStep": 0.000107
+          },
+          {
+            "step": 1489,
+            "total": 2796,
+            "avg": 0.0001062275,
+            "perStep": 0.000114
+          },
+          {
+            "step": 1513,
+            "total": 2796,
+            "avg": 0.0001062199,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1537,
+            "total": 2796,
+            "avg": 0.0001062145,
+            "perStep": 0.000104
+          },
+          {
+            "step": 1561,
+            "total": 2796,
+            "avg": 0.0001062073,
+            "perStep": 0.000102
+          },
+          {
+            "step": 1585,
+            "total": 2796,
+            "avg": 0.0001062004,
+            "perStep": 0.000102
+          },
+          {
+            "step": 1609,
+            "total": 2796,
+            "avg": 0.000106193,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1633,
+            "total": 2796,
+            "avg": 0.0001062006,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1657,
+            "total": 2796,
+            "avg": 0.0001062134,
+            "perStep": 0.000115
+          },
+          {
+            "step": 1681,
+            "total": 2796,
+            "avg": 0.0001062396,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1705,
+            "total": 2796,
+            "avg": 0.0001062779,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1729,
+            "total": 2796,
+            "avg": 0.0001062723,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1753,
+            "total": 2796,
+            "avg": 0.0001062623,
+            "perStep": 0.000136
+          },
+          {
+            "step": 1777,
+            "total": 2796,
+            "avg": 0.0001062407,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1801,
+            "total": 2796,
+            "avg": 0.0001062336,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1825,
+            "total": 2796,
+            "avg": 0.0001062338,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1849,
+            "total": 2796,
+            "avg": 0.0001062031,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1873,
+            "total": 2796,
+            "avg": 0.0001062005,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1897,
+            "total": 2796,
+            "avg": 0.0001061874,
+            "perStep": 0.000102
+          },
+          {
+            "step": 1921,
+            "total": 2796,
+            "avg": 0.000106158,
+            "perStep": 0.000102
+          },
+          {
+            "step": 1945,
+            "total": 2796,
+            "avg": 0.0001061576,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1969,
+            "total": 2796,
+            "avg": 0.0001061546,
+            "perStep": 0.000103
+          },
+          {
+            "step": 1993,
+            "total": 2796,
+            "avg": 0.0001061377,
+            "perStep": 0.000124
+          },
+          {
+            "step": 2017,
+            "total": 2796,
+            "avg": 0.0001061246,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2041,
+            "total": 2796,
+            "avg": 0.0001061202,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2065,
+            "total": 2796,
+            "avg": 0.0001061062,
+            "perStep": 0.000107
+          },
+          {
+            "step": 2089,
+            "total": 2796,
+            "avg": 0.000106094,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2113,
+            "total": 2796,
+            "avg": 0.0001061237,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2137,
+            "total": 2796,
+            "avg": 0.000106134,
+            "perStep": 0.000116
+          },
+          {
+            "step": 2161,
+            "total": 2796,
+            "avg": 0.0001061733,
+            "perStep": 0.000107
+          },
+          {
+            "step": 2185,
+            "total": 2796,
+            "avg": 0.0001062443,
+            "perStep": 0.000129
+          },
+          {
+            "step": 2209,
+            "total": 2796,
+            "avg": 0.000106257,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2233,
+            "total": 2796,
+            "avg": 0.0001062574,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2257,
+            "total": 2796,
+            "avg": 0.0001062578,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2281,
+            "total": 2796,
+            "avg": 0.0001062783,
+            "perStep": 0.000118
+          },
+          {
+            "step": 2305,
+            "total": 2796,
+            "avg": 0.0001062554,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2329,
+            "total": 2796,
+            "avg": 0.0001062545,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2353,
+            "total": 2796,
+            "avg": 0.0001062464,
+            "perStep": 0.000115
+          },
+          {
+            "step": 2377,
+            "total": 2796,
+            "avg": 0.000106222,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2401,
+            "total": 2796,
+            "avg": 0.0001062219,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2425,
+            "total": 2796,
+            "avg": 0.0001062217,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2449,
+            "total": 2796,
+            "avg": 0.0001061966,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2473,
+            "total": 2796,
+            "avg": 0.0001062142,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2497,
+            "total": 2796,
+            "avg": 0.0001062053,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2521,
+            "total": 2796,
+            "avg": 0.0001061942,
+            "perStep": 0.000128
+          },
+          {
+            "step": 2545,
+            "total": 2796,
+            "avg": 0.0001061837,
+            "perStep": 0.000102
+          },
+          {
+            "step": 2569,
+            "total": 2796,
+            "avg": 0.0001061847,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2593,
+            "total": 2796,
+            "avg": 0.0001061737,
+            "perStep": 0.000106
+          },
+          {
+            "step": 2617,
+            "total": 2796,
+            "avg": 0.0001061771,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2641,
+            "total": 2796,
+            "avg": 0.0001061751,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2665,
+            "total": 2796,
+            "avg": 0.0001061642,
+            "perStep": 0.000106
+          },
+          {
+            "step": 2689,
+            "total": 2796,
+            "avg": 0.0001061497,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2713,
+            "total": 2796,
+            "avg": 0.0001061406,
+            "perStep": 0.000103
+          },
+          {
+            "step": 2737,
+            "total": 2796,
+            "avg": 0.0001061372,
+            "perStep": 0.000114
+          },
+          {
+            "step": 2761,
+            "total": 2796,
+            "avg": 0.0001061661,
+            "perStep": 0.000106
+          },
+          {
+            "step": 2785,
+            "total": 2796,
+            "avg": 0.0001061812,
+            "perStep": 0.000107
+          },
+          {
+            "step": 2795,
+            "total": 2796,
+            "avg": 0.0001062231,
+            "perStep": 0.000122
+          }
+        ],
+        "stepCount": 2795,
+        "performance": 179.04301075268816,
+        "totalTimeSec": 2,
+        "exitCode": 0,
+        "lines": 2853
+      },
+      "excerpt": {
+        "head": [
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py: |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| * Start-time     14:31:21                            * Start-date     14:31:21                            |",
+          "| * Partition      cpu                                 * Walltime       00:20:00                            |",
+          "| * Account        N/A                                 * Nodes          1                                   |",
+          "| * Job Name       mfc-task2-n32-weno5-cfl0025         * Engine         batch                               |",
+          "| * QoS            N/A                                 * Binary         N/A                                 |",
+          "| * Queue System   SLURM                               * Email          N/A                                 |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "",
+          "host        : cpu-node1",
+          "nodes/tasks : 1 x 1",
+          "mpirun      : /work/openmpi/5.0.10/bin/mpirun",
+          "fabric      : ibp129s0 (UCX_TLS=rc,sm,self)",
+          "",
+          "mfc: OK > :) Running syscheck:",
+          "",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)",
+          " [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)",
+          " [TEST] MPI: call assert(rank >= 0)",
+          " [TEST] MPI: call mpi_comm_size(MPI_COMM_WORLD, nRanks, ierr)",
+          " [TEST] MPI: call assert(nRanks > 0 .and. rank < nRanks)"
+        ],
+        "tail": [
+          " [100%]  Time step     2776 of 2796 @ t_step =     2775 Time Avg = 1.061713E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2777 of 2796 @ t_step =     2776 Time Avg = 1.061806E-04 Time/step= 1.320000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2778 of 2796 @ t_step =     2777 Time Avg = 1.061809E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2779 of 2796 @ t_step =     2778 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2780 of 2796 @ t_step =     2779 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2781 of 2796 @ t_step =     2780 Time Avg = 1.061811E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2782 of 2796 @ t_step =     2781 Time Avg = 1.061810E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2783 of 2796 @ t_step =     2782 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2784 of 2796 @ t_step =     2783 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2785 of 2796 @ t_step =     2784 Time Avg = 1.061812E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2786 of 2796 @ t_step =     2785 Time Avg = 1.061865E-04 Time/step= 1.210000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2787 of 2796 @ t_step =     2786 Time Avg = 1.061868E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2788 of 2796 @ t_step =     2787 Time Avg = 1.061867E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2789 of 2796 @ t_step =     2788 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2790 of 2796 @ t_step =     2789 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2791 of 2796 @ t_step =     2790 Time Avg = 1.061951E-04 Time/step= 1.300000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2792 of 2796 @ t_step =     2791 Time Avg = 1.061994E-04 Time/step= 1.180000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2793 of 2796 @ t_step =     2792 Time Avg = 1.062039E-04 Time/step= 1.190000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2794 of 2796 @ t_step =     2793 Time Avg = 1.062175E-04 Time/step= 1.440000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2795 of 2796 @ t_step =     2794 Time Avg = 1.062231E-04 Time/step= 1.220000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " Performance:   179.04301075268816      ns/gp/eq/rhs",
+          "",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| Finished mfc-task2-n32-weno5-cfl0025:                                                                     |",
+          "| * Total-time:    2s                                  * Exit Code:     0                                   |",
+          "| * End-time:      14:31:23                            * End-date:      14:31:23                            |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          ""
+        ],
+        "elided": 2801
+      }
+    },
+    "err": {
+      "file": "run.err",
+      "size": 2021,
+      "raw": "+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
+    }
+  }
+}

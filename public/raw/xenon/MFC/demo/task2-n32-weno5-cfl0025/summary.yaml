@@ -1,0 +1,51 @@
+invocation:
+- run
+- /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- -N
+- '1'
+- -n
+- '1'
+- -p
+- cpu
+- -w
+- 00:20:00
+- --name
+- mfc-task2-n32-weno5-cfl0025
+- -o
+- /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml
+- --clean
+- --no-build
+- --gpu
+- 'no'
+- --wait
+- --
+- -N
+- '32'
+- --order
+- '5'
+- --cfl
+- '0.025'
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: 'no'
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  .7002093
+pre_process:
+    exec:  .7276516
+simulation:
+    exec:  1.0435644
+    grind: 179.04301075
