@@ -17,6 +17,11 @@ on:
         description: "Suite to submit (HPL, MFC, or all)"
         required: false
         default: "all"
+      rerun:
+        description: "Re-run jobs that already have results in output/"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -49,8 +54,10 @@ jobs:
         run: node scripts/validate-job.mjs
 
       - name: Stage, submit, wait
+        shell: bash
         run: |
           set -euo pipefail
+          shopt -s nullglob
           STAGE="${SCRATCH_BASE}/${GITHUB_RUN_ID}"
           mkdir -p "$STAGE"; echo "STAGE=$STAGE" >> "$GITHUB_ENV"
           n=0
@@ -58,9 +65,18 @@ jobs:
             [ -d "$jobdir" ] || continue
             s="$(echo "$jobdir" | cut -d/ -f3)"
             [ "${{ inputs.suite }}" = "all" ] || [ -z "${{ inputs.suite }}" ] || [ "${{ inputs.suite }}" = "$s" ] || continue
-            dest="$STAGE/${jobdir#input/$CLUSTER/}"
+            rel="${jobdir#input/$CLUSTER/}"
+            # Inputs are kept so every run stays reproducible, which means they
+            # are all still here on the next push. Skip anything that already
+            # produced results, or each push would re-run the whole history.
+            if [ "${{ inputs.rerun }}" != "true" ] && \
+               compgen -G "output/$CLUSTER/${rel}"'*.out' > /dev/null 2>&1; then
+              echo "skip  $rel (already has results; use the rerun input to force)"
+              continue
+            fi
+            dest="$STAGE/$rel"
             mkdir -p "$dest"; cp -r "$jobdir". "$dest"/
-            echo "staged ${jobdir#input/$CLUSTER/}"; n=$((n+1))
+            echo "staged $rel"; n=$((n+1))
           done
           echo "STAGED=$n" >> "$GITHUB_ENV"
           [ "$n" -gt 0 ] || { echo "no jobs for $CLUSTER"; exit 0; }
