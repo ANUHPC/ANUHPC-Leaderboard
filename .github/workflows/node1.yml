@@ -8,7 +8,10 @@ on:
     branches:
       - main
     paths:
-      - "input/**"
+      # Raijin only. This used to be "input/**", so every push under
+      # input/xenon/ also started Raijin's pipeline -- one commit lighting up
+      # three workflows, and Raijin re-running jobs nobody asked for.
+      - "input/raijin/**"
 
 jobs:
   run-slurm:

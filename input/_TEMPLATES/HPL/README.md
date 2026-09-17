@@ -1,6 +1,16 @@
 # HPL entry template
 
-Copy this directory, add your `HPL.dat`, edit `job.yml`, push.
+Copy this directory, edit your `HPL.dat`, rename the run script for your
+cluster, push. A run is two files, the same as every Raijin entry:
+
+```
+HPL.dat     the problem: N, NB, P x Q
+run.sh      the job: #SBATCH lines, ranks, threads, binding
+```
+
+There is no `job.yml`. Everything it used to declare — partition, nodes,
+tasks, walltime — already lives in `run.sh`'s `#SBATCH` lines, and keeping
+both only lets them disagree.
 
 | | |
 |---|---|

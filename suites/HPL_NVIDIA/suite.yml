@@ -20,7 +20,10 @@ secondary:
 
 inputs:
   required: [HPL.dat]
-  optional: [run.sh, job.yml]
+  # run.sh (or run.<cluster>.sh) carries the #SBATCH lines and is what gets
+  # submitted. No job.yml: it duplicated the #SBATCH fields and could
+  # contradict them. Raijin has never used one.
+  optional: [run.sh]
 
 # Same tuning surface as CPU HPL, plus the process/GPU mapping: P x Q should
 # equal the number of GPUs, one rank per device.

@@ -100,19 +100,26 @@ for jobdir in "$STAGE"/*/*/*/; do
         gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; continue
       fi
       cp "$HPL_BIN" "$jobdir/xhpl" && chmod +x "$jobdir/xhpl"
-      # Insist on the name run.sh. Globbing *.sh and taking the first match
-      # would pick run.raijin.sh out of a wholesale copy of the template
-      # directory -- alphabetically first, and wrong on this cluster.
-      script="$jobdir/run.sh"
-      if [ ! -f "$script" ]; then
+      # run.sh, or run.<this cluster>.sh -- the template ships the latter and
+      # asking people to rename it buys nothing: the directory already says
+      # which cluster this is. What must NOT happen is picking up another
+      # cluster's script, so never glob *.sh and take the first match; that
+      # would choose run.raijin.sh out of a wholesale template copy purely
+      # because it sorts first.
+      script=""
+      for cand in "$jobdir/run.sh" "$jobdir/run.$CLUSTER.sh"; do
+        [ -f "$cand" ] && { script="$cand"; break; }
+      done
+      if [ -z "$script" ]; then
         other="$(cd "$jobdir" && ls run.*.sh 2>/dev/null | tr '\n' ' ')"
         if [ -n "$other" ]; then
-          gh_error "$label: found $other but no run.sh — rename the one for this cluster: mv run.$CLUSTER.sh run.sh"
+          gh_error "$label: found $other, which is for another cluster — use run.sh or run.$CLUSTER.sh"
         else
           gh_error "$label: no run.sh (cp input/_TEMPLATES/HPL/run.$CLUSTER.sh input/$CLUSTER/$label/run.sh)"
         fi
         continue
       fi
+      echo "  using $(basename "$script") for $label"
       # A run.sh carried over from another cluster names nodes that do not exist
       # here and fails only after it has queued.
       if grep -qE '^\s*#SBATCH\s+--nodelist=' "$script"; then

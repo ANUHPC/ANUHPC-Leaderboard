@@ -95,7 +95,12 @@ async function main() {
 
     const jobFile = files.find((f) => /^job\.ya?ml$/i.test(f));
     if (!jobFile) {
-      if (suiteName === "HPL") { warn(where, "no job.yml — falling back to the legacy run.sh path"); continue; }
+      // HPL needs no job.yml. Everything it describes -- partition, nodes,
+      // tasks, walltime -- is already in run.sh's #SBATCH lines, and keeping
+      // both invites them to disagree. None of Raijin's 137 runs has one.
+      // MFC is different: its job.yml names which pinned case to run, which
+      // exists nowhere else, so that stays required via suite.yml.
+      if (suiteName === "HPL" || suiteName === "HPL_NVIDIA") continue;
       err(where, "missing job.yml"); continue;
     }
 
