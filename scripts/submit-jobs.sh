@@ -18,7 +18,9 @@ RUN_ID="${3:?}"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 HPL_BIN="${HPL_BIN:-/apps/benchmarks/hpl/current/bin/xhpl}"
+# The /apps OpenMPI has no Fortran bindings; MFC needs the /work rebuild.
 MPI_PREFIX="${MPI_PREFIX:-/apps/openmpi/5.0.10}"
+export MFC_ROOT="${MFC_ROOT:-/work/mfc/current}"
 POLL="${POLL_INTERVAL:-30}"
 SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/null}"
 
@@ -147,8 +149,11 @@ for jobdir in "$STAGE"/*/*/*/; do
       fi
       ;;
     MFC)
-      if [ ! -d /apps/mfc/current ]; then
-        gh_error "$label: /apps/mfc/current missing — MFC is not published on $CLUSTER"; continue
+      # /work, not /apps: MFC rewrites build/lock.yaml on every run and /apps is
+      # read-only on the compute nodes. render.sh picks the per-architecture
+      # tree (haswell for the cpu partition, zen3 for gpu) and checks the rest.
+      if [ ! -d "$MFC_ROOT" ]; then
+        gh_error "$label: no MFC install at $MFC_ROOT — build it before submitting"; continue
       fi
       if bash "$REPO/suites/MFC/render.sh" "$jobdir" "$RUN_ID"; then
         echo "  submitted $label"

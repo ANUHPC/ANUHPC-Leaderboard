@@ -25,6 +25,17 @@
 % if partition:
 #SBATCH --partition=${partition}
 % endif
+% if not gpu_enabled:
+## Physical cores, and the whole node.
+##
+## Without --hint=nomultithread Slurm hands out hardware threads, so
+## --ntasks-per-node=4 can land on 2 physical cores and the mpirun below fails
+## outright with "Procs mapped: 0" -- --bind-to core cannot find 4 distinct
+## cores. --exclusive keeps another job off the node, which a benchmark needs
+## anyway: a shared node makes the grind time meaningless.
+#SBATCH --exclusive
+#SBATCH --hint=nomultithread
+% endif
 % if gpu_enabled:
 ## gpu-node1 and gpu-node2 carry 4x A100-SXM4-40GB each; one rank per device.
 #SBATCH --gres=gpu:a100:${tasks_per_node}
@@ -49,7 +60,13 @@ ${helpers.template_prologue()}
 ## module system is installed, replace this block with the matching
 ## `module load` lines from cluster/toolchains.yml.
 ## ---------------------------------------------------------------------------
-export OMPI_PREFIX=/apps/openmpi/5.0.10
+## /work, not /apps. The /apps build of OpenMPI 5.0.10 has no Fortran at all
+## ("Fort compiler: none", no mpifort), because it was configured before
+## gfortran was installed. MFC is Fortran, so its binaries are linked against
+## the /work rebuild instead -- and LD_LIBRARY_PATH wins over the RUNPATH baked
+## into them, so naming the wrong prefix here would load an MPI with no
+## libmpi_mpifh and fail at startup.
+export OMPI_PREFIX=/work/openmpi/5.0.10
 export UCX_PREFIX=/apps/ucx/1.22.0
 export PATH="$OMPI_PREFIX/bin:$PATH"
 export LD_LIBRARY_PATH="$OMPI_PREFIX/lib:$UCX_PREFIX/lib:${'${LD_LIBRARY_PATH:-}'}"

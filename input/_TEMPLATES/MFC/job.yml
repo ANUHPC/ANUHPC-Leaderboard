@@ -20,17 +20,26 @@ suite: MFC
 case: 5eq_rk3_weno3_hllc
 
 resources:
-  partition: cpu          # cpu (cpu-node2, 72 cores) | gpu (2 x 4 A100)
+  # cpu -> cpu-node1 + cpu-node2 (Haswell)   gpu -> gpu-node1 + gpu-node2 (Zen 3)
+  #
+  # "all" is rejected: MFC is compiled -march=native and the two node types are
+  # different microarchitectures, so one binary cannot span them. Each partition
+  # gets the build made for its hardware.
+  partition: cpu
   nodes: 1
   tasks_per_node: 8       # on gpu, use 4 — one rank per A100
   walltime: "01:00:00"
 
 build:
-  gpu: none               # none | acc  (acc = OpenACC offload, gpu partition only)
-  toolchain: gcc-ompi5    # see cluster/toolchains.yml
-  # Hard-codes case parameters into the binary. Large GPU speedup, but it costs
-  # a full rebuild on your walltime and is badged on the board.
-  case_optimization: false
+  # none | acc  (acc = OpenACC offload, gpu partition only).
+  # acc needs NVHPC, which is not installed yet — the current builds are CPU-only.
+  gpu: none
+  toolchain: gcc-ompi5    # see clusters/xenon/toolchains.yml
+
+  # case_optimization is NOT available. It recompiles MFC with the case baked
+  # in, and jobs share one checkout per architecture, so it would rewrite the
+  # tree every other job reads from. Setting it true makes the job fail with
+  # that explanation rather than being silently ignored.
 
 tuning:
   # GB of memory per rank. Sets the problem size:

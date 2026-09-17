@@ -40,8 +40,16 @@ ranking:
 
 source:
   repo: https://github.com/MFlowCode/MFC
-  pin: null                # set to a sha before the first ranked run
-  prefix: /apps/mfc
+  # v5.6.1-50-ge2f0e267. render.sh refuses to run if the installed tree is at
+  # a different commit -- two entrants must measure the same code.
+  pin: e2f0e267
+  # /work, not /apps: MFC rewrites build/lock.yaml on every run and /apps is
+  # exported read-only to the compute nodes. One tree per CPU architecture,
+  # because MFC compiles Release with -march=native and the cpu nodes (Haswell)
+  # and gpu nodes (Zen 3) need different binaries:
+  #     /work/mfc/current/haswell   -> partition cpu
+  #     /work/mfc/current/zen3      -> partition gpu
+  prefix: /work/mfc/current
 
 run:
   launcher: mfc
@@ -63,11 +71,17 @@ cases:
   - {slug: igr,                       path: benchmarks/igr/case.py}
 
 tuning:
-  free: [nodes, tasks_per_node, gbpp, gpu, toolchain, case_optimization]
+  free: [nodes, tasks_per_node, gbpp, gpu, toolchain]
   defaults:
     gbpp: 16               # GB per rank; sets the problem size
     gpu: none
-    case_optimization: false
+  unsupported:
+    # Recompiles MFC with the case baked in. Jobs share one checkout per
+    # architecture, so a case-optimized build would rewrite the tree every
+    # other job reads from. It needs a private checkout per job, and staging
+    # one costs about five minutes of NFS metadata here. render.sh rejects it
+    # with that explanation rather than silently ignoring the field.
+    - case_optimization
 
 clusters: [xenon]   # MFC needs a Fortran/MPI toolchain; only Xenon has one being built.
 
