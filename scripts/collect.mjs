@@ -5,7 +5,7 @@
 // output tree the website already consumes:
 //
 //   /tmp/hpl-website-data/data/index.json
-//   /tmp/hpl-website-data/data/runs/<suite>/<group>/<run>/run.json
+//   /tmp/hpl-website-data/data/runs/<cluster>/<suite>/<group>/<run>/run.json
 //   /tmp/hpl-website-data/raw/<suite>/<group>/<run>/<files>
 //
 // The index keeps every field the current site reads (best, outSummary, hasErr)
@@ -194,7 +194,10 @@ async function processSuite(suite, index, clusters, clusterName) {
     for (const f of result.rawFiles || []) {
       const dest = path.join(RAW_ROOT, ...baseParts, f);
       await ensureDir(path.dirname(dest));
-      try { await fs.copyFile(path.join(dir, f), dest); rawPaths[f] = "/" + path.posix.join("raw", ...baseParts, f); }
+      // No leading slash: the site is served from /ANUHPC-Leaderboard/, so an
+      // absolute "/raw/..." resolves to the domain root and 404s. Keep these
+      // relative and let the page prefix import.meta.env.BASE_URL.
+      try { await fs.copyFile(path.join(dir, f), dest); rawPaths[f] = path.posix.join("raw", ...baseParts, f); }
       catch { /* a missing artefact is not fatal */ }
     }
 
