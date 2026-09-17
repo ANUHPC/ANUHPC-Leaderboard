@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T01:46:25.413Z",
+  "generatedAt": "2026-09-17T02:05:21.919Z",
   "clusters": [
     {
       "name": "raijin",
@@ -40,7 +40,42 @@
         "precision": 2
       },
       "reference": null,
-      "count": 138
+      "clusters": [
+        "raijin",
+        "xenon"
+      ],
+      "available": true,
+      "missing": null,
+      "count": 138,
+      "countByCluster": {
+        "raijin": 137,
+        "xenon": 1
+      }
+    },
+    {
+      "name": "HPL_NVIDIA",
+      "description": "High Performance Linpack on NVIDIA GPUs",
+      "metric": {
+        "key": "gflops",
+        "label": "Rmax",
+        "unit": "GFLOP/s",
+        "direction": "higher",
+        "precision": 2
+      },
+      "reference": null,
+      "clusters": [
+        "xenon"
+      ],
+      "available": false,
+      "missing": [
+        "hpl-nvidia binary",
+        "container runtime"
+      ],
+      "count": 0,
+      "countByCluster": {
+        "raijin": 0,
+        "xenon": 0
+      }
     },
     {
       "name": "MFC",
@@ -62,7 +97,16 @@
           "grind": 0.38
         }
       ],
-      "count": 0
+      "clusters": [
+        "xenon"
+      ],
+      "available": true,
+      "missing": null,
+      "count": 0,
+      "countByCluster": {
+        "raijin": 0,
+        "xenon": 0
+      }
     }
   ],
   "runs": [
