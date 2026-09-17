@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T07:58:04.654Z",
+  "generatedAt": "2026-09-17T08:51:05.290Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 4
+      "count": 13
     }
   ],
   "suites": [
@@ -102,10 +102,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 1,
+      "count": 10,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 1
+        "xenon": 10
       }
     }
   ],
@@ -5686,6 +5686,494 @@
       "rank": 3
     },
     {
+      "id": "xenon/MFC/benchmark/5eq_rk3_weno3_hll-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "5eq_rk3_weno3_hll-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.17501602,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 234.522919,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.0892022,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "5eq_rk3_weno3_hll",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "5eq_rk3_weno3_hll/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/5eq_rk3_weno3_hllc-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "5eq_rk3_weno3_hllc-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.17542157,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 277.9768637,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.0894089,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "5eq_rk3_weno3_hllc",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "5eq_rk3_weno3_hllc/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/5eq_rk3_weno3_hllc-cpu",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "5eq_rk3_weno3_hllc-cpu",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 96.27166188,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 147.6111656,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 1.49459676,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 4,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "5eq_rk3_weno3_hllc",
+        "nodes": 1,
+        "tasks_per_node": 4,
+        "ranks": 4,
+        "partition": "cpu",
+        "gpu": "none",
+        "case_optimization": null,
+        "gbpp": 1,
+        "toolchain": "gcc-ompi5",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "5eq_rk3_weno3_hllc/CPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "5eq_rk3_weno3_lf-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.17167647,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 249.2816041,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.0875001,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "5eq_rk3_weno3_lf",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "5eq_rk3_weno3_lf/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/hypo_hll-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "hypo_hll-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.16621504,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 495.4413955,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.1482539,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "hypo_hll",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "hypo_hll/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/ibm-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "ibm-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.69385272,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 260.0710711,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.353643,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "ibm",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "ibm/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/igr-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "igr-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.50197132,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 75.1549189,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.1594291,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "igr",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "igr/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "xenon/MFC/benchmark/viscous_weno5_sgb_acoustic-a100",
+      "suite": "MFC",
+      "group": "benchmark",
+      "run": "viscous_weno5_sgb_acoustic-a100",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 0.44402156,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 311.0567757,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.226309,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 8,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": "viscous_weno5_sgb_acoustic",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "viscous_weno5_sgb_acoustic/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
+    },
+    {
       "id": "xenon/MFC/demo/bowshock-gpu",
       "suite": "MFC",
       "group": "demo",
@@ -5739,6 +6227,66 @@
         "eligible": false,
         "reason": "Custom or unverified case — unranked",
         "group": "custom/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "xenon/MFC/demo/scc26-p3-cpu",
+      "suite": "MFC",
+      "group": "demo",
+      "run": "scc26-p3-cpu",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "grind",
+        "value": 55.9686851,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 52.69835,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.0055245,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 4,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "config": {
+        "case": null,
+        "nodes": 1,
+        "tasks_per_node": 4,
+        "ranks": 4,
+        "partition": "cpu",
+        "gpu": "none",
+        "case_optimization": null,
+        "gbpp": null,
+        "toolchain": "gcc-ompi5",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": false,
+        "reason": "Custom or unverified case — unranked",
+        "group": "custom/CPU"
       },
       "notes": [],
       "best": null,

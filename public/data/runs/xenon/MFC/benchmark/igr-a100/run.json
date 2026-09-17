@@ -1,0 +1,171 @@
+{
+  "id": "xenon/MFC/benchmark/igr-a100",
+  "suite": "MFC",
+  "group": "benchmark",
+  "run": "igr-a100",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "metric": {
+    "key": "grind",
+    "value": 0.50197132,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 75.1549189,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.1594291,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 8,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "config": {
+    "case": "igr",
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "ranks": 8,
+    "partition": "gpu",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "pinned",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": "igr",
+    "case_sha256": "f24d7246d942df6d989f173c5dd216789e505fd64c4ee3e49467468a5a24efc0",
+    "invocation": "run /scratch/jobs/35187881911/MFC/benchmark/igr-a100/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 2 -n 4 -p gpu -w 01:00:00 --name mfc-igr-a100 -o /scratch/jobs/35187881911/MFC/benchmark/igr-a100/summary.yaml --no-build --clean --gpu acc --wait -- --gbpp 16",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": "Pinned benchmark case",
+    "group": "igr/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/benchmark/igr-a100/case.py",
+    "summary.yaml": "raw/xenon/MFC/benchmark/igr-a100/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/benchmark/igr-a100/time_data.dat",
+    "mfc-igr-a100.out": "raw/xenon/MFC/benchmark/igr-a100/mfc-igr-a100.out",
+    "mfc-igr-a100.err": "raw/xenon/MFC/benchmark/igr-a100/mfc-igr-a100.err",
+    "job.yml": "raw/xenon/MFC/benchmark/igr-a100/job.yml",
+    "mfc-provenance.json": "raw/xenon/MFC/benchmark/igr-a100/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/benchmark/igr-a100/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "mfc-igr-a100.out",
+    "size": 6371
+  },
+  "err": {
+    "file": "mfc-igr-a100.err",
+    "size": 392
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35187881911/MFC/benchmark/igr-a100/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "-N",
+        "2",
+        "-n",
+        "4",
+        "-p",
+        "gpu",
+        "-w",
+        "01:00:00",
+        "--name",
+        "mfc-igr-a100",
+        "-o",
+        "/scratch/jobs/35187881911/MFC/benchmark/igr-a100/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--",
+        "--gbpp",
+        "16"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 3.2043981
+      },
+      "pre_process": {
+        "exec": 40.1164167
+      },
+      "simulation": {
+        "exec": 75.1549189,
+        "grind": 0.50197132
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 8,
+        "sPerStep": 0.1594291,
+        "grind": 0.50197132
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# Benchmark igr_T_viscous_T\n# Additional Benchmarked Features\n# - igr : T\n# - viscous : T\n# - igr_order : 5\n\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(prog=\"Benchmarking Case 5\", description=\"This MFC case was created for the purposes of benchmarking MFC.\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\n\nparser.add_argument(\"--mfc\", type=json.loads, default=\"{}\", metavar=\"DICT\", help=\"MFC's toolchain's internal state.\")\nparser.add_argument(\"--gbpp\", type=int, metavar=\"MEM\", default=16, help=\"Adjusts the problem size per rank to fit into [MEM] GB of GPU memory per GPU.\")\nparser.add_argument(\"--steps\", type=int, default=None, help=\"Override t_step_stop/t_step_save.\")\n\nARGS = vars(parser.parse_args())\nDICT = ARGS[\"mfc\"]\n\nsize = 1 if DICT[\"gpu\"] else 0\n\nppg = 8000000 / 16.0\nprocs = DICT[\"nodes\"] * DICT[\"tasks_per_node\"]\nncells = math.floor(ppg * procs * ARGS[\"gbpp\"])\ns = math.floor((ncells) ** (1 / 3))\nNx, Ny, Nz = s, s, s\n\nRe = 1600\nL = 1\nP0 = 101325\nrho0 = 1\nC0 = math.sqrt(1.4 * P0)\nV0 = 0.1 * C0\nmu = V0 * L / Re\n\ncfl = 0.5\ndx = 2 * math.pi * L / (Nx + 1)\n\ndt = cfl * dx / (C0)\n\ntC = L / V0\ntEnd = 20 * tC\n\nNt = int(tEnd / dt)\n\n# Configuring case dictionary\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"F\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": -math.pi * L,\n            \"x_domain%end\": math.pi * L,\n            \"y_domain%beg\": -math.pi * L,\n            \"y_domain%end\": math.pi * L,\n            \"z_domain%beg\": -math.pi * L,\n            \"z_domain%end\": math.pi * L,\n            \"m\": Nx,\n            \"n\": Ny,\n            \"p\": Nz,\n            \"cyl_coord\": \"F\",\n            \"dt\": dt,\n            \"t_step_start\": 0,\n            \"t_step_stop\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            \"t_step_save\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            # Simulation Algorithm Parameters\n            \"num_patches\": 1,\n            \"model_eqns\": 2,\n            \"num_fluids\": 1,\n            \"riemann_solver\": 5,\n            \"time_stepper\": 3,\n            \"bc_x%beg\": -1,\n            \"bc_x%end\": -1,\n            \"bc_y%beg\": -1,\n            \"bc_y%end\": -1,\n            \"bc_z%beg\": -1,\n            \"bc_z%end\": -1,\n            \"igr\": \"T\",\n            \"igr_order\": 5,\n            \"igr_iter_solver\": 1,\n            \"num_igr_iters\": 3,\n            \"num_igr_warm_start_iters\": 3,\n            \"alf_factor\": 10,\n            \"viscous\": \"T\",\n            # Formatted Database Files Structure Parameters\n            \"format\": 1,\n            \"precision\": 2,\n            \"prim_vars_wrt\": \"T\",\n            \"omega_wrt(1)\": \"T\",\n            \"omega_wrt(2)\": \"T\",\n            \"omega_wrt(3)\": \"T\",\n            \"qm_wrt\": \"T\",\n            \"fd_order\": 4,\n            \"parallel_io\": \"F\",\n            # Patch 1: Background (AIR - 2)\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": 0,\n            \"patch_icpp(1)%y_centroid\": 0,\n            \"patch_icpp(1)%z_centroid\": 0,\n            \"patch_icpp(1)%length_x\": 2 * math.pi * L,\n            \"patch_icpp(1)%length_y\": 2 * math.pi * L,\n            \"patch_icpp(1)%length_z\": 2 * math.pi * L,\n            \"patch_icpp(1)%vel(1)\": 0.0,\n            \"patch_icpp(1)%vel(2)\": 0.0,\n            \"patch_icpp(1)%vel(3)\": 0,\n            \"patch_icpp(1)%pres\": 0.0,\n            \"patch_icpp(1)%hcid\": 380,\n            \"patch_icpp(1)%alpha_rho(1)\": 1,\n            \"patch_icpp(1)%alpha(1)\": 1,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (1.4 - 1),\n            \"fluid_pp(1)%pi_inf\": 0,\n            \"fluid_pp(1)%Re(1)\": 1 / mu,\n        }\n    )\n)\n"
+    },
+    "out": {
+      "file": "mfc-igr-a100.out",
+      "size": 6371
+    },
+    "err": {
+      "file": "mfc-igr-a100.err",
+      "size": 392
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "id": "xenon/MFC/demo/scc26-p3-cpu",
+  "suite": "MFC",
+  "group": "demo",
+  "run": "scc26-p3-cpu",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "metric": {
+    "key": "grind",
+    "value": 55.9686851,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 52.69835,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.0055245,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 4,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "config": {
+    "case": null,
+    "nodes": 1,
+    "tasks_per_node": 4,
+    "ranks": 4,
+    "partition": "cpu",
+    "gpu": "none",
+    "case_optimization": null,
+    "gbpp": null,
+    "toolchain": "gcc-ompi5",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "custom",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": null,
+    "case_sha256": "e096868b931e56804da4cc4ee43b6cf81cb69f645de9bb7f8054ba9290d351ef",
+    "invocation": "run /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation post_process -N 1 -n 4 -p cpu -w 00:30:00 --name mfc-scc26-p3-cpu -o /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml --no-build --clean --gpu no --wait --",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "no",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": false,
+    "reason": "Custom or unverified case — unranked",
+    "group": "custom/CPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/demo/scc26-p3-cpu/case.py",
+    "summary.yaml": "raw/xenon/MFC/demo/scc26-p3-cpu/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/demo/scc26-p3-cpu/time_data.dat",
+    "mfc-scc26-p3-cpu.out": "raw/xenon/MFC/demo/scc26-p3-cpu/mfc-scc26-p3-cpu.out",
+    "mfc-scc26-p3-cpu.err": "raw/xenon/MFC/demo/scc26-p3-cpu/mfc-scc26-p3-cpu.err",
+    "job.yml": "raw/xenon/MFC/demo/scc26-p3-cpu/job.yml",
+    "alpha1.mp4": "raw/xenon/MFC/demo/scc26-p3-cpu/alpha1.mp4",
+    "alpha1_2812.png": "raw/xenon/MFC/demo/scc26-p3-cpu/alpha1_2812.png",
+    "mfc-provenance.json": "raw/xenon/MFC/demo/scc26-p3-cpu/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/demo/scc26-p3-cpu/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "mfc-scc26-p3-cpu.out",
+    "size": 378904
+  },
+  "err": {
+    "file": "mfc-scc26-p3-cpu.err",
+    "size": 8829
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "post_process",
+        "-N",
+        "1",
+        "-n",
+        "4",
+        "-p",
+        "cpu",
+        "-w",
+        "00:30:00",
+        "--name",
+        "mfc-scc26-p3-cpu",
+        "-o",
+        "/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "no",
+        "--wait",
+        "--"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "no",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 0.7160673
+      },
+      "pre_process": {
+        "exec": 1.2992406
+      },
+      "simulation": {
+        "exec": 52.69835,
+        "grind": 55.9686851
+      },
+      "post_process": {
+        "exec": 4.0312922
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 4,
+        "sPerStep": 0.0055245,
+        "grind": 55.9686851
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# MIT License\n# \n# Copyright (c) 2021 Spencer Bryngelson and Tim Colonius\n# \n# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n# \n# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n# \n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nimport argparse\nimport json\nimport math\n\n# SCC26 Practice Problem 3, pp. 4-6.\n# Based on MFlowCode/MFC e2f0e267 examples/2D_shockdroplet/case.py.\n# The GitHub runner passes no custom case arguments. Edit these defaults,\n# then submit in a NEW run directory to compare experiments.\nMACH = 1.4\nRESOLUTION = 0.2  # 240 x 60 cells; PDF figure uses 4.0 (4800 x 1200).\nEND_TIME = 1.0   # Dimensionless breakup time; PDF figure uses 2.0.\nCFL = 0.2\nADAPTIVE_DT = False\n\nparser = argparse.ArgumentParser(prog=\"2D_shockdroplet\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\nparser.add_argument(\n    \"--mfc\",\n    type=json.loads,\n    default=\"{}\",\n    metavar=\"DICT\",\n    help=\"MFC's toolchain's internal state.\",\n)\nparser.add_argument(\"--mach\", type=float, default=MACH, help=\"Shock Mach number.\")\nparser.add_argument(\"--adap-dt\", action=\"store_true\", default=ADAPTIVE_DT, help=\"Use CFL-based adaptive time-stepping.\")\nparser.add_argument(\"--cfl\", type=float, default=CFL, help=\"CFL number.\")\nparser.add_argument(\"--tend\", type=float, default=END_TIME, help=\"Dimensionless end time.\")\nparser.add_argument(\"--res\", type=float, default=RESOLUTION, help=\"Resolution scaling factor.\")\nargs = parser.parse_args()\n\nMa = args.mach\np_a = 101325.0\nrho_a = 1.204\nrho_w = 1000\ngam_a = 1.4\ngam_w = 6.12\npi_w = 3.43e8\n\n# Post-shock state from the Rankine-Hugoniot conditions (shock moving into still air)\nps = p_a * (1 + 2 * gam_a / (gam_a + 1) * (Ma**2 - 1))\nrho_post_a = rho_a * (gam_a + 1) * Ma**2 / ((gam_a - 1) * Ma**2 + 2)\nc_a = math.sqrt(gam_a * p_a / rho_a)\nvel = 2 * c_a / (gam_a + 1) * (Ma**2 - 1) / Ma\n\nc_l = math.sqrt(gam_a * ps / rho_a)\neps = 1e-6\n\nD = 0.048\nNy = (300 * args.res) - 1\nNx = (1200 * args.res) - 1\ndx = 24 * D / Nx\n\n# End time in units of the Ranger & Nicholls (1969) breakup time scale\n# t_breakup = D sqrt(rho_l/rho_g) / u_g, with post-shock gas conditions\ntau_end = args.tend\ntime_end = tau_end * D * math.sqrt(rho_w / rho_post_a) / vel\ncfl = args.cfl\n\ndt = cfl * dx / c_l\nNt = int(time_end / dt)\n\nif args.adap_dt:\n    time_stepping = {\n        \"cfl_adap_dt\": \"T\",\n        \"cfl_target\": cfl,\n        \"n_start\": 0,\n        \"t_stop\": time_end,\n        \"t_save\": time_end / 100,\n    }\nelse:\n    time_stepping = {\n        \"dt\": dt,\n        \"t_step_start\": 0,\n        \"t_step_stop\": Nt,\n        \"t_step_save\": math.ceil(Nt / 100),\n    }\n\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"T\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": -4 * D,\n            \"x_domain%end\": 20 * D,\n            \"y_domain%beg\": 0.0,\n            \"y_domain%end\": 6 * D,\n            \"stretch_y\": \"T\",\n            \"a_y\": 3.67,\n            \"y_a\": -5.7 * D,\n            \"y_b\": 5.7 * D,\n            \"loops_y\": 2,\n            \"m\": int(Nx),\n            \"n\": int(Ny),\n            \"p\": 0,\n            **time_stepping,\n            \"elliptic_smoothing\": \"T\",\n            \"elliptic_smoothing_iters\": 20,\n            # Simulation Algorithm Parameters\n            \"num_patches\": 3,\n            \"model_eqns\": \"5eq\",\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"F\",\n            \"mixture_err\": \"F\",\n            \"time_stepper\": \"rk3\",\n            \"weno_order\": 3,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"T\",\n            \"null_weights\": \"F\",\n            \"mp_weno\": \"F\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            \"avg_state\": \"arithmetic\",\n            \"bc_x%beg\": -6,  # 11,\n            \"bc_x%end\": -6,  # 12\n            \"bc_y%beg\": -2,\n            \"bc_y%end\": -3,\n            # Formatted Database Files Structure Parameters\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"T\",\n            # Patch 1: Background\n            \"patch_icpp(1)%geometry\": 3,\n            \"patch_icpp(1)%x_centroid\": 8 * D,\n            \"patch_icpp(1)%y_centroid\": 6 * D,\n            \"patch_icpp(1)%length_x\": 24 * D,\n            \"patch_icpp(1)%length_y\": 14 * D,\n            \"patch_icpp(1)%vel(1)\": 0.0,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%pres\": p_a,\n            \"patch_icpp(1)%alpha_rho(1)\": eps * rho_w,\n            \"patch_icpp(1)%alpha_rho(2)\": (1 - eps) * rho_a,\n            \"patch_icpp(1)%alpha(1)\": eps,\n            \"patch_icpp(1)%alpha(2)\": 1 - eps,\n            # Patch 2: Shocked state\n            \"patch_icpp(2)%geometry\": 3,\n            \"patch_icpp(2)%alter_patch(1)\": \"T\",\n            \"patch_icpp(2)%x_centroid\": -2.5 * D,\n            \"patch_icpp(2)%y_centroid\": 6 * D,\n            \"patch_icpp(2)%length_x\": 3 * D,\n            \"patch_icpp(2)%length_y\": 14 * D,\n            \"patch_icpp(2)%vel(1)\": vel,\n            \"patch_icpp(2)%vel(2)\": 0.0e00,\n            \"patch_icpp(2)%pres\": ps,\n            \"patch_icpp(2)%alpha_rho(1)\": eps * rho_w,\n            \"patch_icpp(2)%alpha_rho(2)\": (1 - eps) * rho_post_a,\n            \"patch_icpp(2)%alpha(1)\": eps,\n            \"patch_icpp(2)%alpha(2)\": 1 - eps,\n            # Patch 3: Bubble\n            \"patch_icpp(3)%geometry\": 2,\n            \"patch_icpp(3)%x_centroid\": 0,\n            \"patch_icpp(3)%y_centroid\": 0,\n            \"patch_icpp(3)%radius\": D / 2,\n            \"patch_icpp(3)%alter_patch(1)\": \"T\",\n            \"patch_icpp(3)%vel(1)\": 0.0,\n            \"patch_icpp(3)%vel(2)\": 0.0e00,\n            \"patch_icpp(3)%pres\": p_a,\n            \"patch_icpp(3)%alpha_rho(1)\": (1 - eps) * rho_w,\n            \"patch_icpp(3)%alpha_rho(2)\": eps * 1.17,\n            \"patch_icpp(3)%alpha(1)\": 1 - eps,  # 0.95\n            \"patch_icpp(3)%alpha(2)\": eps,  # 0.05,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gam_w - 1.0e00),\n            \"fluid_pp(1)%pi_inf\": pi_w * gam_w / (gam_w - 1.0e00),\n            \"fluid_pp(2)%gamma\": 1.0e00 / (gam_a - 1.0e00),\n            \"fluid_pp(2)%pi_inf\": 0.0e00,\n        }\n    )\n)\n"
+    },
+    "out": {
+      "file": "mfc-scc26-p3-cpu.out",
+      "size": 378904
+    },
+    "err": {
+      "file": "mfc-scc26-p3-cpu.err",
+      "size": 8829
+    }
+  }
+}

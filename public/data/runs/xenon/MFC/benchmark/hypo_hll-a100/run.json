@@ -1,0 +1,171 @@
+{
+  "id": "xenon/MFC/benchmark/hypo_hll-a100",
+  "suite": "MFC",
+  "group": "benchmark",
+  "run": "hypo_hll-a100",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "metric": {
+    "key": "grind",
+    "value": 0.16621504,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 495.4413955,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.1482539,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 8,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "config": {
+    "case": "hypo_hll",
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "ranks": 8,
+    "partition": "gpu",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "pinned",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": "hypo_hll",
+    "case_sha256": "bf3bd49ed9c2a155f1df7147e6a7a2c65e0fed6914142d7141390ae83755270c",
+    "invocation": "run /scratch/jobs/35187881911/MFC/benchmark/hypo_hll-a100/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 2 -n 4 -p gpu -w 01:00:00 --name mfc-hypo_hll-a100 -o /scratch/jobs/35187881911/MFC/benchmark/hypo_hll-a100/summary.yaml --no-build --clean --gpu acc --wait -- --gbpp 16",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": "Pinned benchmark case",
+    "group": "hypo_hll/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/benchmark/hypo_hll-a100/case.py",
+    "summary.yaml": "raw/xenon/MFC/benchmark/hypo_hll-a100/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/benchmark/hypo_hll-a100/time_data.dat",
+    "mfc-hypo-hll-a100.out": "raw/xenon/MFC/benchmark/hypo_hll-a100/mfc-hypo-hll-a100.out",
+    "mfc-hypo-hll-a100.err": "raw/xenon/MFC/benchmark/hypo_hll-a100/mfc-hypo-hll-a100.err",
+    "job.yml": "raw/xenon/MFC/benchmark/hypo_hll-a100/job.yml",
+    "mfc-provenance.json": "raw/xenon/MFC/benchmark/hypo_hll-a100/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/benchmark/hypo_hll-a100/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "mfc-hypo-hll-a100.out",
+    "size": 6402
+  },
+  "err": {
+    "file": "mfc-hypo-hll-a100.err",
+    "size": 392
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35187881911/MFC/benchmark/hypo_hll-a100/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "-N",
+        "2",
+        "-n",
+        "4",
+        "-p",
+        "gpu",
+        "-w",
+        "01:00:00",
+        "--name",
+        "mfc-hypo_hll-a100",
+        "-o",
+        "/scratch/jobs/35187881911/MFC/benchmark/hypo_hll-a100/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--",
+        "--gbpp",
+        "16"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 3.1980325
+      },
+      "pre_process": {
+        "exec": 215.9439427
+      },
+      "simulation": {
+        "exec": 495.4413955,
+        "grind": 0.16621504
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 8,
+        "sPerStep": 0.1482539,
+        "grind": 0.16621504
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# Benchmark hypoelasticity_T_riemann_solver_1\n# Additional Benchmarked Features\n# - hypoelasticity : T\n# - riemann_solver : 1\n\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(prog=\"Benchmarkin Case 3\", description=\"This MFC case was created for the purposes of benchmarking MFC.\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\n\nparser.add_argument(\"--mfc\", type=json.loads, default=\"{}\", metavar=\"DICT\", help=\"MFC's toolchain's internal state.\")\nparser.add_argument(\"--gbpp\", type=int, metavar=\"MEM\", default=16, help=\"Adjusts the problem size per rank to fit into [MEM] GB of GPU memory per GPU.\")\nparser.add_argument(\"--steps\", type=int, default=None, help=\"Override t_step_stop/t_step_save.\")\n\nARGS = vars(parser.parse_args())\nDICT = ARGS[\"mfc\"]\n\nsize = 1 if DICT[\"gpu\"] else 0\n\nppg = 8000000 / 16.0\nprocs = DICT[\"nodes\"] * DICT[\"tasks_per_node\"]\nncells = math.floor(ppg * procs * ARGS[\"gbpp\"])\ns = math.floor((ncells / 2.0) ** (1 / 3))\nNx, Ny, Nz = 2 * s, s, s\n\n\n# Configuring case dictionary\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"F\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": 0.0e00,\n            \"x_domain%end\": 1.0e00,\n            \"y_domain%beg\": 0.0e00,\n            \"y_domain%end\": 2.0e00,\n            \"z_domain%beg\": 0.0e00,\n            \"z_domain%end\": 1.0e00,\n            \"m\": Nx,\n            \"n\": Ny,\n            \"p\": Nz,\n            \"dt\": 1e-8,\n            \"t_step_start\": 0,\n            \"t_step_stop\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            \"t_step_save\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            # Simulation Algorithm Parameters\n            \"num_patches\": 2,\n            \"model_eqns\": 2,\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"F\",\n            \"mixture_err\": \"F\",\n            \"time_stepper\": 3,\n            \"weno_order\": 3,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"F\",\n            \"null_weights\": \"F\",\n            \"mp_weno\": \"F\",\n            \"riemann_solver\": 1,\n            \"wave_speeds\": 1,\n            \"avg_state\": 2,\n            \"bc_x%beg\": -3,\n            \"bc_x%end\": -3,\n            \"bc_y%beg\": -3,\n            \"bc_y%end\": -3,\n            \"bc_z%beg\": -3,\n            \"bc_z%end\": -3,\n            # Turning on Hypoelasticity\n            \"hypoelasticity\": \"T\",\n            \"fd_order\": 4,\n            # Formatted Database Files Structure Parameters\n            \"format\": 1,\n            \"precision\": 2,\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"F\",\n            # Patch 1 L\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": 0.35,\n            \"patch_icpp(1)%y_centroid\": 1.0,\n            \"patch_icpp(1)%z_centroid\": 0.5,\n            \"patch_icpp(1)%length_x\": 0.7,\n            \"patch_icpp(1)%length_y\": 2,\n            \"patch_icpp(1)%length_z\": 1,\n            \"patch_icpp(1)%vel(1)\": 0.0,\n            \"patch_icpp(1)%vel(2)\": 0.0,\n            \"patch_icpp(1)%vel(3)\": 0.0,\n            \"patch_icpp(1)%pres\": 1e09,\n            \"patch_icpp(1)%alpha_rho(1)\": 1000,\n            \"patch_icpp(1)%alpha_rho(2)\": 0.0,\n            \"patch_icpp(1)%alpha(1)\": 1,\n            \"patch_icpp(1)%alpha(2)\": 0.0,\n            \"patch_icpp(1)%tau_e(1)\": 0.0,\n            # Patch 2 R\n            \"patch_icpp(2)%geometry\": 9,\n            \"patch_icpp(2)%x_centroid\": 0.85,\n            \"patch_icpp(2)%y_centroid\": 1.0,\n            \"patch_icpp(2)%z_centroid\": 0.5,\n            \"patch_icpp(2)%length_x\": 0.3,\n            \"patch_icpp(2)%length_y\": 2.0,\n            \"patch_icpp(2)%length_z\": 1.0,\n            \"patch_icpp(2)%vel(1)\": 0,\n            \"patch_icpp(2)%vel(2)\": 0,\n            \"patch_icpp(2)%vel(3)\": 0,\n            \"patch_icpp(2)%pres\": 1e05,\n            \"patch_icpp(2)%alpha_rho(1)\": 0.0,\n            \"patch_icpp(2)%alpha_rho(2)\": 50.0,\n            \"patch_icpp(2)%alpha(1)\": 0,\n            \"patch_icpp(2)%alpha(2)\": 1,\n            \"patch_icpp(2)%tau_e(1)\": 0.0,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (4.4e00 - 1.0e00),\n            \"fluid_pp(1)%pi_inf\": 4.4e00 * 6.0e08 / (4.4e00 - 1.0e00),\n            \"fluid_pp(1)%G\": 1.0e09,\n            \"fluid_pp(2)%gamma\": 1.0e00 / (1.4e00 - 1.0e00),\n            \"fluid_pp(2)%pi_inf\": 0.0,\n            \"fluid_pp(2)%G\": 0.0,\n        }\n    )\n)\n"
+    },
+    "out": {
+      "file": "mfc-hypo-hll-a100.out",
+      "size": 6402
+    },
+    "err": {
+      "file": "mfc-hypo-hll-a100.err",
+      "size": 392
+    }
+  }
+}

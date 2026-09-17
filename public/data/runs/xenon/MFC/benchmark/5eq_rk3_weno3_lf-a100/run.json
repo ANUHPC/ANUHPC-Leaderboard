@@ -1,0 +1,171 @@
+{
+  "id": "xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100",
+  "suite": "MFC",
+  "group": "benchmark",
+  "run": "5eq_rk3_weno3_lf-a100",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "metric": {
+    "key": "grind",
+    "value": 0.17167647,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 249.2816041,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.0875001,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 8,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "config": {
+    "case": "5eq_rk3_weno3_lf",
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "ranks": 8,
+    "partition": "gpu",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "pinned",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": "5eq_rk3_weno3_lf",
+    "case_sha256": "365eea5d19de1e57a84fc265bea19c7f3b85b87b5a4112ae8d3e3019b522ee32",
+    "invocation": "run /scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_lf-a100/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 2 -n 4 -p gpu -w 01:00:00 --name mfc-5eq_rk3_weno3_lf-a100 -o /scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_lf-a100/summary.yaml --no-build --clean --gpu acc --wait -- --gbpp 16",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": "Pinned benchmark case",
+    "group": "5eq_rk3_weno3_lf/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/case.py",
+    "summary.yaml": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/time_data.dat",
+    "mfc-5eq-rk3-weno3-lf-a100.out": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/mfc-5eq-rk3-weno3-lf-a100.out",
+    "mfc-5eq-rk3-weno3-lf-a100.err": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/mfc-5eq-rk3-weno3-lf-a100.err",
+    "job.yml": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/job.yml",
+    "mfc-provenance.json": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/benchmark/5eq_rk3_weno3_lf-a100/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "mfc-5eq-rk3-weno3-lf-a100.out",
+    "size": 6437
+  },
+  "err": {
+    "file": "mfc-5eq-rk3-weno3-lf-a100.err",
+    "size": 392
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_lf-a100/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "-N",
+        "2",
+        "-n",
+        "4",
+        "-p",
+        "gpu",
+        "-w",
+        "01:00:00",
+        "--name",
+        "mfc-5eq_rk3_weno3_lf-a100",
+        "-o",
+        "/scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_lf-a100/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--",
+        "--gbpp",
+        "16"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 3.2008577
+      },
+      "pre_process": {
+        "exec": 49.3183518
+      },
+      "simulation": {
+        "exec": 249.2816041,
+        "grind": 0.17167647
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 8,
+        "sPerStep": 0.0875001,
+        "grind": 0.17167647
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# Benchmark model_equations_2_time_stepper_3_weno_order_3_riemann_solver_lax_friedrichs\n# Additional Benchmarked Features\n# - model_equations : 2\n# - time_stepper : 3\n# - weno_order : 3\n# - riemann_solver : lax_friedrichs\n\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(prog=\"Benchmarking Case 1\", description=\"This MFC case was created for the purposes of benchmarking MFC.\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\n\nparser.add_argument(\"--mfc\", type=json.loads, default=\"{}\", metavar=\"DICT\", help=\"MFC's toolchain's internal state.\")\nparser.add_argument(\"--gbpp\", type=int, metavar=\"MEM\", default=16, help=\"Adjusts the problem size per rank to fit into [MEM] GB of GPU memory per GPU.\")\nparser.add_argument(\"--steps\", type=int, default=None, help=\"Override t_step_stop/t_step_save.\")\n\nARGS = vars(parser.parse_args())\nDICT = ARGS[\"mfc\"]\n\nsize = 1 if DICT[\"gpu\"] else 0\n\nppg = 8000000 / 16.0\nprocs = DICT[\"nodes\"] * DICT[\"tasks_per_node\"]\nncells = math.floor(ppg * procs * ARGS[\"gbpp\"])\ns = math.floor((ncells / 2.0) ** (1 / 3))\nNx, Ny, Nz = 2 * s, s, s\n\n# athmospheric pressure - Pa (used as reference value)\npatm = 101325\n\n# Initial Droplet Diameter / Reference length - m\nD0 = 1.0e-3\n\n# cavity to droplet ratio\nCtD = 0.06\n\n# cavity relative eccentricity (distance between radii)\necc = 0.564\n\n# initial shock distance from the y axis. Note that the droplet center is located at y = 0. Thus, the distance from the shock to\n# the droplet is about D0/8\nISD = 5.0 / 8 * D0\n\n# pre-shock properties - AIR\n\n# pressure - Pa\np0a = patm\n\n# density - kg/m3\nrho0a = 1.204\n\n# gamma\ngama = 1.40\n\n# pi infinity - Pa\npia = 0\n\n# speed of sound - M/s\nc_a = math.sqrt(gama * (p0a + pia) / rho0a)\n\n# Droplet - WATER\n\n# surface tension - N / m\nst = 0.00e0\n\n# Delta Pressure - Pa\nDP = -st * 4 / D0\n\n# initial pressure inside the droplet - Pa\np0w = p0a - DP\n\n# density - kg/m3\nrho0w = 1000\n\n# gama\ngamw = 6.12\n\n# pi infty - Pa\npiw = 3.43e08\n\n# speed of sound - m/s\nc_w = math.sqrt(gamw * (p0w + piw) / rho0w)\n\n# Shock Mach number of interest. Note that the post-shock properties can be defined in terms of either\n# Min or psOp0a. Just comment/uncomment appropriately\nMin = 2.4\n\n# Pos to pre shock ratios - AIR\n\n# pressure\npsOp0a = (Min**2 - 1) * 2 * gama / (gama + 1) + 1\n# psOp0a = 4.5\n\n# density\nrhosOrho0a = (1 + (gama + 1) / (gama - 1) * psOp0a) / ((gama + 1) / (gama - 1) + psOp0a)\n\n# Mach number of the shocked region - just a checker, as it must return \"Min\"\nMs = math.sqrt((gama + 1.0) / (2.0 * gama) * (psOp0a - 1.0) * (p0a / (p0a + pia)) + 1.0)\n\n# shock speed of sound - m/s\nss = Ms * c_a\n\n# post-shock - AIR\n\n# pressure - Pa\nps = psOp0a * p0a\n\n# density - kg / m3\nrhos = rhosOrho0a * rho0a\n\n# post shock speed of sound - m/s\nc_s = math.sqrt(gama * (ps + pia) / rhos)\n\n# velocity at the post shock - m/s\nvel = c_a / gama * (psOp0a - 1.0) * p0a / (p0a + pia) / Ms\n\n# Domain boundaries - m\n\n# x direction\nxb = -8.4707 * D0\nxe = 9.6226 * D0\n\n# xb = -10 * D0\n# xe = 10 * D0\n\n# y direction\nyb = 0 * D0\nye = 10 * D0\n\n# y direction\nzb = 0 * D0\nze = 10 * D0\n\n# Stretching factor, to make sure the domaing is sufficiently large after the mesh stretch\nStF = 4.0\n\n# grid delta x if mesh were uniform in x direction - m. Note that I do not need a measure for dy\ndx = (xe - xb) / Nx\n\n# I calculate tend twice; first is an estimate, second is\n# the actual value used. This is because I am getting errors in the\n# post process part every time I approximate the actual Nt by an integer\n# number (think of a smarter way).\n\n# dimensionless time\nttilde = 1.92\n\n# auxiliary simulation physical time - s. This is not YET the total simulation time, as it will be corrected so as to avoid\n# mismatches in simulation and post_process parts. Note that I wrote it this way so I have better control over the # of autosaves\ntendA = ttilde * D0 / vel\n\ncfl = 0.1\n\n# time-step - s\ndt = dx * cfl / ss\n\n# Save Frequency. Note that the number of autosaves will be SF + 1, as th IC (0.dat) is also saved\nSF = 400\n\n# making Nt divisible by SF\n# 1 - ensure NtA goes slightly beyond tendA\nNtA = int(tendA // dt + 1)\n\n# Array of saves. It is the same as Nt/Sf = t_step_save\nAS = int(NtA // SF + 1)\n\n# Nt = total number of steps. Note that Nt >= NtA (so at least tendA is completely simulated)\nNt = AS * SF\n\n# total simulation time - s. Note that tend >= tendA\ntend = Nt * dt\n\n# Configuring case dictionary\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"F\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": xb,\n            \"x_domain%end\": xe,\n            \"y_domain%beg\": yb,\n            \"y_domain%end\": ye,\n            \"z_domain%beg\": zb,\n            \"z_domain%end\": ze,\n            \"m\": Nx,\n            \"n\": Ny,\n            \"p\": Nz,\n            \"cyl_coord\": \"F\",\n            \"dt\": dt,\n            \"t_step_start\": 0,\n            \"t_step_stop\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            \"t_step_save\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            # Simulation Algorithm Parameters\n            \"num_patches\": 3,\n            \"model_eqns\": 2,\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"T\",\n            \"mixture_err\": \"T\",\n            \"time_stepper\": 3,\n            \"weno_order\": 3,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"T\",\n            \"riemann_solver\": \"lax_friedrichs\",\n            \"wave_speeds\": 1,\n            \"avg_state\": 2,\n            \"bc_x%beg\": -6,\n            \"bc_x%end\": -6,\n            \"bc_y%beg\": -2,\n            \"bc_y%end\": -3,\n            \"bc_z%beg\": -2,\n            \"bc_z%end\": -3,\n            # Formatted Database Files Structure Parameters\n            \"format\": 1,\n            \"precision\": 2,\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"F\",\n            # I will use 1 for WATER properties, and 2 for AIR properties\n            # Patch 1: Background (AIR - 2)\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": (xb + xe) / 2 * StF,\n            \"patch_icpp(1)%y_centroid\": (yb + ye) / 2 * StF,\n            \"patch_icpp(1)%z_centroid\": (yb + ye) / 2 * StF,\n            \"patch_icpp(1)%length_x\": (xe - xb) * StF,\n            \"patch_icpp(1)%length_y\": (ye - yb) * StF,\n            \"patch_icpp(1)%length_z\": (ze - zb) * StF,\n            \"patch_icpp(1)%vel(1)\": 0.0e00,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%vel(3)\": 0.0e00,\n            \"patch_icpp(1)%pres\": p0a,\n            \"patch_icpp(1)%alpha_rho(1)\": 0.0e00,\n            \"patch_icpp(1)%alpha_rho(2)\": rho0a,\n            \"patch_icpp(1)%alpha(1)\": 0.0e00,\n            \"patch_icpp(1)%alpha(2)\": 1.0e00,\n            # Patch 2: Shocked state (AIR - 2)\n            \"patch_icpp(2)%geometry\": 9,\n            \"patch_icpp(2)%alter_patch(1)\": \"T\",\n            \"patch_icpp(2)%x_centroid\": -ISD - (xe - xb) / 2 * StF,\n            \"patch_icpp(2)%y_centroid\": (yb + ye) / 2 * StF,\n            \"patch_icpp(2)%z_centroid\": (zb + ze) / 2 * StF,\n            \"patch_icpp(2)%length_x\": (xe - xb) * StF,\n            \"patch_icpp(2)%length_y\": (ye - yb) * StF,\n            \"patch_icpp(2)%length_z\": (ze - zb) * StF,\n            \"patch_icpp(2)%vel(1)\": vel,\n            \"patch_icpp(2)%vel(2)\": 0.0e00,\n            \"patch_icpp(2)%vel(3)\": 0.0e00,\n            \"patch_icpp(2)%pres\": ps,\n            \"patch_icpp(2)%alpha_rho(1)\": 0.0e00,\n            \"patch_icpp(2)%alpha_rho(2)\": rhos,\n            \"patch_icpp(2)%alpha(1)\": 0.0e00,\n            \"patch_icpp(2)%alpha(2)\": 1.0e00,\n            # Patch 3: Droplet (WATER - 1)\n            \"patch_icpp(3)%geometry\": 8,\n            \"patch_icpp(3)%x_centroid\": 0.0e00,\n            \"patch_icpp(3)%y_centroid\": 0.0e00,\n            \"patch_icpp(3)%z_centroid\": 0.0e00,\n            \"patch_icpp(3)%radius\": D0 / 2,\n            \"patch_icpp(3)%alter_patch(1)\": \"T\",\n            \"patch_icpp(3)%vel(1)\": 0.0e00,\n            \"patch_icpp(3)%vel(2)\": 0.0e00,\n            \"patch_icpp(3)%vel(3)\": 0.0e00,\n            \"patch_icpp(3)%pres\": p0w,\n            \"patch_icpp(3)%alpha_rho(1)\": rho0w,\n            \"patch_icpp(3)%alpha_rho(2)\": 0.0e00,\n            \"patch_icpp(3)%alpha(1)\": 1.0e00,\n            \"patch_icpp(3)%alpha(2)\": 0.0e00,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gamw - 1),\n            \"fluid_pp(1)%pi_inf\": gamw * piw / (gamw - 1),\n            \"fluid_pp(2)%gamma\": 1.0e00 / (gama - 1),\n            \"fluid_pp(2)%pi_inf\": gama * pia / (gama - 1),\n        }\n    )\n)\n"
+    },
+    "out": {
+      "file": "mfc-5eq-rk3-weno3-lf-a100.out",
+      "size": 6437
+    },
+    "err": {
+      "file": "mfc-5eq-rk3-weno3-lf-a100.err",
+      "size": 392
+    }
+  }
+}
