@@ -55,7 +55,8 @@ export function validRun(r: unknown): r is MfcRunData {
 }
 export function comparableGrind(runs: MfcRunData[]) {
     if (!runs.length) return false;
-    const key = (r: MfcRunData) => JSON.stringify([r.cluster, hardware(r), r.ranking?.group, r.parameters?.equations]);
+    const key = (r: MfcRunData) => JSON.stringify([r.cluster, hardware(r), r.ranking?.group,
+        ...['equations','modelEqns','numFluids','wenoOrder','wenoEps','riemann','timeStepper','viscous','surfaceTension','bubbles'].map(k => r.parameters?.[k])]);
     return runs.every(r => r.status === 'ok' && r.ranking?.eligible && Number.isFinite(r.metric?.value) &&
         typeof r.parameters?.equations === 'number' && r.parameters.equations > 0 && key(r) === key(runs[0]));
 }

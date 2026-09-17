@@ -241,12 +241,12 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
 
                         <section className="rounded-xl border border-slate-200 bg-white p-4">
                             <h3 className="font-semibold">Resolved simulation settings</h3>
-                            <p className="mt-1 text-xs text-slate-500">Read from simulation.inp. Missing fields are unknown. Equations, when available, are derived for the ordinary 5-equation model.</p>
+                            <p className="mt-1 text-xs text-slate-500">From simulation.inp; missing fields remain unknown.</p>
                             {data.parameters ? <dl className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">{settingFields.map(([k,label]) => <div key={k} className="flex justify-between gap-3 text-sm"><dt className="text-slate-500">{label}</dt><dd className="break-all text-right font-mono">{value(data.parameters?.[k])}</dd></div>)}</dl> : <p className="mt-3 text-sm">Settings unknown: this historical run did not retain simulation.inp.</p>}
-                            <p className="mt-3 text-sm">Simulation execution: {number(sec.exec)} s. Total time also includes workflow overhead.</p>
-                            <p className="mt-2 text-sm text-amber-800">Adding equations can lower grind while increasing seconds per step. Use settings, cost and accuracy together.</p>
+                            <p className="mt-3 text-sm">Simulation: {number(sec.exec)} s · Total includes workflow overhead.</p>
+                            <p className="mt-2 text-sm text-amber-800">Grind changes with equation count; compare seconds per step too.</p>
                             {data.convergence && <p className="mt-2 text-sm">Measured periodic-return error: L1 {number(data.convergence.L1)}, L2 {number(data.convergence.L2)}, L∞ {number(data.convergence.Linf)}.</p>}
-                            <p className="mt-2 text-xs text-slate-500">{data.verification?.reason ?? data.ranking?.reason} Verification checks execution provenance, not physical accuracy.</p>
+                            <details className="mt-2 text-xs text-slate-500"><summary className="cursor-pointer">Verification details</summary><p className="mt-1">{data.verification?.reason ?? data.ranking?.reason} Execution provenance is checked; physical accuracy is not certified.</p></details>
                             <p className="mt-2 text-xs text-slate-500">{data.dateSource === 'git' ? 'Result publication' : 'Run completion'}: {data.date ?? 'Unknown'} · Submitted by {data.submitter?.name ?? 'Unknown'}</p>
                         </section>
 

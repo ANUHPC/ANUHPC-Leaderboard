@@ -108,6 +108,10 @@ with sync_playwright() as p:
     fixture['runs'][1]['parameters']['equations']=7
     page.reload()
     expect(page.get_by_role('option',name='Grind (matching benchmarks only)')).to_be_enabled()
+    fixture['runs'][1]['parameters']['viscous']=True
+    page.reload()
+    expect(page.get_by_role('option',name='Grind (matching benchmarks only)')).to_be_disabled()
+    fixture['runs'][1]['parameters'].pop('viscous')
     fixture['runs'][1]['cluster']='raijin'
     page.goto(base+'#/MFC?view=benchmarks'); page.reload()
     expect(page.get_by_role('heading',name='xenon · advection_1d · CPU')).to_be_visible()

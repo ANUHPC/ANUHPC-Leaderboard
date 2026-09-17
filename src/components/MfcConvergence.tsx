@@ -13,12 +13,12 @@ export function MfcConvergence({ runs, norm, onNorm, onOpen }: { runs: MfcRunDat
     return <section className="space-y-4">
         <div className="rounded-xl border border-slate-200 bg-white p-5">
             <h2 className="text-xl font-semibold">Task 2 · Accuracy under refinement</h2>
-            <p className="mt-2 text-sm text-slate-600">Measured difference between initial and final volume fraction after one periodic return. Each line holds case, CFL arguments, solver settings, cluster and hardware fixed. Observed order is log(error coarse / error fine) ÷ log(N fine / N coarse).</p>
-            <p className="mt-2 text-sm text-slate-600">RK3 time error can limit WENO5 to third order at fixed CFL. WENO epsilon and smooth extrema also affect observed order. Use the low-CFL series to examine spatial accuracy.</p>
+            <p className="mt-2 text-sm text-slate-600">Measured error versus grid size. Lower error means higher accuracy.</p>
+            <details className="mt-2 text-sm text-slate-600"><summary className="cursor-pointer text-blue-800">How to read the plot</summary><div className="mt-2 space-y-2"><p>Error compares initial and final volume fraction after one periodic return. Each line keeps the case, CFL, solver settings and hardware fixed.</p><p>Observed order = log(error coarse / error fine) ÷ log(N fine / N coarse). RK3 time error can limit WENO5 to third order; use a low CFL to examine spatial accuracy.</p><p>WENO epsilon and smooth extrema also affect observed order. The task guide explains the expected trends.</p></div></details>
             <label className="mt-3 inline-flex items-center gap-2 text-sm">Error norm <select className="rounded border p-2" value={norm} onChange={e => onNorm(e.target.value as Norm)}><option>L1</option><option>L2</option><option>Linf</option></select></label>
-            <a className="ml-4 text-sm text-blue-700 underline" href={guide('practice-task2')}>Submit a convergence sweep ↗</a>
+            <a className="ml-4 text-sm text-blue-700 underline" href={guide('practice-task2')}>Run a sweep ↗</a>
         </div>
-        {!groups.size && <p className="rounded-xl border border-slate-200 bg-white p-6">No measured convergence errors in this selection yet. New registered Task 2 runs publish convergence.json automatically. Timings alone cannot establish accuracy.</p>}
+        {!groups.size && <p className="rounded-xl border border-slate-200 bg-white p-6">No error measurements yet. Submit a Task 2 run to add a point.</p>}
         {[...groups].map(([key, items]) => {
             const rows = [...items].sort((a, b) => a.convergence!.N - b.convergence!.N);
             const positive = rows.filter(r => r.convergence![norm] > 0);
@@ -31,8 +31,8 @@ export function MfcConvergence({ runs, norm, onNorm, onOpen }: { runs: MfcRunDat
             const first = rows[0];
             return <div key={key} className="rounded-xl border border-slate-200 bg-white p-5">
                 <h3 className="font-semibold">WENO {value(first.parameters?.wenoOrder)} · {first.cluster} · {hardware(first)}</h3>
-                <p className="mt-1 break-words text-xs text-slate-500">Arguments: {Array.isArray(first.config?.args) ? first.config.args.join(' ') : 'Unknown'} · epsilon {value(first.parameters?.wenoEps)} · {value(first.parameters?.timeStepper)}</p>
-                {duplicate && <p className="mt-2 text-sm text-amber-800">Repeated resolutions: points are shown separately; lines and order estimates are withheld. Narrow the run search to one sweep.</p>}
+                <p className="mt-1 break-words text-xs text-slate-500">Series arguments (N varies): {Array.isArray(first.config?.args) ? first.config.args.filter((v, i, a) => v !== '-N' && a[i-1] !== '-N' && !String(v).startsWith('-N=')).join(' ') || 'Case defaults' : 'Unknown'} · epsilon {value(first.parameters?.wenoEps)} · {value(first.parameters?.timeStepper)}</p>
+                {duplicate && <p className="mt-2 text-sm text-amber-800">Repeated resolutions: filter to one sweep to show lines and order.</p>}
                 {positive.length > 0 && <svg viewBox="0 0 640 285" className="mt-3 w-full max-w-3xl" role="img" aria-label={`${norm} error versus grid cells on logarithmic axes`}>
                     <path d="M75 30V230H580" fill="none" stroke="#64748b" />
                     {[0, .5, 1].map(t => <g key={t}><text x={65} y={234 - 190 * t} textAnchor="end" fontSize="11">{(10 ** (ylo + (yhi - ylo) * t)).toExponential(1)}</text><path d={`M75 ${230 - 190*t}H580`} stroke="#e2e8f0" /></g>)}
@@ -45,7 +45,7 @@ export function MfcConvergence({ runs, norm, onNorm, onOpen }: { runs: MfcRunDat
                         const order = !duplicate && prev && c.N > prev.N && c[norm] > 0 && prev[norm] > 0 ? Math.log(prev[norm] / c[norm]) / Math.log(c.N / prev.N) : null;
                         return <tr key={r.id} className="border-t"><td className="p-2"><button className="text-blue-700 underline" onClick={() => onOpen(r)}>{r.run}</button></td><td className="p-2">{c.N}</td><td className="p-2 font-mono">{c[norm].toExponential(4)}</td><td className="p-2">{order != null && Number.isFinite(order) ? order.toFixed(3) : '—'}</td></tr>; })}
                 </tbody></table></div>
-                <p className="mt-2 text-xs text-slate-500">{positive.length < rows.length ? 'Zero errors remain in the table and are omitted from the log plot. ' : ''}Reference orders: WENO1 → 1, WENO3 → 3, WENO5 → 5 when spatial error dominates. {number(rows.length)} measured points.</p>
+                <p className="mt-2 text-xs text-slate-500">{positive.length < rows.length ? 'Zero errors remain in the table and are omitted from the log plot. ' : ''}{number(rows.length)} measured points.</p>
             </div>;
         })}
     </section>;

@@ -86,4 +86,37 @@ verification is not physical validation. Equation derivation covers the ordinary
 5-equation family only when the required settings are retained; advanced or
 incomplete configurations keep an unknown count. Task 1 full CPU/GPU suites and
 a new interactive Task 4 ParaView session were outside this website audit.
-Live deployment verification is recorded below after publication.
+## Live verification
+
+The initial deployment and GitHub Pages publication both succeeded:
+[website build](https://github.com/ANUHPC/ANUHPC-Leaderboard/actions/runs/35234893984)
+and [Pages deployment](https://github.com/ANUHPC/ANUHPC-Leaderboard/actions/runs/35234974141).
+All ten browser audit groups also passed against the deployed site, including
+both HPL routes. All four task-guide links returned HTTP 200. The retained
+simulation.inp and convergence.json files were downloadable from run details.
+
+The [actual GitHub submission](https://github.com/ANUHPC/ANUHPC-Leaderboard/actions/runs/35234061736)
+completed all three Task 2 jobs after fixing cached-build reuse. The live index
+contains 14 MFC runs, including these three verified study points. Every error
+below was checked against its downloadable convergence.json:
+
+| Cells | L2 error | Observed order |
+|---|---|---|
+| 32 | 4.319939742785054e-6 | — |
+| 64 | 1.3495849315842944e-7 | 5.000424 |
+| 128 | 4.225840822132736e-9 | 4.997134 |
+
+[Open the measured convergence plot](https://anuhpc.github.io/ANUHPC-Leaderboard/#/MFC?cluster=xenon&view=convergence&case=advection_1d).
+The live plot was checked at desktop and mobile widths; all three points form
+one series. The final audit also tightens grind grouping for changed solver or
+physics settings even when equation counts match. No fabricated data was
+published. Starter ZIPs were rebuilt and their contents compared byte-for-byte
+with the current templates.
+
+## Simpler presentation
+
+Following user review, task descriptions were reduced to compact links, the
+intro to one sentence, and submission/metric explanations moved into Quick
+help. Convergence theory is collapsed under How to read the plot. Run rows
+show the key settings and costs; full physics settings remain in comparison
+and details. Safety checks, measured errors and submission links are retained.
