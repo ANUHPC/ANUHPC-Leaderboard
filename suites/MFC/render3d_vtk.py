@@ -16,8 +16,8 @@
 # dependency at all.
 #
 # What it draws:
-#   * the immersed body as an opaque isosurface of ib_markers -- the sphere
-#   * the air as a translucent volume coloured by velocity magnitude, so the
+#   * the immersed body from the sphere geometry supplied from case.py
+#   * the air as a translucent volume coloured by pressure, so the
 #     bow shock is the bright shell standing off the nose
 #   * a camera orbiting as time advances, so the image reads as solid
 import argparse
@@ -76,7 +76,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("vtk_dir")
     ap.add_argument("out_dir")
-    ap.add_argument("--var", default="velmag")
+    ap.add_argument("--var", default="pres")
     ap.add_argument("--body", default="ib_markers")
     ap.add_argument("--spin", type=float, default=1.5, help="degrees per frame")
     ap.add_argument("--size", default="1280x720")
@@ -160,7 +160,7 @@ def main():
 
     bar = vtk.vtkScalarBarActor()
     bar.SetLookupTable(colour)
-    bar.SetTitle("|u|  m/s" if args.var == "velmag" else args.var)
+    bar.SetTitle("Pressure (Pa)" if args.var == "pres" else "|u|  m/s" if args.var == "velmag" else args.var)
     bar.SetNumberOfLabels(5)
     bar.GetTitleTextProperty().SetColor(1, 1, 1)
     bar.GetLabelTextProperty().SetColor(1, 1, 1)

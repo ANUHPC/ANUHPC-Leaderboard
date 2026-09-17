@@ -84,9 +84,14 @@ def main():
     print(f"silo2vtk: {len(steps)} timesteps from {args.case_dir}", flush=True)
 
     for i, step in enumerate(steps):
-        a = silo_reader.assemble_silo(args.case_dir, step)
+        # Reading only pressure keeps the 33M-cell demo within a few GB of
+        # host memory instead of assembling every flow field unnecessarily.
+        a = silo_reader.assemble_silo(args.case_dir, step,
+                                     var=args.var[0] if args.var and len(args.var) == 1 else None)
         wanted = args.var or list(a.variables.keys())
         arrays = {k: a.variables[k] for k in wanted if k in a.variables}
+        if not arrays:
+            sys.exit(f"silo2vtk: requested variables {wanted} missing at step {step}")
 
         # Velocity magnitude is the thing worth looking at: it is what makes
         # the shock and the wake visible. MFC stores the components separately.
