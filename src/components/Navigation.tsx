@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Cpu, Zap, Home, GitBranch, Server } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
-import type { BenchmarkSuite, SuiteInfo, ClusterInfo } from '../types';
+import type { BenchmarkSuite, SuiteInfo, ClusterInfo, SuiteMeta } from '../types';
 
 interface NavigationProps {
     activeSuite: BenchmarkSuite;
@@ -45,15 +45,52 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     // Clusters come from the data, not a hardcoded list: adding a third cluster
     // should need no change here.
     const [clusters, setClusters] = useState<ClusterInfo[]>([]);
+    const [suites, setSuites] = useState<SuiteMeta[]>([]);
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCluster = searchParams.get('cluster') ?? 'all';
 
     useEffect(() => {
         fetch(`${import.meta.env.BASE_URL}data/index.json?t=${Date.now()}`, { cache: 'no-store' })
             .then((r) => (r.ok ? r.json() : null))
-            .then((d) => setClusters(d?.clusters ?? []))
-            .catch(() => setClusters([]));
+            .then((d) => {
+                setClusters(d?.clusters ?? []);
+                setSuites(d?.suites ?? []);
+            })
+            .catch(() => {
+                setClusters([]);
+                setSuites([]);
+            });
     }, []);
+
+    // Suites come from the data, like the clusters do. The table below only
+    // supplies the display name and icon; a suite the collector does not know
+    // about is not a board anyone can open.
+    const tabs = (suites.length ? suites.map((s) => s.name) : suiteInfos.map((s) => s.id))
+        .map((id) => ({
+            id,
+            meta: suites.find((s) => s.name === id),
+            info: suiteInfos.find((s) => s.id === id),
+        }));
+
+    // A suite tab keeps whichever cluster board you are on, so switching
+    // HPL -> HPL NVIDIA compares CPU against GPU on the same cluster instead
+    // of dropping you back to "All clusters".
+    const suiteHref = (id: string) => {
+        const q = searchParams.toString();
+        return q ? `/${id}?${q}` : `/${id}`;
+    };
+
+    // On a specific cluster show that cluster's count; on "All clusters" the
+    // total. A suite not offered here (HPL_NVIDIA needs GPUs) is dimmed.
+    const countFor = (m?: SuiteMeta) =>
+        !m ? 0
+            : activeCluster === 'all' ? (m.count ?? 0)
+            : (m.countByCluster?.[activeCluster] ?? 0);
+
+    const offeredHere = (m?: SuiteMeta) =>
+        !m || activeCluster === 'all' || !m.clusters?.length
+            ? true
+            : m.clusters.includes(activeCluster);
 
     const selectCluster = (name: string) => {
         const next = new URLSearchParams(searchParams);
@@ -86,20 +123,41 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
                 {/* Suite Navigation */}
                 <div className="flex justify-between items-center pb-3">
                     <div className="flex space-x-1 overflow-x-auto">
-                        {suiteInfos.map((suite) => (
-                            <Link
-                                key={suite.id}
-                                to={`/${suite.id}`}
-                                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
-                                    activeSuite === suite.id
-                                        ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30'
-                                        : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
-                                }`}
-                            >
-                                {getIcon(suite.type)}
-                                <span>{suite.name}</span>
-                            </Link>
-                        ))}
+                        {tabs.map(({ id, meta, info }) => {
+                            const offered = offeredHere(meta);
+                            return (
+                                <Link
+                                    key={id}
+                                    to={suiteHref(id)}
+                                    title={
+                                        !offered
+                                            ? `Not run on ${activeCluster}`
+                                            : meta?.available === false
+                                              ? `Not runnable yet: ${(meta.missing ?? []).join(', ')}`
+                                              : meta?.description || info?.description
+                                    }
+                                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
+                                        activeSuite === id
+                                            ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30'
+                                            : offered
+                                              ? 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
+                                              : 'text-slate-600 hover:text-slate-400 border border-transparent'
+                                    }`}
+                                >
+                                    {getIcon(info?.type ?? 'CPU')}
+                                    <span>{info?.name ?? id}</span>
+                                    <span className="text-[11px] opacity-60">{countFor(meta)}</span>
+                                    {meta?.available === false && (
+                                        <span
+                                            className="text-[10px] px-1 py-0.5 rounded bg-amber-400/15 text-amber-300"
+                                            title={`Not runnable yet: ${(meta.missing ?? []).join(', ')}`}
+                                        >
+                                            soon
+                                        </span>
+                                    )}
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     <a

@@ -157,6 +157,18 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
 
     const hasAnyRuns = filteredRuns.length > 0;
 
+    // Suite metadata from the collector: which clusters offer this suite, and
+    // whether its binaries are published yet. An empty GPU board because the
+    // binary is missing is a different thing from nobody having run it.
+    const suiteMeta = useMemo(
+        () => data?.suites?.find((s: any) => s.name === suite),
+        [data, suite]
+    );
+    const notOfferedHere =
+        clusterFilter !== 'all' &&
+        !!suiteMeta?.clusters?.length &&
+        !suiteMeta.clusters.includes(clusterFilter);
+
     // Cluster-filtered base
     const clusterFilteredRuns = useMemo(() => {
         if (clusterFilter === 'all') return filteredRuns;
@@ -668,8 +680,41 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center">
                             <BarChart3 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             <h3 className="text-lg font-medium text-gray-900 mb-2">
-                                No Data Available
+                                {suiteMeta?.available === false
+                                    ? 'Not Runnable Yet'
+                                    : notOfferedHere
+                                      ? 'Not Run On This Cluster'
+                                      : 'No Data Available'}
                             </h3>
+                            {suiteMeta?.available === false ? (
+                                <p className="text-gray-600">
+                                    {suiteName} has no entries because it cannot run yet
+                                    {suiteMeta.missing?.length ? (
+                                        <> — still missing{' '}
+                                        <span className="font-medium">
+                                            {suiteMeta.missing.join(', ')}
+                                        </span></>
+                                    ) : null}
+                                    . The folders and templates are in place, so runs will
+                                    appear here as soon as that is resolved.
+                                </p>
+                            ) : notOfferedHere ? (
+                                <p className="text-gray-600">
+                                    {suiteName} does not run on{' '}
+                                    <span className="font-medium">{clusterFilter}</span>. It is
+                                    offered on{' '}
+                                    <span className="font-medium">
+                                        {suiteMeta?.clusters?.join(', ')}
+                                    </span>
+                                    .{' '}
+                                    <button
+                                        onClick={() => setClusterFilter('all')}
+                                        className="text-blue-600 hover:underline"
+                                    >
+                                        Show all clusters
+                                    </button>
+                                </p>
+                            ) : (
                             <p className="text-gray-600">
                                 No benchmark runs found for {suiteName}
                                 {clusterFilter !== 'all' && <> on <span className="font-medium">{clusterFilter}</span></>}.
@@ -685,6 +730,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                                     </>
                                 )}
                             </p>
+                            )}
                         </div>
                     )
                 ) : // Fail status view

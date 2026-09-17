@@ -39,6 +39,13 @@ export interface SuiteMeta {
     metric?: { key: string; label?: string; unit?: string; direction?: 'higher' | 'lower'; precision?: number } | null;
     reference?: { device: string; [k: string]: unknown }[] | null;
     count?: number;
+    /** Clusters this suite runs on. HPL_NVIDIA needs GPUs, so Xenon only. */
+    clusters?: string[];
+    /** false when the binaries are not published yet. */
+    available?: boolean;
+    missing?: string[] | null;
+    /** Per-cluster run counts, for the suite tab badges. */
+    countByCluster?: Record<string, number>;
 }
 
 export interface BenchmarkData {
