@@ -94,6 +94,28 @@ for (const c of cases) {
   notes.push(`${c.slug}: repo case, ${c.sizing}, ${g1.m}^3-ish at 4 ranks -> ${g2.m} at 8, decomposes 1-8 ranks`);
 }
 
+// Some registered cases also ship as a copy in a template directory, so a
+// student can edit physics that arguments cannot reach. Two copies of a file
+// drift, and a drifted copy is worse than no copy: a sweep would then compare
+// points that did not run the same code, which is the one thing a sweep must
+// guarantee.
+const TWINS = [
+  ["suites/MFC/cases/shock_droplet_2d/case.py",
+   "input/_TEMPLATES/MFC/practice-problem3/case.py"],
+];
+for (const [canonical, copy] of TWINS) {
+  let a = null, b = null;
+  try { a = await fs.readFile(path.join(REPO_ROOT, canonical), "utf8"); } catch { /* reported below */ }
+  try { b = await fs.readFile(path.join(REPO_ROOT, copy), "utf8"); } catch { /* reported below */ }
+  if (a == null || b == null) {
+    problems.push(`${a == null ? canonical : copy}: missing, but it is paired with ${a == null ? copy : canonical}`);
+  } else if (a !== b) {
+    problems.push(`${copy} has drifted from ${canonical} — copy the registered case over it, or they will disagree`);
+  } else {
+    notes.push(`${copy}: identical to the registered case`);
+  }
+}
+
 for (const n of notes) console.log(`  ok   ${n}`);
 for (const p of problems) console.error(`ERROR ${p}`);
 console.log(`\n${cases.length} registered case(s) — ${problems.length} error(s)`);

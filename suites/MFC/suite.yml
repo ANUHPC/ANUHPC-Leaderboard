@@ -148,6 +148,14 @@ cases:
     title: 1D advection — convergence study (SCC26 practice task 2)
     added: 2026-09-17
 
+  - slug: shock_droplet_2d
+    source: repo
+    path: suites/MFC/cases/shock_droplet_2d/case.py
+    sizing: fixed
+    ranked: false
+    title: 2D shock-droplet — parameter study (SCC26 practice task 3)
+    added: 2026-09-17
+
   # --- contributed: cases added here, by pull request -----------------------
   - slug: anu_tgv_3d
     source: repo
