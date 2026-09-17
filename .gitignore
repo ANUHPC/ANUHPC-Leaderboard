@@ -1,2 +1,6 @@
 .DS_Store
 input/.DS_Store
+
+# Python bytecode from the MFC helper scripts
+__pycache__/
+*.pyc
