@@ -5,13 +5,13 @@
   "run": "igr-a100",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
-  "date": null,
-  "dateSource": null,
-  "submittedAt": null,
+  "date": "2026-09-17T08:50:06Z",
+  "dateSource": "git",
+  "submittedAt": "2026-09-17T05:38:02Z",
   "submitter": {
     "name": "benchmark",
     "house": true,
-    "by": null
+    "by": "Codex"
   },
   "metric": {
     "key": "grind",
@@ -43,8 +43,15 @@
       "direction": "none"
     }
   ],
+  "parameters": null,
+  "verification": {
+    "kind": "benchmark",
+    "reason": "Pinned benchmark case"
+  },
+  "convergence": null,
   "config": {
     "case": "igr",
+    "args": [],
     "nodes": 2,
     "tasks_per_node": 4,
     "ranks": 8,

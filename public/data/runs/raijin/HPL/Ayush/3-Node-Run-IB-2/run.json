@@ -5,8 +5,8 @@
   "run": "3-Node-Run-IB-2",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
-  "date": null,
-  "dateSource": null,
+  "date": "2026-03-28T08:37:17Z",
+  "dateSource": "git",
   "submittedAt": null,
   "submitter": {
     "name": "Ayush",
@@ -15,6 +15,9 @@
   },
   "metric": null,
   "secondary": [],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
   "config": {
     "N": 82944,
     "NB": 256,

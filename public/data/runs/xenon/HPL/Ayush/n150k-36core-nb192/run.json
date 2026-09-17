@@ -7,11 +7,11 @@
   "clusterSource": "path (confirmed by output)",
   "date": "2026-09-17T01:30:20.000Z",
   "dateSource": "run",
-  "submittedAt": null,
+  "submittedAt": "2026-09-17T01:19:00Z",
   "submitter": {
     "name": "Ayush",
     "house": false,
-    "by": null
+    "by": "Claude"
   },
   "metric": {
     "key": "gflops",
@@ -29,6 +29,9 @@
       "direction": "lower"
     }
   ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
   "config": {
     "N": 150000,
     "NB": 192,

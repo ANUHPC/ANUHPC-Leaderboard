@@ -5,8 +5,8 @@
   "run": "test-run-30",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
-  "date": null,
-  "dateSource": null,
+  "date": "2026-05-06T03:42:12Z",
+  "dateSource": "git",
   "submittedAt": null,
   "submitter": {
     "name": "Flynn",
@@ -15,6 +15,9 @@
   },
   "metric": null,
   "secondary": [],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
   "config": {
     "N": 80000,
     "NB": 192,

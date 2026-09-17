@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T12:36:24.724Z",
+  "generatedAt": "2026-09-17T14:25:47.105Z",
   "clusters": [
     {
       "name": "raijin",
@@ -141,6 +141,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 207168,
         "NB": 192,
@@ -200,6 +203,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -259,6 +265,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -318,6 +327,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -377,6 +389,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 179968,
         "NB": 256,
@@ -436,6 +451,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 207168,
         "NB": 192,
@@ -495,6 +513,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -554,6 +575,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -613,6 +637,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 141312,
         "NB": 192,
@@ -672,6 +699,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 134208,
         "NB": 192,
@@ -731,6 +761,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -790,6 +823,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 141312,
         "NB": 192,
@@ -849,6 +885,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 108544,
         "NB": 256,
@@ -908,6 +947,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 108544,
         "NB": 256,
@@ -967,6 +1009,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 108544,
         "NB": 256,
@@ -1026,6 +1071,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 82944,
         "NB": 256,
@@ -1085,6 +1133,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 87808,
         "NB": 224,
@@ -1144,6 +1195,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -1203,6 +1257,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 60000,
         "NB": 192,
@@ -1262,6 +1319,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 90000,
         "NB": 256,
@@ -1321,6 +1381,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 128,
@@ -1380,6 +1443,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 60000,
         "NB": 192,
@@ -1439,6 +1505,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 128,
@@ -1498,6 +1567,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 60000,
         "NB": 192,
@@ -1557,6 +1629,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 128,
@@ -1616,6 +1691,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 128,
@@ -1675,6 +1753,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 128,
@@ -1734,6 +1815,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 128,
@@ -1793,6 +1877,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -1852,6 +1939,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 30000,
         "NB": 128,
@@ -1911,6 +2001,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -1970,6 +2063,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2029,6 +2125,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 30000,
         "NB": 128,
@@ -2088,6 +2187,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2147,6 +2249,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 64,
@@ -2206,6 +2311,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 30000,
         "NB": 128,
@@ -2265,6 +2373,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2324,6 +2435,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 198,
@@ -2383,6 +2497,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2442,6 +2559,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2501,6 +2621,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2560,6 +2683,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 30000,
         "NB": 128,
@@ -2619,6 +2745,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 256,
@@ -2678,6 +2807,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -2737,6 +2869,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 30000,
         "NB": 64,
@@ -2796,6 +2931,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 30000,
         "NB": 128,
@@ -2855,6 +2993,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 256,
@@ -2914,6 +3055,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 256,
@@ -2973,6 +3117,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 256,
@@ -3032,6 +3179,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 25000,
         "NB": 64,
@@ -3091,6 +3241,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 256,
@@ -3150,6 +3303,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 256,
@@ -3209,6 +3365,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 64,
@@ -3268,6 +3427,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 192,
@@ -3327,6 +3489,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -3386,6 +3551,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 198,
@@ -3445,6 +3613,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 32,
@@ -3504,6 +3675,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 15000,
         "NB": 64,
@@ -3563,6 +3737,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 15000,
         "NB": 64,
@@ -3622,6 +3799,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -3681,6 +3861,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -3740,6 +3923,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 192,
@@ -3799,6 +3985,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 12345,
         "NB": 192,
@@ -3858,6 +4047,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -3917,6 +4109,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 198,
@@ -3976,6 +4171,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 32,
@@ -4035,6 +4233,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -4094,6 +4295,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -4153,6 +4357,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -4212,6 +4419,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 2000,
         "NB": 192,
@@ -4247,8 +4457,8 @@
       "run": "5node_2task_1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T05:54:35Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4257,6 +4467,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4281,8 +4494,8 @@
       "run": "5node_2task_2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T06:55:30Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4291,6 +4504,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4320,8 +4536,8 @@
       "run": "5node_2task_3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T13:03:15+10:00",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4330,6 +4546,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4354,8 +4573,8 @@
       "run": "5node_run_1",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T10:06:45+10:00",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4364,6 +4583,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4388,8 +4610,8 @@
       "run": "5node_run_2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T04:44:35Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4398,6 +4620,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4422,8 +4647,8 @@
       "run": "5node_run_3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T05:23:13Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4432,6 +4657,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4456,8 +4684,8 @@
       "run": "5node_run_4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T05:40:51Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4466,6 +4694,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4490,8 +4721,8 @@
       "run": "5node_run_5",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T06:37:56Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4500,6 +4731,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -4524,8 +4758,8 @@
       "run": "5node_run_6",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T23:25:21+10:00",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4534,6 +4768,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 179200,
         "NB": 256,
@@ -4558,8 +4795,8 @@
       "run": "26-03-26",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-26T10:28:03Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4568,6 +4805,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -4592,8 +4832,8 @@
       "run": "2Node-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-01T01:11:24Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4602,6 +4842,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 87808,
         "NB": 224,
@@ -4631,8 +4874,8 @@
       "run": "3-Node-Run",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T05:34:53Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4641,6 +4884,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 152096,
         "NB": 224,
@@ -4670,8 +4916,8 @@
       "run": "3-Node-Run-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T02:25:10Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4680,6 +4926,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 152096,
         "NB": 224,
@@ -4709,8 +4958,8 @@
       "run": "3-Node-Run-IB",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T07:56:58Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4719,6 +4968,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 133056,
         "NB": 224,
@@ -4748,8 +5000,8 @@
       "run": "3-Node-Run-IB-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T08:37:17Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4758,6 +5010,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 82944,
         "NB": 256,
@@ -4787,8 +5042,8 @@
       "run": "3-Node-Run-IB-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T09:19:29Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4797,6 +5052,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 82944,
         "NB": 256,
@@ -4821,8 +5079,8 @@
       "run": "3-Node-Run-IB-4",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T09:21:11Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4831,6 +5089,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 82944,
         "NB": 256,
@@ -4855,8 +5116,8 @@
       "run": "3Node-ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-03T11:13:25Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4865,6 +5126,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 141312,
         "NB": 192,
@@ -4889,8 +5153,8 @@
       "run": "4Node-ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-08T08:30:41Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4899,6 +5163,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -4928,8 +5195,8 @@
       "run": "4Node-ib-Trial",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-08T09:16:23Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4938,6 +5205,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -4967,8 +5237,8 @@
       "run": "4Node-ib-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-08T17:31:56+10:00",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4977,6 +5247,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -5001,8 +5274,8 @@
       "run": "5Node-ib-Scream",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-13T05:53:10Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5011,6 +5284,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -5035,8 +5311,8 @@
       "run": "5Node-ib-Trial",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-13T05:42:58Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5045,6 +5321,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -5069,8 +5348,8 @@
       "run": "5Node-ib-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-13T05:49:11Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5079,6 +5358,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 163008,
         "NB": 192,
@@ -5103,8 +5385,8 @@
       "run": "Scream",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-01T01:20:48Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5113,6 +5395,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 108544,
         "NB": 256,
@@ -5142,8 +5427,8 @@
       "run": "Scream-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-01T04:01:14Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5152,6 +5437,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 108544,
         "NB": 256,
@@ -5181,8 +5469,8 @@
       "run": "Second-raijin",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-26T10:32:11Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5191,6 +5479,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -5215,8 +5506,8 @@
       "run": "test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-26T10:34:35Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5225,6 +5516,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -5249,8 +5543,8 @@
       "run": "test-ib",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-03-28T05:36:17Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5259,6 +5553,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -5283,8 +5580,8 @@
       "run": "test-run-10",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:11:11Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5293,6 +5590,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5317,8 +5617,8 @@
       "run": "test-run-11",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:23:27Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5327,6 +5627,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5356,8 +5659,8 @@
       "run": "test-run-12",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:29:31Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5366,6 +5669,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5395,8 +5701,8 @@
       "run": "test-run-13",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:35:51Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5405,6 +5711,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5434,8 +5743,8 @@
       "run": "test-run-14",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:47:09Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5444,6 +5753,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5468,8 +5780,8 @@
       "run": "test-run-15",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:48:10Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5478,6 +5790,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5502,8 +5817,8 @@
       "run": "test-run-16",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:52:53Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5512,6 +5827,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5541,8 +5859,8 @@
       "run": "test-run-17",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T08:01:24Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5551,6 +5869,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -5580,8 +5901,8 @@
       "run": "test-run-19",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T08:07:37Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5590,6 +5911,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5619,8 +5943,8 @@
       "run": "test-run-20",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T08:09:01Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5629,6 +5953,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5653,8 +5980,8 @@
       "run": "test-run-21",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T08:12:27Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5663,6 +5990,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5687,8 +6017,8 @@
       "run": "test-run-22",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-05T23:59:53Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5697,6 +6027,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5721,8 +6054,8 @@
       "run": "test-run-23",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T01:11:52Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5731,6 +6064,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5755,8 +6091,8 @@
       "run": "test-run-24",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T01:23:27Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5765,6 +6101,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5789,8 +6128,8 @@
       "run": "test-run-25",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T01:55:11Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5799,6 +6138,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -5823,8 +6165,8 @@
       "run": "test-run-26",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T02:09:26Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5833,6 +6175,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 80000,
         "NB": 192,
@@ -5862,8 +6207,8 @@
       "run": "test-run-27",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T02:42:28Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5872,6 +6217,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 80000,
         "NB": 192,
@@ -5901,8 +6249,8 @@
       "run": "test-run-28",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T02:43:34Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5911,6 +6259,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 80000,
         "NB": 192,
@@ -5935,8 +6286,8 @@
       "run": "test-run-29",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T03:35:38Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5945,6 +6296,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 80000,
         "NB": 192,
@@ -5974,8 +6328,8 @@
       "run": "test-run-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T05:13:12Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5984,6 +6338,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 186432,
         "NB": 192,
@@ -6013,8 +6370,8 @@
       "run": "test-run-30",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T03:42:12Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6023,6 +6380,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 80000,
         "NB": 192,
@@ -6052,8 +6412,8 @@
       "run": "test-run-31",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-06T05:12:36Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6062,6 +6422,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 192,
@@ -6086,8 +6449,8 @@
       "run": "test-run-32",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-13T05:25:23Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6096,6 +6459,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 192,
@@ -6120,8 +6486,8 @@
       "run": "test-run-33",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-05-13T05:56:30Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6130,6 +6496,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 192,
@@ -6154,8 +6523,8 @@
       "run": "test-run-7",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T05:48:18Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6164,6 +6533,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 186432,
         "NB": 192,
@@ -6193,8 +6565,8 @@
       "run": "test-run-8",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:03:54Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6203,6 +6575,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -6227,8 +6602,8 @@
       "run": "test-run-9",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-29T07:05:42Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6237,6 +6612,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 178944,
         "NB": 192,
@@ -6261,8 +6639,8 @@
       "run": "folder",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-02T15:49:42+11:00",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6271,6 +6649,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 180000,
         "NB": 192,
@@ -6295,8 +6676,8 @@
       "run": "iter 1 n",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-08-27T03:02:33Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6305,6 +6686,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 10000,
         "NB": 32,
@@ -6329,8 +6713,8 @@
       "run": "iter 1nb",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-08-27T03:08:43Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6339,6 +6723,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 64,
@@ -6363,8 +6750,8 @@
       "run": "iter 2n",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-08-27T03:05:38Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6373,6 +6760,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 32,
@@ -6397,8 +6787,8 @@
       "run": "trial-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-04-22T05:23:13Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6407,6 +6797,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 180000,
         "NB": 192,
@@ -6431,8 +6824,8 @@
       "run": "3 nodes 40n192nb6p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-09-03T02:06:26Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6441,6 +6834,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 192,
@@ -6465,8 +6861,8 @@
       "run": "5 nodes 60n192nb10p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-09-03T03:21:22Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6475,6 +6871,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 60000,
         "NB": 192,
@@ -6499,8 +6898,8 @@
       "run": "5 nodes 60n192nb9p9q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-09-03T03:21:22Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6509,6 +6908,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 60000,
         "NB": 192,
@@ -6533,8 +6935,8 @@
       "run": "6 nodes 60n192nb12p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-09-03T03:21:22Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6543,6 +6945,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 60000,
         "NB": 192,
@@ -6567,8 +6972,8 @@
       "run": "iter 40n 32nb",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-08-27T03:10:53Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6577,6 +6982,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 32,
@@ -6601,8 +7009,8 @@
       "run": "n40 nb64 p4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
+      "date": "2026-08-27T03:12:37Z",
+      "dateSource": "git",
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6611,6 +7019,9 @@
       },
       "metric": null,
       "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 40000,
         "NB": 64,
@@ -6637,11 +7048,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-17T01:30:20.000Z",
       "dateSource": "run",
-      "submittedAt": null,
+      "submittedAt": "2026-09-17T01:19:00Z",
       "submitter": {
         "name": "Ayush",
         "house": false,
-        "by": null
+        "by": "Claude"
       },
       "metric": {
         "key": "gflops",
@@ -6659,6 +7070,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 150000,
         "NB": 192,
@@ -6696,11 +7110,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-03T06:05:45.000Z",
       "dateSource": "run",
-      "submittedAt": null,
+      "submittedAt": "2026-09-03T06:07:11Z",
       "submitter": {
         "name": "baseline",
         "house": true,
-        "by": null
+        "by": "Claude"
       },
       "metric": {
         "key": "gflops",
@@ -6718,6 +7132,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 100000,
         "NB": 192,
@@ -6755,11 +7172,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-17T03:05:16.000Z",
       "dateSource": "run",
-      "submittedAt": null,
+      "submittedAt": "2026-09-17T12:38:21+10:00",
       "submitter": {
         "name": "Daniel",
         "house": false,
-        "by": null
+        "by": "dehaansolo"
       },
       "metric": {
         "key": "gflops",
@@ -6777,6 +7194,9 @@
           "direction": "lower"
         }
       ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
       "config": {
         "N": 20000,
         "NB": 192,
@@ -6812,13 +7232,13 @@
       "run": "5eq_rk3_weno3_hll-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -6850,8 +7270,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "5eq_rk3_weno3_hll",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -6881,13 +7308,13 @@
       "run": "5eq_rk3_weno3_hllc-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -6919,8 +7346,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "5eq_rk3_weno3_hllc",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -6950,13 +7384,13 @@
       "run": "5eq_rk3_weno3_hllc-cpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -6988,8 +7422,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "5eq_rk3_weno3_hllc",
+        "args": [],
         "nodes": 1,
         "tasks_per_node": 4,
         "ranks": 4,
@@ -7019,13 +7460,13 @@
       "run": "5eq_rk3_weno3_lf-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -7057,8 +7498,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "5eq_rk3_weno3_lf",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7090,11 +7538,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-17T12:06:58Z",
       "dateSource": "run",
-      "submittedAt": null,
+      "submittedAt": "2026-09-17T12:02:33Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Claude"
       },
       "metric": {
         "key": "grind",
@@ -7126,8 +7574,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Contributed benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "anu_tgv_3d",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7157,13 +7612,13 @@
       "run": "hypo_hll-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -7195,8 +7650,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "hypo_hll",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7226,13 +7688,13 @@
       "run": "ibm-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -7264,8 +7726,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "ibm",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7295,13 +7764,13 @@
       "run": "igr-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -7333,8 +7802,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "igr",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7364,13 +7840,13 @@
       "run": "viscous_weno5_sgb_acoustic-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:38:02Z",
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -7402,8 +7878,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
       "config": {
         "case": "viscous_weno5_sgb_acoustic",
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7433,13 +7916,13 @@
       "run": "bowshock-gpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T04:02:02Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T04:01:42Z",
       "submitter": {
         "name": "demo",
         "house": true,
-        "by": null
+        "by": "Claude"
       },
       "metric": {
         "key": "grind",
@@ -7471,8 +7954,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "custom",
+        "reason": "Successful run; staged custom case hash and MFC source pin match. Physics is user supplied."
+      },
+      "convergence": null,
       "config": {
         "case": null,
+        "args": [],
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
@@ -7501,13 +7991,13 @@
       "run": "scc26-p3-cpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": null,
-      "dateSource": null,
-      "submittedAt": null,
+      "date": "2026-09-17T08:50:06Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-17T05:58:59Z",
       "submitter": {
         "name": "demo",
         "house": true,
-        "by": null
+        "by": "Codex"
       },
       "metric": {
         "key": "grind",
@@ -7539,8 +8029,15 @@
           "direction": "none"
         }
       ],
+      "parameters": null,
+      "verification": {
+        "kind": "custom",
+        "reason": "Successful run; staged custom case hash and MFC source pin match. Physics is user supplied."
+      },
+      "convergence": null,
       "config": {
         "case": null,
+        "args": [],
         "nodes": 1,
         "tasks_per_node": 4,
         "ranks": 4,

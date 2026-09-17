@@ -7,11 +7,11 @@
   "clusterSource": "path (confirmed by output)",
   "date": "2026-09-17T12:06:58Z",
   "dateSource": "run",
-  "submittedAt": null,
+  "submittedAt": "2026-09-17T12:02:33Z",
   "submitter": {
     "name": "benchmark",
     "house": true,
-    "by": null
+    "by": "Claude"
   },
   "metric": {
     "key": "grind",
@@ -43,8 +43,15 @@
       "direction": "none"
     }
   ],
+  "parameters": null,
+  "verification": {
+    "kind": "benchmark",
+    "reason": "Contributed benchmark case"
+  },
+  "convergence": null,
   "config": {
     "case": "anu_tgv_3d",
+    "args": [],
     "nodes": 2,
     "tasks_per_node": 4,
     "ranks": 8,

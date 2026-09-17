@@ -29,6 +29,9 @@
       "direction": "lower"
     }
   ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
   "config": {
     "N": 30000,
     "NB": 128,
