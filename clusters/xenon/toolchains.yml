@@ -32,11 +32,21 @@ toolchains:
     env: {}
 
   nvhpc-acc:
-    description: NVIDIA HPC SDK, OpenACC offload for the A100 nodes
-    available: false
-    missing: [nvhpc]
+    description: NVIDIA HPC SDK 25.7, OpenACC offload for the A100 nodes
+    available: true
     modules: []
     gpu: acc
+    prefix: /work/nvhpc/Linux_x86_64/25.7
+    mpi:
+      # NVHPC's own HPC-X, deliberately NOT /work/openmpi. Fortran .mod files
+      # are compiler specific, so nvfortran objects cannot link against an MPI
+      # built with gfortran. Three MPI installs therefore coexist on purpose:
+      #   /apps/openmpi/5.0.10   HPL (C, no Fortran bindings at all)
+      #   /work/openmpi/5.0.10   MFC CPU (gfortran)
+      #   this one              MFC GPU (nvfortran)
+      prefix: /work/nvhpc/Linux_x86_64/25.7/comm_libs/mpi
+      fortran: true
+    cuda_cc: 80              # A100; set MFC_CUDA_CC=80 when building
 
 installed:
   # Verified present on all four nodes on 2026-09-17.
@@ -57,4 +67,5 @@ pending:
   - hpl-nvidia      # /apps/benchmarks/hpl-nvidia is empty; needs the NGC image
   - container-rt    # no apptainer/enroot, so the NGC HPL container cannot run
   - modules         # no Lmod or environment-modules installed
-  - nvhpc           # nvfortran, for MFC's OpenACC GPU path
+  # nvhpc: DONE 2026-09-17. NVHPC 25.7 at /work/nvhpc, MFC rebuilt --gpu acc;
+  # zen3/build/install/gpu-acc-* carries sm_80 device code and links HPC-X.
