@@ -73,6 +73,14 @@ WALL=$(y "$JOB" resources.walltime 01:00:00)
 GPU=$(y "$JOB" build.gpu none)
 COPT=$(y "$JOB" build.case_optimization false)
 GBPP=$(y "$JOB" tuning.gbpp 16)
+# Ranked runs need only pre_process and simulation -- grind comes from
+# simulation. A visualisation run also needs post_process, which turns the
+# raw output into the Silo/binary database ./mfc.sh viz reads.
+VIZ=$(y "$JOB" visualize false)
+TARGETS="pre_process simulation"
+if [ "$VIZ" = "true" ]; then
+  TARGETS="$TARGETS post_process"
+fi
 
 # --- pick the tree that matches the hardware this partition runs on ---------
 case "$PART" in
@@ -134,7 +142,7 @@ set -x
 exec ./mfc.sh run "$JOB_DIR/case.py" \
   -e batch \
   -c "$TEMPLATE" \
-  -t pre_process simulation \
+  -t $TARGETS \
   -N "$NODES" -n "$TPN" -p "$PART" -w "$WALL" \
   --name "mfc-$(basename "$JOB_DIR")" \
   -o "$JOB_DIR/summary.yaml" \

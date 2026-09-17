@@ -1,0 +1,38 @@
+# 3D bow shock over a sphere — the visualisation demo.
+#
+# A sphere sits in supersonic flow. The immersed boundary method holds the
+# body inside a Cartesian grid while the air piles up in front of it into a
+# detached bow shock, so what you see in the video is the shock standing off
+# the nose and the wake collapsing behind it.
+#
+# Taken from MFC's own examples/3D_ibm_bowshock, unchanged except t_step_save:
+# upstream writes 10 frames, this writes 60 so the animation is watchable.
+#
+# UNRANKED. The board ranks only the seven pinned benchmark cases (see
+# suites/MFC/suite.yml); supplying a case.py makes a run a demonstration
+# rather than a leaderboard entry, which is what this is.
+
+suite: MFC
+
+# Render the video as well as running the simulation. This adds post_process
+# to the target list, which turns the raw output into the Silo database that
+# ./mfc.sh viz reads. Without it you get a grind time and nothing to look at.
+visualize: true
+
+resources:
+  # gpu, not cpu. Measured on this cluster the case costs about 8 s/step on
+  # 4 CPU ranks, so 3000 steps is over six hours; on 8 x A100 it is minutes.
+  # The gpu partition also gets the zen3 build, which matches those nodes.
+  partition: gpu
+  nodes: 2                 # gpu-node1 + gpu-node2
+  tasks_per_node: 4        # one rank per A100
+  walltime: "02:00:00"
+
+build:
+  gpu: acc                 # OpenACC offload; requires NVHPC
+  toolchain: nvhpc-acc
+
+tuning:
+  # 512 x 256 x 256 = 33.6M cells, set in case.py rather than here. gbpp is
+  # ignored for a supplied case.py: the case fixes its own grid.
+  gbpp: 16

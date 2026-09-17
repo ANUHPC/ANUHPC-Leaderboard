@@ -9,6 +9,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { parseYaml } from "./lib/yaml.mjs";
+import { mfcDecomposition, gridFromCase } from "./lib/mfc-decomp.mjs";
 import { loadClusters } from "./lib/cluster.mjs";
 
 const CWD = process.cwd();
@@ -126,6 +127,26 @@ async function main() {
         err(where, `job.yml must name a case (or supply your own case.py for an unranked run); one of: ${cases.map((c) => c.slug).join(", ")}`);
       } else if (!cases.some((c) => c.slug === job.case)) {
         err(where, `unknown case "${job.case}" — must be one of: ${cases.map((c) => c.slug).join(", ")}`);
+      }
+    }
+
+    // --- can MFC actually decompose this grid over the ranks asked for? ---
+    if (hasCustomCase) {
+      const r = job.resources || {};
+      const ranks = (r.nodes ?? 1) * (r.tasks_per_node ?? 1);
+      let caseText = "";
+      try { caseText = await fs.readFile(path.join(CWD, rel, "case.py"), "utf8"); } catch { /* reported elsewhere */ }
+      const g = gridFromCase(caseText);
+      if (g.m != null && g.n != null && g.p != null && ranks > 0) {
+        const d = mfcDecomposition(g.m, g.n, g.p, ranks, g.weno);
+        if (!d.ok) {
+          err(where,
+            `${g.m}x${g.n}x${g.p} cannot be split over ${ranks} rank(s): MFC needs at least ` +
+            `${d.need} cells per rank in every direction at weno_order ${g.weno}, and no factorisation ` +
+            `of ${ranks} satisfies that. pre_process would abort with "Unsupported combination of values ` +
+            `of num_procs, m, n, p and weno/muscl/igr_order" after the job had queued. Use fewer ranks ` +
+            `or a larger grid.`);
+        }
       }
     }
 
