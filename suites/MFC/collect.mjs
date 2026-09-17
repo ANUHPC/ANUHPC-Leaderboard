@@ -223,10 +223,15 @@ export async function collect(ctx) {
     }
   }
 
+  // A registered case may be declared not-ranked: see case-path.mjs. It is
+  // still verified the same way, so the run is trustworthy; it just does not
+  // join a board.
+  const ranks = entry ? entry.ranked !== false : true;
   const pinned = staged && frozen;
   const ranking = {
-    eligible: Boolean(successful && pinned),
+    eligible: Boolean(successful && pinned && ranks),
     reason: !successful ? "Run has no verified successful completion" :
+      pinned && !ranks ? "Reference case — compared by settings, not ranked" :
       // Drift is worth naming: the run was legitimate when it happened, and
       // the case was edited afterwards. Silently unranking it as "custom"
       // would send the entrant looking for a fault in their own job.

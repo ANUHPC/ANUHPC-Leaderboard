@@ -56,6 +56,12 @@ export function normalizeCase(c) {
     sizing: c.sizing === "fixed" ? "fixed" : "gbpp",
     title: c.title ? String(c.title) : null,
     added: c.added ? String(c.added) : null,
+    // Not every registered case is a race. A convergence study runs the same
+    // case at several resolutions, and a coarser grid is trivially faster, so
+    // ordering those by grind time would rank them by how little work they
+    // did. Such a case is still registered -- frozen, shared, and referred to
+    // by name instead of copied -- it simply does not produce a leaderboard.
+    ranked: c.ranked !== false,
   };
 }
 

@@ -135,6 +135,19 @@ cases:
   - {slug: hypo_hll,                  path: benchmarks/hypo_hll/case.py}
   - {slug: igr,                       path: benchmarks/igr/case.py}
 
+  # --- reference: registered and frozen, but not a leaderboard ---------------
+  # Takes -N and --order rather than --gbpp, so sizing is fixed and the
+  # resolution comes from job.yml's args. Not ranked: a convergence study runs
+  # the same case at several grids, and a coarser grid is faster for no merit,
+  # so ordering these by grind time would reward doing less work.
+  - slug: advection_1d
+    source: tree
+    path: examples/1D_advection_convergence/case.py
+    sizing: fixed
+    ranked: false
+    title: 1D advection — convergence study (SCC26 practice task 2)
+    added: 2026-09-17
+
   # --- contributed: cases added here, by pull request -----------------------
   - slug: anu_tgv_3d
     source: repo

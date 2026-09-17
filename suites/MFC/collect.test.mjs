@@ -56,7 +56,7 @@ const repoSuite = {
   cases: [{ slug: 'anu_tgv_3d', source: 'repo', path: 'suites/MFC/cases/anu_tgv_3d/case.py' }],
 };
 
-async function repoFixture({ registered = repoCaseRaw, ran = repoCaseRaw, ...overrides } = {}) {
+async function repoFixture({ registered = repoCaseRaw, ran = repoCaseRaw, suiteOverride = null, ...overrides } = {}) {
   const data = {
     'case.py': ran,
     'job.yml': 'case: anu_tgv_3d\nresources:\n  nodes: 2\n  tasks_per_node: 4\nbuild:\n  gpu: acc\n',
@@ -70,7 +70,7 @@ async function repoFixture({ registered = repoCaseRaw, ran = repoCaseRaw, ...ove
     ...overrides,
   };
   return collect({
-    suite: repoSuite,
+    suite: suiteOverride ?? repoSuite,
     files: Object.keys(data),
     read: async f => data[f] ?? null,
     readRepo: async () => registered,
@@ -122,4 +122,19 @@ test('an unregistered slug is unranked even with perfect provenance', async () =
     readRepo: async () => repoCaseRaw,
   });
   assert.equal(r.ranking.eligible, false);
+});
+
+test('a registered case declared ranked: false is verified but not ranked', async () => {
+  // Frozen and hash-checked like any other, so the result is trustworthy --
+  // it simply does not join a board, because a convergence study's coarser
+  // grids are faster for no merit.
+  const r = await repoFixture({
+    suiteOverride: {
+      source: { pin: 'e2f0e267' },
+      cases: [{ slug: 'anu_tgv_3d', source: 'repo', path: 'suites/MFC/cases/anu_tgv_3d/case.py', ranked: false }],
+    },
+  });
+  assert.equal(r.ranking.eligible, false);
+  assert.equal(r.ranking.reason, 'Reference case — compared by settings, not ranked');
+  assert.equal(r.metric.value, 0.42);      // the measurement still stands
 });
