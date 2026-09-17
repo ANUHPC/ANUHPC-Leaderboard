@@ -17,6 +17,7 @@
 //                   epilogue takes the last one; we do the same, and flag it.
 
 import { parseYaml } from "../../scripts/lib/yaml.mjs";
+import { createHash } from "node:crypto";
 
 export const name = "MFC";
 
@@ -35,7 +36,7 @@ function parseTimeData(raw) {
 }
 
 export async function collect(ctx) {
-  const { files, read } = ctx;
+  const { files, read, suite } = ctx;
 
   const sumName  = files.find((f) => /^summary\.ya?ml$/i.test(f));
   const timeName = files.find((f) => /^time_data\.dat$/i.test(f));
@@ -87,9 +88,24 @@ export async function collect(ctx) {
 
   const job = jobRaw ? (() => { try { return parseYaml(jobRaw); } catch { return null; } })() : null;
   const lock = summary?.lock ?? {};
+  let provenance = {}, completion = {};
+  try { provenance = JSON.parse(await read("mfc-provenance.json")); } catch { /* legacy result */ }
+  try { completion = parseYaml(await read("mfc-status.yml")) ?? {}; } catch { /* legacy result */ }
+  const successful = completion.state === "COMPLETED" && Number.isFinite(grind) && grind > 0;
+  const pinned = provenance.case_source === "pinned" &&
+    provenance.mfc_sha?.startsWith(suite?.source?.pin ?? "INVALID") &&
+    suite?.cases?.some((c) => c.slug === job?.case) && provenance.case === job?.case &&
+    provenance.case_sha256 === createHash("sha256").update(caseRaw ?? "").digest("hex");
+  const ranking = {
+    eligible: Boolean(successful && pinned),
+    reason: !successful ? "Run has no verified successful completion" :
+      !pinned ? "Custom or unverified case — unranked" : "Pinned benchmark case",
+    group: `${job?.case ?? "custom"}/${job?.build?.gpu === "acc" ? "GPU" : "CPU"}`,
+  };
 
   return {
-    metric: grind != null ? { key: "grind", value: grind } : null,
+    metric: Number.isFinite(grind) && grind > 0 ? { key: "grind", value: grind } : null,
+    ranking,
     secondary: [
       exec != null ? { key: "exec", value: exec } : null,
       last?.sPerStep != null ? { key: "s_step", value: last.sPerStep } : null,
@@ -105,13 +121,14 @@ export async function collect(ctx) {
       case_optimization: job?.build?.case_optimization ?? null,
       gbpp: job?.tuning?.gbpp ?? null,
       toolchain: job?.build?.toolchain ?? null,
-      mfc_sha: job?.source?.pin ?? null,
+      mfc_sha: provenance.mfc_sha ?? null,
     },
     provenance: {
+      ...provenance,
       invocation: Array.isArray(summary?.invocation) ? summary.invocation.join(" ") : null,
       lock,
     },
-    status: grind != null ? "ok" : "no-result",
+    status: completion.state === "FAILED" ? "failed" : successful ? "ok" : "no-result",
     notes,
     detail: {
       summary,
@@ -120,6 +137,7 @@ export async function collect(ctx) {
       out: outRaw ? { file: outName, size: outRaw.length } : null,
       err: errRaw ? { file: errName, size: errRaw.length } : null,
     },
-    rawFiles: [caseName, sumName, timeName, outName, errName, jobName].filter(Boolean),
+    rawFiles: [caseName, sumName, timeName, outName, errName, jobName,
+      ...["mfc-provenance.json", "mfc-status.yml"].filter((f) => files.includes(f))].filter(Boolean),
   };
 }

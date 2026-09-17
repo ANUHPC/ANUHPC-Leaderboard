@@ -35,6 +35,7 @@ concurrency:
 env:
   CLUSTER: xenon
   SCRATCH_BASE: /scratch/jobs
+  PARTITION: all
 
 jobs:
   submit:
@@ -100,10 +101,12 @@ jobs:
             # Inputs are kept so every run stays reproducible, which means they
             # are all still here on the next push. Skip anything that already
             # produced results, or each push would re-run the whole history.
-            if [ "${{ inputs.rerun }}" != "true" ] && \
-               compgen -G "output/$CLUSTER/${rel}"'*.out' > /dev/null 2>&1; then
-              echo "skip  $rel (already has results; use the rerun input to force)"
-              continue
+            if [ "${{ inputs.rerun }}" != "true" ]; then
+              if { [ "$s" = MFC ] && [ "$(node scripts/read-yaml.mjs "output/$CLUSTER/${rel}mfc-status.yml" state 2>/dev/null || true)" = COMPLETED ]; } || \
+                 { [ "$s" != MFC ] && compgen -G "output/$CLUSTER/${rel}"'*.out' > /dev/null 2>&1; }; then
+                echo "skip  $rel (already completed; use the rerun input to force)"
+                continue
+              fi
             fi
             dest="$STAGE/$rel"
             mkdir -p "$dest"; cp -r "$jobdir". "$dest"/
@@ -146,6 +149,20 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Preserve MFC visualization data
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -d "${STAGE:-}" ] || exit 0
+          for jobdir in "$STAGE"/MFC/*/*/; do
+            [ -f "$jobdir/job.yml" ] || continue
+            [ "$(node scripts/read-yaml.mjs "$jobdir/job.yml" visualize false)" = true ] || continue
+            dest="${SCRATCH_BASE}/visualizations/${GITHUB_RUN_ID}/MFC/$(basename "$(dirname "$jobdir")")/$(basename "$jobdir")"
+            mkdir -p "$(dirname "$dest")"
+            mv "$jobdir" "$dest"
+            echo "MFC visualization data: \`$dest\`" >> "$GITHUB_STEP_SUMMARY"
+          done
 
       - name: Clean scratch
         if: always()

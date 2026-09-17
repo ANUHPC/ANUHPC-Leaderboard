@@ -14,6 +14,7 @@
 ## result at all.
 ##
 <%namespace name="helpers" file="helpers.mako"/>
+<%! import os %>
 
 % if engine == 'batch':
 #SBATCH --job-name="${name}"
@@ -22,6 +23,7 @@
 #SBATCH --output="${name}.out"
 #SBATCH --error="${name}.err"
 #SBATCH --time=${walltime}
+#SBATCH --hint=nomultithread
 % if partition:
 #SBATCH --partition=${partition}
 % endif
@@ -34,7 +36,6 @@
 ## cores. --exclusive keeps another job off the node, which a benchmark needs
 ## anyway: a shared node makes the grind time meaningless.
 #SBATCH --exclusive
-#SBATCH --hint=nomultithread
 % endif
 % if gpu_enabled:
 ## gpu-node1 and gpu-node2 carry 4x A100-SXM4-40GB each; one rank per device.
@@ -66,10 +67,7 @@ ${helpers.template_prologue()}
 ## the /work rebuild instead -- and LD_LIBRARY_PATH wins over the RUNPATH baked
 ## into them, so naming the wrong prefix here would load an MPI with no
 ## libmpi_mpifh and fail at startup.
-export OMPI_PREFIX=/work/openmpi/5.0.10
-export UCX_PREFIX=/apps/ucx/1.22.0
-export PATH="$OMPI_PREFIX/bin:$PATH"
-export LD_LIBRARY_PATH="$OMPI_PREFIX/lib:$UCX_PREFIX/lib:${'${LD_LIBRARY_PATH:-}'}"
+. "${os.path.dirname(input)}/mfc-environment.sh" ${'acc' if gpu_enabled else 'none'} || exit 1
 
 ## Force MPI onto the 56 Gb FDR fabric. UCX_TLS is what does this: with rc
 ## (RDMA) and no tcp in the list, UCX fails loudly rather than silently
@@ -79,17 +77,9 @@ export LD_LIBRARY_PATH="$OMPI_PREFIX/lib:$UCX_PREFIX/lib:${'${LD_LIBRARY_PATH:-}
 ## name differs by node type (ibp129s0 on cpu, ibp161s0 on gpu), so any single
 ## value is wrong on half the cluster. Autodetect also benchmarked faster on
 ## Raijin. If you ever must pin it, name every device: ibp129s0:1,ibp161s0:1
-export UCX_TLS=rc,sm,self
-export OMPI_MCA_pml=ucx
 
 ulimit -l unlimited
 ulimit -n 65536
-
-% if gpu_enabled:
-export MFC_GPU=1
-## One rank per visible device; MFC's OpenACC path assumes this mapping.
-export UCX_MEMTYPE_CACHE=n
-% endif
 
 echo "host        : $(hostname -s)"
 echo "nodes/tasks : ${nodes} x ${tasks_per_node}"

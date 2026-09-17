@@ -88,14 +88,15 @@ async function loadSuites() {
 function rank(entries, direction) {
   const byCluster = new Map();
   for (const e of entries) {
-    const k = e.cluster || "__unknown__";
+    const k = `${e.cluster || "__unknown__"}/${e.ranking?.group ?? ""}`;
     if (!byCluster.has(k)) byCluster.set(k, []);
     byCluster.get(k).push(e);
   }
   const out = [];
   for (const [, group] of byCluster) {
-    const scored = group.filter((e) => Number.isFinite(e.metric?.value));
-    const rest   = group.filter((e) => !Number.isFinite(e.metric?.value));
+    const eligible = (e) => Number.isFinite(e.metric?.value) && e.ranking?.eligible !== false;
+    const scored = group.filter(eligible);
+    const rest   = group.filter((e) => !eligible(e));
     scored.sort((a, b) =>
       direction === "lower" ? a.metric.value - b.metric.value : b.metric.value - a.metric.value
     );
@@ -143,6 +144,7 @@ async function processSuite(suite, index, clusters, clusterName) {
           config: r.config ?? {},
           provenance: r.provenance ?? {},
           status: r.status ?? "ok",
+          ranking: r.ranking,
           notes: r.notes ?? [],
           detail: r.detail ?? null,
           rawFiles: files.filter((f) => f !== "result.json"),
@@ -157,7 +159,7 @@ async function processSuite(suite, index, clusters, clusterName) {
     //    run rendering — they all predate result.json.
     if (!result && suite.mod?.collect) {
       try {
-        result = await suite.mod.collect({ dir, files, read });
+        result = await suite.mod.collect({ dir, files, read, suite: suite.cfg });
         if (result) fromParser++;
       } catch (e) {
         console.warn(`[collect] ${id}: collector threw (${e.message})`);
@@ -218,10 +220,11 @@ async function processSuite(suite, index, clusters, clusterName) {
       config: result.config || {},
       provenance: result.provenance || {},
       status: result.status || "ok",
+      ranking: result.ranking,
       notes: result.notes || [],
       raw: rawPaths,
       // --- backwards compatibility with the existing website ---
-      best: result.detail?.best ?? (metric ? { gflops: metric.value } : null),
+      best: result.detail?.best ?? null,
       dat: result.detail?.dat ?? null,
       job: result.detail?.job ?? null,
       out: result.detail?.out ?? null,
@@ -241,6 +244,7 @@ async function processSuite(suite, index, clusters, clusterName) {
       secondary: runJson.secondary,
       config: runJson.config,
       status: runJson.status,
+      ranking: runJson.ranking,
       notes: runJson.notes,
       // legacy fields the current site reads
       best: runJson.best,

@@ -172,6 +172,17 @@ async function main() {
     const r = job.resources || {};
     const pname = r.partition;
     const part = pname ? cluster.partitions[pname] : null;
+    if (suiteName === "MFC") {
+      if (pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
+      if (job.build?.case_optimization) err(where, "case_optimization would modify the shared MFC build and is unsupported");
+      const gpu = job.build?.gpu ?? "none";
+      if (!["none", "acc"].includes(gpu)) err(where, "build.gpu must be none or acc");
+      const expected = gpu === "acc" ? "nvhpc-acc" : "gcc-ompi5";
+      if (job.build?.toolchain && job.build.toolchain !== expected) err(where, `build.gpu=${gpu} requires toolchain ${expected}`);
+      if (!Number.isInteger(r.tasks_per_node ?? 1) || (r.tasks_per_node ?? 1) < 1) err(where, "tasks_per_node must be a positive integer");
+      if (!Number.isInteger(r.nodes ?? 1) || (r.nodes ?? 1) < 1) err(where, "nodes must be a positive integer");
+      if (!Number.isInteger(job.tuning?.gbpp ?? 16) || (job.tuning?.gbpp ?? 16) < 1) err(where, "gbpp must be a positive integer");
+    }
 
     if (!pname) err(where, "resources.partition is required");
     else if (!part) {

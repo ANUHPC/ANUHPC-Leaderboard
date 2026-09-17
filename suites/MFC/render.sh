@@ -112,8 +112,10 @@ fi
 
 # --- the case comes from the pinned checkout unless one was submitted -------
 if [ -f "$JOB_DIR/case.py" ]; then
+  CASE_SOURCE=custom
   echo "render: using the submitted case.py — this run is UNRANKED"
 else
+  CASE_SOURCE=pinned
   [ -n "$CASE" ] || die "job.yml sets no case, and no case.py was supplied"
   # Resolve the slug through a real parser, not grep: the case list is a YAML
   # sequence of maps and "grep -A1 slug:" returns the wrong path the moment
@@ -127,8 +129,19 @@ else
   echo "render: case $CASE from $REL"
 fi
 
+python3 - "$JOB_DIR" "$CASE_SOURCE" "$HEAD" "$CASE" <<'PY'
+import hashlib, json, pathlib, sys
+directory, origin, commit, slug = sys.argv[1:]
+p = pathlib.Path(directory)
+(p / 'mfc-provenance.json').write_text(json.dumps({
+    'case_source': origin, 'mfc_sha': commit, 'case': slug or None,
+    'case_sha256': hashlib.sha256((p / 'case.py').read_bytes()).hexdigest(),
+}, indent=2) + '\n')
+PY
+
 # mfc.sh insists on being run from the checkout root, and writes the generated
 # batch script next to the case file (which is in $JOB_DIR, not here).
+cp "$REPO/suites/MFC/environment.sh" "$JOB_DIR/mfc-environment.sh"
 cd "$TREE"
 
 # --clean matters more than it looks. simulation opens time_data.dat with

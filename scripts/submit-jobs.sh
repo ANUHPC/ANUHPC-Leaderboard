@@ -156,8 +156,12 @@ for jobdir in "$STAGE"/*/*/*/; do
         gh_error "$label: no MFC install at $MFC_ROOT — build it before submitting"; continue
       fi
       if bash "$REPO/suites/MFC/render.sh" "$jobdir" "$RUN_ID"; then
-        echo "  submitted $label"
+        echo 'state: COMPLETED' > "$jobdir/mfc-status.yml"
+        echo "  completed $label: $(result_line "$jobdir" MFC)"
+        printf '| %s | %s | %s |\n' "$label" COMPLETED "$(result_line "$jobdir" MFC)" >> "$SUMMARY"
       else
+        echo 'state: FAILED' > "$jobdir/mfc-status.yml"
+        dump_failure "$jobdir" unknown "$label"
         gh_error "$label: MFC submit failed"
         rejected=$((rejected+1))
       fi
@@ -172,7 +176,7 @@ if [ ! -s "$joblist" ]; then
     gh_error "$rejected job(s) were staged but the scheduler refused every one — nothing ran"
     exit 1
   fi
-  echo "Nothing queued via sbatch."
+  echo "No asynchronous jobs remain (MFC submissions wait for completion)."
   exit 0
 fi
 
