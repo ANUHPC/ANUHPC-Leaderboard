@@ -218,6 +218,21 @@ async function main() {
       }
       if (pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
       if (job.build?.case_optimization) err(where, "case_optimization would modify the shared MFC build and is unsupported");
+
+      // args: is passed straight through to the case as separate argv
+      // entries. A bare string is the tempting mistake -- args: "-N 128" --
+      // and it would arrive as ONE argument containing a space, which
+      // argparse rejects with a message about the case, not about job.yml.
+      if (job.args !== undefined) {
+        if (!Array.isArray(job.args)) {
+          err(where, `args must be a list, one entry per argument: args: ["-N", "128"] — not a single string`);
+        } else if (job.args.some((a) => typeof a === "object" && a !== null)) {
+          err(where, "args entries must be strings or numbers");
+        } else if (job.args.some((a) => typeof a === "string" && /^-{1,2}\w[\w-]*=?\s+\S/.test(a))) {
+          // "-N 128" as one entry is the same mistake one level down.
+          err(where, `args entry ${JSON.stringify(job.args.find((a) => typeof a === "string" && /^-{1,2}\w[\w-]*=?\s+\S/.test(a)))} contains a space — split the flag and its value into separate entries`);
+        }
+      }
       const gpu = job.build?.gpu ?? "none";
       if (!["none", "acc"].includes(gpu)) err(where, "build.gpu must be none or acc");
       const expected = gpu === "acc" ? "nvhpc-acc" : "gcc-ompi5";
