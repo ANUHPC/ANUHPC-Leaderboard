@@ -6,7 +6,7 @@ on:
     paths:
       - "scripts/**"
       - "suites/**"
-      - "cluster/**"
+      - "clusters/**"
       - "package.json"
       - "output/**"
   workflow_run:

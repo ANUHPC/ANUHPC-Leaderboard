@@ -15,9 +15,9 @@ driven by its own self-hosted runner and jobs route by runner label. **Results
 are ranked per cluster** — a Raijin number and a Xenon number measure different
 hardware and are not comparable.
 
-Every job names its cluster in `job.yml`. The 137 runs committed before Xenon
-existed are attributed automatically from the node names they left behind
-(123 from output, 10 from a `--nodelist`, 4 by fallback).
+A run's cluster comes from its directory. The collector cross-checks that
+against the node names the run actually reported and warns if they disagree —
+a run filed under the wrong cluster would otherwise corrupt the board silently.
 
 ## Suites
 
@@ -32,10 +32,23 @@ from the suite definition rather than assuming bigger wins.
 
 ## Submitting a run
 
-Copy a template, edit, push:
+Copy a template into the cluster you want, edit, push to `main`:
 
 ```
-input/<SUITE>/<your-name>/<run-name>/
+input/<cluster>/<suite>/<your-name>/<run-name>/
+```
+
+**The directory is the routing.** A push under `input/xenon/` triggers only
+`submit-xenon.yml`, which runs only on a runner labelled `xenon`. Nothing parses
+a field to decide where a job goes, and a job can never reach the wrong machine.
+
+```
+input/
+  _TEMPLATES/       HPL/  MFC/          copy these; not picked up as jobs
+  raijin/           HPL/<user>/<run>/
+  xenon/            HPL/<user>/<run>/   MFC/<user>/<run>/
+output/
+  raijin/  xenon/   same shape, results committed back by the runner
 ```
 
 - **HPL** — `HPL.dat` plus your own `run.sh`. Choosing `N`, `NB` and the `P x Q`
@@ -56,14 +69,19 @@ suites/<NAME>/
   collect.mjs    turns a finished run into a normalised result
   xenon.mako     (MFC) batch template for this cluster
   render.sh      (MFC) job.yml -> ./mfc.sh run
+.github/workflows/
+  submit-<cluster>.yml   one per cluster; path filter + runner label
+  validate.yml           PR-time checks
+  website.yml            rebuilds the site from main
 clusters/<NAME>/
   partitions.yml nodes, partitions and limits for that cluster
   toolchains.yml named toolchains, and what is not built yet
 scripts/
   collect.mjs        suite-agnostic collector; writes the website data
-  validate-job.mjs   PR-time checks, against the cluster the job names
-  select-jobs.mjs    routes each job to its cluster's runner
-  lib/cluster.mjs    cluster registry and attribution of legacy runs
+  validate-job.mjs   PR-time checks, against the cluster the path names
+  submit-jobs.sh     stages, submits and waits; called by the workflows
+  lib/cluster.mjs    cluster registry; cross-checks a run against its directory
+  lib/yaml.mjs       zero-dependency YAML subset reader
   lib/yaml.mjs       zero-dependency YAML subset reader
   collect-hpl.js     superseded by collect.mjs; kept until the site is verified
 input/  output/      one directory per run, per suite, per person

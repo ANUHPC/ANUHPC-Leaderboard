@@ -105,22 +105,28 @@ function rank(entries, direction) {
   return out;
 }
 
-async function processSuite(suite, index, clusters) {
-  const root = path.join(SRC_ROOT, suite.name);
-  if (!(await exists(root))) { console.log(`[collect] ${suite.name}: no output/, skipped`); return; }
+async function processSuite(suite, index, clusters, clusterName) {
+  // Layout is output/<cluster>/<suite>/<group>/<run>. The cluster is part of
+  // the path now, so it is read rather than inferred — inference survives only
+  // as a cross-check against what the run actually reported.
+  const root = path.join(SRC_ROOT, clusterName, suite.name);
+  if (!(await exists(root))) return;
 
   const metricCfg = suite.cfg.metric || {};
   const runDirs = await findRunDirs(root);
   const entries = [];
   let fromResultJson = 0, fromParser = 0, unusable = 0;
   const clusterCounts = {};
+  let mismatches = 0;
 
   for (const dir of runDirs) {
     const rel   = path.relative(root, dir);
     const parts = rel.split(path.sep);
     const group = parts[0] || "__root__";
     const run   = parts.slice(1).join("/") || "__root__";
-    const id    = [suite.name, group, run].join("/");
+    // Cluster leads the id: two clusters can legitimately hold a run with the
+    // same suite/group/run name, and ids must stay unique across the board.
+    const id    = [clusterName, suite.name, group, run].join("/");
     const files = await listFiles(dir);
     const read  = (f) => readSafe(path.join(dir, f));
 
@@ -160,27 +166,30 @@ async function processSuite(suite, index, clusters) {
 
     if (!result) { unusable++; continue; }
 
-    // Which machine produced this? Prefer what the run declares, else read the
-    // node names out of what it left behind.
+    // The directory says which cluster this is. Cross-check it against the node
+    // names the run actually reported: a mismatch means the run was filed under
+    // the wrong cluster, which would silently corrupt the board.
     let inferText = "", inferScript = "";
     for (const f of files) {
       if (/\.(out|err)$/i.test(f)) inferText += ((await read(f)) || "").slice(0, 20000);
       else if (/\.sh$/i.test(f))   inferScript += ((await read(f)) || "").slice(0, 8000);
     }
-    const ci = inferCluster({
-      clusters,
-      explicit: result.config?.cluster ?? result.provenance?.cluster ?? null,
-      text: inferText,
-      script: inferScript,
-      fallback: LEGACY_CLUSTER,
-    });
-    if (ci.source === "ambiguous") {
-      console.warn(`[collect] ${id}: node names from more than one cluster (${ci.candidates.join(", ")}) — left unattributed`);
+    const observed = inferCluster({ clusters, text: inferText, script: inferScript, fallback: null });
+    const ci = { cluster: clusterName, source: "path" };
+    if (observed.cluster && observed.cluster !== clusterName) {
+      console.warn(
+        `[collect] ${id}: filed under ${clusterName} but its output names ${observed.cluster} nodes — ` +
+        `check the directory it was committed to`
+      );
+      ci.source = "path (MISMATCH: output says " + observed.cluster + ")";
+      mismatches++;
+    } else if (observed.cluster === clusterName) {
+      ci.source = "path (confirmed by output)";
     }
     clusterCounts[ci.source] = (clusterCounts[ci.source] || 0) + 1;
 
     // Copy the raw artefacts the site links to.
-    const baseParts = [suite.name, ...parts];
+    const baseParts = [clusterName, suite.name, ...parts];
     const rawPaths = {};
     for (const f of result.rawFiles || []) {
       const dest = path.join(RAW_ROOT, ...baseParts, f);
@@ -242,12 +251,11 @@ async function processSuite(suite, index, clusters) {
 
   const scored = ranked.filter((e) => Number.isFinite(e.metric?.value)).length;
   console.log(
-    `[collect] ${suite.name}: ${runDirs.length} dirs -> ${entries.length} runs ` +
+    `[collect] ${clusterName}/${suite.name}: ${runDirs.length} dirs -> ${entries.length} runs ` +
     `(${scored} scored, ${fromResultJson} via result.json, ${fromParser} parsed, ${unusable} unusable) ` +
     `ranked ${metricCfg.direction === "lower" ? "ascending" : "descending"} by ${metricCfg.key}`
   );
-  const attrib = Object.entries(clusterCounts).map(([k, v]) => `${v} ${k}`).join(", ");
-  if (attrib) console.log(`[collect] ${suite.name}: cluster attribution — ${attrib}`);
+  if (mismatches) console.warn(`[collect] ${clusterName}/${suite.name}: ${mismatches} run(s) filed under the wrong cluster`);
 }
 
 async function main() {
@@ -261,7 +269,12 @@ async function main() {
   console.log(`[collect] suites: ${suites.map((s) => s.name).join(", ")}`);
 
   const index = [];
-  for (const s of suites) await processSuite(s, index, clusters);
+  for (const c of Object.keys(clusters)) {
+    for (const s of suites) {
+      if (Array.isArray(s.cfg.clusters) && s.cfg.clusters.length && !s.cfg.clusters.includes(c)) continue;
+      await processSuite(s, index, clusters, c);
+    }
+  }
 
   const meta = {
     generatedAt: new Date().toISOString(),

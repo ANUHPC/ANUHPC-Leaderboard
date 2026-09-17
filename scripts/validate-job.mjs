@@ -54,11 +54,15 @@ async function main() {
   // Which run directories to check.
   let targets = process.argv.slice(2);
   if (!targets.length) {
-    for (const suite of await listDirs(path.join(CWD, "input"))) {
-      for (const group of await listDirs(path.join(CWD, "input", suite))) {
-        if (group.startsWith("_")) continue;
-        for (const run of await listDirs(path.join(CWD, "input", suite, group))) {
-          targets.push(path.join("input", suite, group, run));
+    // input/<cluster>/<suite>/<group>/<run>
+    for (const cl of await listDirs(path.join(CWD, "input"))) {
+      if (cl.startsWith("_")) continue;                    // input/_TEMPLATES
+      for (const suite of await listDirs(path.join(CWD, "input", cl))) {
+        for (const group of await listDirs(path.join(CWD, "input", cl, suite))) {
+          if (group.startsWith("_")) continue;
+          for (const run of await listDirs(path.join(CWD, "input", cl, suite, group))) {
+            targets.push(path.join("input", cl, suite, group, run));
+          }
         }
       }
     }
@@ -67,9 +71,11 @@ async function main() {
 
   for (const rel of targets) {
     const parts = rel.split(path.sep);
-    const suiteName = parts[1];
+    const pathCluster = parts[1];               // input/<cluster>/<suite>/...
+    const suiteName   = parts[2];
     const where = rel;
     const suite = suites[suiteName];
+    if (pathCluster && pathCluster.startsWith("_")) continue;   // templates
 
     if (!suite)              { err(where, `unknown suite "${suiteName}" — no suites/${suiteName}/suite.yml`); continue; }
     if (suite.enabled === false) { err(where, `suite ${suiteName} is not enabled yet`); continue; }
@@ -115,11 +121,11 @@ async function main() {
       }
     }
 
-    // --- which cluster? everything below depends on it ---
-    const cname = job.cluster;
+    // --- which cluster? the directory decides ---
+    const cname = pathCluster;
     const allowed = suite.clusters || [];
-    if (!cname) {
-      err(where, `job.yml must name a cluster; ${suiteName} runs on: ${allowed.join(", ") || "(none configured)"}`);
+    if (job.cluster && job.cluster !== cname) {
+      err(where, `job.yml says cluster "${job.cluster}" but the job sits under input/${cname}/ — move the directory or fix the field`);
       continue;
     }
     const cluster = clusters[cname];

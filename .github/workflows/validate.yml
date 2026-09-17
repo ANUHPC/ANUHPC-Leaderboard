@@ -9,14 +9,14 @@ on:
     paths:
       - "input/**"
       - "suites/**"
-      - "cluster/**"
+      - "clusters/**"
       - "scripts/**"
   push:
     branches: [main]
     paths:
       - "input/**"
       - "suites/**"
-      - "cluster/**"
+      - "clusters/**"
       - "scripts/**"
   workflow_dispatch:
 

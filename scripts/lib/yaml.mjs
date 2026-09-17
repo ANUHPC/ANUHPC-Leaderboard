@@ -26,6 +26,15 @@ function stripComment(line) {
   return out;
 }
 
+// A mapping key is always a string: never coerce it to a boolean or number.
+export function parseKey(raw) {
+  const s = String(raw).trim();
+  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+    return s.slice(1, -1);
+  }
+  return s;
+}
+
 export function parseScalar(raw) {
   const s = String(raw).trim();
   if (s === "" ) return null;
@@ -43,7 +52,7 @@ export function parseScalar(raw) {
     for (const part of splitFlow(s.slice(1, -1))) {
       const i = part.indexOf(":");
       if (i < 0) continue;
-      o[parseScalar(part.slice(0, i))] = parseScalar(part.slice(i + 1));
+      o[parseKey(part.slice(0, i))] = parseScalar(part.slice(i + 1));
     }
     return o;
   }
@@ -91,14 +100,14 @@ export function parseYaml(text) {
         const ci = colonIndex(item);
         if (ci >= 0 && !item.startsWith("[") && !item.startsWith("{")) {
           const obj = {};
-          const k = item.slice(0, ci).trim();
+          const k = parseKey(item.slice(0, ci));
           const v = item.slice(ci + 1).trim();
           obj[k] = v === "" ? parseBlock(indent + 1) : parseScalar(v);
           while (pos < lines.length && lines[pos].indent > indent &&
                  !lines[pos].text.startsWith("- ")) {
             const l = lines[pos].text; const c2 = colonIndex(l);
             if (c2 < 0) { pos++; continue; }
-            const k2 = l.slice(0, c2).trim(); const v2 = l.slice(c2 + 1).trim();
+            const k2 = parseKey(l.slice(0, c2)); const v2 = l.slice(c2 + 1).trim();
             const ind2 = lines[pos].indent; pos++;
             obj[k2] = v2 === "" ? parseBlock(ind2 + 1) : parseScalar(v2);
           }
@@ -116,7 +125,9 @@ export function parseYaml(text) {
       const l = lines[pos].text;
       const ci = colonIndex(l);
       if (ci < 0) { pos++; continue; }
-      const key = parseScalar(l.slice(0, ci));
+      // Keys stay strings. YAML 1.1 would read "on", "yes" and "no" as booleans,
+      // which silently renames the `on:` key of a GitHub workflow to `true`.
+      const key = parseKey(l.slice(0, ci));
       const val = l.slice(ci + 1).trim();
       pos++;
       if (val === "") {

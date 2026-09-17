@@ -1,6 +1,6 @@
 # MFC leaderboard entry.
 #
-# Copy this directory to  input/MFC/<your-name>/<run-name>/  and edit.
+# Copy this directory to  input/<cluster>/MFC/<your-name>/<run-name>/ and edit.
 # Push to main; the runner picks it up, submits it, and the result appears on
 # the board. Validation runs on the pull request, so mistakes are caught before
 # anything queues.
@@ -10,10 +10,10 @@
 
 suite: MFC
 
-# Which cluster to run on. MFC is only set up on Xenon; Raijin has no
-# Fortran/MPI toolchain published. Results are ranked per cluster, because a
-# Raijin number and a Xenon number measure different hardware.
-cluster: xenon
+# NOTE: the cluster is NOT set here. It comes from the directory you copy this
+# into — input/<cluster>/<suite>/<your-name>/<run-name>/. Filing a job under
+# input/xenon/ is what routes it to the Xenon runner.
+
 
 # Which benchmark case. Must be one of the seven in suites/MFC/suite.yml.
 # The case is fixed so entries are comparable; you compete on how you run it.
