@@ -76,9 +76,10 @@
     "case.py": "raw/xenon/MFC/demo/bowshock-gpu/case.py",
     "summary.yaml": "raw/xenon/MFC/demo/bowshock-gpu/summary.yaml",
     "time_data.dat": "raw/xenon/MFC/demo/bowshock-gpu/time_data.dat",
-    "mfc-bowshock-gpu.out": "raw/xenon/MFC/demo/bowshock-gpu/mfc-bowshock-gpu.out",
-    "mfc-bowshock-gpu.err": "raw/xenon/MFC/demo/bowshock-gpu/mfc-bowshock-gpu.err",
+    "run.out": "raw/xenon/MFC/demo/bowshock-gpu/run.out",
+    "run.err": "raw/xenon/MFC/demo/bowshock-gpu/run.err",
     "job.yml": "raw/xenon/MFC/demo/bowshock-gpu/job.yml",
+    "run.sh": "raw/xenon/MFC/demo/bowshock-gpu/run.sh",
     "mfc-provenance.json": "raw/xenon/MFC/demo/bowshock-gpu/mfc-provenance.json",
     "mfc-status.yml": "raw/xenon/MFC/demo/bowshock-gpu/mfc-status.yml"
   },
@@ -86,12 +87,823 @@
   "dat": null,
   "job": null,
   "out": {
-    "file": "mfc-bowshock-gpu.out",
-    "size": 398854
+    "file": "run.out",
+    "size": 398854,
+    "parsed": {
+      "banner": {
+        "start_time": "05:37:10",
+        "start_date": "05:37:10",
+        "partition": "gpu",
+        "walltime": "02:00:00",
+        "nodes": "2",
+        "job_name": "mfc-bowshock-gpu",
+        "engine": "batch",
+        "queue_system": "SLURM"
+      },
+      "env": {
+        "host": "gpu-node1",
+        "nodesTasks": "2 x 4",
+        "mpirun": "/work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+        "fabric": "ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)"
+      },
+      "steps": [
+        {
+          "step": 1,
+          "total": 3001,
+          "avg": 0,
+          "perStep": 0
+        },
+        {
+          "step": 26,
+          "total": 3001,
+          "avg": 2.596289,
+          "perStep": 2.567637
+        },
+        {
+          "step": 51,
+          "total": 3001,
+          "avg": 2.599093,
+          "perStep": 2.595538
+        },
+        {
+          "step": 76,
+          "total": 3001,
+          "avg": 2.599984,
+          "perStep": 2.607926
+        },
+        {
+          "step": 101,
+          "total": 3001,
+          "avg": 2.599959,
+          "perStep": 2.5775
+        },
+        {
+          "step": 126,
+          "total": 3001,
+          "avg": 2.600113,
+          "perStep": 2.582219
+        },
+        {
+          "step": 151,
+          "total": 3001,
+          "avg": 2.600464,
+          "perStep": 2.57239
+        },
+        {
+          "step": 176,
+          "total": 3001,
+          "avg": 2.600043,
+          "perStep": 2.599505
+        },
+        {
+          "step": 201,
+          "total": 3001,
+          "avg": 2.599603,
+          "perStep": 2.609073
+        },
+        {
+          "step": 226,
+          "total": 3001,
+          "avg": 2.600065,
+          "perStep": 2.609159
+        },
+        {
+          "step": 251,
+          "total": 3001,
+          "avg": 2.600166,
+          "perStep": 2.592386
+        },
+        {
+          "step": 276,
+          "total": 3001,
+          "avg": 2.600662,
+          "perStep": 2.582604
+        },
+        {
+          "step": 301,
+          "total": 3001,
+          "avg": 2.600521,
+          "perStep": 2.612135
+        },
+        {
+          "step": 326,
+          "total": 3001,
+          "avg": 2.600726,
+          "perStep": 2.607037
+        },
+        {
+          "step": 351,
+          "total": 3001,
+          "avg": 2.600966,
+          "perStep": 2.606577
+        },
+        {
+          "step": 376,
+          "total": 3001,
+          "avg": 2.600693,
+          "perStep": 2.580444
+        },
+        {
+          "step": 401,
+          "total": 3001,
+          "avg": 2.600487,
+          "perStep": 2.612707
+        },
+        {
+          "step": 426,
+          "total": 3001,
+          "avg": 2.60045,
+          "perStep": 2.63462
+        },
+        {
+          "step": 451,
+          "total": 3001,
+          "avg": 2.600411,
+          "perStep": 2.602771
+        },
+        {
+          "step": 476,
+          "total": 3001,
+          "avg": 2.600615,
+          "perStep": 2.584586
+        },
+        {
+          "step": 501,
+          "total": 3001,
+          "avg": 2.600564,
+          "perStep": 2.602196
+        },
+        {
+          "step": 526,
+          "total": 3001,
+          "avg": 2.600766,
+          "perStep": 2.579739
+        },
+        {
+          "step": 551,
+          "total": 3001,
+          "avg": 2.60073,
+          "perStep": 2.630796
+        },
+        {
+          "step": 576,
+          "total": 3001,
+          "avg": 2.600459,
+          "perStep": 2.618197
+        },
+        {
+          "step": 601,
+          "total": 3001,
+          "avg": 2.600439,
+          "perStep": 2.626334
+        },
+        {
+          "step": 626,
+          "total": 3001,
+          "avg": 2.600563,
+          "perStep": 2.614957
+        },
+        {
+          "step": 651,
+          "total": 3001,
+          "avg": 2.600463,
+          "perStep": 2.597686
+        },
+        {
+          "step": 676,
+          "total": 3001,
+          "avg": 2.600548,
+          "perStep": 2.604087
+        },
+        {
+          "step": 701,
+          "total": 3001,
+          "avg": 2.600548,
+          "perStep": 2.61184
+        },
+        {
+          "step": 726,
+          "total": 3001,
+          "avg": 2.600557,
+          "perStep": 2.637476
+        },
+        {
+          "step": 751,
+          "total": 3001,
+          "avg": 2.600681,
+          "perStep": 2.607614
+        },
+        {
+          "step": 776,
+          "total": 3001,
+          "avg": 2.600698,
+          "perStep": 2.571254
+        },
+        {
+          "step": 801,
+          "total": 3001,
+          "avg": 2.6006,
+          "perStep": 2.619059
+        },
+        {
+          "step": 826,
+          "total": 3001,
+          "avg": 2.600684,
+          "perStep": 2.589355
+        },
+        {
+          "step": 851,
+          "total": 3001,
+          "avg": 2.600732,
+          "perStep": 2.612957
+        },
+        {
+          "step": 876,
+          "total": 3001,
+          "avg": 2.600765,
+          "perStep": 2.599091
+        },
+        {
+          "step": 901,
+          "total": 3001,
+          "avg": 2.60087,
+          "perStep": 2.590735
+        },
+        {
+          "step": 926,
+          "total": 3001,
+          "avg": 2.600856,
+          "perStep": 2.590332
+        },
+        {
+          "step": 951,
+          "total": 3001,
+          "avg": 2.600988,
+          "perStep": 2.596961
+        },
+        {
+          "step": 976,
+          "total": 3001,
+          "avg": 2.60103,
+          "perStep": 2.605413
+        },
+        {
+          "step": 1001,
+          "total": 3001,
+          "avg": 2.601021,
+          "perStep": 2.620811
+        },
+        {
+          "step": 1026,
+          "total": 3001,
+          "avg": 2.601026,
+          "perStep": 2.637335
+        },
+        {
+          "step": 1051,
+          "total": 3001,
+          "avg": 2.601074,
+          "perStep": 2.589315
+        },
+        {
+          "step": 1076,
+          "total": 3001,
+          "avg": 2.601086,
+          "perStep": 2.605767
+        },
+        {
+          "step": 1101,
+          "total": 3001,
+          "avg": 2.601239,
+          "perStep": 2.612604
+        },
+        {
+          "step": 1126,
+          "total": 3001,
+          "avg": 2.601234,
+          "perStep": 2.61294
+        },
+        {
+          "step": 1151,
+          "total": 3001,
+          "avg": 2.601101,
+          "perStep": 2.58223
+        },
+        {
+          "step": 1176,
+          "total": 3001,
+          "avg": 2.601282,
+          "perStep": 2.60331
+        },
+        {
+          "step": 1201,
+          "total": 3001,
+          "avg": 2.601418,
+          "perStep": 2.602922
+        },
+        {
+          "step": 1226,
+          "total": 3001,
+          "avg": 2.601382,
+          "perStep": 2.591571
+        },
+        {
+          "step": 1251,
+          "total": 3001,
+          "avg": 2.601336,
+          "perStep": 2.57837
+        },
+        {
+          "step": 1276,
+          "total": 3001,
+          "avg": 2.601435,
+          "perStep": 2.599132
+        },
+        {
+          "step": 1301,
+          "total": 3001,
+          "avg": 2.601457,
+          "perStep": 2.615781
+        },
+        {
+          "step": 1326,
+          "total": 3001,
+          "avg": 2.601474,
+          "perStep": 2.59431
+        },
+        {
+          "step": 1351,
+          "total": 3001,
+          "avg": 2.60146,
+          "perStep": 2.596546
+        },
+        {
+          "step": 1376,
+          "total": 3001,
+          "avg": 2.601509,
+          "perStep": 2.626278
+        },
+        {
+          "step": 1401,
+          "total": 3001,
+          "avg": 2.601553,
+          "perStep": 2.595834
+        },
+        {
+          "step": 1426,
+          "total": 3001,
+          "avg": 2.601554,
+          "perStep": 2.593773
+        },
+        {
+          "step": 1451,
+          "total": 3001,
+          "avg": 2.601519,
+          "perStep": 2.628023
+        },
+        {
+          "step": 1476,
+          "total": 3001,
+          "avg": 2.601607,
+          "perStep": 2.589156
+        },
+        {
+          "step": 1501,
+          "total": 3001,
+          "avg": 2.601568,
+          "perStep": 2.580694
+        },
+        {
+          "step": 1526,
+          "total": 3001,
+          "avg": 2.601607,
+          "perStep": 2.602304
+        },
+        {
+          "step": 1551,
+          "total": 3001,
+          "avg": 2.601601,
+          "perStep": 2.590546
+        },
+        {
+          "step": 1576,
+          "total": 3001,
+          "avg": 2.60159,
+          "perStep": 2.588242
+        },
+        {
+          "step": 1601,
+          "total": 3001,
+          "avg": 2.601513,
+          "perStep": 2.603562
+        },
+        {
+          "step": 1626,
+          "total": 3001,
+          "avg": 2.601541,
+          "perStep": 2.637096
+        },
+        {
+          "step": 1651,
+          "total": 3001,
+          "avg": 2.60155,
+          "perStep": 2.571864
+        },
+        {
+          "step": 1676,
+          "total": 3001,
+          "avg": 2.601627,
+          "perStep": 2.627177
+        },
+        {
+          "step": 1701,
+          "total": 3001,
+          "avg": 2.601568,
+          "perStep": 2.580157
+        },
+        {
+          "step": 1726,
+          "total": 3001,
+          "avg": 2.601585,
+          "perStep": 2.618462
+        },
+        {
+          "step": 1751,
+          "total": 3001,
+          "avg": 2.601623,
+          "perStep": 2.615786
+        },
+        {
+          "step": 1776,
+          "total": 3001,
+          "avg": 2.601703,
+          "perStep": 2.626929
+        },
+        {
+          "step": 1801,
+          "total": 3001,
+          "avg": 2.601705,
+          "perStep": 2.613411
+        },
+        {
+          "step": 1826,
+          "total": 3001,
+          "avg": 2.601688,
+          "perStep": 2.610691
+        },
+        {
+          "step": 1851,
+          "total": 3001,
+          "avg": 2.60163,
+          "perStep": 2.597468
+        },
+        {
+          "step": 1876,
+          "total": 3001,
+          "avg": 2.601639,
+          "perStep": 2.623014
+        },
+        {
+          "step": 1901,
+          "total": 3001,
+          "avg": 2.601575,
+          "perStep": 2.615268
+        },
+        {
+          "step": 1926,
+          "total": 3001,
+          "avg": 2.601545,
+          "perStep": 2.586898
+        },
+        {
+          "step": 1951,
+          "total": 3001,
+          "avg": 2.601486,
+          "perStep": 2.587755
+        },
+        {
+          "step": 1976,
+          "total": 3001,
+          "avg": 2.601457,
+          "perStep": 2.631357
+        },
+        {
+          "step": 2001,
+          "total": 3001,
+          "avg": 2.601423,
+          "perStep": 2.593906
+        },
+        {
+          "step": 2026,
+          "total": 3001,
+          "avg": 2.601482,
+          "perStep": 2.623629
+        },
+        {
+          "step": 2051,
+          "total": 3001,
+          "avg": 2.601485,
+          "perStep": 2.590097
+        },
+        {
+          "step": 2076,
+          "total": 3001,
+          "avg": 2.601562,
+          "perStep": 2.600885
+        },
+        {
+          "step": 2101,
+          "total": 3001,
+          "avg": 2.601559,
+          "perStep": 2.595945
+        },
+        {
+          "step": 2126,
+          "total": 3001,
+          "avg": 2.601576,
+          "perStep": 2.56773
+        },
+        {
+          "step": 2151,
+          "total": 3001,
+          "avg": 2.60155,
+          "perStep": 2.609767
+        },
+        {
+          "step": 2176,
+          "total": 3001,
+          "avg": 2.601505,
+          "perStep": 2.591379
+        },
+        {
+          "step": 2201,
+          "total": 3001,
+          "avg": 2.601483,
+          "perStep": 2.601548
+        },
+        {
+          "step": 2226,
+          "total": 3001,
+          "avg": 2.60149,
+          "perStep": 2.593219
+        },
+        {
+          "step": 2251,
+          "total": 3001,
+          "avg": 2.601515,
+          "perStep": 2.609007
+        },
+        {
+          "step": 2276,
+          "total": 3001,
+          "avg": 2.601503,
+          "perStep": 2.616733
+        },
+        {
+          "step": 2301,
+          "total": 3001,
+          "avg": 2.601531,
+          "perStep": 2.611445
+        },
+        {
+          "step": 2326,
+          "total": 3001,
+          "avg": 2.601548,
+          "perStep": 2.602586
+        },
+        {
+          "step": 2351,
+          "total": 3001,
+          "avg": 2.601545,
+          "perStep": 2.596941
+        },
+        {
+          "step": 2376,
+          "total": 3001,
+          "avg": 2.601546,
+          "perStep": 2.585565
+        },
+        {
+          "step": 2401,
+          "total": 3001,
+          "avg": 2.601561,
+          "perStep": 2.620506
+        },
+        {
+          "step": 2426,
+          "total": 3001,
+          "avg": 2.601557,
+          "perStep": 2.615498
+        },
+        {
+          "step": 2451,
+          "total": 3001,
+          "avg": 2.601525,
+          "perStep": 2.594345
+        },
+        {
+          "step": 2476,
+          "total": 3001,
+          "avg": 2.601482,
+          "perStep": 2.611315
+        },
+        {
+          "step": 2501,
+          "total": 3001,
+          "avg": 2.601437,
+          "perStep": 2.617631
+        },
+        {
+          "step": 2526,
+          "total": 3001,
+          "avg": 2.601505,
+          "perStep": 2.5823
+        },
+        {
+          "step": 2551,
+          "total": 3001,
+          "avg": 2.601467,
+          "perStep": 2.594871
+        },
+        {
+          "step": 2576,
+          "total": 3001,
+          "avg": 2.601471,
+          "perStep": 2.591079
+        },
+        {
+          "step": 2601,
+          "total": 3001,
+          "avg": 2.601464,
+          "perStep": 2.592003
+        },
+        {
+          "step": 2626,
+          "total": 3001,
+          "avg": 2.601534,
+          "perStep": 2.607844
+        },
+        {
+          "step": 2651,
+          "total": 3001,
+          "avg": 2.601515,
+          "perStep": 2.631476
+        },
+        {
+          "step": 2676,
+          "total": 3001,
+          "avg": 2.601568,
+          "perStep": 2.607117
+        },
+        {
+          "step": 2701,
+          "total": 3001,
+          "avg": 2.601563,
+          "perStep": 2.583079
+        },
+        {
+          "step": 2726,
+          "total": 3001,
+          "avg": 2.601569,
+          "perStep": 2.608873
+        },
+        {
+          "step": 2751,
+          "total": 3001,
+          "avg": 2.601564,
+          "perStep": 2.600108
+        },
+        {
+          "step": 2776,
+          "total": 3001,
+          "avg": 2.601595,
+          "perStep": 2.597627
+        },
+        {
+          "step": 2801,
+          "total": 3001,
+          "avg": 2.601566,
+          "perStep": 2.597439
+        },
+        {
+          "step": 2826,
+          "total": 3001,
+          "avg": 2.60157,
+          "perStep": 2.609366
+        },
+        {
+          "step": 2851,
+          "total": 3001,
+          "avg": 2.601561,
+          "perStep": 2.603046
+        },
+        {
+          "step": 2876,
+          "total": 3001,
+          "avg": 2.601518,
+          "perStep": 2.612818
+        },
+        {
+          "step": 2901,
+          "total": 3001,
+          "avg": 2.6015,
+          "perStep": 2.627837
+        },
+        {
+          "step": 2926,
+          "total": 3001,
+          "avg": 2.601544,
+          "perStep": 2.613837
+        },
+        {
+          "step": 2951,
+          "total": 3001,
+          "avg": 2.601549,
+          "perStep": 2.602517
+        },
+        {
+          "step": 2976,
+          "total": 3001,
+          "avg": 2.601526,
+          "perStep": 2.581541
+        },
+        {
+          "step": 3000,
+          "total": 3001,
+          "avg": 2.601531,
+          "perStep": 2.610143
+        }
+      ],
+      "stepCount": 3000,
+      "performance": 0.9124885002772013,
+      "totalTimeSec": 8420,
+      "exitCode": 0,
+      "lines": 3138
+    },
+    "excerpt": {
+      "head": [
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| MFC case # mfc-bowshock-gpu @ /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/case.py:                    |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| * Start-time     05:37:10                            * Start-date     05:37:10                            |",
+        "| * Partition      gpu                                 * Walltime       02:00:00                            |",
+        "| * Account        N/A                                 * Nodes          2                                   |",
+        "| * Job Name       mfc-bowshock-gpu                    * Engine         batch                               |",
+        "| * QoS            N/A                                 * Binary         N/A                                 |",
+        "| * Queue System   SLURM                               * Email          N/A                                 |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "",
+        "host        : gpu-node1",
+        "nodes/tasks : 2 x 4",
+        "mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+        "fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)",
+        "",
+        "mfc: OK > :) Running syscheck:",
+        "",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)"
+      ],
+      "tail": [
+        " [ 67%]  Saving       41 of 61 @ t_step =     2000 Time Avg =     4.971891E+00 Time/step = 3.776691E+00 ETA (HH:MM:SS) = 0:01:39",
+        " [ 69%]  Saving       42 of 61 @ t_step =     2050 Time Avg =     4.944492E+00 Time/step = 3.875915E+00 ETA (HH:MM:SS) = 0:01:33",
+        " [ 70%]  Saving       43 of 61 @ t_step =     2100 Time Avg =     4.917890E+00 Time/step = 3.853814E+00 ETA (HH:MM:SS) = 0:01:28",
+        " [ 72%]  Saving       44 of 61 @ t_step =     2150 Time Avg =     4.893549E+00 Time/step = 3.895558E+00 ETA (HH:MM:SS) = 0:01:23",
+        " [ 74%]  Saving       45 of 61 @ t_step =     2200 Time Avg =     4.869707E+00 Time/step = 3.868341E+00 ETA (HH:MM:SS) = 0:01:17",
+        " [ 75%]  Saving       46 of 61 @ t_step =     2250 Time Avg =     4.845738E+00 Time/step = 3.815064E+00 ETA (HH:MM:SS) = 0:01:12",
+        " [ 77%]  Saving       47 of 61 @ t_step =     2300 Time Avg =     4.823822E+00 Time/step = 3.859545E+00 ETA (HH:MM:SS) = 0:01:07",
+        " [ 79%]  Saving       48 of 61 @ t_step =     2350 Time Avg =     4.803216E+00 Time/step = 3.875922E+00 ETA (HH:MM:SS) = 0:01:02",
+        " [ 80%]  Saving       49 of 61 @ t_step =     2400 Time Avg =     4.783507E+00 Time/step = 3.876886E+00 ETA (HH:MM:SS) = 0:00:57",
+        " [ 82%]  Saving       50 of 61 @ t_step =     2450 Time Avg =     4.764324E+00 Time/step = 3.862730E+00 ETA (HH:MM:SS) = 0:00:52",
+        " [ 84%]  Saving       51 of 61 @ t_step =     2500 Time Avg =     4.744096E+00 Time/step = 3.773186E+00 ETA (HH:MM:SS) = 0:00:47",
+        " [ 85%]  Saving       52 of 61 @ t_step =     2550 Time Avg =     4.726048E+00 Time/step = 3.841671E+00 ETA (HH:MM:SS) = 0:00:42",
+        " [ 87%]  Saving       53 of 61 @ t_step =     2600 Time Avg =     4.719724E+00 Time/step = 4.403550E+00 ETA (HH:MM:SS) = 0:00:37",
+        " [ 89%]  Saving       54 of 61 @ t_step =     2650 Time Avg =     4.701545E+00 Time/step = 3.774377E+00 ETA (HH:MM:SS) = 0:00:32",
+        " [ 90%]  Saving       55 of 61 @ t_step =     2700 Time Avg =     4.685253E+00 Time/step = 3.838071E+00 ETA (HH:MM:SS) = 0:00:28",
+        " [ 92%]  Saving       56 of 61 @ t_step =     2750 Time Avg =     4.667604E+00 Time/step = 3.732222E+00 ETA (HH:MM:SS) = 0:00:23",
+        " [ 94%]  Saving       57 of 61 @ t_step =     2800 Time Avg =     4.652039E+00 Time/step = 3.811541E+00 ETA (HH:MM:SS) = 0:00:18",
+        " [ 95%]  Saving       58 of 61 @ t_step =     2850 Time Avg =     4.636942E+00 Time/step = 3.806616E+00 ETA (HH:MM:SS) = 0:00:13",
+        " [ 97%]  Saving       59 of 61 @ t_step =     2900 Time Avg =     4.621147E+00 Time/step = 3.736582E+00 ETA (HH:MM:SS) = 0:00:09",
+        " [ 99%]  Saving       60 of 61 @ t_step =     2950 Time Avg =     4.607594E+00 Time/step = 3.835080E+00 ETA (HH:MM:SS) = 0:00:04",
+        " [100%]  Saving       61 of 61 @ t_step =     3000 Time Avg =     4.594765E+00 Time/step = 3.850718E+00 ETA (HH:MM:SS) = 0:00:00",
+        "",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| Finished mfc-bowshock-gpu:                                                                                |",
+        "| * Total-time:    8420s                               * Exit Code:     0                                   |",
+        "| * End-time:      07:57:30                            * End-date:      07:57:30                            |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        ""
+      ],
+      "elided": 3086
+    }
   },
   "err": {
-    "file": "mfc-bowshock-gpu.err",
-    "size": 525
+    "file": "run.err",
+    "size": 525,
+    "raw": "+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process\n"
   },
   "detail": {
     "summary": {
@@ -163,13 +975,828 @@
       "file": "case.py",
       "raw": "import json\nimport math\n\nMu = 1.84e-05\ngam_a = 1.4\n\nD = 0.1\n\n# Configuring case dictionary\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"T\",\n            # Computational Domain Parameters\n            # x direction\n            \"x_domain%beg\": -5 * D,\n            \"x_domain%end\": 5.0 * D,\n            # y direction\n            \"y_domain%beg\": -2.5 * D,\n            \"y_domain%end\": 2.5 * D,\n            # z direction\n            \"z_domain%beg\": -2.5 * D,\n            \"z_domain%end\": 2.5 * D,\n            \"cyl_coord\": \"F\",\n            \"m\": 512,\n            \"n\": 256,\n            \"p\": 256,\n            \"dt\": 1.0e-6,\n            \"t_step_start\": 0,\n            \"t_step_stop\": 3000,  # 3000\n            \"t_step_save\": 50,  # 60 frames for the video (upstream saves 10)\n            # Simulation Algorithm Parameters\n            # Only one patches are necessary, the air tube\n            \"num_patches\": 1,\n            # Use the 5 equation model\n            \"model_eqns\": \"5eq\",\n            # 6 equations model does not need the K \\div(u) term\n            \"alt_soundspeed\": \"F\",\n            # One fluids: air\n            \"num_fluids\": 1,\n            # time step\n            \"mpp_lim\": \"F\",\n            # Correct errors when computing speed of sound\n            \"mixture_err\": \"T\",\n            # Use TVD RK3 for time marching\n            \"time_stepper\": \"rk3\",\n            # Reconstruct the primitive variables to minimize spurious\n            # Use WENO5\n            \"weno_order\": 5,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"T\",\n            \"weno_avg\": \"T\",\n            \"avg_state\": \"arithmetic\",\n            \"mapped_weno\": \"T\",\n            \"null_weights\": \"F\",\n            \"mp_weno\": \"T\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            # We use ghost-cell extrapolation\n            \"bc_x%beg\": -3,\n            \"bc_x%end\": -3,\n            \"bc_y%beg\": -3,\n            \"bc_y%end\": -3,\n            \"bc_z%beg\": -3,\n            \"bc_z%end\": -3,\n            # Set IB to True and add 1 patch\n            \"ib\": \"T\",\n            \"num_ibs\": 1,\n            \"fd_order\": 2,\n            \"viscous\": \"T\",\n            # Formatted Database Files Structure Parameters\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"E_wrt\": \"T\",\n            \"parallel_io\": \"T\",\n            # Patch: Constant Tube filled with air\n            # Specify the cylindrical air tube grid geometry\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": 0.0,\n            # Uniform medium density, centroid is at the center of the domain\n            \"patch_icpp(1)%y_centroid\": 0.0,\n            \"patch_icpp(1)%z_centroid\": 0.0,\n            \"patch_icpp(1)%length_x\": 10 * D,\n            \"patch_icpp(1)%length_y\": 5 * D,\n            \"patch_icpp(1)%length_z\": 5 * D,\n            # Specify the patch primitive variables\n            \"patch_icpp(1)%vel(1)\": 527.2e00,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%vel(3)\": 0.0e00,\n            \"patch_icpp(1)%pres\": 10918.2549,\n            \"patch_icpp(1)%alpha_rho(1)\": 0.2199,\n            \"patch_icpp(1)%alpha(1)\": 1.0e00,\n            # Patch: Sphere Immersed Boundary\n            \"patch_ib(1)%geometry\": 8,\n            \"patch_ib(1)%x_centroid\": -3.0e-3,\n            \"patch_ib(1)%y_centroid\": 0.0,\n            \"patch_ib(1)%z_centroid\": 0.0,\n            \"patch_ib(1)%radius\": D / 2,\n            \"patch_ib(1)%slip\": \"T\",\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gam_a - 1.0e00),  # 2.50(Not 1.40)\n            \"fluid_pp(1)%pi_inf\": 0,\n            \"fluid_pp(1)%Re(1)\": 7535533.2,\n        }\n    )\n)\n"
     },
+    "script": {
+      "file": "run.sh",
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-bowshock-gpu\"\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4\n#SBATCH --output=\"mfc-bowshock-gpu.out\"\n#SBATCH --error=\"mfc-bowshock-gpu.err\"\n#SBATCH --time=02:00:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=gpu\n#SBATCH --gres=gpu:a100:4\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/zen3/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"gpu\"          \"Walltime\"   \"02:00:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"2\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-bowshock-gpu\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-bowshock-gpu @ /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/mfc-environment.sh\" acc || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 2 x 4\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35186426864/MFC/demo/bowshock-gpu'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35186426864/MFC/demo/bowshock-gpu'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35186426864/MFC/demo/bowshock-gpu'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA post_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35186426864/MFC/demo/bowshock-gpu'\n\n    t_post_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process\")\n\n    \n    code=$?\n\n    t_post_process_stop=$(python3 -c 'import time; print(time.time())')\n\n    python3 \"/work/mfc/5.6.1-gcc13-ompi5/zen3/toolchain/templates/include/generate_silo_series.py\" '/scratch/jobs/35186426864/MFC/demo/bowshock-gpu'\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml' <<EOL\npost_process:\n    exec:  $(echo \"$t_post_process_stop - $t_post_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-bowshock-gpu:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+    },
     "out": {
-      "file": "mfc-bowshock-gpu.out",
-      "size": 398854
+      "file": "run.out",
+      "size": 398854,
+      "parsed": {
+        "banner": {
+          "start_time": "05:37:10",
+          "start_date": "05:37:10",
+          "partition": "gpu",
+          "walltime": "02:00:00",
+          "nodes": "2",
+          "job_name": "mfc-bowshock-gpu",
+          "engine": "batch",
+          "queue_system": "SLURM"
+        },
+        "env": {
+          "host": "gpu-node1",
+          "nodesTasks": "2 x 4",
+          "mpirun": "/work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+          "fabric": "ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)"
+        },
+        "steps": [
+          {
+            "step": 1,
+            "total": 3001,
+            "avg": 0,
+            "perStep": 0
+          },
+          {
+            "step": 26,
+            "total": 3001,
+            "avg": 2.596289,
+            "perStep": 2.567637
+          },
+          {
+            "step": 51,
+            "total": 3001,
+            "avg": 2.599093,
+            "perStep": 2.595538
+          },
+          {
+            "step": 76,
+            "total": 3001,
+            "avg": 2.599984,
+            "perStep": 2.607926
+          },
+          {
+            "step": 101,
+            "total": 3001,
+            "avg": 2.599959,
+            "perStep": 2.5775
+          },
+          {
+            "step": 126,
+            "total": 3001,
+            "avg": 2.600113,
+            "perStep": 2.582219
+          },
+          {
+            "step": 151,
+            "total": 3001,
+            "avg": 2.600464,
+            "perStep": 2.57239
+          },
+          {
+            "step": 176,
+            "total": 3001,
+            "avg": 2.600043,
+            "perStep": 2.599505
+          },
+          {
+            "step": 201,
+            "total": 3001,
+            "avg": 2.599603,
+            "perStep": 2.609073
+          },
+          {
+            "step": 226,
+            "total": 3001,
+            "avg": 2.600065,
+            "perStep": 2.609159
+          },
+          {
+            "step": 251,
+            "total": 3001,
+            "avg": 2.600166,
+            "perStep": 2.592386
+          },
+          {
+            "step": 276,
+            "total": 3001,
+            "avg": 2.600662,
+            "perStep": 2.582604
+          },
+          {
+            "step": 301,
+            "total": 3001,
+            "avg": 2.600521,
+            "perStep": 2.612135
+          },
+          {
+            "step": 326,
+            "total": 3001,
+            "avg": 2.600726,
+            "perStep": 2.607037
+          },
+          {
+            "step": 351,
+            "total": 3001,
+            "avg": 2.600966,
+            "perStep": 2.606577
+          },
+          {
+            "step": 376,
+            "total": 3001,
+            "avg": 2.600693,
+            "perStep": 2.580444
+          },
+          {
+            "step": 401,
+            "total": 3001,
+            "avg": 2.600487,
+            "perStep": 2.612707
+          },
+          {
+            "step": 426,
+            "total": 3001,
+            "avg": 2.60045,
+            "perStep": 2.63462
+          },
+          {
+            "step": 451,
+            "total": 3001,
+            "avg": 2.600411,
+            "perStep": 2.602771
+          },
+          {
+            "step": 476,
+            "total": 3001,
+            "avg": 2.600615,
+            "perStep": 2.584586
+          },
+          {
+            "step": 501,
+            "total": 3001,
+            "avg": 2.600564,
+            "perStep": 2.602196
+          },
+          {
+            "step": 526,
+            "total": 3001,
+            "avg": 2.600766,
+            "perStep": 2.579739
+          },
+          {
+            "step": 551,
+            "total": 3001,
+            "avg": 2.60073,
+            "perStep": 2.630796
+          },
+          {
+            "step": 576,
+            "total": 3001,
+            "avg": 2.600459,
+            "perStep": 2.618197
+          },
+          {
+            "step": 601,
+            "total": 3001,
+            "avg": 2.600439,
+            "perStep": 2.626334
+          },
+          {
+            "step": 626,
+            "total": 3001,
+            "avg": 2.600563,
+            "perStep": 2.614957
+          },
+          {
+            "step": 651,
+            "total": 3001,
+            "avg": 2.600463,
+            "perStep": 2.597686
+          },
+          {
+            "step": 676,
+            "total": 3001,
+            "avg": 2.600548,
+            "perStep": 2.604087
+          },
+          {
+            "step": 701,
+            "total": 3001,
+            "avg": 2.600548,
+            "perStep": 2.61184
+          },
+          {
+            "step": 726,
+            "total": 3001,
+            "avg": 2.600557,
+            "perStep": 2.637476
+          },
+          {
+            "step": 751,
+            "total": 3001,
+            "avg": 2.600681,
+            "perStep": 2.607614
+          },
+          {
+            "step": 776,
+            "total": 3001,
+            "avg": 2.600698,
+            "perStep": 2.571254
+          },
+          {
+            "step": 801,
+            "total": 3001,
+            "avg": 2.6006,
+            "perStep": 2.619059
+          },
+          {
+            "step": 826,
+            "total": 3001,
+            "avg": 2.600684,
+            "perStep": 2.589355
+          },
+          {
+            "step": 851,
+            "total": 3001,
+            "avg": 2.600732,
+            "perStep": 2.612957
+          },
+          {
+            "step": 876,
+            "total": 3001,
+            "avg": 2.600765,
+            "perStep": 2.599091
+          },
+          {
+            "step": 901,
+            "total": 3001,
+            "avg": 2.60087,
+            "perStep": 2.590735
+          },
+          {
+            "step": 926,
+            "total": 3001,
+            "avg": 2.600856,
+            "perStep": 2.590332
+          },
+          {
+            "step": 951,
+            "total": 3001,
+            "avg": 2.600988,
+            "perStep": 2.596961
+          },
+          {
+            "step": 976,
+            "total": 3001,
+            "avg": 2.60103,
+            "perStep": 2.605413
+          },
+          {
+            "step": 1001,
+            "total": 3001,
+            "avg": 2.601021,
+            "perStep": 2.620811
+          },
+          {
+            "step": 1026,
+            "total": 3001,
+            "avg": 2.601026,
+            "perStep": 2.637335
+          },
+          {
+            "step": 1051,
+            "total": 3001,
+            "avg": 2.601074,
+            "perStep": 2.589315
+          },
+          {
+            "step": 1076,
+            "total": 3001,
+            "avg": 2.601086,
+            "perStep": 2.605767
+          },
+          {
+            "step": 1101,
+            "total": 3001,
+            "avg": 2.601239,
+            "perStep": 2.612604
+          },
+          {
+            "step": 1126,
+            "total": 3001,
+            "avg": 2.601234,
+            "perStep": 2.61294
+          },
+          {
+            "step": 1151,
+            "total": 3001,
+            "avg": 2.601101,
+            "perStep": 2.58223
+          },
+          {
+            "step": 1176,
+            "total": 3001,
+            "avg": 2.601282,
+            "perStep": 2.60331
+          },
+          {
+            "step": 1201,
+            "total": 3001,
+            "avg": 2.601418,
+            "perStep": 2.602922
+          },
+          {
+            "step": 1226,
+            "total": 3001,
+            "avg": 2.601382,
+            "perStep": 2.591571
+          },
+          {
+            "step": 1251,
+            "total": 3001,
+            "avg": 2.601336,
+            "perStep": 2.57837
+          },
+          {
+            "step": 1276,
+            "total": 3001,
+            "avg": 2.601435,
+            "perStep": 2.599132
+          },
+          {
+            "step": 1301,
+            "total": 3001,
+            "avg": 2.601457,
+            "perStep": 2.615781
+          },
+          {
+            "step": 1326,
+            "total": 3001,
+            "avg": 2.601474,
+            "perStep": 2.59431
+          },
+          {
+            "step": 1351,
+            "total": 3001,
+            "avg": 2.60146,
+            "perStep": 2.596546
+          },
+          {
+            "step": 1376,
+            "total": 3001,
+            "avg": 2.601509,
+            "perStep": 2.626278
+          },
+          {
+            "step": 1401,
+            "total": 3001,
+            "avg": 2.601553,
+            "perStep": 2.595834
+          },
+          {
+            "step": 1426,
+            "total": 3001,
+            "avg": 2.601554,
+            "perStep": 2.593773
+          },
+          {
+            "step": 1451,
+            "total": 3001,
+            "avg": 2.601519,
+            "perStep": 2.628023
+          },
+          {
+            "step": 1476,
+            "total": 3001,
+            "avg": 2.601607,
+            "perStep": 2.589156
+          },
+          {
+            "step": 1501,
+            "total": 3001,
+            "avg": 2.601568,
+            "perStep": 2.580694
+          },
+          {
+            "step": 1526,
+            "total": 3001,
+            "avg": 2.601607,
+            "perStep": 2.602304
+          },
+          {
+            "step": 1551,
+            "total": 3001,
+            "avg": 2.601601,
+            "perStep": 2.590546
+          },
+          {
+            "step": 1576,
+            "total": 3001,
+            "avg": 2.60159,
+            "perStep": 2.588242
+          },
+          {
+            "step": 1601,
+            "total": 3001,
+            "avg": 2.601513,
+            "perStep": 2.603562
+          },
+          {
+            "step": 1626,
+            "total": 3001,
+            "avg": 2.601541,
+            "perStep": 2.637096
+          },
+          {
+            "step": 1651,
+            "total": 3001,
+            "avg": 2.60155,
+            "perStep": 2.571864
+          },
+          {
+            "step": 1676,
+            "total": 3001,
+            "avg": 2.601627,
+            "perStep": 2.627177
+          },
+          {
+            "step": 1701,
+            "total": 3001,
+            "avg": 2.601568,
+            "perStep": 2.580157
+          },
+          {
+            "step": 1726,
+            "total": 3001,
+            "avg": 2.601585,
+            "perStep": 2.618462
+          },
+          {
+            "step": 1751,
+            "total": 3001,
+            "avg": 2.601623,
+            "perStep": 2.615786
+          },
+          {
+            "step": 1776,
+            "total": 3001,
+            "avg": 2.601703,
+            "perStep": 2.626929
+          },
+          {
+            "step": 1801,
+            "total": 3001,
+            "avg": 2.601705,
+            "perStep": 2.613411
+          },
+          {
+            "step": 1826,
+            "total": 3001,
+            "avg": 2.601688,
+            "perStep": 2.610691
+          },
+          {
+            "step": 1851,
+            "total": 3001,
+            "avg": 2.60163,
+            "perStep": 2.597468
+          },
+          {
+            "step": 1876,
+            "total": 3001,
+            "avg": 2.601639,
+            "perStep": 2.623014
+          },
+          {
+            "step": 1901,
+            "total": 3001,
+            "avg": 2.601575,
+            "perStep": 2.615268
+          },
+          {
+            "step": 1926,
+            "total": 3001,
+            "avg": 2.601545,
+            "perStep": 2.586898
+          },
+          {
+            "step": 1951,
+            "total": 3001,
+            "avg": 2.601486,
+            "perStep": 2.587755
+          },
+          {
+            "step": 1976,
+            "total": 3001,
+            "avg": 2.601457,
+            "perStep": 2.631357
+          },
+          {
+            "step": 2001,
+            "total": 3001,
+            "avg": 2.601423,
+            "perStep": 2.593906
+          },
+          {
+            "step": 2026,
+            "total": 3001,
+            "avg": 2.601482,
+            "perStep": 2.623629
+          },
+          {
+            "step": 2051,
+            "total": 3001,
+            "avg": 2.601485,
+            "perStep": 2.590097
+          },
+          {
+            "step": 2076,
+            "total": 3001,
+            "avg": 2.601562,
+            "perStep": 2.600885
+          },
+          {
+            "step": 2101,
+            "total": 3001,
+            "avg": 2.601559,
+            "perStep": 2.595945
+          },
+          {
+            "step": 2126,
+            "total": 3001,
+            "avg": 2.601576,
+            "perStep": 2.56773
+          },
+          {
+            "step": 2151,
+            "total": 3001,
+            "avg": 2.60155,
+            "perStep": 2.609767
+          },
+          {
+            "step": 2176,
+            "total": 3001,
+            "avg": 2.601505,
+            "perStep": 2.591379
+          },
+          {
+            "step": 2201,
+            "total": 3001,
+            "avg": 2.601483,
+            "perStep": 2.601548
+          },
+          {
+            "step": 2226,
+            "total": 3001,
+            "avg": 2.60149,
+            "perStep": 2.593219
+          },
+          {
+            "step": 2251,
+            "total": 3001,
+            "avg": 2.601515,
+            "perStep": 2.609007
+          },
+          {
+            "step": 2276,
+            "total": 3001,
+            "avg": 2.601503,
+            "perStep": 2.616733
+          },
+          {
+            "step": 2301,
+            "total": 3001,
+            "avg": 2.601531,
+            "perStep": 2.611445
+          },
+          {
+            "step": 2326,
+            "total": 3001,
+            "avg": 2.601548,
+            "perStep": 2.602586
+          },
+          {
+            "step": 2351,
+            "total": 3001,
+            "avg": 2.601545,
+            "perStep": 2.596941
+          },
+          {
+            "step": 2376,
+            "total": 3001,
+            "avg": 2.601546,
+            "perStep": 2.585565
+          },
+          {
+            "step": 2401,
+            "total": 3001,
+            "avg": 2.601561,
+            "perStep": 2.620506
+          },
+          {
+            "step": 2426,
+            "total": 3001,
+            "avg": 2.601557,
+            "perStep": 2.615498
+          },
+          {
+            "step": 2451,
+            "total": 3001,
+            "avg": 2.601525,
+            "perStep": 2.594345
+          },
+          {
+            "step": 2476,
+            "total": 3001,
+            "avg": 2.601482,
+            "perStep": 2.611315
+          },
+          {
+            "step": 2501,
+            "total": 3001,
+            "avg": 2.601437,
+            "perStep": 2.617631
+          },
+          {
+            "step": 2526,
+            "total": 3001,
+            "avg": 2.601505,
+            "perStep": 2.5823
+          },
+          {
+            "step": 2551,
+            "total": 3001,
+            "avg": 2.601467,
+            "perStep": 2.594871
+          },
+          {
+            "step": 2576,
+            "total": 3001,
+            "avg": 2.601471,
+            "perStep": 2.591079
+          },
+          {
+            "step": 2601,
+            "total": 3001,
+            "avg": 2.601464,
+            "perStep": 2.592003
+          },
+          {
+            "step": 2626,
+            "total": 3001,
+            "avg": 2.601534,
+            "perStep": 2.607844
+          },
+          {
+            "step": 2651,
+            "total": 3001,
+            "avg": 2.601515,
+            "perStep": 2.631476
+          },
+          {
+            "step": 2676,
+            "total": 3001,
+            "avg": 2.601568,
+            "perStep": 2.607117
+          },
+          {
+            "step": 2701,
+            "total": 3001,
+            "avg": 2.601563,
+            "perStep": 2.583079
+          },
+          {
+            "step": 2726,
+            "total": 3001,
+            "avg": 2.601569,
+            "perStep": 2.608873
+          },
+          {
+            "step": 2751,
+            "total": 3001,
+            "avg": 2.601564,
+            "perStep": 2.600108
+          },
+          {
+            "step": 2776,
+            "total": 3001,
+            "avg": 2.601595,
+            "perStep": 2.597627
+          },
+          {
+            "step": 2801,
+            "total": 3001,
+            "avg": 2.601566,
+            "perStep": 2.597439
+          },
+          {
+            "step": 2826,
+            "total": 3001,
+            "avg": 2.60157,
+            "perStep": 2.609366
+          },
+          {
+            "step": 2851,
+            "total": 3001,
+            "avg": 2.601561,
+            "perStep": 2.603046
+          },
+          {
+            "step": 2876,
+            "total": 3001,
+            "avg": 2.601518,
+            "perStep": 2.612818
+          },
+          {
+            "step": 2901,
+            "total": 3001,
+            "avg": 2.6015,
+            "perStep": 2.627837
+          },
+          {
+            "step": 2926,
+            "total": 3001,
+            "avg": 2.601544,
+            "perStep": 2.613837
+          },
+          {
+            "step": 2951,
+            "total": 3001,
+            "avg": 2.601549,
+            "perStep": 2.602517
+          },
+          {
+            "step": 2976,
+            "total": 3001,
+            "avg": 2.601526,
+            "perStep": 2.581541
+          },
+          {
+            "step": 3000,
+            "total": 3001,
+            "avg": 2.601531,
+            "perStep": 2.610143
+          }
+        ],
+        "stepCount": 3000,
+        "performance": 0.9124885002772013,
+        "totalTimeSec": 8420,
+        "exitCode": 0,
+        "lines": 3138
+      },
+      "excerpt": {
+        "head": [
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| MFC case # mfc-bowshock-gpu @ /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/case.py:                    |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| * Start-time     05:37:10                            * Start-date     05:37:10                            |",
+          "| * Partition      gpu                                 * Walltime       02:00:00                            |",
+          "| * Account        N/A                                 * Nodes          2                                   |",
+          "| * Job Name       mfc-bowshock-gpu                    * Engine         batch                               |",
+          "| * QoS            N/A                                 * Binary         N/A                                 |",
+          "| * Queue System   SLURM                               * Email          N/A                                 |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "",
+          "host        : gpu-node1",
+          "nodes/tasks : 2 x 4",
+          "mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+          "fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)",
+          "",
+          "mfc: OK > :) Running syscheck:",
+          "",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)"
+        ],
+        "tail": [
+          " [ 67%]  Saving       41 of 61 @ t_step =     2000 Time Avg =     4.971891E+00 Time/step = 3.776691E+00 ETA (HH:MM:SS) = 0:01:39",
+          " [ 69%]  Saving       42 of 61 @ t_step =     2050 Time Avg =     4.944492E+00 Time/step = 3.875915E+00 ETA (HH:MM:SS) = 0:01:33",
+          " [ 70%]  Saving       43 of 61 @ t_step =     2100 Time Avg =     4.917890E+00 Time/step = 3.853814E+00 ETA (HH:MM:SS) = 0:01:28",
+          " [ 72%]  Saving       44 of 61 @ t_step =     2150 Time Avg =     4.893549E+00 Time/step = 3.895558E+00 ETA (HH:MM:SS) = 0:01:23",
+          " [ 74%]  Saving       45 of 61 @ t_step =     2200 Time Avg =     4.869707E+00 Time/step = 3.868341E+00 ETA (HH:MM:SS) = 0:01:17",
+          " [ 75%]  Saving       46 of 61 @ t_step =     2250 Time Avg =     4.845738E+00 Time/step = 3.815064E+00 ETA (HH:MM:SS) = 0:01:12",
+          " [ 77%]  Saving       47 of 61 @ t_step =     2300 Time Avg =     4.823822E+00 Time/step = 3.859545E+00 ETA (HH:MM:SS) = 0:01:07",
+          " [ 79%]  Saving       48 of 61 @ t_step =     2350 Time Avg =     4.803216E+00 Time/step = 3.875922E+00 ETA (HH:MM:SS) = 0:01:02",
+          " [ 80%]  Saving       49 of 61 @ t_step =     2400 Time Avg =     4.783507E+00 Time/step = 3.876886E+00 ETA (HH:MM:SS) = 0:00:57",
+          " [ 82%]  Saving       50 of 61 @ t_step =     2450 Time Avg =     4.764324E+00 Time/step = 3.862730E+00 ETA (HH:MM:SS) = 0:00:52",
+          " [ 84%]  Saving       51 of 61 @ t_step =     2500 Time Avg =     4.744096E+00 Time/step = 3.773186E+00 ETA (HH:MM:SS) = 0:00:47",
+          " [ 85%]  Saving       52 of 61 @ t_step =     2550 Time Avg =     4.726048E+00 Time/step = 3.841671E+00 ETA (HH:MM:SS) = 0:00:42",
+          " [ 87%]  Saving       53 of 61 @ t_step =     2600 Time Avg =     4.719724E+00 Time/step = 4.403550E+00 ETA (HH:MM:SS) = 0:00:37",
+          " [ 89%]  Saving       54 of 61 @ t_step =     2650 Time Avg =     4.701545E+00 Time/step = 3.774377E+00 ETA (HH:MM:SS) = 0:00:32",
+          " [ 90%]  Saving       55 of 61 @ t_step =     2700 Time Avg =     4.685253E+00 Time/step = 3.838071E+00 ETA (HH:MM:SS) = 0:00:28",
+          " [ 92%]  Saving       56 of 61 @ t_step =     2750 Time Avg =     4.667604E+00 Time/step = 3.732222E+00 ETA (HH:MM:SS) = 0:00:23",
+          " [ 94%]  Saving       57 of 61 @ t_step =     2800 Time Avg =     4.652039E+00 Time/step = 3.811541E+00 ETA (HH:MM:SS) = 0:00:18",
+          " [ 95%]  Saving       58 of 61 @ t_step =     2850 Time Avg =     4.636942E+00 Time/step = 3.806616E+00 ETA (HH:MM:SS) = 0:00:13",
+          " [ 97%]  Saving       59 of 61 @ t_step =     2900 Time Avg =     4.621147E+00 Time/step = 3.736582E+00 ETA (HH:MM:SS) = 0:00:09",
+          " [ 99%]  Saving       60 of 61 @ t_step =     2950 Time Avg =     4.607594E+00 Time/step = 3.835080E+00 ETA (HH:MM:SS) = 0:00:04",
+          " [100%]  Saving       61 of 61 @ t_step =     3000 Time Avg =     4.594765E+00 Time/step = 3.850718E+00 ETA (HH:MM:SS) = 0:00:00",
+          "",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| Finished mfc-bowshock-gpu:                                                                                |",
+          "| * Total-time:    8420s                               * Exit Code:     0                                   |",
+          "| * End-time:      07:57:30                            * End-date:      07:57:30                            |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          ""
+        ],
+        "elided": 3086
+      }
     },
     "err": {
-      "file": "mfc-bowshock-gpu.err",
-      "size": 525
+      "file": "run.err",
+      "size": 525,
+      "raw": "+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process\n"
     }
   }
 }
