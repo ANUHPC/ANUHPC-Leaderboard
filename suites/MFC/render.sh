@@ -116,11 +116,25 @@ if [ "$COPT" = "true" ]; then
   die "case_optimization is not available yet: it recompiles MFC with the case baked in, which would rewrite the shared tree every other job reads. It needs a private per-job checkout, and staging one costs ~5 minutes of NFS metadata here."
 fi
 
+# --- arguments for the case itself -----------------------------------------
+#
+# An MFC case is a program, and many take options: the 1D convergence example
+# takes -N and --order, so a convergence study is the SAME case.py run at
+# several grid sizes. Without a way to pass them, a sweep means editing the
+# case between runs, which loses the one thing that makes a sweep readable --
+# every run demonstrably came from identical code.
+#
+#   args: ["-N", "128", "--order", "5"]
+#
+# Read as a YAML sequence rather than a string so an argument containing
+# spaces survives, and appended after MFC's own so a case can override.
+mapfile -t USER_ARGS < <("$NODE_BIN" "$REPO/scripts/read-yaml.mjs" "$JOB" args --list 2>/dev/null || true)
+
 # --- the case comes from the pinned checkout unless one was submitted -------
 if [ -f "$JOB_DIR/case.py" ]; then
   CASE_SOURCE=custom
   CASE_ARGS=()
-  echo "render: using the submitted case.py — this run is UNRANKED"
+  echo "render: using the submitted case.py — this run does not join a ranked board"
 else
   CASE_SOURCE=pinned
   [ -n "$CASE" ] || die "job.yml sets no case, and no case.py was supplied"
@@ -158,6 +172,11 @@ else
   echo "render: case $CASE from $CASE_ORIGIN:$REL"
 fi
 
+if [ ${#USER_ARGS[@]} -gt 0 ]; then
+  CASE_ARGS+=("${USER_ARGS[@]}")
+  echo "render: case arguments: ${USER_ARGS[*]}"
+fi
+
 python3 - "$JOB_DIR" "$CASE_SOURCE" "$HEAD" "$CASE" "${CASE_ORIGIN:-tree}" <<'PY'
 import hashlib, json, pathlib, sys
 directory, origin, commit, slug, registry = sys.argv[1:]
@@ -175,6 +194,22 @@ PY
 # mfc.sh insists on being run from the checkout root, and writes the generated
 # batch script next to the case file (which is in $JOB_DIR, not here).
 cp "$REPO/suites/MFC/environment.sh" "$JOB_DIR/mfc-environment.sh"
+
+# Load the same compiler and MPI here, not only inside the batch script.
+#
+# The batch template sources this on the compute node at job time, which was
+# enough while --no-build meant nothing was ever compiled on the runner. It is
+# not enough now: a case with analytic initial conditions compiles its own
+# pre_process, that happens HERE, and cmake on this host without the Fortran
+# MPI fails with
+#
+#     Could NOT find MPI (missing: MPI_Fortran_FOUND Fortran)
+#
+# which names neither MFC nor the case. Sourcing it twice is harmless -- the
+# script only exports variables.
+# shellcheck source=suites/MFC/environment.sh
+. "$REPO/suites/MFC/environment.sh" "$GPU" || die "could not load the MFC environment for gpu=$GPU"
+command -v mpif90 >/dev/null || die "no mpif90 on PATH after loading the environment for gpu=$GPU; MFC cannot build a target that needs compiling"
 cd "$TREE"
 
 # --clean matters more than it looks. simulation opens time_data.dat with
@@ -182,8 +217,28 @@ cd "$TREE"
 # summary reports is the last field of the last line. Re-running into a dirty
 # case directory therefore reports a number from a previous run.
 #
-# --no-build keeps the job off the shared tree's build/: the binaries are
-# already there and a job must never recompile them underneath another job.
+# BUILDING IS ALLOWED, and must be.
+#
+# MFC compiles the case's analytic initial conditions into pre_process: a case
+# that writes
+#
+#     "patch_icpp(1)%alpha_rho(1)": "0.5 + 0.2 * sin(2.0 * pi * x / lx)"
+#
+# has that expression turned into Fortran, and build.py hashes the generated
+# source into the install path. Such a case therefore needs its OWN binary, and
+# with --no-build it failed with "No such file or directory" on a build slug
+# that had never existed -- after the job had queued.
+#
+# Every case that has run on this cluster so far happens to use numeric initial
+# conditions, which is why this went unnoticed. It is not a safe assumption for
+# a case handed to us to reproduce.
+#
+# Rebuilding under another job was the original worry, and it does not apply:
+# build/install is keyed by that same slug, so a new build adds a directory and
+# leaves every existing binary untouched. MFC also skips a target that is
+# already built, so a case using an existing slug still compiles nothing.
+# Submissions are serialised by the submit-xenon concurrency group, so two
+# builds cannot race in build/staging.
 set -x
 ./mfc.sh run "$JOB_DIR/case.py" \
   -e batch \
@@ -192,7 +247,6 @@ set -x
   -N "$NODES" -n "$TPN" -p "$PART" -w "$WALL" \
   --name "mfc-$(basename "$JOB_DIR")" \
   -o "$JOB_DIR/summary.yaml" \
-  --no-build \
   --clean \
   --gpu "$MFC_GPU_MODE" \
   --wait \

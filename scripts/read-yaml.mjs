@@ -1,6 +1,7 @@
 // Print one value out of a YAML file, for shell scripts.
 //
 //   node scripts/read-yaml.mjs <file> <dotted.path> [default]
+//   node scripts/read-yaml.mjs <file> <dotted.path> --list
 //
 // Exists as a real file rather than an inline `node -e` on purpose. Inline
 // scripts here have gone wrong twice: once mixing require() with a top-level
@@ -13,6 +14,7 @@ import path from "node:path";
 import { parseYaml } from "./lib/yaml.mjs";
 
 const [file, dotted, fallback = ""] = process.argv.slice(2);
+const asList = fallback === "--list";
 
 if (!file || !dotted) {
   process.stderr.write("usage: read-yaml.mjs <file> <dotted.path> [default]\n");
@@ -28,6 +30,17 @@ try {
 }
 
 const value = dotted.split(".").reduce((acc, key) => (acc == null ? acc : acc[key]), doc);
+
+// --list prints one element per line, for `mapfile -t ARR < <(...)`. A shell
+// cannot split a single string safely: an argument containing a space would
+// become two, and quoting it back is guesswork. One per line has no such
+// ambiguity, and an absent or non-sequence value prints nothing, which
+// mapfile reads as an empty array.
+if (asList) {
+  const items = Array.isArray(value) ? value : value == null || value === "" ? [] : [value];
+  process.stdout.write(items.map((v) => String(v)).join("\n") + (items.length ? "\n" : ""));
+  process.exit(0);
+}
 
 // An absent key and an explicitly empty one both fall back, so callers can
 // write `PART=$(read-yaml job.yml resources.partition cpu)` and get "cpu".
