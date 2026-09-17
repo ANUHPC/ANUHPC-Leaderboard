@@ -28,17 +28,16 @@ nodes:
     memory_mb: 500000
     gpus: 0
   cpu-node2:
+    # Pure compute: no daemon to protect, so every core goes to jobs. This is
+    # the node a single-node HPL run lands on, and where the 793 GFLOP/s
+    # baseline was measured.
     sockets: 2
     cores_per_socket: 18
     threads_per_core: 2
     cpus: 72
     cores_total: 36
-    # CoreSpecCount=2 was applied here too, for symmetry with the controller.
-    # It costs 2 cores on the node that does the benchmarking and protects
-    # nothing (no slurmctld here) -- worth dropping back to 0 if the two
-    # cpu nodes do not need to be identical.
-    cores_reserved: 2
-    cores_available: 34
+    cores_reserved: 0
+    cores_available: 36
     memory_mb: 500000
     gpus: 0
   gpu-node1:
@@ -64,8 +63,12 @@ partitions:
     nodes: [cpu-node1, cpu-node2]
     max_nodes: 2
     max_walltime: "04:00:00"
-    # Both cpu nodes currently offer 34 cores to jobs.
-    cores_per_node: 34
+    # The two cpu nodes are NOT identical, and that is deliberate:
+    #   single-node  -> 36 (Slurm places it on cpu-node2, which has 36)
+    #   two-node     -> 34 (must also fit cpu-node1, which reserves 2)
+    # Asking 36 across two nodes is refused up front by sbatch.
+    cores_per_node_single: 36
+    cores_per_node_multi: 34
   gpu:
     default: false
     nodes: [gpu-node1, gpu-node2]

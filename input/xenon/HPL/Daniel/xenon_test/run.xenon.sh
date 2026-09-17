@@ -4,7 +4,7 @@
 # Do not use run.raijin.sh here -- it asks for --partition=batch, which does
 # not exist on Xenon, and forces MPI over Ethernet.
 
-#SBATCH --job-name=hpl-CHANGE-ME
+#SBATCH --job-name=hpl-daniel-xenon-test
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=4
 #SBATCH --cpus-per-task=9
