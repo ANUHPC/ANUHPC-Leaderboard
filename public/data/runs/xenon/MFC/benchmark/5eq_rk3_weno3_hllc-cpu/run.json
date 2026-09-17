@@ -5,13 +5,13 @@
   "run": "5eq_rk3_weno3_hllc-cpu",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-09-17T08:50:06Z",
-  "dateSource": "git",
-  "submittedAt": "2026-09-17T05:38:02Z",
+  "date": null,
+  "dateSource": null,
+  "submittedAt": null,
   "submitter": {
     "name": "benchmark",
     "house": true,
-    "by": "Codex"
+    "by": null
   },
   "metric": {
     "key": "grind",

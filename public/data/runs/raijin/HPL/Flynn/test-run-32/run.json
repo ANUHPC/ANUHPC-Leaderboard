@@ -5,8 +5,8 @@
   "run": "test-run-32",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-05-13T05:25:23Z",
-  "dateSource": "git",
+  "date": null,
+  "dateSource": null,
   "submittedAt": null,
   "submitter": {
     "name": "Flynn",

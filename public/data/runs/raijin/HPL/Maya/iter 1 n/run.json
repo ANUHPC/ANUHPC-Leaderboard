@@ -5,8 +5,8 @@
   "run": "iter 1 n",
   "cluster": "raijin",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-08-27T03:02:33Z",
-  "dateSource": "git",
+  "date": null,
+  "dateSource": null,
   "submittedAt": null,
   "submitter": {
     "name": "Maya",

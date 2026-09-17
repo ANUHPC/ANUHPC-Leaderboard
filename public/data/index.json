@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T12:21:13.402Z",
+  "generatedAt": "2026-09-17T12:36:24.724Z",
   "clusters": [
     {
       "name": "raijin",
@@ -4247,8 +4247,8 @@
       "run": "5node_2task_1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T05:54:35Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4281,8 +4281,8 @@
       "run": "5node_2task_2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T06:55:30Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4320,8 +4320,8 @@
       "run": "5node_2task_3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T13:03:15+10:00",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4354,8 +4354,8 @@
       "run": "5node_run_1",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": "2026-04-22T10:06:45+10:00",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4388,8 +4388,8 @@
       "run": "5node_run_2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T04:44:35Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4422,8 +4422,8 @@
       "run": "5node_run_3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T05:23:13Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4456,8 +4456,8 @@
       "run": "5node_run_4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T05:40:51Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4490,8 +4490,8 @@
       "run": "5node_run_5",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T06:37:56Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4524,8 +4524,8 @@
       "run": "5node_run_6",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T23:25:21+10:00",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Aden",
@@ -4558,8 +4558,8 @@
       "run": "26-03-26",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": "2026-03-26T10:28:03Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4592,8 +4592,8 @@
       "run": "2Node-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-01T01:11:24Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4631,8 +4631,8 @@
       "run": "3-Node-Run",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-28T05:34:53Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4670,8 +4670,8 @@
       "run": "3-Node-Run-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-28T02:25:10Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4709,8 +4709,8 @@
       "run": "3-Node-Run-IB",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-28T07:56:58Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4748,8 +4748,8 @@
       "run": "3-Node-Run-IB-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-28T08:37:17Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4787,8 +4787,8 @@
       "run": "3-Node-Run-IB-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-28T09:19:29Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4821,8 +4821,8 @@
       "run": "3-Node-Run-IB-4",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": "2026-03-28T09:21:11Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4855,8 +4855,8 @@
       "run": "3Node-ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-03T11:13:25Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4889,8 +4889,8 @@
       "run": "4Node-ib-Max",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-08T08:30:41Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4928,8 +4928,8 @@
       "run": "4Node-ib-Trial",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-08T09:16:23Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -4967,8 +4967,8 @@
       "run": "4Node-ib-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-08T17:31:56+10:00",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5001,8 +5001,8 @@
       "run": "5Node-ib-Scream",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-13T05:53:10Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5035,8 +5035,8 @@
       "run": "5Node-ib-Trial",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-13T05:42:58Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5069,8 +5069,8 @@
       "run": "5Node-ib-test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-13T05:49:11Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5103,8 +5103,8 @@
       "run": "Scream",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-01T01:20:48Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5142,8 +5142,8 @@
       "run": "Scream-1",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-01T04:01:14Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5181,8 +5181,8 @@
       "run": "Second-raijin",
       "cluster": "raijin",
       "clusterSource": "path",
-      "date": "2026-03-26T10:32:11Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5215,8 +5215,8 @@
       "run": "test",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-26T10:34:35Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5249,8 +5249,8 @@
       "run": "test-ib",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-03-28T05:36:17Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Ayush",
@@ -5283,8 +5283,8 @@
       "run": "test-run-10",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:11:11Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5317,8 +5317,8 @@
       "run": "test-run-11",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:23:27Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5356,8 +5356,8 @@
       "run": "test-run-12",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:29:31Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5395,8 +5395,8 @@
       "run": "test-run-13",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:35:51Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5434,8 +5434,8 @@
       "run": "test-run-14",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:47:09Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5468,8 +5468,8 @@
       "run": "test-run-15",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:48:10Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5502,8 +5502,8 @@
       "run": "test-run-16",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:52:53Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5541,8 +5541,8 @@
       "run": "test-run-17",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T08:01:24Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5580,8 +5580,8 @@
       "run": "test-run-19",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T08:07:37Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5619,8 +5619,8 @@
       "run": "test-run-20",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T08:09:01Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5653,8 +5653,8 @@
       "run": "test-run-21",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T08:12:27Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5687,8 +5687,8 @@
       "run": "test-run-22",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-05T23:59:53Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5721,8 +5721,8 @@
       "run": "test-run-23",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T01:11:52Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5755,8 +5755,8 @@
       "run": "test-run-24",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T01:23:27Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5789,8 +5789,8 @@
       "run": "test-run-25",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T01:55:11Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5823,8 +5823,8 @@
       "run": "test-run-26",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T02:09:26Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5862,8 +5862,8 @@
       "run": "test-run-27",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T02:42:28Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5901,8 +5901,8 @@
       "run": "test-run-28",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T02:43:34Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5935,8 +5935,8 @@
       "run": "test-run-29",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T03:35:38Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -5974,8 +5974,8 @@
       "run": "test-run-3",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T05:13:12Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6013,8 +6013,8 @@
       "run": "test-run-30",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T03:42:12Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6052,8 +6052,8 @@
       "run": "test-run-31",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-06T05:12:36Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6086,8 +6086,8 @@
       "run": "test-run-32",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-13T05:25:23Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6120,8 +6120,8 @@
       "run": "test-run-33",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-05-13T05:56:30Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6154,8 +6154,8 @@
       "run": "test-run-7",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T05:48:18Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6193,8 +6193,8 @@
       "run": "test-run-8",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:03:54Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6227,8 +6227,8 @@
       "run": "test-run-9",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-29T07:05:42Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Flynn",
@@ -6261,8 +6261,8 @@
       "run": "folder",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-02T15:49:42+11:00",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6295,8 +6295,8 @@
       "run": "iter 1 n",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-08-27T03:02:33Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6329,8 +6329,8 @@
       "run": "iter 1nb",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-08-27T03:08:43Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6363,8 +6363,8 @@
       "run": "iter 2n",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-08-27T03:05:38Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6397,8 +6397,8 @@
       "run": "trial-2",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-04-22T05:23:13Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "Maya",
@@ -6431,8 +6431,8 @@
       "run": "3 nodes 40n192nb6p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-03T02:06:26Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6465,8 +6465,8 @@
       "run": "5 nodes 60n192nb10p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-03T03:21:22Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6499,8 +6499,8 @@
       "run": "5 nodes 60n192nb9p9q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-03T03:21:22Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6533,8 +6533,8 @@
       "run": "6 nodes 60n192nb12p8q",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-03T03:21:22Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6567,8 +6567,8 @@
       "run": "iter 40n 32nb",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-08-27T03:10:53Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6601,8 +6601,8 @@
       "run": "n40 nb64 p4q4",
       "cluster": "raijin",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-08-27T03:12:37Z",
-      "dateSource": "git",
+      "date": null,
+      "dateSource": null,
       "submittedAt": null,
       "submitter": {
         "name": "VarSweep",
@@ -6637,11 +6637,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-17T01:30:20.000Z",
       "dateSource": "run",
-      "submittedAt": "2026-09-17T01:19:00Z",
+      "submittedAt": null,
       "submitter": {
         "name": "Ayush",
         "house": false,
-        "by": "Claude"
+        "by": null
       },
       "metric": {
         "key": "gflops",
@@ -6696,11 +6696,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-03T06:05:45.000Z",
       "dateSource": "run",
-      "submittedAt": "2026-09-03T06:07:11Z",
+      "submittedAt": null,
       "submitter": {
         "name": "baseline",
         "house": true,
-        "by": "Claude"
+        "by": null
       },
       "metric": {
         "key": "gflops",
@@ -6755,11 +6755,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-17T03:05:16.000Z",
       "dateSource": "run",
-      "submittedAt": "2026-09-17T12:38:21+10:00",
+      "submittedAt": null,
       "submitter": {
         "name": "Daniel",
         "house": false,
-        "by": "dehaansolo"
+        "by": null
       },
       "metric": {
         "key": "gflops",
@@ -6812,13 +6812,13 @@
       "run": "5eq_rk3_weno3_hll-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -6881,13 +6881,13 @@
       "run": "5eq_rk3_weno3_hllc-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -6950,13 +6950,13 @@
       "run": "5eq_rk3_weno3_hllc-cpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7019,13 +7019,13 @@
       "run": "5eq_rk3_weno3_lf-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7090,11 +7090,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-17T12:06:58Z",
       "dateSource": "run",
-      "submittedAt": "2026-09-17T12:02:33Z",
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Claude"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7157,13 +7157,13 @@
       "run": "hypo_hll-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7226,13 +7226,13 @@
       "run": "ibm-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7295,13 +7295,13 @@
       "run": "igr-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7364,13 +7364,13 @@
       "run": "viscous_weno5_sgb_acoustic-a100",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:38:02Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "benchmark",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7433,13 +7433,13 @@
       "run": "bowshock-gpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T04:02:02Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T04:01:42Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "demo",
         "house": true,
-        "by": "Claude"
+        "by": null
       },
       "metric": {
         "key": "grind",
@@ -7501,13 +7501,13 @@
       "run": "scc26-p3-cpu",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T08:50:06Z",
-      "dateSource": "git",
-      "submittedAt": "2026-09-17T05:58:59Z",
+      "date": null,
+      "dateSource": null,
+      "submittedAt": null,
       "submitter": {
         "name": "demo",
         "house": true,
-        "by": "Codex"
+        "by": null
       },
       "metric": {
         "key": "grind",

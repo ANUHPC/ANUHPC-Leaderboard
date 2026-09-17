@@ -5,8 +5,8 @@
   "run": "5node_run_1",
   "cluster": "raijin",
   "clusterSource": "path",
-  "date": "2026-04-22T10:06:45+10:00",
-  "dateSource": "git",
+  "date": null,
+  "dateSource": null,
   "submittedAt": null,
   "submitter": {
     "name": "Aden",
