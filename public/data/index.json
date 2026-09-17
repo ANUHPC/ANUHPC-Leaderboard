@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T03:05:10.831Z",
+  "generatedAt": "2026-09-17T03:06:05.556Z",
   "clusters": [
     {
       "name": "raijin",
@@ -5640,9 +5640,23 @@
       "group": "Daniel",
       "run": "xenon_test",
       "cluster": "xenon",
-      "clusterSource": "path",
-      "metric": null,
-      "secondary": [],
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "gflops",
+        "value": 529.74,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 10.07,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        }
+      ],
       "config": {
         "N": 20000,
         "NB": 192,
@@ -5654,11 +5668,22 @@
         "cpus_per_task": 9,
         "partition": "cpu"
       },
-      "status": "no-result",
+      "status": "ok",
       "notes": [],
-      "best": null,
-      "outSummary": null,
-      "hasErr": false
+      "best": {
+        "gflops": 529.74,
+        "N": 20000,
+        "NB": 192,
+        "timeSec": 10.07
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true,
+      "rank": 3
     }
   ]
 }
