@@ -14,14 +14,14 @@
 
 suite: MFC
 
-# Render the video as well as running the simulation. This adds post_process
+# Preserve the visualization data after simulation. This adds post_process
 # to the target list, which turns the raw output into the Silo database that
-# ./mfc.sh viz reads. Without it you get a grind time and nothing to look at.
+# silo2vtk.py reads. Without it you get a grind time and nothing to render.
 visualize: true
 
 resources:
   # gpu, not cpu. Measured on this cluster the case costs about 8 s/step on
-  # 4 CPU ranks, so 3000 steps is over six hours; on 8 x A100 it is minutes.
+  # 4 CPU ranks, so this demo uses all eight A100s instead.
   # The gpu partition also gets the zen3 build, which matches those nodes.
   partition: gpu
   nodes: 2                 # gpu-node1 + gpu-node2
