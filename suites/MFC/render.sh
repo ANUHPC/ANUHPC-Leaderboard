@@ -97,7 +97,9 @@ TREE="$MFC_ROOT/$ARCH"
 
 # --- the run must be reproducible, so the source has to be the pinned sha ---
 PIN=$(awk '/^  pin:/{print $2}' "$REPO/suites/MFC/suite.yml" 2>/dev/null)
-HEAD=$(git -C "$TREE" rev-parse HEAD 2>/dev/null || echo unknown)
+# The installation is owned by anuhpc and used by xenonrun. Trust only this
+# exact resolved checkout for the read, without changing global Git config.
+HEAD=$(git -c safe.directory="$(realpath "$TREE")" -C "$TREE" rev-parse HEAD 2>/dev/null || echo unknown)
 if [ -n "$PIN" ] && [ "$PIN" != "null" ]; then
   case "$HEAD" in
     "$PIN"*) : ;;
