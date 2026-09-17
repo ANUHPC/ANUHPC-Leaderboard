@@ -293,7 +293,23 @@ async function main() {
       description: s.cfg.description ?? "",
       metric: s.cfg.metric ?? null,
       reference: s.cfg.reference ?? null,
+      // Which clusters this suite runs on, so the site can tell "no entries
+      // yet" apart from "not offered here" -- HPL_NVIDIA needs GPUs and only
+      // exists on Xenon. Empty/absent in suite.yml means every cluster.
+      clusters: Array.isArray(s.cfg.clusters) && s.cfg.clusters.length
+        ? s.cfg.clusters
+        : Object.keys(clusters),
+      // available:false means the binaries are not published yet; the board
+      // should say so rather than showing a silently empty table.
+      available: s.cfg.available !== false,
+      missing: s.cfg.missing ?? null,
       count: index.filter((e) => e.suite === s.name).length,
+      // Per-cluster counts drive the suite tab badges.
+      countByCluster: Object.fromEntries(
+        Object.keys(clusters).map((c) => [
+          c, index.filter((e) => e.suite === s.name && e.cluster === c).length,
+        ]),
+      ),
     })),
     runs: index,
   };

@@ -1,0 +1,23 @@
+# HPL_NVIDIA leaderboard entry — HPL on the A100 nodes.
+#
+# Copy this whole directory to  input/xenon/HPL_NVIDIA/<your-name>/<run-name>/
+# and rename run.xenon.sh to run.sh. Both HPL.dat and run.sh are REQUIRED:
+# run.sh is where you control the rank/GPU mapping, which is most of the tuning.
+#
+# Scored on Rmax in GFLOP/s, and HIGHER IS BETTER.
+#
+# This is a SEPARATE board from HPL. GPU and CPU results are never ranked
+# against each other.
+
+suite: HPL_NVIDIA
+
+# NOTE: the cluster is NOT set here. It comes from the directory you copy this
+# into — input/<cluster>/<suite>/<your-name>/<run-name>/.
+
+resources:
+  partition: gpu         # the only partition with GPUs
+  nodes: 1               # 1 node = 4 A100; max 2 nodes = 8
+  tasks_per_node: 4      # one rank per GPU
+  cpus_per_task: 8
+  gpus_per_node: 4
+  walltime: "01:00:00"
