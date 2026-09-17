@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T02:52:45.075Z",
+  "generatedAt": "2026-09-17T03:05:10.831Z",
   "clusters": [
     {
       "name": "raijin",
@@ -19,7 +19,7 @@
       "description": "4-node cluster, 2x CPU + 2x A100 GPU nodes, 56 Gb FDR InfiniBand",
       "status": "active",
       "derived": false,
-      "nodes": 3,
+      "nodes": 4,
       "partitions": [
         "cpu",
         "gpu",
