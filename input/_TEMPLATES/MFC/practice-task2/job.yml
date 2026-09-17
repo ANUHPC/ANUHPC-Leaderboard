@@ -1,0 +1,24 @@
+# SCC26 Practice Task 2 — 1D convergence study. One resolution per folder.
+#
+# Copy this to input/xenon/MFC/<your-name>/task2-n128-weno5/job.yml and edit
+# the two numbers in args. Repeat for each resolution you want a point at, or
+# run make-sweep.sh to write the whole set at once.
+#
+# There is NO case.py to copy: advection_1d is a registered case, so every
+# point provably runs identical code from the pinned MFC checkout, which is
+# the only thing that makes the comparison mean anything.
+suite: MFC
+case: advection_1d
+
+# -N is the number of grid points; --order is the WENO order (1, 3 or 5).
+# --cfl defaults to 0.4; see the README for why you may want 0.025.
+args: ["-N", "128", "--order", "5"]
+
+resources:
+  partition: cpu
+  nodes: 1
+  tasks_per_node: 1      # 1D and tiny; one rank is plenty and keeps it simple
+  walltime: "00:20:00"
+build:
+  gpu: none
+  toolchain: gcc-ompi5
