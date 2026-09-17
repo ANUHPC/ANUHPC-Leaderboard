@@ -1,336 +1,119 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import { Clock, Eye, Film, Medal, Search, Trophy, X } from 'lucide-react';
 import { MfcRunDetails, type MfcRunData } from './MfcRunDetails';
+import { MfcConvergence } from './MfcConvergence';
+import { caseName, comparableGrind, guide, hardware, number, repo, secondary, settingFields, statusLabel, validRun, value } from './mfc';
 
-// The MFC board.
-//
-// This replaces a tab strip that carried one tab per case. With eight cases it
-// wrapped onto two rows, most tabs held a single row of data, and the tab
-// labels (viscous_weno5_sgb_acoustic) were wider than the numbers they led to
-// -- so the navigation cost more space and more reading than the content. It
-// also got worse with every case added, which is the wrong direction for a
-// board meant to grow by contribution.
-//
-// Tabs suit a small fixed set of mutually exclusive VIEWS. There are two of
-// those here:
-//
-//   Recent       every run, newest first. The landing view: the question
-//                people arrive with is "what has been run lately".
-//   Leaderboards the ranked boards, one per case and hardware, which is the
-//                question you arrive with second.
-//
-// Case is a data dimension with unbounded cardinality, so it belongs in a
-// filter, not in navigation. Search covers the rest: with 11 runs today and
-// no ceiling, typing "ayush gpu" beats hunting through controls.
-
-const base = import.meta.env.BASE_URL;
-
-const hw = (r: MfcRunData) => ((r.config as Record<string, unknown>)?.gpu === 'acc' ? 'GPU' : 'CPU');
-const caseOf = (r: MfcRunData) => String((r.config as Record<string, unknown>)?.case ?? 'custom');
-const isRanked = (r: MfcRunData) =>
-    Boolean(r.ranking?.eligible) && r.status === 'ok' && Number.isFinite(r.metric?.value);
-
-// Everything a row shows, flattened once so typing matches what you can see.
-const haystack = (r: MfcRunData) => [
-    r.run, r.group, r.cluster, caseOf(r), hw(r),
-    r.submitter?.name, r.submitter?.by,
-    (r.config as Record<string, unknown>)?.toolchain,
-    isRanked(r) ? 'ranked' : 'unranked demo custom',
-].filter(Boolean).join(' ').toLowerCase();
-
-// Every word must match something. "ayush gpu" means both, not either --
-// with one field per row, OR semantics return almost everything.
-function matches(r: MfcRunData, q: string) {
-    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
-    if (!terms.length) return true;
-    const hay = haystack(r);
-    return terms.every((t) => hay.includes(t));
-}
-
-// "3d ago" reads faster than a timestamp when scanning; the exact time stays
-// in the title attribute, because it is the audit trail for a result.
-function ago(iso?: string | null) {
-    if (!iso) return '—';
-    const t = Date.parse(iso);
-    if (!Number.isFinite(t)) return '—';
-    const s = (Date.now() - t) / 1000;
-    if (s < 60) return 'just now';
-    if (s < 3600) return `${Math.floor(s / 60)}m ago`;
-    if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
-    if (s < 86400 * 30) return `${Math.floor(s / 86400)}d ago`;
-    return new Date(t).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
-}
-
-const exact = (iso?: string | null) =>
-    iso && Number.isFinite(Date.parse(iso)) ? new Date(iso).toLocaleString() : 'date unknown';
+const tasks = [
+    ['1', 'Build & test', 'Check CPU and GPU correctness with the test-suite helper on Xenon.', 'practice-task1', 'Cluster terminal'],
+    ['2', 'Convergence', 'Refine a 1D grid and measure how WENO order changes error and cost.', 'practice-task2', 'GitHub submission'],
+    ['3', 'Shock & droplet', 'Vary resolution, viscosity, surface tension and bubbles; compare the resulting flow.', 'practice-problem3', 'GitHub submission'],
+    ['4', 'Remote visualisation', 'Connect ParaView to Xenon and explore the full simulation fields remotely.', 'practice-task4', 'ParaView + terminal'],
+];
 
 export function MfcPage() {
+    const [params, setParams] = useSearchParams();
+    const update = (changes: Record<string, string | null>) => setParams(prev => {
+        const next = new URLSearchParams(prev);
+        for (const [k, v] of Object.entries(changes)) { if (v && v !== 'all') next.set(k, v); else next.delete(k); }
+        return next;
+    }, { replace: true });
+    const q = params.get('q') ?? '', cluster = params.get('cluster') ?? 'all';
+    const hardwareFilter = ['CPU','GPU','Unknown hardware'].includes(params.get('hardware') ?? '') ? params.get('hardware')! : 'all', caseFilter = params.get('case') ?? 'all';
+    const view = ['convergence', 'benchmarks'].includes(params.get('view') ?? '') ? params.get('view')! : 'runs';
+    const norm = params.get('norm') === 'L1' ? 'L1' : params.get('norm') === 'Linf' ? 'Linf' : 'L2';
     const [runs, setRuns] = useState<MfcRunData[]>([]);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [view, setView] = useState<'recent' | 'boards'>('recent');
-    const [q, setQ] = useState('');
-    const [hardware, setHardware] = useState('all');
-    const [caseFilter, setCaseFilter] = useState('all');
+    const [loading, setLoading] = useState(true), [error, setError] = useState(''), [retry, setRetry] = useState(0);
+    const [selected, setSelected] = useState<string[]>([]);
+    const search = useRef<HTMLInputElement>(null);
     const [open, setOpen] = useState<MfcRunData | null>(null);
-    const [params] = useSearchParams();
-    const cluster = params.get('cluster') ?? 'all';
-    const searchRef = useRef<HTMLInputElement>(null);
-
     useEffect(() => {
-        fetch(`${base}data/index.json?t=${Date.now()}`, { cache: 'no-store' })
-            .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-            .then((data) => setRuns(data.runs.filter((r: { suite: string }) => r.suite === 'MFC')))
-            .catch((e) => setError(String(e)))
-            .finally(() => setLoading(false));
-    }, []);
-
-    // "/" to search and Escape to clear are the conventions people already
-    // carry from GitHub, Slack and Gmail, so they cost nothing to learn.
+        const controller = new AbortController();
+        setLoading(true); setError('');
+        fetch(`${import.meta.env.BASE_URL}data/index.json?t=${Date.now()}`, { signal: controller.signal, cache: 'no-store' })
+            .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+            .then(data => {
+                if (!Array.isArray(data?.runs)) throw new Error('Invalid results index');
+                const mfc = data.runs.filter((r: { suite?: string } | null) => r?.suite === 'MFC');
+                if (!mfc.every(validRun)) throw new Error('Invalid MFC run record');
+                setRuns(mfc);
+            }).catch(e => { if (!controller.signal.aborted) setError(String(e)); })
+            .finally(() => { if (!controller.signal.aborted) setLoading(false); });
+        return () => controller.abort();
+    }, [retry]);
     useEffect(() => {
-        const onKey = (e: KeyboardEvent) => {
-            const el = e.target as HTMLElement | null;
-            const typing = el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName);
-            if (e.key === '/' && !typing) { e.preventDefault(); searchRef.current?.focus(); }
-            if (e.key === 'Escape' && typing && el === searchRef.current) { setQ(''); searchRef.current?.blur(); }
+        const key = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement;
+            if (!open && e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey && !target.isContentEditable && !/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) {
+                e.preventDefault(); search.current?.focus();
+            }
         };
-        window.addEventListener('keydown', onKey);
-        return () => window.removeEventListener('keydown', onKey);
-    }, []);
-
-    const cases = useMemo(() => {
-        const counts = new Map<string, number>();
-        for (const r of runs) counts.set(caseOf(r), (counts.get(caseOf(r)) ?? 0) + 1);
-        return [...counts].sort((a, b) => a[0].localeCompare(b[0]));
-    }, [runs]);
-
-    const shown = useMemo(() => runs.filter((r) =>
-        (cluster === 'all' || r.cluster === cluster) &&
-        (hardware === 'all' || hw(r) === hardware) &&
-        (caseFilter === 'all' || caseOf(r) === caseFilter) &&
-        matches(r, q)), [runs, cluster, hardware, caseFilter, q]);
-
-    const filtered = q !== '' || hardware !== 'all' || caseFilter !== 'all';
-    const clear = () => { setQ(''); setHardware('all'); setCaseFilter('all'); };
-
-    const Row = ({ r, rank }: { r: MfcRunData; rank?: number }) => {
-        const cfg = (r.config ?? {}) as Record<string, unknown>;
-        const medal = ['text-amber-500', 'text-slate-400', 'text-amber-700'];
-        const hasMedia = r.hasMedia ?? Object.keys(r.raw ?? {}).some((n) => /\.(mp4|png)$/i.test(n));
-        const who = r.submitter;
-        return (
-            <tr className="border-t border-slate-100 hover:bg-slate-50/70">
-                {rank !== undefined && (
-                    <td className="py-3 pl-5 pr-2">
-                        <span className={`inline-flex items-center gap-1 text-sm font-semibold ${medal[rank] ?? 'text-slate-400'}`}>
-                            {rank < 3 && <Medal className="h-4 w-4" />}#{rank + 1}
-                        </span>
-                    </td>
-                )}
-                <td className="px-4 py-3">
-                    <div className="flex items-center gap-1.5 font-medium text-slate-900">
-                        {r.run}
-                        {hasMedia && <Film className="h-3.5 w-3.5 text-slate-400" aria-label="has a rendered video" />}
-                    </div>
-                    <div className="text-xs text-slate-500">
-                        {caseOf(r)} · {hw(r)} · {r.cluster}
-                        {r.status !== 'ok' && <span className="ml-1 text-red-600">· {r.status}</span>}
-                    </div>
-                </td>
-                <td className="px-4 py-3">
-                    {who?.name
-                        ? <span className={who.house ? 'text-slate-500' : 'font-medium text-slate-800'}
-                                title={who.by ? `pushed by ${who.by}` : undefined}>
-                              {who.name}{who.house && <span className="ml-1 text-xs text-slate-400">· reference</span>}
-                          </span>
-                        : <span className="text-slate-400">—</span>}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-slate-900">
-                    {r.metric?.value != null ? r.metric.value.toFixed(4) : '—'}
-                    {!isRanked(r) && <div className="text-xs font-sans font-normal text-amber-700">unranked</div>}
-                </td>
-                <td className="px-4 py-3 text-right font-mono text-sm text-slate-600">{r.wallSec != null ? `${r.wallSec}s` : '—'}</td>
-                <td className="px-4 py-3 text-sm text-slate-600">
-                    {String(cfg.nodes ?? '—')}&nbsp;node · {String(cfg.ranks ?? '—')}&nbsp;ranks
-                    <div className="text-xs text-slate-400">{String(cfg.gbpp ?? '—')} GB/rank</div>
-                </td>
-                <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500"
-                    title={`${exact(r.date)}${r.dateSource === 'git' ? ' (from the commit that published the results)' : ''}`}>
-                    {ago(r.date)}
-                </td>
-                <td className="py-3 pl-2 pr-5 text-right">
-                    <button onClick={() => setOpen(r)}
-                            aria-label={`Details for ${r.run}`}
-                            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900">
-                        <Eye className="h-4 w-4" /> Details
-                    </button>
-                </td>
-            </tr>);
-    };
-
-    // One header for the whole view. The boards view previously rendered a
-    // separate card and a repeated 8-column header per board -- with nine
-    // boards holding one entry each, that was eight redundant headers and more
-    // chrome than data. Group rows inside one table instead: the standard
-    // grouped-table pattern, and it stays readable as boards fill up.
-    const Head = ({ scored }: { scored: boolean }) => (
-        <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-            <tr>
-                {scored && <th className="py-2.5 pl-5 pr-2 font-medium">#</th>}
-                <th className="px-4 py-2.5 font-medium">Run</th>
-                <th className="px-4 py-2.5 font-medium">User</th>
-                <th className="px-4 py-2.5 text-right font-medium">Grind <span className="normal-case text-slate-400">ns/gp/eq/rhs</span></th>
-                <th className="px-4 py-2.5 text-right font-medium">Wall</th>
-                <th className="px-4 py-2.5 font-medium">Resources</th>
-                <th className="px-4 py-2.5 font-medium">When</th>
-                <th className="py-2.5 pl-2 pr-5"></th>
-            </tr>
-        </thead>);
-
-    const Table = ({ items, scored }: { items: MfcRunData[]; scored: boolean }) => (
-        <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
-                <Head scored={scored} />
-                <tbody>{items.map((r, i) => <Row key={r.id} r={r} rank={scored ? i : undefined} />)}</tbody>
-            </table>
-        </div>);
-
-    // Results published in one commit share a timestamp exactly, so date alone
-    // leaves their order to whatever the index listed first. Case then name
-    // breaks the tie and keeps the list stable between builds.
-    const recent = [...shown].sort((a, b) =>
-        String(b.date ?? '').localeCompare(String(a.date ?? '')) ||
-        caseOf(a).localeCompare(caseOf(b)) || a.run.localeCompare(b.run));
-
-    // One board per (case, hardware): the only grouping in which two grind
-    // times are comparable.
+        window.addEventListener('keydown', key); return () => window.removeEventListener('keydown', key);
+    }, [open]);
+    const shown = useMemo(() => runs.filter(r =>
+        (cluster === 'all' || r.cluster === cluster) && (hardwareFilter === 'all' || hardware(r) === hardwareFilter) &&
+        (caseFilter === 'all' || caseName(r) === caseFilter) && q.toLowerCase().split(/\s+/).every(word =>
+            [r.run, r.group, r.cluster, caseName(r), hardware(r), r.submitter?.name, r.submitter?.by, r.config?.toolchain, statusLabel(r)].join(' ').toLowerCase().includes(word))),
+        [runs, cluster, hardwareFilter, caseFilter, q]);
+    const cases = [...new Set(runs.filter(r => cluster === 'all' || r.cluster === cluster).map(caseName))].sort();
+    const filtered = Boolean(q || hardwareFilter !== 'all' || caseFilter !== 'all');
+    const clear = () => update({ q: null, hardware: null, case: null });
+    const compared = shown.filter(r => selected.includes(r.id));
+    const safeGrind = comparableGrind(shown);
+    const sort = params.get('sort') === 'step' ? 'step' : params.get('sort') === 'grind' && safeGrind ? 'grind' : 'recent';
+    const recent = [...shown].sort((a,b) => {
+        const score = (r: MfcRunData) => { const n = sort === 'step' ? secondary(r, 's_step') : r.metric?.value; return typeof n === 'number' && Number.isFinite(n) && n > 0 ? n : Infinity; };
+        return (sort !== 'recent' ? score(a) - score(b) : (Date.parse(b.date ?? '') || 0) - (Date.parse(a.date ?? '') || 0)) || a.id.localeCompare(b.id);
+    });
     const boards = new Map<string, MfcRunData[]>();
-    for (const r of shown.filter(isRanked)) {
-        const k = `${caseOf(r)} · ${hw(r)}`;
+    for (const r of shown.filter(r => r.ranking?.eligible && r.status === 'ok')) {
+        const k = `${r.cluster} · ${caseName(r)} · ${hardware(r)}`;
         boards.set(k, [...(boards.get(k) ?? []), r]);
     }
-
-    const seg = (id: 'recent' | 'boards', label: string, icon: React.ReactNode) => (
-        <button onClick={() => setView(id)} aria-pressed={view === id}
-                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
-                    view === id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}>
-            {icon}{label}
-        </button>);
-
-    return (
-        <div className="space-y-5">
-            <div>
-                <h1 className="text-3xl font-bold text-slate-900">MFC · Multi-component Flow Code</h1>
-                <p className="mt-2 text-slate-600">
-                    Grind time is nanoseconds per grid point, per equation, per right-hand-side evaluation.
-                    <span className="font-medium"> Lower is better</span> — the opposite of HPL.
-                </p>
-            </div>
-
-            {/* One row: view, search, filters. Search is widest because it is
-                the fastest path to a specific run and the only control that
-                does not need you to know the vocabulary first. */}
-            <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-1 rounded-xl bg-slate-100 p-1">
-                    {seg('recent', 'Recent', <Clock className="h-4 w-4" />)}
-                    {seg('boards', 'Leaderboards', <Trophy className="h-4 w-4" />)}
-                </div>
-
-                <div className="relative min-w-[16rem] flex-1">
-                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                    <input
-                        ref={searchRef} type="search" value={q} onChange={(e) => setQ(e.target.value)}
-                        aria-label="Search runs"
-                        placeholder="Search runs, users, cases…   (press /)"
-                        className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-9 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
-                    />
-                    {q && (
-                        <button onClick={() => { setQ(''); searchRef.current?.focus(); }} aria-label="Clear search"
-                                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700">
-                            <X className="h-3.5 w-3.5" />
-                        </button>)}
-                </div>
-
-                <select aria-label="Filter by case" value={caseFilter} onChange={(e) => setCaseFilter(e.target.value)}
-                        className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700">
-                    <option value="all">All cases</option>
-                    {cases.map(([c, n]) => <option key={c} value={c}>{c} ({n})</option>)}
-                </select>
-
-                <select aria-label="Filter by hardware" value={hardware} onChange={(e) => setHardware(e.target.value)}
-                        className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700">
-                    <option value="all">All hardware</option>
-                    <option>GPU</option><option>CPU</option>
-                </select>
-            </div>
-
-            <div className="flex items-center gap-3 text-sm text-slate-500">
-                <span>
-                    <span className="font-medium text-slate-700">{shown.length}</span> of {runs.length} run{runs.length === 1 ? '' : 's'}
-                    {view === 'boards' && ` · ${boards.size} board${boards.size === 1 ? '' : 's'}`}
-                </span>
-                {filtered && (
-                    <button onClick={clear} className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-slate-500 underline-offset-2 hover:bg-slate-100 hover:text-slate-900 hover:underline">
-                        <X className="h-3 w-3" /> Clear filters
-                    </button>)}
-            </div>
-
-            {loading && <p className="text-slate-600">Loading MFC results…</p>}
-            {error && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">Could not load results: {error}</p>}
-
-            {!loading && !error && shown.length === 0 && (
-                <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center">
-                    <p className="text-slate-700">
-                        {filtered ? <>No runs match {q ? <span className="font-medium">“{q}”</span> : 'these filters'}.</>
-                                  : 'No MFC results for this cluster yet.'}
-                    </p>
-                    {filtered && (
-                        <button onClick={clear} className="mt-3 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50">
-                            Clear filters
-                        </button>)}
-                </div>)}
-
-            {!loading && !error && shown.length > 0 && view === 'recent' && (
-                <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                    <Table items={recent} scored={false} />
-                </section>)}
-
-            {!loading && !error && shown.length > 0 && view === 'boards' && (
-                boards.size === 0
-                    ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-600">
-                          Nothing ranked in this selection. Unranked runs — custom cases, and runs without a
-                          verified result — appear under Recent.
-                      </div>
-                    : <div className="space-y-3">
-                          <p className="text-sm text-slate-500">
-                              Ranked per case and per hardware: 8 A100s and 36 Haswell cores are different machines,
-                              and each case is different physics, so only times within one board compare.
-                          </p>
-                          <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                              <div className="overflow-x-auto">
-                                  <table className="min-w-full text-left text-sm">
-                                      <Head scored />
-                                      {[...boards].sort(([a], [b]) => a.localeCompare(b)).map(([k, items]) => (
-                                          <tbody key={k}>
-                                              <tr>
-                                                  <th colSpan={8} scope="colgroup"
-                                                      className="border-t border-slate-200 bg-slate-50/60 px-5 py-2 text-left">
-                                                      <span className="font-semibold text-slate-800">{k}</span>
-                                                      <span className="ml-2 text-xs font-normal text-slate-500">
-                                                          {items.length} entr{items.length === 1 ? 'y' : 'ies'}
-                                                      </span>
-                                                  </th>
-                                              </tr>
-                                              {[...items]
-                                                  .sort((a, b) => (a.metric?.value ?? Infinity) - (b.metric?.value ?? Infinity))
-                                                  .map((r, i) => <Row key={r.id} r={r} rank={i} />)}
-                                          </tbody>))}
-                                  </table>
-                              </div>
-                          </section>
-                      </div>)}
-
-            {open && <MfcRunDetails run={open} onClose={() => setOpen(null)} />}
-        </div>);
+    const openDetails = (r: MfcRunData) => setOpen(r);
+    const button = 'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm hover:bg-slate-50 focus-visible:outline-blue-600';
+    const cell = 'px-4 py-3 align-top';
+    const table = (items: MfcRunData[], ranked = false) => <div className="overflow-x-auto"><table className="w-full text-left text-sm">
+        <caption className="sr-only">MFC run settings and measured costs</caption>
+        <thead className="bg-slate-50 text-xs uppercase text-slate-500"><tr>{['Compare', 'Run / provenance', 'Resolved settings', 'Measured cost', 'Resources / date', ''].map((label,i) => <th key={i} className={cell}>{label}</th>)}</tr></thead>
+        <tbody>{items.map((r,i) => <tr key={r.id} className="border-t border-slate-100 hover:bg-slate-50">
+            <td className={cell}><input type="checkbox" aria-label={`Compare ${r.run}`} checked={selected.includes(r.id)} disabled={!selected.includes(r.id) && compared.length >= 4}
+                onChange={e => setSelected(e.target.checked ? [...compared.map(r => r.id), r.id] : selected.filter(id => id !== r.id))} /></td>
+            <td className={`${cell} min-w-48 max-w-xs break-words`}><button className="font-semibold text-blue-800 underline-offset-2 hover:underline" onClick={() => openDetails(r)}>{ranked ? `#${i+1} · ` : ''}{r.run}</button>
+                <p className="mt-1 text-xs text-slate-500">{caseName(r)} · {r.cluster} · {hardware(r)}</p>
+                <p className="mt-1 text-xs">{r.submitter?.name ?? r.group}{r.submitter?.house ? ' · reference' : ''}</p>
+                <p className={`mt-2 text-xs ${statusLabel(r).startsWith('Verified') ? 'text-emerald-800' : 'text-amber-800'}`} title={r.verification?.reason ?? r.ranking?.reason}>{statusLabel(r)}</p>
+            </td>
+            <td className={`${cell} min-w-48`}>
+                {r.parameters ? <><p>{value(r.parameters.grid)} cells</p><p className="mt-1">WENO {value(r.parameters.wenoOrder)} · {value(r.parameters.riemann)}</p><p className="mt-1 text-xs text-slate-500">Viscosity {value(r.parameters.viscous)} · Surface tension {value(r.parameters.surfaceTension)} · Bubbles {value(r.parameters.bubbles)}</p></> : <><p className="text-slate-500">Settings unknown</p><p className="mt-1 text-xs text-slate-500">simulation.inp was not retained</p></>}
+            </td>
+            <td className={`${cell} min-w-44 font-mono text-xs leading-6`}><p>{number(secondary(r, 's_step'))} s / step</p><p>{number(secondary(r, 'exec'))} s simulation</p><p>{number(r.wallSec)} s total</p><p className="text-slate-500">{number(r.metric?.value)} grind · {value(r.parameters?.equations)} eq</p></td>
+            <td className={`${cell} min-w-40 text-xs leading-6`}><p>{value(r.config?.nodes)} nodes · {value(r.config?.ranks)} ranks</p><p>{value(r.config?.toolchain)}</p><p>{r.date && Number.isFinite(Date.parse(r.date)) ? new Date(r.date).toLocaleString('en-GB', {timeZone:'UTC'}) + ' UTC' : 'Date unknown'}</p><p className="text-slate-500">{r.dateSource === 'git' ? 'Result publication date' : r.dateSource === 'run' ? 'Run completion date' : ''}</p></td>
+            <td className={cell}><button className={button} onClick={() => openDetails(r)} aria-label={`Details for ${r.run}`}>{r.hasMedia ? 'Details + media' : 'Details'}</button></td>
+        </tr>)}</tbody></table></div>;
+    return <div className="min-w-0 space-y-5 text-slate-900">
+        <div className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-widest text-blue-700">SCC26 practice · MFC</p><h1 className="mt-1 text-3xl font-bold">MFC · Simulation studies</h1><p className="mt-2 max-w-3xl text-slate-600">Compare your simulation settings, accuracy and computational cost. Use the practice tasks to build, refine and visualise your own cases.</p></div><a href={guide('')} className="rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-800">Run through GitHub ↗</a></div>
+        <section aria-label="SCC26 practice tasks" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{tasks.map(([n,title,description,path,mode]) => <a key={n} href={guide(path)} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm hover:border-blue-400"><p className="text-xs font-semibold uppercase tracking-wide text-blue-700">Task {n} · {mode}</p><h2 className="mt-2 font-semibold">{title} ↗</h2><p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p></a>)}</section>
+        <details className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm"><summary className="cursor-pointer font-semibold text-blue-900">How to submit and interpret a run</summary><div className="mt-3 space-y-2 text-slate-700"><p>Tasks 2 and 3: copy the linked template into input/xenon/MFC/&lt;your-name&gt;/&lt;run-name&gt;/, edit job.yml and the case where required, then commit and push to main. Watch <a href={`${repo}/actions/workflows/submit-xenon.yml`} className="text-blue-700 underline">Submit jobs (xenon)</a>; results appear after collection and website deployment.</p><p>Task 1 uses the cluster test helper. Task 4 needs a local ParaView client and an SSH tunnel; neither is a timing submission.</p><p>Seconds per step and simulation time describe measured execution cost. Total time includes MFC workflow overhead. Runs with different resolutions or durations do different work.</p><p>Grind = nanoseconds per grid point, equation and right-hand-side evaluation. Adding equations can lower grind even when each step takes longer. Compare it only within a matching benchmark context and known equation count.</p><p>“Verified” checks successful completion, the staged case hash and MFC source pin. It does not certify physical accuracy. Custom cases are welcome; missing settings remain unknown.</p></div></details>
+        <div className="flex flex-wrap gap-2" aria-label="MFC views">{[['runs','Runs & settings'],['convergence','Convergence'],['benchmarks','Benchmarks']].map(([id,label]) => <button key={id} aria-pressed={view === id} onClick={() => update({view:id})} className={`${button} ${view === id ? '!border-blue-700 !bg-blue-700 text-white' : ''}`}>{label}</button>)}</div>
+        <div className="flex flex-wrap items-center gap-3"><input ref={search} type="search" aria-label="Search runs" placeholder="Search runs, users, cases… ( / )" value={q} onChange={e => update({q:e.target.value})} className="min-w-0 flex-1 basis-64 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm" />
+            <select aria-label="Filter by case" value={caseFilter} onChange={e => update({case:e.target.value})} className={`${button} max-w-full`}><option value="all">All cases</option>{caseFilter !== 'all' && !cases.includes(caseFilter) && <option value={caseFilter}>{caseFilter} (not in this cluster)</option>}{cases.map(c => <option key={c}>{c}</option>)}</select>
+            <select aria-label="Filter by hardware" value={hardwareFilter} onChange={e => update({hardware:e.target.value})} className={button}><option value="all">All hardware</option><option>CPU</option><option>GPU</option><option>Unknown hardware</option></select>
+            {view === 'runs' && <select aria-label="Sort runs" value={sort} onChange={e => update({sort:e.target.value})} className={button}><option value="recent">Newest published / completed</option><option value="step">Seconds per step</option><option value="grind" disabled={!safeGrind}>Grind (matching benchmarks only)</option></select>}
+        </div>
+        <div className="flex flex-wrap items-center gap-3 text-sm text-slate-600" aria-live="polite"><span>{shown.length} of {runs.length} MFC runs</span>{filtered && <button className="text-blue-700 underline" onClick={clear}>Clear filters</button>}<span>Select up to four runs for a comparison.</span></div>
+        {compared.length > 0 && <section className="overflow-hidden rounded-xl border border-blue-200 bg-white"><div className="flex justify-between gap-2 bg-blue-50 p-4"><h2 className="font-semibold">Compare selected runs ({compared.length})</h2><button className="text-sm text-blue-700 underline" onClick={() => setSelected([])}>Clear selection</button></div><div className="overflow-x-auto"><table className="w-full text-left text-sm"><thead><tr><th className={cell}>Setting / measurement</th>{compared.map(r => <th key={r.id} className={`${cell} min-w-48`}><button onClick={() => openDetails(r)} className="text-blue-700 underline">{r.run}</button></th>)}</tr></thead><tbody>
+            {[['Cluster / hardware', (r: MfcRunData) => `${r.cluster} / ${hardware(r)}`], ['Case', caseName], ...settingFields.map(([k,label]) => [label, (r: MfcRunData) => value(r.parameters?.[k])]), ['Seconds per step', (r: MfcRunData) => number(secondary(r,'s_step'))], ['Simulation seconds', (r: MfcRunData) => number(secondary(r,'exec'))], ['Total seconds', (r: MfcRunData) => number(r.wallSec)], ['Grind (ns/gp/eq/rhs)', (r: MfcRunData) => number(r.metric?.value)]].map(([label,get]) => <tr key={String(label)} className="border-t"><th className={`${cell} font-medium`}>{String(label)}</th>{compared.map(r => <td className={cell} key={r.id}>{(get as (r: MfcRunData) => string)(r)}</td>)}</tr>)}
+        </tbody></table></div><p className="p-4 text-sm text-amber-900">{comparableGrind(compared) ? 'Grind shares a verified benchmark context and equation count. Check grid, resources and build settings before interpreting a speedup.' : 'Grind is not directly comparable: benchmark context or equation count differs or is unknown. Read seconds per step alongside settings and accuracy.'}</p></section>}
+        {loading && <p role="status">Loading MFC results…</p>}
+        {error && <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800"><p>Could not load results: {error}</p><button className={`${button} mt-3`} onClick={() => setRetry(v => v+1)}>Retry</button></div>}
+        {!loading && !error && <>
+            {view === 'convergence' ? <MfcConvergence runs={shown} norm={norm} onNorm={norm => update({norm})} onOpen={openDetails} /> : shown.length === 0 ? <div className="rounded-xl border bg-white p-8"><p>{filtered ? 'No runs match these filters.' : 'No MFC results for this cluster yet.'}</p>{filtered && <button onClick={clear} className={`${button} mt-3`}>Reset filters</button>}</div> : view === 'runs' ? <section className="overflow-hidden rounded-xl border border-slate-200 bg-white">{table(recent)}</section> : <div className="space-y-4"><p className="text-sm text-slate-600">Verified benchmarks are grouped by cluster, case and hardware. Ordering by grind requires a known, matching equation count. Study and custom runs appear in Runs & settings.</p>{boards.size === 0 && <p className="rounded-xl border bg-white p-6">No verified benchmarks in this selection.</p>}{[...boards].map(([key,items]) => {
+                const safe = comparableGrind(items);
+                return <section key={key} className="overflow-hidden rounded-xl border border-slate-200 bg-white"><h2 className="bg-slate-50 p-4 font-semibold">{key}</h2>{!safe && <p className="px-4 pb-3 text-sm text-amber-800">Equation counts are unknown or differ; no grind ranking is shown.</p>}{table(safe ? [...items].sort((a,b) => a.metric!.value-b.metric!.value) : items,safe)}</section>;
+            })}</div>}
+        </>}
+        <p className="text-xs text-slate-500">Settings are read from retained simulation.inp, not guessed from case.py. Historical runs may have missing parameters. <a href="https://mflowcode.github.io/documentation/expectedPerformance.html" className="underline">About MFC performance metrics ↗</a></p>
+        {open && <MfcRunDetails run={open} onClose={() => setOpen(null)} />}
+    </div>;
 }

@@ -53,8 +53,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
         fetch(`${import.meta.env.BASE_URL}data/index.json?t=${Date.now()}`, { cache: 'no-store' })
             .then((r) => (r.ok ? r.json() : null))
             .then((d) => {
-                setClusters(d?.clusters ?? []);
-                setSuites(d?.suites ?? []);
+                setClusters(Array.isArray(d?.clusters) ? d.clusters.filter((c: ClusterInfo | null) => c && typeof c.name === 'string') : []);
+                setSuites(Array.isArray(d?.suites) ? d.suites.filter((s: SuiteMeta | null) => s && typeof s.name === 'string') : []);
             })
             .catch(() => {
                 setClusters([]);
@@ -76,7 +76,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     // HPL -> HPL NVIDIA compares CPU against GPU on the same cluster instead
     // of dropping you back to "All clusters".
     const suiteHref = (id: string) => {
-        const q = searchParams.toString();
+        const q = activeCluster === 'all' ? '' : new URLSearchParams({cluster: activeCluster}).toString();
         return q ? `/${id}?${q}` : `/${id}`;
     };
 

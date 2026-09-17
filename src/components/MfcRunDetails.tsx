@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { artifactURL, number, settingFields, statusLabel, validRun, value } from './mfc';
 import { Activity, Check, Copy, Cpu, FileText, Server, X } from 'lucide-react';
 
 // Details for one MFC run.
@@ -39,6 +40,9 @@ export interface MfcRunData {
     metric?: { value: number; unit?: string } | null;
     secondary?: { key: string; value: number }[];
     config?: Record<string, unknown>;
+    parameters?: Record<string, string | number | boolean | null> | null;
+    verification?: { kind: string; reason: string } | null;
+    convergence?: { N: number; first: number; last: number; L1: number; L2: number; Linf: number; series: string } | null;
     provenance?: Record<string, unknown>;
     ranking?: { eligible: boolean; reason: string; group: string };
     notes?: string[];
@@ -104,6 +108,7 @@ function StepChart({ steps }: { steps: Step[] }) {
 
 function FileBlock({ name, text, note }: { name: string; text: string; note?: string }) {
     const [copied, setCopied] = useState(false);
+    const [copyError, setCopyError] = useState(false);
     return (
         <div className="rounded-xl border border-slate-200 bg-white">
             <div className="flex items-center justify-between border-b border-slate-100 px-4 py-2">
@@ -113,9 +118,9 @@ function FileBlock({ name, text, note }: { name: string; text: string; note?: st
                     {note && <span className="font-normal text-slate-500">{note}</span>}
                 </div>
                 <button
-                    onClick={() => { navigator.clipboard.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); }}
+                    onClick={() => { if (!navigator.clipboard) { setCopyError(true); return; } navigator.clipboard.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => setCopyError(true)); }}
                     className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs text-slate-500 hover:bg-slate-100 hover:text-slate-900">
-                    {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}{copied ? 'Copied' : 'Copy'}
+                    {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}{copied ? 'Copied' : copyError ? 'Select text to copy' : 'Copy'}
                 </button>
             </div>
             <pre className="max-h-80 overflow-auto px-4 py-3 text-xs leading-relaxed text-slate-800">{text}</pre>
@@ -125,6 +130,9 @@ function FileBlock({ name, text, note }: { name: string; text: string; note?: st
 
 export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () => void }) {
     const [tab, setTab] = useState('overview');
+    const dialog = useRef<HTMLDivElement>(null);
+    const close = useRef(onClose);
+    close.current = onClose;
     const [full, setFull] = useState<MfcRunData | null>(null);
     const [loadErr, setLoadErr] = useState('');
 
@@ -134,18 +142,32 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
     // HPL's overlay does too.
     useEffect(() => {
         let alive = true;
-        fetch(`${base}data/runs/${run.id}/run.json?t=${Date.now()}`, { cache: 'no-store' })
+        setFull(null); setLoadErr(''); setTab('overview');
+        fetch(`${base}data/runs/${run.id.split('/').map(encodeURIComponent).join('/')}/run.json?t=${Date.now()}`, { cache: 'no-store' })
             .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-            .then((j) => { if (alive) setFull(j); })
+            .then((j) => { if (!validRun(j) || j.id !== run.id) throw new Error('Invalid run record'); if (alive) setFull(j); })
             .catch((e) => { if (alive) setLoadErr(String(e)); });
         return () => { alive = false; };
     }, [run.id]);
 
     useEffect(() => {
-        const k = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-        window.addEventListener('keydown', k);
-        return () => window.removeEventListener('keydown', k);
-    }, [onClose]);
+        const previous = document.activeElement as HTMLElement | null;
+        const overflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        dialog.current?.focus();
+        const k = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close.current(); }
+            if (e.key === 'Tab') {
+                const elements = [...(dialog.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input, select, video[controls], [tabindex="0"]') ?? [])];
+                const first = elements[0], last = elements.at(-1);
+                if (!first) { e.preventDefault(); return; }
+                if (e.shiftKey && (document.activeElement === first || document.activeElement === dialog.current)) { e.preventDefault(); last?.focus(); }
+                else if (!e.shiftKey && (document.activeElement === last || document.activeElement === dialog.current)) { e.preventDefault(); first.focus(); }
+            }
+        };
+        document.addEventListener('keydown', k, true);
+        return () => { document.removeEventListener('keydown', k, true); document.body.style.overflow = overflow; previous?.focus(); };
+    }, []);
 
     const data = full ?? run;
     const d = data.detail ?? {};
@@ -153,7 +175,7 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
     const env = parsed?.env ?? {};
     const cfg = (data.config ?? {}) as Record<string, string | number | null>;
     const sec = Object.fromEntries((data.secondary ?? []).map((s) => [s.key, s.value]));
-    const media = Object.entries(data.raw ?? run.raw ?? {}).filter(([n]) => /\.(mp4|png)$/i.test(n));
+    const media = Object.entries(data.raw ?? run.raw ?? {}).filter(([n, url]) => /\.(mp4|png)$/i.test(n) && artifactURL(url));
 
     const outText = d.out?.excerpt
         ? [...d.out.excerpt.head,
@@ -172,19 +194,19 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" style={{ margin: 0 }} onClick={onClose}>
-            <div className="max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-slate-50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div ref={dialog} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="mfc-run-title" className="max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-slate-50 shadow-2xl" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-start justify-between border-b border-slate-200 bg-white px-6 py-4">
                     <div>
-                        <div className="flex items-center gap-2">
-                            <h2 className="text-xl font-bold text-slate-900">{run.group} / {run.run}</h2>
+                        <div className="flex flex-wrap items-center gap-2">
+                            <h2 id="mfc-run-title" className="break-all text-xl font-bold text-slate-900">{run.group} / {run.run}</h2>
                             <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                                run.ranking?.eligible ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                                {run.ranking?.eligible ? 'Ranked' : 'Unranked'}
+                                statusLabel(data).startsWith('Verified') ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                                {statusLabel(data)}
                             </span>
                         </div>
                         <p className="mt-1 text-sm text-slate-600">
                             {run.cluster} · {String(cfg.case ?? 'custom case')} · {cfg.gpu === 'acc' ? 'GPU (OpenACC)' : 'CPU'}
-                            {run.ranking && !run.ranking.eligible && <> · {run.ranking.reason}</>}
+                            {data.verification?.kind === 'unverified' && <> · {data.verification.reason}</>}
                         </p>
                     </div>
                     <button onClick={onClose} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100" aria-label="Close">
@@ -192,9 +214,9 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
                     </button>
                 </div>
 
-                <div className="flex gap-1 border-b border-slate-200 bg-white px-4">
+                <div className="flex overflow-x-auto gap-1 border-b border-slate-200 bg-white px-4">
                     {tabs.map(([id, label]) => (
-                        <button key={id} onClick={() => setTab(id)}
+                        <button key={id} aria-pressed={tab === id} onClick={() => setTab(id)}
                                 className={`border-b-2 px-3 py-2 text-sm font-medium transition-colors ${
                                     tab === id ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-800'}`}>
                             {label}
@@ -210,12 +232,23 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
                     {!full && !loadErr && <p className="text-sm text-slate-500">Loading run details…</p>}
                     {tab === 'overview' && <>
                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                            <Stat accent label="Grind time" value={data.metric?.value != null ? data.metric.value.toFixed(4) : '—'} hint="ns/gp/eq/rhs · lower is better" />
+                            <Stat accent label="Grind time" value={number(data.metric?.value)} hint="ns/gp/eq/rhs · check equation count" />
                             <Stat label="Seconds / step" value={sec.s_step != null ? Number(sec.s_step).toFixed(4) : '—'} />
                             <Stat label="Ranks" value={String(cfg.ranks ?? sec.ranks ?? '—')} hint={`${cfg.nodes ?? '—'} node(s)`} />
-                            <Stat label="Wall time" value={parsed?.totalTimeSec != null ? `${parsed.totalTimeSec}s` : '—'}
+                            <Stat label="Total time" value={parsed?.totalTimeSec != null ? `${parsed.totalTimeSec}s` : '—'}
                                   hint={parsed?.exitCode != null ? `exit ${parsed.exitCode}` : undefined} />
                         </div>
+
+                        <section className="rounded-xl border border-slate-200 bg-white p-4">
+                            <h3 className="font-semibold">Resolved simulation settings</h3>
+                            <p className="mt-1 text-xs text-slate-500">Read from simulation.inp. Missing fields are unknown. Equations, when available, are derived for the ordinary 5-equation model.</p>
+                            {data.parameters ? <dl className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">{settingFields.map(([k,label]) => <div key={k} className="flex justify-between gap-3 text-sm"><dt className="text-slate-500">{label}</dt><dd className="break-all text-right font-mono">{value(data.parameters?.[k])}</dd></div>)}</dl> : <p className="mt-3 text-sm">Settings unknown: this historical run did not retain simulation.inp.</p>}
+                            <p className="mt-3 text-sm">Simulation execution: {number(sec.exec)} s. Total time also includes workflow overhead.</p>
+                            <p className="mt-2 text-sm text-amber-800">Adding equations can lower grind while increasing seconds per step. Use settings, cost and accuracy together.</p>
+                            {data.convergence && <p className="mt-2 text-sm">Measured periodic-return error: L1 {number(data.convergence.L1)}, L2 {number(data.convergence.L2)}, L∞ {number(data.convergence.Linf)}.</p>}
+                            <p className="mt-2 text-xs text-slate-500">{data.verification?.reason ?? data.ranking?.reason} Verification checks execution provenance, not physical accuracy.</p>
+                            <p className="mt-2 text-xs text-slate-500">{data.dateSource === 'git' ? 'Result publication' : 'Run completion'}: {data.date ?? 'Unknown'} · Submitted by {data.submitter?.name ?? 'Unknown'}</p>
+                        </section>
 
                         {parsed?.steps?.length ? <StepChart steps={parsed.steps} /> : null}
 
@@ -281,9 +314,9 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
                         <div className="rounded-xl border border-slate-200 bg-white p-4">
                             <div className="mb-2 text-sm font-medium text-slate-700">Files</div>
                             <div className="flex flex-wrap gap-2">
-                                {Object.entries(data.raw ?? run.raw ?? {}).map(([n, url]) => (
-                                    <a key={n} href={`${base}${url}`}
-                                       className="rounded-lg border border-slate-200 px-2.5 py-1 font-mono text-xs text-blue-700 hover:border-blue-300 hover:bg-blue-50">
+                                {Object.entries(data.raw ?? run.raw ?? {}).filter(([,url]) => artifactURL(url)).map(([n, url]) => (
+                                    <a key={n} href={artifactURL(url)}
+                                       className="break-all rounded-lg border border-slate-200 px-2.5 py-1 font-mono text-xs text-blue-700 hover:border-blue-300 hover:bg-blue-50">
                                         {n}
                                     </a>))}
                             </div>
@@ -298,12 +331,20 @@ export function MfcRunDetails({ run, onClose }: { run: MfcRunData; onClose: () =
                     {tab === 'err' && d.err?.raw && <FileBlock name={d.err.file} text={d.err.raw} note={`${(d.err.size / 1024).toFixed(1)} KB`} />}
                     {tab === 'media' && (
                         <div className="space-y-3">
-                            {media.map(([n, url]) => /\.mp4$/i.test(n)
-                                ? <video key={n} controls loop className="w-full rounded-xl border border-slate-200 bg-black" src={`${base}${url}`} />
-                                : <img key={n} className="w-full rounded-xl border border-slate-200" src={`${base}${url}`} alt={n} />)}
+                            {media.map(([n, url]) => <Media key={n} name={n} url={artifactURL(url)!} />)}
                         </div>)}
                 </div>
             </div>
         </div>
     );
+}
+
+function Media({ name, url }: { name: string; url: string }) {
+    const [failed, setFailed] = useState(false);
+    return <figure className="space-y-2">
+        {failed ? <p role="status" className="rounded border border-amber-300 p-3 text-sm">Preview unavailable in this browser. Open the original file below.</p> : /\.mp4$/i.test(name)
+            ? <video controls preload="metadata" className="w-full rounded-xl border bg-black" src={url} onError={() => setFailed(true)} aria-label={name} />
+            : <img loading="lazy" className="w-full rounded-xl border" src={url} alt={name} onError={() => setFailed(true)} />}
+        <figcaption><a href={url} className="break-all text-sm text-blue-700 underline">Open {name}</a></figcaption>
+    </figure>;
 }

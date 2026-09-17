@@ -45,9 +45,31 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          # Full history, not a shallow clone. Dates and submitters are read
+          # from git: a job spec is added under input/ by whoever submitted it
+          # and the results under output/ when the job finishes, and no run
+          # artifact records either (MFC prints no date at all; HPL's own
+          # timestamp is present in 73 of 132 Raijin runs). At depth 1 there is
+          # one commit, so every run older than this build loses its date and
+          # the board cannot be ordered by recency.
+          fetch-depth: 0
           ref: main
           fetch-tags: false
+
+      # fetch-depth: 0 above should make this a no-op. It is here because it
+      # once was not: a build whose log showed a full fetch still ran collect
+      # against a one-commit repository, and every git-derived date came out
+      # as that commit's timestamp -- 80 runs apparently finishing in the same
+      # second. collect.mjs now detects that shape and drops the dates rather
+      # than publishing them, but recovering the history is better than losing
+      # it, so ask git directly instead of trusting the checkout.
+      - name: Ensure full history
+        run: |
+          if [ "$(git rev-parse --is-shallow-repository)" = true ]; then
+            echo "::warning::checkout was shallow despite fetch-depth: 0 — unshallowing"
+            git fetch --unshallow --quiet
+          fi
+          echo "history: $(git rev-list --count HEAD) commit(s)"
 
       - name: Setup Node
         uses: actions/setup-node@v4
