@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, useParams } from 'react-router';
 import { Navigation } from './components/Navigation';
 import { BenchmarkPage } from './components/BenchmarkPage';
+import { MfcPage } from './components/MfcPage';
 import type { BenchmarkSuite } from './types';
 import { RunDetailsOverlay } from './components/RunDetailsOverlay';
 import { Outlet } from "react-router";
@@ -17,8 +18,8 @@ const suiteDetails = {
         background:"bg-green-50",
     },
     MFC: {
-        name: 'MFC (Multi-Flow Component)',
-        description: 'Multi-Flow Component benchmark for evaluating distributed flow processing performance and throughput across compute nodes.',
+        name: 'MFC (Multi-component Flow Code)',
+        description: 'Multiphase compressible flow simulations on CPUs and GPUs.',
         background:"bg-amber-50",
     }
 };
@@ -35,11 +36,11 @@ function SuiteWrapper() {
         <div className={`min-h-screen ${suite.background}`}>
             <Navigation activeSuite={suiteId!} />
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <BenchmarkPage
+                {suiteId === 'MFC' ? <MfcPage /> : <BenchmarkPage
                     suite={suiteId!}
                     suiteName={suite.name}
                     description={suite.description}
-                />
+                />}
             </main>
 
             <Outlet />

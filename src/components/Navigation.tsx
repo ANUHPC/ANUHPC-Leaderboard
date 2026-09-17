@@ -22,8 +22,8 @@ const suiteInfos: SuiteInfo[] = [
     },
     {
         id: 'MFC',
-        name: 'MFC (Multi-Flow Component)',
-        description: 'Multi-Flow Component Benchmark',
+        name: 'MFC (Multi-component Flow Code)',
+        description: 'Multiphase compressible flow',
         type: 'Multi-Flow',
     },
 ];

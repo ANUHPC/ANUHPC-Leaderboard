@@ -101,6 +101,8 @@ function scanRuns() {
                             secondary:   data.secondary ?? [],
                             config:      data.config ?? {},
                             status:      data.status ?? null,
+                            ranking:     data.ranking,
+                            raw:         data.raw ?? {},
                             rank:        data.rank ?? null,
                             best:        extractBest(suite, data),
                             outSummary:  extractOutSummary(data),
@@ -125,14 +127,14 @@ function applyRanks(runs, suites) {
 
     const groups = new Map();
     for (const r of runs) {
-        const k = `${r.cluster}\u0000${r.suite}`;
+        const k = `${r.cluster}\u0000${r.suite}\u0000${r.ranking?.group ?? ''}`;
         if (!groups.has(k)) groups.set(k, []);
         groups.get(k).push(r);
     }
     for (const [k, list] of groups) {
         const suite = k.split('\u0000')[1];
         const dir = dirOf[suite] ?? 'higher';
-        const scored = list.filter((r) => Number.isFinite(r.metric?.value));
+        const scored = list.filter((r) => Number.isFinite(r.metric?.value) && r.ranking?.eligible !== false);
         scored.sort((a, b) =>
             dir === 'lower' ? a.metric.value - b.metric.value : b.metric.value - a.metric.value
         );
