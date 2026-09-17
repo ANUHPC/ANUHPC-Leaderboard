@@ -1,22 +1,28 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import { Clock, Eye, Film, Medal, User } from 'lucide-react';
+import { Clock, Eye, Film, Medal, Search, Trophy, X } from 'lucide-react';
 import { MfcRunDetails, type MfcRunData } from './MfcRunDetails';
 
 // The MFC board.
 //
-// Two ways to read the same runs, as tabs:
+// This replaces a tab strip that carried one tab per case. With eight cases it
+// wrapped onto two rows, most tabs held a single row of data, and the tab
+// labels (viscous_weno5_sgb_acoustic) were wider than the numbers they led to
+// -- so the navigation cost more space and more reading than the content. It
+// also got worse with every case added, which is the wrong direction for a
+// board meant to grow by contribution.
 //
-//   Recent      everything, newest first. The landing view, because the
-//               question people arrive with is "what has been run lately",
-//               and a leaderboard whose boards mostly hold one entry each
-//               answers that badly.
-//   per case    the ranked board for one case, split by hardware.
+// Tabs suit a small fixed set of mutually exclusive VIEWS. There are two of
+// those here:
 //
-// Ranking is per (cluster, case, hardware): a grind time on 8 A100s and one on
-// 36 Haswell cores measure different machines, and the pinned cases are
-// different physics, so a single ordering across them would be meaningless.
-// Runs with a supplied case.py are unranked by construction.
+//   Recent       every run, newest first. The landing view: the question
+//                people arrive with is "what has been run lately".
+//   Leaderboards the ranked boards, one per case and hardware, which is the
+//                question you arrive with second.
+//
+// Case is a data dimension with unbounded cardinality, so it belongs in a
+// filter, not in navigation. Search covers the rest: with 11 runs today and
+// no ceiling, typing "ayush gpu" beats hunting through controls.
 
 const base = import.meta.env.BASE_URL;
 
@@ -25,8 +31,25 @@ const caseOf = (r: MfcRunData) => String((r.config as Record<string, unknown>)?.
 const isRanked = (r: MfcRunData) =>
     Boolean(r.ranking?.eligible) && r.status === 'ok' && Number.isFinite(r.metric?.value);
 
-// "3 days ago" reads faster than a timestamp when scanning a list, but the
-// exact time has to stay reachable -- it is the audit trail for a result.
+// Everything a row shows, flattened once so typing matches what you can see.
+const haystack = (r: MfcRunData) => [
+    r.run, r.group, r.cluster, caseOf(r), hw(r),
+    r.submitter?.name, r.submitter?.by,
+    (r.config as Record<string, unknown>)?.toolchain,
+    isRanked(r) ? 'ranked' : 'unranked demo custom',
+].filter(Boolean).join(' ').toLowerCase();
+
+// Every word must match something. "ayush gpu" means both, not either --
+// with one field per row, OR semantics return almost everything.
+function matches(r: MfcRunData, q: string) {
+    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!terms.length) return true;
+    const hay = haystack(r);
+    return terms.every((t) => hay.includes(t));
+}
+
+// "3d ago" reads faster than a timestamp when scanning; the exact time stays
+// in the title attribute, because it is the audit trail for a result.
 function ago(iso?: string | null) {
     if (!iso) return '—';
     const t = Date.parse(iso);
@@ -42,36 +65,18 @@ function ago(iso?: string | null) {
 const exact = (iso?: string | null) =>
     iso && Number.isFinite(Date.parse(iso)) ? new Date(iso).toLocaleString() : 'date unknown';
 
-// Who entered the run. The folder under input/ is the identity the leaderboard
-// is organised by; "house" marks the seeded reference entries, which belong to
-// nobody and should not wear a person's name.
-function Who({ r }: { r: MfcRunData }) {
-    const s = r.submitter;
-    if (!s?.name) return <span className="text-slate-400">—</span>;
-    if (s.house) {
-        return (
-            <span className="inline-flex items-center gap-1.5 text-slate-500">
-                <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-xs font-medium">{s.name}</span>
-                <span className="text-xs">reference</span>
-            </span>
-        );
-    }
-    return (
-        <span className="inline-flex items-center gap-1.5 font-medium text-slate-800" title={s.by ? `pushed by ${s.by}` : undefined}>
-            <User className="h-3.5 w-3.5 text-slate-400" />{s.name}
-        </span>
-    );
-}
-
 export function MfcPage() {
     const [runs, setRuns] = useState<MfcRunData[]>([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
+    const [view, setView] = useState<'recent' | 'boards'>('recent');
+    const [q, setQ] = useState('');
     const [hardware, setHardware] = useState('all');
-    const [tab, setTab] = useState('recent');
+    const [caseFilter, setCaseFilter] = useState('all');
     const [open, setOpen] = useState<MfcRunData | null>(null);
     const [params] = useSearchParams();
     const cluster = params.get('cluster') ?? 'all';
+    const searchRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         fetch(`${base}data/index.json?t=${Date.now()}`, { cache: 'no-store' })
@@ -81,189 +86,250 @@ export function MfcPage() {
             .finally(() => setLoading(false));
     }, []);
 
-    const scoped = useMemo(
-        () => runs.filter((r) => (cluster === 'all' || r.cluster === cluster) && (hardware === 'all' || hw(r) === hardware)),
-        [runs, cluster, hardware]);
+    // "/" to search and Escape to clear are the conventions people already
+    // carry from GitHub, Slack and Gmail, so they cost nothing to learn.
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            const el = e.target as HTMLElement | null;
+            const typing = el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName);
+            if (e.key === '/' && !typing) { e.preventDefault(); searchRef.current?.focus(); }
+            if (e.key === 'Escape' && typing && el === searchRef.current) { setQ(''); searchRef.current?.blur(); }
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, []);
 
-    // Tabs are built from the runs, not from a hardcoded list, so a case
-    // contributed through suites/MFC/cases/ appears here the moment it has a
-    // result without this file needing to know it exists.
     const cases = useMemo(() => {
         const counts = new Map<string, number>();
-        for (const r of runs.filter((x) => isRanked(x))) counts.set(caseOf(r), (counts.get(caseOf(r)) ?? 0) + 1);
+        for (const r of runs) counts.set(caseOf(r), (counts.get(caseOf(r)) ?? 0) + 1);
         return [...counts].sort((a, b) => a[0].localeCompare(b[0]));
     }, [runs]);
 
-    const unrankedCount = runs.filter((r) => !isRanked(r)).length;
-    const tabs = [
-        { id: 'recent', label: 'Recent', count: runs.length },
-        ...cases.map(([c, n]) => ({ id: `case:${c}`, label: c, count: n })),
-        ...(unrankedCount ? [{ id: 'other', label: 'Demos & unranked', count: unrankedCount }] : []),
-    ];
-    // A case tab can vanish when the hardware filter excludes its only runs.
-    const active = tabs.some((t) => t.id === tab) ? tab : 'recent';
+    const shown = useMemo(() => runs.filter((r) =>
+        (cluster === 'all' || r.cluster === cluster) &&
+        (hardware === 'all' || hw(r) === hardware) &&
+        (caseFilter === 'all' || caseOf(r) === caseFilter) &&
+        matches(r, q)), [runs, cluster, hardware, caseFilter, q]);
+
+    const filtered = q !== '' || hardware !== 'all' || caseFilter !== 'all';
+    const clear = () => { setQ(''); setHardware('all'); setCaseFilter('all'); };
 
     const Row = ({ r, rank }: { r: MfcRunData; rank?: number }) => {
         const cfg = (r.config ?? {}) as Record<string, unknown>;
         const medal = ['text-amber-500', 'text-slate-400', 'text-amber-700'];
         const hasMedia = r.hasMedia ?? Object.keys(r.raw ?? {}).some((n) => /\.(mp4|png)$/i.test(n));
+        const who = r.submitter;
         return (
             <tr className="border-t border-slate-100 hover:bg-slate-50/70">
                 {rank !== undefined && (
-                    <td className="px-5 py-4">
-                        <span className={`inline-flex items-center gap-1 font-semibold ${medal[rank] ?? 'text-slate-400'}`}>
+                    <td className="py-3 pl-5 pr-2">
+                        <span className={`inline-flex items-center gap-1 text-sm font-semibold ${medal[rank] ?? 'text-slate-400'}`}>
                             {rank < 3 && <Medal className="h-4 w-4" />}#{rank + 1}
                         </span>
                     </td>
                 )}
-                <td className="px-5 py-4">
-                    <div className="flex items-center gap-2 font-semibold text-slate-900">
+                <td className="px-4 py-3">
+                    <div className="flex items-center gap-1.5 font-medium text-slate-900">
                         {r.run}
                         {hasMedia && <Film className="h-3.5 w-3.5 text-slate-400" aria-label="has a rendered video" />}
                     </div>
                     <div className="text-xs text-slate-500">
-                        {r.cluster} · {caseOf(r)} · {hw(r)}
+                        {caseOf(r)} · {hw(r)} · {r.cluster}
                         {r.status !== 'ok' && <span className="ml-1 text-red-600">· {r.status}</span>}
                     </div>
-                    {!isRanked(r) && r.ranking?.reason && (
-                        <div className="text-xs text-amber-700">{r.ranking.reason}</div>)}
                 </td>
-                <td className="px-5 py-4"><Who r={r} /></td>
-                <td className="px-5 py-4 font-mono text-base text-slate-900">
+                <td className="px-4 py-3">
+                    {who?.name
+                        ? <span className={who.house ? 'text-slate-500' : 'font-medium text-slate-800'}
+                                title={who.by ? `pushed by ${who.by}` : undefined}>
+                              {who.name}{who.house && <span className="ml-1 text-xs text-slate-400">· reference</span>}
+                          </span>
+                        : <span className="text-slate-400">—</span>}
+                </td>
+                <td className="px-4 py-3 text-right font-mono text-slate-900">
                     {r.metric?.value != null ? r.metric.value.toFixed(4) : '—'}
+                    {!isRanked(r) && <div className="text-xs font-sans font-normal text-amber-700">unranked</div>}
                 </td>
-                <td className="px-5 py-4 font-mono text-slate-600">{r.wallSec != null ? `${r.wallSec}s` : '—'}</td>
-                <td className="px-5 py-4 text-slate-700">
-                    {String(cfg.nodes ?? '—')} node(s), {String(cfg.ranks ?? '—')} ranks
-                    <div className="text-xs text-slate-500">{hw(r)} · {String(cfg.gbpp ?? '—')} GB/rank</div>
+                <td className="px-4 py-3 text-right font-mono text-sm text-slate-600">{r.wallSec != null ? `${r.wallSec}s` : '—'}</td>
+                <td className="px-4 py-3 text-sm text-slate-600">
+                    {String(cfg.nodes ?? '—')}&nbsp;node · {String(cfg.ranks ?? '—')}&nbsp;ranks
+                    <div className="text-xs text-slate-400">{String(cfg.gbpp ?? '—')} GB/rank</div>
                 </td>
-                <td className="px-5 py-4 whitespace-nowrap text-slate-600" title={`${exact(r.date)}${r.dateSource === 'git' ? ' (from the commit that published the results)' : ''}`}>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500"
+                    title={`${exact(r.date)}${r.dateSource === 'git' ? ' (from the commit that published the results)' : ''}`}>
                     {ago(r.date)}
                 </td>
-                <td className="px-5 py-4">
+                <td className="py-3 pl-2 pr-5 text-right">
                     <button onClick={() => setOpen(r)}
-                            className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-medium text-slate-500 transition-all hover:bg-slate-100 hover:text-slate-900">
+                            aria-label={`Details for ${r.run}`}
+                            className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900">
                         <Eye className="h-4 w-4" /> Details
                     </button>
                 </td>
             </tr>);
     };
 
+    // One header for the whole view. The boards view previously rendered a
+    // separate card and a repeated 8-column header per board -- with nine
+    // boards holding one entry each, that was eight redundant headers and more
+    // chrome than data. Group rows inside one table instead: the standard
+    // grouped-table pattern, and it stays readable as boards fill up.
+    const Head = ({ scored }: { scored: boolean }) => (
+        <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+            <tr>
+                {scored && <th className="py-2.5 pl-5 pr-2 font-medium">#</th>}
+                <th className="px-4 py-2.5 font-medium">Run</th>
+                <th className="px-4 py-2.5 font-medium">User</th>
+                <th className="px-4 py-2.5 text-right font-medium">Grind <span className="normal-case text-slate-400">ns/gp/eq/rhs</span></th>
+                <th className="px-4 py-2.5 text-right font-medium">Wall</th>
+                <th className="px-4 py-2.5 font-medium">Resources</th>
+                <th className="px-4 py-2.5 font-medium">When</th>
+                <th className="py-2.5 pl-2 pr-5"></th>
+            </tr>
+        </thead>);
+
     const Table = ({ items, scored }: { items: MfcRunData[]; scored: boolean }) => (
         <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm">
-                <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-                    <tr>
-                        {scored && <th className="w-20 px-5 py-3">Rank</th>}
-                        <th className="px-5 py-3">Run</th>
-                        <th className="px-5 py-3">User</th>
-                        <th className="px-5 py-3">Grind time<div className="font-normal normal-case">ns/gp/eq/rhs</div></th>
-                        <th className="px-5 py-3">Wall</th>
-                        <th className="px-5 py-3">Resources</th>
-                        <th className="px-5 py-3">When</th>
-                        <th className="w-28 px-5 py-3"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.map((r, i) => <Row key={r.id} r={r} rank={scored ? i : undefined} />)}
-                </tbody>
+                <Head scored={scored} />
+                <tbody>{items.map((r, i) => <Row key={r.id} r={r} rank={scored ? i : undefined} />)}</tbody>
             </table>
         </div>);
 
-    const Panel = ({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) => (
-        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <h2 className="border-b border-slate-100 px-5 py-3 font-semibold text-slate-900">
-                {title}{hint && <span className="ml-2 text-sm font-normal text-slate-500">{hint}</span>}
-            </h2>
-            {children}
-        </section>);
+    // Results published in one commit share a timestamp exactly, so date alone
+    // leaves their order to whatever the index listed first. Case then name
+    // breaks the tie and keeps the list stable between builds.
+    const recent = [...shown].sort((a, b) =>
+        String(b.date ?? '').localeCompare(String(a.date ?? '')) ||
+        caseOf(a).localeCompare(caseOf(b)) || a.run.localeCompare(b.run));
 
-    // --- what the active tab shows ---
-    let body: React.ReactNode = null;
-    if (active === 'recent') {
-        // Results are committed in batches, so runs published together share a
-        // timestamp exactly -- 8 of the first 10 MFC runs do. Date alone would
-        // leave their order down to whatever the index happened to list first,
-        // which changes between builds. Case then run name breaks the tie, so
-        // the list is stable and reads sensibly.
-        const recent = [...scoped].sort((a, b) =>
-            String(b.date ?? '').localeCompare(String(a.date ?? '')) ||
-            caseOf(a).localeCompare(caseOf(b)) ||
-            a.run.localeCompare(b.run));
-        body = recent.length ? (
-            <Panel title="All runs, newest first"
-                   hint={`${recent.length} run${recent.length === 1 ? '' : 's'} · ranked and unranked together`}>
-                <Table items={recent} scored={false} />
-            </Panel>
-        ) : null;
-    } else if (active === 'other') {
-        const others = scoped.filter((r) => !isRanked(r));
-        body = others.length ? (
-            <Panel title="Demos and unranked runs" hint="custom cases, and runs without a verified result">
-                <Table items={others} scored={false} />
-            </Panel>
-        ) : null;
-    } else {
-        const slug = active.slice(5);
-        const mine = scoped.filter((r) => isRanked(r) && caseOf(r) === slug);
-        // One board per hardware: a grind time on A100s and one on Haswell
-        // cores are not comparable, so they must not share an ordering.
-        const boards = new Map<string, MfcRunData[]>();
-        for (const r of mine) boards.set(hw(r), [...(boards.get(hw(r)) ?? []), r]);
-        body = boards.size ? [...boards].sort(([a], [b]) => a.localeCompare(b)).map(([k, items]) => (
-            <Panel key={k} title={`${slug} · ${k}`} hint={`${items.length} ranked entr${items.length === 1 ? 'y' : 'ies'}`}>
-                <Table items={[...items].sort((a, b) => (a.metric?.value ?? Infinity) - (b.metric?.value ?? Infinity))} scored />
-            </Panel>
-        )) : null;
+    // One board per (case, hardware): the only grouping in which two grind
+    // times are comparable.
+    const boards = new Map<string, MfcRunData[]>();
+    for (const r of shown.filter(isRanked)) {
+        const k = `${caseOf(r)} · ${hw(r)}`;
+        boards.set(k, [...(boards.get(k) ?? []), r]);
     }
 
+    const seg = (id: 'recent' | 'boards', label: string, icon: React.ReactNode) => (
+        <button onClick={() => setView(id)} aria-pressed={view === id}
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                    view === id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}`}>
+            {icon}{label}
+        </button>);
+
     return (
-        <div className="space-y-6">
+        <div className="space-y-5">
             <div>
                 <h1 className="text-3xl font-bold text-slate-900">MFC · Multi-component Flow Code</h1>
                 <p className="mt-2 text-slate-600">
                     Grind time is nanoseconds per grid point, per equation, per right-hand-side evaluation.
                     <span className="font-medium"> Lower is better</span> — the opposite of HPL.
                 </p>
-                <p className="mt-1 text-sm text-slate-500">
-                    Ranked per case and per hardware: 8 A100s and 36 Haswell cores are different machines, and each
-                    case is different physics. Runs with their own case.py are unranked.
-                </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 border-b border-slate-200">
-                {tabs.map((t) => (
-                    <button key={t.id} onClick={() => setTab(t.id)}
-                            aria-current={active === t.id ? 'page' : undefined}
-                            className={`-mb-px flex items-center gap-2 rounded-t-lg border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
-                                active === t.id
-                                    ? 'border-blue-600 text-blue-700'
-                                    : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-800'}`}>
-                        {t.id === 'recent' && <Clock className="h-4 w-4" />}
-                        {t.label}
-                        <span className={`rounded-full px-1.5 py-0.5 text-xs ${
-                            active === t.id ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'}`}>{t.count}</span>
-                    </button>
-                ))}
-            </div>
-
+            {/* One row: view, search, filters. Search is widest because it is
+                the fastest path to a specific run and the only control that
+                does not need you to know the vocabulary first. */}
             <div className="flex flex-wrap items-center gap-3">
-                <label className="text-sm text-slate-600">Hardware
-                    <select className="ml-2 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm"
-                            value={hardware} onChange={(e) => setHardware(e.target.value)}>
-                        <option value="all">All</option><option>GPU</option><option>CPU</option>
-                    </select>
-                </label>
-                <span className="text-sm text-slate-500">
-                    {scoped.length} run{scoped.length === 1 ? '' : 's'} in view
+                <div className="flex items-center gap-1 rounded-xl bg-slate-100 p-1">
+                    {seg('recent', 'Recent', <Clock className="h-4 w-4" />)}
+                    {seg('boards', 'Leaderboards', <Trophy className="h-4 w-4" />)}
+                </div>
+
+                <div className="relative min-w-[16rem] flex-1">
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <input
+                        ref={searchRef} type="search" value={q} onChange={(e) => setQ(e.target.value)}
+                        aria-label="Search runs"
+                        placeholder="Search runs, users, cases…   (press /)"
+                        className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-9 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                    />
+                    {q && (
+                        <button onClick={() => { setQ(''); searchRef.current?.focus(); }} aria-label="Clear search"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700">
+                            <X className="h-3.5 w-3.5" />
+                        </button>)}
+                </div>
+
+                <select aria-label="Filter by case" value={caseFilter} onChange={(e) => setCaseFilter(e.target.value)}
+                        className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700">
+                    <option value="all">All cases</option>
+                    {cases.map(([c, n]) => <option key={c} value={c}>{c} ({n})</option>)}
+                </select>
+
+                <select aria-label="Filter by hardware" value={hardware} onChange={(e) => setHardware(e.target.value)}
+                        className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700">
+                    <option value="all">All hardware</option>
+                    <option>GPU</option><option>CPU</option>
+                </select>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-slate-500">
+                <span>
+                    <span className="font-medium text-slate-700">{shown.length}</span> of {runs.length} run{runs.length === 1 ? '' : 's'}
+                    {view === 'boards' && ` · ${boards.size} board${boards.size === 1 ? '' : 's'}`}
                 </span>
+                {filtered && (
+                    <button onClick={clear} className="inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-slate-500 underline-offset-2 hover:bg-slate-100 hover:text-slate-900 hover:underline">
+                        <X className="h-3 w-3" /> Clear filters
+                    </button>)}
             </div>
 
             {loading && <p className="text-slate-600">Loading MFC results…</p>}
             {error && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">Could not load results: {error}</p>}
-            {!loading && !error && !body && (
-                <p className="rounded-xl border border-slate-200 bg-white p-6 text-slate-600">No MFC results for this selection yet.</p>)}
-            {body}
+
+            {!loading && !error && shown.length === 0 && (
+                <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center">
+                    <p className="text-slate-700">
+                        {filtered ? <>No runs match {q ? <span className="font-medium">“{q}”</span> : 'these filters'}.</>
+                                  : 'No MFC results for this cluster yet.'}
+                    </p>
+                    {filtered && (
+                        <button onClick={clear} className="mt-3 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50">
+                            Clear filters
+                        </button>)}
+                </div>)}
+
+            {!loading && !error && shown.length > 0 && view === 'recent' && (
+                <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    <Table items={recent} scored={false} />
+                </section>)}
+
+            {!loading && !error && shown.length > 0 && view === 'boards' && (
+                boards.size === 0
+                    ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-600">
+                          Nothing ranked in this selection. Unranked runs — custom cases, and runs without a
+                          verified result — appear under Recent.
+                      </div>
+                    : <div className="space-y-3">
+                          <p className="text-sm text-slate-500">
+                              Ranked per case and per hardware: 8 A100s and 36 Haswell cores are different machines,
+                              and each case is different physics, so only times within one board compare.
+                          </p>
+                          <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                              <div className="overflow-x-auto">
+                                  <table className="min-w-full text-left text-sm">
+                                      <Head scored />
+                                      {[...boards].sort(([a], [b]) => a.localeCompare(b)).map(([k, items]) => (
+                                          <tbody key={k}>
+                                              <tr>
+                                                  <th colSpan={8} scope="colgroup"
+                                                      className="border-t border-slate-200 bg-slate-50/60 px-5 py-2 text-left">
+                                                      <span className="font-semibold text-slate-800">{k}</span>
+                                                      <span className="ml-2 text-xs font-normal text-slate-500">
+                                                          {items.length} entr{items.length === 1 ? 'y' : 'ies'}
+                                                      </span>
+                                                  </th>
+                                              </tr>
+                                              {[...items]
+                                                  .sort((a, b) => (a.metric?.value ?? Infinity) - (b.metric?.value ?? Infinity))
+                                                  .map((r, i) => <Row key={r.id} r={r} rank={i} />)}
+                                          </tbody>))}
+                                  </table>
+                              </div>
+                          </section>
+                      </div>)}
 
             {open && <MfcRunDetails run={open} onClose={() => setOpen(null)} />}
         </div>);
