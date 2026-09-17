@@ -26,7 +26,7 @@ resources:
   partition: gpu
   nodes: 2                 # gpu-node1 + gpu-node2
   tasks_per_node: 4        # one rank per A100
-  walltime: "02:00:00"
+  walltime: "04:00:00"
 
 build:
   gpu: acc                 # OpenACC offload; requires NVHPC

@@ -1,163 +1,520 @@
 name: Submit jobs (raijin)
 
-# Fires only on a push under input/raijin/, and runs only on a runner labelled
-# "raijin". Cluster is the first path segment, so routing needs no file parsing
-# and a push can never reach the wrong machine.
-#
-# The runner MUST carry the "raijin" label or this never matches.
-
-# NOT wired to push yet. This workflow needs a runner carrying the "raijin"
-# label (see runs-on below) and Raijin's runner does not have one, so a push
-# trigger here would queue forever while node1.yml did the actual work --
-# every Raijin push lighting up two workflows, one of which can never start.
-#
-# node1.yml remains Raijin's push driver until that label exists. To switch:
-#   1. add the label "raijin" to Raijin's self-hosted runner
-#   2. add the push/paths block below back here
-#   3. delete node1.yml, which still deletes job specs after submitting and
-#      so makes its runs unreproducible
-#
-#   push:
-#     branches: [main]
-#     paths:
-#       - "input/raijin/**"
-on:
-  workflow_dispatch:
-    inputs:
-      suite:
-        description: "Suite to submit (HPL, MFC, or all)"
-        required: false
-        default: "all"
-      rerun:
-        description: "Re-run jobs that already have results in output/"
-        required: false
-        type: boolean
-        default: false
-
 permissions:
   contents: write
 
+on:
+  workflow_dispatch:
+    inputs:
+      rerun:
+        description: Re-run jobs that already have output
+        type: boolean
+        default: false
+  push:
+    branches:
+      - main
+    paths:
+      # Raijin has node-local /tmp; distribute and gather explicitly.
+      - "input/raijin/**"
+
+# Raijin submits from a single directory tree; two overlapping runs would
+# fight over the same job directories. submit-xenon/raijin already do this.
 concurrency:
-  # One submission at a time per cluster. Two overlapping runs would fight over
-  # the same job directories.
   group: submit-raijin
   cancel-in-progress: false
 
-env:
-  CLUSTER: raijin
-  SCRATCH_BASE: /scratch/jobs
-
 jobs:
-  submit:
+  run-slurm:
     runs-on: [self-hosted, raijin]
-    timeout-minutes: 480
+    timeout-minutes: 7200
+    if: >-
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      github.ref == 'refs/heads/main'
+
     steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 1, ref: main }
-
-      - uses: actions/setup-node@v4
-        with: { node-version: "20" }
-
-      - name: Verify runner is on the right cluster
-        run: node scripts/verify-runner-cluster.mjs "$CLUSTER"
-
-      - name: Check the runner account resolves on the compute nodes
-        # An account that exists only where the runner lives makes jobs requeue
-        # forever with Reason=BeginTime and no output at all -- a baffling
-        # symptom worth one cheap probe.
-        #
-        # This asks Slurm, not ssh. The runner is a no-sudo service account
-        # with no home directory and no keys, so an ssh probe could never
-        # work; an earlier version of this step tried exactly that and failed
-        # on every run, healthy cluster or not.
-        #
-        # --immediate means a busy cluster skips the check instead of queueing
-        # behind someone's four-hour HPL run, so this is advisory only.
-        continue-on-error: true
+      - name: Log submission context
         run: |
-          set -uo pipefail
-          me="$(id -un)"; uid="$(id -u)"
-          echo "runner account: $me ($uid)"
-          n="$(sinfo -h -N -o '%N' -p "$PARTITION" 2>/dev/null | sort -u | wc -l)"
-          if [ "${n:-0}" -eq 0 ]; then echo "  no nodes in $PARTITION; skipping"; exit 0; fi
-          out="$(srun --immediate=10 --quiet --partition="$PARTITION" \
-                      --nodes="$n" --ntasks-per-node=1 --time=00:01:00 \
-                      id -u 2>&1)" || {
-            echo "  could not get an allocation (cluster busy?); skipping"; exit 0; }
-          bad="$(echo "$out" | grep -vc "^${uid}$" || true)"
-          if [ "${bad:-0}" -ne 0 ]; then
-            echo "::warning::$me does not resolve to $uid on every node in $PARTITION:"
-            echo "$out" | sed 's/^/    /'
-          else
-            echo "  ok: $me = $uid on all $n node(s) in $PARTITION"
-          fi
+          set -euo pipefail
+          echo "Authorized actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
 
-      - name: Validate
-        run: node scripts/validate-job.mjs
+      - name: Refuse to run on a non-Raijin runner
+        # Verify the labelled runner before staging Raijin-specific binaries.
+        run: |
+          set -euo pipefail
+          me="$(hostname -s)"
+          case "$me" in
+            hpc-*) echo "ok: $me is a Raijin node" ;;
+            *) echo "refusing: this workflow is Raijin-only but landed on $me"
+               echo "Check the raijin runner label and host configuration."
+               exit 1 ;;
+          esac
 
-      - name: Stage, submit, wait
-        shell: bash
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: main
+          fetch-tags: false
+
+      - name: Prepare working and output directories
+        run: |
+          set -euo pipefail
+          mkdir -p output/raijin
+          export SLURM_TMP_BASE="/tmp/slurm_jobs_${GITHUB_RUN_ID}"
+          mkdir -p "$SLURM_TMP_BASE"
+          echo "SLURM_TMP_BASE=$SLURM_TMP_BASE" >> "$GITHUB_ENV"
+          echo "JOBSET_FAILED=0" >> "$GITHUB_ENV"
+
+      - name: Copy nested job folders to SLURM temp dir
         run: |
           set -euo pipefail
           shopt -s nullglob
-          STAGE="${SCRATCH_BASE}/${GITHUB_RUN_ID}"
-          mkdir -p "$STAGE"; echo "STAGE=$STAGE" >> "$GITHUB_ENV"
-          n=0
-          for jobdir in input/$CLUSTER/*/*/*/; do
-            [ -d "$jobdir" ] || continue
-            s="$(echo "$jobdir" | cut -d/ -f3)"
-            [ "${{ inputs.suite }}" = "all" ] || [ -z "${{ inputs.suite }}" ] || [ "${{ inputs.suite }}" = "$s" ] || continue
-            rel="${jobdir#input/$CLUSTER/}"
-            # Inputs are kept so every run stays reproducible, which means they
-            # are all still here on the next push. Skip anything that already
-            # produced results, or each push would re-run the whole history.
-            if [ "${{ inputs.rerun }}" != "true" ] && \
-               compgen -G "output/$CLUSTER/${rel}"'*.out' > /dev/null 2>&1; then
-              echo "skip  $rel (already has results; use the rerun input to force)"
-              continue
-            fi
-            dest="$STAGE/$rel"
-            mkdir -p "$dest"; cp -r "$jobdir". "$dest"/
-            echo "staged $rel"; n=$((n+1))
-          done
-          echo "STAGED=$n" >> "$GITHUB_ENV"
-          [ "$n" -gt 0 ] || { echo "no jobs for $CLUSTER"; exit 0; }
-          bash scripts/submit-jobs.sh "$STAGE" "$CLUSTER" "$GITHUB_RUN_ID"
 
-      - name: Harvest
-        if: always()
-        run: |
-          set -euo pipefail
-          [ -d "${STAGE:-}" ] || exit 0
-          for jobdir in "$STAGE"/*/*/*/; do
+          copied_any=0
+          for jobdir in input/raijin/HPL/*; do
             [ -d "$jobdir" ] || continue
-            dest="output/$CLUSTER/${jobdir#$STAGE/}"
-            mkdir -p "$dest"
-            for f in "$jobdir"*; do
-              [ -f "$f" ] || continue
-              case "$(basename "$f")" in xhpl|*.o|*.mod) continue ;; esac
-              cp "$f" "$dest"/
+            case "$(basename "$jobdir")" in _TEMPLATE*) continue ;; esac
+            for rundir in "$jobdir"/*; do
+              [ -d "$rundir" ] || continue
+              relpath="${rundir#input/raijin/}"
+              if [ "${{ inputs.rerun }}" != true ] && compgen -G "output/raijin/$relpath/*.out" > /dev/null; then
+                echo "Skipping completed $relpath"
+                continue
+              fi
+              dest="${SLURM_TMP_BASE}/${relpath}"
+              mkdir -p "$dest"
+              cp -r "$rundir"/. "$dest"/ || true
+              echo "Copied $rundir -> $dest"
+              copied_any=1
             done
-            echo "harvested ${jobdir#$STAGE/}"
           done
 
-      - name: Commit results
+          if [ "$copied_any" -eq 0 ]; then
+            echo "No job directories found under input/raijin/HPL/"
+          fi
+
+          echo "Directory structure in temp dir:"
+          command -v tree >/dev/null && tree "$SLURM_TMP_BASE" || ls -R "$SLURM_TMP_BASE"
+
+      - name: Discover SLURM nodes
+        run: |
+          set -euo pipefail
+          sinfo -N -h -t idle,alloc,mix,comp -o "%n" | sort -u > nodes.txt
+          node_count="$(wc -l < nodes.txt | tr -d ' ')"
+          echo "Found $node_count nodes:"
+          cat nodes.txt || true
+          echo "NODES_FILE=$(pwd)/nodes.txt" >> "$GITHUB_ENV"
+
+      - name: Ensure HPL binary exists in each job folder
+        run: |
+          set -euo pipefail
+
+          HPL_BIN="/home/hpc/Documents/hpl/hpl-2.3/bin/linux/xhpl"
+
+          for jobdir in "${SLURM_TMP_BASE}"/HPL/*/*; do
+            [ -d "$jobdir" ] || continue
+
+            if [ ! -x "$jobdir/xhpl" ]; then
+              echo "No xhpl in $jobdir, copying from $HPL_BIN"
+              cp "$HPL_BIN" "$jobdir/xhpl"
+            fi
+          done
+
+      - name: Distribute job folders to all cluster nodes
+        run: |
+          set -euo pipefail
+          nodes_file="${NODES_FILE:-nodes.txt}"
+          remote_base="${SLURM_TMP_BASE}"
+
+          if [ ! -s "$nodes_file" ]; then
+            echo "No nodes found; skipping distribution."
+            exit 0
+          fi
+
+          echo "Distributing $SLURM_TMP_BASE to all nodes..."
+          failures=0
+          running=0
+
+          copy_to_node() {
+            local node="$1"
+            echo "[${node}] creating $remote_base"
+            if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+              "$node" "mkdir -p '$remote_base'"
+            then
+              echo "[${node}] mkdir failed"
+              return 1
+            fi
+
+            if ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+              "$node" 'command -v rsync >/dev/null 2>&1'
+            then
+              echo "[${node}] rsync -> $remote_base"
+              rsync -a --delete \
+                -e "ssh -o BatchMode=yes -o StrictHostKeyChecking=no" \
+                "$SLURM_TMP_BASE"/ "$node:$remote_base"/
+            else
+              echo "[${node}] tar stream -> $remote_base"
+              tar -C "$SLURM_TMP_BASE" -cf - . \
+                | ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+                  "$node" "tar -C '$remote_base' -xf -"
+            fi
+          }
+
+          while IFS= read -r node; do
+            [ -n "$node" ] || continue
+            (
+              if ! copy_to_node "$node"; then
+                echo "[${node}] distribution failed"
+                exit 1
+              fi
+            ) &
+            running=$((running + 1))
+            if [ "$running" -ge 8 ]; then
+              if ! wait -n; then
+                failures=$((failures + 1))
+              fi
+              running=$((running - 1))
+            fi
+          done < "$nodes_file"
+
+          while [ "$running" -gt 0 ]; do
+            if ! wait -n; then
+              failures=$((failures + 1))
+            fi
+            running=$((running - 1))
+          done
+
+          if [ "$failures" -ne 0 ]; then
+            echo "Distribution encountered $failures failures."
+            exit 1
+          fi
+          echo "Distribution completed successfully."
+
+      - name: Submit jobs to SLURM (.sh files in each job folder)
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+
+          : > joblist.txt
+          any_submitted=0
+
+          for jobdir in "${SLURM_TMP_BASE}"/HPL/*/*; do
+            [ -d "$jobdir" ] || continue
+            jobrel="${jobdir#${SLURM_TMP_BASE}/}"
+
+            scripts_found=0
+            for script in "$jobdir"/*.sh; do
+              [ -f "$script" ] || continue
+              scripts_found=1
+              fname="$(basename "$script")"
+              echo "Submitting $fname from $jobrel..."
+              jobid="$(sbatch --parsable \
+                --chdir="$jobdir" \
+                --output="${jobdir}/${fname}-%j.out" \
+                --error="${jobdir}/${fname}-%j.err" \
+                "$script")"
+              echo "${jobrel}|${fname}:$jobid" >> joblist.txt
+              any_submitted=1
+            done
+
+            if [ "$scripts_found" -eq 0 ]; then
+              echo "No .sh scripts found in $jobrel; skipping." >&2
+            fi
+          done
+
+          if [ "$any_submitted" -eq 0 ]; then
+            echo "No jobs submitted. Nothing to do."
+          else
+            echo "Submitted jobs:"
+            cat joblist.txt || true
+          fi
+
+      - name: Wait for jobs to finish (with live completion logs)
+        run: |
+          set -euo pipefail
+
+          if [ ! -s joblist.txt ]; then
+            echo "No jobs to wait for."
+            exit 0
+          fi
+
+          awk -F'[:|]' '{print $3 "\t" $1 "\t" $2}' joblist.txt > jobmap.tsv
+          awk -F: '{print $2}' joblist.txt | sort -u > remaining.txt
+
+          total="$(wc -l < remaining.txt | tr -d ' ')"
+          completed=0
+          : "${POLL_INTERVAL:=10}"
+
+          echo "Waiting for $total SLURM jobs to complete (poll ${POLL_INTERVAL}s)..."
+
+          lookup() {
+            local id="$1"
+            awk -v id="$id" 'BEGIN{FS="\t"} $1==id {print $2"\t"$3; exit}' \
+              jobmap.tsv
+          }
+
+          final_state() {
+            local id="$1"
+            if command -v sacct >/dev/null 2>&1; then
+              local line
+              line="$(sacct -n -P -j "$id" -o State,ExitCode 2>/dev/null \
+                | tail -n1 || true)"
+              if [ -n "${line:-}" ]; then
+                echo "${line%%|*} ${line##*|}"
+                return
+              fi
+            fi
+            local info state exitcode
+            info="$(scontrol show job "$id" 2>/dev/null || true)"
+            state="$(awk -F= '/JobState=/{print $2}' <<< "$info" \
+              | awk '{print $1}')"
+            exitcode="$(awk -F= '/ExitCode=/{print $2}' <<< "$info" \
+              | awk '{print $1}')"
+            echo "${state:-UNKNOWN} ${exitcode:-N/A}"
+          }
+
+          touch active_base.txt remaining.sorted just_finished.txt
+
+          while [ -s remaining.txt ]; do
+            squeue -h -o "%i" -j "$(paste -sd, - < remaining.txt)" \
+              2>/dev/null \
+              | sed 's/_.*$//' \
+              | sort -u > active_base.txt || true
+
+            sort -u remaining.txt > remaining.sorted
+
+            if [ -s active_base.txt ]; then
+              comm -23 remaining.sorted active_base.txt > just_finished.txt
+            else
+              cp remaining.sorted just_finished.txt
+            fi
+
+            if [ -s just_finished.txt ]; then
+              while read -r jobid; do
+                [ -n "$jobid" ] || continue
+                IFS=$'\t' read -r jobrel script < <(lookup "$jobid")
+                read -r state exitcode < <(final_state "$jobid")
+                completed=$((completed + 1))
+                echo "Job $jobid ($script in $jobrel) finished: state=$state exitcode=$exitcode [$completed/$total]"
+              done < just_finished.txt
+            else
+              left="$(wc -l < remaining.txt | tr -d ' ')"
+              echo "Still running: $left/$total jobs remaining..."
+            fi
+
+            if [ -s active_base.txt ]; then
+              mv active_base.txt remaining.txt
+            else
+              : > remaining.txt
+            fi
+
+            [ -s remaining.txt ] && sleep "$POLL_INTERVAL" || true
+          done
+
+          echo "All $total jobs have left the queue."
+
+      - name: Check job exit codes and mark completed job dirs
+        run: |
+          set -euo pipefail
+
+          if [ ! -s joblist.txt ]; then
+            echo "No jobs submitted; skipping checks."
+            : > completed_dirs.txt
+            : > jobdirs_all_sorted.txt
+            exit 0
+          fi
+
+          echo "Checking SLURM job exit codes..."
+          failed_any=0
+
+          cut -d: -f1 joblist.txt | awk -F'|' '{print $1}' | sort -u \
+            > jobdirs_all_sorted.txt
+
+          : > failed_dirs.txt
+
+          while read -r line; do
+            [ -n "$line" ] || continue
+            entry="${line%%:*}"
+            jobid="${line##*:}"
+            jobrel="${entry%%|*}"
+            script="${entry##*|}"
+
+            jobinfo="$(scontrol show job "$jobid" 2>/dev/null || true)"
+            state="$(awk -F= '/JobState=/{print $2}' <<< "$jobinfo" | awk '{print $1}')"
+            exitcode="$(awk -F= '/ExitCode=/{print $2}' <<< "$jobinfo" | awk '{print $1}')"
+            if [ -z "${state:-}" ]; then
+              state="UNKNOWN"
+              exitcode="N/A"
+            fi
+
+            echo "Job $jobid ($script) in $jobrel finished with state=$state exitcode=$exitcode"
+            if [[ "$state" != "COMPLETED" ]]; then
+              failed_any=1
+              echo "$jobrel" >> failed_dirs.txt
+            fi
+          done < joblist.txt
+
+          sort -u failed_dirs.txt > failed_dirs_sorted.txt || true
+
+          comm -23 jobdirs_all_sorted.txt failed_dirs_sorted.txt \
+            > completed_dirs.txt || true
+
+          echo "Job directories with all jobs completed successfully:"
+          cat completed_dirs.txt || echo "(none)"
+
+          if [[ $failed_any -ne 0 ]]; then
+            echo "One or more jobs failed at the Slurm level."
+            echo "JOBSET_FAILED=1" >> "$GITHUB_ENV"
+          else
+            echo "JOBSET_FAILED=0" >> "$GITHUB_ENV"
+          fi
+
+      - name: Gather output files from all nodes
         if: always()
         run: |
           set -euo pipefail
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git fetch --prune origin main && git checkout -B main && git pull --no-rebase --no-edit origin main
-          # Results only. The input spec stays put so every run is reproducible.
-          git add -A output/$CLUSTER/
-          if git diff --cached --quiet; then echo "nothing to commit"; else
-            git commit -m "$CLUSTER results from run ${GITHUB_RUN_ID} [skip ci]"
-            for i in 1 2 3; do git push origin main && break; git pull --no-rebase --no-edit origin main; done
+          shopt -s nullglob
+          nodes_file="${NODES_FILE:-nodes.txt}"
+
+          mkdir -p output/raijin
+
+          if [ ! -s "$nodes_file" ]; then
+            echo "No nodes found; skipping output collection."
+            exit 0
           fi
+
+          echo "Collecting outputs from all nodes..."
+          failures=0
+          running=0
+
+          fetch_from_node() {
+            local node="$1"
+            if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+              "$node" "test -d '$SLURM_TMP_BASE'"
+            then
+              echo "[${node}] $SLURM_TMP_BASE not found; skipping."
+              return 0
+            fi
+
+            if ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+              "$node" 'command -v rsync >/dev/null 2>&1'
+            then
+              echo "[${node}] rsync -> output/raijin/"
+              rsync -a --ignore-errors \
+                -e "ssh -o BatchMode=yes -o StrictHostKeyChecking=no" \
+                "$node:$SLURM_TMP_BASE"/ output/raijin/
+            else
+              echo "[${node}] tar stream -> output/raijin/"
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+                "$node" "tar -C '$SLURM_TMP_BASE' -cf - ." \
+                | tar -C output/raijin -xf -
+            fi
+          }
+
+          while IFS= read -r node; do
+            [ -n "$node" ] || continue
+            (
+              if ! fetch_from_node "$node"; then
+                echo "[${node}] fetch failed"
+                exit 1
+              fi
+            ) &
+            running=$((running + 1))
+            if [ "$running" -ge 8 ]; then
+              if ! wait -n; then
+                failures=$((failures + 1))
+              fi
+              running=$((running - 1))
+            fi
+          done < "$nodes_file"
+
+          while [ "$running" -gt 0 ]; do
+            if ! wait -n; then
+              failures=$((failures + 1))
+            fi
+            running=$((running - 1))
+          done
+
+          if [ "$failures" -ne 0 ]; then
+            echo "Output collection encountered $failures failures."
+            exit 1
+          fi
+
+          rm -rf "${SLURM_TMP_BASE}"
+
+      - name: Prune copied binaries from output
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ -d output/raijin ]; then
+            echo "Removing HPL binaries from output/raijin/ ..."
+            find output/raijin -type f -name 'xhpl' -print -delete || true
+          fi
+
+      - name: Cleanup remote staging on all nodes
+        if: always()
+        run: |
+          set -euo pipefail
+          nodes_file="${NODES_FILE:-nodes.txt}"
+          if [ ! -s "$nodes_file" ]; then
+            echo "No nodes found; skipping remote cleanup."
+            exit 0
+          fi
+
+          echo "Removing $SLURM_TMP_BASE from all nodes..."
+          while IFS= read -r node; do
+            [ -n "$node" ] || continue
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=no \
+              "$node" "rm -rf '$SLURM_TMP_BASE'" || true
+          done < "$nodes_file"
+
+      - name: Commit results and keep input specs
+        if: always()
+        run: |
+          set -euo pipefail
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          BRANCH="${GITHUB_REF_NAME:-$(git rev-parse --abbrev-ref HEAD)}"
+          echo "Target branch: $BRANCH"
+
+          git fetch --prune origin "$BRANCH"
+          git checkout -B "$BRANCH"
+          git pull --no-rebase --no-edit origin "$BRANCH"
+
+          git add -A output/raijin/
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit after staging."
+          else
+            git commit -m "Raijin results from run ${GITHUB_RUN_ID} [skip ci]"
+          fi
+
+          for attempt in 1 2 3; do
+            if git push origin "$BRANCH"; then
+              echo "Push succeeded."
+              break
+            fi
+            echo "Push failed (attempt $attempt). Pulling and retrying..."
+            git pull --no-rebase --no-edit origin "$BRANCH"
+            if [ "$attempt" -eq 3 ]; then
+              echo "Giving up after $attempt attempts."
+              exit 1
+            fi
+          done
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
 
-      - name: Clean scratch
+      - name: Upload output as artifact
         if: always()
-        run: rm -rf "${STAGE:-/nonexistent}"
+        uses: actions/upload-artifact@v4
+        with:
+          name: raijin-job-output
+          path: output/raijin/
+
+      - name: Report job failures
+        if: always()
+        run: test "${JOBSET_FAILED:-0}" = 0

@@ -19,11 +19,8 @@ on:
       - "index.html"
       - "vite.config.ts"
   workflow_run:
-    # "Run SLURM Jobs" is node1.yml, still driving Raijin. The per-cluster
-    # workflows replace it; list all three so results deploy as soon as a run
-    # finishes rather than waiting on the next push.
+    # Deploy when either cluster has finished harvesting results.
     workflows:
-      - "Run SLURM Jobs"
       - "Submit jobs (xenon)"
       - "Submit jobs (raijin)"
     types:

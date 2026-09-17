@@ -63,7 +63,6 @@ installed:
 
 pending:
   # Tracked here so validation can say exactly what is missing.
-  - mfc             # building into /work/mfc; /apps/mfc is still an empty dir
   - hpl-nvidia      # /apps/benchmarks/hpl-nvidia is empty; needs the NGC image
   - container-rt    # no apptainer/enroot, so the NGC HPL container cannot run
   - modules         # no Lmod or environment-modules installed
