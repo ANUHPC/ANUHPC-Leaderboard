@@ -1,0 +1,119 @@
+{
+  "id": "raijin/HPL/VarSweep/3 nodes 60n192nb2p8q",
+  "suite": "HPL",
+  "group": "VarSweep",
+  "run": "3 nodes 60n192nb2p8q",
+  "cluster": "raijin",
+  "clusterSource": "path (confirmed by output)",
+  "metric": {
+    "key": "gflops",
+    "value": 251.14,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 573.41,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    }
+  ],
+  "config": {
+    "N": 60000,
+    "NB": 192,
+    "P": 2,
+    "Q": 8,
+    "variant": "cpu",
+    "nodes": null,
+    "tasks_per_node": null,
+    "cpus_per_task": null,
+    "partition": null
+  },
+  "provenance": {
+    "started": "Thu Sep  3 03:36:10 2026",
+    "ended": "Thu Sep  3 03:45:43 2026"
+  },
+  "status": "ok",
+  "notes": [],
+  "raw": {
+    "run.sh-231.out": "/raw/raijin/HPL/VarSweep/3 nodes 60n192nb2p8q/run.sh-231.out",
+    "run.sh-231.err": "/raw/raijin/HPL/VarSweep/3 nodes 60n192nb2p8q/run.sh-231.err"
+  },
+  "best": {
+    "gflops": 251.14,
+    "N": 60000,
+    "NB": 192,
+    "timeSec": 573.41
+  },
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "run.sh-231.out",
+    "runs": [
+      {
+        "tv": "WR02C2C2",
+        "N": 60000,
+        "NB": 192,
+        "P": 2,
+        "Q": 8,
+        "timeSec": 573.41,
+        "gflops": 251.14,
+        "startTime": "Thu Sep  3 03:36:10 2026",
+        "endTime": "Thu Sep  3 03:45:43 2026",
+        "residual": 0.00288903527,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    }
+  },
+  "err": {
+    "file": "run.sh-231.err",
+    "size": 5528
+  },
+  "detail": {
+    "dat": null,
+    "job": null,
+    "out": {
+      "file": "run.sh-231.out",
+      "runs": [
+        {
+          "tv": "WR02C2C2",
+          "N": 60000,
+          "NB": 192,
+          "P": 2,
+          "Q": 8,
+          "timeSec": 573.41,
+          "gflops": 251.14,
+          "startTime": "Thu Sep  3 03:36:10 2026",
+          "endTime": "Thu Sep  3 03:45:43 2026",
+          "residual": 0.00288903527,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      }
+    },
+    "err": {
+      "file": "run.sh-231.err",
+      "size": 5528
+    },
+    "best": {
+      "gflops": 251.14,
+      "N": 60000,
+      "NB": 192,
+      "timeSec": 573.41
+    }
+  }
+}
