@@ -71,12 +71,16 @@ NODES=$(y "$JOB" resources.nodes 1)
 TPN=$(y "$JOB" resources.tasks_per_node 1)
 WALL=$(y "$JOB" resources.walltime 01:00:00)
 GPU=$(y "$JOB" build.gpu none)
+# job.yml uses 'none'; the pinned MFC CLI spells disabled offload 'no'.
+MFC_GPU_MODE="$GPU"
+[ "$GPU" != none ] || MFC_GPU_MODE=no
 COPT=$(y "$JOB" build.case_optimization false)
 GBPP=$(y "$JOB" tuning.gbpp 16)
 # Ranked runs need only pre_process and simulation -- grind comes from
 # simulation. A visualisation run also needs post_process, which turns the
 # raw output into the Silo/binary database ./mfc.sh viz reads.
 VIZ=$(y "$JOB" visualize false)
+PREVIEW=$(y "$JOB" preview)
 TARGETS="pre_process simulation"
 if [ "$VIZ" = "true" ]; then
   TARGETS="$TARGETS post_process"
@@ -115,9 +119,11 @@ fi
 # --- the case comes from the pinned checkout unless one was submitted -------
 if [ -f "$JOB_DIR/case.py" ]; then
   CASE_SOURCE=custom
+  CASE_ARGS=()
   echo "render: using the submitted case.py — this run is UNRANKED"
 else
   CASE_SOURCE=pinned
+  CASE_ARGS=(--gbpp "$GBPP")
   [ -n "$CASE" ] || die "job.yml sets no case, and no case.py was supplied"
   # Resolve the slug through a real parser, not grep: the case list is a YAML
   # sequence of maps and "grep -A1 slug:" returns the wrong path the moment
@@ -154,7 +160,7 @@ cd "$TREE"
 # --no-build keeps the job off the shared tree's build/: the binaries are
 # already there and a job must never recompile them underneath another job.
 set -x
-exec ./mfc.sh run "$JOB_DIR/case.py" \
+./mfc.sh run "$JOB_DIR/case.py" \
   -e batch \
   -c "$TEMPLATE" \
   -t $TARGETS \
@@ -163,6 +169,13 @@ exec ./mfc.sh run "$JOB_DIR/case.py" \
   -o "$JOB_DIR/summary.yaml" \
   --no-build \
   --clean \
-  --gpu "$GPU" \
+  --gpu "$MFC_GPU_MODE" \
   --wait \
-  -- --gbpp "$GBPP"
+  -- "${CASE_ARGS[@]}"
+
+# Optional 1D/2D preview, generated headlessly by MFC's own visualization tool.
+# 3D volume movies use suites/MFC/video.sh instead of this slice renderer.
+if [ -n "$PREVIEW" ]; then
+  ./mfc.sh viz "$JOB_DIR" --var "$PREVIEW" --step all --mp4 --fps 20 --output "$JOB_DIR"
+  ./mfc.sh viz "$JOB_DIR" --var "$PREVIEW" --step last --png --output "$JOB_DIR"
+fi

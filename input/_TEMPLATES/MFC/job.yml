@@ -1,47 +1,20 @@
-# MFC leaderboard entry.
-#
-# Copy this directory to  input/<cluster>/MFC/<your-name>/<run-name>/ and edit.
-# Push to main; the runner picks it up, submits it, and the result appears on
-# the board. Validation runs on the pull request, so mistakes are caught before
-# anything queues.
-#
-# MFC is scored on GRIND TIME in ns/gp/eq/rhs, and LOWER IS BETTER — the
-# opposite of HPL. Published reference points: GH200 0.32, H100 SXM5 0.38.
-
+# Small ranked CPU benchmark. Copy ONLY this file to:
+# input/xenon/MFC/<your-name>/<new-run-name>/job.yml
+# Commit to main (or merge a PR) to submit through GitHub Actions.
+# No case.py or run.sh is needed. See README.md in this template directory.
 suite: MFC
-
-# NOTE: the cluster is NOT set here. It comes from the directory you copy this
-# into — input/<cluster>/<suite>/<your-name>/<run-name>/. Filing a job under
-# input/xenon/ is what routes it to the Xenon runner.
-
-
-# Which benchmark case. Must be one of the seven in suites/MFC/suite.yml.
-# The case is fixed so entries are comparable; you compete on how you run it.
 case: 5eq_rk3_weno3_hllc
-
+visualize: false
 resources:
-  # cpu -> cpu-node1 + cpu-node2 (Haswell)   gpu -> gpu-node1 + gpu-node2 (Zen 3)
-  #
-  # "all" is rejected: MFC is compiled -march=native and the two node types are
-  # different microarchitectures, so one binary cannot span them. Each partition
-  # gets the build made for its hardware.
-  partition: cpu
-  nodes: 1
-  tasks_per_node: 8       # on gpu, use 4 — one rank per A100
+  partition: cpu          # haswell build; never use partition all
+  nodes: 1                # 1 or 2
+  tasks_per_node: 4        # total ranks = nodes * tasks_per_node
   walltime: "01:00:00"
-
 build:
-  # none | acc  (acc = OpenACC offload, gpu partition only).
-  # acc needs NVHPC, which is not installed yet — the current builds are CPU-only.
   gpu: none
-  toolchain: gcc-ompi5    # see clusters/xenon/toolchains.yml
-
-  # case_optimization is NOT available. It recompiles MFC with the case baked
-  # in, and jobs share one checkout per architecture, so it would rewrite the
-  # tree every other job reads from. Setting it true makes the job fail with
-  # that explanation rather than being silently ignored.
-
+  toolchain: gcc-ompi5
 tuning:
-  # GB of memory per rank. Sets the problem size:
-  #   cells ~= 500000 x ranks x gbpp
-  gbpp: 16
+  gbpp: 1                 # modest CPU grid; increase deliberately
+# Grind time: ns/gp/eq/rhs, LOWER is better.
+# For GPUs use gpu/job.yml. For SCC26 Problem 3 use practice-problem3/.
+# case_optimization and OpenMP GPU offload are not supported by this pipeline.

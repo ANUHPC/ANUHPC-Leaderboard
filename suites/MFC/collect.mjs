@@ -138,6 +138,7 @@ export async function collect(ctx) {
       err: errRaw ? { file: errName, size: errRaw.length } : null,
     },
     rawFiles: [caseName, sumName, timeName, outName, errName, jobName,
+      ...files.filter((f) => /\.(png|mp4)$/i.test(f)),
       ...["mfc-provenance.json", "mfc-status.yml"].filter((f) => files.includes(f))].filter(Boolean),
   };
 }

@@ -6,7 +6,11 @@ Put your run in your own folder:
 input/xenon/<suite>/<your-name>/<run-name>/
 ```
 
-Copy a template to start, then rename the run script for this cluster:
+For HPL, copy a template and rename its run script for this cluster.
+For MFC, use [the MFC instructions](../_TEMPLATES/MFC/README.md); it needs
+`job.yml` and optionally `case.py`, not a run script.
+
+HPL example:
 
 ```bash
 cp -r input/_TEMPLATES/HPL input/xenon/HPL/<your-name>/<run-name>
@@ -24,7 +28,7 @@ exist here, and forces MPI over Ethernet instead of the 56 Gb fabric.
 |-------|-------|----------|--------|
 | `HPL` | CPU | `cpu` partition, 36 physical cores | ready |
 | `HPL_NVIDIA` | GPU | `gpu` partition, 4-8 x A100-SXM4-40GB | needs a GPU HPL binary |
-| `MFC` | — | `cpu` or `gpu` | being built into /apps |
+| `MFC` | CPU / GPU | `cpu` or `gpu` | prebuilt; [GitHub templates](../_TEMPLATES/MFC/README.md) |
 
 `HPL` and `HPL_NVIDIA` are **separate boards**, not one board with a filter.
 GFLOP/s from 4 x A100 and from 36 Haswell cores are not the same measurement,
@@ -35,9 +39,9 @@ on cpu-node2 and commits results to `output/xenon/`. Nothing else needs doing.
 
 | Partition | Nodes | Per node |
 |-----------|-------|----------|
-| `cpu` | cpu-node2 | 72 threads (36 physical cores), 500 GB |
-| `gpu` | gpu-node1, gpu-node2 | 64 threads, 2 TB, 4x A100-SXM4-40GB |
-| `all` | all three | |
+| `cpu` | cpu-node1, cpu-node2 | 34 / 36 available physical cores, 500 GB each |
+| `gpu` | gpu-node1, gpu-node2 | 32 physical cores, 4x A100-SXM4-40GB each |
+| `all` | all four | Not supported for MFC: mixed CPU architectures |
 
 Xenon and Raijin are ranked separately — they measure different hardware.
 

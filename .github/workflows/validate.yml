@@ -34,7 +34,7 @@ jobs:
         run: node scripts/validate-job.mjs
 
       - name: Verify MFC ranking and provenance
-        run: node --test suites/MFC/collect.test.mjs
+        run: node --test suites/MFC/collect.test.mjs scripts/lib/mfc-decomp.test.mjs
 
       - name: Collector smoke test
         # Proves the collector still parses every committed run before this

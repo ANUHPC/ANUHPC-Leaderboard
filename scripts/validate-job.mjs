@@ -173,6 +173,10 @@ async function main() {
     const pname = r.partition;
     const part = pname ? cluster.partitions[pname] : null;
     if (suiteName === "MFC") {
+      if (job.preview != null) {
+        if (typeof job.preview !== "string" || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(job.preview)) err(where, "preview must name one output variable, for example alpha1 or pres");
+        if (job.visualize !== true) err(where, "preview needs visualize: true to generate Silo data");
+      }
       if (pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
       if (job.build?.case_optimization) err(where, "case_optimization would modify the shared MFC build and is unsupported");
       const gpu = job.build?.gpu ?? "none";

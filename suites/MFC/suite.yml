@@ -23,7 +23,7 @@ reference:
 
 inputs:
   # job.yml is the entry. case.py is NOT required: for a ranked run the case
-  # comes from the pinned checkout in /apps/mfc, so everyone runs byte-identical
+  # comes from the pinned checkout in /work/mfc/current, so everyone runs byte-identical
   # physics and only names the case they want.
   required: [job.yml]
   # Supplying your own case.py is allowed, but it makes the run UNRANKED — it is
