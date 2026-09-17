@@ -173,7 +173,7 @@ endgroup
 
 if [ ! -s "$joblist" ]; then
   if [ "$rejected" -gt 0 ]; then
-    gh_error "$rejected job(s) were staged but the scheduler refused every one — nothing ran"
+    gh_error "$rejected job(s) failed during submission or execution; see the errors above"
     exit 1
   fi
   echo "No asynchronous jobs remain (MFC submissions wait for completion)."
@@ -220,6 +220,7 @@ echo "All jobs have left the queue."
 } >> "$SUMMARY"
 
 rc=0; failed=0; ok=0
+[ "$rejected" -eq 0 ] || rc=1
 while IFS= read -r line; do
   entry="${line%:*}"; jid="${line##*:}"
   dir="${entry%%|*}"; rest="${entry#*|}"; suite="${rest%%|*}"; label="${rest#*|}"

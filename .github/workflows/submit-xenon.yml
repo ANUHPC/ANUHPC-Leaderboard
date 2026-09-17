@@ -145,7 +145,11 @@ jobs:
           git add -A output/$CLUSTER/
           if git diff --cached --quiet; then echo "nothing to commit"; else
             git commit -m "$CLUSTER results from run ${GITHUB_RUN_ID} [skip ci]"
-            for i in 1 2 3; do git push origin main && break; git pull --no-rebase --no-edit origin main; done
+            for i in 1 2 3; do
+              git push origin main && break
+              [ "$i" -lt 3 ] || exit 1
+              git pull --no-rebase --no-edit origin main
+            done
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}

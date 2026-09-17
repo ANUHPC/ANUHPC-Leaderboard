@@ -163,6 +163,6 @@ exec ./mfc.sh run "$JOB_DIR/case.py" \
   -o "$JOB_DIR/summary.yaml" \
   --no-build \
   --clean \
-  $([ "$GPU" != none ] && echo "--gpu $GPU") \
+  --gpu "$GPU" \
   --wait \
   -- --gbpp "$GBPP"
