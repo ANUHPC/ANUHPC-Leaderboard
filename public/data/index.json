@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T02:05:53.801Z",
+  "generatedAt": "2026-09-17T02:20:34.638Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 1
+      "count": 2
     }
   ],
   "suites": [
@@ -46,10 +46,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 138,
+      "count": 139,
       "countByCluster": {
         "raijin": 137,
-        "xenon": 1
+        "xenon": 2
       }
     },
     {
@@ -5533,6 +5533,57 @@
       "hasErr": true
     },
     {
+      "id": "xenon/HPL/Ayush/n150k-36core-nb192",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "n150k-36core-nb192",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "metric": {
+        "key": "gflops",
+        "value": 793.12,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 2836.96,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        }
+      ],
+      "config": {
+        "N": 150000,
+        "NB": 192,
+        "P": 2,
+        "Q": 2,
+        "variant": "cpu",
+        "nodes": 1,
+        "tasks_per_node": 4,
+        "cpus_per_task": 9,
+        "partition": "cpu"
+      },
+      "status": "ok",
+      "notes": [],
+      "best": {
+        "gflops": 793.12,
+        "N": 150000,
+        "NB": 192,
+        "timeSec": 2836.96
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true,
+      "rank": 1
+    },
+    {
       "id": "xenon/HPL/baseline/xenon-cpu-node2-36core",
       "suite": "HPL",
       "group": "baseline",
@@ -5581,7 +5632,7 @@
         "testsSkipped": 0
       },
       "hasErr": true,
-      "rank": 1
+      "rank": 2
     }
   ]
 }
