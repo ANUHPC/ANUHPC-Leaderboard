@@ -10,7 +10,11 @@
 
 export PATH=/apps/openmpi/5.0.10/bin:$PATH
 export LD_LIBRARY_PATH=/apps/openmpi/5.0.10/lib:/apps/ucx/1.22.0/lib:${LD_LIBRARY_PATH:-}
-export UCX_NET_DEVICES=mlx5_0:1
+# The IB device is named for its PCI slot: ibp129s0 on the cpu nodes,
+# ibp161s0 on the gpu nodes. Pinning UCX_NET_DEVICES to one name is wrong on
+# half the cluster, so leave it unset and let UCX autodetect (which Raijin
+# measured as faster anyway). UCX_TLS is what keeps traffic off the 1 GbE net.
+export UCX_TLS=rc,sm,self
 export PMIX_MCA_pcompress_base_silence_warning=1
 # No CUDA on the cpu partition; stop OpenMPI probing for it.
 export OMPI_MCA_accelerator=^cuda

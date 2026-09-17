@@ -54,9 +54,14 @@ export UCX_PREFIX=/apps/ucx/1.22.0
 export PATH="$OMPI_PREFIX/bin:$PATH"
 export LD_LIBRARY_PATH="$OMPI_PREFIX/lib:$UCX_PREFIX/lib:${'${LD_LIBRARY_PATH:-}'}"
 
-## Pin MPI to the 56 Gb FDR fabric. Without this it silently falls back to the
-## 1 GbE management network and every multi-node number is meaningless.
-export UCX_NET_DEVICES=mlx5_0:1
+## Force MPI onto the 56 Gb FDR fabric. UCX_TLS is what does this: with rc
+## (RDMA) and no tcp in the list, UCX fails loudly rather than silently
+## dropping to the 1 GbE management network and reporting a meaningless number.
+##
+## Do NOT add UCX_NET_DEVICES. The IB device is named for its PCI slot and the
+## name differs by node type (ibp129s0 on cpu, ibp161s0 on gpu), so any single
+## value is wrong on half the cluster. Autodetect also benchmarked faster on
+## Raijin. If you ever must pin it, name every device: ibp129s0:1,ibp161s0:1
 export UCX_TLS=rc,sm,self
 export OMPI_MCA_pml=ucx
 
@@ -72,7 +77,7 @@ export UCX_MEMTYPE_CACHE=n
 echo "host        : $(hostname -s)"
 echo "nodes/tasks : ${nodes} x ${tasks_per_node}"
 echo "mpirun      : $(command -v mpirun || echo NOT-FOUND)"
-echo "fabric      : ${'${UCX_NET_DEVICES}'}"
+echo "fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\n' ' ')(UCX_TLS=${'${UCX_TLS}'})"
 echo
 
 % for target in targets:

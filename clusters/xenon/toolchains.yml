@@ -13,8 +13,15 @@ toolchains:
     mpi:
       prefix: /apps/openmpi/5.0.10
       launcher: mpirun
-    env:
-      UCX_NET_DEVICES: mlx5_0:1
+    # UCX_NET_DEVICES is deliberately NOT pinned. The IB device is named after
+    # its PCI slot and that name differs by node type:
+    #     ibp129s0 -> cpu-node1, cpu-node2
+    #     ibp161s0 -> gpu-node1, gpu-node2
+    # so no single value is correct cluster-wide, and a wrong one makes UCX
+    # warn and fall back. Raijin measured autodetect FASTER than pinning
+    # anyway (47.3 vs 42.7 Gbit/s) -- see output/raijin/HPL/Ayush/ICX-1/run.sh.
+    # Use UCX_TLS to force RDMA; that is what actually prevents a TCP fallback.
+    env: {}
 
   nvhpc-acc:
     description: NVIDIA HPC SDK, OpenACC offload for the A100 nodes
