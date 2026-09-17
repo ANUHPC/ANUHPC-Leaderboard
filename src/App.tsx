@@ -16,11 +16,6 @@ const suiteDetails = {
         description: 'GPU-accelerated High Performance Linpack benchmark leveraging NVIDIA CUDA cores for maximum computational throughput.',
         background:"bg-green-50",
     },
-    IQTree: {
-        name: 'IQ-TREE (Phylogenetics)',
-        description: 'Maximum-likelihood phylogenetic tree inference benchmark using IQ-TREE. Measures runtime and log-likelihood across clusters.',
-        background:"bg-purple-50",
-    },
     MFC: {
         name: 'MFC (Multi-Flow Component)',
         description: 'Multi-Flow Component benchmark for evaluating distributed flow processing performance and throughput across compute nodes.',

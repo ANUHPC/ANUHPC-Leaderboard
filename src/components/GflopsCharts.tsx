@@ -56,7 +56,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
 };
 
 export const GflopsCharts: React.FC<GflopsChartsProps> = ({ runs }) => {
-    // Flatten HPL-style runs only (skip IQTree and other non-GFLOPS suites)
+    // Flatten HPL-style runs only (skip suites that do not report GFLOPS)
     const chartData = useMemo(() => {
         const points: {
             N: number;
@@ -80,7 +80,7 @@ export const GflopsCharts: React.FC<GflopsChartsProps> = ({ runs }) => {
         return points;
     }, [runs]);
 
-    // If no HPL-style data (e.g. IQTree suite), render nothing
+    // If no HPL-style data, render nothing
     if (chartData.length === 0) return null;
 
     // Compute axis extents with padding

@@ -5,22 +5,13 @@ export interface HplBest {
     timeSec: number;
 }
 
-export interface IqtreeBest {
-    logL: number;
-    BIC: number | null;
-    model: string | null;
-    numTaxa: number | null;
-    numSites: number | null;
-    timeSec: number;
-}
-
 export interface BenchmarkRun {
     id: string;
     suite: string;
     group: string;
     run: string;
     cluster: string | null;
-    best: HplBest | IqtreeBest | null;
+    best: HplBest | null;
     outSummary: {
         testsTotal: number | null;
         testsPassed: number | null;
@@ -57,11 +48,11 @@ export interface BenchmarkData {
     runs: BenchmarkRun[];
 }
 
-export type BenchmarkSuite = 'HPL' | 'HPL_NVIDIA' | 'IQTree' | 'MFC';
+export type BenchmarkSuite = 'HPL' | 'HPL_NVIDIA' | 'MFC';
 
 export interface SuiteInfo {
     id: BenchmarkSuite;
     name: string;
     description: string;
-    type: 'CPU' | 'GPU' | 'Phylogenetics' | 'Multi-Flow';
+    type: 'CPU' | 'GPU' | 'Multi-Flow';
 }

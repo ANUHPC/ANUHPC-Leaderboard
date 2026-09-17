@@ -51,8 +51,6 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
 
     const getPrimaryMetric = (run: BenchmarkRun): number => {
         if (!run.best) return -Infinity;
-        // IQTree: higher log-likelihood is better
-        if ('logL' in run.best) return run.best.logL ?? -Infinity;
         if ('gflops' in run.best) return run.best.gflops ?? -Infinity;
         return -Infinity;
     };
@@ -144,18 +142,6 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
 
     const renderPrimaryMetric = (run: BenchmarkRun) => {
         if (!run.best) return <span className="text-gray-400">N/A</span>;
-        if ('logL' in run.best) {
-            return (
-                <>
-                    <div className="text-sm font-bold text-purple-600">
-                        lnL = {run.best.logL?.toFixed(2) ?? 'N/A'}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                        {run.best.model ?? ''}
-                    </div>
-                </>
-            );
-        }
         const best = run.best as import('../types').HplBest;
         return (
             <>
@@ -171,15 +157,6 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
 
     const renderSizeColumn = (run: BenchmarkRun) => {
         if (!run.best) return <span className="text-gray-400">N/A</span>;
-        if ('logL' in run.best) {
-            const b = run.best as import('../types').IqtreeBest;
-            return (
-                <>
-                    <div className="text-sm text-gray-900">{b.numTaxa ?? '?'} taxa</div>
-                    <div className="text-xs text-gray-500">{b.numSites ?? '?'} sites</div>
-                </>
-            );
-        }
         const b = run.best as import('../types').HplBest;
         return (
             <>

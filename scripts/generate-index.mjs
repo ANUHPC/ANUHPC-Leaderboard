@@ -41,20 +41,7 @@ function extractHplBest(data) {
     };
 }
 
-function extractIqtreeBest(data) {
-    if (!data.best) return null;
-    return {
-        logL:     data.best.logL    ?? null,
-        BIC:      data.best.BIC     ?? null,
-        model:    data.best.model   ?? null,
-        numTaxa:  data.best.numTaxa ?? null,
-        numSites: data.best.numSites ?? null,
-        timeSec:  data.best.timeSec  ?? null,
-    };
-}
-
-function extractBest(suite, data) {
-    if (suite === 'IQTree') return extractIqtreeBest(data);
+function extractBest(_suite, data) {
     return extractHplBest(data);
 }
 

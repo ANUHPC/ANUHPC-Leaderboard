@@ -167,18 +167,15 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
     // A run is an "error" if it produced no valid results (best is null)
     // Having stderr output (hasErr) is normal — MPI binding info goes there
     const errorRuns = useMemo(
-        () => clusterFilteredRuns.filter((r: any) => {
-            if (suite === 'IQTree') return r.best == null;
-            return r.best == null && (r.outSummary == null || r.outSummary.testsPassed === 0);
-        }),
+        () => clusterFilteredRuns.filter((r: any) =>
+            r.best == null && (r.outSummary == null || r.outSummary.testsPassed === 0)
+        ),
         [clusterFilteredRuns, suite]
     );
 
     const validPerfRuns = useMemo(
         () =>
             clusterFilteredRuns.filter((r: any) => {
-                // IQTree runs are valid even without gflops
-                if (suite === 'IQTree') return r.best != null;
                 const g = getGflops(r);
                 return Number.isFinite(g);
             }),
