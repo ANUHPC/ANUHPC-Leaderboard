@@ -1,7 +1,7 @@
-import React from 'react';
-import { Cpu, Zap, TreePine, Home, GitBranch } from 'lucide-react';
-import { Link } from 'react-router';
-import type { BenchmarkSuite, SuiteInfo } from '../types';
+import React, { useEffect, useState } from 'react';
+import { Cpu, Zap, TreePine, Home, GitBranch, Server } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router';
+import type { BenchmarkSuite, SuiteInfo, ClusterInfo } from '../types';
 
 interface NavigationProps {
     activeSuite: BenchmarkSuite;
@@ -50,6 +50,27 @@ const getIcon = (type: string) => {
 };
 
 export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
+    // Clusters come from the data, not a hardcoded list: adding a third cluster
+    // should need no change here.
+    const [clusters, setClusters] = useState<ClusterInfo[]>([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const activeCluster = searchParams.get('cluster') ?? 'all';
+
+    useEffect(() => {
+        fetch(`${import.meta.env.BASE_URL}data/index.json`)
+            .then((r) => (r.ok ? r.json() : null))
+            .then((d) => setClusters(d?.clusters ?? []))
+            .catch(() => setClusters([]));
+    }, []);
+
+    const selectCluster = (name: string) => {
+        const next = new URLSearchParams(searchParams);
+        if (name === 'all') next.delete('cluster');
+        else next.set('cluster', name);
+        // The cluster is in the URL so a board is linkable and survives reload.
+        setSearchParams(next, { replace: false });
+    };
+
     return (
         <nav className="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,7 +120,56 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
                         <span>GitHub Org</span>
                     </a>
                 </div>
+
+                {/* Cluster tabs. Results are ranked per cluster because the two
+                    measure different hardware, so this is a board switch rather
+                    than a filter. */}
+                {clusters.length > 0 && (
+                    <div className="flex items-center gap-2 pb-3 border-t border-white/5 pt-3">
+                        <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-slate-500 pr-1">
+                            <Server className="w-3.5 h-3.5" />
+                            Cluster
+                        </span>
+                        <div className="flex space-x-1 overflow-x-auto">
+                            <button
+                                onClick={() => selectCluster('all')}
+                                className={tabClass(activeCluster === 'all')}
+                            >
+                                All clusters
+                                <span className="ml-1.5 text-[11px] opacity-60">
+                                    {clusters.reduce((n, c) => n + (c.count ?? 0), 0)}
+                                </span>
+                            </button>
+                            {clusters.map((c) => (
+                                <button
+                                    key={c.name}
+                                    onClick={() => selectCluster(c.name)}
+                                    title={c.description || undefined}
+                                    className={tabClass(activeCluster === c.name)}
+                                >
+                                    {c.label ?? c.name}
+                                    <span className="ml-1.5 text-[11px] opacity-60">{c.count ?? 0}</span>
+                                    {c.derived && (
+                                        <span
+                                            className="ml-1.5 text-[10px] px-1 py-0.5 rounded bg-amber-400/15 text-amber-300"
+                                            title="Node specs inferred from past runs, not measured"
+                                        >
+                                            est
+                                        </span>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </nav>
     );
 };
+
+const tabClass = (active: boolean) =>
+    `flex items-center px-3 py-1.5 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
+        active
+            ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30'
+            : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
+    }`;

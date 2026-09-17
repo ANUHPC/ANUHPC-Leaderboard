@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router';
 import type { BenchmarkData, BenchmarkSuite } from '../types';
 import { LeaderboardTable } from './LeaderboardTable';
 import {
@@ -39,7 +40,14 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
 
     // Filters and controls
     const [searchQuery, setSearchQuery] = useState('');
-    const [clusterFilter, setClusterFilter] = useState<string>('all');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const clusterFilter = searchParams.get('cluster') ?? 'all';
+    const setClusterFilter = (name: string) => {
+        const next = new URLSearchParams(searchParams);
+        if (name === 'all') next.delete('cluster');
+        else next.set('cluster', name);
+        setSearchParams(next, { replace: false });
+    };
     const [statusFilter, setStatusFilter] = useState<StatusFilter>('pass');
 
     // Sort options (no toggle, explicit options only)
@@ -661,7 +669,19 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                                 No Data Available
                             </h3>
                             <p className="text-gray-600">
-                                No benchmark runs found for {suiteName}.
+                                No benchmark runs found for {suiteName}
+                                {clusterFilter !== 'all' && <> on <span className="font-medium">{clusterFilter}</span></>}.
+                                {clusterFilter !== 'all' && (
+                                    <>
+                                        {' '}
+                                        <button
+                                            onClick={() => setClusterFilter('all')}
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            Show all clusters
+                                        </button>
+                                    </>
+                                )}
                             </p>
                         </div>
                     )

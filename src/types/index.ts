@@ -30,8 +30,30 @@ export interface BenchmarkRun {
     hasErr: boolean;
 }
 
+export interface ClusterInfo {
+    name: string;
+    label?: string;
+    description?: string;
+    status?: string;
+    /** Node specs inferred from committed output rather than measured. */
+    derived?: boolean;
+    nodes?: number;
+    partitions?: string[];
+    count?: number;
+}
+
+export interface SuiteMeta {
+    name: string;
+    description?: string;
+    metric?: { key: string; label?: string; unit?: string; direction?: 'higher' | 'lower'; precision?: number } | null;
+    reference?: { device: string; [k: string]: unknown }[] | null;
+    count?: number;
+}
+
 export interface BenchmarkData {
     generatedAt: string;
+    clusters?: ClusterInfo[];
+    suites?: SuiteMeta[];
     runs: BenchmarkRun[];
 }
 

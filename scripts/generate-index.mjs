@@ -1,7 +1,17 @@
 #!/usr/bin/env node
 /**
  * Generates public/data/index.json by scanning all run.json files under:
- *   public/data/runs/<suite>/<group>/<run>/run.json
+ *   public/data/runs/<cluster>/<suite>/<group>/<run>/run.json
+ *
+ * The cluster level was added when the leaderboard started serving both Raijin
+ * and Xenon. Results are NOT comparable across clusters, so the cluster is part
+ * of the path and part of every run id.
+ *
+ * This script only rebuilds the `runs` array. The `clusters` and `suites`
+ * blocks are written by scripts/collect.mjs on the main branch and carried
+ * through unchanged — they hold suite metric labels, units and directions that
+ * cannot be reconstructed from run.json alone. Overwriting them is what made
+ * the board render empty.
  *
  * Usage:
  *   node scripts/generate-index.mjs
@@ -65,37 +75,53 @@ function extractOutSummary(data) {
 
 function scanRuns() {
     const runs = [];
+    if (!isDir(RUNS_DIR)) {
+        console.warn(`  [warn] ${RUNS_DIR} does not exist`);
+        return runs;
+    }
 
-    for (const suite of readdirSync(RUNS_DIR).sort()) {
-        const suitePath = join(RUNS_DIR, suite);
-        if (!isDir(suitePath)) continue;
+    for (const cluster of readdirSync(RUNS_DIR).sort()) {
+        const clusterPath = join(RUNS_DIR, cluster);
+        if (!isDir(clusterPath) || cluster.startsWith('_')) continue;
 
-        for (const group of readdirSync(suitePath).sort()) {
-            if (group.startsWith('_')) continue; // skip _OLD, _archive, etc.
-            const groupPath = join(suitePath, group);
-            if (!isDir(groupPath)) continue;
+        for (const suite of readdirSync(clusterPath).sort()) {
+            const suitePath = join(clusterPath, suite);
+            if (!isDir(suitePath)) continue;
 
-            for (const run of readdirSync(groupPath).sort()) {
-                const runPath = join(groupPath, run);
-                if (!isDir(runPath)) continue;
+            for (const group of readdirSync(suitePath).sort()) {
+                if (group.startsWith('_')) continue; // _OLD, _archive, etc.
+                const groupPath = join(suitePath, group);
+                if (!isDir(groupPath)) continue;
 
-                const runJsonPath = join(runPath, 'run.json');
-                if (!existsSync(runJsonPath)) continue;
+                for (const run of readdirSync(groupPath).sort()) {
+                    const runPath = join(groupPath, run);
+                    if (!isDir(runPath)) continue;
 
-                try {
-                    const data = JSON.parse(readFileSync(runJsonPath, 'utf-8'));
-                    runs.push({
-                        id:          `${suite}/${group}/${run}`,
-                        suite,
-                        group,
-                        run,
-                        cluster:     data.cluster     ?? null,
-                        best:        extractBest(suite, data),
-                        outSummary:  extractOutSummary(data),
-                        hasErr:      data.hasErr ?? (data.err != null && data.err !== false),
-                    });
-                } catch (e) {
-                    console.warn(`  [warn] Skipping ${runJsonPath}: ${e.message}`);
+                    const runJsonPath = join(runPath, 'run.json');
+                    if (!existsSync(runJsonPath)) continue;
+
+                    try {
+                        const data = JSON.parse(readFileSync(runJsonPath, 'utf-8'));
+                        runs.push({
+                            // Cluster leads the id: two clusters can hold a run
+                            // with the same suite/group/run name.
+                            id:          `${cluster}/${suite}/${group}/${run}`,
+                            suite,
+                            group,
+                            run,
+                            cluster:     data.cluster ?? cluster,
+                            metric:      data.metric ?? null,
+                            secondary:   data.secondary ?? [],
+                            config:      data.config ?? {},
+                            status:      data.status ?? null,
+                            rank:        data.rank ?? null,
+                            best:        extractBest(suite, data),
+                            outSummary:  extractOutSummary(data),
+                            hasErr:      data.hasErr ?? (data.err != null && data.err !== false),
+                        });
+                    } catch (e) {
+                        console.warn(`  [warn] Skipping ${runJsonPath}: ${e.message}`);
+                    }
                 }
             }
         }
@@ -104,11 +130,54 @@ function scanRuns() {
     return runs;
 }
 
+// Rank within each (cluster, suite): HPL wants the largest number and MFC the
+// smallest, and the two clusters measure different hardware.
+function applyRanks(runs, suites) {
+    const dirOf = {};
+    for (const s of suites || []) if (s.name) dirOf[s.name] = s.metric?.direction ?? 'higher';
+
+    const groups = new Map();
+    for (const r of runs) {
+        const k = `${r.cluster}\u0000${r.suite}`;
+        if (!groups.has(k)) groups.set(k, []);
+        groups.get(k).push(r);
+    }
+    for (const [k, list] of groups) {
+        const suite = k.split('\u0000')[1];
+        const dir = dirOf[suite] ?? 'higher';
+        const scored = list.filter((r) => Number.isFinite(r.metric?.value));
+        scored.sort((a, b) =>
+            dir === 'lower' ? a.metric.value - b.metric.value : b.metric.value - a.metric.value
+        );
+        scored.forEach((r, i) => { r.rank = i + 1; });
+    }
+}
+
+// Carry forward the metadata collect.mjs wrote; it cannot be derived here.
+let previous = {};
+if (existsSync(OUTPUT_FILE)) {
+    try { previous = JSON.parse(readFileSync(OUTPUT_FILE, 'utf-8')); }
+    catch (e) { console.warn(`  [warn] existing index.json unreadable: ${e.message}`); }
+}
+
 const runs = scanRuns();
+applyRanks(runs, previous.suites);
+
 const index = {
     generatedAt: new Date().toISOString(),
+    clusters: previous.clusters ?? [],
+    suites: previous.suites ?? [],
     runs,
 };
 
+// Keep the per-cluster counts honest even if collect.mjs ran against a
+// different tree than the one that got synced here.
+index.clusters = index.clusters.map((c) => ({ ...c, count: runs.filter((r) => r.cluster === c.name).length }));
+index.suites = index.suites.map((s) => ({ ...s, count: runs.filter((r) => r.suite === s.name).length }));
+
 writeFileSync(OUTPUT_FILE, JSON.stringify(index, null, 2) + '\n');
-console.log(`✓ index.json generated — ${runs.length} runs across ${[...new Set(runs.map(r => r.suite))].join(', ')}`);
+const byCluster = index.clusters.map((c) => `${c.name}:${c.count}`).join(' ') || '(no cluster metadata)';
+console.log(`✓ index.json — ${runs.length} runs across ${[...new Set(runs.map(r => r.suite))].join(', ') || 'nothing'} | ${byCluster}`);
+if (runs.length === 0) {
+    console.warn('  [warn] no runs found — check that public/data/runs/<cluster>/<suite>/... exists');
+}
