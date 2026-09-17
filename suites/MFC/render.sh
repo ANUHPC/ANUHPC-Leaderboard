@@ -258,7 +258,53 @@ cd "$TREE"
 # already built, so a case using an existing slug still compiles nothing.
 # Submissions are serialised by the submit-xenon concurrency group, so two
 # builds cannot race in build/staging.
+# --- build, then submit: two invocations, on purpose -----------------------
+#
+# Both halves matter, and each fixes a failure seen on this cluster.
+#
+# THE BUILD PASS must happen, because MFC compiles the case's analytic initial
+# conditions into pre_process. A case writing
+#
+#     "patch_icpp(1)%alpha_rho(1)": "0.5 + 0.2 * sin(2.0 * pi * x / lx)"
+#
+# has that turned into Fortran and hashed into the install path, so it needs
+# its own binary. Without it the job died with "No such file or directory" on
+# a build slug that had never existed -- after queueing.
+#
+# It uses --dry-run rather than `mfc.sh build` because `mfc.sh build` refuses
+# --input unless --case-optimization is also given, and without --input it
+# builds for an empty case and produces the wrong slug. run.py calls
+# build(targets) at line 163 and only checks dry_run at line 206, so --dry-run
+# builds exactly what this case needs and stops before submitting.
+#
+# THE RUN PASS must use --no-build, because `mfc.sh run` re-installs the
+# binaries into the shared build/install on every invocation even when nothing
+# changed. Another MFC process executing those same files at that moment dies
+# with
+#
+#     execve(): .../syscheck: Text file busy
+#
+# which killed 3 of 5 runs in a concurrent test. Pipeline jobs are serialised
+# by the submit-xenon concurrency group, but anyone running MFC by hand is
+# not, and a leaderboard job must not be able to break their run.
+#
+# The build pass is cheap when there is nothing to do -- MFC skips an
+# up-to-date target -- so this costs seconds normally and minutes exactly once
+# for a genuinely new case.
 set -x
+./mfc.sh run "$JOB_DIR/case.py" \
+  -e batch \
+  -c "$TEMPLATE" \
+  -t $TARGETS \
+  -N "$NODES" -n "$TPN" -p "$PART" -w "$WALL" \
+  --name "mfc-$(basename "$JOB_DIR")" \
+  --dry-run \
+  -j 8 \
+  ${CASE_OPT_ARGS[0]+"${CASE_OPT_ARGS[@]}"} \
+  --gpu "$MFC_GPU_MODE" \
+  -- "${CASE_ARGS[@]}" \
+  || die "MFC could not build the targets this case needs"
+
 ./mfc.sh run "$JOB_DIR/case.py" \
   -e batch \
   -c "$TEMPLATE" \
@@ -267,8 +313,7 @@ set -x
   --name "mfc-$(basename "$JOB_DIR")" \
   -o "$JOB_DIR/summary.yaml" \
   --clean \
-  -j 8 \
-  ${CASE_OPT_ARGS[0]+"${CASE_OPT_ARGS[@]}"} \
+  --no-build \
   --gpu "$MFC_GPU_MODE" \
   --wait \
   -- "${CASE_ARGS[@]}"
