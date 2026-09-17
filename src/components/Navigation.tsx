@@ -57,7 +57,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     const activeCluster = searchParams.get('cluster') ?? 'all';
 
     useEffect(() => {
-        fetch(`${import.meta.env.BASE_URL}data/index.json`)
+        fetch(`${import.meta.env.BASE_URL}data/index.json?t=${Date.now()}`, { cache: 'no-store' })
             .then((r) => (r.ok ? r.json() : null))
             .then((d) => setClusters(d?.clusters ?? []))
             .catch(() => setClusters([]));

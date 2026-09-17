@@ -63,7 +63,12 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`${import.meta.env.BASE_URL}data/index.json`);
+                // Stable URL + CDN caching means a fresh deploy keeps serving the old
+                // index. Bust it so the board is never stale after a run finishes.
+                const response = await fetch(
+                    `${import.meta.env.BASE_URL}data/index.json?t=${Date.now()}`,
+                    { cache: 'no-store' }
+                );
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
