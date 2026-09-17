@@ -1,18 +1,26 @@
-# Named toolchains, resolved to what is actually installed under /apps.
+# Named toolchains, resolved to what is actually installed.
 # "available: false" means the pieces are not built yet — validation reports
 # that as a clear message rather than letting a job fail at run time.
 #
-# Verified against /apps on 2026-09-03.
+# Re-verified on 2026-09-17 against all four nodes, not just cpu-node2.
 
 toolchains:
   gcc-ompi5:
-    description: System GCC with OpenMPI 5.0.10 over UCX
-    available: false
-    missing: [gfortran, cmake, blas]
+    description: GCC 13 with OpenMPI 5.0.10 (Fortran + UCX + CUDA) for C and Fortran
+    available: true
     modules: [mpi/openmpi/5.0.10, lib/ucx/1.22.0]
     mpi:
-      prefix: /apps/openmpi/5.0.10
+      # NOT /apps/openmpi/5.0.10. That build reports "Fort compiler: none" and
+      # ships no mpifort/mpif90 — it was configured before gfortran was
+      # installed, so OpenMPI's autodetect silently dropped Fortran. It is
+      # fine for HPL (C) and unusable for MFC (Fortran).
+      #
+      # This prefix is the same 5.0.10 rebuilt with --enable-mpi-fortran=all
+      # and otherwise identical configure flags. It lives on /work because
+      # /apps is root-owned; promote it to /apps when convenient.
+      prefix: /work/openmpi/5.0.10
       launcher: mpirun
+      fortran: true
     # UCX_NET_DEVICES is deliberately NOT pinned. The IB device is named after
     # its PCI slot and that name differs by node type:
     #     ibp129s0 -> cpu-node1, cpu-node2
@@ -31,17 +39,22 @@ toolchains:
     gpu: acc
 
 installed:
-  # Present and verified under /apps today.
-  openmpi: {version: "5.0.10", prefix: /apps/openmpi/5.0.10}
-  ucx:     {version: "1.22.0", prefix: /apps/ucx/1.22.0}
+  # Verified present on all four nodes on 2026-09-17.
+  gcc:      {version: "13.3.0"}
+  gfortran: {version: "13"}
+  cmake:    {version: "3.28.3"}
+  openblas: {prefix: /usr/lib/x86_64-linux-gnu}      # system package
+  ucx:      {version: "1.22.0", prefix: /apps/ucx/1.22.0}
+  # Two OpenMPI 5.0.10 installs, deliberately. See the note above.
+  openmpi:         {version: "5.0.10", prefix: /apps/openmpi/5.0.10, fortran: false}
+  openmpi-fortran: {version: "5.0.10", prefix: /work/openmpi/5.0.10, fortran: true}
+  hpl:      {version: "2.3", prefix: /apps/benchmarks/hpl/current}
+  cuda:     {version: "13.3", nodes: [gpu-node1, gpu-node2]}
 
 pending:
-  # Required before either suite can run. Tracked here so validation can say
-  # exactly what is missing.
-  - gfortran        # MFC is Fortran; HPL needs a working compiler set
-  - cmake           # MFC's build system
-  - blas            # OpenBLAS or BLIS, for HPL
-  - hpl             # /apps/benchmarks/hpl is empty
-  - mfc             # /apps/mfc is empty
+  # Tracked here so validation can say exactly what is missing.
+  - mfc             # building into /work/mfc; /apps/mfc is still an empty dir
+  - hpl-nvidia      # /apps/benchmarks/hpl-nvidia is empty; needs the NGC image
+  - container-rt    # no apptainer/enroot, so the NGC HPL container cannot run
   - modules         # no Lmod or environment-modules installed
-  - nvhpc           # nvfortran, for MFC's GPU path
+  - nvhpc           # nvfortran, for MFC's OpenACC GPU path
