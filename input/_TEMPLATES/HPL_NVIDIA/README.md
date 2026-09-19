@@ -26,10 +26,33 @@ about 80% occupancy:
 
 `NB` should be 192 or 256 for A100 — much larger than a CPU run wants.
 
-## Not runnable yet
+## Measured baselines
 
-`/apps/benchmarks/hpl-nvidia` is an empty placeholder. GPU HPL normally comes
-from NVIDIA's NGC container, `nvcr.io/nvidia/hpc-benchmarks`, which needs a
-container runtime — neither apptainer nor enroot is installed, and
-`/apps/containers` is empty. Until one of those is in place, jobs here will
-fail at submission with a clear message rather than silently.
+Xenon, 2026-09-19, HPL-NVIDIA 26.02, `N=184320 NB=512 P=4 Q=2 PMAP=1`, residual PASSED:
+
+| config | Rmax | per GPU | time |
+|---|---|---|---|
+| 8 x A100, 2 nodes | **101.7 TFLOP/s** | 12.72 TF | 41.0 s |
+| 4 x A100, 1 node  | 65.5 TFLOP/s | 16.37 TF | 20.9 s |
+
+Two nodes buy 1.55x one node, not 2x -- the second node is reached over 56 Gb/s
+FDR InfiniBand, and HPL's panel broadcast is on the critical path. Beating
+101.7 TF is mostly about N; beating 16.37 TF/GPU is not going to happen here.
+
+## Things that are already known, so you do not burn runs rediscovering them
+
+- **`P` must be the GPUs-per-node (4), `Q` the node count (2), with `PMAP=1`.**
+  That puts each process column inside one node, so the column AllGather stays
+  on NVLink and only the row broadcast crosses InfiniBand. `PMAP=0` with the
+  same HPL.dat measured 48% slower last year; `2x4` measured 8% slower.
+- **`NB=512`.** Beat 384 at every N tested and beat 1024 on 8 GPUs, while using
+  0.85 GiB/GPU less workspace.
+- **N is limited by GPU memory, not time.** 8*N^2 bytes spread over 8 x 40 GB.
+  N=184320 uses 37.7 of 40 GiB. There is room to push, but not much.
+- **PFACT, RFACT, NBMIN, NDIV, BCAST, DEPTH, L1, U, EQUIL and ALIGN do nothing.**
+  xhpl-nvidia prints that it ignores them, and an A/B at identical N/NB/grid
+  confirmed it. Sweeping them wastes cluster time.
+- **Do not reorder `CUDA_VISIBLE_DEVICES`.** Chasing NIC locality with `2,3,0,1`
+  cost 30% last year; it breaks the alignment `ppr:2:numa:pe=8` sets up.
+- **`HPL_USE_NVSHMEM=0` is required for multi-node** on this cluster. Without it
+  the job dies in about six seconds in NVSHMEM heap registration.

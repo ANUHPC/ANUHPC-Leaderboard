@@ -59,12 +59,16 @@ installed:
   openmpi:         {version: "5.0.10", prefix: /apps/openmpi/5.0.10, fortran: false}
   openmpi-fortran: {version: "5.0.10", prefix: /work/openmpi/5.0.10, fortran: true}
   hpl:      {version: "2.3", prefix: /apps/benchmarks/hpl/current}
+  hpl-nvidia: {version: "26.02", prefix: /apps/benchmarks/hpl-nvidia/current}
+  apptainer:  {version: "1.5.3", prefix: /usr/bin}
   cuda:     {version: "13.3", nodes: [gpu-node1, gpu-node2]}
 
 pending:
   # Tracked here so validation can say exactly what is missing.
-  - hpl-nvidia      # /apps/benchmarks/hpl-nvidia is empty; needs the NGC image
-  - container-rt    # no apptainer/enroot, so the NGC HPL container cannot run
   - modules         # no Lmod or environment-modules installed
+  # hpl-nvidia: DONE 2026-09-19. HPL-NVIDIA 26.02 extracted from the NGC image
+  # and published to /apps/benchmarks/hpl-nvidia/current; 101.7 TF on 8x A100.
+  # container-rt: was never actually missing -- apptainer 1.5.3 is installed on
+  # all four nodes. It is only used to pull and unpack the image, not to run it.
   # nvhpc: DONE 2026-09-17. NVHPC 25.7 at /work/nvhpc, MFC rebuilt --gpu acc;
   # zen3/build/install/gpu-acc-* carries sm_80 device code and links HPC-X.

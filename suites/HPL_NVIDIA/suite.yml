@@ -25,10 +25,21 @@ inputs:
   # contradict them. Raijin has never used one.
   optional: [run.sh]
 
-# Same tuning surface as CPU HPL, plus the process/GPU mapping: P x Q should
-# equal the number of GPUs, one rank per device.
+# NOT the same tuning surface as CPU HPL. xhpl-nvidia prints, at the top of
+# every run, that it ignores the panel-factorisation parameters, the broadcast
+# choice, the look-ahead depth, and the L1/U/equilibration/alignment settings.
+# Measured: PFACT=2/RFACT=2/DEPTH=2 scored 190.4 TF against 190.3-190.8 TF for
+# PFACT=0/RFACT=0/DEPTH=1 at identical N/NB/grid -- i.e. noise. Sweeping them
+# burns cluster time for nothing, so they are not offered as knobs.
+#
+# P x Q must equal the GPU count, one rank per device, and the pairing is not
+# free either: with PMAP=1 (column-major) and Slurm's block distribution,
+# P = GPUs-per-node puts each process column entirely inside one node, keeping
+# the column AllGather on NVLink and leaving only the row broadcast on IB.
+# Getting this backwards cost 48% last year (56.2 TF vs 107.7 TF, same HPL.dat).
 tuning:
-  free: [N, NB, P, Q, PFACT, RFACT, BCAST, DEPTH, SWAP]
+  free: [N, NB, P, Q, PMAP, SWAP]
+  ignored: [PFACT, RFACT, NBMIN, NDIV, BCAST, DEPTH, L1, U, EQUIL, ALIGN]
 
 # What a finished run keeps. HPL's names are already canonical; declaring them
 # means harvest keeps the same four things for every suite instead of copying
@@ -42,7 +53,7 @@ artifacts:
 
 run:
   launcher: sbatch
-  binary: /apps/benchmarks/hpl-nvidia/current/bin/xhpl
+  binary: /apps/benchmarks/hpl-nvidia/current/bin/xhpl-nvidia
   partition: gpu
 
 # 2 nodes x 4 A100-SXM4-40GB. 40 GB/GPU sets the practical ceiling on N.
@@ -55,10 +66,24 @@ limits:
 legacy:
   parse_stdout: true       # same stdout parsing as HPL; no result.json yet
 
-# NOT RUNNABLE YET. /apps/benchmarks/hpl-nvidia is an empty placeholder and
-# /apps/containers holds no image. GPU HPL is normally the NGC container
-# nvcr.io/nvidia/hpc-benchmarks, which needs a container runtime (apptainer or
-# enroot) that is not installed. Until a binary is published here, validation
-# reports this as a clear message instead of letting jobs fail at run time.
-available: false
-missing: [hpl-nvidia binary, container runtime]
+# RUNNABLE. HPL-NVIDIA 26.02 is published at /apps/benchmarks/hpl-nvidia/current.
+#
+# It is extracted from the NGC image nvcr.io/nvidia/hpc-benchmarks (which pulls
+# anonymously, no API key) and run natively -- the image is a delivery vehicle,
+# not a runtime. Running it containerised does not work here: the image carries
+# OpenMPI 4.1.x while Slurm 23.11.4 offers only pmix_v5, so srun cannot bootstrap
+# the container's MPI. The extracted tree ships its own HPC-X, so nothing depends
+# on matching the host MPI either.
+#
+# Multi-node requires HPL_USE_NVSHMEM=0, which run.xenon.sh sets. NVSHMEM's IB
+# transports (ibrc, ucx, ibdevx were all tried) cannot register GPU memory with
+# the HCA on this cluster: nvidia_peermem needs MLNX/DOCA-OFED's ib_core and
+# Xenon runs the inbox RDMA stack, which does not export the peer-memory API.
+# With NVSHMEM off, HPL uses MPI/NCCL for inter-node instead.
+#
+# Measured on Xenon, 2026-09-19, N=184320 NB=512 4x2 PMAP=1, residual PASSED:
+#   8 x A100, 2 nodes   101.7 TFLOP/s   12.72 TF/GPU   41.0 s   37.7/40 GiB used
+#   4 x A100, 1 node     65.5 TFLOP/s   16.37 TF/GPU   20.9 s   (--no-multinode)
+# The per-GPU figures are the honest scaling story: two nodes over 56 Gb/s FDR
+# buy 1.55x the throughput of one, not 2x.
+available: true

@@ -18,6 +18,12 @@ RUN_ID="${3:?}"
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 HPL_BIN="${HPL_BIN:-/apps/benchmarks/hpl/current/bin/xhpl}"
+# GPU HPL is NVIDIA's HPL-NVIDIA, not a rebuild of netlib xhpl, so it gets its
+# own tree. Nothing is staged per job: the vendor launcher hpl.sh resolves its
+# libraries, its CUDA/NCCL/NVSHMEM settings and its sibling env file relative to
+# its own location, so copying the executable out of that tree breaks it. run.sh
+# invokes hpl.sh in place and passes --dat.
+HPL_NVIDIA_SH="${HPL_NVIDIA_SH:-/apps/benchmarks/hpl-nvidia/current/workspace/hpl.sh}"
 # The /apps OpenMPI has no Fortran bindings; MFC needs the /work rebuild.
 MPI_PREFIX="${MPI_PREFIX:-/apps/openmpi/5.0.10}"
 export MFC_ROOT="${MFC_ROOT:-/work/mfc/current}"
@@ -53,8 +59,10 @@ final_node() { sacct -n -X -j "$1" -o NodeList 2>/dev/null | head -1 | tr -d ' '
 result_line() {
   local dir="$1" suite="$2"
   case "$suite" in
-    HPL)
-      local wr; wr="$(grep -hE '^WR[0-9A-Za-z]+' "$dir"/*.out 2>/dev/null | tail -1)"
+    HPL|HPL_NVIDIA)
+      # netlib prints WR<pivot><depth>; xhpl-nvidia prints WC<...>. Same column
+      # layout either way, so one parser serves both boards.
+      local wr; wr="$(grep -hE '^W[RC][0-9A-Za-z]+' "$dir"/*.out 2>/dev/null | tail -1)"
       [ -n "$wr" ] || { echo ""; return; }
       # HPL prints Gflops in scientific notation; +0 coerces it to a number.
       awk '{printf "%.1f GFLOP/s  (N=%s NB=%s %sx%s, %.0fs)", $7+0, $2, $3, $4, $5, $6+0}' <<<"$wr"
@@ -101,11 +109,20 @@ for jobdir in "$STAGE"/*/*/*/; do
   label="${jobdir#$STAGE/}"
 
   case "$suite" in
-    HPL)
-      if [ ! -x "$HPL_BIN" ]; then
-        gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; continue
+    HPL|HPL_NVIDIA)
+      # Same submit path for both boards; how the binary is reached differs.
+      # CPU HPL is one self-contained executable, so it is copied in beside the
+      # HPL.dat. GPU HPL is a vendor tree that must be run where it lives.
+      if [ "$suite" = HPL_NVIDIA ]; then
+        if [ ! -x "$HPL_NVIDIA_SH" ]; then
+          gh_error "$label: no hpl.sh at $HPL_NVIDIA_SH — publish HPL-NVIDIA to /apps first"; continue
+        fi
+      else
+        if [ ! -x "$HPL_BIN" ]; then
+          gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; continue
+        fi
+        cp "$HPL_BIN" "$jobdir/xhpl" && chmod +x "$jobdir/xhpl"
       fi
-      cp "$HPL_BIN" "$jobdir/xhpl" && chmod +x "$jobdir/xhpl"
       # run.sh, or run.<this cluster>.sh -- the template ships the latter and
       # asking people to rename it buys nothing: the directory already says
       # which cluster this is. What must NOT happen is picking up another
@@ -121,7 +138,7 @@ for jobdir in "$STAGE"/*/*/*/; do
         if [ -n "$other" ]; then
           gh_error "$label: found $other, which is for another cluster — use run.sh or run.$CLUSTER.sh"
         else
-          gh_error "$label: no run.sh (cp input/_TEMPLATES/HPL/run.$CLUSTER.sh input/$CLUSTER/$label/run.sh)"
+          gh_error "$label: no run.sh (cp input/_TEMPLATES/$suite/run.$CLUSTER.sh input/$CLUSTER/$label/run.sh)"
         fi
         continue
       fi
