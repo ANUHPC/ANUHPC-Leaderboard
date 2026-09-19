@@ -1,12 +1,11 @@
 import type { ClusterInfo, SuiteMeta } from './types';
 
-// Availability comes from the suite manifest, including clusters with no runs yet.
-export function supportedClusters(meta: SuiteMeta | undefined, clusters: ClusterInfo[]): ClusterInfo[] {
-    if (!meta) return [];
-    if (!Array.isArray(meta.clusters)) return clusters;
-    return meta.clusters.filter((name): name is string => typeof name === 'string')
-        .filter((name, index, names) => names.indexOf(name) === index)
-        .map(name => clusters.find(cluster => cluster.name === name) ?? { name });
+// The cluster row describes recorded runs for this application, not hardware
+// support or activity in other applications. Hide clusters until their first run.
+export function recordedClusters(meta: SuiteMeta | undefined, clusters: ClusterInfo[]): ClusterInfo[] {
+    return Object.entries(meta?.countByCluster ?? {})
+        .filter(([, count]) => Number.isFinite(count) && count > 0)
+        .map(([name]) => clusters.find(cluster => cluster.name === name) ?? { name });
 }
 
 export function validCluster(requested: string, offered: ClusterInfo[]): string {

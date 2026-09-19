@@ -91,18 +91,37 @@ with sync_playwright() as p:
     fixture['runs'] = original_runs
     passed('failed and unverified residuals are excluded from performance rankings')
 
-    # A newly supported cluster must be offered even before its first result.
+    # Hardware support alone must not add an empty cluster to this application.
     gpu = next(s for s in fixture['suites'] if s['name'] == 'HPL_NVIDIA')
     gpu['clusters'] = ['xenon', 'future']
     gpu['countByCluster']['future'] = 0
-    fixture['clusters'].append({'name': 'future', 'label': 'Future', 'count': 0})
-    page.goto(base + '#/HPL_NVIDIA?cluster=raijin')
+    fixture['clusters'].append({'name': 'future', 'label': 'Future', 'count': 27})
+    page.goto(base + '#/HPL_NVIDIA?cluster=future')
+    page.reload()
+    expect(page).to_have_url(base + '#/HPL_NVIDIA?cluster=xenon')
+    expect(nav.get_by_role('button', name='Future')).to_have_count(0)
+    expect(nav.get_by_role('button', name='All clusters')).to_have_count(0)
+    expect(nav.get_by_label('Available cluster')).to_have_text('Xenon')
+    passed('clusters with no runs for this application stay hidden')
+
+    # Its first recorded run makes the cluster selectable automatically.
+    gpu['countByCluster']['future'] = 1
     page.reload()
     expect(nav.get_by_role('button', name='Future')).to_be_visible()
     expect(nav.get_by_role('button', name='Raijin')).to_have_count(0)
     nav.get_by_role('button', name='Future').click()
     expect(page).to_have_url(base + '#/HPL_NVIDIA?cluster=future')
-    passed('future availability uses metadata rather than existing runs or hardcoded names')
+    passed('the first application run reveals its cluster')
+
+    gpu['countByCluster'] = {}
+    gpu['count'] = 0
+    fixture['runs'] = [r for r in fixture['runs'] if r['suite'] != 'HPL_NVIDIA']
+    page.reload()
+    expect(page).to_have_url(base + '#/HPL_NVIDIA')
+    expect(nav.get_by_label('Available cluster')).to_have_count(0)
+    expect(nav.get_by_role('button', name='All clusters')).to_have_count(0)
+    expect(nav.get_by_role('button', name='Future')).to_have_count(0)
+    passed('applications without recorded runs have no cluster row')
 
     assert not errors, errors
     passed('no browser runtime errors')

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Cpu, Zap, Home, GitBranch, Server } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 import type { BenchmarkSuite, SuiteInfo, ClusterInfo, SuiteMeta } from '../types';
-import { supportedClusters, validCluster } from '../suiteAvailability';
+import { recordedClusters, validCluster } from '../suiteAvailability';
 
 interface NavigationProps {
     activeSuite: BenchmarkSuite;
@@ -51,7 +51,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const requestedCluster = searchParams.get('cluster') ?? 'all';
     const activeMeta = suites.find(s => s.name === activeSuite);
-    const suiteClusters = supportedClusters(activeMeta, clusters);
+    const suiteClusters = recordedClusters(activeMeta, clusters);
     const activeCluster = activeMeta ? validCluster(requestedCluster, suiteClusters) : requestedCluster;
 
     useEffect(() => {
@@ -96,7 +96,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
 
     // Resolve the destination before navigation so an unsupported board never flashes.
     const targetCluster = (meta?: SuiteMeta) => meta
-        ? validCluster(activeCluster, supportedClusters(meta, clusters)) : 'all';
+        ? validCluster(activeCluster, recordedClusters(meta, clusters)) : 'all';
     const suiteHref = (id: string, meta?: SuiteMeta) => {
         const cluster = targetCluster(meta);
         const q = cluster === 'all' ? '' : new URLSearchParams({ cluster }).toString();

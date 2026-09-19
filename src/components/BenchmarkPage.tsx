@@ -10,7 +10,7 @@ import {
     Filter as FilterIcon,
 } from 'lucide-react';
 import { GflopsCharts } from "./GflopsCharts";
-import { supportedClusters, validCluster } from '../suiteAvailability';
+import { recordedClusters, validCluster } from '../suiteAvailability';
 
 interface BenchmarkPageProps {
     suite: BenchmarkSuite;
@@ -43,7 +43,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
     const [searchQuery, setSearchQuery] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     const suiteMeta = data?.suites?.find(s => s.name === suite);
-    const offeredClusters = supportedClusters(suiteMeta, data?.clusters ?? []);
+    const offeredClusters = recordedClusters(suiteMeta, data?.clusters ?? []);
     const clusterFilter = suiteMeta ? validCluster(searchParams.get('cluster') ?? 'all', offeredClusters) : 'all';
     const setClusterFilter = (name: string) => {
         const next = new URLSearchParams(searchParams);
