@@ -92,6 +92,32 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
             ? true
             : m.clusters.includes(activeCluster);
 
+    // The suite currently open, and the clusters it is actually offered on.
+    // HPL runs on both; MFC and HPL_NVIDIA only exist on Xenon -- Raijin has no
+    // GPUs and no Fortran/MPI toolchain for MFC.
+    const activeMeta = suites.find((s) => s.name === activeSuite);
+    const suiteClusters = activeMeta?.clusters?.length ? activeMeta.clusters : null;
+
+    // A board that exists on exactly one cluster has nothing to switch between,
+    // so the picker is hidden rather than offering choices that are empty by
+    // construction. It stays visible while the suite list is still loading, and
+    // for any suite genuinely offered on more than one cluster.
+    const showClusterTabs = clusters.length > 0 && (!suiteClusters || suiteClusters.length > 1);
+
+    // Landing on a single-cluster board while ?cluster= still names another one
+    // (you were on Raijin/HPL and clicked MFC) would show an empty table with no
+    // visible control to fix it, because the picker is now hidden. Drop the
+    // parameter instead; for a single-cluster suite it selects the same rows.
+    useEffect(() => {
+        if (!suiteClusters || suiteClusters.length !== 1) return;
+        const current = searchParams.get('cluster');
+        if (current && current !== suiteClusters[0]) {
+            const next = new URLSearchParams(searchParams);
+            next.delete('cluster');
+            setSearchParams(next, { replace: true });
+        }
+    }, [suiteClusters, searchParams, setSearchParams]);
+
     const selectCluster = (name: string) => {
         const next = new URLSearchParams(searchParams);
         if (name === 'all') next.delete('cluster');
@@ -174,7 +200,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
                 {/* Cluster tabs. Results are ranked per cluster because the two
                     measure different hardware, so this is a board switch rather
                     than a filter. */}
-                {clusters.length > 0 && (
+                {showClusterTabs && (
                     <div className="flex items-center gap-2 pb-3 border-t border-white/5 pt-3">
                         <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-slate-500 pr-1">
                             <Server className="w-3.5 h-3.5" />
