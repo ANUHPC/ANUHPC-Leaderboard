@@ -5,7 +5,7 @@
 # resolves its libraries and CUDA/NCCL/NVSHMEM settings relative to its own
 # location, so it is run where it lives and pointed at your HPL.dat with --dat.
 
-#SBATCH --job-name=hplgpu-CHANGE-ME
+#SBATCH --job-name=hplgpu-8a100-baseline
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=4          # one rank per GPU: ranks 0-3 node1, 4-7 node2
 #SBATCH --gres=gpu:a100:4

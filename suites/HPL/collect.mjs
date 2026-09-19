@@ -1,8 +1,8 @@
 // HPL result collector.
 //
 // Two sources, in priority order:
-//   1. result.json written by the job epilogue  (new runs — authoritative)
-//   2. HPL's stdout, parsed  (the 137 legacy runs already in output/)
+// Performance and residual verification always come from HPL stdout.
+// A submitted result.json cannot bypass the numerical correctness check.
 //
 // Netlib, AOCL and NVIDIA output share result and residual records. Keep each
 // result tied to its own residual: another candidate passing cannot validate

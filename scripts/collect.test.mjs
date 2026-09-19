@@ -22,3 +22,18 @@ test('MFC metadata reaches run.json, index.json and downloadable artifacts', asy
     assert.equal(await fs.readFile(path.join(tmp,'site',r.raw['simulation.inp']),'utf8'),data['simulation.inp']);
   } finally { await fs.rm(tmp,{recursive:true,force:true}); }
 });
+
+test('an HPL result.json cannot override failed residual evidence from stdout', async () => {
+  const tmp=await fs.mkdtemp(path.join(os.tmpdir(),'hpl-integrity-'));
+  try {
+    for(const d of ['scripts','suites','clusters']) await fs.cp(d,path.join(tmp,d),{recursive:true});
+    const dir=path.join(tmp,'output/xenon/HPL_NVIDIA/test/run');await fs.mkdir(dir,{recursive:true});
+    await fs.writeFile(path.join(dir,'run.out'),'--- DEVICE INFO ---\nWC0 184320 512 4 2 41.03 1.017e+05 ( 1.272e+04)\n||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)= 100.0 ...... FAILED\n');
+    await fs.writeFile(path.join(dir,'result.json'),JSON.stringify({metric:{value:999999},status:'ok',ranking:{eligible:true}}));
+    execFileSync(process.execPath,['scripts/collect.mjs'],{cwd:tmp,env:{...process.env,WEBSITE_DATA_DIR:path.join(tmp,'site')},stdio:'pipe'});
+    const r=JSON.parse(await fs.readFile(path.join(tmp,'site/data/runs/xenon/HPL_NVIDIA/test/run/run.json'),'utf8'));
+    assert.notEqual(r.metric?.value,999999);
+    assert.equal(r.ranking.eligible,false);
+    assert.notEqual(r.status,'ok');
+  } finally {await fs.rm(tmp,{recursive:true,force:true});}
+});

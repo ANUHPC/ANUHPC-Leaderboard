@@ -45,6 +45,9 @@ nodes:
     cores_per_socket: 16
     threads_per_core: 2
     cpus: 64
+    cores_total: 32
+    cores_reserved: 0
+    cores_available: 32
     memory_mb: 2000000
     gpus: 4
     gpu_model: a100
@@ -53,6 +56,9 @@ nodes:
     cores_per_socket: 16
     threads_per_core: 2
     cpus: 64
+    cores_total: 32
+    cores_reserved: 0
+    cores_available: 32
     memory_mb: 2000000
     gpus: 4
     gpu_model: a100

@@ -159,8 +159,9 @@ async function processSuite(suite, index, clusters, clusterName) {
 
     let result = null;
 
-    // 1. result.json, written by the job epilogue — authoritative.
-    if (files.includes("result.json")) {
+    // 1. Generic epilogue result. HPL always parses stdout so residual checks
+    // cannot be bypassed by a hand-written metric/status in result.json.
+    if (files.includes("result.json") && !["HPL", "HPL_NVIDIA"].includes(suite.name)) {
       const raw = await read("result.json");
       try {
         const r = JSON.parse(raw);

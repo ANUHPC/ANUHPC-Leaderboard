@@ -7,6 +7,7 @@
 // 2" becomes a failed check on the PR instead of a job that queues and dies.
 
 import fs from "fs/promises";
+import { validateGpuHpl } from "./lib/hpl-gpu.mjs";
 import path from "path";
 import { parseYaml } from "./lib/yaml.mjs";
 import { mfcDecomposition, gridFromCase } from "./lib/mfc-decomp.mjs";
@@ -82,6 +83,10 @@ async function main() {
     if (!suite)              { err(where, `unknown suite "${suiteName}" — no suites/${suiteName}/suite.yml`); continue; }
     if (suite.enabled === false) { err(where, `suite ${suiteName} is not enabled yet`); continue; }
 
+    if (!clusters[pathCluster]) { err(where, `unknown cluster "${pathCluster}"`); continue; }
+    if (suite.clusters?.length && !suite.clusters.includes(pathCluster)) {
+      err(where, `${suiteName} is available only on ${suite.clusters.join(", ")}`); continue;
+    }
     const files = await listFiles(path.join(CWD, rel));
 
     for (const req of suite.inputs?.required || []) {
@@ -95,17 +100,12 @@ async function main() {
       }
     }
 
+    if (suiteName === "HPL" || suiteName === "HPL_NVIDIA") {
+      await checkSbatch(rel, where, files, clusters[pathCluster], pathCluster, suiteName);
+      continue; // Slurm script is authoritative even when optional job.yml exists.
+    }
     const jobFile = files.find((f) => /^job\.ya?ml$/i.test(f));
     if (!jobFile) {
-      // HPL needs no job.yml. Everything it describes -- partition, nodes,
-      // tasks, walltime -- is already in run.sh's #SBATCH lines, and keeping
-      // both invites them to disagree. None of Raijin's 137 runs has one.
-      // MFC is different: its job.yml names which pinned case to run, which
-      // exists nowhere else, so that stays required via suite.yml.
-      if (suiteName === "HPL" || suiteName === "HPL_NVIDIA") {
-        await checkSbatch(rel, where, files, clusters[pathCluster], pathCluster);
-        continue;
-      }
       err(where, "missing job.yml"); continue;
     }
 
@@ -312,8 +312,8 @@ main().catch((e) => { console.error(e); process.exit(1); });
 // bad core count here is the difference between a clear message on the pull
 // request and "Requested node configuration is not available" from sbatch,
 // after which the workflow used to go green having submitted nothing.
-async function checkSbatch(rel, where, files, cluster, cname) {
-  const name = files.find((f) => /^run(\.[a-z0-9_-]+)?\.sh$/i.test(f));
+async function checkSbatch(rel, where, files, cluster, cname, suiteName) {
+  const name = files.includes("run.sh") ? "run.sh" : files.includes(`run.${cname}.sh`) ? `run.${cname}.sh` : files.find((f) => /^run(\.[a-z0-9_-]+)?\.sh$/i.test(f));
   if (!name) { err(where, `no run.sh (or run.<cluster>.sh) — nothing to submit`); return; }
 
   // run.raijin.sh sitting in an input/xenon/ directory is always a mistake.
@@ -333,6 +333,9 @@ async function checkSbatch(rel, where, files, cluster, cname) {
     return mm ? mm[1] : null;
   };
 
+  if (suiteName === "HPL_NVIDIA") {
+    for (const problem of validateGpuHpl(await readSafe(path.join(CWD, rel, "HPL.dat")), directive, cluster)) err(where, problem);
+  }
   if (/CHANGE-ME/.test(text)) {
     warn(where, `${name} still has the template placeholder in --job-name; give the run a real name`);
   }

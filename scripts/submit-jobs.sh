@@ -62,7 +62,7 @@ result_line() {
     HPL|HPL_NVIDIA)
       # netlib prints WR<pivot><depth>; xhpl-nvidia prints WC<...>. Same column
       # layout either way, so one parser serves both boards.
-      local wr; wr="$(grep -hE '^W[RC][0-9A-Za-z]+' "$dir"/*.out 2>/dev/null | tail -1)"
+      local wr; wr="$(sed -E 's/^\[[^]]+\]<stdout>:[[:space:]]*//' "$dir"/*.out 2>/dev/null | grep -E '^[[:space:]]*W[RC][0-9A-Za-z]+' | tail -1 || true)"
       [ -n "$wr" ] || { echo ""; return; }
       # HPL prints Gflops in scientific notation; +0 coerces it to a number.
       awk '{printf "%.1f GFLOP/s  (N=%s NB=%s %sx%s, %.0fs)", $7+0, $2, $3, $4, $5, $6+0}' <<<"$wr"
@@ -77,7 +77,7 @@ result_line() {
 
 residual_line() {
   grep -hoE '\|\|Ax-b\|\|_oo[^=]*=\s*[0-9.eE+-]+\s*\.*\s*(PASSED|FAILED)' "$1"/*.out 2>/dev/null \
-    | tail -1 | grep -oE '(PASSED|FAILED)'
+    | awk '/FAILED/{failed=1} /PASSED/{passed=1} END{if(failed) print "FAILED"; else if(passed) print "PASSED"}' || true
 }
 
 # On failure the Actions log is the only place anyone will look, so put the
@@ -115,11 +115,11 @@ for jobdir in "$STAGE"/*/*/*/; do
       # HPL.dat. GPU HPL is a vendor tree that must be run where it lives.
       if [ "$suite" = HPL_NVIDIA ]; then
         if [ ! -x "$HPL_NVIDIA_SH" ]; then
-          gh_error "$label: no hpl.sh at $HPL_NVIDIA_SH — publish HPL-NVIDIA to /apps first"; continue
+          gh_error "$label: no hpl.sh at $HPL_NVIDIA_SH — publish HPL-NVIDIA to /apps first"; rejected=$((rejected+1)); continue
         fi
       else
         if [ ! -x "$HPL_BIN" ]; then
-          gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; continue
+          gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; rejected=$((rejected+1)); continue
         fi
         cp "$HPL_BIN" "$jobdir/xhpl" && chmod +x "$jobdir/xhpl"
       fi
@@ -140,6 +140,7 @@ for jobdir in "$STAGE"/*/*/*/; do
         else
           gh_error "$label: no run.sh (cp input/_TEMPLATES/$suite/run.$CLUSTER.sh input/$CLUSTER/$label/run.sh)"
         fi
+        rejected=$((rejected+1))
         continue
       fi
       echo "  using $(basename "$script") for $label"
@@ -265,7 +266,7 @@ while IFS= read -r line; do
   printf '| %s | %s | %s | %s | %s | %s | %s |\n' \
     "$jid" "$suite" "$state" "${elapsed:-–}" "${node:-–}" "${res:-–}" "${chk:-–}" >> "$SUMMARY"
 
-  if [ "$state" != "COMPLETED" ] || [ "$chk" = "FAILED" ]; then
+  if [ "$state" != "COMPLETED" ] || [ "$code" != "0:0" ] || [ "$chk" != "PASSED" ] || [ -z "$res" ]; then
     dump_failure "$dir" "$jid" "$label"
     gh_error "$label (job $jid): state=$state exit=$code${chk:+ residual=$chk}"
     failed=$((failed + 1)); rc=1

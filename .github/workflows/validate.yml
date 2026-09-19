@@ -15,6 +15,7 @@ on:
       - "suites/**"
       - "clusters/**"
       - "scripts/**"
+      - ".github/workflows/**"
   workflow_dispatch:
 
 permissions:
@@ -33,8 +34,8 @@ jobs:
       - name: Validate submitted jobs
         run: node scripts/validate-job.mjs
 
-      - name: Verify MFC ranking and provenance
-        run: node --test suites/MFC/collect.test.mjs scripts/lib/mfc-decomp.test.mjs
+      - name: Verify collectors and submission validation
+        run: node --test suites/HPL/collect.test.mjs suites/MFC/collect.test.mjs scripts/*.test.mjs scripts/lib/*.test.mjs
 
       # Checks the case registry, which is what a case contribution changes.
       # Runs every contributed case.py for real, at each allowed node/rank

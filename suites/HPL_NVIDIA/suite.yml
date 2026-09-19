@@ -53,7 +53,7 @@ artifacts:
 
 run:
   launcher: sbatch
-  binary: /apps/benchmarks/hpl-nvidia/current/bin/xhpl-nvidia
+  binary: /apps/benchmarks/hpl-nvidia/current/workspace/hpl-linux-x86_64/xhpl
   partition: gpu
 
 # 2 nodes x 4 A100-SXM4-40GB. 40 GB/GPU sets the practical ceiling on N.
