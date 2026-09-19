@@ -74,10 +74,10 @@ export const RunDetailsModal: React.FC<RunDetailsModalProps> = ({
         };
     }, [isOpen, onClose]);
 
-    if (!isOpen) return null;
-
     const [copiedJob, setCopiedJob] = useState(false);
     const [copiedHPL, setCopiedHPL] = useState(false);
+
+    if (!isOpen) return null;
 
     const handleCopyJob = async () => {
         if (runData?.job?.raw) {

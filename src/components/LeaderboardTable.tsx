@@ -59,8 +59,9 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
     // Get best run per group
     const bestPerGroupRuns = Object.values(
         runs.reduce<Record<string, BenchmarkRun>>((acc, run) => {
-            if (!acc[run.group] || getPrimaryMetric(run) > getPrimaryMetric(acc[run.group])) {
-                acc[run.group] = run;
+            const key = JSON.stringify([run.cluster, run.group]);
+            if (!acc[key] || getPrimaryMetric(run) > getPrimaryMetric(acc[key])) {
+                acc[key] = run;
             }
             return acc;
         }, {})
@@ -299,7 +300,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                             // files are laid out the same way. Omitting the cluster
                                             // here is what made every Details click 404.
                                             navigate(
-                                                `/${suiteId}/${run.cluster}/${run.group}/${run.run}${location.search}`
+                                                `/${[suiteId ?? suite, run.cluster ?? '', run.group, run.run].map(encodeURIComponent).join('/')}${location.search}`
                                             )
                                         }
                                         className="inline-flex items-center gap-1.5 px-3 py-1.5 text-gray-500 hover:text-gray-900 hover:bg-gray-100 text-sm font-medium rounded-xl transition-all"

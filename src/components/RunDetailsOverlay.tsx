@@ -21,23 +21,29 @@ export function RunDetailsOverlay() {
             return;
         }
 
+        const controller = new AbortController();
         const fetchRun = async () => {
             setLoading(true);
+            setError(null);
+            setRunData(null);
             try {
                 const res = await fetch(
                     // collect.mjs writes data/runs/<cluster>/<suite>/<group>/<run>/run.json
-                    `${import.meta.env.BASE_URL}data/runs/${cluster}/${suiteId}/${group}/${runPath}/run.json`
+                    `${import.meta.env.BASE_URL}data/runs/${[cluster, suiteId, group, ...runPath.split('/')].map(encodeURIComponent).join('/')}/run.json`,
+                    { signal: controller.signal }
                 );
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 setRunData(await res.json());
             } catch (err) {
+                if (controller.signal.aborted) return;
                 setError(err instanceof Error ? err.message : 'Error loading run');
             } finally {
-                setLoading(false);
+                if (!controller.signal.aborted) setLoading(false);
             }
         };
 
         fetchRun();
+        return () => controller.abort();
     }, [suiteId, cluster, group, runPath]);
 
     const handleClose = () => {
