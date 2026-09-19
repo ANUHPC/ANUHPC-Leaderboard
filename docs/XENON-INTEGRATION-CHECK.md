@@ -1,6 +1,6 @@
 # Xenon integration verification — 19 September 2026
 
-The site offers clusters from each suite's manifest. HPL CPU offers Raijin and
+The site shows only clusters with recorded runs for the selected application. HPL CPU offers Raijin and
 Xenon; HPL NVIDIA and MFC offer Xenon. A stale `?cluster=raijin` link to either
 Xenon-only suite resolves to Xenon and preserves other query parameters.
 Single-cluster pages show one compact cluster label instead of a picker.
@@ -29,7 +29,8 @@ targeted retries, invalid selectors and validation before staging.
 
 The website browser audits cover stale bookmarks, suite-specific counts,
 back navigation, 320–1440 px layouts, keyboard navigation and future supported
-clusters without results. Injected failed/unverified GPU scores cannot enter
+clusters appearing only after their first application run. Applications with no
+runs have no cluster row. Injected failed/unverified GPU scores cannot enter
 the performance table. MFC checks cover task links, details, focus trapping,
 convergence comparisons, mixed configurations, unsafe artifact links, inert HTML,
 missing media, malformed responses and retry behavior. Fixtures exist only inside
