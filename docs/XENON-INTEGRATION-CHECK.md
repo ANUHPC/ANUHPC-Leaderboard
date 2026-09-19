@@ -35,6 +35,13 @@ convergence comparisons, mixed configurations, unsafe artifact links, inert HTML
 missing media, malformed responses and retry behavior. Fixtures exist only inside
 the test browser; no synthetic results are published.
 
+The final published site passed all 8 cluster audit groups and all 10 MFC
+browser audit groups after [Pages deployment 35430680957](https://github.com/ANUHPC/ANUHPC-Leaderboard/actions/runs/35430680957).
+A separate live-data check confirmed the GPU baseline is rank 1 with its passing
+residual and 41.06-second timing, its detail view opens, and MFC Quick help links
+to the dedicated workflow. The updated dependency lockfile reports zero known
+vulnerabilities in `npm audit` at this verification time.
+
 ## Runtime and publication decisions
 
 Production inputs/results stay on `main`; React source stays on `website`.
