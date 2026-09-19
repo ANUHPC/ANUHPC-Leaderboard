@@ -113,6 +113,19 @@ with sync_playwright() as p:
     expect(chart.locator('[data-point]')).to_have_count(3)
     expect(chart.get_by_role('link')).to_have_count(0)
     ok('single/empty results and filter resets avoid stale hover or hook errors')
+    # Nearly coincident targets must not steal focus/selection from their neighbour.
+    rows[1]['best']['gflops'] = 100.5
+    page.reload()
+    expect(chart.locator('[data-point="10000/100.5"]')).to_be_visible()
+    lower.scroll_into_view_if_needed()
+    page.mouse.click(*center(lower))
+    expect(chart.get_by_role('link', name='xenon · chart-audit/lower & exact', exact=True)).to_be_visible()
+    expect(chart.get_by_role('link', name='xenon · chart-audit/upper', exact=True)).to_have_count(0)
+    page.mouse.click(*center(chart.locator('[data-point="10000/100.5"]')))
+    expect(chart.get_by_role('link', name='xenon · chart-audit/upper', exact=True)).to_be_visible()
+    rows[1]['best']['gflops'] = 200
+    ok('nearby SVG targets cannot override the closest XY selection')
+
     page.goto(base + '#/HPL/xenon/chart-audit/missing')
     expect(page.get_by_text('Error loading run details', exact=True)).to_be_visible()
     page.goto(base + '#/HPL/xenon/chart-audit/lower%20%26%20exact')

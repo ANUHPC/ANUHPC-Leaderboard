@@ -16,7 +16,7 @@ const tickLabel = (value: number) => value.toLocaleString('en-US', {
 // Rounded integer ticks, including a useful range when there is only one point.
 function scale(values: number[], count: number) {
     const min = Math.min(...values), max = Math.max(...values);
-    const padding = Math.max((max - min) * 0.08, max * 0.04, 1);
+    const padding = Math.max((max - min) * 0.08, min === max ? max * 0.04 : 0, 1);
     const low = Math.max(0, min - padding), high = max + padding;
     const rough = (high - low) / count;
     const power = 10 ** Math.floor(Math.log10(rough));
@@ -106,6 +106,9 @@ function RunPlot({ runs, axis }: { runs: BenchmarkRun[]; axis: 'N' | 'NB' }) {
                     <circle data-point={point.key} cx={xPixel(point.x)} cy={yPixel(point.y)} r={12} fill="transparent"
                         role="button" tabIndex={0} aria-label={`${point.runs.map(r => `${r.cluster}: ${r.group}/${r.run}`).join('; ')}; ${axis} ${point.x}; ${point.y} GFLOP/s`}
                         aria-pressed={pinned && selected === point.key}
+                        // Pointer selection uses XY distance, even when another circle overlaps.
+                        // Prevent browser focus from overriding it with the topmost SVG target.
+                        onPointerDown={event => event.preventDefault()}
                         onFocus={() => { setSelected(point.key); setPinned(true); }}
                         onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelected(point.key); setPinned(true); } }}
                         className="cursor-pointer outline-none focus:stroke-slate-900 focus:stroke-2" />
