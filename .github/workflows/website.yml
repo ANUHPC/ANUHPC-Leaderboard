@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # Full history, not a shallow clone. Dates and submitters are read
           # from git: a job spec is added under input/ by whoever submitted it
@@ -72,9 +72,9 @@ jobs:
           echo "history: $(git rev-list --count HEAD) commit(s)"
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
 
       # validate.yml is a pull-request gate now, so this is what keeps a
       # direct push to main honest. It is the same script, and it is cheap.
@@ -85,13 +85,13 @@ jobs:
         run: node scripts/collect.mjs
 
       - name: Checkout website branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: website
           path: website-branch
 
       - name: Cache npm dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: website-branch/node_modules
           key: npm-${{ hashFiles('website-branch/package-lock.json', 'website-branch/package.json') }}
@@ -138,7 +138,7 @@ jobs:
           BASE_PATH: "/${{ github.event.repository.name }}/"
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: website-branch/dist

@@ -52,7 +52,7 @@ jobs:
           esac
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1
           ref: main
@@ -510,7 +510,7 @@ jobs:
 
       - name: Upload output as artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: raijin-job-output
           path: output/raijin/

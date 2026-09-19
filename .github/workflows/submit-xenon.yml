@@ -42,11 +42,11 @@ jobs:
     runs-on: [self-hosted, xenon]
     timeout-minutes: 480
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { fetch-depth: 1, ref: main }
 
-      - uses: actions/setup-node@v4
-        with: { node-version: "20" }
+      - uses: actions/setup-node@v5
+        with: { node-version: "22" }
 
       - name: Verify runner is on the right cluster
         run: node scripts/verify-runner-cluster.mjs "$CLUSTER"
