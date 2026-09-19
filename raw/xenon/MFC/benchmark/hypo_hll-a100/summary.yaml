@@ -1,0 +1,47 @@
+invocation:
+- run
+- /scratch/jobs/35187881911/MFC/benchmark/hypo_hll-a100/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- -N
+- '2'
+- -n
+- '4'
+- -p
+- gpu
+- -w
+- 01:00:00
+- --name
+- mfc-hypo_hll-a100
+- -o
+- /scratch/jobs/35187881911/MFC/benchmark/hypo_hll-a100/summary.yaml
+- --no-build
+- --clean
+- --gpu
+- acc
+- --wait
+- --
+- --gbpp
+- '16'
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: acc
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  3.1980325
+pre_process:
+    exec:  215.9439427
+simulation:
+    exec:  495.4413955
+    grind: 0.16621504

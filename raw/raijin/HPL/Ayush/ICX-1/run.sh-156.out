@@ -1,0 +1,83 @@
+== preflight ==
+  ok   xhpl -> /lib/x86_64-linux-gnu/libopenblas.so.0
+  ok   grid 8x14 = 112 ranks over 7 nodes
+  need 47.6 GiB/node (N=207168 NB=192, uniform across all 7 nodes)
+  ok   hpc-01-ib 59.9 GiB, ibp176s0 ACTIVE 56Gb/s, no stray ranks
+  ok   hpc-02-ib 61.3 GiB, ibp176s0 ACTIVE 56Gb/s, no stray ranks
+  ok   hpc-03-ib 124.0 GiB, mlx4_0 ACTIVE 56Gb/s, no stray ranks
+  ok   hpc-04-ib 61.5 GiB, ibp176s0 ACTIVE 56Gb/s, no stray ranks
+  ok   hpc-05-ib 61.5 GiB, mlx4_0 ACTIVE 56Gb/s, no stray ranks
+  ok   hpc-06-ib 124.2 GiB, ibp176s0 ACTIVE 56Gb/s, no stray ranks
+  ok   hpc-07-ib 61.3 GiB, ibp176s0 ACTIVE 56Gb/s, no stray ranks
+== launching ==
+  hostfile:
+    hpc-01-ib slots=16
+    hpc-02-ib slots=16
+    hpc-03-ib slots=16
+    hpc-04-ib slots=16
+    hpc-05-ib slots=16
+    hpc-06-ib slots=16
+    hpc-07-ib slots=16
+================================================================================
+HPLinpack 2.3  --  High-Performance Linpack benchmark  --   December 2, 2018
+Written by A. Petitet and R. Clint Whaley,  Innovative Computing Laboratory, UTK
+Modified by Piotr Luszczek, Innovative Computing Laboratory, UTK
+Modified by Julien Langou, University of Colorado Denver
+================================================================================
+
+An explanation of the input/output parameters follows:
+T/V    : Wall time / encoded variant.
+N      : The order of the coefficient matrix A.
+NB     : The partitioning blocking factor.
+P      : The number of process rows.
+Q      : The number of process columns.
+Time   : Time in seconds to solve the linear system.
+Gflops : Rate of execution for solving the linear system.
+
+The following parameter values will be used:
+
+N      :  207168 
+NB     :     192 
+PMAP   : Row-major process mapping
+P      :       8 
+Q      :      14 
+PFACT  :   Crout 
+NBMIN  :       2 
+NDIV   :       2 
+RFACT  :   Crout 
+BCAST  :  1ringM 
+DEPTH  :       1 
+SWAP   : Mix (threshold = 16)
+L1     : transposed form
+U      : transposed form
+EQUIL  : yes
+ALIGN  : 16 double precision words
+
+--------------------------------------------------------------------------------
+
+- The matrix A is randomly generated for each test.
+- The following scaled residual check will be computed:
+      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+- The relative machine precision (eps) is taken to be               1.110223e-16
+- Computational tests pass if scaled residuals are less than                16.0
+
+================================================================================
+T/V                N    NB     P     Q               Time                 Gflops
+--------------------------------------------------------------------------------
+WR11C2C2      207168   192     8    14            4426.21             1.3392e+03
+HPL_pdgesv() start time Thu Aug 20 09:40:31 2026
+
+HPL_pdgesv() end time   Thu Aug 20 10:54:18 2026
+
+--------------------------------------------------------------------------------
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.64542431e-03 ...... PASSED
+================================================================================
+
+Finished      1 tests with the following results:
+              1 tests completed and passed residual checks,
+              0 tests completed and failed residual checks,
+              0 tests skipped because of illegal input values.
+--------------------------------------------------------------------------------
+
+End of Tests.
+================================================================================
