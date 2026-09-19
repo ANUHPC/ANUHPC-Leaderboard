@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T08:02:41.896Z",
+  "generatedAt": "2026-09-19T08:08:36.681Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 18
+      "count": 19
     }
   ],
   "suites": [
@@ -68,10 +68,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 1,
+      "count": 2,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 1
+        "xenon": 2
       }
     },
     {
@@ -8797,6 +8797,87 @@
       "rank": 3
     },
     {
+      "id": "xenon/HPL_NVIDIA/Ayush/Test-1",
+      "suite": "HPL_NVIDIA",
+      "group": "Ayush",
+      "run": "Test-1",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-19T08:07:10.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-19T18:06:43+10:00",
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": "Xeno-Tek"
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 102000,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 40.91,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000445944836,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 184320,
+        "NB": 384,
+        "P": 4,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "cpus_per_task": 8,
+        "partition": "gpu"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 184320,
+        "NB": 384,
+        "P": 4,
+        "Q": 2,
+        "timeSec": 40.91,
+        "gflops": 102000,
+        "gflopsPerGpu": 12760,
+        "startTime": "Sat Sep 19 08:07:10 2026",
+        "endTime": "Sat Sep 19 08:07:51 2026",
+        "residual": 0.000445944836,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 1
+    },
+    {
       "id": "xenon/HPL_NVIDIA/baseline/a100-8gpu-n184320-nb512",
       "suite": "HPL_NVIDIA",
       "group": "baseline",
@@ -8875,7 +8956,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 1
+      "rank": 2
     },
     {
       "id": "xenon/MFC/benchmark/5eq_rk3_weno3_hll-a100",
