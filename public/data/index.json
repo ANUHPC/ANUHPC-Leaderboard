@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T14:45:57.197Z",
+  "generatedAt": "2026-09-19T07:31:46.173Z",
   "clusters": [
     {
       "name": "raijin",
@@ -66,11 +66,8 @@
       "clusters": [
         "xenon"
       ],
-      "available": false,
-      "missing": [
-        "hpl-nvidia binary",
-        "container runtime"
-      ],
+      "available": true,
+      "missing": null,
       "count": 0,
       "countByCluster": {
         "raijin": 0,
