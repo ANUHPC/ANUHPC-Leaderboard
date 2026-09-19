@@ -10,6 +10,7 @@ import {
     Filter as FilterIcon,
 } from 'lucide-react';
 import { GflopsCharts } from "./GflopsCharts";
+import { supportedClusters, validCluster } from '../suiteAvailability';
 
 interface BenchmarkPageProps {
     suite: BenchmarkSuite;
@@ -41,7 +42,9 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
     // Filters and controls
     const [searchQuery, setSearchQuery] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
-    const clusterFilter = searchParams.get('cluster') ?? 'all';
+    const suiteMeta = data?.suites?.find(s => s.name === suite);
+    const offeredClusters = supportedClusters(suiteMeta, data?.clusters ?? []);
+    const clusterFilter = suiteMeta ? validCluster(searchParams.get('cluster') ?? 'all', offeredClusters) : 'all';
     const setClusterFilter = (name: string) => {
         const next = new URLSearchParams(searchParams);
         if (name === 'all') next.delete('cluster');
@@ -148,22 +151,9 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
         return data ? data.runs.filter((r: any) => r.suite === suite) : [];
     }, [data, suite]);
 
-    // Unique clusters present in this suite
-    const availableClusters = useMemo(() => {
-        const clusters = new Set<string>();
-        filteredRuns.forEach((r: any) => { if (r.cluster) clusters.add(r.cluster); });
-        return Array.from(clusters).sort();
-    }, [filteredRuns]);
-
+    const availableClusters = offeredClusters.map(cluster => cluster.name);
     const hasAnyRuns = filteredRuns.length > 0;
 
-    // Suite metadata from the collector: which clusters offer this suite, and
-    // whether its binaries are published yet. An empty GPU board because the
-    // binary is missing is a different thing from nobody having run it.
-    const suiteMeta = useMemo(
-        () => data?.suites?.find((s: any) => s.name === suite),
-        [data, suite]
-    );
     const notOfferedHere =
         clusterFilter !== 'all' &&
         !!suiteMeta?.clusters?.length &&
@@ -180,7 +170,8 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
     // Having stderr output (hasErr) is normal — MPI binding info goes there
     const errorRuns = useMemo(
         () => clusterFilteredRuns.filter((r: any) =>
-            r.best == null && (r.outSummary == null || r.outSummary.testsPassed === 0)
+            (r.status != null && r.status !== 'ok') || r.ranking?.eligible === false ||
+            (r.best == null && (r.outSummary == null || r.outSummary.testsPassed === 0))
         ),
         [clusterFilteredRuns, suite]
     );
@@ -189,7 +180,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
         () =>
             clusterFilteredRuns.filter((r: any) => {
                 const g = getGflops(r);
-                return Number.isFinite(g);
+                return Number.isFinite(g) && (r.status == null || r.status === 'ok') && r.ranking?.eligible !== false;
             }),
         [clusterFilteredRuns, suite]
     );
@@ -498,6 +489,7 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                                         Cluster
                                     </label>
                                     <select
+                                        aria-label="Cluster"
                                         value={clusterFilter}
                                         onChange={(e) => setClusterFilter(e.target.value)}
                                         className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -755,6 +747,8 @@ export const BenchmarkPage: React.FC<BenchmarkPageProps> = ({
                                     const errMsg =
                                         r?.errorMessage ??
                                         r?.errMessage ??
+                                        r?.ranking?.reason ??
+                                        (r?.status === 'failed-residual' ? 'Residual check failed' : r?.status === 'unverified-residual' ? 'No verified residual check' : null) ??
                                         (r?.outSummary == null && r?.best == null
                                             ? (r?.hasErr ? 'No HPL output produced (check stderr)' : 'No output file found')
                                             : r?.outSummary?.testsFailed > 0

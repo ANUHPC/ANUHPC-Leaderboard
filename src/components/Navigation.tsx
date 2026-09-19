@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Cpu, Zap, Home, GitBranch, Server } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 import type { BenchmarkSuite, SuiteInfo, ClusterInfo, SuiteMeta } from '../types';
+import { supportedClusters, validCluster } from '../suiteAvailability';
 
 interface NavigationProps {
     activeSuite: BenchmarkSuite;
@@ -46,8 +47,29 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     // should need no change here.
     const [clusters, setClusters] = useState<ClusterInfo[]>([]);
     const [suites, setSuites] = useState<SuiteMeta[]>([]);
+    const suiteTabs = useRef<HTMLDivElement>(null);
     const [searchParams, setSearchParams] = useSearchParams();
-    const activeCluster = searchParams.get('cluster') ?? 'all';
+    const requestedCluster = searchParams.get('cluster') ?? 'all';
+    const activeMeta = suites.find(s => s.name === activeSuite);
+    const suiteClusters = supportedClusters(activeMeta, clusters);
+    const activeCluster = activeMeta ? validCluster(requestedCluster, suiteClusters) : requestedCluster;
+
+    useEffect(() => {
+        const container = suiteTabs.current;
+        if (!container) return;
+        const revealActive = () => {
+            const selected = container.querySelector('[aria-current="page"]');
+            if (!selected) return;
+            const tab = selected.getBoundingClientRect();
+            const area = container.getBoundingClientRect();
+            if (tab.left < area.left) container.scrollLeft -= area.left - tab.left;
+            else if (tab.right > area.right) container.scrollLeft += tab.right - area.right;
+        };
+        revealActive();
+        const observer = new ResizeObserver(revealActive);
+        observer.observe(container);
+        return () => observer.disconnect();
+    }, [activeSuite, suites]);
 
     useEffect(() => {
         fetch(`${import.meta.env.BASE_URL}data/index.json?t=${Date.now()}`, { cache: 'no-store' })
@@ -72,51 +94,26 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
             info: suiteInfos.find((s) => s.id === id),
         }));
 
-    // A suite tab keeps whichever cluster board you are on, so switching
-    // HPL -> HPL NVIDIA compares CPU against GPU on the same cluster instead
-    // of dropping you back to "All clusters".
-    const suiteHref = (id: string) => {
-        const q = activeCluster === 'all' ? '' : new URLSearchParams({cluster: activeCluster}).toString();
+    // Resolve the destination before navigation so an unsupported board never flashes.
+    const targetCluster = (meta?: SuiteMeta) => meta
+        ? validCluster(activeCluster, supportedClusters(meta, clusters)) : 'all';
+    const suiteHref = (id: string, meta?: SuiteMeta) => {
+        const cluster = targetCluster(meta);
+        const q = cluster === 'all' ? '' : new URLSearchParams({ cluster }).toString();
         return q ? `/${id}?${q}` : `/${id}`;
     };
+    const countFor = (meta?: SuiteMeta) => targetCluster(meta) === 'all'
+        ? meta?.count ?? 0 : meta?.countByCluster?.[targetCluster(meta)] ?? 0;
+    const showClusterTabs = suiteClusters.length > 1;
 
-    // On a specific cluster show that cluster's count; on "All clusters" the
-    // total. A suite not offered here (HPL_NVIDIA needs GPUs) is dimmed.
-    const countFor = (m?: SuiteMeta) =>
-        !m ? 0
-            : activeCluster === 'all' ? (m.count ?? 0)
-            : (m.countByCluster?.[activeCluster] ?? 0);
-
-    const offeredHere = (m?: SuiteMeta) =>
-        !m || activeCluster === 'all' || !m.clusters?.length
-            ? true
-            : m.clusters.includes(activeCluster);
-
-    // The suite currently open, and the clusters it is actually offered on.
-    // HPL runs on both; MFC and HPL_NVIDIA only exist on Xenon -- Raijin has no
-    // GPUs and no Fortran/MPI toolchain for MFC.
-    const activeMeta = suites.find((s) => s.name === activeSuite);
-    const suiteClusters = activeMeta?.clusters?.length ? activeMeta.clusters : null;
-
-    // A board that exists on exactly one cluster has nothing to switch between,
-    // so the picker is hidden rather than offering choices that are empty by
-    // construction. It stays visible while the suite list is still loading, and
-    // for any suite genuinely offered on more than one cluster.
-    const showClusterTabs = clusters.length > 0 && (!suiteClusters || suiteClusters.length > 1);
-
-    // Landing on a single-cluster board while ?cluster= still names another one
-    // (you were on Raijin/HPL and clicked MFC) would show an empty table with no
-    // visible control to fix it, because the picker is now hidden. Drop the
-    // parameter instead; for a single-cluster suite it selects the same rows.
+    // Repair bookmarks too, preserving the page's other filters and browser history.
     useEffect(() => {
-        if (!suiteClusters || suiteClusters.length !== 1) return;
-        const current = searchParams.get('cluster');
-        if (current && current !== suiteClusters[0]) {
-            const next = new URLSearchParams(searchParams);
-            next.delete('cluster');
-            setSearchParams(next, { replace: true });
-        }
-    }, [suiteClusters, searchParams, setSearchParams]);
+        if (!activeMeta || requestedCluster === activeCluster) return;
+        const next = new URLSearchParams(searchParams);
+        if (activeCluster === 'all') next.delete('cluster');
+        else next.set('cluster', activeCluster);
+        setSearchParams(next, { replace: true });
+    }, [activeMeta, requestedCluster, activeCluster, searchParams, setSearchParams]);
 
     const selectCluster = (name: string) => {
         const next = new URLSearchParams(searchParams);
@@ -127,7 +124,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
     };
 
     return (
-        <nav className="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
+        <nav aria-label="Leaderboard navigation" className="bg-gradient-to-r from-slate-900 to-slate-800 shadow-lg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="flex justify-between items-center py-4">
@@ -148,26 +145,22 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
 
                 {/* Suite Navigation */}
                 <div className="flex justify-between items-center pb-3">
-                    <div className="flex space-x-1 overflow-x-auto">
+                    <div ref={suiteTabs} className="flex min-w-0 space-x-1 overflow-x-auto">
                         {tabs.map(({ id, meta, info }) => {
-                            const offered = offeredHere(meta);
                             return (
                                 <Link
                                     key={id}
-                                    to={suiteHref(id)}
+                                    to={suiteHref(id, meta)}
+                                    aria-current={activeSuite === id ? 'page' : undefined}
                                     title={
-                                        !offered
-                                            ? `Not run on ${activeCluster}`
-                                            : meta?.available === false
+                                        meta?.available === false
                                               ? `Not runnable yet: ${(meta.missing ?? []).join(', ')}`
                                               : meta?.description || info?.description
                                     }
                                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
                                         activeSuite === id
                                             ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30'
-                                            : offered
-                                              ? 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
-                                              : 'text-slate-600 hover:text-slate-400 border border-transparent'
+                                            : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
                                     }`}
                                 >
                                     {getIcon(info?.type ?? 'CPU')}
@@ -190,41 +183,50 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSuite }) => {
                         href="https://github.com/ANUHPC"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center space-x-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/10 border border-transparent transition-all"
+                        aria-label="GitHub organisation"
+                        className="shrink-0 flex items-center space-x-2 px-2 sm:px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap text-slate-400 hover:text-white hover:bg-white/10 border border-transparent transition-all"
                     >
                         <Home className="w-5 h-5" />
-                        <span>GitHub Org</span>
+                        <span className="hidden lg:inline">GitHub Org</span>
                     </a>
                 </div>
 
                 {/* Cluster tabs. Results are ranked per cluster because the two
                     measure different hardware, so this is a board switch rather
                     than a filter. */}
+                {suiteClusters.length === 1 && (
+                    <div aria-label="Available cluster" className="pb-3 text-xs text-slate-400 flex items-center gap-1.5">
+                        <Server className="w-3.5 h-3.5" aria-hidden="true" />
+                        {suiteClusters[0].label ?? suiteClusters[0].name}
+                    </div>
+                )}
                 {showClusterTabs && (
                     <div className="flex items-center gap-2 pb-3 border-t border-white/5 pt-3">
                         <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-slate-500 pr-1">
                             <Server className="w-3.5 h-3.5" />
                             Cluster
                         </span>
-                        <div className="flex space-x-1 overflow-x-auto">
+                        <div className="flex min-w-0 space-x-1 overflow-x-auto">
                             <button
+                                aria-pressed={activeCluster === 'all'}
                                 onClick={() => selectCluster('all')}
                                 className={tabClass(activeCluster === 'all')}
                             >
                                 All clusters
                                 <span className="ml-1.5 text-[11px] opacity-60">
-                                    {clusters.reduce((n, c) => n + (c.count ?? 0), 0)}
+                                    {activeMeta?.count ?? 0}
                                 </span>
                             </button>
-                            {clusters.map((c) => (
+                            {suiteClusters.map((c) => (
                                 <button
                                     key={c.name}
+                                    aria-pressed={activeCluster === c.name}
                                     onClick={() => selectCluster(c.name)}
                                     title={c.description || undefined}
                                     className={tabClass(activeCluster === c.name)}
                                 >
                                     {c.label ?? c.name}
-                                    <span className="ml-1.5 text-[11px] opacity-60">{c.count ?? 0}</span>
+                                    <span className="ml-1.5 text-[11px] opacity-60">{activeMeta?.countByCluster?.[c.name] ?? 0}</span>
                                     {c.derived && (
                                         <span
                                             className="ml-1.5 text-[10px] px-1 py-0.5 rounded bg-amber-400/15 text-amber-300"
