@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T07:53:37.622Z",
+  "generatedAt": "2026-09-19T07:55:46.865Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 17
+      "count": 18
     }
   ],
   "suites": [
@@ -68,10 +68,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 0,
+      "count": 1,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 0
+        "xenon": 1
       }
     },
     {
@@ -8795,6 +8795,87 @@
       },
       "hasErr": true,
       "rank": 3
+    },
+    {
+      "id": "xenon/HPL_NVIDIA/baseline/a100-8gpu-n184320-nb512",
+      "suite": "HPL_NVIDIA",
+      "group": "baseline",
+      "run": "a100-8gpu-n184320-nb512",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-19T07:54:27.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-19T07:53:20Z",
+      "submitter": {
+        "name": "baseline",
+        "house": true,
+        "by": "Xeno-Tek"
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 101700,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 41.06,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.00040141439,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 184320,
+        "NB": 512,
+        "P": 4,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "cpus_per_task": 8,
+        "partition": "gpu"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 184320,
+        "NB": 512,
+        "P": 4,
+        "Q": 2,
+        "timeSec": 41.06,
+        "gflops": 101700,
+        "gflopsPerGpu": 12710,
+        "startTime": "Sat Sep 19 07:54:27 2026",
+        "endTime": "Sat Sep 19 07:55:08 2026",
+        "residual": 0.00040141439,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 1
     },
     {
       "id": "xenon/MFC/benchmark/5eq_rk3_weno3_hll-a100",
