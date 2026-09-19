@@ -1,0 +1,26 @@
+[1,0]<stdout>:HPL-NVIDIA 25.4.0  -- NVIDIA accelerated HPL benchmark -- NVIDIA
+[1,0]<stdout>:HPLinpack 2.1  --  High-Performance Linpack benchmark  --   October 26, 2012
+[1,0]<stdout>:T/V    : Wall time / encoded variant.
+[1,0]<stdout>:      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+[1,0]<stdout>:HPL-NVIDIA ignores the following parameters from input file:
+[1,0]<stdout>:HPL-NVIDIA settings from environment variables:
+[1,0]<stdout>:--- DEVICE INFO ---
+[1,0]<stdout>:  Peak clock frequency: 1410 MHz
+[1,0]<stdout>:  SM version          : 80
+[1,0]<stdout>:  Number of SMs       : 108
+[1,0]<stdout>:--- MEMORY INFO ---
+[1,0]<stdout>:DEVICE
+[1,0]<stdout>:  HPL buffers      =     37.00843 GiB (MIN)     37.36976 GiB (MAX)     37.18909 GiB (AVG)
+[1,0]<stdout>:HOST
+[1,0]<stdout>:  HPL buffers      =      0.00039 GiB (MIN)      0.00039 GiB (MAX)      0.00039 GiB (AVG)
+[1,0]<stdout>:T/V                N    NB     P     Q         Time          Gflops (   per GPU)
+[1,0]<stdout>:WC0           189440   512     4     2        74.13       6.114e+04 ( 7.643e+03)
+[1,0]<stdout>:HPL_pdgesv() start time Wed Sep 17 03:20:22 2025
+[1,0]<stdout>:HPL_pdgesv() end time   Wed Sep 17 03:21:37 2025
+[1,0]<stdout>:||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   0.000412123315 ...... PASSED
+[1,0]<stdout>:||Ax-b||_oo  . . . . . . . . . . . . . . . . . = 0.0000000027970903
+[1,0]<stdout>:Finished      1 tests with the following results:
+[1,0]<stdout>:              1 tests completed and passed residual checks,
+[1,0]<stdout>:              0 tests completed and failed residual checks,
+[1,0]<stdout>:              0 tests skipped because of illegal input values.
+[1,0]<stdout>:End of Tests.

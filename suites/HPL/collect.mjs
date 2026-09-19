@@ -4,9 +4,9 @@
 //   1. result.json written by the job epilogue  (new runs — authoritative)
 //   2. HPL's stdout, parsed  (the 137 legacy runs already in output/)
 //
-// The parsers below are lifted VERBATIM from the original scripts/collect-hpl.js
-// so that every historical run keeps rendering exactly as it does today. Do not
-// "tidy" them without re-checking against output/HPL in full.
+// Netlib, AOCL and NVIDIA output share result and residual records. Keep each
+// result tied to its own residual: another candidate passing cannot validate
+// a faster candidate that failed or never completed its check.
 
 function firstToken(line) {
     const m = line.trim().match(/^(\S+)/);
@@ -219,21 +219,25 @@ function parseHplDat(raw) {
 
 function parseSbatch(shRaw) {
     const sb = {};
-    const lines = shRaw.split(/\r?\n/);
-    for (const l of lines) {
-        const m = l.match(/^#SBATCH\s+--([^=\s]+)(?:=(.+))?/);
-        if (m) {
-            const key = m[1].trim();
-            const val = (m[2] || "").trim();
-            sb[key] = key === "nodes" ||
-            key === "ntasks" ||
-            key === "ntasks-per-node" ||
-            key === "cpus-per-task"
-                ? Number(val)
-                : val || true;
-        }
+    const numeric = new Set(["nodes", "ntasks", "ntasks-per-node", "cpus-per-task"]);
+    for (const line of shRaw.split(/\r?\n/)) {
+        // Both --nodes=2 and --nodes 2 occur in submitted scripts. A trailing
+        // shell comment is not part of the value; never publish NaN resources.
+        const m = line.match(/^\s*#SBATCH\s+--([^=\s]+)(?:[=\s]+([^#]*))?/);
+        if (!m) continue;
+        const key = m[1];
+        const val = (m[2] || "").trim();
+        sb[key] = numeric.has(key)
+            ? (/^\d+$/.test(val) && Number.isSafeInteger(Number(val)) && Number(val) > 0 ? Number(val) : null)
+            : val || true;
     }
     return sb;
+}
+
+function normalizeOutput(raw) {
+    // Open MPI --tag-output prefixes every line, including the numeric row.
+    // Strip only its known transport wrapper, not arbitrary bracketed content.
+    return raw.replace(/^\s*\[\d+,\d+\]<(?:stdout|stderr)>:\s?/gm, "");
 }
 
 function parseOutCpu(raw) {
@@ -245,7 +249,7 @@ function parseOutCpu(raw) {
   //  - optional SWP column between T/V and N
   //  - supports various spacing & E-notation floats
   const tvRe =
-    /^\s*([A-Z]{2}\S*)\s+(?:\S+\s+)?(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([0-9.]+)\s+([0-9.eE+\-]+)/;
+    /^\s*(W[RC]\S*)\s+(?:\S+\s+)?(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([0-9.eE+\-]+)\s+([0-9.eE+\-]+)(?:\s+\(\s*([0-9.eE+\-]+)\s*\))?\s*$/;
 
   for (let i = 0; i < lines.length; i++) {
     const l = lines[i];
@@ -264,11 +268,20 @@ function parseOutCpu(raw) {
         Q: Number(m[5]),
         timeSec: Number(m[6]),
         gflops: Number(m[7]),
+        ...(m[8] ? { gflopsPerGpu: Number(m[8]) } : {}),
         startTime: null,
         endTime: null,
         residual: null,
         residualPassed: null,
       };
+      continue;
+    }
+
+    // A malformed candidate still ends the previous candidate. Its later
+    // PASSED line must never validate the preceding, incomplete result.
+    if (/^\s*W[RC]\S*\s+/.test(l)) {
+      if (cur) runs.push(cur);
+      cur = null;
       continue;
     }
 
@@ -278,11 +291,12 @@ function parseOutCpu(raw) {
       const e = l.match(/HPL_pdgesv\(\)\s+end time\s+(.+)/);
       if (e) cur.endTime = e[1].trim();
       const r = l.match(
-        /\|\|Ax-b\|\|_oo.*=\s*([0-9.eE+\-]+).*?(PASSED|FAILED)/i
+        /\|\|Ax-b\|\|_oo.*=\s*(\S+).*?\b(PASSED|FAILED)\b/i
       );
       if (r) {
         cur.residual = Number(r[1]);
-        cur.residualPassed = r[2].toUpperCase() === "PASSED";
+        cur.residualPassed = r[2].toUpperCase() === "PASSED" && Number.isFinite(cur.residual) && cur.residual >= 0;
+        if (!Number.isFinite(cur.residual)) cur.residual = null;
       }
     }
   }
@@ -325,32 +339,13 @@ function parseOutCpu(raw) {
 
 function parseOutNvidia(raw) {
     const lines = raw.split(/\r?\n/);
-    const runs = [];
-    let deviceInfo = {};
+    const parsed = parseOutCpu(raw);
+    const deviceInfo = {};
     const memInfo = { DEVICE: {}, HOST: {} };
     const traces = [];
     let section = null;
 
-    const tvRe =
-        /^\s*([A-Z]{2}[^\s]*)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+([0-9.]+)\s+([0-9.eE+\-]+)\s+\(\s*([0-9.eE+\-]+)\s*\)/;
-
-    for (let i = 0; i < lines.length; i++) {
-        const l = lines[i];
-        const tv = l.match(tvRe);
-        if (tv) {
-            runs.push({
-                tv: tv[1],
-                N: Number(tv[2]),
-                NB: Number(tv[3]),
-                P: Number(tv[4]),
-                Q: Number(tv[5]),
-                timeSec: Number(tv[6]),
-                gflops: Number(tv[7]),
-                gflopsPerGpu: Number(tv[8]),
-            });
-            continue;
-        }
-
+    for (const l of lines) {
         if (/--- DEVICE INFO ---/.test(l)) {
             section = "DEVICE_INFO";
             continue;
@@ -398,49 +393,17 @@ function parseOutNvidia(raw) {
         }
     }
 
-    let startTime = null;
-    let endTime = null;
-    const s = raw.match(/HPL_pdgesv\(\)\s+start time\s+(.+)/);
-    if (s) startTime = s[1].trim();
-    const e = raw.match(/HPL_pdgesv\(\)\s+end time\s+(.+)/);
-    if (e) endTime = e[1].trim();
-
-    let residual = null;
-    let residualPassed = null;
-    const r = raw.match(
-        /\|\|Ax-b\|\|_oo.*=\s*([0-9.eE+\-]+).*?(PASSED|FAILED)/
-    );
-    if (r) {
-        residual = Number(r[1]);
-        residualPassed = r[2] === "PASSED";
-    }
-
-    const summary = {
-        testsTotal: null,
-        testsPassed: null,
-        testsFailed: null,
-        testsSkipped: null,
-    };
-    const m = raw.match(
-        /Finished\s+(\d+)\s+tests[\s\S]*?(\d+)\s+tests completed and passed[\s\S]*?(\d+)\s+tests completed and failed[\s\S]*?(\d+)\s+tests skipped/i
-    );
-    if (m) {
-        summary.testsTotal = Number(m[1]);
-        summary.testsPassed = Number(m[2]);
-        summary.testsFailed = Number(m[3]);
-        summary.testsSkipped = Number(m[4]);
-    }
-
+    const best = bestFromRuns(parsed.runs);
     return {
-        runs,
-        summary,
+        ...parsed,
         deviceInfo,
         memInfo,
         traces,
-        startTime,
-        endTime,
-        residual,
-        residualPassed,
+        // Backwards-compatible overview fields, always from the same result.
+        startTime: best?.startTime ?? null,
+        endTime: best?.endTime ?? null,
+        residual: best?.residual ?? null,
+        residualPassed: best?.residualPassed ?? null,
     };
 }
 
@@ -454,17 +417,13 @@ function toIso(asctime) {
 }
 
 function bestFromRuns(runs) {
-    if (!runs || !runs.length) return null;
-    let best = runs[0];
-    for (const r of runs) {
-        if ((r.gflops ?? 0) > (best.gflops ?? 0)) best = r;
-    }
-    return {
-        gflops: best.gflops ?? null,
-        N: best.N ?? null,
-        NB: best.NB ?? null,
-        timeSec: best.timeSec ?? null,
-    };
+    const usable = (runs || []).filter((r) =>
+        Number.isFinite(r.gflops) && r.gflops > 0 &&
+        Number.isFinite(r.timeSec) && r.timeSec >= 0 &&
+        [r.N, r.NB, r.P, r.Q].every((n) => Number.isSafeInteger(n) && n > 0));
+    if (!usable.length) return null;
+    return usable.reduce((best, r) => r.gflops > best.gflops ? r : best);
+
 }
 
 // --- suite interface -------------------------------------------------------
@@ -494,41 +453,49 @@ export async function collect(ctx) {
 
   // The NVIDIA container prints an extra per-GPU column; pick the parser by
   // which shape the file actually has, not by directory name.
-  const isNvidia = !!outRaw && /--- DEVICE INFO ---|gflopsPerGpu|\(\s*[0-9.]+\s*\)\s*$/m.test(outRaw);
-  const parsed   = outRaw ? (isNvidia ? parseOutNvidia(outRaw) : parseOutCpu(outRaw)) : null;
+  const normalizedOut = outRaw ? normalizeOutput(outRaw) : "";
+  const isNvidia = !!outRaw && /--- DEVICE INFO ---|gflopsPerGpu|\(\s*[0-9.eE+\-]+\s*\)\s*$/m.test(normalizedOut);
+  const parsed   = outRaw ? (isNvidia ? parseOutNvidia(normalizedOut) : parseOutCpu(normalizedOut)) : null;
   const best     = parsed ? bestFromRuns(parsed.runs) : null;
 
-  const passed = parsed?.runs?.length
-    ? parsed.runs.some((r) => r.residualPassed !== false)
-    : null;
+  const passed = best?.residualPassed ?? null;
+  const status = !best ? "no-result" : passed === true ? "ok"
+    : passed === false ? "failed-residual" : "unverified-residual";
 
   return {
     metric: best?.gflops != null ? { key: "gflops", value: best.gflops } : null,
     secondary: [
       best?.timeSec != null ? { key: "time", value: best.timeSec } : null,
-      parsed?.residual != null ? { key: "residual", value: parsed.residual } : null,
+      best?.residual != null ? { key: "residual", value: best.residual } : null,
     ].filter(Boolean),
     config: {
       N: best?.N ?? dat?.Ns?.[0] ?? null,
       NB: best?.NB ?? dat?.NBs?.[0] ?? null,
-      P: parsed?.runs?.[0]?.P ?? dat?.Ps?.[0] ?? null,
-      Q: parsed?.runs?.[0]?.Q ?? dat?.Qs?.[0] ?? null,
+      P: best?.P ?? dat?.Ps?.[0] ?? null,
+      Q: best?.Q ?? dat?.Qs?.[0] ?? null,
       variant: isNvidia ? "nvidia" : "cpu",
       nodes: sbatch?.nodes ?? null,
       tasks_per_node: sbatch?.["ntasks-per-node"] ?? null,
       cpus_per_task: sbatch?.["cpus-per-task"] ?? null,
       partition: sbatch?.partition ?? null,
     },
-    provenance: { started: parsed?.runs?.[0]?.startTime ?? null,
-                  ended: parsed?.runs?.[0]?.endTime ?? null },
+    provenance: { started: best?.startTime ?? null,
+                  ended: best?.endTime ?? null },
     // When the run happened, as the run itself reports it. HPL prints
     // "HPL_pdgesv() start time Wed Apr  1 01:42:05 2026" in C asctime format,
     // which has no timezone -- it is local to the cluster that ran it, and is
     // read as UTC here because that is the only consistent choice available.
     // Present in 73 of 132 Raijin runs; the rest failed before reaching it and
     // are dated from git history instead.
-    ranAt: toIso(parsed?.startTime ?? parsed?.runs?.[0]?.startTime ?? null),
-    status: best?.gflops != null ? (passed === false ? "failed-residual" : "ok") : "no-result",
+    ranAt: toIso(best?.startTime ?? null),
+    status,
+    ranking: {
+      eligible: status === "ok",
+      reason: status === "ok" ? null : status === "failed-residual"
+        ? "Fastest result failed its residual check"
+        : status === "unverified-residual" ? "Fastest result has no verified residual check"
+        : "No valid performance result",
+    },
     detail: {
       dat: datRaw ? { raw: datRaw, parsed: dat, file: datName } : null,
       job: shRaw ? { raw: shRaw, sbatch, file: shName } : null,
