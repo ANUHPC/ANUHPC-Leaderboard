@@ -1,26 +1,17 @@
-name: Submit jobs (xenon)
+name: Submit MFC (xenon)
 
-# HPL workflows only stage HPL suites. MFC has its own workflow and shares
-# the cluster concurrency lock, so a broken MFC case cannot block HPL validation.
-#
-# The runner MUST carry the "xenon" label or this never matches.
+# Production MFC runs use main inputs and return results to main.
+# Develop changes on feature branches, then merge through validation.
 
 on:
   push:
     branches: [main]
     paths:
-      - "input/xenon/HPL/**"
-      - "input/xenon/HPL_NVIDIA/**"
+      - "input/xenon/MFC/**"
   workflow_dispatch:
     inputs:
-      suite:
-        description: "HPL suite to submit"
-        type: choice
-        options: [all, HPL, HPL_NVIDIA]
-        required: false
-        default: "all"
       job:
-        description: "Optional group/run (select one suite); required for rerun"
+        description: "Optional group/run; required for rerun"
         required: false
         default: ""
       rerun:
@@ -43,7 +34,7 @@ env:
   CLUSTER: xenon
   SCRATCH_BASE: /scratch/jobs
   PARTITION: all
-  ALLOWED_SUITES: HPL,HPL_NVIDIA
+  ALLOWED_SUITES: MFC
 
 jobs:
   submit:
@@ -92,7 +83,7 @@ jobs:
 
       - name: Stage and validate selected jobs
         env:
-          SELECTED_SUITE: ${{ inputs.suite || 'all' }}
+          SELECTED_SUITE: MFC
           SELECTED_JOB: ${{ inputs.job }}
           RERUN: ${{ inputs.rerun }}
         run: |
@@ -136,6 +127,20 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Preserve MFC visualization data
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -d "${STAGE:-}" ] || exit 0
+          for jobdir in "$STAGE"/MFC/*/*/; do
+            [ -f "$jobdir/job.yml" ] || continue
+            [ "$(node scripts/read-yaml.mjs "$jobdir/job.yml" visualize false)" = true ] || continue
+            dest="${SCRATCH_BASE}/visualizations/${GITHUB_RUN_ID}/MFC/$(basename "$(dirname "$jobdir")")/$(basename "$jobdir")"
+            mkdir -p "$(dirname "$dest")"
+            mv "$jobdir" "$dest"
+            echo "MFC visualization data: \`$dest\`" >> "$GITHUB_STEP_SUMMARY"
+          done
 
       - name: Clean scratch
         if: always()

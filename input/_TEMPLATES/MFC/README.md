@@ -6,8 +6,8 @@ Submit files to **ANUHPC/ANUHPC-Leaderboard, branch `main`**, under:
 input/xenon/MFC/<your-name>/<unique-run-name>/
 ```
 
-The directory selects the cluster and suite. A commit changing `input/xenon/`
-starts **Actions → Submit jobs (xenon)**. It queues a Slurm job, waits for it,
+The directory selects the cluster and suite. A commit changing `input/xenon/MFC/`
+starts **Actions → Submit MFC (xenon)**. It queues a Slurm job, waits for it,
 commits the results, and triggers the website deployment. A pull request runs
 validation; the simulation starts when the PR is merged into `main`.
 Committing templates under `input/_TEMPLATES/` does not submit a simulation.
@@ -54,7 +54,7 @@ For the PDF exercise, follow the [Problem 3 walkthrough](practice-problem3/READM
    and, when needed, `.../case.py`.
 4. Commit both files together. Either commit to `main`, or create a branch,
    open a pull request, wait for validation, and merge it into `main`.
-5. Open **Actions → Submit jobs (xenon)**. The run may wait behind an existing
+5. Open **Actions → Submit MFC (xenon)**. The run may wait behind an existing
    submission: Xenon serializes jobs because MFC uses shared build directories.
 
 For a ranked benchmark with just one file, **Add file → Create new file** also
@@ -80,8 +80,9 @@ git push origin main
 Replace `Ayush` and the run name. Choose a **new run directory for every
 experiment**. Editing a run that already completed does not automatically
 rerun it: the workflow skips completed output. The Actions **Run workflow**
-form can force reruns with `suite=MFC` and `rerun=true`, but that reruns **all
-retained MFC jobs**, so use a new directory for an ordinary experiment.
+form can retry one run: enter `job=Ayush/cpu-benchmark-01` and select
+`rerun=true`. A rerun requires a specific `group/run`, so it cannot replay
+all retained jobs accidentally. Leave `rerun` off to run only unfinished jobs.
 
 ## Fields and supported resources
 

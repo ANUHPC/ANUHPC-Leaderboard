@@ -22,6 +22,7 @@ on:
     # Deploy when either cluster has finished harvesting results.
     workflows:
       - "Submit jobs (xenon)"
+      - "Submit MFC (xenon)"
       - "Submit jobs (raijin)"
     types:
       - completed

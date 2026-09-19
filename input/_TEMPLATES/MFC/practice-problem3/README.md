@@ -34,7 +34,7 @@ Replace `Ayush` with your own group/name. **Commit both files together to
 Do not upload a `run.sh`, and do not place the files in `output/`, `website`,
 or `gh-pages`. See the [GitHub upload walkthrough](../README.md#submit-using-the-github-website).
 
-Then open **Actions → Submit jobs (xenon)**. The runner automatically:
+Then open **Actions → Submit MFC (xenon)**. The runner automatically:
 
 1. Validates the job and selects the prebuilt Haswell CPU installation.
 2. Runs MFC's system check, preprocessing, simulation and postprocessing.
