@@ -27,6 +27,13 @@
       "unit": "s",
       "label": "Solve time",
       "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.00343288457,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
     }
   ],
   "parameters": null,
@@ -48,16 +55,27 @@
     "ended": "Thu Sep  3 03:35:04 2026"
   },
   "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
   "notes": [],
   "raw": {
     "run.sh-230.out": "raw/raijin/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.out",
     "run.sh-230.err": "raw/raijin/HPL/VarSweep/2 nodes 60n192nb2p8q/run.sh-230.err"
   },
   "best": {
-    "gflops": 252.91,
+    "tv": "WR02C2C2",
     "N": 60000,
     "NB": 192,
-    "timeSec": 569.4
+    "P": 4,
+    "Q": 4,
+    "timeSec": 569.4,
+    "gflops": 252.91,
+    "startTime": "Thu Sep  3 03:25:35 2026",
+    "endTime": "Thu Sep  3 03:35:04 2026",
+    "residual": 0.00343288457,
+    "residualPassed": true
   },
   "dat": null,
   "job": null,
@@ -121,10 +139,17 @@
       "size": 3682
     },
     "best": {
-      "gflops": 252.91,
+      "tv": "WR02C2C2",
       "N": 60000,
       "NB": 192,
-      "timeSec": 569.4
+      "P": 4,
+      "Q": 4,
+      "timeSec": 569.4,
+      "gflops": 252.91,
+      "startTime": "Thu Sep  3 03:25:35 2026",
+      "endTime": "Thu Sep  3 03:35:04 2026",
+      "residual": 0.00343288457,
+      "residualPassed": true
     }
   }
 }

@@ -34,6 +34,10 @@
     "ended": null
   },
   "status": "no-result",
+  "ranking": {
+    "eligible": false,
+    "reason": "No valid performance result"
+  },
   "notes": [],
   "raw": {
     "HPL.dat": "raw/raijin/HPL/Maya/trial-2/HPL.dat",

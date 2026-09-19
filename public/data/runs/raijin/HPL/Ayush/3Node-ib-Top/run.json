@@ -27,6 +27,13 @@
       "unit": "s",
       "label": "Solve time",
       "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.00330770018,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
     }
   ],
   "parameters": null,
@@ -48,6 +55,10 @@
     "ended": "Fri Apr  3 12:07:11 2026"
   },
   "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
   "notes": [],
   "raw": {
     "HPL.dat": "raw/raijin/HPL/Ayush/3Node-ib-Top/HPL.dat",
@@ -56,10 +67,17 @@
     "run.sh-38.err": "raw/raijin/HPL/Ayush/3Node-ib-Top/run.sh-38.err"
   },
   "best": {
-    "gflops": 737.45,
+    "tv": "WR11C2R4",
     "N": 141312,
     "NB": 192,
-    "timeSec": 2551.06
+    "P": 2,
+    "Q": 3,
+    "timeSec": 2551.06,
+    "gflops": 737.45,
+    "startTime": "Fri Apr  3 11:24:40 2026",
+    "endTime": "Fri Apr  3 12:07:11 2026",
+    "residual": 0.00330770018,
+    "residualPassed": true
   },
   "dat": {
     "raw": "HPLinpack benchmark input file\nRaijin 3-node InfiniBand test (80% memory)\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n141312       Ns\n1            # of NBs\n192          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n2            Ps\n3            Qs\n16.0         threshold\n1            # of panel fact\n2            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n4            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n1            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n64           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)",
@@ -309,10 +327,17 @@
       "size": 2488
     },
     "best": {
-      "gflops": 737.45,
+      "tv": "WR11C2R4",
       "N": 141312,
       "NB": 192,
-      "timeSec": 2551.06
+      "P": 2,
+      "Q": 3,
+      "timeSec": 2551.06,
+      "gflops": 737.45,
+      "startTime": "Fri Apr  3 11:24:40 2026",
+      "endTime": "Fri Apr  3 12:07:11 2026",
+      "residual": 0.00330770018,
+      "residualPassed": true
     }
   }
 }
