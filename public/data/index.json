@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T07:55:46.865Z",
+  "generatedAt": "2026-09-19T07:56:27.080Z",
   "clusters": [
     {
       "name": "raijin",
@@ -9827,7 +9827,7 @@
       "run": "task2-n32-weno5-cfl0025",
       "cluster": "xenon",
       "clusterSource": "path (confirmed by output)",
-      "date": "2026-09-17T14:31:30Z",
+      "date": "2026-09-19T07:55:54Z",
       "dateSource": "run",
       "submittedAt": "2026-09-17T14:25:19Z",
       "submitter": {
@@ -9837,7 +9837,7 @@
       },
       "metric": {
         "key": "grind",
-        "value": 179.04301075,
+        "value": 178.84408602,
         "unit": "ns/gp/eq/rhs",
         "label": "Grind time",
         "direction": "lower"
@@ -9845,14 +9845,14 @@
       "secondary": [
         {
           "key": "exec",
-          "value": 1.0435644,
+          "value": 1.0423781,
           "unit": "s",
           "label": "Simulation wall time",
           "direction": "lower"
         },
         {
           "key": "s_step",
-          "value": 0.0000333,
+          "value": 0.00003327,
           "unit": "s/step",
           "label": "Seconds per step",
           "direction": "lower"

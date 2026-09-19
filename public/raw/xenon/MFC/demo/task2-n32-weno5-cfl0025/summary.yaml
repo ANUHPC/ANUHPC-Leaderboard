@@ -1,6 +1,6 @@
 invocation:
 - run
-- /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py
+- /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py
 - -e
 - batch
 - -c
@@ -19,7 +19,7 @@ invocation:
 - --name
 - mfc-task2-n32-weno5-cfl0025
 - -o
-- /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml
+- /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml
 - --clean
 - --no-build
 - --gpu
@@ -43,9 +43,9 @@ lock:
   single: false
   unified: false
 syscheck:
-    exec:  .7002093
+    exec:  .8221205
 pre_process:
-    exec:  .7276516
+    exec:  .7271523
 simulation:
-    exec:  1.0435644
-    grind: 179.04301075
+    exec:  1.0423781
+    grind: 178.84408602

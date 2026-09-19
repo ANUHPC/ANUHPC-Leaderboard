@@ -5,7 +5,7 @@
   "run": "task2-n32-weno5-cfl0025",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-09-17T14:31:30Z",
+  "date": "2026-09-19T07:55:54Z",
   "dateSource": "run",
   "submittedAt": "2026-09-17T14:25:19Z",
   "submitter": {
@@ -15,7 +15,7 @@
   },
   "metric": {
     "key": "grind",
-    "value": 179.04301075,
+    "value": 178.84408602,
     "unit": "ns/gp/eq/rhs",
     "label": "Grind time",
     "direction": "lower"
@@ -23,14 +23,14 @@
   "secondary": [
     {
       "key": "exec",
-      "value": 1.0435644,
+      "value": 1.0423781,
       "unit": "s",
       "label": "Simulation wall time",
       "direction": "lower"
     },
     {
       "key": "s_step",
-      "value": 0.0000333,
+      "value": 0.00003327,
       "unit": "s/step",
       "label": "Seconds per step",
       "direction": "lower"
@@ -102,7 +102,7 @@
     "case": "advection_1d",
     "case_registry": "tree",
     "case_sha256": "f03fad17cc88cf4275b1ef2f3dd81fe64a1636912e71e068af39a820c75d1654",
-    "invocation": "run /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 1 -n 1 -p cpu -w 00:20:00 --name mfc-task2-n32-weno5-cfl0025 -o /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml --clean --no-build --gpu no --wait -- -N 32 --order 5 --cfl 0.025",
+    "invocation": "run /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation -N 1 -n 1 -p cpu -w 00:20:00 --name mfc-task2-n32-weno5-cfl0025 -o /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml --clean --no-build --gpu no --wait -- -N 32 --order 5 --cfl 0.025",
     "lock": {
       "debug": false,
       "fastmath": false,
@@ -144,8 +144,8 @@
     "size": 363646,
     "parsed": {
       "banner": {
-        "start_time": "14:31:21",
-        "start_date": "14:31:21",
+        "start_time": "07:55:44",
+        "start_date": "07:55:44",
         "partition": "cpu",
         "walltime": "00:20:00",
         "nodes": "1",
@@ -169,708 +169,708 @@
         {
           "step": 25,
           "total": 2796,
-          "avg": 0.0001097727,
-          "perStep": 0.000102
+          "avg": 0.0001103636,
+          "perStep": 0.000112
         },
         {
           "step": 49,
           "total": 2796,
-          "avg": 0.0001101739,
-          "perStep": 0.000103
+          "avg": 0.000113413,
+          "perStep": 0.000137
         },
         {
           "step": 73,
           "total": 2796,
-          "avg": 0.0001088571,
-          "perStep": 0.000103
+          "avg": 0.0001125571,
+          "perStep": 0.000133
         },
         {
           "step": 97,
           "total": 2796,
-          "avg": 0.000108234,
+          "avg": 0.0001122872,
           "perStep": 0.000103
         },
         {
           "step": 121,
           "total": 2796,
-          "avg": 0.0001075339,
+          "avg": 0.0001116356,
           "perStep": 0.000103
         },
         {
           "step": 145,
           "total": 2796,
-          "avg": 0.0001070986,
-          "perStep": 0.000102
+          "avg": 0.0001108732,
+          "perStep": 0.000103
         },
         {
           "step": 169,
           "total": 2796,
-          "avg": 0.0001073313,
-          "perStep": 0.000115
+          "avg": 0.0001100301,
+          "perStep": 0.000122
         },
         {
           "step": 193,
           "total": 2796,
-          "avg": 0.0001070895,
-          "perStep": 0.000108
+          "avg": 0.0001095211,
+          "perStep": 0.000102
         },
         {
           "step": 217,
           "total": 2796,
-          "avg": 0.0001068131,
-          "perStep": 0.000102
+          "avg": 0.0001092009,
+          "perStep": 0.000103
         },
         {
           "step": 241,
           "total": 2796,
-          "avg": 0.0001067563,
-          "perStep": 0.000103
+          "avg": 0.0001088613,
+          "perStep": 0.000106
         },
         {
           "step": 265,
           "total": 2796,
-          "avg": 0.0001067366,
+          "avg": 0.0001085687,
           "perStep": 0.000103
         },
         {
           "step": 289,
           "total": 2796,
-          "avg": 0.0001066888,
+          "avg": 0.000108542,
           "perStep": 0.000103
         },
         {
           "step": 313,
           "total": 2796,
-          "avg": 0.0001066645,
-          "perStep": 0.000103
+          "avg": 0.0001083645,
+          "perStep": 0.000116
         },
         {
           "step": 337,
           "total": 2796,
-          "avg": 0.0001066946,
+          "avg": 0.0001081497,
           "perStep": 0.000116
         },
         {
           "step": 361,
           "total": 2796,
-          "avg": 0.0001072654,
+          "avg": 0.0001082765,
           "perStep": 0.000103
         },
         {
           "step": 385,
           "total": 2796,
-          "avg": 0.0001072513,
-          "perStep": 0.000116
+          "avg": 0.0001081492,
+          "perStep": 0.000104
         },
         {
           "step": 409,
           "total": 2796,
-          "avg": 0.0001070911,
+          "avg": 0.0001079729,
           "perStep": 0.000103
         },
         {
           "step": 433,
           "total": 2796,
-          "avg": 0.0001069512,
-          "perStep": 0.000103
+          "avg": 0.0001078977,
+          "perStep": 0.000118
         },
         {
           "step": 457,
           "total": 2796,
-          "avg": 0.0001069075,
+          "avg": 0.0001077797,
           "perStep": 0.000103
         },
         {
           "step": 481,
           "total": 2796,
-          "avg": 0.0001067824,
-          "perStep": 0.000103
+          "avg": 0.0001076611,
+          "perStep": 0.000104
         },
         {
           "step": 505,
           "total": 2796,
-          "avg": 0.0001069143,
-          "perStep": 0.000103
+          "avg": 0.0001075697,
+          "perStep": 0.000104
         },
         {
           "step": 529,
           "total": 2796,
-          "avg": 0.0001068441,
-          "perStep": 0.000102
+          "avg": 0.0001074696,
+          "perStep": 0.000103
         },
         {
           "step": 553,
           "total": 2796,
-          "avg": 0.0001067927,
-          "perStep": 0.000131
+          "avg": 0.0001073818,
+          "perStep": 0.000103
         },
         {
           "step": 577,
           "total": 2796,
-          "avg": 0.0001067439,
-          "perStep": 0.000122
+          "avg": 0.0001073554,
+          "perStep": 0.000103
         },
         {
           "step": 601,
           "total": 2796,
-          "avg": 0.0001070853,
-          "perStep": 0.000103
+          "avg": 0.0001072742,
+          "perStep": 0.000115
         },
         {
           "step": 625,
           "total": 2796,
-          "avg": 0.0001070209,
+          "avg": 0.0001071833,
           "perStep": 0.000103
         },
         {
           "step": 649,
           "total": 2796,
-          "avg": 0.0001069381,
-          "perStep": 0.000107
+          "avg": 0.0001071563,
+          "perStep": 0.000103
         },
         {
           "step": 673,
           "total": 2796,
-          "avg": 0.0001068791,
-          "perStep": 0.000103
+          "avg": 0.0001071567,
+          "perStep": 0.000114
         },
         {
           "step": 697,
           "total": 2796,
-          "avg": 0.0001068559,
-          "perStep": 0.000102
+          "avg": 0.0001071585,
+          "perStep": 0.000103
         },
         {
           "step": 721,
           "total": 2796,
-          "avg": 0.0001067646,
-          "perStep": 0.000107
+          "avg": 0.0001071504,
+          "perStep": 0.000103
         },
         {
           "step": 745,
           "total": 2796,
-          "avg": 0.0001067129,
+          "avg": 0.0001071078,
           "perStep": 0.000103
         },
         {
           "step": 769,
           "total": 2796,
-          "avg": 0.0001067337,
-          "perStep": 0.000102
+          "avg": 0.0001070405,
+          "perStep": 0.000123
         },
         {
           "step": 793,
           "total": 2796,
-          "avg": 0.0001066962,
-          "perStep": 0.000116
+          "avg": 0.0001071101,
+          "perStep": 0.000104
         },
         {
           "step": 817,
           "total": 2796,
-          "avg": 0.0001066351,
-          "perStep": 0.000108
+          "avg": 0.0001070971,
+          "perStep": 0.000103
         },
         {
           "step": 841,
           "total": 2796,
-          "avg": 0.0001066074,
-          "perStep": 0.000103
+          "avg": 0.0001070632,
+          "perStep": 0.000107
         },
         {
           "step": 865,
           "total": 2796,
-          "avg": 0.0001065499,
-          "perStep": 0.000103
+          "avg": 0.0001070325,
+          "perStep": 0.000116
         },
         {
           "step": 889,
           "total": 2796,
-          "avg": 0.0001064955,
-          "perStep": 0.000102
+          "avg": 0.0001070135,
+          "perStep": 0.000103
         },
         {
           "step": 913,
           "total": 2796,
-          "avg": 0.0001064835,
-          "perStep": 0.000102
+          "avg": 0.000106978,
+          "perStep": 0.000104
         },
         {
           "step": 937,
           "total": 2796,
-          "avg": 0.0001064679,
+          "avg": 0.0001070375,
           "perStep": 0.000103
         },
         {
           "step": 961,
           "total": 2796,
-          "avg": 0.0001064572,
-          "perStep": 0.000106
+          "avg": 0.0001070021,
+          "perStep": 0.000103
         },
         {
           "step": 985,
           "total": 2796,
-          "avg": 0.0001064613,
-          "perStep": 0.000131
+          "avg": 0.0001070346,
+          "perStep": 0.000103
         },
         {
           "step": 1009,
           "total": 2796,
-          "avg": 0.0001064722,
-          "perStep": 0.000102
+          "avg": 0.000106994,
+          "perStep": 0.000103
         },
         {
           "step": 1033,
           "total": 2796,
-          "avg": 0.000106435,
+          "avg": 0.0001070252,
           "perStep": 0.000103
         },
         {
           "step": 1057,
           "total": 2796,
-          "avg": 0.0001064298,
-          "perStep": 0.000104
+          "avg": 0.0001069715,
+          "perStep": 0.000103
         },
         {
           "step": 1081,
           "total": 2796,
-          "avg": 0.0001064054,
+          "avg": 0.0001069267,
           "perStep": 0.000103
         },
         {
           "step": 1105,
           "total": 2796,
-          "avg": 0.0001063975,
-          "perStep": 0.00013
+          "avg": 0.0001069165,
+          "perStep": 0.000103
         },
         {
           "step": 1129,
           "total": 2796,
-          "avg": 0.0001064325,
-          "perStep": 0.000103
+          "avg": 0.0001068819,
+          "perStep": 0.000114
         },
         {
           "step": 1153,
           "total": 2796,
-          "avg": 0.0001064235,
-          "perStep": 0.000128
+          "avg": 0.0001068391,
+          "perStep": 0.000103
         },
         {
           "step": 1177,
           "total": 2796,
-          "avg": 0.0001064114,
+          "avg": 0.0001068637,
           "perStep": 0.000103
         },
         {
           "step": 1201,
           "total": 2796,
-          "avg": 0.0001064082,
-          "perStep": 0.000102
+          "avg": 0.0001068531,
+          "perStep": 0.000104
         },
         {
           "step": 1225,
           "total": 2796,
-          "avg": 0.0001064002,
+          "avg": 0.0001068028,
           "perStep": 0.000103
         },
         {
           "step": 1249,
           "total": 2796,
-          "avg": 0.0001064157,
-          "perStep": 0.000123
+          "avg": 0.0001067905,
+          "perStep": 0.000103
         },
         {
           "step": 1273,
           "total": 2796,
-          "avg": 0.0001063961,
+          "avg": 0.0001068283,
           "perStep": 0.000103
         },
         {
           "step": 1297,
           "total": 2796,
-          "avg": 0.0001063926,
-          "perStep": 0.000103
+          "avg": 0.0001067913,
+          "perStep": 0.000122
         },
         {
           "step": 1321,
           "total": 2796,
-          "avg": 0.0001063513,
-          "perStep": 0.000112
+          "avg": 0.0001067716,
+          "perStep": 0.000103
         },
         {
           "step": 1345,
           "total": 2796,
-          "avg": 0.0001063271,
+          "avg": 0.0001067601,
           "perStep": 0.000103
         },
         {
           "step": 1369,
           "total": 2796,
-          "avg": 0.0001063214,
-          "perStep": 0.000103
+          "avg": 0.0001067577,
+          "perStep": 0.000119
         },
         {
           "step": 1393,
           "total": 2796,
-          "avg": 0.0001062971,
-          "perStep": 0.000107
+          "avg": 0.0001068892,
+          "perStep": 0.000114
         },
         {
           "step": 1417,
           "total": 2796,
-          "avg": 0.0001062645,
+          "avg": 0.0001069328,
           "perStep": 0.000103
         },
         {
           "step": 1441,
           "total": 2796,
-          "avg": 0.0001062622,
+          "avg": 0.0001069652,
           "perStep": 0.000103
         },
         {
           "step": 1465,
           "total": 2796,
-          "avg": 0.0001062449,
-          "perStep": 0.000107
+          "avg": 0.0001069993,
+          "perStep": 0.000103
         },
         {
           "step": 1489,
           "total": 2796,
-          "avg": 0.0001062275,
-          "perStep": 0.000114
+          "avg": 0.0001070451,
+          "perStep": 0.000118
         },
         {
           "step": 1513,
           "total": 2796,
-          "avg": 0.0001062199,
-          "perStep": 0.000103
+          "avg": 0.0001070742,
+          "perStep": 0.000142
         },
         {
           "step": 1537,
           "total": 2796,
-          "avg": 0.0001062145,
-          "perStep": 0.000104
+          "avg": 0.0001070717,
+          "perStep": 0.000103
         },
         {
           "step": 1561,
           "total": 2796,
-          "avg": 0.0001062073,
-          "perStep": 0.000102
+          "avg": 0.0001071791,
+          "perStep": 0.000103
         },
         {
           "step": 1585,
           "total": 2796,
-          "avg": 0.0001062004,
-          "perStep": 0.000102
+          "avg": 0.0001072168,
+          "perStep": 0.000103
         },
         {
           "step": 1609,
           "total": 2796,
-          "avg": 0.000106193,
-          "perStep": 0.000103
+          "avg": 0.0001072472,
+          "perStep": 0.000129
         },
         {
           "step": 1633,
           "total": 2796,
-          "avg": 0.0001062006,
-          "perStep": 0.000103
+          "avg": 0.0001072356,
+          "perStep": 0.000114
         },
         {
           "step": 1657,
           "total": 2796,
-          "avg": 0.0001062134,
-          "perStep": 0.000115
+          "avg": 0.0001072195,
+          "perStep": 0.000103
         },
         {
           "step": 1681,
           "total": 2796,
-          "avg": 0.0001062396,
+          "avg": 0.0001072026,
           "perStep": 0.000103
         },
         {
           "step": 1705,
           "total": 2796,
-          "avg": 0.0001062779,
+          "avg": 0.000107171,
           "perStep": 0.000103
         },
         {
           "step": 1729,
           "total": 2796,
-          "avg": 0.0001062723,
-          "perStep": 0.000103
+          "avg": 0.000107157,
+          "perStep": 0.000104
         },
         {
           "step": 1753,
           "total": 2796,
-          "avg": 0.0001062623,
-          "perStep": 0.000136
+          "avg": 0.0001071434,
+          "perStep": 0.000104
         },
         {
           "step": 1777,
           "total": 2796,
-          "avg": 0.0001062407,
+          "avg": 0.0001071161,
           "perStep": 0.000103
         },
         {
           "step": 1801,
           "total": 2796,
-          "avg": 0.0001062336,
-          "perStep": 0.000103
+          "avg": 0.0001071418,
+          "perStep": 0.000104
         },
         {
           "step": 1825,
           "total": 2796,
-          "avg": 0.0001062338,
-          "perStep": 0.000103
+          "avg": 0.0001071246,
+          "perStep": 0.000117
         },
         {
           "step": 1849,
           "total": 2796,
-          "avg": 0.0001062031,
+          "avg": 0.0001071463,
           "perStep": 0.000103
         },
         {
           "step": 1873,
           "total": 2796,
-          "avg": 0.0001062005,
-          "perStep": 0.000103
+          "avg": 0.0001072059,
+          "perStep": 0.000107
         },
         {
           "step": 1897,
           "total": 2796,
-          "avg": 0.0001061874,
-          "perStep": 0.000102
+          "avg": 0.0001072571,
+          "perStep": 0.000117
         },
         {
           "step": 1921,
           "total": 2796,
-          "avg": 0.000106158,
-          "perStep": 0.000102
+          "avg": 0.000107255,
+          "perStep": 0.000129
         },
         {
           "step": 1945,
           "total": 2796,
-          "avg": 0.0001061576,
+          "avg": 0.0001072781,
           "perStep": 0.000103
         },
         {
           "step": 1969,
           "total": 2796,
-          "avg": 0.0001061546,
+          "avg": 0.0001073138,
           "perStep": 0.000103
         },
         {
           "step": 1993,
           "total": 2796,
-          "avg": 0.0001061377,
-          "perStep": 0.000124
+          "avg": 0.0001073025,
+          "perStep": 0.000115
         },
         {
           "step": 2017,
           "total": 2796,
-          "avg": 0.0001061246,
-          "perStep": 0.000103
+          "avg": 0.0001072786,
+          "perStep": 0.000105
         },
         {
           "step": 2041,
           "total": 2796,
-          "avg": 0.0001061202,
-          "perStep": 0.000103
+          "avg": 0.0001073047,
+          "perStep": 0.000106
         },
         {
           "step": 2065,
           "total": 2796,
-          "avg": 0.0001061062,
+          "avg": 0.0001073317,
           "perStep": 0.000107
         },
         {
           "step": 2089,
           "total": 2796,
-          "avg": 0.000106094,
+          "avg": 0.0001073188,
           "perStep": 0.000103
         },
         {
           "step": 2113,
           "total": 2796,
-          "avg": 0.0001061237,
+          "avg": 0.0001073114,
           "perStep": 0.000103
         },
         {
           "step": 2137,
           "total": 2796,
-          "avg": 0.000106134,
-          "perStep": 0.000116
+          "avg": 0.0001072905,
+          "perStep": 0.000103
         },
         {
           "step": 2161,
           "total": 2796,
-          "avg": 0.0001061733,
-          "perStep": 0.000107
+          "avg": 0.0001072646,
+          "perStep": 0.000103
         },
         {
           "step": 2185,
           "total": 2796,
-          "avg": 0.0001062443,
-          "perStep": 0.000129
+          "avg": 0.0001072649,
+          "perStep": 0.000103
         },
         {
           "step": 2209,
           "total": 2796,
-          "avg": 0.000106257,
-          "perStep": 0.000103
+          "avg": 0.0001072566,
+          "perStep": 0.000128
         },
         {
           "step": 2233,
           "total": 2796,
-          "avg": 0.0001062574,
+          "avg": 0.000107248,
           "perStep": 0.000103
         },
         {
           "step": 2257,
           "total": 2796,
-          "avg": 0.0001062578,
+          "avg": 0.0001072405,
           "perStep": 0.000103
         },
         {
           "step": 2281,
           "total": 2796,
-          "avg": 0.0001062783,
-          "perStep": 0.000118
+          "avg": 0.000107234,
+          "perStep": 0.000103
         },
         {
           "step": 2305,
           "total": 2796,
-          "avg": 0.0001062554,
+          "avg": 0.0001072046,
           "perStep": 0.000103
         },
         {
           "step": 2329,
           "total": 2796,
-          "avg": 0.0001062545,
+          "avg": 0.0001072016,
           "perStep": 0.000103
         },
         {
           "step": 2353,
           "total": 2796,
-          "avg": 0.0001062464,
-          "perStep": 0.000115
+          "avg": 0.0001071953,
+          "perStep": 0.000103
         },
         {
           "step": 2377,
           "total": 2796,
-          "avg": 0.000106222,
-          "perStep": 0.000103
+          "avg": 0.0001071782,
+          "perStep": 0.000128
         },
         {
           "step": 2401,
           "total": 2796,
-          "avg": 0.0001062219,
-          "perStep": 0.000103
+          "avg": 0.0001071593,
+          "perStep": 0.000104
         },
         {
           "step": 2425,
           "total": 2796,
-          "avg": 0.0001062217,
+          "avg": 0.0001071532,
           "perStep": 0.000103
         },
         {
           "step": 2449,
           "total": 2796,
-          "avg": 0.0001061966,
-          "perStep": 0.000103
+          "avg": 0.0001071353,
+          "perStep": 0.000106
         },
         {
           "step": 2473,
           "total": 2796,
-          "avg": 0.0001062142,
+          "avg": 0.0001071142,
           "perStep": 0.000103
         },
         {
           "step": 2497,
           "total": 2796,
-          "avg": 0.0001062053,
+          "avg": 0.0001071371,
           "perStep": 0.000103
         },
         {
           "step": 2521,
           "total": 2796,
-          "avg": 0.0001061942,
-          "perStep": 0.000128
+          "avg": 0.0001071263,
+          "perStep": 0.000115
         },
         {
           "step": 2545,
           "total": 2796,
-          "avg": 0.0001061837,
-          "perStep": 0.000102
+          "avg": 0.0001071338,
+          "perStep": 0.000103
         },
         {
           "step": 2569,
           "total": 2796,
-          "avg": 0.0001061847,
+          "avg": 0.0001071169,
           "perStep": 0.000103
         },
         {
           "step": 2593,
           "total": 2796,
-          "avg": 0.0001061737,
-          "perStep": 0.000106
+          "avg": 0.0001071062,
+          "perStep": 0.000104
         },
         {
           "step": 2617,
           "total": 2796,
-          "avg": 0.0001061771,
+          "avg": 0.0001070891,
           "perStep": 0.000103
         },
         {
           "step": 2641,
           "total": 2796,
-          "avg": 0.0001061751,
-          "perStep": 0.000103
+          "avg": 0.0001070864,
+          "perStep": 0.000119
         },
         {
           "step": 2665,
           "total": 2796,
-          "avg": 0.0001061642,
-          "perStep": 0.000106
+          "avg": 0.0001070864,
+          "perStep": 0.000103
         },
         {
           "step": 2689,
           "total": 2796,
-          "avg": 0.0001061497,
-          "perStep": 0.000103
+          "avg": 0.0001070871,
+          "perStep": 0.000106
         },
         {
           "step": 2713,
           "total": 2796,
-          "avg": 0.0001061406,
+          "avg": 0.0001071207,
           "perStep": 0.000103
         },
         {
           "step": 2737,
           "total": 2796,
-          "avg": 0.0001061372,
-          "perStep": 0.000114
+          "avg": 0.0001071207,
+          "perStep": 0.000133
         },
         {
           "step": 2761,
           "total": 2796,
-          "avg": 0.0001061661,
-          "perStep": 0.000106
+          "avg": 0.0001070968,
+          "perStep": 0.000103
         },
         {
           "step": 2785,
           "total": 2796,
-          "avg": 0.0001061812,
-          "perStep": 0.000107
+          "avg": 0.0001071161,
+          "perStep": 0.000103
         },
         {
           "step": 2795,
           "total": 2796,
-          "avg": 0.0001062231,
-          "perStep": 0.000122
+          "avg": 0.0001071085,
+          "perStep": 0.000104
         }
       ],
       "stepCount": 2795,
-      "performance": 179.04301075268816,
+      "performance": 178.84408602150538,
       "totalTimeSec": 2,
       "exitCode": 0,
       "lines": 2853
@@ -878,9 +878,9 @@
     "excerpt": {
       "head": [
         "+-----------------------------------------------------------------------------------------------------------+ ",
-        "| MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py: |",
+        "| MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py: |",
         "+-----------------------------------------------------------------------------------------------------------+ ",
-        "| * Start-time     14:31:21                            * Start-date     14:31:21                            |",
+        "| * Start-time     07:55:44                            * Start-date     07:55:44                            |",
         "| * Partition      cpu                                 * Walltime       00:20:00                            |",
         "| * Account        N/A                                 * Nodes          1                                   |",
         "| * Job Name       mfc-task2-n32-weno5-cfl0025         * Engine         batch                               |",
@@ -903,32 +903,32 @@
         " [TEST] MPI: call assert(nRanks > 0 .and. rank < nRanks)"
       ],
       "tail": [
-        " [100%]  Time step     2776 of 2796 @ t_step =     2775 Time Avg = 1.061713E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2777 of 2796 @ t_step =     2776 Time Avg = 1.061806E-04 Time/step= 1.320000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2778 of 2796 @ t_step =     2777 Time Avg = 1.061809E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2779 of 2796 @ t_step =     2778 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2780 of 2796 @ t_step =     2779 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2781 of 2796 @ t_step =     2780 Time Avg = 1.061811E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2782 of 2796 @ t_step =     2781 Time Avg = 1.061810E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2783 of 2796 @ t_step =     2782 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2784 of 2796 @ t_step =     2783 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2785 of 2796 @ t_step =     2784 Time Avg = 1.061812E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2786 of 2796 @ t_step =     2785 Time Avg = 1.061865E-04 Time/step= 1.210000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2787 of 2796 @ t_step =     2786 Time Avg = 1.061868E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2788 of 2796 @ t_step =     2787 Time Avg = 1.061867E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2789 of 2796 @ t_step =     2788 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2790 of 2796 @ t_step =     2789 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2791 of 2796 @ t_step =     2790 Time Avg = 1.061951E-04 Time/step= 1.300000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2792 of 2796 @ t_step =     2791 Time Avg = 1.061994E-04 Time/step= 1.180000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2793 of 2796 @ t_step =     2792 Time Avg = 1.062039E-04 Time/step= 1.190000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2794 of 2796 @ t_step =     2793 Time Avg = 1.062175E-04 Time/step= 1.440000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " [100%]  Time step     2795 of 2796 @ t_step =     2794 Time Avg = 1.062231E-04 Time/step= 1.220000E-04 ETA (HH:MM:SS) = 0:00:00",
-        " Performance:   179.04301075268816      ns/gp/eq/rhs",
+        " [100%]  Time step     2776 of 2796 @ t_step =     2775 Time Avg = 1.070999E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2777 of 2796 @ t_step =     2776 Time Avg = 1.070984E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2778 of 2796 @ t_step =     2777 Time Avg = 1.070969E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2779 of 2796 @ t_step =     2778 Time Avg = 1.071009E-04 Time/step= 1.180000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2780 of 2796 @ t_step =     2779 Time Avg = 1.071008E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2781 of 2796 @ t_step =     2780 Time Avg = 1.071152E-04 Time/step= 1.470000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2782 of 2796 @ t_step =     2781 Time Avg = 1.071151E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2783 of 2796 @ t_step =     2782 Time Avg = 1.071187E-04 Time/step= 1.170000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2784 of 2796 @ t_step =     2783 Time Avg = 1.071176E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2785 of 2796 @ t_step =     2784 Time Avg = 1.071161E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2786 of 2796 @ t_step =     2785 Time Avg = 1.071150E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2787 of 2796 @ t_step =     2786 Time Avg = 1.071135E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2788 of 2796 @ t_step =     2787 Time Avg = 1.071120E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2789 of 2796 @ t_step =     2788 Time Avg = 1.071156E-04 Time/step= 1.170000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2790 of 2796 @ t_step =     2789 Time Avg = 1.071148E-04 Time/step= 1.050000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2791 of 2796 @ t_step =     2790 Time Avg = 1.071133E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2792 of 2796 @ t_step =     2791 Time Avg = 1.071119E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2793 of 2796 @ t_step =     2792 Time Avg = 1.071108E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2794 of 2796 @ t_step =     2793 Time Avg = 1.071096E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Time step     2795 of 2796 @ t_step =     2794 Time Avg = 1.071085E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+        " Performance:   178.84408602150538      ns/gp/eq/rhs",
         "",
         "+-----------------------------------------------------------------------------------------------------------+ ",
         "| Finished mfc-task2-n32-weno5-cfl0025:                                                                     |",
         "| * Total-time:    2s                                  * Exit Code:     0                                   |",
-        "| * End-time:      14:31:23                            * End-date:      14:31:23                            |",
+        "| * End-time:      07:55:46                            * End-date:      07:55:46                            |",
         "+-----------------------------------------------------------------------------------------------------------+ ",
         ""
       ],
@@ -938,13 +938,13 @@
   "err": {
     "file": "run.err",
     "size": 2021,
-    "raw": "+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
+    "raw": "+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:187641] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187641] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187641] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:187655] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187655] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187655] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:187675] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187675] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187675] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
   },
   "detail": {
     "summary": {
       "invocation": [
         "run",
-        "/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py",
+        "/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py",
         "-e",
         "batch",
         "-c",
@@ -963,7 +963,7 @@
         "--name",
         "mfc-task2-n32-weno5-cfl0025",
         "-o",
-        "/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml",
+        "/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml",
         "--clean",
         "--no-build",
         "--gpu",
@@ -989,21 +989,21 @@
         "unified": false
       },
       "syscheck": {
-        "exec": 0.7002093
+        "exec": 0.8221205
       },
       "pre_process": {
-        "exec": 0.7276516
+        "exec": 0.7271523
       },
       "simulation": {
-        "exec": 1.0435644,
-        "grind": 179.04301075
+        "exec": 1.0423781,
+        "grind": 178.84408602
       }
     },
     "timeData": [
       {
         "ranks": 1,
-        "sPerStep": 0.0000333,
-        "grind": 179.04301075
+        "sPerStep": 0.00003327,
+        "grind": 178.84408602
       }
     ],
     "case": {
@@ -1012,15 +1012,15 @@
     },
     "script": {
       "file": "run.sh",
-      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-task2-n32-weno5-cfl0025\"\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=1\n#SBATCH --output=\"mfc-task2-n32-weno5-cfl0025.out\"\n#SBATCH --error=\"mfc-task2-n32-weno5-cfl0025.err\"\n#SBATCH --time=00:20:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=cpu\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/haswell/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"cpu\"          \"Walltime\"   \"00:20:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"1\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-task2-n32-weno5-cfl0025\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/mfc-environment.sh\" none || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 1 x 1\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-task2-n32-weno5-cfl0025:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-task2-n32-weno5-cfl0025\"\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=1\n#SBATCH --output=\"mfc-task2-n32-weno5-cfl0025.out\"\n#SBATCH --error=\"mfc-task2-n32-weno5-cfl0025.err\"\n#SBATCH --time=00:20:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=cpu\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/haswell/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"cpu\"          \"Walltime\"   \"00:20:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"1\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-task2-n32-weno5-cfl0025\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/mfc-environment.sh\" none || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 1 x 1\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 1                             --map-by ppr:1:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-task2-n32-weno5-cfl0025:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
     },
     "out": {
       "file": "run.out",
       "size": 363646,
       "parsed": {
         "banner": {
-          "start_time": "14:31:21",
-          "start_date": "14:31:21",
+          "start_time": "07:55:44",
+          "start_date": "07:55:44",
           "partition": "cpu",
           "walltime": "00:20:00",
           "nodes": "1",
@@ -1044,708 +1044,708 @@
           {
             "step": 25,
             "total": 2796,
-            "avg": 0.0001097727,
-            "perStep": 0.000102
+            "avg": 0.0001103636,
+            "perStep": 0.000112
           },
           {
             "step": 49,
             "total": 2796,
-            "avg": 0.0001101739,
-            "perStep": 0.000103
+            "avg": 0.000113413,
+            "perStep": 0.000137
           },
           {
             "step": 73,
             "total": 2796,
-            "avg": 0.0001088571,
-            "perStep": 0.000103
+            "avg": 0.0001125571,
+            "perStep": 0.000133
           },
           {
             "step": 97,
             "total": 2796,
-            "avg": 0.000108234,
+            "avg": 0.0001122872,
             "perStep": 0.000103
           },
           {
             "step": 121,
             "total": 2796,
-            "avg": 0.0001075339,
+            "avg": 0.0001116356,
             "perStep": 0.000103
           },
           {
             "step": 145,
             "total": 2796,
-            "avg": 0.0001070986,
-            "perStep": 0.000102
+            "avg": 0.0001108732,
+            "perStep": 0.000103
           },
           {
             "step": 169,
             "total": 2796,
-            "avg": 0.0001073313,
-            "perStep": 0.000115
+            "avg": 0.0001100301,
+            "perStep": 0.000122
           },
           {
             "step": 193,
             "total": 2796,
-            "avg": 0.0001070895,
-            "perStep": 0.000108
+            "avg": 0.0001095211,
+            "perStep": 0.000102
           },
           {
             "step": 217,
             "total": 2796,
-            "avg": 0.0001068131,
-            "perStep": 0.000102
+            "avg": 0.0001092009,
+            "perStep": 0.000103
           },
           {
             "step": 241,
             "total": 2796,
-            "avg": 0.0001067563,
-            "perStep": 0.000103
+            "avg": 0.0001088613,
+            "perStep": 0.000106
           },
           {
             "step": 265,
             "total": 2796,
-            "avg": 0.0001067366,
+            "avg": 0.0001085687,
             "perStep": 0.000103
           },
           {
             "step": 289,
             "total": 2796,
-            "avg": 0.0001066888,
+            "avg": 0.000108542,
             "perStep": 0.000103
           },
           {
             "step": 313,
             "total": 2796,
-            "avg": 0.0001066645,
-            "perStep": 0.000103
+            "avg": 0.0001083645,
+            "perStep": 0.000116
           },
           {
             "step": 337,
             "total": 2796,
-            "avg": 0.0001066946,
+            "avg": 0.0001081497,
             "perStep": 0.000116
           },
           {
             "step": 361,
             "total": 2796,
-            "avg": 0.0001072654,
+            "avg": 0.0001082765,
             "perStep": 0.000103
           },
           {
             "step": 385,
             "total": 2796,
-            "avg": 0.0001072513,
-            "perStep": 0.000116
+            "avg": 0.0001081492,
+            "perStep": 0.000104
           },
           {
             "step": 409,
             "total": 2796,
-            "avg": 0.0001070911,
+            "avg": 0.0001079729,
             "perStep": 0.000103
           },
           {
             "step": 433,
             "total": 2796,
-            "avg": 0.0001069512,
-            "perStep": 0.000103
+            "avg": 0.0001078977,
+            "perStep": 0.000118
           },
           {
             "step": 457,
             "total": 2796,
-            "avg": 0.0001069075,
+            "avg": 0.0001077797,
             "perStep": 0.000103
           },
           {
             "step": 481,
             "total": 2796,
-            "avg": 0.0001067824,
-            "perStep": 0.000103
+            "avg": 0.0001076611,
+            "perStep": 0.000104
           },
           {
             "step": 505,
             "total": 2796,
-            "avg": 0.0001069143,
-            "perStep": 0.000103
+            "avg": 0.0001075697,
+            "perStep": 0.000104
           },
           {
             "step": 529,
             "total": 2796,
-            "avg": 0.0001068441,
-            "perStep": 0.000102
+            "avg": 0.0001074696,
+            "perStep": 0.000103
           },
           {
             "step": 553,
             "total": 2796,
-            "avg": 0.0001067927,
-            "perStep": 0.000131
+            "avg": 0.0001073818,
+            "perStep": 0.000103
           },
           {
             "step": 577,
             "total": 2796,
-            "avg": 0.0001067439,
-            "perStep": 0.000122
+            "avg": 0.0001073554,
+            "perStep": 0.000103
           },
           {
             "step": 601,
             "total": 2796,
-            "avg": 0.0001070853,
-            "perStep": 0.000103
+            "avg": 0.0001072742,
+            "perStep": 0.000115
           },
           {
             "step": 625,
             "total": 2796,
-            "avg": 0.0001070209,
+            "avg": 0.0001071833,
             "perStep": 0.000103
           },
           {
             "step": 649,
             "total": 2796,
-            "avg": 0.0001069381,
-            "perStep": 0.000107
+            "avg": 0.0001071563,
+            "perStep": 0.000103
           },
           {
             "step": 673,
             "total": 2796,
-            "avg": 0.0001068791,
-            "perStep": 0.000103
+            "avg": 0.0001071567,
+            "perStep": 0.000114
           },
           {
             "step": 697,
             "total": 2796,
-            "avg": 0.0001068559,
-            "perStep": 0.000102
+            "avg": 0.0001071585,
+            "perStep": 0.000103
           },
           {
             "step": 721,
             "total": 2796,
-            "avg": 0.0001067646,
-            "perStep": 0.000107
+            "avg": 0.0001071504,
+            "perStep": 0.000103
           },
           {
             "step": 745,
             "total": 2796,
-            "avg": 0.0001067129,
+            "avg": 0.0001071078,
             "perStep": 0.000103
           },
           {
             "step": 769,
             "total": 2796,
-            "avg": 0.0001067337,
-            "perStep": 0.000102
+            "avg": 0.0001070405,
+            "perStep": 0.000123
           },
           {
             "step": 793,
             "total": 2796,
-            "avg": 0.0001066962,
-            "perStep": 0.000116
+            "avg": 0.0001071101,
+            "perStep": 0.000104
           },
           {
             "step": 817,
             "total": 2796,
-            "avg": 0.0001066351,
-            "perStep": 0.000108
+            "avg": 0.0001070971,
+            "perStep": 0.000103
           },
           {
             "step": 841,
             "total": 2796,
-            "avg": 0.0001066074,
-            "perStep": 0.000103
+            "avg": 0.0001070632,
+            "perStep": 0.000107
           },
           {
             "step": 865,
             "total": 2796,
-            "avg": 0.0001065499,
-            "perStep": 0.000103
+            "avg": 0.0001070325,
+            "perStep": 0.000116
           },
           {
             "step": 889,
             "total": 2796,
-            "avg": 0.0001064955,
-            "perStep": 0.000102
+            "avg": 0.0001070135,
+            "perStep": 0.000103
           },
           {
             "step": 913,
             "total": 2796,
-            "avg": 0.0001064835,
-            "perStep": 0.000102
+            "avg": 0.000106978,
+            "perStep": 0.000104
           },
           {
             "step": 937,
             "total": 2796,
-            "avg": 0.0001064679,
+            "avg": 0.0001070375,
             "perStep": 0.000103
           },
           {
             "step": 961,
             "total": 2796,
-            "avg": 0.0001064572,
-            "perStep": 0.000106
+            "avg": 0.0001070021,
+            "perStep": 0.000103
           },
           {
             "step": 985,
             "total": 2796,
-            "avg": 0.0001064613,
-            "perStep": 0.000131
+            "avg": 0.0001070346,
+            "perStep": 0.000103
           },
           {
             "step": 1009,
             "total": 2796,
-            "avg": 0.0001064722,
-            "perStep": 0.000102
+            "avg": 0.000106994,
+            "perStep": 0.000103
           },
           {
             "step": 1033,
             "total": 2796,
-            "avg": 0.000106435,
+            "avg": 0.0001070252,
             "perStep": 0.000103
           },
           {
             "step": 1057,
             "total": 2796,
-            "avg": 0.0001064298,
-            "perStep": 0.000104
+            "avg": 0.0001069715,
+            "perStep": 0.000103
           },
           {
             "step": 1081,
             "total": 2796,
-            "avg": 0.0001064054,
+            "avg": 0.0001069267,
             "perStep": 0.000103
           },
           {
             "step": 1105,
             "total": 2796,
-            "avg": 0.0001063975,
-            "perStep": 0.00013
+            "avg": 0.0001069165,
+            "perStep": 0.000103
           },
           {
             "step": 1129,
             "total": 2796,
-            "avg": 0.0001064325,
-            "perStep": 0.000103
+            "avg": 0.0001068819,
+            "perStep": 0.000114
           },
           {
             "step": 1153,
             "total": 2796,
-            "avg": 0.0001064235,
-            "perStep": 0.000128
+            "avg": 0.0001068391,
+            "perStep": 0.000103
           },
           {
             "step": 1177,
             "total": 2796,
-            "avg": 0.0001064114,
+            "avg": 0.0001068637,
             "perStep": 0.000103
           },
           {
             "step": 1201,
             "total": 2796,
-            "avg": 0.0001064082,
-            "perStep": 0.000102
+            "avg": 0.0001068531,
+            "perStep": 0.000104
           },
           {
             "step": 1225,
             "total": 2796,
-            "avg": 0.0001064002,
+            "avg": 0.0001068028,
             "perStep": 0.000103
           },
           {
             "step": 1249,
             "total": 2796,
-            "avg": 0.0001064157,
-            "perStep": 0.000123
+            "avg": 0.0001067905,
+            "perStep": 0.000103
           },
           {
             "step": 1273,
             "total": 2796,
-            "avg": 0.0001063961,
+            "avg": 0.0001068283,
             "perStep": 0.000103
           },
           {
             "step": 1297,
             "total": 2796,
-            "avg": 0.0001063926,
-            "perStep": 0.000103
+            "avg": 0.0001067913,
+            "perStep": 0.000122
           },
           {
             "step": 1321,
             "total": 2796,
-            "avg": 0.0001063513,
-            "perStep": 0.000112
+            "avg": 0.0001067716,
+            "perStep": 0.000103
           },
           {
             "step": 1345,
             "total": 2796,
-            "avg": 0.0001063271,
+            "avg": 0.0001067601,
             "perStep": 0.000103
           },
           {
             "step": 1369,
             "total": 2796,
-            "avg": 0.0001063214,
-            "perStep": 0.000103
+            "avg": 0.0001067577,
+            "perStep": 0.000119
           },
           {
             "step": 1393,
             "total": 2796,
-            "avg": 0.0001062971,
-            "perStep": 0.000107
+            "avg": 0.0001068892,
+            "perStep": 0.000114
           },
           {
             "step": 1417,
             "total": 2796,
-            "avg": 0.0001062645,
+            "avg": 0.0001069328,
             "perStep": 0.000103
           },
           {
             "step": 1441,
             "total": 2796,
-            "avg": 0.0001062622,
+            "avg": 0.0001069652,
             "perStep": 0.000103
           },
           {
             "step": 1465,
             "total": 2796,
-            "avg": 0.0001062449,
-            "perStep": 0.000107
+            "avg": 0.0001069993,
+            "perStep": 0.000103
           },
           {
             "step": 1489,
             "total": 2796,
-            "avg": 0.0001062275,
-            "perStep": 0.000114
+            "avg": 0.0001070451,
+            "perStep": 0.000118
           },
           {
             "step": 1513,
             "total": 2796,
-            "avg": 0.0001062199,
-            "perStep": 0.000103
+            "avg": 0.0001070742,
+            "perStep": 0.000142
           },
           {
             "step": 1537,
             "total": 2796,
-            "avg": 0.0001062145,
-            "perStep": 0.000104
+            "avg": 0.0001070717,
+            "perStep": 0.000103
           },
           {
             "step": 1561,
             "total": 2796,
-            "avg": 0.0001062073,
-            "perStep": 0.000102
+            "avg": 0.0001071791,
+            "perStep": 0.000103
           },
           {
             "step": 1585,
             "total": 2796,
-            "avg": 0.0001062004,
-            "perStep": 0.000102
+            "avg": 0.0001072168,
+            "perStep": 0.000103
           },
           {
             "step": 1609,
             "total": 2796,
-            "avg": 0.000106193,
-            "perStep": 0.000103
+            "avg": 0.0001072472,
+            "perStep": 0.000129
           },
           {
             "step": 1633,
             "total": 2796,
-            "avg": 0.0001062006,
-            "perStep": 0.000103
+            "avg": 0.0001072356,
+            "perStep": 0.000114
           },
           {
             "step": 1657,
             "total": 2796,
-            "avg": 0.0001062134,
-            "perStep": 0.000115
+            "avg": 0.0001072195,
+            "perStep": 0.000103
           },
           {
             "step": 1681,
             "total": 2796,
-            "avg": 0.0001062396,
+            "avg": 0.0001072026,
             "perStep": 0.000103
           },
           {
             "step": 1705,
             "total": 2796,
-            "avg": 0.0001062779,
+            "avg": 0.000107171,
             "perStep": 0.000103
           },
           {
             "step": 1729,
             "total": 2796,
-            "avg": 0.0001062723,
-            "perStep": 0.000103
+            "avg": 0.000107157,
+            "perStep": 0.000104
           },
           {
             "step": 1753,
             "total": 2796,
-            "avg": 0.0001062623,
-            "perStep": 0.000136
+            "avg": 0.0001071434,
+            "perStep": 0.000104
           },
           {
             "step": 1777,
             "total": 2796,
-            "avg": 0.0001062407,
+            "avg": 0.0001071161,
             "perStep": 0.000103
           },
           {
             "step": 1801,
             "total": 2796,
-            "avg": 0.0001062336,
-            "perStep": 0.000103
+            "avg": 0.0001071418,
+            "perStep": 0.000104
           },
           {
             "step": 1825,
             "total": 2796,
-            "avg": 0.0001062338,
-            "perStep": 0.000103
+            "avg": 0.0001071246,
+            "perStep": 0.000117
           },
           {
             "step": 1849,
             "total": 2796,
-            "avg": 0.0001062031,
+            "avg": 0.0001071463,
             "perStep": 0.000103
           },
           {
             "step": 1873,
             "total": 2796,
-            "avg": 0.0001062005,
-            "perStep": 0.000103
+            "avg": 0.0001072059,
+            "perStep": 0.000107
           },
           {
             "step": 1897,
             "total": 2796,
-            "avg": 0.0001061874,
-            "perStep": 0.000102
+            "avg": 0.0001072571,
+            "perStep": 0.000117
           },
           {
             "step": 1921,
             "total": 2796,
-            "avg": 0.000106158,
-            "perStep": 0.000102
+            "avg": 0.000107255,
+            "perStep": 0.000129
           },
           {
             "step": 1945,
             "total": 2796,
-            "avg": 0.0001061576,
+            "avg": 0.0001072781,
             "perStep": 0.000103
           },
           {
             "step": 1969,
             "total": 2796,
-            "avg": 0.0001061546,
+            "avg": 0.0001073138,
             "perStep": 0.000103
           },
           {
             "step": 1993,
             "total": 2796,
-            "avg": 0.0001061377,
-            "perStep": 0.000124
+            "avg": 0.0001073025,
+            "perStep": 0.000115
           },
           {
             "step": 2017,
             "total": 2796,
-            "avg": 0.0001061246,
-            "perStep": 0.000103
+            "avg": 0.0001072786,
+            "perStep": 0.000105
           },
           {
             "step": 2041,
             "total": 2796,
-            "avg": 0.0001061202,
-            "perStep": 0.000103
+            "avg": 0.0001073047,
+            "perStep": 0.000106
           },
           {
             "step": 2065,
             "total": 2796,
-            "avg": 0.0001061062,
+            "avg": 0.0001073317,
             "perStep": 0.000107
           },
           {
             "step": 2089,
             "total": 2796,
-            "avg": 0.000106094,
+            "avg": 0.0001073188,
             "perStep": 0.000103
           },
           {
             "step": 2113,
             "total": 2796,
-            "avg": 0.0001061237,
+            "avg": 0.0001073114,
             "perStep": 0.000103
           },
           {
             "step": 2137,
             "total": 2796,
-            "avg": 0.000106134,
-            "perStep": 0.000116
+            "avg": 0.0001072905,
+            "perStep": 0.000103
           },
           {
             "step": 2161,
             "total": 2796,
-            "avg": 0.0001061733,
-            "perStep": 0.000107
+            "avg": 0.0001072646,
+            "perStep": 0.000103
           },
           {
             "step": 2185,
             "total": 2796,
-            "avg": 0.0001062443,
-            "perStep": 0.000129
+            "avg": 0.0001072649,
+            "perStep": 0.000103
           },
           {
             "step": 2209,
             "total": 2796,
-            "avg": 0.000106257,
-            "perStep": 0.000103
+            "avg": 0.0001072566,
+            "perStep": 0.000128
           },
           {
             "step": 2233,
             "total": 2796,
-            "avg": 0.0001062574,
+            "avg": 0.000107248,
             "perStep": 0.000103
           },
           {
             "step": 2257,
             "total": 2796,
-            "avg": 0.0001062578,
+            "avg": 0.0001072405,
             "perStep": 0.000103
           },
           {
             "step": 2281,
             "total": 2796,
-            "avg": 0.0001062783,
-            "perStep": 0.000118
+            "avg": 0.000107234,
+            "perStep": 0.000103
           },
           {
             "step": 2305,
             "total": 2796,
-            "avg": 0.0001062554,
+            "avg": 0.0001072046,
             "perStep": 0.000103
           },
           {
             "step": 2329,
             "total": 2796,
-            "avg": 0.0001062545,
+            "avg": 0.0001072016,
             "perStep": 0.000103
           },
           {
             "step": 2353,
             "total": 2796,
-            "avg": 0.0001062464,
-            "perStep": 0.000115
+            "avg": 0.0001071953,
+            "perStep": 0.000103
           },
           {
             "step": 2377,
             "total": 2796,
-            "avg": 0.000106222,
-            "perStep": 0.000103
+            "avg": 0.0001071782,
+            "perStep": 0.000128
           },
           {
             "step": 2401,
             "total": 2796,
-            "avg": 0.0001062219,
-            "perStep": 0.000103
+            "avg": 0.0001071593,
+            "perStep": 0.000104
           },
           {
             "step": 2425,
             "total": 2796,
-            "avg": 0.0001062217,
+            "avg": 0.0001071532,
             "perStep": 0.000103
           },
           {
             "step": 2449,
             "total": 2796,
-            "avg": 0.0001061966,
-            "perStep": 0.000103
+            "avg": 0.0001071353,
+            "perStep": 0.000106
           },
           {
             "step": 2473,
             "total": 2796,
-            "avg": 0.0001062142,
+            "avg": 0.0001071142,
             "perStep": 0.000103
           },
           {
             "step": 2497,
             "total": 2796,
-            "avg": 0.0001062053,
+            "avg": 0.0001071371,
             "perStep": 0.000103
           },
           {
             "step": 2521,
             "total": 2796,
-            "avg": 0.0001061942,
-            "perStep": 0.000128
+            "avg": 0.0001071263,
+            "perStep": 0.000115
           },
           {
             "step": 2545,
             "total": 2796,
-            "avg": 0.0001061837,
-            "perStep": 0.000102
+            "avg": 0.0001071338,
+            "perStep": 0.000103
           },
           {
             "step": 2569,
             "total": 2796,
-            "avg": 0.0001061847,
+            "avg": 0.0001071169,
             "perStep": 0.000103
           },
           {
             "step": 2593,
             "total": 2796,
-            "avg": 0.0001061737,
-            "perStep": 0.000106
+            "avg": 0.0001071062,
+            "perStep": 0.000104
           },
           {
             "step": 2617,
             "total": 2796,
-            "avg": 0.0001061771,
+            "avg": 0.0001070891,
             "perStep": 0.000103
           },
           {
             "step": 2641,
             "total": 2796,
-            "avg": 0.0001061751,
-            "perStep": 0.000103
+            "avg": 0.0001070864,
+            "perStep": 0.000119
           },
           {
             "step": 2665,
             "total": 2796,
-            "avg": 0.0001061642,
-            "perStep": 0.000106
+            "avg": 0.0001070864,
+            "perStep": 0.000103
           },
           {
             "step": 2689,
             "total": 2796,
-            "avg": 0.0001061497,
-            "perStep": 0.000103
+            "avg": 0.0001070871,
+            "perStep": 0.000106
           },
           {
             "step": 2713,
             "total": 2796,
-            "avg": 0.0001061406,
+            "avg": 0.0001071207,
             "perStep": 0.000103
           },
           {
             "step": 2737,
             "total": 2796,
-            "avg": 0.0001061372,
-            "perStep": 0.000114
+            "avg": 0.0001071207,
+            "perStep": 0.000133
           },
           {
             "step": 2761,
             "total": 2796,
-            "avg": 0.0001061661,
-            "perStep": 0.000106
+            "avg": 0.0001070968,
+            "perStep": 0.000103
           },
           {
             "step": 2785,
             "total": 2796,
-            "avg": 0.0001061812,
-            "perStep": 0.000107
+            "avg": 0.0001071161,
+            "perStep": 0.000103
           },
           {
             "step": 2795,
             "total": 2796,
-            "avg": 0.0001062231,
-            "perStep": 0.000122
+            "avg": 0.0001071085,
+            "perStep": 0.000104
           }
         ],
         "stepCount": 2795,
-        "performance": 179.04301075268816,
+        "performance": 178.84408602150538,
         "totalTimeSec": 2,
         "exitCode": 0,
         "lines": 2853
@@ -1753,9 +1753,9 @@
       "excerpt": {
         "head": [
           "+-----------------------------------------------------------------------------------------------------------+ ",
-          "| MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py: |",
+          "| MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py: |",
           "+-----------------------------------------------------------------------------------------------------------+ ",
-          "| * Start-time     14:31:21                            * Start-date     14:31:21                            |",
+          "| * Start-time     07:55:44                            * Start-date     07:55:44                            |",
           "| * Partition      cpu                                 * Walltime       00:20:00                            |",
           "| * Account        N/A                                 * Nodes          1                                   |",
           "| * Job Name       mfc-task2-n32-weno5-cfl0025         * Engine         batch                               |",
@@ -1778,32 +1778,32 @@
           " [TEST] MPI: call assert(nRanks > 0 .and. rank < nRanks)"
         ],
         "tail": [
-          " [100%]  Time step     2776 of 2796 @ t_step =     2775 Time Avg = 1.061713E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2777 of 2796 @ t_step =     2776 Time Avg = 1.061806E-04 Time/step= 1.320000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2778 of 2796 @ t_step =     2777 Time Avg = 1.061809E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2779 of 2796 @ t_step =     2778 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2780 of 2796 @ t_step =     2779 Time Avg = 1.061808E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2781 of 2796 @ t_step =     2780 Time Avg = 1.061811E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2782 of 2796 @ t_step =     2781 Time Avg = 1.061810E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2783 of 2796 @ t_step =     2782 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2784 of 2796 @ t_step =     2783 Time Avg = 1.061809E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2785 of 2796 @ t_step =     2784 Time Avg = 1.061812E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2786 of 2796 @ t_step =     2785 Time Avg = 1.061865E-04 Time/step= 1.210000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2787 of 2796 @ t_step =     2786 Time Avg = 1.061868E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2788 of 2796 @ t_step =     2787 Time Avg = 1.061867E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2789 of 2796 @ t_step =     2788 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2790 of 2796 @ t_step =     2789 Time Avg = 1.061866E-04 Time/step= 1.060000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2791 of 2796 @ t_step =     2790 Time Avg = 1.061951E-04 Time/step= 1.300000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2792 of 2796 @ t_step =     2791 Time Avg = 1.061994E-04 Time/step= 1.180000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2793 of 2796 @ t_step =     2792 Time Avg = 1.062039E-04 Time/step= 1.190000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2794 of 2796 @ t_step =     2793 Time Avg = 1.062175E-04 Time/step= 1.440000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " [100%]  Time step     2795 of 2796 @ t_step =     2794 Time Avg = 1.062231E-04 Time/step= 1.220000E-04 ETA (HH:MM:SS) = 0:00:00",
-          " Performance:   179.04301075268816      ns/gp/eq/rhs",
+          " [100%]  Time step     2776 of 2796 @ t_step =     2775 Time Avg = 1.070999E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2777 of 2796 @ t_step =     2776 Time Avg = 1.070984E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2778 of 2796 @ t_step =     2777 Time Avg = 1.070969E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2779 of 2796 @ t_step =     2778 Time Avg = 1.071009E-04 Time/step= 1.180000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2780 of 2796 @ t_step =     2779 Time Avg = 1.071008E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2781 of 2796 @ t_step =     2780 Time Avg = 1.071152E-04 Time/step= 1.470000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2782 of 2796 @ t_step =     2781 Time Avg = 1.071151E-04 Time/step= 1.070000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2783 of 2796 @ t_step =     2782 Time Avg = 1.071187E-04 Time/step= 1.170000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2784 of 2796 @ t_step =     2783 Time Avg = 1.071176E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2785 of 2796 @ t_step =     2784 Time Avg = 1.071161E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2786 of 2796 @ t_step =     2785 Time Avg = 1.071150E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2787 of 2796 @ t_step =     2786 Time Avg = 1.071135E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2788 of 2796 @ t_step =     2787 Time Avg = 1.071120E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2789 of 2796 @ t_step =     2788 Time Avg = 1.071156E-04 Time/step= 1.170000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2790 of 2796 @ t_step =     2789 Time Avg = 1.071148E-04 Time/step= 1.050000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2791 of 2796 @ t_step =     2790 Time Avg = 1.071133E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2792 of 2796 @ t_step =     2791 Time Avg = 1.071119E-04 Time/step= 1.030000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2793 of 2796 @ t_step =     2792 Time Avg = 1.071108E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2794 of 2796 @ t_step =     2793 Time Avg = 1.071096E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Time step     2795 of 2796 @ t_step =     2794 Time Avg = 1.071085E-04 Time/step= 1.040000E-04 ETA (HH:MM:SS) = 0:00:00",
+          " Performance:   178.84408602150538      ns/gp/eq/rhs",
           "",
           "+-----------------------------------------------------------------------------------------------------------+ ",
           "| Finished mfc-task2-n32-weno5-cfl0025:                                                                     |",
           "| * Total-time:    2s                                  * Exit Code:     0                                   |",
-          "| * End-time:      14:31:23                            * End-date:      14:31:23                            |",
+          "| * End-time:      07:55:46                            * End-date:      07:55:46                            |",
           "+-----------------------------------------------------------------------------------------------------------+ ",
           ""
         ],
@@ -1813,7 +1813,7 @@
     "err": {
       "file": "run.err",
       "size": 2021,
-      "raw": "+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139315] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139329] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:139347] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
+      "raw": "+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:187641] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187641] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187641] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:187655] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187655] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187655] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:187675] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187675] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:187675] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
     }
   }
 }

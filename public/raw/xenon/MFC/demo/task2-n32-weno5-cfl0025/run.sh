@@ -34,7 +34,7 @@ END
 )
 
     printf "$TABLE_HEADER"
-    printf "$TABLE_TITLE_FORMAT" "MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/case.py:"
+    printf "$TABLE_TITLE_FORMAT" "MFC case # mfc-task2-n32-weno5-cfl0025 @ /scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/case.py:"
     printf "$TABLE_HEADER"
     printf "$TABLE_CONTENT\\n"
     printf "$TABLE_FOOTER\\n"
@@ -43,7 +43,7 @@ END
     t_start=$(date +%s)
 
 
-. "/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/mfc-environment.sh" none || exit 1
+. "/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/mfc-environment.sh" none || exit 1
 
 
 ulimit -l unlimited
@@ -58,7 +58,7 @@ echo
     
     ok ":) Running$MAGENTA syscheck$COLOR_RESET:\n"
 
-    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'
+    cd '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025'
 
     t_syscheck_start=$(python3 -c 'import time; print(time.time())')
 
@@ -86,7 +86,7 @@ echo
 
         cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'
 
-        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL
+        cat >>'/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL
 syscheck:
     exec:  $(echo "$t_syscheck_stop - $t_syscheck_start" | bc -l)
 EOL
@@ -99,7 +99,7 @@ EOL
     
     ok ":) Running$MAGENTA pre_process$COLOR_RESET:\n"
 
-    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'
+    cd '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025'
 
     t_pre_process_start=$(python3 -c 'import time; print(time.time())')
 
@@ -127,7 +127,7 @@ EOL
 
         cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'
 
-        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL
+        cat >>'/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL
 pre_process:
     exec:  $(echo "$t_pre_process_stop - $t_pre_process_start" | bc -l)
 EOL
@@ -140,7 +140,7 @@ EOL
     
     ok ":) Running$MAGENTA simulation$COLOR_RESET:\n"
 
-    cd '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025'
+    cd '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025'
 
     t_simulation_start=$(python3 -c 'import time; print(time.time())')
 
@@ -168,10 +168,10 @@ EOL
 
         cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'
 
-        cat >>'/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL
+        cat >>'/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/summary.yaml' <<EOL
 simulation:
     exec:  $(echo "$t_simulation_stop - $t_simulation_start" | bc -l)
-    grind: $(cat '/scratch/jobs/35234061736/MFC/demo/task2-n32-weno5-cfl0025/time_data.dat' | tail -n 1 | awk '{print $NF}')
+    grind: $(cat '/scratch/jobs/35430572731/MFC/demo/task2-n32-weno5-cfl0025/time_data.dat' | tail -n 1 | awk '{print $NF}')
 EOL
 
         cd - > /dev/null
