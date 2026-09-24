@@ -1,0 +1,143 @@
+name: Submit jobs (launchpad)
+
+# HPL workflows only stage HPL suites. MFC has its own workflow and shares
+# the cluster concurrency lock, so a broken MFC case cannot block HPL validation.
+#
+# The runner MUST carry the "launchpad" label or this never matches.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "input/launchpad/HPL/**"
+      - "input/launchpad/HPL_NVIDIA/**"
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "HPL suite to submit"
+        type: choice
+        options: [all, HPL, HPL_NVIDIA]
+        required: false
+        default: "all"
+      job:
+        description: "Optional group/run (select one suite); required for rerun"
+        required: false
+        default: ""
+      rerun:
+        description: "Re-run jobs that already have results in output/"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  # One submission at a time per cluster. Two overlapping runs would fight over
+  # the same job directories.
+  group: submit-launchpad
+  cancel-in-progress: false
+  queue: max
+
+env:
+  CLUSTER: launchpad
+  SCRATCH_BASE: /data/jobs
+  PARTITION: all
+  ALLOWED_SUITES: HPL_NVIDIA
+  HPL_NVIDIA_SH: /home/nvidia/PROGRAMS/nvidia_hpl_benchmarks/hpl.sh
+
+jobs:
+  submit:
+    runs-on: [self-hosted, launchpad]
+    timeout-minutes: 480
+    steps:
+      - uses: actions/checkout@v5
+        with: { fetch-depth: 1, ref: main }
+
+      - uses: actions/setup-node@v5
+        with: { node-version: "22" }
+
+      - name: Verify runner is on the right cluster
+        run: node scripts/verify-runner-cluster.mjs "$CLUSTER"
+
+      - name: Check the runner account resolves on the compute nodes
+        # An account that exists only where the runner lives makes jobs requeue
+        # forever with Reason=BeginTime and no output at all -- a baffling
+        # symptom worth one cheap probe.
+        #
+        # This asks Slurm, not ssh. The runner is a no-sudo service account
+        # with no home directory and no keys, so an ssh probe could never
+        # work; an earlier version of this step tried exactly that and failed
+        # on every run, healthy cluster or not.
+        #
+        # --immediate means a busy cluster skips the check instead of queueing
+        # behind someone's four-hour HPL run, so this is advisory only.
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          me="$(id -un)"; uid="$(id -u)"
+          echo "runner account: $me ($uid)"
+          n="$(sinfo -h -N -o '%N' -p "$PARTITION" 2>/dev/null | sort -u | wc -l)"
+          if [ "${n:-0}" -eq 0 ]; then echo "  no nodes in $PARTITION; skipping"; exit 0; fi
+          out="$(srun --immediate=10 --quiet --partition="$PARTITION" \
+                      --nodes="$n" --ntasks-per-node=1 --time=00:01:00 \
+                      id -u 2>&1)" || {
+            echo "  could not get an allocation (cluster busy?); skipping"; exit 0; }
+          bad="$(echo "$out" | grep -vc "^${uid}$" || true)"
+          if [ "${bad:-0}" -ne 0 ]; then
+            echo "::warning::$me does not resolve to $uid on every node in $PARTITION:"
+            echo "$out" | sed 's/^/    /'
+          else
+            echo "  ok: $me = $uid on all $n node(s) in $PARTITION"
+          fi
+
+      - name: Stage and validate selected jobs
+        env:
+          SELECTED_SUITE: ${{ inputs.suite || 'all' }}
+          SELECTED_JOB: ${{ inputs.job }}
+          RERUN: ${{ inputs.rerun }}
+        run: |
+          set -euo pipefail
+          export STAGE="${SCRATCH_BASE}/${GITHUB_RUN_ID}"
+          echo "STAGE=$STAGE" >> "$GITHUB_ENV"
+          node scripts/stage-submissions.mjs
+
+      - name: Submit and wait
+        if: env.STAGED != '0'
+        run: bash scripts/submit-jobs.sh "$STAGE" "$CLUSTER" "$GITHUB_RUN_ID"
+
+      - name: Harvest
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -d "${STAGE:-}" ] || exit 0
+          # Each suite declares what to keep, and under what name, in its
+          # suite.yml. The old loop copied everything that was not xhpl/*.o/*.mod,
+          # which for MFC meant 16 files per run -- its .inp files, three timing
+          # files, an indices table -- burying the four that matter.
+          node scripts/harvest.mjs "$STAGE" "$CLUSTER"
+
+      - name: Commit results
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --prune origin main && git checkout -B main && git pull --no-rebase --no-edit origin main
+          # Results only. The input spec stays put so every run is reproducible.
+          git add -A output/$CLUSTER/
+          if git diff --cached --quiet; then echo "nothing to commit"; else
+            git commit -m "$CLUSTER results from run ${GITHUB_RUN_ID} [skip ci]"
+            for i in 1 2 3; do
+              git push origin main && break
+              [ "$i" -lt 3 ] || exit 1
+              git pull --no-rebase --no-edit origin main
+            done
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Clean scratch
+        if: always()
+        run: rm -rf "${STAGE:-/nonexistent}"

@@ -24,6 +24,7 @@ on:
       - "Submit jobs (xenon)"
       - "Submit MFC (xenon)"
       - "Submit jobs (raijin)"
+      - "Submit jobs (launchpad)"
     types:
       - completed
 
