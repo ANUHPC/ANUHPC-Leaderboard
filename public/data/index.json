@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T04:18:56.021Z",
+  "generatedAt": "2026-09-24T04:27:04.848Z",
   "clusters": [
     {
       "name": "raijin",
@@ -25,7 +25,7 @@
         "gpu",
         "all"
       ],
-      "count": 19
+      "count": 21
     }
   ],
   "suites": [
@@ -68,10 +68,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 2,
+      "count": 4,
       "countByCluster": {
         "raijin": 0,
-        "xenon": 2
+        "xenon": 4
       }
     },
     {
@@ -8805,11 +8805,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-09-19T08:07:10.000Z",
       "dateSource": "run",
-      "submittedAt": "2026-09-19T18:06:43+10:00",
+      "submittedAt": null,
       "submitter": {
         "name": "Ayush",
         "house": false,
-        "by": "Xeno-Tek"
+        "by": null
       },
       "metric": {
         "key": "gflops",
@@ -8876,6 +8876,87 @@
       },
       "hasErr": false,
       "rank": 1
+    },
+    {
+      "id": "xenon/HPL_NVIDIA/Ayush/Test-3",
+      "suite": "HPL_NVIDIA",
+      "group": "Ayush",
+      "run": "Test-3",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-24T04:25:45.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-09-19T18:06:43+10:00",
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": "Xeno-Tek"
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 102000,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 40.92,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000445944836,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 184320,
+        "NB": 384,
+        "P": 4,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "cpus_per_task": 8,
+        "partition": "gpu"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 184320,
+        "NB": 384,
+        "P": 4,
+        "Q": 2,
+        "timeSec": 40.92,
+        "gflops": 102000,
+        "gflopsPerGpu": 12750,
+        "startTime": "Thu Sep 24 04:25:45 2026",
+        "endTime": "Thu Sep 24 04:26:26 2026",
+        "residual": 0.000445944836,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 2
     },
     {
       "id": "xenon/HPL_NVIDIA/baseline/a100-8gpu-n184320-nb512",
@@ -8956,7 +9037,53 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 2
+      "rank": 3
+    },
+    {
+      "id": "xenon/HPL_NVIDIA/Ayush/Test-2",
+      "suite": "HPL_NVIDIA",
+      "group": "Ayush",
+      "run": "Test-2",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-09-24T04:23:02Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
+      "metric": null,
+      "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 368640,
+        "NB": 256,
+        "P": 4,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 2,
+        "tasks_per_node": 4,
+        "cpus_per_task": 8,
+        "partition": "gpu"
+      },
+      "status": "no-result",
+      "ranking": {
+        "eligible": false,
+        "reason": "No valid performance result"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "hasErr": true
     },
     {
       "id": "xenon/MFC/benchmark/5eq_rk3_weno3_hll-a100",

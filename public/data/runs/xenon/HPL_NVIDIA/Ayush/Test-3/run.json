@@ -1,17 +1,17 @@
 {
-  "id": "xenon/HPL_NVIDIA/Ayush/Test-1",
+  "id": "xenon/HPL_NVIDIA/Ayush/Test-3",
   "suite": "HPL_NVIDIA",
   "group": "Ayush",
-  "run": "Test-1",
+  "run": "Test-3",
   "cluster": "xenon",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-09-19T08:07:10.000Z",
+  "date": "2026-09-24T04:25:45.000Z",
   "dateSource": "run",
-  "submittedAt": null,
+  "submittedAt": "2026-09-19T18:06:43+10:00",
   "submitter": {
     "name": "Ayush",
     "house": false,
-    "by": null
+    "by": "Xeno-Tek"
   },
   "metric": {
     "key": "gflops",
@@ -23,7 +23,7 @@
   "secondary": [
     {
       "key": "time",
-      "value": 40.91,
+      "value": 40.92,
       "unit": "s",
       "label": "Solve time",
       "direction": "lower"
@@ -51,8 +51,8 @@
     "partition": "gpu"
   },
   "provenance": {
-    "started": "Sat Sep 19 08:07:10 2026",
-    "ended": "Sat Sep 19 08:07:51 2026"
+    "started": "Thu Sep 24 04:25:45 2026",
+    "ended": "Thu Sep 24 04:26:26 2026"
   },
   "status": "ok",
   "ranking": {
@@ -61,10 +61,10 @@
   },
   "notes": [],
   "raw": {
-    "HPL.dat": "raw/xenon/HPL_NVIDIA/Ayush/Test-1/HPL.dat",
-    "run.sh": "raw/xenon/HPL_NVIDIA/Ayush/Test-1/run.sh",
-    "run.out": "raw/xenon/HPL_NVIDIA/Ayush/Test-1/run.out",
-    "run.err": "raw/xenon/HPL_NVIDIA/Ayush/Test-1/run.err"
+    "HPL.dat": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/HPL.dat",
+    "run.sh": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/run.sh",
+    "run.out": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/run.out",
+    "run.err": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/run.err"
   },
   "best": {
     "tv": "WC0",
@@ -72,11 +72,11 @@
     "NB": 384,
     "P": 4,
     "Q": 2,
-    "timeSec": 40.91,
+    "timeSec": 40.92,
     "gflops": 102000,
-    "gflopsPerGpu": 12760,
-    "startTime": "Sat Sep 19 08:07:10 2026",
-    "endTime": "Sat Sep 19 08:07:51 2026",
+    "gflopsPerGpu": 12750,
+    "startTime": "Thu Sep 24 04:25:45 2026",
+    "endTime": "Thu Sep 24 04:26:26 2026",
     "residual": 0.000445944836,
     "residualPassed": true
   },
@@ -158,7 +158,7 @@
     "file": "HPL.dat"
   },
   "job": {
-    "raw": "#!/bin/bash\n# GPU HPL on the A100 nodes. Copy to your run directory AS run.sh.\n\n#SBATCH --job-name=hplgpu-8a100-baseline\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4          \n#SBATCH --gres=gpu:a100:4\n#SBATCH --cpus-per-task=8           \n#SBATCH --partition=gpu\n#SBATCH --time=00:40:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --distribution=block:block\n\nset -euo pipefail\n\nHPL_ROOT=/apps/benchmarks/hpl-nvidia/current\n\n\nexport OPAL_PREFIX=$HPL_ROOT/opt/hpcx/ompi\nexport PATH=$HPL_ROOT/opt/hpcx/ompi/bin:$PATH\nexport LD_LIBRARY_PATH=$HPL_ROOT/usr/local/cuda-13.1/targets/x86_64-linux/lib:$HPL_ROOT/lib/x86_64-linux-gnu:$HPL_ROOT/opt/hpcx/ompi/lib:$HPL_ROOT/opt/hpcx/ucx/lib\n# hpl.sh prepends workspace/lib/{nvshmem,omp} itself.\n\n\nexport HPL_USE_NVSHMEM=0\n\nexport CUDA_VISIBLE_DEVICES=0,1,2,3  \n\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl=^openib\nexport OMPI_MCA_opal_cuda_support=true\nexport OMPI_MCA_mpi_leave_pinned=1\nexport OMPI_MCA_rmaps_base_mapping_policy=\"ppr:2:numa:pe=8\"\nexport OMPI_MCA_hwloc_base_binding_policy=core\n\n\nexport UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc\nexport UCX_IB_GPU_DIRECT_RDMA=y\nexport UCX_MEMTYPE_CACHE=y\nexport UCX_RNDV_SCHEME=put_zcopy\n\nexport NCCL_PXN_DISABLE=0\nexport NCCL_IB_GDR_LEVEL=5\nexport NCCL_DEBUG=INFO\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node    : $(hostname -s)\"\necho \"gpus    : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks   : ${SLURM_NTASKS}\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/workspace/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/workspace/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
+    "raw": "#!/bin/bash\n# GPU HPL on the A100 nodes. Copy to your run directory AS run.sh.\n\n#SBATCH --job-name=hplgpu-8a100-baseline\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4          \n#SBATCH --gres=gpu:a100:4\n#SBATCH --cpus-per-task=8           \n#SBATCH --partition=gpu\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --distribution=block:block\n\nset -euo pipefail\n\nHPL_ROOT=/apps/benchmarks/hpl-nvidia/current\n\n\nexport OPAL_PREFIX=$HPL_ROOT/opt/hpcx/ompi\nexport PATH=$HPL_ROOT/opt/hpcx/ompi/bin:$PATH\nexport LD_LIBRARY_PATH=$HPL_ROOT/usr/local/cuda-13.1/targets/x86_64-linux/lib:$HPL_ROOT/lib/x86_64-linux-gnu:$HPL_ROOT/opt/hpcx/ompi/lib:$HPL_ROOT/opt/hpcx/ucx/lib\n# hpl.sh prepends workspace/lib/{nvshmem,omp} itself.\n\n\nexport HPL_USE_NVSHMEM=0\n\nexport CUDA_VISIBLE_DEVICES=0,1,2,3  \n\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl=^openib\nexport OMPI_MCA_opal_cuda_support=true\nexport OMPI_MCA_mpi_leave_pinned=1\nexport OMPI_MCA_rmaps_base_mapping_policy=\"ppr:2:numa:pe=8\"\nexport OMPI_MCA_hwloc_base_binding_policy=core\n\n\nexport UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc\nexport UCX_IB_GPU_DIRECT_RDMA=y\nexport UCX_MEMTYPE_CACHE=y\nexport UCX_RNDV_SCHEME=put_zcopy\n\nexport NCCL_PXN_DISABLE=0\nexport NCCL_IB_GDR_LEVEL=5\nexport NCCL_DEBUG=INFO\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node    : $(hostname -s)\"\necho \"gpus    : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks   : ${SLURM_NTASKS}\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/workspace/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/workspace/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
     "sbatch": {
       "job-name": "hplgpu-8a100-baseline",
       "nodes": 2,
@@ -166,7 +166,7 @@
       "gres": "gpu:a100:4",
       "cpus-per-task": 8,
       "partition": "gpu",
-      "time": "00:40:00",
+      "time": "01:00:00",
       "exclusive": true,
       "hint": "nomultithread",
       "distribution": "block:block"
@@ -182,11 +182,11 @@
         "NB": 384,
         "P": 4,
         "Q": 2,
-        "timeSec": 40.91,
+        "timeSec": 40.92,
         "gflops": 102000,
-        "gflopsPerGpu": 12760,
-        "startTime": "Sat Sep 19 08:07:10 2026",
-        "endTime": "Sat Sep 19 08:07:51 2026",
+        "gflopsPerGpu": 12750,
+        "startTime": "Thu Sep 24 04:25:45 2026",
+        "endTime": "Thu Sep 24 04:26:26 2026",
         "residual": 0.000445944836,
         "residualPassed": true
       }
@@ -234,13 +234,13 @@
       }
     },
     "traces": [
-      "[HPL TRACE] cuda_nvshmem_init: max=0.0000 (0) min=0.0000 (3)",
-      "[HPL TRACE] ncclCommInitRank: max=0.9944 (4) min=0.9926 (1)",
-      "[HPL TRACE] cugetrfs_mp_init: max=1.1539 (2) min=1.1538 (7)",
-      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0253 (1) min=0.0252 (6)"
+      "[HPL TRACE] cuda_nvshmem_init: max=0.0000 (4) min=0.0000 (7)",
+      "[HPL TRACE] ncclCommInitRank: max=1.0045 (4) min=1.0025 (2)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.1678 (6) min=1.1677 (2)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0254 (5) min=0.0253 (2)"
     ],
-    "startTime": "Sat Sep 19 08:07:10 2026",
-    "endTime": "Sat Sep 19 08:07:51 2026",
+    "startTime": "Thu Sep 24 04:25:45 2026",
+    "endTime": "Thu Sep 24 04:26:26 2026",
     "residual": 0.000445944836,
     "residualPassed": true
   },
@@ -324,7 +324,7 @@
       "file": "HPL.dat"
     },
     "job": {
-      "raw": "#!/bin/bash\n# GPU HPL on the A100 nodes. Copy to your run directory AS run.sh.\n\n#SBATCH --job-name=hplgpu-8a100-baseline\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4          \n#SBATCH --gres=gpu:a100:4\n#SBATCH --cpus-per-task=8           \n#SBATCH --partition=gpu\n#SBATCH --time=00:40:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --distribution=block:block\n\nset -euo pipefail\n\nHPL_ROOT=/apps/benchmarks/hpl-nvidia/current\n\n\nexport OPAL_PREFIX=$HPL_ROOT/opt/hpcx/ompi\nexport PATH=$HPL_ROOT/opt/hpcx/ompi/bin:$PATH\nexport LD_LIBRARY_PATH=$HPL_ROOT/usr/local/cuda-13.1/targets/x86_64-linux/lib:$HPL_ROOT/lib/x86_64-linux-gnu:$HPL_ROOT/opt/hpcx/ompi/lib:$HPL_ROOT/opt/hpcx/ucx/lib\n# hpl.sh prepends workspace/lib/{nvshmem,omp} itself.\n\n\nexport HPL_USE_NVSHMEM=0\n\nexport CUDA_VISIBLE_DEVICES=0,1,2,3  \n\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl=^openib\nexport OMPI_MCA_opal_cuda_support=true\nexport OMPI_MCA_mpi_leave_pinned=1\nexport OMPI_MCA_rmaps_base_mapping_policy=\"ppr:2:numa:pe=8\"\nexport OMPI_MCA_hwloc_base_binding_policy=core\n\n\nexport UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc\nexport UCX_IB_GPU_DIRECT_RDMA=y\nexport UCX_MEMTYPE_CACHE=y\nexport UCX_RNDV_SCHEME=put_zcopy\n\nexport NCCL_PXN_DISABLE=0\nexport NCCL_IB_GDR_LEVEL=5\nexport NCCL_DEBUG=INFO\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node    : $(hostname -s)\"\necho \"gpus    : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks   : ${SLURM_NTASKS}\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/workspace/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/workspace/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
+      "raw": "#!/bin/bash\n# GPU HPL on the A100 nodes. Copy to your run directory AS run.sh.\n\n#SBATCH --job-name=hplgpu-8a100-baseline\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4          \n#SBATCH --gres=gpu:a100:4\n#SBATCH --cpus-per-task=8           \n#SBATCH --partition=gpu\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --distribution=block:block\n\nset -euo pipefail\n\nHPL_ROOT=/apps/benchmarks/hpl-nvidia/current\n\n\nexport OPAL_PREFIX=$HPL_ROOT/opt/hpcx/ompi\nexport PATH=$HPL_ROOT/opt/hpcx/ompi/bin:$PATH\nexport LD_LIBRARY_PATH=$HPL_ROOT/usr/local/cuda-13.1/targets/x86_64-linux/lib:$HPL_ROOT/lib/x86_64-linux-gnu:$HPL_ROOT/opt/hpcx/ompi/lib:$HPL_ROOT/opt/hpcx/ucx/lib\n# hpl.sh prepends workspace/lib/{nvshmem,omp} itself.\n\n\nexport HPL_USE_NVSHMEM=0\n\nexport CUDA_VISIBLE_DEVICES=0,1,2,3  \n\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl=^openib\nexport OMPI_MCA_opal_cuda_support=true\nexport OMPI_MCA_mpi_leave_pinned=1\nexport OMPI_MCA_rmaps_base_mapping_policy=\"ppr:2:numa:pe=8\"\nexport OMPI_MCA_hwloc_base_binding_policy=core\n\n\nexport UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc\nexport UCX_IB_GPU_DIRECT_RDMA=y\nexport UCX_MEMTYPE_CACHE=y\nexport UCX_RNDV_SCHEME=put_zcopy\n\nexport NCCL_PXN_DISABLE=0\nexport NCCL_IB_GDR_LEVEL=5\nexport NCCL_DEBUG=INFO\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node    : $(hostname -s)\"\necho \"gpus    : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks   : ${SLURM_NTASKS}\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/workspace/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/workspace/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
       "sbatch": {
         "job-name": "hplgpu-8a100-baseline",
         "nodes": 2,
@@ -332,7 +332,7 @@
         "gres": "gpu:a100:4",
         "cpus-per-task": 8,
         "partition": "gpu",
-        "time": "00:40:00",
+        "time": "01:00:00",
         "exclusive": true,
         "hint": "nomultithread",
         "distribution": "block:block"
@@ -348,11 +348,11 @@
           "NB": 384,
           "P": 4,
           "Q": 2,
-          "timeSec": 40.91,
+          "timeSec": 40.92,
           "gflops": 102000,
-          "gflopsPerGpu": 12760,
-          "startTime": "Sat Sep 19 08:07:10 2026",
-          "endTime": "Sat Sep 19 08:07:51 2026",
+          "gflopsPerGpu": 12750,
+          "startTime": "Thu Sep 24 04:25:45 2026",
+          "endTime": "Thu Sep 24 04:26:26 2026",
           "residual": 0.000445944836,
           "residualPassed": true
         }
@@ -400,13 +400,13 @@
         }
       },
       "traces": [
-        "[HPL TRACE] cuda_nvshmem_init: max=0.0000 (0) min=0.0000 (3)",
-        "[HPL TRACE] ncclCommInitRank: max=0.9944 (4) min=0.9926 (1)",
-        "[HPL TRACE] cugetrfs_mp_init: max=1.1539 (2) min=1.1538 (7)",
-        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0253 (1) min=0.0252 (6)"
+        "[HPL TRACE] cuda_nvshmem_init: max=0.0000 (4) min=0.0000 (7)",
+        "[HPL TRACE] ncclCommInitRank: max=1.0045 (4) min=1.0025 (2)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.1678 (6) min=1.1677 (2)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0254 (5) min=0.0253 (2)"
       ],
-      "startTime": "Sat Sep 19 08:07:10 2026",
-      "endTime": "Sat Sep 19 08:07:51 2026",
+      "startTime": "Thu Sep 24 04:25:45 2026",
+      "endTime": "Thu Sep 24 04:26:26 2026",
       "residual": 0.000445944836,
       "residualPassed": true
     },
@@ -417,11 +417,11 @@
       "NB": 384,
       "P": 4,
       "Q": 2,
-      "timeSec": 40.91,
+      "timeSec": 40.92,
       "gflops": 102000,
-      "gflopsPerGpu": 12760,
-      "startTime": "Sat Sep 19 08:07:10 2026",
-      "endTime": "Sat Sep 19 08:07:51 2026",
+      "gflopsPerGpu": 12750,
+      "startTime": "Thu Sep 24 04:25:45 2026",
+      "endTime": "Thu Sep 24 04:26:26 2026",
       "residual": 0.000445944836,
       "residualPassed": true
     }
