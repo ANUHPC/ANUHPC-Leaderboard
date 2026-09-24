@@ -7,7 +7,7 @@
 #SBATCH --gres=gpu:a100:4
 #SBATCH --cpus-per-task=8           
 #SBATCH --partition=gpu
-#SBATCH --time=00:40:00
+#SBATCH --time=01:00:00
 #SBATCH --exclusive
 #SBATCH --hint=nomultithread
 #SBATCH --distribution=block:block
