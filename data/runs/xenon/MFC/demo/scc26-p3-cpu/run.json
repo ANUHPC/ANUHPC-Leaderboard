@@ -1,0 +1,1793 @@
+{
+  "id": "xenon/MFC/demo/scc26-p3-cpu",
+  "suite": "MFC",
+  "group": "demo",
+  "run": "scc26-p3-cpu",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-17T08:50:06Z",
+  "dateSource": "git",
+  "submittedAt": "2026-09-17T05:58:59Z",
+  "submitter": {
+    "name": "demo",
+    "house": true,
+    "by": "Codex"
+  },
+  "metric": {
+    "key": "grind",
+    "value": 55.9686851,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 52.69835,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.0055245,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 4,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "parameters": null,
+  "verification": {
+    "kind": "custom",
+    "reason": "Successful run; staged custom case hash and MFC source pin match. Physics is user supplied."
+  },
+  "convergence": null,
+  "config": {
+    "case": null,
+    "args": [],
+    "nodes": 1,
+    "tasks_per_node": 4,
+    "ranks": 4,
+    "partition": "cpu",
+    "gpu": "none",
+    "case_optimization": null,
+    "gbpp": null,
+    "toolchain": "gcc-ompi5",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "custom",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": null,
+    "case_sha256": "e096868b931e56804da4cc4ee43b6cf81cb69f645de9bb7f8054ba9290d351ef",
+    "invocation": "run /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation post_process -N 1 -n 4 -p cpu -w 00:30:00 --name mfc-scc26-p3-cpu -o /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml --no-build --clean --gpu no --wait --",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "no",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": false,
+    "reason": "Custom or unverified case — unranked",
+    "group": "custom/CPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/demo/scc26-p3-cpu/case.py",
+    "summary.yaml": "raw/xenon/MFC/demo/scc26-p3-cpu/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/demo/scc26-p3-cpu/time_data.dat",
+    "run.out": "raw/xenon/MFC/demo/scc26-p3-cpu/run.out",
+    "run.err": "raw/xenon/MFC/demo/scc26-p3-cpu/run.err",
+    "job.yml": "raw/xenon/MFC/demo/scc26-p3-cpu/job.yml",
+    "run.sh": "raw/xenon/MFC/demo/scc26-p3-cpu/run.sh",
+    "alpha1.mp4": "raw/xenon/MFC/demo/scc26-p3-cpu/alpha1.mp4",
+    "alpha1_2812.png": "raw/xenon/MFC/demo/scc26-p3-cpu/alpha1_2812.png",
+    "mfc-provenance.json": "raw/xenon/MFC/demo/scc26-p3-cpu/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/demo/scc26-p3-cpu/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "run.out",
+    "size": 378904,
+    "parsed": {
+      "banner": {
+        "start_time": "08:48:06",
+        "start_date": "08:48:06",
+        "partition": "cpu",
+        "walltime": "00:30:00",
+        "nodes": "1",
+        "job_name": "mfc-scc26-p3-cpu",
+        "engine": "batch",
+        "queue_system": "SLURM"
+      },
+      "env": {
+        "host": "cpu-node1",
+        "nodesTasks": "1 x 4",
+        "mpirun": "/work/openmpi/5.0.10/bin/mpirun",
+        "fabric": "ibp129s0 (UCX_TLS=rc,sm,self)"
+      },
+      "steps": [
+        {
+          "step": 1,
+          "total": 2813,
+          "avg": 0,
+          "perStep": 0
+        },
+        {
+          "step": 25,
+          "total": 2813,
+          "avg": 0.01801486,
+          "perStep": 0.017934
+        },
+        {
+          "step": 49,
+          "total": 2813,
+          "avg": 0.01794428,
+          "perStep": 0.017809
+        },
+        {
+          "step": 73,
+          "total": 2813,
+          "avg": 0.01793739,
+          "perStep": 0.017841
+        },
+        {
+          "step": 97,
+          "total": 2813,
+          "avg": 0.01797198,
+          "perStep": 0.017567
+        },
+        {
+          "step": 121,
+          "total": 2813,
+          "avg": 0.01795476,
+          "perStep": 0.017531
+        },
+        {
+          "step": 145,
+          "total": 2813,
+          "avg": 0.01792602,
+          "perStep": 0.017488
+        },
+        {
+          "step": 169,
+          "total": 2813,
+          "avg": 0.01790898,
+          "perStep": 0.017582
+        },
+        {
+          "step": 193,
+          "total": 2813,
+          "avg": 0.01790569,
+          "perStep": 0.01954
+        },
+        {
+          "step": 217,
+          "total": 2813,
+          "avg": 0.01790678,
+          "perStep": 0.01784
+        },
+        {
+          "step": 241,
+          "total": 2813,
+          "avg": 0.01789795,
+          "perStep": 0.017612
+        },
+        {
+          "step": 265,
+          "total": 2813,
+          "avg": 0.01789845,
+          "perStep": 0.018022
+        },
+        {
+          "step": 289,
+          "total": 2813,
+          "avg": 0.01790216,
+          "perStep": 0.017935
+        },
+        {
+          "step": 313,
+          "total": 2813,
+          "avg": 0.01789317,
+          "perStep": 0.017571
+        },
+        {
+          "step": 337,
+          "total": 2813,
+          "avg": 0.01789325,
+          "perStep": 0.017815
+        },
+        {
+          "step": 361,
+          "total": 2813,
+          "avg": 0.0178918,
+          "perStep": 0.017588
+        },
+        {
+          "step": 385,
+          "total": 2813,
+          "avg": 0.01788448,
+          "perStep": 0.017919
+        },
+        {
+          "step": 409,
+          "total": 2813,
+          "avg": 0.01787998,
+          "perStep": 0.018319
+        },
+        {
+          "step": 433,
+          "total": 2813,
+          "avg": 0.01787235,
+          "perStep": 0.017965
+        },
+        {
+          "step": 457,
+          "total": 2813,
+          "avg": 0.0178706,
+          "perStep": 0.017703
+        },
+        {
+          "step": 481,
+          "total": 2813,
+          "avg": 0.01787213,
+          "perStep": 0.017857
+        },
+        {
+          "step": 505,
+          "total": 2813,
+          "avg": 0.01787056,
+          "perStep": 0.017773
+        },
+        {
+          "step": 529,
+          "total": 2813,
+          "avg": 0.01787569,
+          "perStep": 0.017665
+        },
+        {
+          "step": 553,
+          "total": 2813,
+          "avg": 0.01787694,
+          "perStep": 0.018473
+        },
+        {
+          "step": 577,
+          "total": 2813,
+          "avg": 0.01787639,
+          "perStep": 0.018048
+        },
+        {
+          "step": 601,
+          "total": 2813,
+          "avg": 0.01788086,
+          "perStep": 0.017759
+        },
+        {
+          "step": 625,
+          "total": 2813,
+          "avg": 0.0178838,
+          "perStep": 0.018042
+        },
+        {
+          "step": 649,
+          "total": 2813,
+          "avg": 0.01789104,
+          "perStep": 0.018021
+        },
+        {
+          "step": 673,
+          "total": 2813,
+          "avg": 0.01790035,
+          "perStep": 0.017688
+        },
+        {
+          "step": 697,
+          "total": 2813,
+          "avg": 0.01790253,
+          "perStep": 0.018057
+        },
+        {
+          "step": 721,
+          "total": 2813,
+          "avg": 0.01790899,
+          "perStep": 0.018004
+        },
+        {
+          "step": 745,
+          "total": 2813,
+          "avg": 0.01791358,
+          "perStep": 0.017743
+        },
+        {
+          "step": 769,
+          "total": 2813,
+          "avg": 0.0179169,
+          "perStep": 0.018202
+        },
+        {
+          "step": 793,
+          "total": 2813,
+          "avg": 0.01792097,
+          "perStep": 0.018177
+        },
+        {
+          "step": 817,
+          "total": 2813,
+          "avg": 0.01792345,
+          "perStep": 0.017933
+        },
+        {
+          "step": 841,
+          "total": 2813,
+          "avg": 0.01792567,
+          "perStep": 0.018188
+        },
+        {
+          "step": 865,
+          "total": 2813,
+          "avg": 0.0179269,
+          "perStep": 0.018206
+        },
+        {
+          "step": 889,
+          "total": 2813,
+          "avg": 0.01792329,
+          "perStep": 0.017576
+        },
+        {
+          "step": 913,
+          "total": 2813,
+          "avg": 0.01791874,
+          "perStep": 0.017717
+        },
+        {
+          "step": 937,
+          "total": 2813,
+          "avg": 0.01791204,
+          "perStep": 0.017772
+        },
+        {
+          "step": 961,
+          "total": 2813,
+          "avg": 0.017908,
+          "perStep": 0.017573
+        },
+        {
+          "step": 985,
+          "total": 2813,
+          "avg": 0.01790131,
+          "perStep": 0.017529
+        },
+        {
+          "step": 1009,
+          "total": 2813,
+          "avg": 0.01789638,
+          "perStep": 0.017588
+        },
+        {
+          "step": 1033,
+          "total": 2813,
+          "avg": 0.01789295,
+          "perStep": 0.017501
+        },
+        {
+          "step": 1057,
+          "total": 2813,
+          "avg": 0.01788842,
+          "perStep": 0.017524
+        },
+        {
+          "step": 1081,
+          "total": 2813,
+          "avg": 0.01788579,
+          "perStep": 0.01786
+        },
+        {
+          "step": 1105,
+          "total": 2813,
+          "avg": 0.01788274,
+          "perStep": 0.017717
+        },
+        {
+          "step": 1129,
+          "total": 2813,
+          "avg": 0.01788015,
+          "perStep": 0.017974
+        },
+        {
+          "step": 1153,
+          "total": 2813,
+          "avg": 0.01787703,
+          "perStep": 0.017676
+        },
+        {
+          "step": 1177,
+          "total": 2813,
+          "avg": 0.01787438,
+          "perStep": 0.017893
+        },
+        {
+          "step": 1201,
+          "total": 2813,
+          "avg": 0.01787109,
+          "perStep": 0.017525
+        },
+        {
+          "step": 1225,
+          "total": 2813,
+          "avg": 0.01786705,
+          "perStep": 0.017791
+        },
+        {
+          "step": 1249,
+          "total": 2813,
+          "avg": 0.01786337,
+          "perStep": 0.018234
+        },
+        {
+          "step": 1273,
+          "total": 2813,
+          "avg": 0.01785981,
+          "perStep": 0.01748
+        },
+        {
+          "step": 1297,
+          "total": 2813,
+          "avg": 0.01785709,
+          "perStep": 0.018675
+        },
+        {
+          "step": 1321,
+          "total": 2813,
+          "avg": 0.01785317,
+          "perStep": 0.017527
+        },
+        {
+          "step": 1345,
+          "total": 2813,
+          "avg": 0.01784986,
+          "perStep": 0.017507
+        },
+        {
+          "step": 1369,
+          "total": 2813,
+          "avg": 0.01784868,
+          "perStep": 0.017585
+        },
+        {
+          "step": 1393,
+          "total": 2813,
+          "avg": 0.01784707,
+          "perStep": 0.017791
+        },
+        {
+          "step": 1417,
+          "total": 2813,
+          "avg": 0.01785001,
+          "perStep": 0.018086
+        },
+        {
+          "step": 1441,
+          "total": 2813,
+          "avg": 0.01784848,
+          "perStep": 0.017851
+        },
+        {
+          "step": 1465,
+          "total": 2813,
+          "avg": 0.01784586,
+          "perStep": 0.017726
+        },
+        {
+          "step": 1489,
+          "total": 2813,
+          "avg": 0.01784496,
+          "perStep": 0.017561
+        },
+        {
+          "step": 1513,
+          "total": 2813,
+          "avg": 0.01784372,
+          "perStep": 0.017736
+        },
+        {
+          "step": 1537,
+          "total": 2813,
+          "avg": 0.0178427,
+          "perStep": 0.017813
+        },
+        {
+          "step": 1561,
+          "total": 2813,
+          "avg": 0.01784261,
+          "perStep": 0.017991
+        },
+        {
+          "step": 1585,
+          "total": 2813,
+          "avg": 0.01784243,
+          "perStep": 0.017599
+        },
+        {
+          "step": 1609,
+          "total": 2813,
+          "avg": 0.01784246,
+          "perStep": 0.017607
+        },
+        {
+          "step": 1633,
+          "total": 2813,
+          "avg": 0.01784189,
+          "perStep": 0.017579
+        },
+        {
+          "step": 1657,
+          "total": 2813,
+          "avg": 0.017842,
+          "perStep": 0.017668
+        },
+        {
+          "step": 1681,
+          "total": 2813,
+          "avg": 0.01784065,
+          "perStep": 0.017587
+        },
+        {
+          "step": 1705,
+          "total": 2813,
+          "avg": 0.01784017,
+          "perStep": 0.01762
+        },
+        {
+          "step": 1729,
+          "total": 2813,
+          "avg": 0.0178391,
+          "perStep": 0.017569
+        },
+        {
+          "step": 1753,
+          "total": 2813,
+          "avg": 0.01783925,
+          "perStep": 0.017954
+        },
+        {
+          "step": 1777,
+          "total": 2813,
+          "avg": 0.01783785,
+          "perStep": 0.017519
+        },
+        {
+          "step": 1801,
+          "total": 2813,
+          "avg": 0.01783776,
+          "perStep": 0.01811
+        },
+        {
+          "step": 1825,
+          "total": 2813,
+          "avg": 0.01783618,
+          "perStep": 0.017556
+        },
+        {
+          "step": 1849,
+          "total": 2813,
+          "avg": 0.01783709,
+          "perStep": 0.017981
+        },
+        {
+          "step": 1873,
+          "total": 2813,
+          "avg": 0.01783738,
+          "perStep": 0.017793
+        },
+        {
+          "step": 1897,
+          "total": 2813,
+          "avg": 0.01783747,
+          "perStep": 0.017852
+        },
+        {
+          "step": 1921,
+          "total": 2813,
+          "avg": 0.01783693,
+          "perStep": 0.017839
+        },
+        {
+          "step": 1945,
+          "total": 2813,
+          "avg": 0.017835,
+          "perStep": 0.018486
+        },
+        {
+          "step": 1969,
+          "total": 2813,
+          "avg": 0.01783708,
+          "perStep": 0.018101
+        },
+        {
+          "step": 1993,
+          "total": 2813,
+          "avg": 0.01783772,
+          "perStep": 0.017978
+        },
+        {
+          "step": 2017,
+          "total": 2813,
+          "avg": 0.0178376,
+          "perStep": 0.017696
+        },
+        {
+          "step": 2041,
+          "total": 2813,
+          "avg": 0.01783669,
+          "perStep": 0.017562
+        },
+        {
+          "step": 2065,
+          "total": 2813,
+          "avg": 0.01783726,
+          "perStep": 0.018445
+        },
+        {
+          "step": 2089,
+          "total": 2813,
+          "avg": 0.01783668,
+          "perStep": 0.017854
+        },
+        {
+          "step": 2113,
+          "total": 2813,
+          "avg": 0.01783698,
+          "perStep": 0.017671
+        },
+        {
+          "step": 2137,
+          "total": 2813,
+          "avg": 0.01783771,
+          "perStep": 0.017935
+        },
+        {
+          "step": 2161,
+          "total": 2813,
+          "avg": 0.01783738,
+          "perStep": 0.017806
+        },
+        {
+          "step": 2185,
+          "total": 2813,
+          "avg": 0.01783813,
+          "perStep": 0.017922
+        },
+        {
+          "step": 2209,
+          "total": 2813,
+          "avg": 0.01784027,
+          "perStep": 0.017837
+        },
+        {
+          "step": 2233,
+          "total": 2813,
+          "avg": 0.01784182,
+          "perStep": 0.017925
+        },
+        {
+          "step": 2257,
+          "total": 2813,
+          "avg": 0.01784233,
+          "perStep": 0.017568
+        },
+        {
+          "step": 2281,
+          "total": 2813,
+          "avg": 0.01784146,
+          "perStep": 0.017841
+        },
+        {
+          "step": 2305,
+          "total": 2813,
+          "avg": 0.01783937,
+          "perStep": 0.01742
+        },
+        {
+          "step": 2329,
+          "total": 2813,
+          "avg": 0.01783547,
+          "perStep": 0.017392
+        },
+        {
+          "step": 2353,
+          "total": 2813,
+          "avg": 0.01783165,
+          "perStep": 0.017494
+        },
+        {
+          "step": 2377,
+          "total": 2813,
+          "avg": 0.01782772,
+          "perStep": 0.017427
+        },
+        {
+          "step": 2401,
+          "total": 2813,
+          "avg": 0.01782454,
+          "perStep": 0.017395
+        },
+        {
+          "step": 2425,
+          "total": 2813,
+          "avg": 0.01782091,
+          "perStep": 0.017407
+        },
+        {
+          "step": 2449,
+          "total": 2813,
+          "avg": 0.01781833,
+          "perStep": 0.017583
+        },
+        {
+          "step": 2473,
+          "total": 2813,
+          "avg": 0.01781651,
+          "perStep": 0.017438
+        },
+        {
+          "step": 2497,
+          "total": 2813,
+          "avg": 0.01781327,
+          "perStep": 0.017887
+        },
+        {
+          "step": 2521,
+          "total": 2813,
+          "avg": 0.01780976,
+          "perStep": 0.017396
+        },
+        {
+          "step": 2545,
+          "total": 2813,
+          "avg": 0.01780617,
+          "perStep": 0.017651
+        },
+        {
+          "step": 2569,
+          "total": 2813,
+          "avg": 0.01780463,
+          "perStep": 0.017604
+        },
+        {
+          "step": 2593,
+          "total": 2813,
+          "avg": 0.01780223,
+          "perStep": 0.0175
+        },
+        {
+          "step": 2617,
+          "total": 2813,
+          "avg": 0.01779952,
+          "perStep": 0.017447
+        },
+        {
+          "step": 2641,
+          "total": 2813,
+          "avg": 0.0177966,
+          "perStep": 0.017901
+        },
+        {
+          "step": 2665,
+          "total": 2813,
+          "avg": 0.01779369,
+          "perStep": 0.017365
+        },
+        {
+          "step": 2689,
+          "total": 2813,
+          "avg": 0.01779132,
+          "perStep": 0.017531
+        },
+        {
+          "step": 2713,
+          "total": 2813,
+          "avg": 0.01778838,
+          "perStep": 0.017343
+        },
+        {
+          "step": 2737,
+          "total": 2813,
+          "avg": 0.01778522,
+          "perStep": 0.017337
+        },
+        {
+          "step": 2761,
+          "total": 2813,
+          "avg": 0.01778223,
+          "perStep": 0.017517
+        },
+        {
+          "step": 2785,
+          "total": 2813,
+          "avg": 0.01777943,
+          "perStep": 0.017363
+        },
+        {
+          "step": 2809,
+          "total": 2813,
+          "avg": 0.0177771,
+          "perStep": 0.017396
+        },
+        {
+          "step": 2812,
+          "total": 2813,
+          "avg": 0.01777681,
+          "perStep": 0.017436
+        }
+      ],
+      "stepCount": 2812,
+      "performance": 55.968685098321295,
+      "totalTimeSec": 59,
+      "exitCode": 0,
+      "lines": 2980
+    },
+    "excerpt": {
+      "head": [
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| MFC case # mfc-scc26-p3-cpu @ /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py:                    |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| * Start-time     08:48:06                            * Start-date     08:48:06                            |",
+        "| * Partition      cpu                                 * Walltime       00:30:00                            |",
+        "| * Account        N/A                                 * Nodes          1                                   |",
+        "| * Job Name       mfc-scc26-p3-cpu                    * Engine         batch                               |",
+        "| * QoS            N/A                                 * Binary         N/A                                 |",
+        "| * Queue System   SLURM                               * Email          N/A                                 |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "",
+        "host        : cpu-node1",
+        "nodes/tasks : 1 x 4",
+        "mpirun      : /work/openmpi/5.0.10/bin/mpirun",
+        "fabric      : ibp129s0 (UCX_TLS=rc,sm,self)",
+        "",
+        "mfc: OK > :) Running syscheck:",
+        "",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)",
+        " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)"
+      ],
+      "tail": [
+        " [ 80%]  Saving       78 of 97 @ t_step =     2233 Time Avg =     1.314201E-02 Time/step = 1.872800E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 81%]  Saving       79 of 97 @ t_step =     2262 Time Avg =     1.317052E-02 Time/step = 1.533700E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 82%]  Saving       80 of 97 @ t_step =     2291 Time Avg =     1.316141E-02 Time/step = 1.246000E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 83%]  Saving       81 of 97 @ t_step =     2320 Time Avg =     1.312891E-02 Time/step = 1.059400E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 84%]  Saving       82 of 97 @ t_step =     2349 Time Avg =     1.317195E-02 Time/step = 1.657200E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 85%]  Saving       83 of 97 @ t_step =     2378 Time Avg =     1.318225E-02 Time/step = 1.400600E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 86%]  Saving       84 of 97 @ t_step =     2407 Time Avg =     1.318354E-02 Time/step = 1.328800E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 87%]  Saving       85 of 97 @ t_step =     2436 Time Avg =     1.316194E-02 Time/step = 1.139100E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 88%]  Saving       86 of 97 @ t_step =     2465 Time Avg =     1.320988E-02 Time/step = 1.718900E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 89%]  Saving       87 of 97 @ t_step =     2494 Time Avg =     1.321814E-02 Time/step = 1.391200E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 90%]  Saving       88 of 97 @ t_step =     2523 Time Avg =     1.320593E-02 Time/step = 1.216800E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 91%]  Saving       89 of 97 @ t_step =     2552 Time Avg =     1.326391E-02 Time/step = 1.825000E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 92%]  Saving       90 of 97 @ t_step =     2581 Time Avg =     1.328918E-02 Time/step = 1.548800E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 93%]  Saving       91 of 97 @ t_step =     2610 Time Avg =     1.328500E-02 Time/step = 1.291700E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 94%]  Saving       92 of 97 @ t_step =     2639 Time Avg =     1.333722E-02 Time/step = 1.798500E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 95%]  Saving       93 of 97 @ t_step =     2668 Time Avg =     1.332563E-02 Time/step = 1.228200E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 96%]  Saving       94 of 97 @ t_step =     2697 Time Avg =     1.330714E-02 Time/step = 1.162500E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 97%]  Saving       95 of 97 @ t_step =     2726 Time Avg =     1.333862E-02 Time/step = 1.623500E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 98%]  Saving       96 of 97 @ t_step =     2755 Time Avg =     1.338246E-02 Time/step = 1.745900E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [ 99%]  Saving       97 of 97 @ t_step =     2784 Time Avg =     1.337671E-02 Time/step = 1.283600E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Saving       97 of 97 @ t_step =     2812 Time Avg =     1.337493E-02 Time/step = 1.320600E-02 ETA (HH:MM:SS) = 0:00:00",
+        "",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| Finished mfc-scc26-p3-cpu:                                                                                |",
+        "| * Total-time:    59s                                 * Exit Code:     0                                   |",
+        "| * End-time:      08:49:05                            * End-date:      08:49:05                            |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        ""
+      ],
+      "elided": 2928
+    }
+  },
+  "err": {
+    "file": "run.err",
+    "size": 8829,
+    "raw": "+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:69682] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69681] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69683] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69684] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69683] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69682] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69681] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69684] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69683] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69682] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69684] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69681] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-77ad0e446d/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:69705] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69706] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69707] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69708] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69707] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69706] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69705] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69707] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69705] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69706] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69708] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69708] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-503a859d02/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:69740] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69741] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69742] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69743] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69742] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69741] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69742] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69741] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69743] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69743] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69740] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69740] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-c084270971/bin/post_process\nException caught: rsmi_init.\n[cpu-node1:69787] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69786] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69788] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69789] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69788] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69789] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69787] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69788] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69789] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69787] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69786] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69786] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "post_process",
+        "-N",
+        "1",
+        "-n",
+        "4",
+        "-p",
+        "cpu",
+        "-w",
+        "00:30:00",
+        "--name",
+        "mfc-scc26-p3-cpu",
+        "-o",
+        "/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml",
+        "--no-build",
+        "--clean",
+        "--gpu",
+        "no",
+        "--wait",
+        "--"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "no",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 0.7160673
+      },
+      "pre_process": {
+        "exec": 1.2992406
+      },
+      "simulation": {
+        "exec": 52.69835,
+        "grind": 55.9686851
+      },
+      "post_process": {
+        "exec": 4.0312922
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 4,
+        "sPerStep": 0.0055245,
+        "grind": 55.9686851
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# MIT License\n# \n# Copyright (c) 2021 Spencer Bryngelson and Tim Colonius\n# \n# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n# \n# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n# \n# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\nimport argparse\nimport json\nimport math\n\n# SCC26 Practice Problem 3, pp. 4-6.\n# Based on MFlowCode/MFC e2f0e267 examples/2D_shockdroplet/case.py.\n# The GitHub runner passes no custom case arguments. Edit these defaults,\n# then submit in a NEW run directory to compare experiments.\nMACH = 1.4\nRESOLUTION = 0.2  # 240 x 60 cells; PDF figure uses 4.0 (4800 x 1200).\nEND_TIME = 1.0   # Dimensionless breakup time; PDF figure uses 2.0.\nCFL = 0.2\nADAPTIVE_DT = False\n\nparser = argparse.ArgumentParser(prog=\"2D_shockdroplet\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\nparser.add_argument(\n    \"--mfc\",\n    type=json.loads,\n    default=\"{}\",\n    metavar=\"DICT\",\n    help=\"MFC's toolchain's internal state.\",\n)\nparser.add_argument(\"--mach\", type=float, default=MACH, help=\"Shock Mach number.\")\nparser.add_argument(\"--adap-dt\", action=\"store_true\", default=ADAPTIVE_DT, help=\"Use CFL-based adaptive time-stepping.\")\nparser.add_argument(\"--cfl\", type=float, default=CFL, help=\"CFL number.\")\nparser.add_argument(\"--tend\", type=float, default=END_TIME, help=\"Dimensionless end time.\")\nparser.add_argument(\"--res\", type=float, default=RESOLUTION, help=\"Resolution scaling factor.\")\nargs = parser.parse_args()\n\nMa = args.mach\np_a = 101325.0\nrho_a = 1.204\nrho_w = 1000\ngam_a = 1.4\ngam_w = 6.12\npi_w = 3.43e8\n\n# Post-shock state from the Rankine-Hugoniot conditions (shock moving into still air)\nps = p_a * (1 + 2 * gam_a / (gam_a + 1) * (Ma**2 - 1))\nrho_post_a = rho_a * (gam_a + 1) * Ma**2 / ((gam_a - 1) * Ma**2 + 2)\nc_a = math.sqrt(gam_a * p_a / rho_a)\nvel = 2 * c_a / (gam_a + 1) * (Ma**2 - 1) / Ma\n\nc_l = math.sqrt(gam_a * ps / rho_a)\neps = 1e-6\n\nD = 0.048\nNy = (300 * args.res) - 1\nNx = (1200 * args.res) - 1\ndx = 24 * D / Nx\n\n# End time in units of the Ranger & Nicholls (1969) breakup time scale\n# t_breakup = D sqrt(rho_l/rho_g) / u_g, with post-shock gas conditions\ntau_end = args.tend\ntime_end = tau_end * D * math.sqrt(rho_w / rho_post_a) / vel\ncfl = args.cfl\n\ndt = cfl * dx / c_l\nNt = int(time_end / dt)\n\nif args.adap_dt:\n    time_stepping = {\n        \"cfl_adap_dt\": \"T\",\n        \"cfl_target\": cfl,\n        \"n_start\": 0,\n        \"t_stop\": time_end,\n        \"t_save\": time_end / 100,\n    }\nelse:\n    time_stepping = {\n        \"dt\": dt,\n        \"t_step_start\": 0,\n        \"t_step_stop\": Nt,\n        \"t_step_save\": math.ceil(Nt / 100),\n    }\n\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"T\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": -4 * D,\n            \"x_domain%end\": 20 * D,\n            \"y_domain%beg\": 0.0,\n            \"y_domain%end\": 6 * D,\n            \"stretch_y\": \"T\",\n            \"a_y\": 3.67,\n            \"y_a\": -5.7 * D,\n            \"y_b\": 5.7 * D,\n            \"loops_y\": 2,\n            \"m\": int(Nx),\n            \"n\": int(Ny),\n            \"p\": 0,\n            **time_stepping,\n            \"elliptic_smoothing\": \"T\",\n            \"elliptic_smoothing_iters\": 20,\n            # Simulation Algorithm Parameters\n            \"num_patches\": 3,\n            \"model_eqns\": \"5eq\",\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"F\",\n            \"mixture_err\": \"F\",\n            \"time_stepper\": \"rk3\",\n            \"weno_order\": 3,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"T\",\n            \"null_weights\": \"F\",\n            \"mp_weno\": \"F\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            \"avg_state\": \"arithmetic\",\n            \"bc_x%beg\": -6,  # 11,\n            \"bc_x%end\": -6,  # 12\n            \"bc_y%beg\": -2,\n            \"bc_y%end\": -3,\n            # Formatted Database Files Structure Parameters\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"T\",\n            # Patch 1: Background\n            \"patch_icpp(1)%geometry\": 3,\n            \"patch_icpp(1)%x_centroid\": 8 * D,\n            \"patch_icpp(1)%y_centroid\": 6 * D,\n            \"patch_icpp(1)%length_x\": 24 * D,\n            \"patch_icpp(1)%length_y\": 14 * D,\n            \"patch_icpp(1)%vel(1)\": 0.0,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%pres\": p_a,\n            \"patch_icpp(1)%alpha_rho(1)\": eps * rho_w,\n            \"patch_icpp(1)%alpha_rho(2)\": (1 - eps) * rho_a,\n            \"patch_icpp(1)%alpha(1)\": eps,\n            \"patch_icpp(1)%alpha(2)\": 1 - eps,\n            # Patch 2: Shocked state\n            \"patch_icpp(2)%geometry\": 3,\n            \"patch_icpp(2)%alter_patch(1)\": \"T\",\n            \"patch_icpp(2)%x_centroid\": -2.5 * D,\n            \"patch_icpp(2)%y_centroid\": 6 * D,\n            \"patch_icpp(2)%length_x\": 3 * D,\n            \"patch_icpp(2)%length_y\": 14 * D,\n            \"patch_icpp(2)%vel(1)\": vel,\n            \"patch_icpp(2)%vel(2)\": 0.0e00,\n            \"patch_icpp(2)%pres\": ps,\n            \"patch_icpp(2)%alpha_rho(1)\": eps * rho_w,\n            \"patch_icpp(2)%alpha_rho(2)\": (1 - eps) * rho_post_a,\n            \"patch_icpp(2)%alpha(1)\": eps,\n            \"patch_icpp(2)%alpha(2)\": 1 - eps,\n            # Patch 3: Bubble\n            \"patch_icpp(3)%geometry\": 2,\n            \"patch_icpp(3)%x_centroid\": 0,\n            \"patch_icpp(3)%y_centroid\": 0,\n            \"patch_icpp(3)%radius\": D / 2,\n            \"patch_icpp(3)%alter_patch(1)\": \"T\",\n            \"patch_icpp(3)%vel(1)\": 0.0,\n            \"patch_icpp(3)%vel(2)\": 0.0e00,\n            \"patch_icpp(3)%pres\": p_a,\n            \"patch_icpp(3)%alpha_rho(1)\": (1 - eps) * rho_w,\n            \"patch_icpp(3)%alpha_rho(2)\": eps * 1.17,\n            \"patch_icpp(3)%alpha(1)\": 1 - eps,  # 0.95\n            \"patch_icpp(3)%alpha(2)\": eps,  # 0.05,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gam_w - 1.0e00),\n            \"fluid_pp(1)%pi_inf\": pi_w * gam_w / (gam_w - 1.0e00),\n            \"fluid_pp(2)%gamma\": 1.0e00 / (gam_a - 1.0e00),\n            \"fluid_pp(2)%pi_inf\": 0.0e00,\n        }\n    )\n)\n"
+    },
+    "script": {
+      "file": "run.sh",
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-scc26-p3-cpu\"\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=4\n#SBATCH --output=\"mfc-scc26-p3-cpu.out\"\n#SBATCH --error=\"mfc-scc26-p3-cpu.err\"\n#SBATCH --time=00:30:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=cpu\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/haswell/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"cpu\"          \"Walltime\"   \"00:30:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"1\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-scc26-p3-cpu\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-scc26-p3-cpu @ /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/mfc-environment.sh\" none || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 1 x 4\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 4                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 4                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-77ad0e446d/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-77ad0e446d/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 4                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-503a859d02/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-503a859d02/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA post_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu'\n\n    t_post_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 4                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-c084270971/bin/post_process\")\n\n    \n    code=$?\n\n    t_post_process_stop=$(python3 -c 'import time; print(time.time())')\n\n    python3 \"/work/mfc/5.6.1-gcc13-ompi5/haswell/toolchain/templates/include/generate_silo_series.py\" '/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu'\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-c084270971/bin/post_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/haswell'\n\n        cat >>'/scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml' <<EOL\npost_process:\n    exec:  $(echo \"$t_post_process_stop - $t_post_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-scc26-p3-cpu:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+    },
+    "out": {
+      "file": "run.out",
+      "size": 378904,
+      "parsed": {
+        "banner": {
+          "start_time": "08:48:06",
+          "start_date": "08:48:06",
+          "partition": "cpu",
+          "walltime": "00:30:00",
+          "nodes": "1",
+          "job_name": "mfc-scc26-p3-cpu",
+          "engine": "batch",
+          "queue_system": "SLURM"
+        },
+        "env": {
+          "host": "cpu-node1",
+          "nodesTasks": "1 x 4",
+          "mpirun": "/work/openmpi/5.0.10/bin/mpirun",
+          "fabric": "ibp129s0 (UCX_TLS=rc,sm,self)"
+        },
+        "steps": [
+          {
+            "step": 1,
+            "total": 2813,
+            "avg": 0,
+            "perStep": 0
+          },
+          {
+            "step": 25,
+            "total": 2813,
+            "avg": 0.01801486,
+            "perStep": 0.017934
+          },
+          {
+            "step": 49,
+            "total": 2813,
+            "avg": 0.01794428,
+            "perStep": 0.017809
+          },
+          {
+            "step": 73,
+            "total": 2813,
+            "avg": 0.01793739,
+            "perStep": 0.017841
+          },
+          {
+            "step": 97,
+            "total": 2813,
+            "avg": 0.01797198,
+            "perStep": 0.017567
+          },
+          {
+            "step": 121,
+            "total": 2813,
+            "avg": 0.01795476,
+            "perStep": 0.017531
+          },
+          {
+            "step": 145,
+            "total": 2813,
+            "avg": 0.01792602,
+            "perStep": 0.017488
+          },
+          {
+            "step": 169,
+            "total": 2813,
+            "avg": 0.01790898,
+            "perStep": 0.017582
+          },
+          {
+            "step": 193,
+            "total": 2813,
+            "avg": 0.01790569,
+            "perStep": 0.01954
+          },
+          {
+            "step": 217,
+            "total": 2813,
+            "avg": 0.01790678,
+            "perStep": 0.01784
+          },
+          {
+            "step": 241,
+            "total": 2813,
+            "avg": 0.01789795,
+            "perStep": 0.017612
+          },
+          {
+            "step": 265,
+            "total": 2813,
+            "avg": 0.01789845,
+            "perStep": 0.018022
+          },
+          {
+            "step": 289,
+            "total": 2813,
+            "avg": 0.01790216,
+            "perStep": 0.017935
+          },
+          {
+            "step": 313,
+            "total": 2813,
+            "avg": 0.01789317,
+            "perStep": 0.017571
+          },
+          {
+            "step": 337,
+            "total": 2813,
+            "avg": 0.01789325,
+            "perStep": 0.017815
+          },
+          {
+            "step": 361,
+            "total": 2813,
+            "avg": 0.0178918,
+            "perStep": 0.017588
+          },
+          {
+            "step": 385,
+            "total": 2813,
+            "avg": 0.01788448,
+            "perStep": 0.017919
+          },
+          {
+            "step": 409,
+            "total": 2813,
+            "avg": 0.01787998,
+            "perStep": 0.018319
+          },
+          {
+            "step": 433,
+            "total": 2813,
+            "avg": 0.01787235,
+            "perStep": 0.017965
+          },
+          {
+            "step": 457,
+            "total": 2813,
+            "avg": 0.0178706,
+            "perStep": 0.017703
+          },
+          {
+            "step": 481,
+            "total": 2813,
+            "avg": 0.01787213,
+            "perStep": 0.017857
+          },
+          {
+            "step": 505,
+            "total": 2813,
+            "avg": 0.01787056,
+            "perStep": 0.017773
+          },
+          {
+            "step": 529,
+            "total": 2813,
+            "avg": 0.01787569,
+            "perStep": 0.017665
+          },
+          {
+            "step": 553,
+            "total": 2813,
+            "avg": 0.01787694,
+            "perStep": 0.018473
+          },
+          {
+            "step": 577,
+            "total": 2813,
+            "avg": 0.01787639,
+            "perStep": 0.018048
+          },
+          {
+            "step": 601,
+            "total": 2813,
+            "avg": 0.01788086,
+            "perStep": 0.017759
+          },
+          {
+            "step": 625,
+            "total": 2813,
+            "avg": 0.0178838,
+            "perStep": 0.018042
+          },
+          {
+            "step": 649,
+            "total": 2813,
+            "avg": 0.01789104,
+            "perStep": 0.018021
+          },
+          {
+            "step": 673,
+            "total": 2813,
+            "avg": 0.01790035,
+            "perStep": 0.017688
+          },
+          {
+            "step": 697,
+            "total": 2813,
+            "avg": 0.01790253,
+            "perStep": 0.018057
+          },
+          {
+            "step": 721,
+            "total": 2813,
+            "avg": 0.01790899,
+            "perStep": 0.018004
+          },
+          {
+            "step": 745,
+            "total": 2813,
+            "avg": 0.01791358,
+            "perStep": 0.017743
+          },
+          {
+            "step": 769,
+            "total": 2813,
+            "avg": 0.0179169,
+            "perStep": 0.018202
+          },
+          {
+            "step": 793,
+            "total": 2813,
+            "avg": 0.01792097,
+            "perStep": 0.018177
+          },
+          {
+            "step": 817,
+            "total": 2813,
+            "avg": 0.01792345,
+            "perStep": 0.017933
+          },
+          {
+            "step": 841,
+            "total": 2813,
+            "avg": 0.01792567,
+            "perStep": 0.018188
+          },
+          {
+            "step": 865,
+            "total": 2813,
+            "avg": 0.0179269,
+            "perStep": 0.018206
+          },
+          {
+            "step": 889,
+            "total": 2813,
+            "avg": 0.01792329,
+            "perStep": 0.017576
+          },
+          {
+            "step": 913,
+            "total": 2813,
+            "avg": 0.01791874,
+            "perStep": 0.017717
+          },
+          {
+            "step": 937,
+            "total": 2813,
+            "avg": 0.01791204,
+            "perStep": 0.017772
+          },
+          {
+            "step": 961,
+            "total": 2813,
+            "avg": 0.017908,
+            "perStep": 0.017573
+          },
+          {
+            "step": 985,
+            "total": 2813,
+            "avg": 0.01790131,
+            "perStep": 0.017529
+          },
+          {
+            "step": 1009,
+            "total": 2813,
+            "avg": 0.01789638,
+            "perStep": 0.017588
+          },
+          {
+            "step": 1033,
+            "total": 2813,
+            "avg": 0.01789295,
+            "perStep": 0.017501
+          },
+          {
+            "step": 1057,
+            "total": 2813,
+            "avg": 0.01788842,
+            "perStep": 0.017524
+          },
+          {
+            "step": 1081,
+            "total": 2813,
+            "avg": 0.01788579,
+            "perStep": 0.01786
+          },
+          {
+            "step": 1105,
+            "total": 2813,
+            "avg": 0.01788274,
+            "perStep": 0.017717
+          },
+          {
+            "step": 1129,
+            "total": 2813,
+            "avg": 0.01788015,
+            "perStep": 0.017974
+          },
+          {
+            "step": 1153,
+            "total": 2813,
+            "avg": 0.01787703,
+            "perStep": 0.017676
+          },
+          {
+            "step": 1177,
+            "total": 2813,
+            "avg": 0.01787438,
+            "perStep": 0.017893
+          },
+          {
+            "step": 1201,
+            "total": 2813,
+            "avg": 0.01787109,
+            "perStep": 0.017525
+          },
+          {
+            "step": 1225,
+            "total": 2813,
+            "avg": 0.01786705,
+            "perStep": 0.017791
+          },
+          {
+            "step": 1249,
+            "total": 2813,
+            "avg": 0.01786337,
+            "perStep": 0.018234
+          },
+          {
+            "step": 1273,
+            "total": 2813,
+            "avg": 0.01785981,
+            "perStep": 0.01748
+          },
+          {
+            "step": 1297,
+            "total": 2813,
+            "avg": 0.01785709,
+            "perStep": 0.018675
+          },
+          {
+            "step": 1321,
+            "total": 2813,
+            "avg": 0.01785317,
+            "perStep": 0.017527
+          },
+          {
+            "step": 1345,
+            "total": 2813,
+            "avg": 0.01784986,
+            "perStep": 0.017507
+          },
+          {
+            "step": 1369,
+            "total": 2813,
+            "avg": 0.01784868,
+            "perStep": 0.017585
+          },
+          {
+            "step": 1393,
+            "total": 2813,
+            "avg": 0.01784707,
+            "perStep": 0.017791
+          },
+          {
+            "step": 1417,
+            "total": 2813,
+            "avg": 0.01785001,
+            "perStep": 0.018086
+          },
+          {
+            "step": 1441,
+            "total": 2813,
+            "avg": 0.01784848,
+            "perStep": 0.017851
+          },
+          {
+            "step": 1465,
+            "total": 2813,
+            "avg": 0.01784586,
+            "perStep": 0.017726
+          },
+          {
+            "step": 1489,
+            "total": 2813,
+            "avg": 0.01784496,
+            "perStep": 0.017561
+          },
+          {
+            "step": 1513,
+            "total": 2813,
+            "avg": 0.01784372,
+            "perStep": 0.017736
+          },
+          {
+            "step": 1537,
+            "total": 2813,
+            "avg": 0.0178427,
+            "perStep": 0.017813
+          },
+          {
+            "step": 1561,
+            "total": 2813,
+            "avg": 0.01784261,
+            "perStep": 0.017991
+          },
+          {
+            "step": 1585,
+            "total": 2813,
+            "avg": 0.01784243,
+            "perStep": 0.017599
+          },
+          {
+            "step": 1609,
+            "total": 2813,
+            "avg": 0.01784246,
+            "perStep": 0.017607
+          },
+          {
+            "step": 1633,
+            "total": 2813,
+            "avg": 0.01784189,
+            "perStep": 0.017579
+          },
+          {
+            "step": 1657,
+            "total": 2813,
+            "avg": 0.017842,
+            "perStep": 0.017668
+          },
+          {
+            "step": 1681,
+            "total": 2813,
+            "avg": 0.01784065,
+            "perStep": 0.017587
+          },
+          {
+            "step": 1705,
+            "total": 2813,
+            "avg": 0.01784017,
+            "perStep": 0.01762
+          },
+          {
+            "step": 1729,
+            "total": 2813,
+            "avg": 0.0178391,
+            "perStep": 0.017569
+          },
+          {
+            "step": 1753,
+            "total": 2813,
+            "avg": 0.01783925,
+            "perStep": 0.017954
+          },
+          {
+            "step": 1777,
+            "total": 2813,
+            "avg": 0.01783785,
+            "perStep": 0.017519
+          },
+          {
+            "step": 1801,
+            "total": 2813,
+            "avg": 0.01783776,
+            "perStep": 0.01811
+          },
+          {
+            "step": 1825,
+            "total": 2813,
+            "avg": 0.01783618,
+            "perStep": 0.017556
+          },
+          {
+            "step": 1849,
+            "total": 2813,
+            "avg": 0.01783709,
+            "perStep": 0.017981
+          },
+          {
+            "step": 1873,
+            "total": 2813,
+            "avg": 0.01783738,
+            "perStep": 0.017793
+          },
+          {
+            "step": 1897,
+            "total": 2813,
+            "avg": 0.01783747,
+            "perStep": 0.017852
+          },
+          {
+            "step": 1921,
+            "total": 2813,
+            "avg": 0.01783693,
+            "perStep": 0.017839
+          },
+          {
+            "step": 1945,
+            "total": 2813,
+            "avg": 0.017835,
+            "perStep": 0.018486
+          },
+          {
+            "step": 1969,
+            "total": 2813,
+            "avg": 0.01783708,
+            "perStep": 0.018101
+          },
+          {
+            "step": 1993,
+            "total": 2813,
+            "avg": 0.01783772,
+            "perStep": 0.017978
+          },
+          {
+            "step": 2017,
+            "total": 2813,
+            "avg": 0.0178376,
+            "perStep": 0.017696
+          },
+          {
+            "step": 2041,
+            "total": 2813,
+            "avg": 0.01783669,
+            "perStep": 0.017562
+          },
+          {
+            "step": 2065,
+            "total": 2813,
+            "avg": 0.01783726,
+            "perStep": 0.018445
+          },
+          {
+            "step": 2089,
+            "total": 2813,
+            "avg": 0.01783668,
+            "perStep": 0.017854
+          },
+          {
+            "step": 2113,
+            "total": 2813,
+            "avg": 0.01783698,
+            "perStep": 0.017671
+          },
+          {
+            "step": 2137,
+            "total": 2813,
+            "avg": 0.01783771,
+            "perStep": 0.017935
+          },
+          {
+            "step": 2161,
+            "total": 2813,
+            "avg": 0.01783738,
+            "perStep": 0.017806
+          },
+          {
+            "step": 2185,
+            "total": 2813,
+            "avg": 0.01783813,
+            "perStep": 0.017922
+          },
+          {
+            "step": 2209,
+            "total": 2813,
+            "avg": 0.01784027,
+            "perStep": 0.017837
+          },
+          {
+            "step": 2233,
+            "total": 2813,
+            "avg": 0.01784182,
+            "perStep": 0.017925
+          },
+          {
+            "step": 2257,
+            "total": 2813,
+            "avg": 0.01784233,
+            "perStep": 0.017568
+          },
+          {
+            "step": 2281,
+            "total": 2813,
+            "avg": 0.01784146,
+            "perStep": 0.017841
+          },
+          {
+            "step": 2305,
+            "total": 2813,
+            "avg": 0.01783937,
+            "perStep": 0.01742
+          },
+          {
+            "step": 2329,
+            "total": 2813,
+            "avg": 0.01783547,
+            "perStep": 0.017392
+          },
+          {
+            "step": 2353,
+            "total": 2813,
+            "avg": 0.01783165,
+            "perStep": 0.017494
+          },
+          {
+            "step": 2377,
+            "total": 2813,
+            "avg": 0.01782772,
+            "perStep": 0.017427
+          },
+          {
+            "step": 2401,
+            "total": 2813,
+            "avg": 0.01782454,
+            "perStep": 0.017395
+          },
+          {
+            "step": 2425,
+            "total": 2813,
+            "avg": 0.01782091,
+            "perStep": 0.017407
+          },
+          {
+            "step": 2449,
+            "total": 2813,
+            "avg": 0.01781833,
+            "perStep": 0.017583
+          },
+          {
+            "step": 2473,
+            "total": 2813,
+            "avg": 0.01781651,
+            "perStep": 0.017438
+          },
+          {
+            "step": 2497,
+            "total": 2813,
+            "avg": 0.01781327,
+            "perStep": 0.017887
+          },
+          {
+            "step": 2521,
+            "total": 2813,
+            "avg": 0.01780976,
+            "perStep": 0.017396
+          },
+          {
+            "step": 2545,
+            "total": 2813,
+            "avg": 0.01780617,
+            "perStep": 0.017651
+          },
+          {
+            "step": 2569,
+            "total": 2813,
+            "avg": 0.01780463,
+            "perStep": 0.017604
+          },
+          {
+            "step": 2593,
+            "total": 2813,
+            "avg": 0.01780223,
+            "perStep": 0.0175
+          },
+          {
+            "step": 2617,
+            "total": 2813,
+            "avg": 0.01779952,
+            "perStep": 0.017447
+          },
+          {
+            "step": 2641,
+            "total": 2813,
+            "avg": 0.0177966,
+            "perStep": 0.017901
+          },
+          {
+            "step": 2665,
+            "total": 2813,
+            "avg": 0.01779369,
+            "perStep": 0.017365
+          },
+          {
+            "step": 2689,
+            "total": 2813,
+            "avg": 0.01779132,
+            "perStep": 0.017531
+          },
+          {
+            "step": 2713,
+            "total": 2813,
+            "avg": 0.01778838,
+            "perStep": 0.017343
+          },
+          {
+            "step": 2737,
+            "total": 2813,
+            "avg": 0.01778522,
+            "perStep": 0.017337
+          },
+          {
+            "step": 2761,
+            "total": 2813,
+            "avg": 0.01778223,
+            "perStep": 0.017517
+          },
+          {
+            "step": 2785,
+            "total": 2813,
+            "avg": 0.01777943,
+            "perStep": 0.017363
+          },
+          {
+            "step": 2809,
+            "total": 2813,
+            "avg": 0.0177771,
+            "perStep": 0.017396
+          },
+          {
+            "step": 2812,
+            "total": 2813,
+            "avg": 0.01777681,
+            "perStep": 0.017436
+          }
+        ],
+        "stepCount": 2812,
+        "performance": 55.968685098321295,
+        "totalTimeSec": 59,
+        "exitCode": 0,
+        "lines": 2980
+      },
+      "excerpt": {
+        "head": [
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| MFC case # mfc-scc26-p3-cpu @ /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py:                    |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| * Start-time     08:48:06                            * Start-date     08:48:06                            |",
+          "| * Partition      cpu                                 * Walltime       00:30:00                            |",
+          "| * Account        N/A                                 * Nodes          1                                   |",
+          "| * Job Name       mfc-scc26-p3-cpu                    * Engine         batch                               |",
+          "| * QoS            N/A                                 * Binary         N/A                                 |",
+          "| * Queue System   SLURM                               * Email          N/A                                 |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "",
+          "host        : cpu-node1",
+          "nodes/tasks : 1 x 4",
+          "mpirun      : /work/openmpi/5.0.10/bin/mpirun",
+          "fabric      : ibp129s0 (UCX_TLS=rc,sm,self)",
+          "",
+          "mfc: OK > :) Running syscheck:",
+          "",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)",
+          " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)"
+        ],
+        "tail": [
+          " [ 80%]  Saving       78 of 97 @ t_step =     2233 Time Avg =     1.314201E-02 Time/step = 1.872800E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 81%]  Saving       79 of 97 @ t_step =     2262 Time Avg =     1.317052E-02 Time/step = 1.533700E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 82%]  Saving       80 of 97 @ t_step =     2291 Time Avg =     1.316141E-02 Time/step = 1.246000E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 83%]  Saving       81 of 97 @ t_step =     2320 Time Avg =     1.312891E-02 Time/step = 1.059400E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 84%]  Saving       82 of 97 @ t_step =     2349 Time Avg =     1.317195E-02 Time/step = 1.657200E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 85%]  Saving       83 of 97 @ t_step =     2378 Time Avg =     1.318225E-02 Time/step = 1.400600E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 86%]  Saving       84 of 97 @ t_step =     2407 Time Avg =     1.318354E-02 Time/step = 1.328800E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 87%]  Saving       85 of 97 @ t_step =     2436 Time Avg =     1.316194E-02 Time/step = 1.139100E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 88%]  Saving       86 of 97 @ t_step =     2465 Time Avg =     1.320988E-02 Time/step = 1.718900E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 89%]  Saving       87 of 97 @ t_step =     2494 Time Avg =     1.321814E-02 Time/step = 1.391200E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 90%]  Saving       88 of 97 @ t_step =     2523 Time Avg =     1.320593E-02 Time/step = 1.216800E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 91%]  Saving       89 of 97 @ t_step =     2552 Time Avg =     1.326391E-02 Time/step = 1.825000E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 92%]  Saving       90 of 97 @ t_step =     2581 Time Avg =     1.328918E-02 Time/step = 1.548800E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 93%]  Saving       91 of 97 @ t_step =     2610 Time Avg =     1.328500E-02 Time/step = 1.291700E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 94%]  Saving       92 of 97 @ t_step =     2639 Time Avg =     1.333722E-02 Time/step = 1.798500E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 95%]  Saving       93 of 97 @ t_step =     2668 Time Avg =     1.332563E-02 Time/step = 1.228200E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 96%]  Saving       94 of 97 @ t_step =     2697 Time Avg =     1.330714E-02 Time/step = 1.162500E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 97%]  Saving       95 of 97 @ t_step =     2726 Time Avg =     1.333862E-02 Time/step = 1.623500E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 98%]  Saving       96 of 97 @ t_step =     2755 Time Avg =     1.338246E-02 Time/step = 1.745900E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [ 99%]  Saving       97 of 97 @ t_step =     2784 Time Avg =     1.337671E-02 Time/step = 1.283600E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Saving       97 of 97 @ t_step =     2812 Time Avg =     1.337493E-02 Time/step = 1.320600E-02 ETA (HH:MM:SS) = 0:00:00",
+          "",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| Finished mfc-scc26-p3-cpu:                                                                                |",
+          "| * Total-time:    59s                                 * Exit Code:     0                                   |",
+          "| * End-time:      08:49:05                            * End-date:      08:49:05                            |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          ""
+        ],
+        "elided": 2928
+      }
+    },
+    "err": {
+      "file": "run.err",
+      "size": 8829,
+      "raw": "+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck\nException caught: rsmi_init.\n[cpu-node1:69682] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69681] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69683] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69684] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69683] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69682] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69681] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69684] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69683] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69682] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69684] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69681] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-77ad0e446d/bin/pre_process\nException caught: rsmi_init.\n[cpu-node1:69705] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69706] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69707] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69708] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69707] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69706] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69705] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69707] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69705] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69706] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69708] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69708] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-503a859d02/bin/simulation\nException caught: rsmi_init.\n[cpu-node1:69740] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69741] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69742] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69743] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69742] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69741] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69742] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69741] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69743] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69743] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69740] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69740] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n+ mpirun -np 4 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-c084270971/bin/post_process\nException caught: rsmi_init.\n[cpu-node1:69787] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69786] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69788] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69789] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69788] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69789] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69787] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69788] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69789] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69787] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69786] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n[cpu-node1:69786] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)\n"
+    }
+  }
+}

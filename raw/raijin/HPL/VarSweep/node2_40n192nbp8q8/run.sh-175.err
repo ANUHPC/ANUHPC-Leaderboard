@@ -1,0 +1,74 @@
+[hpc-02:222179] MCW rank 5 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-02:222179] MCW rank 6 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-02:222179] MCW rank 7 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-02:222179] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-02:222179] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-02:222179] MCW rank 2 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-02:222179] MCW rank 3 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-02:222179] MCW rank 4 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 23 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-04:275399] MCW rank 16 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 17 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 18 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 19 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 20 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 21 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-04:275399] MCW rank 22 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-05:161168] MCW rank 24 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-07:237424] MCW rank 46 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-05:161168] MCW rank 25 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-07:237424] MCW rank 47 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-05:161168] MCW rank 26 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-07:237424] MCW rank 40 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-05:161168] MCW rank 27 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-07:237424] MCW rank 41 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-05:161168] MCW rank 28 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+[hpc-07:237424] MCW rank 42 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-05:161168] MCW rank 29 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-07:237424] MCW rank 43 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-05:161168] MCW rank 30 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-07:237424] MCW rank 44 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+[hpc-05:161168] MCW rank 31 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-07:237424] MCW rank 45 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-03:243517] MCW rank 13 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-03:243517] MCW rank 14 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-03:243517] MCW rank 15 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-06:190350] MCW rank 37 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-03:243517] MCW rank 8 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 38 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-03:243517] MCW rank 9 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 39 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-03:243517] MCW rank 10 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 32 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-03:243517] MCW rank 11 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 33 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-03:243517] MCW rank 12 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 34 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 35 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-06:190350] MCW rank 36 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+--------------------------------------------------------------------------
+A system call failed during shared memory initialization that should
+not have.  It is likely that your MPI job will now either abort or
+experience performance degradation.
+
+  Local host:  hpc-04
+  System call: unlink(2) /dev/shm/vader_segment.hpc-04.1000.f7090001.5
+  Error:       No such file or directory (errno 2)
+--------------------------------------------------------------------------
+[hpc-03:243533] *** Process received signal ***
+[hpc-03:243533] Signal: Segmentation fault (11)
+[hpc-03:243533] Signal code: Address not mapped (1)
+[hpc-03:243533] Failing at address: 0x73454ca170c0
+[hpc-06:190359] *** Process received signal ***
+[hpc-06:190359] Signal: Segmentation fault (11)
+[hpc-06:190359] Signal code: Address not mapped (1)
+[hpc-06:190359] Failing at address: 0x757cf58180c0
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 15 with PID 243533 on node hpc-03 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+[hpc-02:222179] 31 more processes have sent help message help-opal-shmem-mmap.txt / sys call fail
+[hpc-02:222179] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages

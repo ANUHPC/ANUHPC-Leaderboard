@@ -1,0 +1,429 @@
+{
+  "id": "xenon/HPL_NVIDIA/Ayush/Test-3",
+  "suite": "HPL_NVIDIA",
+  "group": "Ayush",
+  "run": "Test-3",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-09-24T04:25:45.000Z",
+  "dateSource": "run",
+  "submittedAt": "2026-09-19T18:06:43+10:00",
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": "Xeno-Tek"
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 102000,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 40.92,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.000445944836,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 184320,
+    "NB": 384,
+    "P": 4,
+    "Q": 2,
+    "variant": "nvidia",
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "cpus_per_task": 8,
+    "partition": "gpu"
+  },
+  "provenance": {
+    "started": "Thu Sep 24 04:25:45 2026",
+    "ended": "Thu Sep 24 04:26:26 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/HPL.dat",
+    "run.sh": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/run.sh",
+    "run.out": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/run.out",
+    "run.err": "raw/xenon/HPL_NVIDIA/Ayush/Test-3/run.err"
+  },
+  "best": {
+    "tv": "WC0",
+    "N": 184320,
+    "NB": 384,
+    "P": 4,
+    "Q": 2,
+    "timeSec": 40.92,
+    "gflops": 102000,
+    "gflopsPerGpu": 12750,
+    "startTime": "Thu Sep 24 04:25:45 2026",
+    "endTime": "Thu Sep 24 04:26:26 2026",
+    "residual": 0.000445944836,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nXenon - 2 gpu nodes, 8 x A100-SXM4-40GB, 4x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n184320       Ns\n1            # of NBs\n384          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n4            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Xenon - 2 gpu nodes, 8 x A100-SXM4-40GB, 4x2 grid"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        184320
+      ],
+      "numNBs": 1,
+      "NBs": [
+        384
+      ],
+      "pmap": 1,
+      "numGrids": 1,
+      "Ps": [
+        4
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        3,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 1,
+      "swapThreshold": 192,
+      "L1": 1,
+      "U": 0,
+      "equilibration": 0,
+      "memoryAlignment": 8
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# GPU HPL on the A100 nodes. Copy to your run directory AS run.sh.\n\n#SBATCH --job-name=hplgpu-8a100-baseline\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4          \n#SBATCH --gres=gpu:a100:4\n#SBATCH --cpus-per-task=8           \n#SBATCH --partition=gpu\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --distribution=block:block\n\nset -euo pipefail\n\nHPL_ROOT=/apps/benchmarks/hpl-nvidia/current\n\n\nexport OPAL_PREFIX=$HPL_ROOT/opt/hpcx/ompi\nexport PATH=$HPL_ROOT/opt/hpcx/ompi/bin:$PATH\nexport LD_LIBRARY_PATH=$HPL_ROOT/usr/local/cuda-13.1/targets/x86_64-linux/lib:$HPL_ROOT/lib/x86_64-linux-gnu:$HPL_ROOT/opt/hpcx/ompi/lib:$HPL_ROOT/opt/hpcx/ucx/lib\n# hpl.sh prepends workspace/lib/{nvshmem,omp} itself.\n\n\nexport HPL_USE_NVSHMEM=0\n\nexport CUDA_VISIBLE_DEVICES=0,1,2,3  \n\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl=^openib\nexport OMPI_MCA_opal_cuda_support=true\nexport OMPI_MCA_mpi_leave_pinned=1\nexport OMPI_MCA_rmaps_base_mapping_policy=\"ppr:2:numa:pe=8\"\nexport OMPI_MCA_hwloc_base_binding_policy=core\n\n\nexport UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc\nexport UCX_IB_GPU_DIRECT_RDMA=y\nexport UCX_MEMTYPE_CACHE=y\nexport UCX_RNDV_SCHEME=put_zcopy\n\nexport NCCL_PXN_DISABLE=0\nexport NCCL_IB_GDR_LEVEL=5\nexport NCCL_DEBUG=INFO\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node    : $(hostname -s)\"\necho \"gpus    : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks   : ${SLURM_NTASKS}\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/workspace/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/workspace/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
+    "sbatch": {
+      "job-name": "hplgpu-8a100-baseline",
+      "nodes": 2,
+      "ntasks-per-node": 4,
+      "gres": "gpu:a100:4",
+      "cpus-per-task": 8,
+      "partition": "gpu",
+      "time": "01:00:00",
+      "exclusive": true,
+      "hint": "nomultithread",
+      "distribution": "block:block"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WC0",
+        "N": 184320,
+        "NB": 384,
+        "P": 4,
+        "Q": 2,
+        "timeSec": 40.92,
+        "gflops": 102000,
+        "gflopsPerGpu": 12750,
+        "startTime": "Thu Sep 24 04:25:45 2026",
+        "endTime": "Thu Sep 24 04:26:26 2026",
+        "residual": 0.000445944836,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "deviceInfo": {
+      "peakClockMHz": 1410,
+      "smVersion": 80,
+      "numSms": 108
+    },
+    "memInfo": {
+      "DEVICE": {
+        "System": {
+          "minGiB": 2.28451,
+          "maxGiB": 2.34311,
+          "avgGiB": 2.31381
+        },
+        "HPL buffers": {
+          "minGiB": 35.19402,
+          "maxGiB": 35.19402,
+          "avgGiB": 35.19402
+        },
+        "Used": {
+          "minGiB": 37.47854,
+          "maxGiB": 37.53713,
+          "avgGiB": 37.50784
+        },
+        "Total": {
+          "minGiB": 40,
+          "maxGiB": 40,
+          "avgGiB": 40
+        }
+      },
+      "HOST": {
+        "HPL buffers": {
+          "minGiB": 0.00037,
+          "maxGiB": 0.00037,
+          "avgGiB": 0.00037
+        }
+      }
+    },
+    "traces": [
+      "[HPL TRACE] cuda_nvshmem_init: max=0.0000 (4) min=0.0000 (7)",
+      "[HPL TRACE] ncclCommInitRank: max=1.0045 (4) min=1.0025 (2)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.1678 (6) min=1.1677 (2)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0254 (5) min=0.0253 (2)"
+    ],
+    "startTime": "Thu Sep 24 04:25:45 2026",
+    "endTime": "Thu Sep 24 04:26:26 2026",
+    "residual": 0.000445944836,
+    "residualPassed": true
+  },
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nXenon - 2 gpu nodes, 8 x A100-SXM4-40GB, 4x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n184320       Ns\n1            # of NBs\n384          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n4            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Xenon - 2 gpu nodes, 8 x A100-SXM4-40GB, 4x2 grid"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          184320
+        ],
+        "numNBs": 1,
+        "NBs": [
+          384
+        ],
+        "pmap": 1,
+        "numGrids": 1,
+        "Ps": [
+          4
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          3,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 1,
+        "swapThreshold": 192,
+        "L1": 1,
+        "U": 0,
+        "equilibration": 0,
+        "memoryAlignment": 8
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# GPU HPL on the A100 nodes. Copy to your run directory AS run.sh.\n\n#SBATCH --job-name=hplgpu-8a100-baseline\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4          \n#SBATCH --gres=gpu:a100:4\n#SBATCH --cpus-per-task=8           \n#SBATCH --partition=gpu\n#SBATCH --time=01:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n#SBATCH --distribution=block:block\n\nset -euo pipefail\n\nHPL_ROOT=/apps/benchmarks/hpl-nvidia/current\n\n\nexport OPAL_PREFIX=$HPL_ROOT/opt/hpcx/ompi\nexport PATH=$HPL_ROOT/opt/hpcx/ompi/bin:$PATH\nexport LD_LIBRARY_PATH=$HPL_ROOT/usr/local/cuda-13.1/targets/x86_64-linux/lib:$HPL_ROOT/lib/x86_64-linux-gnu:$HPL_ROOT/opt/hpcx/ompi/lib:$HPL_ROOT/opt/hpcx/ucx/lib\n# hpl.sh prepends workspace/lib/{nvshmem,omp} itself.\n\n\nexport HPL_USE_NVSHMEM=0\n\nexport CUDA_VISIBLE_DEVICES=0,1,2,3  \n\nexport OMPI_MCA_pml=ucx\nexport OMPI_MCA_osc=ucx\nexport OMPI_MCA_btl=^openib\nexport OMPI_MCA_opal_cuda_support=true\nexport OMPI_MCA_mpi_leave_pinned=1\nexport OMPI_MCA_rmaps_base_mapping_policy=\"ppr:2:numa:pe=8\"\nexport OMPI_MCA_hwloc_base_binding_policy=core\n\n\nexport UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc\nexport UCX_IB_GPU_DIRECT_RDMA=y\nexport UCX_MEMTYPE_CACHE=y\nexport UCX_RNDV_SCHEME=put_zcopy\n\nexport NCCL_PXN_DISABLE=0\nexport NCCL_IB_GDR_LEVEL=5\nexport NCCL_DEBUG=INFO\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node    : $(hostname -s)\"\necho \"gpus    : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks   : ${SLURM_NTASKS}\"\necho \"fabric  : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/workspace/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/workspace/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
+      "sbatch": {
+        "job-name": "hplgpu-8a100-baseline",
+        "nodes": 2,
+        "ntasks-per-node": 4,
+        "gres": "gpu:a100:4",
+        "cpus-per-task": 8,
+        "partition": "gpu",
+        "time": "01:00:00",
+        "exclusive": true,
+        "hint": "nomultithread",
+        "distribution": "block:block"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WC0",
+          "N": 184320,
+          "NB": 384,
+          "P": 4,
+          "Q": 2,
+          "timeSec": 40.92,
+          "gflops": 102000,
+          "gflopsPerGpu": 12750,
+          "startTime": "Thu Sep 24 04:25:45 2026",
+          "endTime": "Thu Sep 24 04:26:26 2026",
+          "residual": 0.000445944836,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "deviceInfo": {
+        "peakClockMHz": 1410,
+        "smVersion": 80,
+        "numSms": 108
+      },
+      "memInfo": {
+        "DEVICE": {
+          "System": {
+            "minGiB": 2.28451,
+            "maxGiB": 2.34311,
+            "avgGiB": 2.31381
+          },
+          "HPL buffers": {
+            "minGiB": 35.19402,
+            "maxGiB": 35.19402,
+            "avgGiB": 35.19402
+          },
+          "Used": {
+            "minGiB": 37.47854,
+            "maxGiB": 37.53713,
+            "avgGiB": 37.50784
+          },
+          "Total": {
+            "minGiB": 40,
+            "maxGiB": 40,
+            "avgGiB": 40
+          }
+        },
+        "HOST": {
+          "HPL buffers": {
+            "minGiB": 0.00037,
+            "maxGiB": 0.00037,
+            "avgGiB": 0.00037
+          }
+        }
+      },
+      "traces": [
+        "[HPL TRACE] cuda_nvshmem_init: max=0.0000 (4) min=0.0000 (7)",
+        "[HPL TRACE] ncclCommInitRank: max=1.0045 (4) min=1.0025 (2)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.1678 (6) min=1.1677 (2)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0254 (5) min=0.0253 (2)"
+      ],
+      "startTime": "Thu Sep 24 04:25:45 2026",
+      "endTime": "Thu Sep 24 04:26:26 2026",
+      "residual": 0.000445944836,
+      "residualPassed": true
+    },
+    "err": null,
+    "best": {
+      "tv": "WC0",
+      "N": 184320,
+      "NB": 384,
+      "P": 4,
+      "Q": 2,
+      "timeSec": 40.92,
+      "gflops": 102000,
+      "gflopsPerGpu": 12750,
+      "startTime": "Thu Sep 24 04:25:45 2026",
+      "endTime": "Thu Sep 24 04:26:26 2026",
+      "residual": 0.000445944836,
+      "residualPassed": true
+    }
+  }
+}
