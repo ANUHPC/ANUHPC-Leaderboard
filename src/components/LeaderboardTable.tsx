@@ -120,9 +120,11 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
         }
     };
 
+    // keyed by cluster name, the data has lowercase names
     const CLUSTER_STYLES: Record<string, string> = {
-        Xenon:  'bg-blue-100 text-blue-800',
-        Raijin: 'bg-orange-100 text-orange-800',
+        xenon:     'bg-blue-100 text-blue-800',
+        raijin:    'bg-orange-100 text-orange-800',
+        launchpad: 'bg-green-100 text-green-800',
     };
 
     const clusterBadge = (cluster: string | null) => {
