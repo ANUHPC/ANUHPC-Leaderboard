@@ -7,11 +7,11 @@
   "clusterSource": "path (confirmed by output)",
   "date": "2026-09-17T01:30:20.000Z",
   "dateSource": "run",
-  "submittedAt": "2026-09-17T01:19:00Z",
+  "submittedAt": null,
   "submitter": {
     "name": "Ayush",
     "house": false,
-    "by": "Claude"
+    "by": null
   },
   "metric": {
     "key": "gflops",
