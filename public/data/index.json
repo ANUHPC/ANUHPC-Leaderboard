@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T00:32:55.769Z",
+  "generatedAt": "2026-10-01T00:39:51.874Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 1
+      "count": 2
     },
     {
       "name": "raijin",
@@ -82,9 +82,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 5,
+      "count": 6,
       "countByCluster": {
-        "launchpad": 1,
+        "launchpad": 2,
         "raijin": 0,
         "xenon": 4
       }
@@ -203,6 +203,87 @@
       },
       "hasErr": false,
       "rank": 1
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Daniel/test_run",
+      "suite": "HPL_NVIDIA",
+      "group": "Daniel",
+      "run": "test_run",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-01T00:39:08.000Z",
+      "dateSource": "run",
+      "submittedAt": "2026-10-01T00:38:46Z",
+      "submitter": {
+        "name": "Daniel",
+        "house": false,
+        "by": "dehaansolo"
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 1139,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 0.63,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.001027706724,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 10240,
+        "NB": 512,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 10240,
+        "NB": 512,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 0.63,
+        "gflops": 1139,
+        "gflopsPerGpu": 569.6,
+        "startTime": "Thu Oct  1 00:39:08 2026",
+        "endTime": "Thu Oct  1 00:39:09 2026",
+        "residual": 0.001027706724,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 2
     },
     {
       "id": "raijin/HPL/Ayush/ICX-2",
