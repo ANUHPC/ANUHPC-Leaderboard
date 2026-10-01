@@ -57,7 +57,8 @@ run:
   partition: gpu
 
 # 2 nodes x 4 A100-SXM4-40GB. 40 GB/GPU sets the practical ceiling on N.
-clusters: [xenon]
+# Launchpad is a 1-node, 2x H100 NVL box with its own run.launchpad.sh.
+clusters: [xenon, launchpad]
 
 limits:
   max_nodes: 2

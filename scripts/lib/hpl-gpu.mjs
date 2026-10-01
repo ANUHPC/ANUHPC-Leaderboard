@@ -8,11 +8,13 @@ export function validateGpuHpl(dat, directive, cluster) {
   const gres = /^gpu(?::[a-zA-Z0-9_-]+)?:(\d+)$/.exec(directive('gres') ?? '');
   const gpus = gres ? Number(gres[1]) : 0;
   const part = cluster?.partitions?.[directive('partition')];
-  if (directive('partition') !== 'gpu') errors.push('HPL_NVIDIA requires the gpu partition');
-  if (!integer(nodes) || !integer(tasks)) errors.push('set positive integer --nodes and --ntasks-per-node');
-  if (!integer(gpus) || gpus !== tasks) errors.push('reserve one GPU per MPI rank with --gres=gpu:a100:<tasks-per-node>');
   const available = (part?.nodes ?? []).map(n => cluster.nodes[n]?.gpus ?? 0);
-  if (!available.length || available.some(n => gpus > n)) errors.push('GPU request exceeds the GPUs available per node');
+  // Not every cluster names its GPU partition "gpu" (launchpad's only partition
+  // is "all"), so check what the partition actually offers instead of the name.
+  if (!available.length || !available.every(n => n > 0)) errors.push('HPL_NVIDIA requires a partition whose nodes all have GPUs');
+  if (!integer(nodes) || !integer(tasks)) errors.push('set positive integer --nodes and --ntasks-per-node');
+  if (!integer(gpus) || gpus !== tasks) errors.push('reserve one GPU per MPI rank with --gres=gpu:<tasks-per-node>');
+  if (available.length && available.some(n => gpus > n)) errors.push('GPU request exceeds the GPUs available per node');
   if (directive('ntasks') != null && Number(directive('ntasks')) !== nodes * tasks) errors.push('--ntasks contradicts nodes × tasks-per-node');
   const lines = String(dat ?? '').trimEnd().split(/\r?\n/);
   let i = 4;
