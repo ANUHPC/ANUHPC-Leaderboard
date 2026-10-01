@@ -1,0 +1,354 @@
+{
+  "id": "launchpad/HPL_NVIDIA/Daniel/2",
+  "suite": "HPL_NVIDIA",
+  "group": "Daniel",
+  "run": "2",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-01T04:44:07Z",
+  "dateSource": "git",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Daniel",
+    "house": false,
+    "by": null
+  },
+  "metric": null,
+  "secondary": [],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 1000000,
+    "NB": 1024,
+    "P": 1,
+    "Q": 2,
+    "variant": "nvidia",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "provenance": {
+    "started": null,
+    "ended": null
+  },
+  "status": "no-result",
+  "ranking": {
+    "eligible": false,
+    "reason": "No valid performance result"
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL_NVIDIA/Daniel/2/HPL.dat",
+    "run.sh": "raw/launchpad/HPL_NVIDIA/Daniel/2/run.sh",
+    "run.out": "raw/launchpad/HPL_NVIDIA/Daniel/2/run.out",
+    "run.err": "raw/launchpad/HPL_NVIDIA/Daniel/2/run.err"
+  },
+  "best": null,
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n1000000        Ns\n1            # of NBs\n1024          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        1000000
+      ],
+      "numNBs": 1,
+      "NBs": [
+        1024
+      ],
+      "pmap": 1,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        3,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 1,
+      "swapThreshold": 192,
+      "L1": 1,
+      "U": 0,
+      "equilibration": 0,
+      "memoryAlignment": 8
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hplgpu-launchpad-baseline\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2          # one rank per GPU\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32           # one socket (32 cores) per rank\n#SBATCH --partition=all\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\nset -euo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\n# shellcheck source=/dev/null\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\n\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc\nexport CUDA_VISIBLE_DEVICES=0,1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node : $(hostname -s)\"\necho \"gpus : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks: ${SLURM_NTASKS}\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
+    "sbatch": {
+      "job-name": "hplgpu-launchpad-baseline",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "gres": "gpu:2",
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "00:30:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [],
+    "summary": {
+      "testsTotal": null,
+      "testsPassed": null,
+      "testsFailed": null,
+      "testsSkipped": null
+    },
+    "deviceInfo": {
+      "peakClockMHz": 1785,
+      "smVersion": 90,
+      "numSms": 132
+    },
+    "memInfo": {
+      "DEVICE": {
+        "System": {
+          "minGiB": 5.21726,
+          "maxGiB": 5.21726,
+          "avgGiB": 5.21726
+        },
+        "HPL buffers": {
+          "minGiB": 3743.25912,
+          "maxGiB": 3743.25912,
+          "avgGiB": 3743.25912
+        },
+        "Used": {
+          "minGiB": 3748.47638,
+          "maxGiB": 3748.47638,
+          "avgGiB": 3748.47638
+        },
+        "Total": {
+          "minGiB": 93.58398,
+          "maxGiB": 93.58398,
+          "avgGiB": 93.58398
+        }
+      },
+      "HOST": {
+        "HPL buffers": {
+          "minGiB": 0.00748,
+          "maxGiB": 0.00748,
+          "avgGiB": 0.00748
+        }
+      }
+    },
+    "traces": [
+      "[HPL TRACE] cuda_nvshmem_init: max=0.8138 (0) min=0.8138 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=0.7039 (0) min=0.7039 (1)",
+      "[HPL TRACE] cugetrfs_mp_init: max=0.9677 (1) min=0.9677 (0)"
+    ],
+    "startTime": null,
+    "endTime": null,
+    "residual": null,
+    "residualPassed": null
+  },
+  "err": {
+    "file": "run.err",
+    "size": 929
+  },
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n1000000        Ns\n1            # of NBs\n1024          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          1000000
+        ],
+        "numNBs": 1,
+        "NBs": [
+          1024
+        ],
+        "pmap": 1,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          3,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 1,
+        "swapThreshold": 192,
+        "L1": 1,
+        "U": 0,
+        "equilibration": 0,
+        "memoryAlignment": 8
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n#SBATCH --job-name=hplgpu-launchpad-baseline\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2          # one rank per GPU\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32           # one socket (32 cores) per rank\n#SBATCH --partition=all\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\nset -euo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\n# shellcheck source=/dev/null\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\n\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc\nexport CUDA_VISIBLE_DEVICES=0,1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"node : $(hostname -s)\"\necho \"gpus : $(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l) x $(nvidia-smi --query-gpu=name --format=csv,noheader | head -1)\"\necho \"ranks: ${SLURM_NTASKS}\"\n\ntest -r \"$PWD/HPL.dat\"\ntest -x \"$HPL_ROOT/hpl.sh\"\nexec mpirun -np \"${SLURM_NTASKS}\" \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\"\n",
+      "sbatch": {
+        "job-name": "hplgpu-launchpad-baseline",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "gres": "gpu:2",
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "00:30:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [],
+      "summary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "deviceInfo": {
+        "peakClockMHz": 1785,
+        "smVersion": 90,
+        "numSms": 132
+      },
+      "memInfo": {
+        "DEVICE": {
+          "System": {
+            "minGiB": 5.21726,
+            "maxGiB": 5.21726,
+            "avgGiB": 5.21726
+          },
+          "HPL buffers": {
+            "minGiB": 3743.25912,
+            "maxGiB": 3743.25912,
+            "avgGiB": 3743.25912
+          },
+          "Used": {
+            "minGiB": 3748.47638,
+            "maxGiB": 3748.47638,
+            "avgGiB": 3748.47638
+          },
+          "Total": {
+            "minGiB": 93.58398,
+            "maxGiB": 93.58398,
+            "avgGiB": 93.58398
+          }
+        },
+        "HOST": {
+          "HPL buffers": {
+            "minGiB": 0.00748,
+            "maxGiB": 0.00748,
+            "avgGiB": 0.00748
+          }
+        }
+      },
+      "traces": [
+        "[HPL TRACE] cuda_nvshmem_init: max=0.8138 (0) min=0.8138 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=0.7039 (0) min=0.7039 (1)",
+        "[HPL TRACE] cugetrfs_mp_init: max=0.9677 (1) min=0.9677 (0)"
+      ],
+      "startTime": null,
+      "endTime": null,
+      "residual": null,
+      "residualPassed": null
+    },
+    "err": {
+      "file": "run.err",
+      "size": 929
+    },
+    "best": null
+  }
+}

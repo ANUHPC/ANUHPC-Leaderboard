@@ -1,0 +1,621 @@
+{
+  "id": "launchpad/MFC/Ayush/h100-hllc-01",
+  "suite": "MFC",
+  "group": "Ayush",
+  "run": "h100-hllc-01",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-01T04:53:57Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "grind",
+    "value": 0.39652046,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 57.8151185,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.0499971,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 2,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "parameters": {
+    "grid": "399 × 200 × 200",
+    "cells": 15960000,
+    "dimensions": 3,
+    "dt": 5.51841541022844e-9,
+    "steps": 20,
+    "wenoOrder": 3,
+    "wenoEps": 1e-16,
+    "riemann": "HLLC",
+    "timeStepper": "RK3",
+    "modelEqns": 2,
+    "numFluids": 2,
+    "viscous": null,
+    "surfaceTension": null,
+    "bubbles": null,
+    "equations": null,
+    "equationSource": null
+  },
+  "verification": {
+    "kind": "benchmark",
+    "reason": "Pinned benchmark case"
+  },
+  "convergence": null,
+  "config": {
+    "case": "5eq_rk3_weno3_hllc",
+    "args": [],
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "ranks": 2,
+    "partition": "all",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "pinned",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": "5eq_rk3_weno3_hllc",
+    "case_registry": "tree",
+    "case_sha256": "b26fc312b904c697f23589db826f188707defcfaaf9912e462ae69456244a237",
+    "invocation": "run /data/jobs/36817096579/MFC/Ayush/h100-hllc-01/case.py -e batch -c /home/nvidia/actions-runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/launchpad.mako -t pre_process simulation -N 1 -n 2 -p all -w 01:00:00 --name mfc-h100-hllc-01 -o /data/jobs/36817096579/MFC/Ayush/h100-hllc-01/summary.yaml --clean --no-build --gpu acc --wait -- --gbpp 16",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": "Pinned benchmark case",
+    "group": "5eq_rk3_weno3_hllc/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/launchpad/MFC/Ayush/h100-hllc-01/case.py",
+    "summary.yaml": "raw/launchpad/MFC/Ayush/h100-hllc-01/summary.yaml",
+    "time_data.dat": "raw/launchpad/MFC/Ayush/h100-hllc-01/time_data.dat",
+    "run.out": "raw/launchpad/MFC/Ayush/h100-hllc-01/run.out",
+    "run.err": "raw/launchpad/MFC/Ayush/h100-hllc-01/run.err",
+    "job.yml": "raw/launchpad/MFC/Ayush/h100-hllc-01/job.yml",
+    "run.sh": "raw/launchpad/MFC/Ayush/h100-hllc-01/run.sh",
+    "simulation.inp": "raw/launchpad/MFC/Ayush/h100-hllc-01/simulation.inp",
+    "pre_process.inp": "raw/launchpad/MFC/Ayush/h100-hllc-01/pre_process.inp",
+    "mfc-provenance.json": "raw/launchpad/MFC/Ayush/h100-hllc-01/mfc-provenance.json",
+    "mfc-status.yml": "raw/launchpad/MFC/Ayush/h100-hllc-01/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "run.out",
+    "size": 5923,
+    "parsed": {
+      "banner": {
+        "start_time": "04:52:12",
+        "start_date": "04:52:12",
+        "partition": "all",
+        "walltime": "01:00:00",
+        "nodes": "1",
+        "job_name": "mfc-h100-hllc-01",
+        "engine": "batch",
+        "queue_system": "SLURM"
+      },
+      "env": {
+        "host": "scc-connect-03-gpu01",
+        "nodesTasks": "1 x 2",
+        "mpirun": "/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/bin/mpirun",
+        "fabric": null
+      },
+      "steps": [
+        {
+          "step": 1,
+          "total": 21,
+          "avg": 0,
+          "perStep": 0
+        },
+        {
+          "step": 2,
+          "total": 21,
+          "avg": 0,
+          "perStep": 0.171571
+        },
+        {
+          "step": 3,
+          "total": 21,
+          "avg": 0,
+          "perStep": 0.155591
+        },
+        {
+          "step": 4,
+          "total": 21,
+          "avg": 0.1549101,
+          "perStep": 0.1549101
+        },
+        {
+          "step": 5,
+          "total": 21,
+          "avg": 0.1545026,
+          "perStep": 0.1540952
+        },
+        {
+          "step": 6,
+          "total": 21,
+          "avg": 0.154266,
+          "perStep": 0.1537929
+        },
+        {
+          "step": 7,
+          "total": 21,
+          "avg": 0.1549816,
+          "perStep": 0.1571281
+        },
+        {
+          "step": 8,
+          "total": 21,
+          "avg": 0.1545784,
+          "perStep": 0.152966
+        },
+        {
+          "step": 9,
+          "total": 21,
+          "avg": 0.1545369,
+          "perStep": 0.1543291
+        },
+        {
+          "step": 10,
+          "total": 21,
+          "avg": 0.1545139,
+          "perStep": 0.154376
+        },
+        {
+          "step": 11,
+          "total": 21,
+          "avg": 0.1546116,
+          "perStep": 0.1552951
+        },
+        {
+          "step": 12,
+          "total": 21,
+          "avg": 0.1547518,
+          "perStep": 0.155874
+        },
+        {
+          "step": 13,
+          "total": 21,
+          "avg": 0.1546866,
+          "perStep": 0.1540999
+        },
+        {
+          "step": 14,
+          "total": 21,
+          "avg": 0.1545379,
+          "perStep": 0.1530502
+        },
+        {
+          "step": 15,
+          "total": 21,
+          "avg": 0.1545536,
+          "perStep": 0.154727
+        },
+        {
+          "step": 16,
+          "total": 21,
+          "avg": 0.1546009,
+          "perStep": 0.1551678
+        },
+        {
+          "step": 17,
+          "total": 21,
+          "avg": 0.1545358,
+          "perStep": 0.1536899
+        },
+        {
+          "step": 18,
+          "total": 21,
+          "avg": 0.1544435,
+          "perStep": 0.1531508
+        },
+        {
+          "step": 19,
+          "total": 21,
+          "avg": 0.1544627,
+          "perStep": 0.1547511
+        },
+        {
+          "step": 20,
+          "total": 21,
+          "avg": 0.1546165,
+          "perStep": 0.1570771
+        }
+      ],
+      "stepCount": 20,
+      "performance": 0.3965204611984444,
+      "totalTimeSec": 92,
+      "exitCode": 0,
+      "lines": 84
+    },
+    "excerpt": {
+      "head": [
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| MFC case # mfc-h100-hllc-01 @ /data/jobs/36817096579/MFC/Ayush/h100-hllc-01/case.py:                      |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| * Start-time     04:52:12                            * Start-date     04:52:12                            |",
+        "| * Partition      all                                 * Walltime       01:00:00                            |",
+        "| * Account        N/A                                 * Nodes          1                                   |",
+        "| * Job Name       mfc-h100-hllc-01                    * Engine         batch                               |",
+        "| * QoS            N/A                                 * Binary         N/A                                 |",
+        "| * Queue System   SLURM                               * Email          N/A                                 |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "",
+        "host        : scc-connect-03-gpu01",
+        "nodes/tasks : 1 x 2",
+        "mpirun      : /opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/bin/mpirun",
+        "UCX_TLS     : sm,self,cuda_copy,cuda_ipc",
+        "0, NVIDIA H100 NVL, 0 MiB",
+        "1, NVIDIA H100 NVL, 0 MiB",
+        "",
+        "mfc: OK > :) Running syscheck:",
+        "",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)",
+        " [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)"
+      ],
+      "tail": [
+        " [  0%]  Time step        1 of 21 @ t_step =        0 Time Avg = 0.000000E+00 Time/step= 0.000000E+00 ETA (HH:MM:SS) = 0:00:00",
+        " [  5%]  Time step        2 of 21 @ t_step =        1 Time Avg = 0.000000E+00 Time/step= 1.715710E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 10%]  Time step        3 of 21 @ t_step =        2 Time Avg = 0.000000E+00 Time/step= 1.555910E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 15%]  Time step        4 of 21 @ t_step =        3 Time Avg = 1.549101E-01 Time/step= 1.549101E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 20%]  Time step        5 of 21 @ t_step =        4 Time Avg = 1.545026E-01 Time/step= 1.540952E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 24%]  Time step        6 of 21 @ t_step =        5 Time Avg = 1.542660E-01 Time/step= 1.537929E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 29%]  Time step        7 of 21 @ t_step =        6 Time Avg = 1.549816E-01 Time/step= 1.571281E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 34%]  Time step        8 of 21 @ t_step =        7 Time Avg = 1.545784E-01 Time/step= 1.529660E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 39%]  Time step        9 of 21 @ t_step =        8 Time Avg = 1.545369E-01 Time/step= 1.543291E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 43%]  Time step       10 of 21 @ t_step =        9 Time Avg = 1.545139E-01 Time/step= 1.543760E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 48%]  Time step       11 of 21 @ t_step =       10 Time Avg = 1.546116E-01 Time/step= 1.552951E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 53%]  Time step       12 of 21 @ t_step =       11 Time Avg = 1.547518E-01 Time/step= 1.558740E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 58%]  Time step       13 of 21 @ t_step =       12 Time Avg = 1.546866E-01 Time/step= 1.540999E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 62%]  Time step       14 of 21 @ t_step =       13 Time Avg = 1.545379E-01 Time/step= 1.530502E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 67%]  Time step       15 of 21 @ t_step =       14 Time Avg = 1.545536E-01 Time/step= 1.547270E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 72%]  Time step       16 of 21 @ t_step =       15 Time Avg = 1.546009E-01 Time/step= 1.551678E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 77%]  Time step       17 of 21 @ t_step =       16 Time Avg = 1.545358E-01 Time/step= 1.536899E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 81%]  Time step       18 of 21 @ t_step =       17 Time Avg = 1.544435E-01 Time/step= 1.531508E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 86%]  Time step       19 of 21 @ t_step =       18 Time Avg = 1.544627E-01 Time/step= 1.547511E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 91%]  Time step       20 of 21 @ t_step =       19 Time Avg = 1.546165E-01 Time/step= 1.570771E-01 ETA (HH:MM:SS) = 0:00:00",
+        " Performance:   0.3965204611984444      ns/gp/eq/rhs",
+        "",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| Finished mfc-h100-hllc-01:                                                                                |",
+        "| * Total-time:    92s                                 * Exit Code:     0                                   |",
+        "| * End-time:      04:53:44                            * End-date:      04:53:44                            |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        ""
+      ],
+      "elided": 32
+    }
+  },
+  "err": {
+    "file": "run.err",
+    "size": 353,
+    "raw": "+ mpirun -np 2 --map-by core --bind-to core /data/mfc/current/emr-acc/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 2 --map-by core --bind-to core /data/mfc/current/emr-acc/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 2 --map-by core --bind-to core /data/mfc/current/emr-acc/build/install/gpu-acc-c819d00b45/bin/simulation\n"
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/home/nvidia/actions-runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/launchpad.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "-N",
+        "1",
+        "-n",
+        "2",
+        "-p",
+        "all",
+        "-w",
+        "01:00:00",
+        "--name",
+        "mfc-h100-hllc-01",
+        "-o",
+        "/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/summary.yaml",
+        "--clean",
+        "--no-build",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--",
+        "--gbpp",
+        "16"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 2.9108255
+      },
+      "pre_process": {
+        "exec": 31.1057293
+      },
+      "simulation": {
+        "exec": 57.8151185,
+        "grind": 0.39652046
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 2,
+        "sPerStep": 0.0499971,
+        "grind": 0.39652046
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\n# Benchmark model_equations_2_time_stepper_3_weno_order_3_riemann_solver_2\n# Additional Benchmarked Features\n# - model_equations : 2\n# - time_stepper : 3\n# - weno_order : 3\n# - riemann_solver : 2\n\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(prog=\"Benchmarking Case 1\", description=\"This MFC case was created for the purposes of benchmarking MFC.\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\n\nparser.add_argument(\"--mfc\", type=json.loads, default=\"{}\", metavar=\"DICT\", help=\"MFC's toolchain's internal state.\")\nparser.add_argument(\"--gbpp\", type=int, metavar=\"MEM\", default=16, help=\"Adjusts the problem size per rank to fit into [MEM] GB of GPU memory per GPU.\")\nparser.add_argument(\"--steps\", type=int, default=None, help=\"Override t_step_stop/t_step_save.\")\n\nARGS = vars(parser.parse_args())\nDICT = ARGS[\"mfc\"]\n\nsize = 1 if DICT[\"gpu\"] else 0\n\nppg = 8000000 / 16.0\nprocs = DICT[\"nodes\"] * DICT[\"tasks_per_node\"]\nncells = math.floor(ppg * procs * ARGS[\"gbpp\"])\ns = math.floor((ncells / 2.0) ** (1 / 3))\nNx, Ny, Nz = 2 * s, s, s\n\n# athmospheric pressure - Pa (used as reference value)\npatm = 101325\n\n# Initial Droplet Diameter / Reference length - m\nD0 = 1.0e-3\n\n# cavity to droplet ratio\nCtD = 0.06\n\n# cavity relative eccentricity (distance between radii)\necc = 0.564\n\n# initial shock distance from the y axis. Note that the droplet center is located at y = 0. Thus, the distance from the shock to\n# the droplet is about D0/8\nISD = 5.0 / 8 * D0\n\n# pre-shock properties - AIR\n\n# pressure - Pa\np0a = patm\n\n# density - kg/m3\nrho0a = 1.204\n\n# gamma\ngama = 1.40\n\n# pi infinity - Pa\npia = 0\n\n# speed of sound - M/s\nc_a = math.sqrt(gama * (p0a + pia) / rho0a)\n\n# Droplet - WATER\n\n# surface tension - N / m\nst = 0.00e0\n\n# Delta Pressure - Pa\nDP = -st * 4 / D0\n\n# initial pressure inside the droplet - Pa\np0w = p0a - DP\n\n# density - kg/m3\nrho0w = 1000\n\n# gama\ngamw = 6.12\n\n# pi infty - Pa\npiw = 3.43e08\n\n# speed of sound - m/s\nc_w = math.sqrt(gamw * (p0w + piw) / rho0w)\n\n# Shock Mach number of interest. Note that the post-shock properties can be defined in terms of either\n# Min or psOp0a. Just comment/uncomment appropriately\nMin = 2.4\n\n# Pos to pre shock ratios - AIR\n\n# pressure\npsOp0a = (Min**2 - 1) * 2 * gama / (gama + 1) + 1\n# psOp0a = 4.5\n\n# density\nrhosOrho0a = (1 + (gama + 1) / (gama - 1) * psOp0a) / ((gama + 1) / (gama - 1) + psOp0a)\n\n# Mach number of the shocked region - just a checker, as it must return \"Min\"\nMs = math.sqrt((gama + 1.0) / (2.0 * gama) * (psOp0a - 1.0) * (p0a / (p0a + pia)) + 1.0)\n\n# shock speed of sound - m/s\nss = Ms * c_a\n\n# post-shock - AIR\n\n# pressure - Pa\nps = psOp0a * p0a\n\n# density - kg / m3\nrhos = rhosOrho0a * rho0a\n\n# post shock speed of sound - m/s\nc_s = math.sqrt(gama * (ps + pia) / rhos)\n\n# velocity at the post shock - m/s\nvel = c_a / gama * (psOp0a - 1.0) * p0a / (p0a + pia) / Ms\n\n# Domain boundaries - m\n\n# x direction\nxb = -8.4707 * D0\nxe = 9.6226 * D0\n\n# xb = -10 * D0\n# xe = 10 * D0\n\n# y direction\nyb = 0 * D0\nye = 10 * D0\n\n# y direction\nzb = 0 * D0\nze = 10 * D0\n\n# Stretching factor, to make sure the domaing is sufficiently large after the mesh stretch\nStF = 4.0\n\n# grid delta x if mesh were uniform in x direction - m. Note that I do not need a measure for dy\ndx = (xe - xb) / Nx\n\n# I calculate tend twice; first is an estimate, second is\n# the actual value used. This is because I am getting errors in the\n# post process part every time I approximate the actual Nt by an integer\n# number (think of a smarter way).\n\n# dimensionless time\nttilde = 1.92\n\n# auxiliary simulation physical time - s. This is not YET the total simulation time, as it will be corrected so as to avoid\n# mismatches in simulation and post_process parts. Note that I wrote it this way so I have better control over the # of autosaves\ntendA = ttilde * D0 / vel\n\ncfl = 0.1\n\n# time-step - s\ndt = dx * cfl / ss\n\n# Save Frequency. Note that the number of autosaves will be SF + 1, as th IC (0.dat) is also saved\nSF = 400\n\n# making Nt divisible by SF\n# 1 - ensure NtA goes slightly beyond tendA\nNtA = int(tendA // dt + 1)\n\n# Array of saves. It is the same as Nt/Sf = t_step_save\nAS = int(NtA // SF + 1)\n\n# Nt = total number of steps. Note that Nt >= NtA (so at least tendA is completely simulated)\nNt = AS * SF\n\n# total simulation time - s. Note that tend >= tendA\ntend = Nt * dt\n\n# Configuring case dictionary\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"F\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": xb,\n            \"x_domain%end\": xe,\n            \"y_domain%beg\": yb,\n            \"y_domain%end\": ye,\n            \"z_domain%beg\": zb,\n            \"z_domain%end\": ze,\n            \"m\": Nx,\n            \"n\": Ny,\n            \"p\": Nz,\n            \"cyl_coord\": \"F\",\n            \"dt\": dt,\n            \"t_step_start\": 0,\n            \"t_step_stop\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            \"t_step_save\": ARGS[\"steps\"] if ARGS[\"steps\"] is not None else int(2 * (5 * size + 5)),\n            # Simulation Algorithm Parameters\n            \"num_patches\": 3,\n            \"model_eqns\": 2,\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"T\",\n            \"mixture_err\": \"T\",\n            \"time_stepper\": 3,\n            \"weno_order\": 3,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"T\",\n            \"riemann_solver\": 2,\n            \"wave_speeds\": 1,\n            \"avg_state\": 2,\n            \"bc_x%beg\": -6,\n            \"bc_x%end\": -6,\n            \"bc_y%beg\": -2,\n            \"bc_y%end\": -3,\n            \"bc_z%beg\": -2,\n            \"bc_z%end\": -3,\n            # Formatted Database Files Structure Parameters\n            \"format\": 1,\n            \"precision\": 2,\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"F\",\n            # I will use 1 for WATER properties, and 2 for AIR properties\n            # Patch 1: Background (AIR - 2)\n            \"patch_icpp(1)%geometry\": 9,\n            \"patch_icpp(1)%x_centroid\": (xb + xe) / 2 * StF,\n            \"patch_icpp(1)%y_centroid\": (yb + ye) / 2 * StF,\n            \"patch_icpp(1)%z_centroid\": (yb + ye) / 2 * StF,\n            \"patch_icpp(1)%length_x\": (xe - xb) * StF,\n            \"patch_icpp(1)%length_y\": (ye - yb) * StF,\n            \"patch_icpp(1)%length_z\": (ze - zb) * StF,\n            \"patch_icpp(1)%vel(1)\": 0.0e00,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%vel(3)\": 0.0e00,\n            \"patch_icpp(1)%pres\": p0a,\n            \"patch_icpp(1)%alpha_rho(1)\": 0.0e00,\n            \"patch_icpp(1)%alpha_rho(2)\": rho0a,\n            \"patch_icpp(1)%alpha(1)\": 0.0e00,\n            \"patch_icpp(1)%alpha(2)\": 1.0e00,\n            # Patch 2: Shocked state (AIR - 2)\n            \"patch_icpp(2)%geometry\": 9,\n            \"patch_icpp(2)%alter_patch(1)\": \"T\",\n            \"patch_icpp(2)%x_centroid\": -ISD - (xe - xb) / 2 * StF,\n            \"patch_icpp(2)%y_centroid\": (yb + ye) / 2 * StF,\n            \"patch_icpp(2)%z_centroid\": (zb + ze) / 2 * StF,\n            \"patch_icpp(2)%length_x\": (xe - xb) * StF,\n            \"patch_icpp(2)%length_y\": (ye - yb) * StF,\n            \"patch_icpp(2)%length_z\": (ze - zb) * StF,\n            \"patch_icpp(2)%vel(1)\": vel,\n            \"patch_icpp(2)%vel(2)\": 0.0e00,\n            \"patch_icpp(2)%vel(3)\": 0.0e00,\n            \"patch_icpp(2)%pres\": ps,\n            \"patch_icpp(2)%alpha_rho(1)\": 0.0e00,\n            \"patch_icpp(2)%alpha_rho(2)\": rhos,\n            \"patch_icpp(2)%alpha(1)\": 0.0e00,\n            \"patch_icpp(2)%alpha(2)\": 1.0e00,\n            # Patch 3: Droplet (WATER - 1)\n            \"patch_icpp(3)%geometry\": 8,\n            \"patch_icpp(3)%x_centroid\": 0.0e00,\n            \"patch_icpp(3)%y_centroid\": 0.0e00,\n            \"patch_icpp(3)%z_centroid\": 0.0e00,\n            \"patch_icpp(3)%radius\": D0 / 2,\n            \"patch_icpp(3)%alter_patch(1)\": \"T\",\n            \"patch_icpp(3)%vel(1)\": 0.0e00,\n            \"patch_icpp(3)%vel(2)\": 0.0e00,\n            \"patch_icpp(3)%vel(3)\": 0.0e00,\n            \"patch_icpp(3)%pres\": p0w,\n            \"patch_icpp(3)%alpha_rho(1)\": rho0w,\n            \"patch_icpp(3)%alpha_rho(2)\": 0.0e00,\n            \"patch_icpp(3)%alpha(1)\": 1.0e00,\n            \"patch_icpp(3)%alpha(2)\": 0.0e00,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gamw - 1),\n            \"fluid_pp(1)%pi_inf\": gamw * piw / (gamw - 1),\n            \"fluid_pp(2)%gamma\": 1.0e00 / (gama - 1),\n            \"fluid_pp(2)%pi_inf\": gama * pia / (gama - 1),\n        }\n    )\n)\n"
+    },
+    "script": {
+      "file": "run.sh",
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-h100-hllc-01\"\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --output=\"mfc-h100-hllc-01.out\"\n#SBATCH --error=\"mfc-h100-hllc-01.err\"\n#SBATCH --time=01:00:00\n#SBATCH --hint=nomultithread\n#SBATCH --exclusive\n#SBATCH --partition=all\n#SBATCH --gres=gpu:2\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/data/mfc/current/emr-acc/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"all\"          \"Walltime\"   \"01:00:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"1\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-h100-hllc-01\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-h100-hllc-01 @ /data/jobs/36817096579/MFC/Ayush/h100-hllc-01/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/mfc-environment.sh\" acc launchpad || exit 1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 1 x 2\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"UCX_TLS     : ${UCX_TLS}\"\nnvidia-smi --query-gpu=index,name,memory.used --format=csv,noheader\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/data/jobs/36817096579/MFC/Ayush/h100-hllc-01'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 2                             --map-by core                                           --bind-to core                                          \"/data/mfc/current/emr-acc/build/install/gpu-acc-869e78ff84/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/data/mfc/current/emr-acc/build/install/gpu-acc-869e78ff84/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/data/mfc/current/emr-acc'\n\n        cat >>'/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/data/jobs/36817096579/MFC/Ayush/h100-hllc-01'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 2                             --map-by core                                           --bind-to core                                          \"/data/mfc/current/emr-acc/build/install/gpu-acc-7d1e32e277/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/data/mfc/current/emr-acc/build/install/gpu-acc-7d1e32e277/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/data/mfc/current/emr-acc'\n\n        cat >>'/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/data/jobs/36817096579/MFC/Ayush/h100-hllc-01'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 2                             --map-by core                                           --bind-to core                                          \"/data/mfc/current/emr-acc/build/install/gpu-acc-c819d00b45/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/data/mfc/current/emr-acc/build/install/gpu-acc-c819d00b45/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/data/mfc/current/emr-acc'\n\n        cat >>'/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/data/jobs/36817096579/MFC/Ayush/h100-hllc-01/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-h100-hllc-01:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+    },
+    "out": {
+      "file": "run.out",
+      "size": 5923,
+      "parsed": {
+        "banner": {
+          "start_time": "04:52:12",
+          "start_date": "04:52:12",
+          "partition": "all",
+          "walltime": "01:00:00",
+          "nodes": "1",
+          "job_name": "mfc-h100-hllc-01",
+          "engine": "batch",
+          "queue_system": "SLURM"
+        },
+        "env": {
+          "host": "scc-connect-03-gpu01",
+          "nodesTasks": "1 x 2",
+          "mpirun": "/opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/bin/mpirun",
+          "fabric": null
+        },
+        "steps": [
+          {
+            "step": 1,
+            "total": 21,
+            "avg": 0,
+            "perStep": 0
+          },
+          {
+            "step": 2,
+            "total": 21,
+            "avg": 0,
+            "perStep": 0.171571
+          },
+          {
+            "step": 3,
+            "total": 21,
+            "avg": 0,
+            "perStep": 0.155591
+          },
+          {
+            "step": 4,
+            "total": 21,
+            "avg": 0.1549101,
+            "perStep": 0.1549101
+          },
+          {
+            "step": 5,
+            "total": 21,
+            "avg": 0.1545026,
+            "perStep": 0.1540952
+          },
+          {
+            "step": 6,
+            "total": 21,
+            "avg": 0.154266,
+            "perStep": 0.1537929
+          },
+          {
+            "step": 7,
+            "total": 21,
+            "avg": 0.1549816,
+            "perStep": 0.1571281
+          },
+          {
+            "step": 8,
+            "total": 21,
+            "avg": 0.1545784,
+            "perStep": 0.152966
+          },
+          {
+            "step": 9,
+            "total": 21,
+            "avg": 0.1545369,
+            "perStep": 0.1543291
+          },
+          {
+            "step": 10,
+            "total": 21,
+            "avg": 0.1545139,
+            "perStep": 0.154376
+          },
+          {
+            "step": 11,
+            "total": 21,
+            "avg": 0.1546116,
+            "perStep": 0.1552951
+          },
+          {
+            "step": 12,
+            "total": 21,
+            "avg": 0.1547518,
+            "perStep": 0.155874
+          },
+          {
+            "step": 13,
+            "total": 21,
+            "avg": 0.1546866,
+            "perStep": 0.1540999
+          },
+          {
+            "step": 14,
+            "total": 21,
+            "avg": 0.1545379,
+            "perStep": 0.1530502
+          },
+          {
+            "step": 15,
+            "total": 21,
+            "avg": 0.1545536,
+            "perStep": 0.154727
+          },
+          {
+            "step": 16,
+            "total": 21,
+            "avg": 0.1546009,
+            "perStep": 0.1551678
+          },
+          {
+            "step": 17,
+            "total": 21,
+            "avg": 0.1545358,
+            "perStep": 0.1536899
+          },
+          {
+            "step": 18,
+            "total": 21,
+            "avg": 0.1544435,
+            "perStep": 0.1531508
+          },
+          {
+            "step": 19,
+            "total": 21,
+            "avg": 0.1544627,
+            "perStep": 0.1547511
+          },
+          {
+            "step": 20,
+            "total": 21,
+            "avg": 0.1546165,
+            "perStep": 0.1570771
+          }
+        ],
+        "stepCount": 20,
+        "performance": 0.3965204611984444,
+        "totalTimeSec": 92,
+        "exitCode": 0,
+        "lines": 84
+      },
+      "excerpt": {
+        "head": [
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| MFC case # mfc-h100-hllc-01 @ /data/jobs/36817096579/MFC/Ayush/h100-hllc-01/case.py:                      |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| * Start-time     04:52:12                            * Start-date     04:52:12                            |",
+          "| * Partition      all                                 * Walltime       01:00:00                            |",
+          "| * Account        N/A                                 * Nodes          1                                   |",
+          "| * Job Name       mfc-h100-hllc-01                    * Engine         batch                               |",
+          "| * QoS            N/A                                 * Binary         N/A                                 |",
+          "| * Queue System   SLURM                               * Email          N/A                                 |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "",
+          "host        : scc-connect-03-gpu01",
+          "nodes/tasks : 1 x 2",
+          "mpirun      : /opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi5/bin/mpirun",
+          "UCX_TLS     : sm,self,cuda_copy,cuda_ipc",
+          "0, NVIDIA H100 NVL, 0 MiB",
+          "1, NVIDIA H100 NVL, 0 MiB",
+          "",
+          "mfc: OK > :) Running syscheck:",
+          "",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)",
+          " [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)"
+        ],
+        "tail": [
+          " [  0%]  Time step        1 of 21 @ t_step =        0 Time Avg = 0.000000E+00 Time/step= 0.000000E+00 ETA (HH:MM:SS) = 0:00:00",
+          " [  5%]  Time step        2 of 21 @ t_step =        1 Time Avg = 0.000000E+00 Time/step= 1.715710E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 10%]  Time step        3 of 21 @ t_step =        2 Time Avg = 0.000000E+00 Time/step= 1.555910E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 15%]  Time step        4 of 21 @ t_step =        3 Time Avg = 1.549101E-01 Time/step= 1.549101E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 20%]  Time step        5 of 21 @ t_step =        4 Time Avg = 1.545026E-01 Time/step= 1.540952E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 24%]  Time step        6 of 21 @ t_step =        5 Time Avg = 1.542660E-01 Time/step= 1.537929E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 29%]  Time step        7 of 21 @ t_step =        6 Time Avg = 1.549816E-01 Time/step= 1.571281E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 34%]  Time step        8 of 21 @ t_step =        7 Time Avg = 1.545784E-01 Time/step= 1.529660E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 39%]  Time step        9 of 21 @ t_step =        8 Time Avg = 1.545369E-01 Time/step= 1.543291E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 43%]  Time step       10 of 21 @ t_step =        9 Time Avg = 1.545139E-01 Time/step= 1.543760E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 48%]  Time step       11 of 21 @ t_step =       10 Time Avg = 1.546116E-01 Time/step= 1.552951E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 53%]  Time step       12 of 21 @ t_step =       11 Time Avg = 1.547518E-01 Time/step= 1.558740E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 58%]  Time step       13 of 21 @ t_step =       12 Time Avg = 1.546866E-01 Time/step= 1.540999E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 62%]  Time step       14 of 21 @ t_step =       13 Time Avg = 1.545379E-01 Time/step= 1.530502E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 67%]  Time step       15 of 21 @ t_step =       14 Time Avg = 1.545536E-01 Time/step= 1.547270E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 72%]  Time step       16 of 21 @ t_step =       15 Time Avg = 1.546009E-01 Time/step= 1.551678E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 77%]  Time step       17 of 21 @ t_step =       16 Time Avg = 1.545358E-01 Time/step= 1.536899E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 81%]  Time step       18 of 21 @ t_step =       17 Time Avg = 1.544435E-01 Time/step= 1.531508E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 86%]  Time step       19 of 21 @ t_step =       18 Time Avg = 1.544627E-01 Time/step= 1.547511E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 91%]  Time step       20 of 21 @ t_step =       19 Time Avg = 1.546165E-01 Time/step= 1.570771E-01 ETA (HH:MM:SS) = 0:00:00",
+          " Performance:   0.3965204611984444      ns/gp/eq/rhs",
+          "",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| Finished mfc-h100-hllc-01:                                                                                |",
+          "| * Total-time:    92s                                 * Exit Code:     0                                   |",
+          "| * End-time:      04:53:44                            * End-date:      04:53:44                            |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          ""
+        ],
+        "elided": 32
+      }
+    },
+    "err": {
+      "file": "run.err",
+      "size": 353,
+      "raw": "+ mpirun -np 2 --map-by core --bind-to core /data/mfc/current/emr-acc/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 2 --map-by core --bind-to core /data/mfc/current/emr-acc/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 2 --map-by core --bind-to core /data/mfc/current/emr-acc/build/install/gpu-acc-c819d00b45/bin/simulation\n"
+    }
+  }
+}

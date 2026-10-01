@@ -1,0 +1,1835 @@
+{
+  "id": "xenon/MFC/Flynn/2D_shockdroplet",
+  "suite": "MFC",
+  "group": "Flynn",
+  "run": "2D_shockdroplet",
+  "cluster": "xenon",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-01T03:43:07Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Flynn",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "grind",
+    "value": 0.43909023,
+    "unit": "ns/gp/eq/rhs",
+    "label": "Grind time",
+    "direction": "lower"
+  },
+  "secondary": [
+    {
+      "key": "exec",
+      "value": 80.6518571,
+      "unit": "s",
+      "label": "Simulation wall time",
+      "direction": "lower"
+    },
+    {
+      "key": "s_step",
+      "value": 0.0011019,
+      "unit": "s/step",
+      "label": "Seconds per step",
+      "direction": "lower"
+    },
+    {
+      "key": "ranks",
+      "value": 8,
+      "unit": "",
+      "label": "MPI ranks",
+      "direction": "none"
+    }
+  ],
+  "parameters": {
+    "grid": "1200 × 300",
+    "cells": 360000,
+    "dimensions": 2,
+    "dt": 3.8449109041358677e-7,
+    "steps": 14111,
+    "wenoOrder": 3,
+    "wenoEps": 1e-16,
+    "riemann": "HLLC",
+    "timeStepper": "RK3",
+    "modelEqns": 2,
+    "numFluids": 2,
+    "viscous": null,
+    "surfaceTension": null,
+    "bubbles": null,
+    "equations": null,
+    "equationSource": null
+  },
+  "verification": {
+    "kind": "custom",
+    "reason": "Successful run; staged custom case hash and MFC source pin match. Physics is user supplied."
+  },
+  "convergence": null,
+  "config": {
+    "case": null,
+    "args": [],
+    "nodes": 2,
+    "tasks_per_node": 4,
+    "ranks": 8,
+    "partition": "gpu",
+    "gpu": "acc",
+    "case_optimization": null,
+    "gbpp": 16,
+    "toolchain": "nvhpc-acc",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+  },
+  "provenance": {
+    "case_source": "custom",
+    "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",
+    "case": null,
+    "case_registry": "tree",
+    "case_sha256": "952f06d76971fdf88c5e542b455d6cdc22dc9047cfbfa0a46c0a95931a021262",
+    "invocation": "run /scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/case.py -e batch -c /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako -t pre_process simulation post_process -N 2 -n 4 -p gpu -w 02:00:00 --name mfc-2D_shockdroplet -o /scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/summary.yaml --clean --no-build --gpu acc --wait --",
+    "lock": {
+      "debug": false,
+      "fastmath": false,
+      "gcov": false,
+      "gpu": "acc",
+      "mixed": false,
+      "mpi": true,
+      "reldebug": false,
+      "single": false,
+      "unified": false
+    }
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": false,
+    "reason": "Custom or unverified case — unranked",
+    "group": "custom/GPU"
+  },
+  "notes": [],
+  "raw": {
+    "case.py": "raw/xenon/MFC/Flynn/2D_shockdroplet/case.py",
+    "summary.yaml": "raw/xenon/MFC/Flynn/2D_shockdroplet/summary.yaml",
+    "time_data.dat": "raw/xenon/MFC/Flynn/2D_shockdroplet/time_data.dat",
+    "run.out": "raw/xenon/MFC/Flynn/2D_shockdroplet/run.out",
+    "run.err": "raw/xenon/MFC/Flynn/2D_shockdroplet/run.err",
+    "job.yml": "raw/xenon/MFC/Flynn/2D_shockdroplet/job.yml",
+    "run.sh": "raw/xenon/MFC/Flynn/2D_shockdroplet/run.sh",
+    "simulation.inp": "raw/xenon/MFC/Flynn/2D_shockdroplet/simulation.inp",
+    "pre_process.inp": "raw/xenon/MFC/Flynn/2D_shockdroplet/pre_process.inp",
+    "mfc-provenance.json": "raw/xenon/MFC/Flynn/2D_shockdroplet/mfc-provenance.json",
+    "mfc-status.yml": "raw/xenon/MFC/Flynn/2D_shockdroplet/mfc-status.yml"
+  },
+  "best": null,
+  "dat": null,
+  "job": null,
+  "out": {
+    "file": "run.out",
+    "size": 1851536,
+    "parsed": {
+      "banner": {
+        "start_time": "03:40:49",
+        "start_date": "03:40:49",
+        "partition": "gpu",
+        "walltime": "02:00:00",
+        "nodes": "2",
+        "job_name": "mfc-2D-shockdroplet",
+        "engine": "batch",
+        "queue_system": "SLURM"
+      },
+      "env": {
+        "host": "gpu-node1",
+        "nodesTasks": "2 x 4",
+        "mpirun": "/work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+        "fabric": "ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)"
+      },
+      "steps": [
+        {
+          "step": 1,
+          "total": 14112,
+          "avg": 0,
+          "perStep": 0
+        },
+        {
+          "step": 119,
+          "total": 14112,
+          "avg": 0.003642841,
+          "perStep": 0.003360987
+        },
+        {
+          "step": 237,
+          "total": 14112,
+          "avg": 0.003543521,
+          "perStep": 0.003440142
+        },
+        {
+          "step": 355,
+          "total": 14112,
+          "avg": 0.003508784,
+          "perStep": 0.003447056
+        },
+        {
+          "step": 473,
+          "total": 14112,
+          "avg": 0.003492859,
+          "perStep": 0.003385067
+        },
+        {
+          "step": 591,
+          "total": 14112,
+          "avg": 0.003484455,
+          "perStep": 0.003387928
+        },
+        {
+          "step": 709,
+          "total": 14112,
+          "avg": 0.003477151,
+          "perStep": 0.00343585
+        },
+        {
+          "step": 827,
+          "total": 14112,
+          "avg": 0.003471098,
+          "perStep": 0.003420115
+        },
+        {
+          "step": 945,
+          "total": 14112,
+          "avg": 0.003466872,
+          "perStep": 0.003441095
+        },
+        {
+          "step": 1063,
+          "total": 14112,
+          "avg": 0.003463051,
+          "perStep": 0.003396034
+        },
+        {
+          "step": 1181,
+          "total": 14112,
+          "avg": 0.003459614,
+          "perStep": 0.003448963
+        },
+        {
+          "step": 1299,
+          "total": 14112,
+          "avg": 0.003457774,
+          "perStep": 0.003437042
+        },
+        {
+          "step": 1417,
+          "total": 14112,
+          "avg": 0.003456304,
+          "perStep": 0.003426075
+        },
+        {
+          "step": 1535,
+          "total": 14112,
+          "avg": 0.003454465,
+          "perStep": 0.003368139
+        },
+        {
+          "step": 1653,
+          "total": 14112,
+          "avg": 0.003452484,
+          "perStep": 0.003443956
+        },
+        {
+          "step": 1771,
+          "total": 14112,
+          "avg": 0.003452207,
+          "perStep": 0.003432035
+        },
+        {
+          "step": 1889,
+          "total": 14112,
+          "avg": 0.003450866,
+          "perStep": 0.003626108
+        },
+        {
+          "step": 2007,
+          "total": 14112,
+          "avg": 0.003449936,
+          "perStep": 0.003391981
+        },
+        {
+          "step": 2125,
+          "total": 14112,
+          "avg": 0.003449452,
+          "perStep": 0.003422976
+        },
+        {
+          "step": 2243,
+          "total": 14112,
+          "avg": 0.003448479,
+          "perStep": 0.003442049
+        },
+        {
+          "step": 2361,
+          "total": 14112,
+          "avg": 0.003447654,
+          "perStep": 0.003449917
+        },
+        {
+          "step": 2479,
+          "total": 14112,
+          "avg": 0.003447618,
+          "perStep": 0.003360987
+        },
+        {
+          "step": 2597,
+          "total": 14112,
+          "avg": 0.003447164,
+          "perStep": 0.00346303
+        },
+        {
+          "step": 2715,
+          "total": 14112,
+          "avg": 0.003446623,
+          "perStep": 0.003399849
+        },
+        {
+          "step": 2833,
+          "total": 14112,
+          "avg": 0.003446437,
+          "perStep": 0.003474951
+        },
+        {
+          "step": 2951,
+          "total": 14112,
+          "avg": 0.003445806,
+          "perStep": 0.003417015
+        },
+        {
+          "step": 3069,
+          "total": 14112,
+          "avg": 0.003445331,
+          "perStep": 0.003418922
+        },
+        {
+          "step": 3187,
+          "total": 14112,
+          "avg": 0.003444773,
+          "perStep": 0.003406048
+        },
+        {
+          "step": 3305,
+          "total": 14112,
+          "avg": 0.003444524,
+          "perStep": 0.003400087
+        },
+        {
+          "step": 3423,
+          "total": 14112,
+          "avg": 0.00344452,
+          "perStep": 0.003364086
+        },
+        {
+          "step": 3541,
+          "total": 14112,
+          "avg": 0.003444228,
+          "perStep": 0.00344491
+        },
+        {
+          "step": 3659,
+          "total": 14112,
+          "avg": 0.003443746,
+          "perStep": 0.003463984
+        },
+        {
+          "step": 3777,
+          "total": 14112,
+          "avg": 0.003443504,
+          "perStep": 0.003437996
+        },
+        {
+          "step": 3895,
+          "total": 14112,
+          "avg": 0.003443148,
+          "perStep": 0.00342679
+        },
+        {
+          "step": 4013,
+          "total": 14112,
+          "avg": 0.003442751,
+          "perStep": 0.003393888
+        },
+        {
+          "step": 4131,
+          "total": 14112,
+          "avg": 0.003442444,
+          "perStep": 0.003330946
+        },
+        {
+          "step": 4249,
+          "total": 14112,
+          "avg": 0.003442367,
+          "perStep": 0.003453016
+        },
+        {
+          "step": 4367,
+          "total": 14112,
+          "avg": 0.003442023,
+          "perStep": 0.003422022
+        },
+        {
+          "step": 4485,
+          "total": 14112,
+          "avg": 0.00344168,
+          "perStep": 0.003402948
+        },
+        {
+          "step": 4603,
+          "total": 14112,
+          "avg": 0.003441239,
+          "perStep": 0.003425121
+        },
+        {
+          "step": 4721,
+          "total": 14112,
+          "avg": 0.003441109,
+          "perStep": 0.003386974
+        },
+        {
+          "step": 4839,
+          "total": 14112,
+          "avg": 0.003440868,
+          "perStep": 0.00334096
+        },
+        {
+          "step": 4957,
+          "total": 14112,
+          "avg": 0.003440773,
+          "perStep": 0.003432989
+        },
+        {
+          "step": 5075,
+          "total": 14112,
+          "avg": 0.003440473,
+          "perStep": 0.003441095
+        },
+        {
+          "step": 5193,
+          "total": 14112,
+          "avg": 0.003440315,
+          "perStep": 0.003403187
+        },
+        {
+          "step": 5311,
+          "total": 14112,
+          "avg": 0.003440115,
+          "perStep": 0.003452063
+        },
+        {
+          "step": 5429,
+          "total": 14112,
+          "avg": 0.003439925,
+          "perStep": 0.003413916
+        },
+        {
+          "step": 5547,
+          "total": 14112,
+          "avg": 0.003439892,
+          "perStep": 0.003345966
+        },
+        {
+          "step": 5665,
+          "total": 14112,
+          "avg": 0.003439788,
+          "perStep": 0.003458977
+        },
+        {
+          "step": 5783,
+          "total": 14112,
+          "avg": 0.003439696,
+          "perStep": 0.003442049
+        },
+        {
+          "step": 5901,
+          "total": 14112,
+          "avg": 0.003439482,
+          "perStep": 0.003455162
+        },
+        {
+          "step": 6019,
+          "total": 14112,
+          "avg": 0.003439282,
+          "perStep": 0.003449202
+        },
+        {
+          "step": 6137,
+          "total": 14112,
+          "avg": 0.003439109,
+          "perStep": 0.003431082
+        },
+        {
+          "step": 6255,
+          "total": 14112,
+          "avg": 0.003438981,
+          "perStep": 0.003339052
+        },
+        {
+          "step": 6373,
+          "total": 14112,
+          "avg": 0.003438978,
+          "perStep": 0.003451109
+        },
+        {
+          "step": 6491,
+          "total": 14112,
+          "avg": 0.003438803,
+          "perStep": 0.003458023
+        },
+        {
+          "step": 6609,
+          "total": 14112,
+          "avg": 0.003438655,
+          "perStep": 0.003418922
+        },
+        {
+          "step": 6727,
+          "total": 14112,
+          "avg": 0.003438521,
+          "perStep": 0.003470898
+        },
+        {
+          "step": 6845,
+          "total": 14112,
+          "avg": 0.003438358,
+          "perStep": 0.003442764
+        },
+        {
+          "step": 6963,
+          "total": 14112,
+          "avg": 0.003438449,
+          "perStep": 0.003363848
+        },
+        {
+          "step": 7081,
+          "total": 14112,
+          "avg": 0.003438454,
+          "perStep": 0.00343895
+        },
+        {
+          "step": 7199,
+          "total": 14112,
+          "avg": 0.00343839,
+          "perStep": 0.003479004
+        },
+        {
+          "step": 7317,
+          "total": 14112,
+          "avg": 0.003438356,
+          "perStep": 0.003474951
+        },
+        {
+          "step": 7435,
+          "total": 14112,
+          "avg": 0.003438291,
+          "perStep": 0.003465891
+        },
+        {
+          "step": 7553,
+          "total": 14112,
+          "avg": 0.003438234,
+          "perStep": 0.003436804
+        },
+        {
+          "step": 7671,
+          "total": 14112,
+          "avg": 0.003438263,
+          "perStep": 0.003395081
+        },
+        {
+          "step": 7789,
+          "total": 14112,
+          "avg": 0.003438157,
+          "perStep": 0.003476858
+        },
+        {
+          "step": 7907,
+          "total": 14112,
+          "avg": 0.003438096,
+          "perStep": 0.003452063
+        },
+        {
+          "step": 8025,
+          "total": 14112,
+          "avg": 0.003438033,
+          "perStep": 0.003487825
+        },
+        {
+          "step": 8143,
+          "total": 14112,
+          "avg": 0.003437947,
+          "perStep": 0.003450871
+        },
+        {
+          "step": 8261,
+          "total": 14112,
+          "avg": 0.003437869,
+          "perStep": 0.003386974
+        },
+        {
+          "step": 8379,
+          "total": 14112,
+          "avg": 0.003437828,
+          "perStep": 0.003405094
+        },
+        {
+          "step": 8497,
+          "total": 14112,
+          "avg": 0.003437768,
+          "perStep": 0.003386021
+        },
+        {
+          "step": 8615,
+          "total": 14112,
+          "avg": 0.003437669,
+          "perStep": 0.003454924
+        },
+        {
+          "step": 8733,
+          "total": 14112,
+          "avg": 0.003437599,
+          "perStep": 0.003418922
+        },
+        {
+          "step": 8851,
+          "total": 14112,
+          "avg": 0.003437572,
+          "perStep": 0.003436804
+        },
+        {
+          "step": 8969,
+          "total": 14112,
+          "avg": 0.003437603,
+          "perStep": 0.003428936
+        },
+        {
+          "step": 9087,
+          "total": 14112,
+          "avg": 0.003437578,
+          "perStep": 0.00343895
+        },
+        {
+          "step": 9205,
+          "total": 14112,
+          "avg": 0.003437496,
+          "perStep": 0.003450871
+        },
+        {
+          "step": 9323,
+          "total": 14112,
+          "avg": 0.003437452,
+          "perStep": 0.003531933
+        },
+        {
+          "step": 9441,
+          "total": 14112,
+          "avg": 0.003437453,
+          "perStep": 0.003445864
+        },
+        {
+          "step": 9559,
+          "total": 14112,
+          "avg": 0.003437423,
+          "perStep": 0.003450155
+        },
+        {
+          "step": 9677,
+          "total": 14112,
+          "avg": 0.003437378,
+          "perStep": 0.003399134
+        },
+        {
+          "step": 9795,
+          "total": 14112,
+          "avg": 0.003437464,
+          "perStep": 0.003469944
+        },
+        {
+          "step": 9913,
+          "total": 14112,
+          "avg": 0.003437412,
+          "perStep": 0.003458023
+        },
+        {
+          "step": 10031,
+          "total": 14112,
+          "avg": 0.003437345,
+          "perStep": 0.003416061
+        },
+        {
+          "step": 10149,
+          "total": 14112,
+          "avg": 0.003437297,
+          "perStep": 0.003460884
+        },
+        {
+          "step": 10267,
+          "total": 14112,
+          "avg": 0.003437328,
+          "perStep": 0.003379822
+        },
+        {
+          "step": 10385,
+          "total": 14112,
+          "avg": 0.003437194,
+          "perStep": 0.003422022
+        },
+        {
+          "step": 10503,
+          "total": 14112,
+          "avg": 0.003437437,
+          "perStep": 0.003465891
+        },
+        {
+          "step": 10621,
+          "total": 14112,
+          "avg": 0.003437393,
+          "perStep": 0.003427982
+        },
+        {
+          "step": 10739,
+          "total": 14112,
+          "avg": 0.00343733,
+          "perStep": 0.003484011
+        },
+        {
+          "step": 10857,
+          "total": 14112,
+          "avg": 0.003437244,
+          "perStep": 0.00345397
+        },
+        {
+          "step": 10975,
+          "total": 14112,
+          "avg": 0.003437152,
+          "perStep": 0.003447056
+        },
+        {
+          "step": 11093,
+          "total": 14112,
+          "avg": 0.003437064,
+          "perStep": 0.003363848
+        },
+        {
+          "step": 11211,
+          "total": 14112,
+          "avg": 0.003437,
+          "perStep": 0.00343895
+        },
+        {
+          "step": 11329,
+          "total": 14112,
+          "avg": 0.003436955,
+          "perStep": 0.003466129
+        },
+        {
+          "step": 11447,
+          "total": 14112,
+          "avg": 0.003436896,
+          "perStep": 0.003437042
+        },
+        {
+          "step": 11565,
+          "total": 14112,
+          "avg": 0.003436873,
+          "perStep": 0.003390074
+        },
+        {
+          "step": 11683,
+          "total": 14112,
+          "avg": 0.003436853,
+          "perStep": 0.003401041
+        },
+        {
+          "step": 11801,
+          "total": 14112,
+          "avg": 0.00343687,
+          "perStep": 0.003613949
+        },
+        {
+          "step": 11919,
+          "total": 14112,
+          "avg": 0.003436879,
+          "perStep": 0.003436089
+        },
+        {
+          "step": 12037,
+          "total": 14112,
+          "avg": 0.003436815,
+          "perStep": 0.003451109
+        },
+        {
+          "step": 12155,
+          "total": 14112,
+          "avg": 0.003436762,
+          "perStep": 0.003415108
+        },
+        {
+          "step": 12273,
+          "total": 14112,
+          "avg": 0.003436677,
+          "perStep": 0.003450871
+        },
+        {
+          "step": 12391,
+          "total": 14112,
+          "avg": 0.003436668,
+          "perStep": 0.003457069
+        },
+        {
+          "step": 12509,
+          "total": 14112,
+          "avg": 0.003436662,
+          "perStep": 0.003565073
+        },
+        {
+          "step": 12627,
+          "total": 14112,
+          "avg": 0.003436648,
+          "perStep": 0.00342989
+        },
+        {
+          "step": 12745,
+          "total": 14112,
+          "avg": 0.003436581,
+          "perStep": 0.003432035
+        },
+        {
+          "step": 12863,
+          "total": 14112,
+          "avg": 0.003436495,
+          "perStep": 0.003463984
+        },
+        {
+          "step": 12981,
+          "total": 14112,
+          "avg": 0.003436412,
+          "perStep": 0.003428936
+        },
+        {
+          "step": 13099,
+          "total": 14112,
+          "avg": 0.003436356,
+          "perStep": 0.003461123
+        },
+        {
+          "step": 13217,
+          "total": 14112,
+          "avg": 0.003436343,
+          "perStep": 0.003356934
+        },
+        {
+          "step": 13335,
+          "total": 14112,
+          "avg": 0.003436322,
+          "perStep": 0.003431082
+        },
+        {
+          "step": 13453,
+          "total": 14112,
+          "avg": 0.003436312,
+          "perStep": 0.00343585
+        },
+        {
+          "step": 13571,
+          "total": 14112,
+          "avg": 0.003436305,
+          "perStep": 0.003435135
+        },
+        {
+          "step": 13689,
+          "total": 14112,
+          "avg": 0.003436233,
+          "perStep": 0.003426075
+        },
+        {
+          "step": 13807,
+          "total": 14112,
+          "avg": 0.003436206,
+          "perStep": 0.003432989
+        },
+        {
+          "step": 13925,
+          "total": 14112,
+          "avg": 0.00343623,
+          "perStep": 0.003365993
+        },
+        {
+          "step": 14043,
+          "total": 14112,
+          "avg": 0.003436211,
+          "perStep": 0.003473043
+        },
+        {
+          "step": 14111,
+          "total": 14112,
+          "avg": 0.003436131,
+          "perStep": 0.003469944
+        }
+      ],
+      "stepCount": 14111,
+      "performance": 0.4390902276821703,
+      "totalTimeSec": 112,
+      "exitCode": 0,
+      "lines": 14290
+    },
+    "excerpt": {
+      "head": [
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| MFC case # mfc-2D-shockdroplet @ /scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/case.py:             |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| * Start-time     03:40:49                            * Start-date     03:40:49                            |",
+        "| * Partition      gpu                                 * Walltime       02:00:00                            |",
+        "| * Account        N/A                                 * Nodes          2                                   |",
+        "| * Job Name       mfc-2D-shockdroplet                 * Engine         batch                               |",
+        "| * QoS            N/A                                 * Binary         N/A                                 |",
+        "| * Queue System   SLURM                               * Email          N/A                                 |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "",
+        "host        : gpu-node1",
+        "nodes/tasks : 2 x 4",
+        "mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+        "fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)",
+        "",
+        "mfc: OK > :) Running syscheck:",
+        "",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)",
+        " [TEST] MPI: call mpi_init(ierr)"
+      ],
+      "tail": [
+        " [ 81%]  Saving       81 of 100 @ t_step =    11360 Time Avg =     1.673487E-01 Time/step = 2.211890E-01 ETA (HH:MM:SS) = 0:00:03",
+        " [ 82%]  Saving       82 of 100 @ t_step =    11502 Time Avg =     1.666943E-01 Time/step = 1.149979E-01 ETA (HH:MM:SS) = 0:00:03",
+        " [ 83%]  Saving       83 of 100 @ t_step =    11644 Time Avg =     1.675494E-01 Time/step = 2.359529E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 84%]  Saving       84 of 100 @ t_step =    11786 Time Avg =     1.669115E-01 Time/step = 1.152468E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 85%]  Saving       85 of 100 @ t_step =    11928 Time Avg =     1.662688E-01 Time/step = 1.135681E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 86%]  Saving       86 of 100 @ t_step =    12070 Time Avg =     1.669342E-01 Time/step = 2.221589E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 87%]  Saving       87 of 100 @ t_step =    12212 Time Avg =     1.663252E-01 Time/step = 1.151690E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 88%]  Saving       88 of 100 @ t_step =    12354 Time Avg =     1.669738E-01 Time/step = 2.221069E-01 ETA (HH:MM:SS) = 0:00:02",
+        " [ 89%]  Saving       89 of 100 @ t_step =    12496 Time Avg =     1.667654E-01 Time/step = 1.488411E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 90%]  Saving       90 of 100 @ t_step =    12638 Time Avg =     1.661730E-01 Time/step = 1.146359E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 91%]  Saving       91 of 100 @ t_step =    12780 Time Avg =     1.668601E-01 Time/step = 2.273190E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 92%]  Saving       92 of 100 @ t_step =    12922 Time Avg =     1.674447E-01 Time/step = 2.194781E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 93%]  Saving       93 of 100 @ t_step =    13064 Time Avg =     1.668735E-01 Time/step = 1.154699E-01 ETA (HH:MM:SS) = 0:00:01",
+        " [ 94%]  Saving       94 of 100 @ t_step =    13206 Time Avg =     1.662939E-01 Time/step = 1.135480E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 95%]  Saving       95 of 100 @ t_step =    13348 Time Avg =     1.657363E-01 Time/step = 1.144359E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 96%]  Saving       96 of 100 @ t_step =    13490 Time Avg =     1.652113E-01 Time/step = 1.163878E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 97%]  Saving       97 of 100 @ t_step =    13632 Time Avg =     1.657962E-01 Time/step = 2.207730E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 98%]  Saving       98 of 100 @ t_step =    13774 Time Avg =     1.652463E-01 Time/step = 1.130099E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [ 99%]  Saving       99 of 100 @ t_step =    13916 Time Avg =     1.645040E-01 Time/step = 9.323597E-02 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Saving      100 of 100 @ t_step =    14058 Time Avg =     1.639832E-01 Time/step = 1.134670E-01 ETA (HH:MM:SS) = 0:00:00",
+        " [100%]  Saving      100 of 100 @ t_step =    14111 Time Avg =     1.644996E-01 Time/step = 2.151101E-01 ETA (HH:MM:SS) = 0:00:00",
+        "",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        "| Finished mfc-2D-shockdroplet:                                                                             |",
+        "| * Total-time:    112s                                * Exit Code:     0                                   |",
+        "| * End-time:      03:42:41                            * End-date:      03:42:41                            |",
+        "+-----------------------------------------------------------------------------------------------------------+ ",
+        ""
+      ],
+      "elided": 14238
+    }
+  },
+  "err": {
+    "file": "run.err",
+    "size": 525,
+    "raw": "+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process\n"
+  },
+  "detail": {
+    "summary": {
+      "invocation": [
+        "run",
+        "/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/case.py",
+        "-e",
+        "batch",
+        "-c",
+        "/cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako",
+        "-t",
+        "pre_process",
+        "simulation",
+        "post_process",
+        "-N",
+        "2",
+        "-n",
+        "4",
+        "-p",
+        "gpu",
+        "-w",
+        "02:00:00",
+        "--name",
+        "mfc-2D_shockdroplet",
+        "-o",
+        "/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/summary.yaml",
+        "--clean",
+        "--no-build",
+        "--gpu",
+        "acc",
+        "--wait",
+        "--"
+      ],
+      "lock": {
+        "debug": false,
+        "fastmath": false,
+        "gcov": false,
+        "gpu": "acc",
+        "mixed": false,
+        "mpi": true,
+        "reldebug": false,
+        "single": false,
+        "unified": false
+      },
+      "syscheck": {
+        "exec": 5.2364828
+      },
+      "pre_process": {
+        "exec": 5.2813651
+      },
+      "simulation": {
+        "exec": 80.6518571,
+        "grind": 0.43909023
+      },
+      "post_process": {
+        "exec": 21.1512343
+      }
+    },
+    "timeData": [
+      {
+        "ranks": 8,
+        "sPerStep": 0.0011019,
+        "grind": 0.43909023
+      }
+    ],
+    "case": {
+      "file": "case.py",
+      "raw": "#!/usr/bin/env python3\nimport argparse\nimport json\nimport math\n\nparser = argparse.ArgumentParser(prog=\"2D_shockdroplet\", formatter_class=argparse.ArgumentDefaultsHelpFormatter)\nparser.add_argument(\n    \"--mfc\",\n    type=json.loads,\n    default=\"{}\",\n    metavar=\"DICT\",\n    help=\"MFC's toolchain's internal state.\",\n)\nparser.add_argument(\"--mach\", type=float, default=1.4, help=\"Shock Mach number.\")\nparser.add_argument(\"--adap-dt\", action=\"store_true\", help=\"Use CFL-based adaptive time-stepping.\")\nparser.add_argument(\"--cfl\", type=float, default=0.2, help=\"CFL number.\")\nparser.add_argument(\"--tend\", type=float, default=1.0, help=\"Dimensionless end time.\")\nparser.add_argument(\"--res\", type=float, default=1.0, help=\"Resolution scaling factor.\")\nargs = parser.parse_args()\n\nMa = args.mach\np_a = 101325.0\nrho_a = 1.204\nrho_w = 1000\ngam_a = 1.4\ngam_w = 6.12\npi_w = 3.43e8\n\n# Post-shock state from the Rankine-Hugoniot conditions (shock moving into still air)\nps = p_a * (1 + 2 * gam_a / (gam_a + 1) * (Ma**2 - 1))\nrho_post_a = rho_a * (gam_a + 1) * Ma**2 / ((gam_a - 1) * Ma**2 + 2)\nc_a = math.sqrt(gam_a * p_a / rho_a)\nvel = 2 * c_a / (gam_a + 1) * (Ma**2 - 1) / Ma\n\nc_l = math.sqrt(gam_a * ps / rho_a)\neps = 1e-6\n\nD = 0.048\nNy = (300 * args.res) - 1\nNx = (1200 * args.res) - 1\ndx = 24 * D / Nx\n\n# End time in units of the Ranger & Nicholls (1969) breakup time scale\n# t_breakup = D sqrt(rho_l/rho_g) / u_g, with post-shock gas conditions\ntau_end = args.tend\ntime_end = tau_end * D * math.sqrt(rho_w / rho_post_a) / vel\ncfl = args.cfl\n\ndt = cfl * dx / c_l\nNt = int(time_end / dt)\n\nif args.adap_dt:\n    time_stepping = {\n        \"cfl_adap_dt\": \"T\",\n        \"cfl_target\": cfl,\n        \"n_start\": 0,\n        \"t_stop\": time_end,\n        \"t_save\": time_end / 100,\n    }\nelse:\n    time_stepping = {\n        \"dt\": dt,\n        \"t_step_start\": 0,\n        \"t_step_stop\": Nt,\n        \"t_step_save\": math.ceil(Nt / 100),\n    }\n\nprint(\n    json.dumps(\n        {\n            # Logistics\n            \"run_time_info\": \"F\",\n            # Computational Domain Parameters\n            \"x_domain%beg\": -4 * D,\n            \"x_domain%end\": 20 * D,\n            \"y_domain%beg\": 0.0,\n            \"y_domain%end\": 6 * D,\n            \"stretch_y\": \"T\",\n            \"a_y\": 3.67,\n            \"y_a\": -5.7 * D,\n            \"y_b\": 5.7 * D,\n            \"loops_y\": 2,\n            \"m\": int(Nx),\n            \"n\": int(Ny),\n            \"p\": 0,\n            **time_stepping,\n            \"elliptic_smoothing\": \"T\",\n            \"elliptic_smoothing_iters\": 20,\n            # Simulation Algorithm Parameters\n            \"num_patches\": 3,\n            \"model_eqns\": \"5eq\",\n            \"alt_soundspeed\": \"F\",\n            \"num_fluids\": 2,\n            \"mpp_lim\": \"F\",\n            \"mixture_err\": \"F\",\n            \"time_stepper\": \"rk3\",\n            \"weno_order\": 3,\n            \"weno_eps\": 1.0e-16,\n            \"weno_Re_flux\": \"F\",\n            \"weno_avg\": \"F\",\n            \"mapped_weno\": \"T\",\n            \"null_weights\": \"F\",\n            \"mp_weno\": \"F\",\n            \"riemann_solver\": \"hllc\",\n            \"wave_speeds\": \"direct\",\n            \"avg_state\": \"arithmetic\",\n            \"bc_x%beg\": -6,  # 11,\n            \"bc_x%end\": -6,  # 12\n            \"bc_y%beg\": -2,\n            \"bc_y%end\": -3,\n            # Formatted Database Files Structure Parameters\n            \"format\": \"silo\",\n            \"precision\": \"double\",\n            \"prim_vars_wrt\": \"T\",\n            \"parallel_io\": \"T\",\n            # Patch 1: Background\n            \"patch_icpp(1)%geometry\": 3,\n            \"patch_icpp(1)%x_centroid\": 8 * D,\n            \"patch_icpp(1)%y_centroid\": 6 * D,\n            \"patch_icpp(1)%length_x\": 24 * D,\n            \"patch_icpp(1)%length_y\": 14 * D,\n            \"patch_icpp(1)%vel(1)\": 0.0,\n            \"patch_icpp(1)%vel(2)\": 0.0e00,\n            \"patch_icpp(1)%pres\": p_a,\n            \"patch_icpp(1)%alpha_rho(1)\": eps * rho_w,\n            \"patch_icpp(1)%alpha_rho(2)\": (1 - eps) * rho_a,\n            \"patch_icpp(1)%alpha(1)\": eps,\n            \"patch_icpp(1)%alpha(2)\": 1 - eps,\n            # Patch 2: Shocked state\n            \"patch_icpp(2)%geometry\": 3,\n            \"patch_icpp(2)%alter_patch(1)\": \"T\",\n            \"patch_icpp(2)%x_centroid\": -2.5 * D,\n            \"patch_icpp(2)%y_centroid\": 6 * D,\n            \"patch_icpp(2)%length_x\": 3 * D,\n            \"patch_icpp(2)%length_y\": 14 * D,\n            \"patch_icpp(2)%vel(1)\": vel,\n            \"patch_icpp(2)%vel(2)\": 0.0e00,\n            \"patch_icpp(2)%pres\": ps,\n            \"patch_icpp(2)%alpha_rho(1)\": eps * rho_w,\n            \"patch_icpp(2)%alpha_rho(2)\": (1 - eps) * rho_post_a,\n            \"patch_icpp(2)%alpha(1)\": eps,\n            \"patch_icpp(2)%alpha(2)\": 1 - eps,\n            # Patch 3: Bubble\n            \"patch_icpp(3)%geometry\": 2,\n            \"patch_icpp(3)%x_centroid\": 0,\n            \"patch_icpp(3)%y_centroid\": 0,\n            \"patch_icpp(3)%radius\": D / 2,\n            \"patch_icpp(3)%alter_patch(1)\": \"T\",\n            \"patch_icpp(3)%vel(1)\": 0.0,\n            \"patch_icpp(3)%vel(2)\": 0.0e00,\n            \"patch_icpp(3)%pres\": p_a,\n            \"patch_icpp(3)%alpha_rho(1)\": (1 - eps) * rho_w,\n            \"patch_icpp(3)%alpha_rho(2)\": eps * 1.17,\n            \"patch_icpp(3)%alpha(1)\": 1 - eps,  # 0.95\n            \"patch_icpp(3)%alpha(2)\": eps,  # 0.05,\n            # Fluids Physical Parameters\n            \"fluid_pp(1)%gamma\": 1.0e00 / (gam_w - 1.0e00),\n            \"fluid_pp(1)%pi_inf\": pi_w * gam_w / (gam_w - 1.0e00),\n            \"fluid_pp(2)%gamma\": 1.0e00 / (gam_a - 1.0e00),\n            \"fluid_pp(2)%pi_inf\": 0.0e00,\n        }\n    )\n)"
+    },
+    "script": {
+      "file": "run.sh",
+      "raw": "#!/usr/bin/env bash\n\n\n\n#SBATCH --job-name=\"mfc-2D-shockdroplet\"\n#SBATCH --nodes=2\n#SBATCH --ntasks-per-node=4\n#SBATCH --output=\"mfc-2D-shockdroplet.out\"\n#SBATCH --error=\"mfc-2D-shockdroplet.err\"\n#SBATCH --time=02:00:00\n#SBATCH --hint=nomultithread\n#SBATCH --partition=gpu\n#SBATCH --gres=gpu:a100:4\n#SBATCH --exclusive\n\n\n    #>\n    #> The MFC prologue prints a summary of the running job and starts a timer.\n    #>\n\n    . \"/work/mfc/5.6.1-gcc13-ompi5/zen3/toolchain/util.sh\"\n\n    TABLE_FORMAT_LINE=\"| * %-14s $MAGENTA%-35s$COLOR_RESET * %-14s $MAGENTA%-35s$COLOR_RESET |\\\\n\"\n    TABLE_HEADER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_FOOTER=\"+-----------------------------------------------------------------------------------------------------------+ \\\\n\"\n    TABLE_TITLE_FORMAT=\"| %-105s |\\\\n\"\n    TABLE_CONTENT=$(cat <<-END\n$(printf \"$TABLE_FORMAT_LINE\" \"Start-time\"   \"$(date +%T)\"                    \"Start-date\" \"$(date +%T)\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Partition\"    \"gpu\"          \"Walltime\"   \"02:00:00\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Account\"      \"N/A\"          \"Nodes\"      \"2\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Job Name\"     \"mfc-2D-shockdroplet\"                        \"Engine\"     \"batch\")\n$(printf \"$TABLE_FORMAT_LINE\" \"QoS\"          \"N/A\" \"Binary\"     \"N/A\")\n$(printf \"$TABLE_FORMAT_LINE\" \"Queue System\" \"SLURM\"                \"Email\"      \"N/A\")\nEND\n)\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"MFC case # mfc-2D-shockdroplet @ /scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/case.py:\"\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_CONTENT\\\\n\"\n    printf \"$TABLE_FOOTER\\\\n\"\n\n\n    t_start=$(date +%s)\n\n\n. \"/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/mfc-environment.sh\" acc || exit 1\n\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"host        : $(hostname -s)\"\necho \"nodes/tasks : 2 x 4\"\necho \"mpirun      : $(command -v mpirun || echo NOT-FOUND)\"\necho \"fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\\n' ' ')(UCX_TLS=${UCX_TLS})\"\necho\n\n    \n    ok \":) Running$MAGENTA syscheck$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet'\n\n    t_syscheck_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\")\n\n    \n    code=$?\n\n    t_syscheck_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/summary.yaml' <<EOL\nsyscheck:\n    exec:  $(echo \"$t_syscheck_stop - $t_syscheck_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA pre_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet'\n\n    t_pre_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\")\n\n    \n    code=$?\n\n    t_pre_process_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/summary.yaml' <<EOL\npre_process:\n    exec:  $(echo \"$t_pre_process_stop - $t_pre_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA simulation$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet'\n\n    t_simulation_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\")\n\n    \n    code=$?\n\n    t_simulation_stop=$(python3 -c 'import time; print(time.time())')\n\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/summary.yaml' <<EOL\nsimulation:\n    exec:  $(echo \"$t_simulation_stop - $t_simulation_start\" | bc -l)\n    grind: $(cat '/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/time_data.dat' | tail -n 1 | awk '{print $NF}')\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n    \n    ok \":) Running$MAGENTA post_process$COLOR_RESET:\\n\"\n\n    cd '/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet'\n\n    t_post_process_start=$(python3 -c 'import time; print(time.time())')\n\n\n        (set -x;                                         mpirun -np 8                             --map-by ppr:4:node                     --bind-to core                                          \"/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process\")\n\n    \n    code=$?\n\n    t_post_process_stop=$(python3 -c 'import time; print(time.time())')\n\n    python3 \"/work/mfc/5.6.1-gcc13-ompi5/zen3/toolchain/templates/include/generate_silo_series.py\" '/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet'\n\n    if [ $code -eq 22 ]; then\n        echo\n        error \"$YELLOW CASE FILE ERROR$COLOR_RESET > $YELLOW Case file has prohibited conditions as stated above.$COLOR_RESET\"\n    fi\n\n    if [ $code -ne 0 ]; then\n        echo\n        error \":( $MAGENTA/work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process$COLOR_RESET failed with exit code $MAGENTA$code$COLOR_RESET.\"\n        echo\n        exit 1\n    fi\n\n\n        cd '/work/mfc/5.6.1-gcc13-ompi5/zen3'\n\n        cat >>'/scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/summary.yaml' <<EOL\npost_process:\n    exec:  $(echo \"$t_post_process_stop - $t_post_process_start\" | bc -l)\nEOL\n\n        cd - > /dev/null\n\n\n\n    echo\n\n\n    #>\n    #> The MFC epilogue stops the timer and prints the execution summary. It also\n    #> performs some cleanup and housekeeping tasks before exiting.\n    #>\n\n    code=$?\n\n    t_stop=\"$(date +%s)\"\n\n    printf \"$TABLE_HEADER\"\n    printf \"$TABLE_TITLE_FORMAT\" \"Finished mfc-2D-shockdroplet:\"\n    printf \"$TABLE_FORMAT_LINE\"  \"Total-time:\" \"$(expr $t_stop - $t_start)s\" \"Exit Code:\" \"$code\"\n    printf \"$TABLE_FORMAT_LINE\"  \"End-time:\"   \"$(date +%T)\"                 \"End-date:\"  \"$(date +%T)\"\n    printf \"$TABLE_FOOTER\"\n\n    exit $code\n\n"
+    },
+    "out": {
+      "file": "run.out",
+      "size": 1851536,
+      "parsed": {
+        "banner": {
+          "start_time": "03:40:49",
+          "start_date": "03:40:49",
+          "partition": "gpu",
+          "walltime": "02:00:00",
+          "nodes": "2",
+          "job_name": "mfc-2D-shockdroplet",
+          "engine": "batch",
+          "queue_system": "SLURM"
+        },
+        "env": {
+          "host": "gpu-node1",
+          "nodesTasks": "2 x 4",
+          "mpirun": "/work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+          "fabric": "ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)"
+        },
+        "steps": [
+          {
+            "step": 1,
+            "total": 14112,
+            "avg": 0,
+            "perStep": 0
+          },
+          {
+            "step": 119,
+            "total": 14112,
+            "avg": 0.003642841,
+            "perStep": 0.003360987
+          },
+          {
+            "step": 237,
+            "total": 14112,
+            "avg": 0.003543521,
+            "perStep": 0.003440142
+          },
+          {
+            "step": 355,
+            "total": 14112,
+            "avg": 0.003508784,
+            "perStep": 0.003447056
+          },
+          {
+            "step": 473,
+            "total": 14112,
+            "avg": 0.003492859,
+            "perStep": 0.003385067
+          },
+          {
+            "step": 591,
+            "total": 14112,
+            "avg": 0.003484455,
+            "perStep": 0.003387928
+          },
+          {
+            "step": 709,
+            "total": 14112,
+            "avg": 0.003477151,
+            "perStep": 0.00343585
+          },
+          {
+            "step": 827,
+            "total": 14112,
+            "avg": 0.003471098,
+            "perStep": 0.003420115
+          },
+          {
+            "step": 945,
+            "total": 14112,
+            "avg": 0.003466872,
+            "perStep": 0.003441095
+          },
+          {
+            "step": 1063,
+            "total": 14112,
+            "avg": 0.003463051,
+            "perStep": 0.003396034
+          },
+          {
+            "step": 1181,
+            "total": 14112,
+            "avg": 0.003459614,
+            "perStep": 0.003448963
+          },
+          {
+            "step": 1299,
+            "total": 14112,
+            "avg": 0.003457774,
+            "perStep": 0.003437042
+          },
+          {
+            "step": 1417,
+            "total": 14112,
+            "avg": 0.003456304,
+            "perStep": 0.003426075
+          },
+          {
+            "step": 1535,
+            "total": 14112,
+            "avg": 0.003454465,
+            "perStep": 0.003368139
+          },
+          {
+            "step": 1653,
+            "total": 14112,
+            "avg": 0.003452484,
+            "perStep": 0.003443956
+          },
+          {
+            "step": 1771,
+            "total": 14112,
+            "avg": 0.003452207,
+            "perStep": 0.003432035
+          },
+          {
+            "step": 1889,
+            "total": 14112,
+            "avg": 0.003450866,
+            "perStep": 0.003626108
+          },
+          {
+            "step": 2007,
+            "total": 14112,
+            "avg": 0.003449936,
+            "perStep": 0.003391981
+          },
+          {
+            "step": 2125,
+            "total": 14112,
+            "avg": 0.003449452,
+            "perStep": 0.003422976
+          },
+          {
+            "step": 2243,
+            "total": 14112,
+            "avg": 0.003448479,
+            "perStep": 0.003442049
+          },
+          {
+            "step": 2361,
+            "total": 14112,
+            "avg": 0.003447654,
+            "perStep": 0.003449917
+          },
+          {
+            "step": 2479,
+            "total": 14112,
+            "avg": 0.003447618,
+            "perStep": 0.003360987
+          },
+          {
+            "step": 2597,
+            "total": 14112,
+            "avg": 0.003447164,
+            "perStep": 0.00346303
+          },
+          {
+            "step": 2715,
+            "total": 14112,
+            "avg": 0.003446623,
+            "perStep": 0.003399849
+          },
+          {
+            "step": 2833,
+            "total": 14112,
+            "avg": 0.003446437,
+            "perStep": 0.003474951
+          },
+          {
+            "step": 2951,
+            "total": 14112,
+            "avg": 0.003445806,
+            "perStep": 0.003417015
+          },
+          {
+            "step": 3069,
+            "total": 14112,
+            "avg": 0.003445331,
+            "perStep": 0.003418922
+          },
+          {
+            "step": 3187,
+            "total": 14112,
+            "avg": 0.003444773,
+            "perStep": 0.003406048
+          },
+          {
+            "step": 3305,
+            "total": 14112,
+            "avg": 0.003444524,
+            "perStep": 0.003400087
+          },
+          {
+            "step": 3423,
+            "total": 14112,
+            "avg": 0.00344452,
+            "perStep": 0.003364086
+          },
+          {
+            "step": 3541,
+            "total": 14112,
+            "avg": 0.003444228,
+            "perStep": 0.00344491
+          },
+          {
+            "step": 3659,
+            "total": 14112,
+            "avg": 0.003443746,
+            "perStep": 0.003463984
+          },
+          {
+            "step": 3777,
+            "total": 14112,
+            "avg": 0.003443504,
+            "perStep": 0.003437996
+          },
+          {
+            "step": 3895,
+            "total": 14112,
+            "avg": 0.003443148,
+            "perStep": 0.00342679
+          },
+          {
+            "step": 4013,
+            "total": 14112,
+            "avg": 0.003442751,
+            "perStep": 0.003393888
+          },
+          {
+            "step": 4131,
+            "total": 14112,
+            "avg": 0.003442444,
+            "perStep": 0.003330946
+          },
+          {
+            "step": 4249,
+            "total": 14112,
+            "avg": 0.003442367,
+            "perStep": 0.003453016
+          },
+          {
+            "step": 4367,
+            "total": 14112,
+            "avg": 0.003442023,
+            "perStep": 0.003422022
+          },
+          {
+            "step": 4485,
+            "total": 14112,
+            "avg": 0.00344168,
+            "perStep": 0.003402948
+          },
+          {
+            "step": 4603,
+            "total": 14112,
+            "avg": 0.003441239,
+            "perStep": 0.003425121
+          },
+          {
+            "step": 4721,
+            "total": 14112,
+            "avg": 0.003441109,
+            "perStep": 0.003386974
+          },
+          {
+            "step": 4839,
+            "total": 14112,
+            "avg": 0.003440868,
+            "perStep": 0.00334096
+          },
+          {
+            "step": 4957,
+            "total": 14112,
+            "avg": 0.003440773,
+            "perStep": 0.003432989
+          },
+          {
+            "step": 5075,
+            "total": 14112,
+            "avg": 0.003440473,
+            "perStep": 0.003441095
+          },
+          {
+            "step": 5193,
+            "total": 14112,
+            "avg": 0.003440315,
+            "perStep": 0.003403187
+          },
+          {
+            "step": 5311,
+            "total": 14112,
+            "avg": 0.003440115,
+            "perStep": 0.003452063
+          },
+          {
+            "step": 5429,
+            "total": 14112,
+            "avg": 0.003439925,
+            "perStep": 0.003413916
+          },
+          {
+            "step": 5547,
+            "total": 14112,
+            "avg": 0.003439892,
+            "perStep": 0.003345966
+          },
+          {
+            "step": 5665,
+            "total": 14112,
+            "avg": 0.003439788,
+            "perStep": 0.003458977
+          },
+          {
+            "step": 5783,
+            "total": 14112,
+            "avg": 0.003439696,
+            "perStep": 0.003442049
+          },
+          {
+            "step": 5901,
+            "total": 14112,
+            "avg": 0.003439482,
+            "perStep": 0.003455162
+          },
+          {
+            "step": 6019,
+            "total": 14112,
+            "avg": 0.003439282,
+            "perStep": 0.003449202
+          },
+          {
+            "step": 6137,
+            "total": 14112,
+            "avg": 0.003439109,
+            "perStep": 0.003431082
+          },
+          {
+            "step": 6255,
+            "total": 14112,
+            "avg": 0.003438981,
+            "perStep": 0.003339052
+          },
+          {
+            "step": 6373,
+            "total": 14112,
+            "avg": 0.003438978,
+            "perStep": 0.003451109
+          },
+          {
+            "step": 6491,
+            "total": 14112,
+            "avg": 0.003438803,
+            "perStep": 0.003458023
+          },
+          {
+            "step": 6609,
+            "total": 14112,
+            "avg": 0.003438655,
+            "perStep": 0.003418922
+          },
+          {
+            "step": 6727,
+            "total": 14112,
+            "avg": 0.003438521,
+            "perStep": 0.003470898
+          },
+          {
+            "step": 6845,
+            "total": 14112,
+            "avg": 0.003438358,
+            "perStep": 0.003442764
+          },
+          {
+            "step": 6963,
+            "total": 14112,
+            "avg": 0.003438449,
+            "perStep": 0.003363848
+          },
+          {
+            "step": 7081,
+            "total": 14112,
+            "avg": 0.003438454,
+            "perStep": 0.00343895
+          },
+          {
+            "step": 7199,
+            "total": 14112,
+            "avg": 0.00343839,
+            "perStep": 0.003479004
+          },
+          {
+            "step": 7317,
+            "total": 14112,
+            "avg": 0.003438356,
+            "perStep": 0.003474951
+          },
+          {
+            "step": 7435,
+            "total": 14112,
+            "avg": 0.003438291,
+            "perStep": 0.003465891
+          },
+          {
+            "step": 7553,
+            "total": 14112,
+            "avg": 0.003438234,
+            "perStep": 0.003436804
+          },
+          {
+            "step": 7671,
+            "total": 14112,
+            "avg": 0.003438263,
+            "perStep": 0.003395081
+          },
+          {
+            "step": 7789,
+            "total": 14112,
+            "avg": 0.003438157,
+            "perStep": 0.003476858
+          },
+          {
+            "step": 7907,
+            "total": 14112,
+            "avg": 0.003438096,
+            "perStep": 0.003452063
+          },
+          {
+            "step": 8025,
+            "total": 14112,
+            "avg": 0.003438033,
+            "perStep": 0.003487825
+          },
+          {
+            "step": 8143,
+            "total": 14112,
+            "avg": 0.003437947,
+            "perStep": 0.003450871
+          },
+          {
+            "step": 8261,
+            "total": 14112,
+            "avg": 0.003437869,
+            "perStep": 0.003386974
+          },
+          {
+            "step": 8379,
+            "total": 14112,
+            "avg": 0.003437828,
+            "perStep": 0.003405094
+          },
+          {
+            "step": 8497,
+            "total": 14112,
+            "avg": 0.003437768,
+            "perStep": 0.003386021
+          },
+          {
+            "step": 8615,
+            "total": 14112,
+            "avg": 0.003437669,
+            "perStep": 0.003454924
+          },
+          {
+            "step": 8733,
+            "total": 14112,
+            "avg": 0.003437599,
+            "perStep": 0.003418922
+          },
+          {
+            "step": 8851,
+            "total": 14112,
+            "avg": 0.003437572,
+            "perStep": 0.003436804
+          },
+          {
+            "step": 8969,
+            "total": 14112,
+            "avg": 0.003437603,
+            "perStep": 0.003428936
+          },
+          {
+            "step": 9087,
+            "total": 14112,
+            "avg": 0.003437578,
+            "perStep": 0.00343895
+          },
+          {
+            "step": 9205,
+            "total": 14112,
+            "avg": 0.003437496,
+            "perStep": 0.003450871
+          },
+          {
+            "step": 9323,
+            "total": 14112,
+            "avg": 0.003437452,
+            "perStep": 0.003531933
+          },
+          {
+            "step": 9441,
+            "total": 14112,
+            "avg": 0.003437453,
+            "perStep": 0.003445864
+          },
+          {
+            "step": 9559,
+            "total": 14112,
+            "avg": 0.003437423,
+            "perStep": 0.003450155
+          },
+          {
+            "step": 9677,
+            "total": 14112,
+            "avg": 0.003437378,
+            "perStep": 0.003399134
+          },
+          {
+            "step": 9795,
+            "total": 14112,
+            "avg": 0.003437464,
+            "perStep": 0.003469944
+          },
+          {
+            "step": 9913,
+            "total": 14112,
+            "avg": 0.003437412,
+            "perStep": 0.003458023
+          },
+          {
+            "step": 10031,
+            "total": 14112,
+            "avg": 0.003437345,
+            "perStep": 0.003416061
+          },
+          {
+            "step": 10149,
+            "total": 14112,
+            "avg": 0.003437297,
+            "perStep": 0.003460884
+          },
+          {
+            "step": 10267,
+            "total": 14112,
+            "avg": 0.003437328,
+            "perStep": 0.003379822
+          },
+          {
+            "step": 10385,
+            "total": 14112,
+            "avg": 0.003437194,
+            "perStep": 0.003422022
+          },
+          {
+            "step": 10503,
+            "total": 14112,
+            "avg": 0.003437437,
+            "perStep": 0.003465891
+          },
+          {
+            "step": 10621,
+            "total": 14112,
+            "avg": 0.003437393,
+            "perStep": 0.003427982
+          },
+          {
+            "step": 10739,
+            "total": 14112,
+            "avg": 0.00343733,
+            "perStep": 0.003484011
+          },
+          {
+            "step": 10857,
+            "total": 14112,
+            "avg": 0.003437244,
+            "perStep": 0.00345397
+          },
+          {
+            "step": 10975,
+            "total": 14112,
+            "avg": 0.003437152,
+            "perStep": 0.003447056
+          },
+          {
+            "step": 11093,
+            "total": 14112,
+            "avg": 0.003437064,
+            "perStep": 0.003363848
+          },
+          {
+            "step": 11211,
+            "total": 14112,
+            "avg": 0.003437,
+            "perStep": 0.00343895
+          },
+          {
+            "step": 11329,
+            "total": 14112,
+            "avg": 0.003436955,
+            "perStep": 0.003466129
+          },
+          {
+            "step": 11447,
+            "total": 14112,
+            "avg": 0.003436896,
+            "perStep": 0.003437042
+          },
+          {
+            "step": 11565,
+            "total": 14112,
+            "avg": 0.003436873,
+            "perStep": 0.003390074
+          },
+          {
+            "step": 11683,
+            "total": 14112,
+            "avg": 0.003436853,
+            "perStep": 0.003401041
+          },
+          {
+            "step": 11801,
+            "total": 14112,
+            "avg": 0.00343687,
+            "perStep": 0.003613949
+          },
+          {
+            "step": 11919,
+            "total": 14112,
+            "avg": 0.003436879,
+            "perStep": 0.003436089
+          },
+          {
+            "step": 12037,
+            "total": 14112,
+            "avg": 0.003436815,
+            "perStep": 0.003451109
+          },
+          {
+            "step": 12155,
+            "total": 14112,
+            "avg": 0.003436762,
+            "perStep": 0.003415108
+          },
+          {
+            "step": 12273,
+            "total": 14112,
+            "avg": 0.003436677,
+            "perStep": 0.003450871
+          },
+          {
+            "step": 12391,
+            "total": 14112,
+            "avg": 0.003436668,
+            "perStep": 0.003457069
+          },
+          {
+            "step": 12509,
+            "total": 14112,
+            "avg": 0.003436662,
+            "perStep": 0.003565073
+          },
+          {
+            "step": 12627,
+            "total": 14112,
+            "avg": 0.003436648,
+            "perStep": 0.00342989
+          },
+          {
+            "step": 12745,
+            "total": 14112,
+            "avg": 0.003436581,
+            "perStep": 0.003432035
+          },
+          {
+            "step": 12863,
+            "total": 14112,
+            "avg": 0.003436495,
+            "perStep": 0.003463984
+          },
+          {
+            "step": 12981,
+            "total": 14112,
+            "avg": 0.003436412,
+            "perStep": 0.003428936
+          },
+          {
+            "step": 13099,
+            "total": 14112,
+            "avg": 0.003436356,
+            "perStep": 0.003461123
+          },
+          {
+            "step": 13217,
+            "total": 14112,
+            "avg": 0.003436343,
+            "perStep": 0.003356934
+          },
+          {
+            "step": 13335,
+            "total": 14112,
+            "avg": 0.003436322,
+            "perStep": 0.003431082
+          },
+          {
+            "step": 13453,
+            "total": 14112,
+            "avg": 0.003436312,
+            "perStep": 0.00343585
+          },
+          {
+            "step": 13571,
+            "total": 14112,
+            "avg": 0.003436305,
+            "perStep": 0.003435135
+          },
+          {
+            "step": 13689,
+            "total": 14112,
+            "avg": 0.003436233,
+            "perStep": 0.003426075
+          },
+          {
+            "step": 13807,
+            "total": 14112,
+            "avg": 0.003436206,
+            "perStep": 0.003432989
+          },
+          {
+            "step": 13925,
+            "total": 14112,
+            "avg": 0.00343623,
+            "perStep": 0.003365993
+          },
+          {
+            "step": 14043,
+            "total": 14112,
+            "avg": 0.003436211,
+            "perStep": 0.003473043
+          },
+          {
+            "step": 14111,
+            "total": 14112,
+            "avg": 0.003436131,
+            "perStep": 0.003469944
+          }
+        ],
+        "stepCount": 14111,
+        "performance": 0.4390902276821703,
+        "totalTimeSec": 112,
+        "exitCode": 0,
+        "lines": 14290
+      },
+      "excerpt": {
+        "head": [
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| MFC case # mfc-2D-shockdroplet @ /scratch/jobs/36811598002/MFC/Flynn/2D_shockdroplet/case.py:             |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| * Start-time     03:40:49                            * Start-date     03:40:49                            |",
+          "| * Partition      gpu                                 * Walltime       02:00:00                            |",
+          "| * Account        N/A                                 * Nodes          2                                   |",
+          "| * Job Name       mfc-2D-shockdroplet                 * Engine         batch                               |",
+          "| * QoS            N/A                                 * Binary         N/A                                 |",
+          "| * Queue System   SLURM                               * Email          N/A                                 |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "",
+          "host        : gpu-node1",
+          "nodes/tasks : 2 x 4",
+          "mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun",
+          "fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)",
+          "",
+          "mfc: OK > :) Running syscheck:",
+          "",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)",
+          " [TEST] MPI: call mpi_init(ierr)"
+        ],
+        "tail": [
+          " [ 81%]  Saving       81 of 100 @ t_step =    11360 Time Avg =     1.673487E-01 Time/step = 2.211890E-01 ETA (HH:MM:SS) = 0:00:03",
+          " [ 82%]  Saving       82 of 100 @ t_step =    11502 Time Avg =     1.666943E-01 Time/step = 1.149979E-01 ETA (HH:MM:SS) = 0:00:03",
+          " [ 83%]  Saving       83 of 100 @ t_step =    11644 Time Avg =     1.675494E-01 Time/step = 2.359529E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 84%]  Saving       84 of 100 @ t_step =    11786 Time Avg =     1.669115E-01 Time/step = 1.152468E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 85%]  Saving       85 of 100 @ t_step =    11928 Time Avg =     1.662688E-01 Time/step = 1.135681E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 86%]  Saving       86 of 100 @ t_step =    12070 Time Avg =     1.669342E-01 Time/step = 2.221589E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 87%]  Saving       87 of 100 @ t_step =    12212 Time Avg =     1.663252E-01 Time/step = 1.151690E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 88%]  Saving       88 of 100 @ t_step =    12354 Time Avg =     1.669738E-01 Time/step = 2.221069E-01 ETA (HH:MM:SS) = 0:00:02",
+          " [ 89%]  Saving       89 of 100 @ t_step =    12496 Time Avg =     1.667654E-01 Time/step = 1.488411E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 90%]  Saving       90 of 100 @ t_step =    12638 Time Avg =     1.661730E-01 Time/step = 1.146359E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 91%]  Saving       91 of 100 @ t_step =    12780 Time Avg =     1.668601E-01 Time/step = 2.273190E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 92%]  Saving       92 of 100 @ t_step =    12922 Time Avg =     1.674447E-01 Time/step = 2.194781E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 93%]  Saving       93 of 100 @ t_step =    13064 Time Avg =     1.668735E-01 Time/step = 1.154699E-01 ETA (HH:MM:SS) = 0:00:01",
+          " [ 94%]  Saving       94 of 100 @ t_step =    13206 Time Avg =     1.662939E-01 Time/step = 1.135480E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 95%]  Saving       95 of 100 @ t_step =    13348 Time Avg =     1.657363E-01 Time/step = 1.144359E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 96%]  Saving       96 of 100 @ t_step =    13490 Time Avg =     1.652113E-01 Time/step = 1.163878E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 97%]  Saving       97 of 100 @ t_step =    13632 Time Avg =     1.657962E-01 Time/step = 2.207730E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 98%]  Saving       98 of 100 @ t_step =    13774 Time Avg =     1.652463E-01 Time/step = 1.130099E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [ 99%]  Saving       99 of 100 @ t_step =    13916 Time Avg =     1.645040E-01 Time/step = 9.323597E-02 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Saving      100 of 100 @ t_step =    14058 Time Avg =     1.639832E-01 Time/step = 1.134670E-01 ETA (HH:MM:SS) = 0:00:00",
+          " [100%]  Saving      100 of 100 @ t_step =    14111 Time Avg =     1.644996E-01 Time/step = 2.151101E-01 ETA (HH:MM:SS) = 0:00:00",
+          "",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          "| Finished mfc-2D-shockdroplet:                                                                             |",
+          "| * Total-time:    112s                                * Exit Code:     0                                   |",
+          "| * End-time:      03:42:41                            * End-date:      03:42:41                            |",
+          "+-----------------------------------------------------------------------------------------------------------+ ",
+          ""
+        ],
+        "elided": 14238
+      }
+    },
+    "err": {
+      "file": "run.err",
+      "size": 525,
+      "raw": "+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-869e78ff84/bin/syscheck\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-7d1e32e277/bin/pre_process\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-c819d00b45/bin/simulation\n+ mpirun -np 8 --map-by ppr:4:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/zen3/build/install/gpu-acc-2b8bf09f8f/bin/post_process\n"
+    }
+  }
+}

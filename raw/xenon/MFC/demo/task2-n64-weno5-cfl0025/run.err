@@ -1,0 +1,15 @@
++ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-ccca43eb0a/bin/syscheck
+Exception caught: rsmi_init.
+[cpu-node1:139419] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
+[cpu-node1:139419] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
+[cpu-node1:139419] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
++ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-8a38b6f7ec/bin/pre_process
+Exception caught: rsmi_init.
+[cpu-node1:139433] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
+[cpu-node1:139433] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
+[cpu-node1:139433] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
++ mpirun -np 1 --map-by ppr:1:node --bind-to core /work/mfc/5.6.1-gcc13-ompi5/haswell/build/install/cpu-51d1d9b397/bin/simulation
+Exception caught: rsmi_init.
+[cpu-node1:139453] mca_base_component_repository_open: unable to open mca_accelerator_cuda: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
+[cpu-node1:139453] mca_base_component_repository_open: unable to open mca_rcache_gpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
+[cpu-node1:139453] mca_base_component_repository_open: unable to open mca_rcache_rgpusm: libcuda.so.1: cannot open shared object file: No such file or directory (ignored)
