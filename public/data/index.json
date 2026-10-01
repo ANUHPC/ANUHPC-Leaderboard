@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T03:43:36.650Z",
+  "generatedAt": "2026-10-01T04:34:16.484Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -110,7 +110,8 @@
         }
       ],
       "clusters": [
-        "xenon"
+        "xenon",
+        "launchpad"
       ],
       "available": true,
       "missing": null,
@@ -213,11 +214,11 @@
       "clusterSource": "path (confirmed by output)",
       "date": "2026-10-01T00:39:08.000Z",
       "dateSource": "run",
-      "submittedAt": "2026-10-01T00:38:46Z",
+      "submittedAt": null,
       "submitter": {
         "name": "Daniel",
         "house": false,
-        "by": "dehaansolo"
+        "by": null
       },
       "metric": {
         "key": "gflops",
