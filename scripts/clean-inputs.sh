@@ -2,6 +2,7 @@
 # Remove input/<cluster>/<suite>/<group>/<run> for jobs that have run, after harvest.
 #
 #   scripts/clean-inputs.sh <stage> <cluster>
+#   DRY_RUN=1 scripts/clean-inputs.sh ...     # only print what would go
 #
 # Reads <stage>.jobs.txt from stage-submissions.mjs. An input is only removed
 # (git rm) if its output dir exists and has a file of the same name for every
@@ -27,6 +28,7 @@ while IFS= read -r rel; do
   if [ -n "$missing" ]; then
     echo "::warning::keeping $in, not in output:$missing"; continue
   fi
+  if [ -n "${DRY_RUN:-}" ]; then echo "would remove $in"; continue; fi
   git rm -r -q -- "$in"
   echo "removed $in"
 done < "$LIST"
