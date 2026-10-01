@@ -49,10 +49,35 @@ live_reason(){ squeue -h -j "$1" -o '%R' 2>/dev/null | head -1; }
 live_node()  { squeue -h -j "$1" -o '%N' 2>/dev/null | head -1; }
 live_time()  { squeue -h -j "$1" -o '%M' 2>/dev/null | head -1; }
 
-final_state(){ sacct -n -X -j "$1" -o State    2>/dev/null | head -1 | tr -d ' '; }
-final_code() { sacct -n -X -j "$1" -o ExitCode 2>/dev/null | head -1 | tr -d ' '; }
-final_time() { sacct -n -X -j "$1" -o Elapsed  2>/dev/null | head -1 | tr -d ' '; }
-final_node() { sacct -n -X -j "$1" -o NodeList 2>/dev/null | head -1 | tr -d ' '; }
+# sacct needs accounting storage (slurmdbd + a database), which a single-node
+# cluster may not have configured. scontrol still holds a just-finished job for
+# MinJobAge seconds, so fall back to parsing that instead of reporting every
+# job UNKNOWN on a cluster with accounting storage disabled.
+# The leading [[:space:]] anchors on a real field boundary -- without it,
+# NodeList= also matches inside ReqNodeList=(null) and ExcNodeList=(null),
+# which scontrol prints earlier in the same job.
+scontrol_field() { scontrol show job "$1" 2>/dev/null | grep -oE "[[:space:]]$2=\S+" | head -1 | cut -d= -f2-; }
+
+final_state(){
+  local v; v="$(sacct -n -X -j "$1" -o State 2>/dev/null | head -1 | tr -d ' ')"
+  [ -n "$v" ] || v="$(scontrol_field "$1" JobState)"
+  echo "$v"
+}
+final_code() {
+  local v; v="$(sacct -n -X -j "$1" -o ExitCode 2>/dev/null | head -1 | tr -d ' ')"
+  [ -n "$v" ] || v="$(scontrol_field "$1" ExitCode)"
+  echo "$v"
+}
+final_time() {
+  local v; v="$(sacct -n -X -j "$1" -o Elapsed 2>/dev/null | head -1 | tr -d ' ')"
+  [ -n "$v" ] || v="$(scontrol_field "$1" RunTime)"
+  echo "$v"
+}
+final_node() {
+  local v; v="$(sacct -n -X -j "$1" -o NodeList 2>/dev/null | head -1 | tr -d ' ')"
+  [ -n "$v" ] || v="$(scontrol_field "$1" NodeList)"
+  echo "$v"
+}
 
 # Pull the headline number straight out of what the application wrote, so the
 # log and the summary show the result rather than just "COMPLETED".
