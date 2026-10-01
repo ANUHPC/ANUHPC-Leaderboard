@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-09-24T04:27:04.848Z",
+  "generatedAt": "2026-10-01T00:18:29.934Z",
   "clusters": [
+    {
+      "name": "launchpad",
+      "label": "Launchpad",
+      "description": "1-node cluster, 2x Intel Xeon Gold 6548Y+, 2x H100 NVL GPU, 1 TiB RAM",
+      "status": "active",
+      "derived": false,
+      "nodes": 1,
+      "partitions": [
+        "all"
+      ],
+      "count": 0
+    },
     {
       "name": "raijin",
       "label": "Raijin",
@@ -48,6 +60,7 @@
       "missing": null,
       "count": 140,
       "countByCluster": {
+        "launchpad": 0,
         "raijin": 137,
         "xenon": 3
       }
@@ -64,12 +77,14 @@
       },
       "reference": null,
       "clusters": [
-        "xenon"
+        "xenon",
+        "launchpad"
       ],
       "available": true,
       "missing": null,
       "count": 4,
       "countByCluster": {
+        "launchpad": 0,
         "raijin": 0,
         "xenon": 4
       }
@@ -101,6 +116,7 @@
       "missing": null,
       "count": 14,
       "countByCluster": {
+        "launchpad": 0,
         "raijin": 0,
         "xenon": 14
       }
