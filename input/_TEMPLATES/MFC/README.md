@@ -37,6 +37,7 @@ run settings and cost. Select up to four runs to compare them, or open
 |---|---|---|
 | Small ranked CPU benchmark | [`job.yml`](job.yml) only | Four CPU ranks, modest problem size |
 | Ranked A100 benchmark | [`gpu/job.yml`](gpu/job.yml) only | Four A100 GPUs on one node |
+| Launchpad benchmark | [`launchpad/gpu/job.yml`](launchpad/gpu/job.yml) or [`launchpad/cpu/job.yml`](launchpad/cpu/job.yml), under `input/launchpad/MFC/` | 2x H100 NVL, or CPU |
 | SCC26 PDF, Problem 3: shock–droplet | [`practice-problem3/job.yml`](practice-problem3/job.yml) **and** [`practice-problem3/case.py`](practice-problem3/case.py) | Custom 2D study with Silo data and execution provenance |
 
 Copy the selected files, **not this entire tree**. Do not include `run.sh`,

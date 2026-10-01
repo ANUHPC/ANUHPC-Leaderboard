@@ -1,14 +1,11 @@
-// Minimal YAML reader. No dependencies: the website workflow runs `node` on a
-// bare checkout with no `npm install`, so we cannot pull in js-yaml.
-//
-// Supports the subset we actually consume:
+// Minimal YAML reader, no deps since the workflows don't npm install.
+// supports:
 //   - nested block maps (by indentation)
 //   - block sequences ("- item", including "- key: value" maps)
 //   - flow sequences [a, b] and flow maps {a: b}
 //   - quoted and bare scalars, numbers, booleans, null
 //   - "#" comments and "---" document markers
-// It is deliberately NOT a general YAML implementation. It parses the suite
-// configs in this repo and the summary.yaml MFC writes; nothing else.
+// only meant for the configs in this repo and MFC's summary.yaml.
 
 function stripComment(line) {
   let out = "", qc = null;
@@ -26,7 +23,7 @@ function stripComment(line) {
   return out;
 }
 
-// A mapping key is always a string: never coerce it to a boolean or number.
+// keys are always strings
 export function parseKey(raw) {
   const s = String(raw).trim();
   if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
@@ -96,7 +93,7 @@ export function parseYaml(text) {
         const item = lines[pos].text === "-" ? "" : lines[pos].text.slice(2).trim();
         pos++;
         if (item === "") { arr.push(parseBlock(indent + 1)); continue; }
-        // "- key: value" starts an inline map that may continue on later lines.
+        // "- key: value" starts a map that can continue on later lines
         const ci = colonIndex(item);
         if (ci >= 0 && !item.startsWith("[") && !item.startsWith("{")) {
           const obj = {};
@@ -125,8 +122,7 @@ export function parseYaml(text) {
       const l = lines[pos].text;
       const ci = colonIndex(l);
       if (ci < 0) { pos++; continue; }
-      // Keys stay strings. YAML 1.1 would read "on", "yes" and "no" as booleans,
-      // which silently renames the `on:` key of a GitHub workflow to `true`.
+      // keys stay strings, otherwise a workflow's `on:` becomes `true`
       const key = parseKey(l.slice(0, ci));
       const val = l.slice(ci + 1).trim();
       pos++;

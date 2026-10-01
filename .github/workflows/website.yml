@@ -2,39 +2,32 @@ name: website.yml
 on:
   workflow_dispatch:
   push:
-    # Also watch the website branch: a change to the site's own source used to
-    # need an unrelated push to main before it would deploy.
     branches: [main, website]
     paths:
       - "scripts/**"
       - "suites/**"
       - "clusters/**"
       - "package.json"
-      # output/** is deliberately absent: results are committed by the submit
-      # workflows with [skip ci], and the deploy is chained from their
-      # completion via workflow_run below. Listing it here would either do
-      # nothing or double-deploy.
+      # no output/**, results deploy via workflow_run below
       - "src/**"
       - "public/**"
       - "index.html"
       - "vite.config.ts"
   workflow_run:
-    # Deploy when either cluster has finished harvesting results.
+    # deploy after a submit workflow harvests results
     workflows:
       - "Submit jobs (xenon)"
       - "Submit MFC (xenon)"
       - "Submit jobs (raijin)"
       - "Submit jobs (launchpad)"
+      - "Submit MFC (launchpad)"
     types:
       - completed
 
 permissions:
   contents: write
 
-# One deploy at a time, newest wins. A commit that touches both a job and the
-# collector fires this from the push AND again when the submit workflow
-# finishes; without this they race and the older one can overwrite the newer
-# data. cancel-in-progress keeps the run that has the results.
+# one deploy at a time, newest wins
 concurrency:
   group: website-deploy
   cancel-in-progress: true
@@ -47,24 +40,12 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v5
         with:
-          # Full history, not a shallow clone. Dates and submitters are read
-          # from git: a job spec is added under input/ by whoever submitted it
-          # and the results under output/ when the job finishes, and no run
-          # artifact records either (MFC prints no date at all; HPL's own
-          # timestamp is present in 73 of 132 Raijin runs). At depth 1 there is
-          # one commit, so every run older than this build loses its date and
-          # the board cannot be ordered by recency.
+          # full history, run dates and submitters come from git
           fetch-depth: 0
           ref: main
           fetch-tags: false
 
-      # fetch-depth: 0 above should make this a no-op. It is here because it
-      # once was not: a build whose log showed a full fetch still ran collect
-      # against a one-commit repository, and every git-derived date came out
-      # as that commit's timestamp -- 80 runs apparently finishing in the same
-      # second. collect.mjs now detects that shape and drops the dates rather
-      # than publishing them, but recovering the history is better than losing
-      # it, so ask git directly instead of trusting the checkout.
+      # should be a no-op, but a checkout once came back shallow anyway
       - name: Ensure full history
         run: |
           if [ "$(git rev-parse --is-shallow-repository)" = true ]; then
@@ -78,8 +59,7 @@ jobs:
         with:
           node-version: "22"
 
-      # validate.yml is a pull-request gate now, so this is what keeps a
-      # direct push to main honest. It is the same script, and it is cheap.
+      # validate.yml only runs on PRs, so check pushes to main here
       - name: Validate job specs
         run: node scripts/validate-job.mjs
 

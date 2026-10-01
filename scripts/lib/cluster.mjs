@@ -1,14 +1,5 @@
 // Cluster registry and inference.
-//
-// The leaderboard spans more than one machine: Raijin (7 x hpc-0N, the original
-// target) and Xenon (cpu-node1..2, gpu-node1..2). Results from different
-// clusters are NOT comparable, so every run carries the cluster that produced
-// it and boards are ranked per (suite, cluster).
-//
-// The 137 runs committed before Xenon existed have no cluster recorded. Rather
-// than editing them, the cluster is inferred from the node names the run left
-// behind — matched against each cluster's own node list, so adding a cluster
-// needs no code change here.
+// old runs have no cluster recorded, so it's inferred from node names in the output.
 
 import fs from "fs/promises";
 import path from "path";
@@ -44,24 +35,12 @@ export async function loadClusters(root = process.cwd()) {
   return out;
 }
 
-// Escape a node name for use in a word-boundary regex. Node names contain "-",
-// which is literal, but be defensive about anything else.
 function nodePattern(names) {
   const esc = names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
   return new RegExp(`(?<![\\w-])(${esc.join("|")})(?![\\w-])`);
 }
 
-/**
- * Decide which cluster produced a run.
- *
- * Order:
- *   1. an explicit cluster recorded in the run (result.json / job.yml)
- *   2. node names appearing in the run's own output (.out/.err) — strongest
- *   3. node names in a --nodelist inside the submitted script
- *   4. the configured fallback
- *
- * Returns { cluster, source } so the collector can report how it was decided.
- */
+// order: explicit cluster, node names in output, --nodelist in the script, fallback
 export function inferCluster({ clusters, explicit = null, text = "", script = "", fallback = null }) {
   if (explicit && clusters[explicit]) return { cluster: explicit, source: "declared" };
 

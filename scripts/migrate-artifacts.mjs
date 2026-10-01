@@ -3,13 +3,7 @@
 //
 //   node scripts/migrate-artifacts.mjs [--apply] [output/<cluster>/<suite>]
 //
-// Dry run by default: prints what it would rename and drop, changes nothing.
-//
-// Runs harvested before suites declared an artifacts manifest kept whatever
-// the job left in its directory -- for MFC that is 16 files per run, including
-// its .inp files and three separate timing files, with stdout named after the
-// job (mfc-<run>.out) so no stable link to "the output" is possible. This
-// applies the same manifest harvest.mjs uses to what is already committed.
+// dry run by default. applies the same manifest harvest.mjs uses to old runs.
 import fs from "node:fs/promises";
 import path from "node:path";
 import { parseYaml } from "./lib/yaml.mjs";

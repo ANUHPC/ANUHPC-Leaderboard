@@ -2,13 +2,7 @@
 //
 //   node scripts/verify-runner-cluster.mjs <cluster>
 //
-// Runner labels are set once at registration and can drift or be copied to the
-// wrong machine. This checks the actual hostname against the node list in
-// clusters/<cluster>/partitions.yml, so a mislabelled runner fails loudly here
-// instead of submitting jobs to the wrong cluster.
-//
-// A .mjs file, not an inline `node -e`: mixing `require` with a top-level
-// `await import()` puts node in ES-module mode and `require` stops existing.
+// checks the hostname against clusters/<cluster>/partitions.yml
 
 import fs from "fs";
 import os from "os";
@@ -27,8 +21,7 @@ if (!nodes.length) { console.error(`${file} lists no nodes`); process.exit(2); }
 
 const me = os.hostname().split(".")[0];
 
-// The controller runs the scheduler but is not always a compute node, so accept
-// it too — it can legitimately host the runner.
+// controller can host the runner too
 const controller = cfg.controller ? [cfg.controller] : [];
 const allowed = [...nodes, ...controller];
 

@@ -2,9 +2,7 @@
 //
 //   node scripts/validate-job.mjs [input/...]     # specific dirs, or all of input/
 //
-// Runs on the pull request, where there is no cluster — everything checked here
-// is static. The point is that "you asked for 5 nodes but the gpu partition has
-// 2" becomes a failed check on the PR instead of a job that queues and dies.
+// static checks only, runs on PRs where there's no cluster.
 
 import fs from "fs/promises";
 import { validateGpuHpl } from "./lib/hpl-gpu.mjs";
@@ -118,7 +116,7 @@ async function main() {
     const hasCustomCase = files.some((f) => /^case\.py$/i.test(f));
     if (cases.length) {
       if (hasCustomCase) {
-        // A custom case is allowed but cannot be compared with the fixed set.
+        // custom case is fine, just unranked
         if (job.case) {
           warn(where, `both case.py and case: "${job.case}" are present — the supplied case.py wins and this run is UNRANKED`);
         } else {
@@ -131,12 +129,8 @@ async function main() {
       }
     }
 
-    // --- can MFC actually decompose this grid over the ranks asked for? ---
-    //
-    // Checkable for two kinds of case: one the entrant supplied, and one
-    // registered with source: repo -- both are files in this checkout. A
-    // tree case lives in the MFC installation, which the pull-request runner
-    // does not have, so it is checked on the cluster by render.sh instead.
+    // --- can MFC decompose this grid over the ranks asked for? ---
+    // only for submitted and source: repo cases, tree cases aren't in this checkout
     const registered = cases.find((c) => c.slug === job.case) ?? null;
     const repoCasePath = hasCustomCase
       ? path.join(CWD, rel, "case.py")
@@ -148,12 +142,8 @@ async function main() {
       const r = job.resources || {};
       const ranks = (r.nodes ?? 1) * (r.tasks_per_node ?? 1);
 
-      // A registered case is run for real, with this job's own rank count, so
-      // a weak-scaled case reports the grid it will actually produce. Reading
-      // it with a regex only works when the grid is written as a literal,
-      // which for a scalable case it never is. An entrant's own case.py is
-      // still read rather than executed: it is unranked either way, and the
-      // regex costs nothing.
+      // registered cases are run with this job's rank count (weak-scaled grids);
+      // a submitted case.py is only regex-read, not executed
       let g;
       if (!hasCustomCase && registered?.source === "repo") {
         const sizing = registered.sizing === "fixed" ? "fixed" : "gbpp";
@@ -218,25 +208,18 @@ async function main() {
       }
       // only xenon's "all" mixes architectures, launchpad's is one node
       if (cname === "xenon" && pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
-      // Was rejected here on the grounds that it modifies the shared build.
-      // It does not: MFC hashes the generated source into the install path,
-      // so a case-optimized build lands in its own directory. It is allowed,
-      // and costs a compile, which is worth saying once.
       if (job.build?.case_optimization) {
         warn(where, "case_optimization compiles simulation for these exact parameters — about 12 extra minutes the first time this combination is submitted, and once per point if you are sweeping");
       }
 
-      // args: is passed straight through to the case as separate argv
-      // entries. A bare string is the tempting mistake -- args: "-N 128" --
-      // and it would arrive as ONE argument containing a space, which
-      // argparse rejects with a message about the case, not about job.yml.
+      // args must be a list, a string would reach argparse as one argument
       if (job.args !== undefined) {
         if (!Array.isArray(job.args)) {
           err(where, `args must be a list, one entry per argument: args: ["-N", "128"] — not a single string`);
         } else if (job.args.some((a) => typeof a === "object" && a !== null)) {
           err(where, "args entries must be strings or numbers");
         } else if (job.args.some((a) => typeof a === "string" && /^-{1,2}\w[\w-]*=?\s+\S/.test(a))) {
-          // "-N 128" as one entry is the same mistake one level down.
+          // same problem with "-N 128" as one entry
           err(where, `args entry ${JSON.stringify(job.args.find((a) => typeof a === "string" && /^-{1,2}\w[\w-]*=?\s+\S/.test(a)))} contains a space — split the flag and its value into separate entries`);
         }
       }
@@ -309,16 +292,12 @@ async function main() {
 
 main().catch((e) => { console.error(e); process.exit(1); });
 
-// HPL carries its resources in run.sh's #SBATCH lines rather than a job.yml,
-// so the checks that job.yml gets have to read the script instead. Catching a
-// bad core count here is the difference between a clear message on the pull
-// request and "Requested node configuration is not available" from sbatch,
-// after which the workflow used to go green having submitted nothing.
+// HPL resources come from the #SBATCH lines in run.sh
 async function checkSbatch(rel, where, files, cluster, cname, suiteName) {
   const name = files.includes("run.sh") ? "run.sh" : files.includes(`run.${cname}.sh`) ? `run.${cname}.sh` : files.find((f) => /^run(\.[a-z0-9_-]+)?\.sh$/i.test(f));
   if (!name) { err(where, `no run.sh (or run.<cluster>.sh) — nothing to submit`); return; }
 
-  // run.raijin.sh sitting in an input/xenon/ directory is always a mistake.
+  // e.g. run.raijin.sh in input/xenon/
   const m = /^run\.([a-z0-9_-]+)\.sh$/i.exec(name);
   if (m && m[1].toLowerCase() !== cname.toLowerCase()) {
     err(where, `"${name}" is another cluster's script but this job is under input/${cname}/`);
@@ -355,14 +334,12 @@ async function checkSbatch(rel, where, files, cluster, cname, suiteName) {
     err(where, `${name} asks for ${nodes} nodes but partition "${pname}" has ${part.max_nodes}`);
   }
 
-  // The real trap: cores a job may have is cores_total minus CoreSpecCount.
+  // usable cores = cores_total minus CoreSpecCount
   const tasks = Number(directive("ntasks-per-node") || 0);
   const cpt   = Number(directive("cpus-per-task") || 1);
   if (tasks > 0) {
     const want = tasks * cpt;
-    // A single-node job needs ONE node that fits, so the ceiling is the
-    // largest in the partition -- Slurm simply places it there. A multi-node
-    // job has to fit every node it lands on, so the ceiling is the smallest.
+    // single node: largest node in the partition. multi-node: smallest.
     const names = part.nodes || [];
     const avails = names
       .map((n) => [n, cluster?.nodes?.[n]?.cores_available])

@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 ##
-## MFC batch template for the ANU Xenon cluster.
+## MFC batch template for launchpad (scc-connect-03-gpu01).
+## 1 node, 2x Xeon Gold 6548Y+, 2x H100 NVL. render.sh picks this when CLUSTER=launchpad.
 ##
-##     ./mfc.sh run <case.py> -e batch -c suites/MFC/xenon.mako ...
-##
-## keep the helpers.* macros, run_epilogue writes summary.yaml.
+## Keep the helpers.* macros, run_epilogue writes summary.yaml.
 ##
 <%namespace name="helpers" file="helpers.mako"/>
 <%! import os %>
@@ -17,17 +16,12 @@
 #SBATCH --error="${name}.err"
 #SBATCH --time=${walltime}
 #SBATCH --hint=nomultithread
+#SBATCH --exclusive
 % if partition:
 #SBATCH --partition=${partition}
 % endif
-% if not gpu_enabled:
-## nomultithread or --bind-to core fails with "Procs mapped: 0"
-#SBATCH --exclusive
-% endif
 % if gpu_enabled:
-## 4x A100 per gpu node, one rank per device
-#SBATCH --gres=gpu:a100:${tasks_per_node}
-#SBATCH --exclusive
+#SBATCH --gres=gpu:${tasks_per_node}
 % endif
 % if account:
 #SBATCH --account=${account}
@@ -40,12 +34,7 @@
 
 ${helpers.template_prologue()}
 
-## no modules on xenon yet, environment.sh sets PATH directly.
-## uses the /work OpenMPI, the /apps one has no Fortran.
-. "${os.path.dirname(input)}/mfc-environment.sh" ${'acc' if gpu_enabled else 'none'} || exit 1
-
-## no tcp in UCX_TLS so it fails instead of falling back to 1GbE.
-## don't set UCX_NET_DEVICES, IB device names differ between cpu and gpu nodes.
+. "${os.path.dirname(input)}/mfc-environment.sh" ${'acc' if gpu_enabled else 'none'} launchpad || exit 1
 
 ulimit -l unlimited
 ulimit -n 65536
@@ -53,7 +42,10 @@ ulimit -n 65536
 echo "host        : $(hostname -s)"
 echo "nodes/tasks : ${nodes} x ${tasks_per_node}"
 echo "mpirun      : $(command -v mpirun || echo NOT-FOUND)"
-echo "fabric      : $(ls /sys/class/infiniband/ 2>/dev/null | tr '\n' ' ')(UCX_TLS=${'${UCX_TLS}'})"
+echo "UCX_TLS     : ${'${UCX_TLS}'}"
+% if gpu_enabled:
+nvidia-smi --query-gpu=index,name,memory.used --format=csv,noheader
+% endif
 echo
 
 % for target in targets:
@@ -62,9 +54,15 @@ echo
     % if not mpi:
         (set -x; ${profiler} "${target.get_install_binpath(case)}")
     % else:
+## GPU: both H100s are on NUMA 0, so pack ranks onto cores there.
+## CPU: spread ranks across both sockets.
         (set -x; ${profiler}                            \
             mpirun -np ${nodes*tasks_per_node}          \
-                   --map-by ppr:${tasks_per_node}:node  \
+% if gpu_enabled:
+                   --map-by core                        \
+% else:
+                   --map-by socket                      \
+% endif
                    --bind-to core                       \
                    "${target.get_install_binpath(case)}")
     % endif

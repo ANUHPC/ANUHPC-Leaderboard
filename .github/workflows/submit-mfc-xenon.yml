@@ -1,7 +1,6 @@
 name: Submit MFC (xenon)
 
-# Production MFC runs use main inputs and return results to main.
-# Develop changes on feature branches, then merge through validation.
+# MFC runs from main inputs, results go back to main.
 
 on:
   push:
@@ -24,8 +23,7 @@ permissions:
   contents: write
 
 concurrency:
-  # One submission at a time per cluster. Two overlapping runs would fight over
-  # the same job directories.
+  # one submission at a time per cluster, runs share job directories
   group: submit-xenon
   cancel-in-progress: false
   queue: max
@@ -51,17 +49,8 @@ jobs:
         run: node scripts/verify-runner-cluster.mjs "$CLUSTER"
 
       - name: Check the runner account resolves on the compute nodes
-        # An account that exists only where the runner lives makes jobs requeue
-        # forever with Reason=BeginTime and no output at all -- a baffling
-        # symptom worth one cheap probe.
-        #
-        # This asks Slurm, not ssh. The runner is a no-sudo service account
-        # with no home directory and no keys, so an ssh probe could never
-        # work; an earlier version of this step tried exactly that and failed
-        # on every run, healthy cluster or not.
-        #
-        # --immediate means a busy cluster skips the check instead of queueing
-        # behind someone's four-hour HPL run, so this is advisory only.
+        # if the account is missing on compute nodes jobs requeue forever (Reason=BeginTime).
+        # advisory only, --immediate skips it when the cluster is busy.
         continue-on-error: true
         run: |
           set -uo pipefail

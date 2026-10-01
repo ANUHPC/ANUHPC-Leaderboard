@@ -1,39 +1,20 @@
 #!/usr/bin/env bash
 # Run MFC's own test suite on Xenon.  SCC26 practice task 1.
+# CLUSTER=launchpad for launchpad.
 #
 #   suites/MFC/run-tests.sh cpu           # full suite on one Haswell node (~1 h)
 #   suites/MFC/run-tests.sh gpu           # full suite on 4 A100s (~35-60 min)
 #   suites/MFC/run-tests.sh cpu --smoke   # 17 one-dimensional tests (~5 min)
 #   suites/MFC/run-tests.sh gpu --smoke
 #
-# Submits one batch job and waits. Exit code is the number of failed tests,
-# which is what ./mfc.sh test itself returns.
+# Submits one batch job and waits. Exit code is the number of failed tests.
 #
-# THIS IS NOT A LEADERBOARD SUBMISSION, deliberately. The suite verifies the
-# build; it produces one bit and a log, with no grind time and nothing to
-# rank. It also takes about an hour, and submissions are serialised, so
-# routing it through the pipeline would park every entrant's benchmark behind
-# it. And ./mfc.sh test --generate REWRITES the tracked golden files that
-# every later test is compared against; a job.yml field that could reach it
-# would be a live footgun. So it is a script you run, not a job you submit.
+# not a leaderboard submission: nothing to rank, takes ~1h, and --generate
+# would rewrite the golden files.
 #
-# EVERY FLAG BELOW IS LOAD-BEARING. Measured on this cluster:
-#
-#   --binary mpirun   MFC's default template picks its launcher from
-#                     "jsrun srun mpirun mpiexec" and srun wins here. That is
-#                     317 s per test against 42 s with mpirun, because Slurm
-#                     serialises step creation, and it also produces spurious
-#                     failures -- concurrent execve() of the same NFS binary
-#                     gives "Text file busy" (6 of 34 tests in one sample).
-#                     On GPU srun does not merely slow things down: NVHPC's
-#                     HPC-X is not built with Slurm PMI, so all 17 GPU tests
-#                     failed with "OPAL ERROR: Unreachable" until forced to
-#                     mpirun.
-#   --ntasks-per-node PRRTE reads SLURM_TASKS_PER_NODE for its slot count.
-#                     Without it the two-rank tests die with "There are not
-#                     enough slots available".
-#   --max-attempts 3  NFS leaves a residual "Text file busy" flake even with
-#                     mpirun. This is what MFC's own CI uses.
+#   --binary mpirun   srun is much slower here and HPC-X has no slurm PMI
+#   --ntasks-per-node PRRTE needs it for the slot count
+#   --max-attempts 3  NFS "Text file busy" flakes, same as MFC's CI
 set -euo pipefail
 
 MODE=${1:-}; shift || true
@@ -49,27 +30,43 @@ for a in "$@"; do
 done
 
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
-STAGE=/work/leaderboard/mfc-tests
+CLUSTER_NAME="${CLUSTER:-xenon}"
+case "$CLUSTER_NAME" in
+  xenon)     STAGE=/work/leaderboard/mfc-tests ;;
+  launchpad) STAGE=/data/leaderboard/mfc-tests ;;
+  *) echo "MFC tests are not set up on cluster '$CLUSTER_NAME'" >&2; exit 2 ;;
+esac
 mkdir -p "$STAGE"
 
-# /home is node-local on this cluster, so a batch script running on a compute
-# node cannot read the repository. Stage what it needs onto shared storage --
-# the same reason render.sh copies environment.sh into the job directory.
+# /home is node-local, stage env onto shared storage
 cp "$REPO/suites/MFC/environment.sh" "$STAGE/environment.sh"
 
-case "$MODE" in
-  cpu)
+case "$CLUSTER_NAME:$MODE" in
+  xenon:cpu)
     TREE=/work/mfc/current/haswell
     SBATCH_ARGS=(--partition=cpu --nodes=1 --ntasks-per-node=36 --exclusive --hint=nomultithread)
     ENVARG=none
     TESTARGS=(-j 32)
     ;;
-  gpu)
+  xenon:gpu)
     TREE=/work/mfc/current/zen3
     SBATCH_ARGS=(--partition=gpu --nodes=1 --ntasks-per-node=8 --gres=gpu:a100:4 --exclusive)
     ENVARG=acc
-    # One worker per A100; -g hands each test the least-loaded device.
+    # one worker per A100
     TESTARGS=(--gpu acc -j 4 -g 0 1 2 3)
+    ;;
+  # launchpad: 64 cores, 2x H100 NVL
+  launchpad:cpu)
+    TREE=/data/mfc/current/emr-cpu
+    SBATCH_ARGS=(--partition="${PARTITION:-all}" --nodes=1 --ntasks-per-node=64 --exclusive --hint=nomultithread)
+    ENVARG=none
+    TESTARGS=(-j 32)
+    ;;
+  launchpad:gpu)
+    TREE=/data/mfc/current/emr-acc
+    SBATCH_ARGS=(--partition="${PARTITION:-all}" --nodes=1 --ntasks-per-node=4 --gres=gpu:2 --exclusive)
+    ENVARG=acc
+    TESTARGS=(--gpu acc -j 2 -g 0 1)
     ;;
   *) echo "usage: run-tests.sh cpu|gpu [--smoke]" >&2; exit 2 ;;
 esac
@@ -86,7 +83,7 @@ mkdir -p "$JOB"
 cat > "$JOB/run.sh" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
-. "$STAGE/environment.sh" $ENVARG || exit 1
+. "$STAGE/environment.sh" $ENVARG $CLUSTER_NAME || exit 1
 cd "$TREE" || exit 1
 ./mfc.sh test ${TESTARGS[*]} --max-attempts 3 -- --binary mpirun
 EOF

@@ -1,0 +1,17 @@
+# Ranked CPU benchmark on launchpad. Copy ONLY this file to:
+# input/launchpad/MFC/<your-name>/<new-run-name>/job.yml
+# No case.py or run.sh is needed.
+suite: MFC
+case: 5eq_rk3_weno3_hllc
+visualize: false
+resources:
+  partition: all
+  nodes: 1
+  tasks_per_node: 4        # up to 64
+  walltime: "01:00:00"
+build:
+  gpu: none
+  toolchain: gcc-ompi4     # GCC 13 + Ubuntu OpenMPI 4.1.6
+tuning:
+  gbpp: 1                 # modest CPU grid; increase deliberately
+# Grind time: ns/gp/eq/rhs, LOWER is better.

@@ -17,8 +17,7 @@ on:
       # Raijin has node-local /tmp; distribute and gather explicitly.
       - "input/raijin/**"
 
-# Raijin submits from a single directory tree; two overlapping runs would
-# fight over the same job directories. submit-xenon/raijin already do this.
+# one run at a time, runs share job directories
 concurrency:
   group: submit-raijin
   cancel-in-progress: false
@@ -40,7 +39,6 @@ jobs:
           echo "Ref: ${{ github.ref }}"
 
       - name: Refuse to run on a non-Raijin runner
-        # Verify the labelled runner before staging Raijin-specific binaries.
         run: |
           set -euo pipefail
           me="$(hostname -s)"

@@ -1,0 +1,17 @@
+# Ranked H100 benchmark on launchpad. Copy this file as:
+# input/launchpad/MFC/<your-name>/<new-run-name>/job.yml
+# No case.py or run.sh is needed.
+suite: MFC
+case: 5eq_rk3_weno3_hllc
+visualize: false
+resources:
+  partition: all
+  nodes: 1
+  tasks_per_node: 2        # one rank per GPU
+  walltime: "01:00:00"
+build:
+  gpu: acc
+  toolchain: nvhpc-acc     # NVHPC 26.9, sm_90
+tuning:
+  gbpp: 16                # grid sizing parameter, not a memory reservation
+# Grind time: ns/gp/eq/rhs, LOWER is better.

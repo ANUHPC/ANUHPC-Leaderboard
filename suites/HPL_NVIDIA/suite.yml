@@ -1,9 +1,5 @@
-# HPL_NVIDIA — High Performance Linpack on the A100 nodes.
-#
-# Deliberately a separate suite from HPL rather than a variant inside it.
-# GFLOP/s from 4x A100-SXM4-40GB and from 36 Haswell cores are not the same
-# measurement, and ranking is per (suite, cluster) — so a shared board would
-# bury every CPU entry under the GPU numbers.
+# HPL_NVIDIA — High Performance Linpack on GPUs.
+# separate from HPL so GPU numbers don't bury the CPU board.
 name: HPL_NVIDIA
 description: High Performance Linpack on NVIDIA GPUs
 
@@ -20,30 +16,16 @@ secondary:
 
 inputs:
   required: [HPL.dat]
-  # run.sh (or run.<cluster>.sh) carries the #SBATCH lines and is what gets
-  # submitted. No job.yml: it duplicated the #SBATCH fields and could
-  # contradict them. Raijin has never used one.
+  # run.sh (or run.<cluster>.sh) has the #SBATCH lines and gets submitted
   optional: [run.sh]
 
-# NOT the same tuning surface as CPU HPL. xhpl-nvidia prints, at the top of
-# every run, that it ignores the panel-factorisation parameters, the broadcast
-# choice, the look-ahead depth, and the L1/U/equilibration/alignment settings.
-# Measured: PFACT=2/RFACT=2/DEPTH=2 scored 190.4 TF against 190.3-190.8 TF for
-# PFACT=0/RFACT=0/DEPTH=1 at identical N/NB/grid -- i.e. noise. Sweeping them
-# burns cluster time for nothing, so they are not offered as knobs.
-#
-# P x Q must equal the GPU count, one rank per device, and the pairing is not
-# free either: with PMAP=1 (column-major) and Slurm's block distribution,
-# P = GPUs-per-node puts each process column entirely inside one node, keeping
-# the column AllGather on NVLink and leaving only the row broadcast on IB.
-# Getting this backwards cost 48% last year (56.2 TF vs 107.7 TF, same HPL.dat).
+# xhpl-nvidia ignores the params in `ignored`.
+# P x Q = GPU count. with PMAP=1 set P = GPUs per node, the other way round is ~2x slower.
 tuning:
   free: [N, NB, P, Q, PMAP, SWAP]
   ignored: [PFACT, RFACT, NBMIN, NDIV, BCAST, DEPTH, L1, U, EQUIL, ALIGN]
 
-# What a finished run keeps. HPL's names are already canonical; declaring them
-# means harvest keeps the same four things for every suite instead of copying
-# whatever the job happened to leave behind.
+# files kept from a run
 artifacts:
   HPL.dat: [HPL.dat]
   run.sh:  [run.sh, "run.*.sh"]
@@ -56,8 +38,7 @@ run:
   binary: /apps/benchmarks/hpl-nvidia/current/workspace/hpl-linux-x86_64/xhpl
   partition: gpu
 
-# 2 nodes x 4 A100-SXM4-40GB. 40 GB/GPU sets the practical ceiling on N.
-# Launchpad is a 1-node, 2x H100 NVL box with its own run.launchpad.sh.
+# xenon: 2 nodes x 4 A100 40GB. launchpad: 1 node, 2x H100 NVL
 clusters: [xenon, launchpad]
 
 limits:
@@ -67,24 +48,6 @@ limits:
 legacy:
   parse_stdout: true       # same stdout parsing as HPL; no result.json yet
 
-# RUNNABLE. HPL-NVIDIA 26.02 is published at /apps/benchmarks/hpl-nvidia/current.
-#
-# It is extracted from the NGC image nvcr.io/nvidia/hpc-benchmarks (which pulls
-# anonymously, no API key) and run natively -- the image is a delivery vehicle,
-# not a runtime. Running it containerised does not work here: the image carries
-# OpenMPI 4.1.x while Slurm 23.11.4 offers only pmix_v5, so srun cannot bootstrap
-# the container's MPI. The extracted tree ships its own HPC-X, so nothing depends
-# on matching the host MPI either.
-#
-# Multi-node requires HPL_USE_NVSHMEM=0, which run.xenon.sh sets. NVSHMEM's IB
-# transports (ibrc, ucx, ibdevx were all tried) cannot register GPU memory with
-# the HCA on this cluster: nvidia_peermem needs MLNX/DOCA-OFED's ib_core and
-# Xenon runs the inbox RDMA stack, which does not export the peer-memory API.
-# With NVSHMEM off, HPL uses MPI/NCCL for inter-node instead.
-#
-# Measured on Xenon, 2026-09-19, N=184320 NB=512 4x2 PMAP=1, residual PASSED:
-#   8 x A100, 2 nodes   101.7 TFLOP/s   12.72 TF/GPU   41.0 s   37.7/40 GiB used
-#   4 x A100, 1 node     65.5 TFLOP/s   16.37 TF/GPU   20.9 s   (--no-multinode)
-# The per-GPU figures are the honest scaling story: two nodes over 56 Gb/s FDR
-# buy 1.55x the throughput of one, not 2x.
+# HPL-NVIDIA 26.02 extracted from the NGC image and run natively (container MPI
+# can't bootstrap under this slurm). multi-node needs HPL_USE_NVSHMEM=0, set in run.xenon.sh.
 available: true

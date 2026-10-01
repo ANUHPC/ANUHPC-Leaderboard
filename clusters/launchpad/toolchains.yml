@@ -1,0 +1,41 @@
+# Toolchains on launchpad. Checked 2026-10-01.
+# Rebuild MFC with suites/MFC/build-launchpad.sh, notes in docs/MFC-LAUNCHPAD.md.
+
+# toolchain MFC uses for each build.gpu mode (read by scripts/validate-job.mjs)
+mfc:
+  none: gcc-ompi4
+  acc: nvhpc-acc
+
+toolchains:
+  gcc-ompi4:
+    description: GCC 13 with Ubuntu OpenMPI 4.1.6 (gfortran, UCX 1.16)
+    available: true
+    modules: []
+    mpi:
+      prefix: /usr
+      launcher: mpirun
+      fortran: true
+    env: {}
+
+  nvhpc-acc:
+    description: NVIDIA HPC SDK 26.9, OpenACC on 2x H100 NVL
+    available: true
+    modules: []
+    gpu: acc
+    prefix: /opt/nvidia/hpc_sdk/Linux_x86_64/26.9
+    mpi:
+      # HPC-X 2.50 (OpenMPI 5.0.10, CUDA aware) that comes with the SDK
+      prefix: /opt/nvidia/hpc_sdk/Linux_x86_64/26.9/comm_libs/13.3/hpcx/hpcx-2.50/ompi
+      fortran: true
+    cuda: "13.3"             
+    cuda_cc: 90              
+
+installed:
+  gcc:      {version: "13.3.0"}
+  gfortran: {version: "13.3.0"}
+  cmake:    {version: "3.28.3"}
+  openmpi:  {version: "4.1.6", prefix: /usr, fortran: true}
+  ucx:      {version: "1.16.0"}
+  nvhpc:    {version: "26.9", prefix: /opt/nvidia/hpc_sdk/Linux_x86_64/26.9}
+  driver:   {version: "595.71.05", cuda: "13.2"}
+  mfc:      {commit: e2f0e267, prefix: "/data/mfc/current/emr-{cpu,acc}"}

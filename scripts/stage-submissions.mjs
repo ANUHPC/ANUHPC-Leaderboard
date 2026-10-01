@@ -1,5 +1,4 @@
-// Select and validate this workflow's suites before touching Slurm. Keeping
-// the allowlist separate from the dispatch selector prevents cross-suite jobs.
+// pick and validate the jobs for this workflow's suites, then stage them
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -62,7 +61,7 @@ async function main() {
   });
   for (const rel of skipped) console.log(`skip ${rel} (already completed)`);
   if (selected.length) {
-    // No empty invocation: validate-job defaults to the entire repository.
+    // with no args validate-job checks the whole repo
     const validation = spawnSync(process.execPath, ['scripts/validate-job.mjs', ...selected.map(j => j.input)], { cwd: root, stdio: 'inherit' });
     if (validation.error) throw validation.error;
     if (validation.status !== 0) throw new Error('Selected job validation failed; nothing was staged');

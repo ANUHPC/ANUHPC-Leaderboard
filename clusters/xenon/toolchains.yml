@@ -1,8 +1,5 @@
-# Named toolchains, resolved to what is actually installed.
-# "available: false" means the pieces are not built yet — validation reports
-# that as a clear message rather than letting a job fail at run time.
-#
-# Re-verified on 2026-09-17 against all four nodes, not just cpu-node2.
+# Toolchains on xenon. checked on all four nodes 2026-09-17.
+# available: false means not built yet, validation rejects jobs that need it.
 
 toolchains:
   gcc-ompi5:
@@ -10,25 +7,13 @@ toolchains:
     available: true
     modules: [mpi/openmpi/5.0.10, lib/ucx/1.22.0]
     mpi:
-      # NOT /apps/openmpi/5.0.10. That build reports "Fort compiler: none" and
-      # ships no mpifort/mpif90 — it was configured before gfortran was
-      # installed, so OpenMPI's autodetect silently dropped Fortran. It is
-      # fine for HPL (C) and unusable for MFC (Fortran).
-      #
-      # This prefix is the same 5.0.10 rebuilt with --enable-mpi-fortran=all
-      # and otherwise identical configure flags. It lives on /work because
-      # /apps is root-owned; promote it to /apps when convenient.
+      # not /apps/openmpi/5.0.10, that one has no Fortran. this is a rebuild
+      # with --enable-mpi-fortran=all.
       prefix: /work/openmpi/5.0.10
       launcher: mpirun
       fortran: true
-    # UCX_NET_DEVICES is deliberately NOT pinned. The IB device is named after
-    # its PCI slot and that name differs by node type:
-    #     ibp129s0 -> cpu-node1, cpu-node2
-    #     ibp161s0 -> gpu-node1, gpu-node2
-    # so no single value is correct cluster-wide, and a wrong one makes UCX
-    # warn and fall back. Raijin measured autodetect FASTER than pinning
-    # anyway (47.3 vs 42.7 Gbit/s) -- see output/raijin/HPL/Ayush/ICX-1/run.sh.
-    # Use UCX_TLS to force RDMA; that is what actually prevents a TCP fallback.
+    # don't pin UCX_NET_DEVICES, IB names differ (ibp129s0 cpu, ibp161s0 gpu).
+    # use UCX_TLS to force RDMA.
     env: {}
 
   nvhpc-acc:
@@ -38,9 +23,7 @@ toolchains:
     gpu: acc
     prefix: /work/nvhpc/Linux_x86_64/25.7
     mpi:
-      # NVHPC's own HPC-X, deliberately NOT /work/openmpi. Fortran .mod files
-      # are compiler specific, so nvfortran objects cannot link against an MPI
-      # built with gfortran. Three MPI installs therefore coexist on purpose:
+      # NVHPC's HPC-X, since Fortran .mod files are compiler specific:
       #   /apps/openmpi/5.0.10   HPL (C, no Fortran bindings at all)
       #   /work/openmpi/5.0.10   MFC CPU (gfortran)
       #   this one              MFC GPU (nvfortran)
@@ -49,13 +32,12 @@ toolchains:
     cuda_cc: 80              # A100; set MFC_CUDA_CC=80 when building
 
 installed:
-  # Verified present on all four nodes on 2026-09-17.
   gcc:      {version: "13.3.0"}
   gfortran: {version: "13"}
   cmake:    {version: "3.28.3"}
   openblas: {prefix: /usr/lib/x86_64-linux-gnu}      # system package
   ucx:      {version: "1.22.0", prefix: /apps/ucx/1.22.0}
-  # Two OpenMPI 5.0.10 installs, deliberately. See the note above.
+  # two OpenMPI installs, see above
   openmpi:         {version: "5.0.10", prefix: /apps/openmpi/5.0.10, fortran: false}
   openmpi-fortran: {version: "5.0.10", prefix: /work/openmpi/5.0.10, fortran: true}
   hpl:      {version: "2.3", prefix: /apps/benchmarks/hpl/current}
@@ -64,11 +46,4 @@ installed:
   cuda:     {version: "13.3", nodes: [gpu-node1, gpu-node2]}
 
 pending:
-  # Tracked here so validation can say exactly what is missing.
   - modules         # no Lmod or environment-modules installed
-  # hpl-nvidia: DONE 2026-09-19. HPL-NVIDIA 26.02 extracted from the NGC image
-  # and published to /apps/benchmarks/hpl-nvidia/current; 101.7 TF on 8x A100.
-  # container-rt: was never actually missing -- apptainer 1.5.3 is installed on
-  # all four nodes. It is only used to pull and unpack the image, not to run it.
-  # nvhpc: DONE 2026-09-17. NVHPC 25.7 at /work/nvhpc, MFC rebuilt --gpu acc;
-  # zen3/build/install/gpu-acc-* carries sm_80 device code and links HPC-X.

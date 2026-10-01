@@ -1,4 +1,4 @@
-# HPL — High Performance Linpack. The suite the leaderboard started with.
+# HPL — High Performance Linpack
 name: HPL
 description: High Performance Linpack, the Top500 benchmark
 
@@ -15,19 +15,14 @@ secondary:
 
 inputs:
   required: [HPL.dat]
-  # run.sh (or run.<cluster>.sh) carries the #SBATCH lines and is what gets
-  # submitted. No job.yml: it duplicated the #SBATCH fields and could
-  # contradict them. Raijin has never used one.
+  # run.sh (or run.<cluster>.sh) has the #SBATCH lines and gets submitted
   optional: [run.sh]
 
-# HPL's tuning surface IS the exercise: N, NB and the P x Q grid are what the
-# competitor chooses. Unlike MFC there is no fixed case list.
+# no fixed case list, tuning is the exercise
 tuning:
   free: [N, NB, P, Q, PFACT, RFACT, BCAST, DEPTH, SWAP]
 
-# What a finished run keeps. HPL's names are already canonical; declaring them
-# means harvest keeps the same four things for every suite instead of copying
-# whatever the job happened to leave behind.
+# files kept from a run
 artifacts:
   HPL.dat: [HPL.dat]
   run.sh:  [run.sh, "run.*.sh"]
@@ -39,13 +34,12 @@ run:
   launcher: sbatch          # the user's own run.sh is submitted directly
   binary: /apps/benchmarks/hpl/current/bin/xhpl
 
-clusters: [raijin, xenon]   # HPL runs on both clusters.
+clusters: [raijin, xenon]
 
 limits:
   max_nodes: 3
   max_walltime: "04:00:00"
 
-# Legacy runs (137 of them at time of writing) predate result.json and are
-# recovered by parsing HPL's stdout. Never remove this.
+# old runs have no result.json and are parsed from stdout, keep this
 legacy:
   parse_stdout: true

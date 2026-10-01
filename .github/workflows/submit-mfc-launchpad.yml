@@ -1,24 +1,16 @@
-name: Submit jobs (launchpad)
+name: Submit MFC (launchpad)
 
-# HPL only, MFC has its own workflow (same concurrency group).
-# runner needs the "launchpad" label.
+# MFC runs from main inputs, results go back to main.
 
 on:
   push:
     branches: [main]
     paths:
-      - "input/launchpad/HPL/**"
-      - "input/launchpad/HPL_NVIDIA/**"
+      - "input/launchpad/MFC/**"
   workflow_dispatch:
     inputs:
-      suite:
-        description: "HPL suite to submit"
-        type: choice
-        options: [all, HPL, HPL_NVIDIA]
-        required: false
-        default: "all"
       job:
-        description: "Optional group/run (select one suite); required for rerun"
+        description: "Optional group/run; required for rerun"
         required: false
         default: ""
       rerun:
@@ -31,7 +23,7 @@ permissions:
   contents: write
 
 concurrency:
-  # one submission at a time per cluster, runs share job directories
+  # same group as the HPL launchpad workflow so they don't share the GPUs
   group: submit-launchpad
   cancel-in-progress: false
   queue: max
@@ -40,8 +32,8 @@ env:
   CLUSTER: launchpad
   SCRATCH_BASE: /data/jobs
   PARTITION: all
-  ALLOWED_SUITES: HPL_NVIDIA
-  HPL_NVIDIA_SH: /home/nvidia/PROGRAMS/nvidia_hpl_benchmarks/hpl.sh
+  ALLOWED_SUITES: MFC
+  MFC_ROOT: /data/mfc/current
 
 jobs:
   submit:
@@ -81,7 +73,7 @@ jobs:
 
       - name: Stage and validate selected jobs
         env:
-          SELECTED_SUITE: ${{ inputs.suite || 'all' }}
+          SELECTED_SUITE: MFC
           SELECTED_JOB: ${{ inputs.job }}
           RERUN: ${{ inputs.rerun }}
         run: |
@@ -125,6 +117,20 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+
+      - name: Preserve MFC visualization data
+        if: always()
+        run: |
+          set -euo pipefail
+          [ -d "${STAGE:-}" ] || exit 0
+          for jobdir in "$STAGE"/MFC/*/*/; do
+            [ -f "$jobdir/job.yml" ] || continue
+            [ "$(node scripts/read-yaml.mjs "$jobdir/job.yml" visualize false)" = true ] || continue
+            dest="${SCRATCH_BASE}/visualizations/${GITHUB_RUN_ID}/MFC/$(basename "$(dirname "$jobdir")")/$(basename "$jobdir")"
+            mkdir -p "$(dirname "$dest")"
+            mv "$jobdir" "$dest"
+            echo "MFC visualization data: \`$dest\`" >> "$GITHUB_STEP_SUMMARY"
+          done
 
       - name: Clean scratch
         if: always()

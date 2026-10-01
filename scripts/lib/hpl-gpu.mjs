@@ -9,8 +9,7 @@ export function validateGpuHpl(dat, directive, cluster) {
   const gpus = gres ? Number(gres[1]) : 0;
   const part = cluster?.partitions?.[directive('partition')];
   const available = (part?.nodes ?? []).map(n => cluster.nodes[n]?.gpus ?? 0);
-  // Not every cluster names its GPU partition "gpu" (launchpad's only partition
-  // is "all"), so check what the partition actually offers instead of the name.
+  // check for GPUs, not the partition name (launchpad only has "all")
   if (!available.length || !available.every(n => n > 0)) errors.push('HPL_NVIDIA requires a partition whose nodes all have GPUs');
   if (!integer(nodes) || !integer(tasks)) errors.push('set positive integer --nodes and --ntasks-per-node');
   if (!integer(gpus) || gpus !== tasks) errors.push('reserve one GPU per MPI rank with --gres=gpu:<tasks-per-node>');

@@ -2,22 +2,14 @@
 //
 //   node scripts/harvest.mjs <stage-dir> <cluster>
 //
-// Replaces the inline "copy everything that is not xhpl/*.o/*.mod" loop the
-// submit workflows used. That loop is why an MFC run landed 16 files in
-// output/ -- MFC leaves its own .inp files, three separate timing files and an
-// indices table in the case directory -- and the four that matter drowned in
-// them on the website.
-//
-// Each suite declares what to keep in its suite.yml:
+// each suite declares what to keep in its suite.yml:
 //
 //   artifacts:
 //     run.out: ["mfc-*.out"]     canonical name <- source globs, first match wins
 //   metadata:
 //     - mfc-provenance.json      kept for verification, not shown as an artifact
 //
-// Canonical names matter beyond tidiness. MFC names its batch files after the
-// job (mfc-<run-name>.out), so without renaming, every run's stdout has a
-// different filename and the website cannot link to "the output" generically.
+// renaming gives the website stable names to link to.
 import fs from "node:fs/promises";
 import path from "node:path";
 import { parseYaml } from "./lib/yaml.mjs";
@@ -61,19 +53,15 @@ for (const suite of await listDirs(stage)) {
       const present = (await fs.readdir(src, { withFileTypes: true }))
         .filter((e) => e.isFile()).map((e) => e.name);
 
-      // No manifest: fall back to the old behaviour rather than silently
-      // harvesting nothing. A suite added without one still works.
+      // no manifest, copy everything like before
       const pairs = [];
       if (manifest.artifacts) {
-        // Metadata is claimed first so a glob cannot swallow it. "mfc-*.sh"
-        // otherwise matches mfc-environment.sh before mfc-<run>.sh -- readdir
-        // returns it first alphabetically -- and the website would show the
-        // environment helper where the batch script belongs.
+        // metadata first, so "mfc-*.sh" can't grab mfc-environment.sh
         const claimed = new Set();
         for (const m of manifest.metadata) {
           if (present.includes(m)) { pairs.push([m, m]); claimed.add(m); }
         }
-        // "keep" globs take every match, under the original name.
+        // keep globs take every match, original names
         for (const g of manifest.keep) {
           for (const hit of present.filter((x) => !claimed.has(x) && globToRe(g).test(x))) {
             pairs.push([hit, hit]); claimed.add(hit);

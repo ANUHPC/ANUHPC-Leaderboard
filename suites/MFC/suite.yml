@@ -7,7 +7,7 @@ metric:
   key: grind
   label: Grind time
   unit: ns/gp/eq/rhs
-  direction: lower         # SMALLER is better — the opposite of HPL
+  direction: lower         # smaller is better, unlike HPL
   precision: 4
 
 secondary:
@@ -15,50 +15,34 @@ secondary:
   - {key: s_step, label: Seconds per step,     unit: s/step, direction: lower}
   - {key: ranks,  label: MPI ranks,            unit: "",     direction: none}
 
-# Published reference points, for context on the board. A100-SXM4-40GB should
-# land above these. Source: MFC 5.0 (arXiv 2503.07953) and arXiv 2409.10729.
+# published reference points: MFC 5.0 (arXiv 2503.07953) and arXiv 2409.10729
 reference:
   - {device: "NVIDIA GH200",     grind: 0.32}
   - {device: "NVIDIA H100 SXM5", grind: 0.38}
 
 inputs:
-  # job.yml is the entry. case.py is NOT required: for a ranked run the case
-  # comes from the pinned checkout in /work/mfc/current, so everyone runs byte-identical
-  # physics and only names the case they want.
+  # ranked runs name a pinned case in job.yml, no case.py needed
   required: [job.yml]
-  # Supplying your own case.py is allowed, but it makes the run UNRANKED — it is
-  # not comparable with the fixed set. See ranking.custom below.
+  # own case.py makes the run unranked
   optional: [case.py]
-  # MFC generates its own batch script from the template below. A user-supplied
-  # .sh would be ignored, so reject it rather than silently dropping it.
+  # MFC generates the batch script, a user .sh would be ignored
   forbidden: ["*.sh"]
 
 ranking:
-  # A run is ranked only if it used one of the pinned cases below.
   requires_pinned_case: true
   custom: unranked
 
 source:
   repo: https://github.com/MFlowCode/MFC
-  # v5.6.1-50-ge2f0e267. render.sh refuses to run if the installed tree is at
-  # a different commit -- two entrants must measure the same code.
+  # v5.6.1-50-ge2f0e267, render.sh checks the tree is at this commit
   pin: e2f0e267
-  # /work, not /apps: MFC rewrites build/lock.yaml on every run and /apps is
-  # exported read-only to the compute nodes. One tree per CPU architecture,
-  # because MFC compiles Release with -march=native and the cpu nodes (Haswell)
-  # and gpu nodes (Zen 3) need different binaries:
+  # one tree per arch (-march=native):
   #     /work/mfc/current/haswell   -> partition cpu
   #     /work/mfc/current/zen3      -> partition gpu
   prefix: /work/mfc/current
 
-# What a finished run keeps, and under what name. MFC leaves 16 files in a case
-# directory -- its own .inp files, per-stage timing files, an indices table --
-# and harvesting all of them buried the four that matter under a wall of links.
-# The names on the left mirror HPL, so a run of either suite looks the same:
-# the input, the script, what it printed, and the numbers.
-#
-# Sources are globs because MFC names its batch files after the job
-# (mfc-<name>.out), which differs per run and makes a stable link impossible.
+# files kept from a run. names on the left match HPL, globs because MFC names
+# batch files after the job
 artifacts:
   case.py:        [case.py]           # the input you wrote
   run.sh:         ["mfc-*.sh"]        # the batch script MFC generated
@@ -67,31 +51,21 @@ artifacts:
   summary.yaml:   [summary.yaml]      # MFC's own exec/grind report
   time_data.dat:  [time_data.dat]     # Ranks | s/step | ns/gp/eq/rhs
   job.yml:        [job.yml]
-  # The parameters MFC actually resolved and ran with -- grid, dt, weno_order,
-  # riemann_solver, viscosity, fluid properties. case.py is a PROGRAM, so it
-  # does not say what any given run used; this file does.
-  #
-  # These were dropped as clutter when this manifest was written, which was a
-  # mistake: comparing runs of one case at different settings is the point of
-  # the exercise, and without them a run does not record its own settings.
   convergence.json: [convergence.json] # measured periodic-return error for Task 2
+  # .inp files record the parameters a run actually used
   simulation.inp:  [simulation.inp]
   pre_process.inp: [pre_process.inp]
 
-# Kept under their own names, all matches, not just the first. Rendered output
-# is named after whatever variable was plotted (alpha1.mp4, alpha1_2812.png),
-# so there is no canonical name to map it to -- but it is the most interesting
-# thing a visualisation run produces and must not be dropped.
+# viz output, kept under its own names (all matches)
 keep:
   - "*.mp4"
   - "*.png"
 
-# Kept for verification but not shown as user-facing artifacts: the collector
-# reads these to decide whether a run is rankable.
+# read by the collector, not shown as artifacts
 metadata:
   - mfc-provenance.json
   - mfc-status.yml
-  # Listed here so the "mfc-*.sh" glob above cannot claim it as run.sh.
+  # listed so the "mfc-*.sh" glob doesn't pick it up as run.sh
   - mfc-environment.sh
 
 run:
@@ -101,31 +75,10 @@ run:
   summary: summary.yaml
   artifacts: [summary.yaml, time_data.dat]
 
-# The case registry. A run is RANKED only if job.yml names a slug from here,
-# because grind time is normalised per grid point and per equation but NOT by
-# how expensive the physics is per cell -- our own seven cases span 4.2x on
-# identical hardware. If entrants supplied their own case, the shortest route
-# to the top of the board would be writing the cheapest physics that still
-# runs, so the case is held constant and everything else is yours to tune.
-#
-# Two kinds of entry, distinguished by `source`:
-#
-#   source: tree  (the default)  ships with MFC; `path` is relative to the
-#                 pinned checkout. Frozen by the commit pin above.
-#   source: repo                 contributed here; `path` is relative to the
-#                 repository root. Frozen by git -- collect.mjs re-hashes the
-#                 harvested case.py against the file in this tree.
-#
-# `sizing` says whether the case accepts --gbpp:
-#
-#   sizing: gbpp  (the default)  implements MFC's benchmark interface: reads
-#                 --gbpp and the --mfc dict and sizes its grid from the rank
-#                 count, so work per rank stays constant as nodes grow.
-#   sizing: fixed                the grid is written into the case; --gbpp is
-#                 not passed, because argparse would reject it.
-#
-# TO ADD A CASE: see suites/MFC/cases/README.md. Do not edit a registered
-# case -- that silently changes what every past run measured. Add a new slug.
+# case registry. only these slugs are ranked.
+#   source: tree (default) path in the pinned MFC checkout; repo = path in this repo
+#   sizing: gbpp (default) takes --gbpp; fixed = grid set in the case
+# to add a case see suites/MFC/cases/README.md. don't edit a registered one, add a new slug.
 cases:
   # --- upstream: MFC's own benchmark set, mirrors toolchain/bench.yaml -------
   - {slug: 5eq_rk3_weno3_hllc,        path: benchmarks/5eq_rk3_weno3_hllc/case.py}
@@ -137,10 +90,7 @@ cases:
   - {slug: igr,                       path: benchmarks/igr/case.py}
 
   # --- reference: registered and frozen, but not a leaderboard ---------------
-  # Takes -N and --order rather than --gbpp, so sizing is fixed and the
-  # resolution comes from job.yml's args. Not ranked: a convergence study runs
-  # the same case at several grids, and a coarser grid is faster for no merit,
-  # so ordering these by grind time would reward doing less work.
+  # takes -N and --order from job.yml args. unranked, coarser grids are just faster
   - slug: advection_1d
     source: tree
     path: examples/1D_advection_convergence/case.py
@@ -170,16 +120,12 @@ tuning:
   defaults:
     gbpp: 16               # GB per rank; sets the problem size
     gpu: none
-  # Opt-in, because it costs a compile rather than because it is unsafe.
-  # MFC's own help calls it "10x faster with case optimization": it bakes
-  # weno_order, the bubble model and similar into simulation as compile-time
-  # constants. It was listed as unsupported here on the grounds that it would
-  # rewrite the shared tree, which was wrong -- build.py hashes the generated
-  # source into the install path, so the build lands in its own directory.
+  # opt-in since each one is a separate compile
   opt_in:
     - case_optimization
 
-clusters: [xenon]   # MFC needs a Fortran/MPI toolchain; only Xenon has one being built.
+# launchpad trees are /data/mfc/current/emr-{cpu,acc}, built by suites/MFC/build-launchpad.sh
+clusters: [xenon, launchpad]
 
 limits:
   max_nodes: 2

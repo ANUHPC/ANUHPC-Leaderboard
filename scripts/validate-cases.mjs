@@ -2,14 +2,8 @@
 //
 //   node scripts/validate-cases.mjs
 //
-// validate-job.mjs checks a submitted job against the registry. This checks the
-// registry, which is the thing a case contribution actually changes. A bad
-// entry here does not break one job -- it breaks every future run of that case,
-// and worse, it can make a board that looks fine mean nothing.
-//
-// Tree cases are listed but not executed: they live in the MFC installation,
-// which the pull-request runner does not have. render.sh verifies those on the
-// cluster against the commit pin.
+// tree cases aren't run here (no MFC checkout on the PR runner), render.sh
+// checks those on the cluster.
 import fs from "node:fs/promises";
 import path from "node:path";
 import { loadCases, REPO_ROOT } from "../suites/MFC/case-path.mjs";
@@ -26,7 +20,7 @@ const seen = new Set();
 for (const c of cases) {
   if (seen.has(c.slug)) err(c.slug, "duplicate slug — two entries claim the same board");
   seen.add(c.slug);
-  // The slug becomes a board heading and part of a run id.
+  // slug ends up in board headings and run ids
   if (!/^[a-z0-9][a-z0-9_]*$/.test(c.slug)) {
     err(c.slug, "slug must be lower-case letters, digits and underscores");
   }
@@ -35,7 +29,7 @@ for (const c of cases) {
 for (const c of cases) {
   if (c.source !== "repo") { notes.push(`${c.slug}: tree case, verified on the cluster against the pin`); continue; }
 
-  // A registry entry must not be able to point outside the repository.
+  // no paths outside the repo
   const file = path.resolve(REPO_ROOT, c.path);
   if (file !== REPO_ROOT && !file.startsWith(REPO_ROOT + path.sep)) {
     err(c.slug, `path "${c.path}" resolves outside the repository`);
@@ -44,7 +38,6 @@ for (const c of cases) {
   try { await fs.access(file); }
   catch { err(c.slug, `path "${c.path}" does not exist`); continue; }
 
-  // Does it run at all, and does it produce a grid?
   const base = { nodes: 1, tasksPerNode: 4, gpu: true };
   const gbppArgs = (g) => (c.sizing === "fixed" ? [] : ["--gbpp", String(g)]);
   const first = await evalCase(file, { dict: mfcDict(base), args: gbppArgs(16) });
@@ -56,10 +49,7 @@ for (const c of cases) {
     continue;
   }
 
-  // The sizing declaration has to be true, not just plausible. Getting it
-  // wrong is silent: a case declared gbpp that ignores --gbpp turns every
-  // multi-node entry on its board into strong scaling without saying so, and
-  // the board then compares runs that did different amounts of work per rank.
+  // a gbpp case that ignores --gbpp would silently be strong scaling
   const scaled = await evalCase(file, {
     dict: mfcDict({ ...base, nodes: 2 }),
     args: gbppArgs(16),
@@ -76,8 +66,7 @@ for (const c of cases) {
     err(c.slug, "declares sizing: fixed but the grid changes with the rank count — declare sizing: gbpp");
   }
 
-  // Every configuration the limits allow must decompose, or the board has
-  // entries that cannot exist.
+  // every allowed node/rank combo has to decompose
   for (const nodes of [1, 2]) {
     for (const tpn of [1, 2, 4]) {
       const r = await evalCase(file, { dict: mfcDict({ nodes, tasksPerNode: tpn, gpu: true }), args: gbppArgs(16) });
@@ -94,11 +83,7 @@ for (const c of cases) {
   notes.push(`${c.slug}: repo case, ${c.sizing}, ${g1.m}^3-ish at 4 ranks -> ${g2.m} at 8, decomposes 1-8 ranks`);
 }
 
-// Some registered cases also ship as a copy in a template directory, so a
-// student can edit physics that arguments cannot reach. Two copies of a file
-// drift, and a drifted copy is worse than no copy: a sweep would then compare
-// points that did not run the same code, which is the one thing a sweep must
-// guarantee.
+// template copies of registered cases must match the registered file
 const TWINS = [
   ["suites/MFC/cases/shock_droplet_2d/case.py",
    "input/_TEMPLATES/MFC/practice-problem3/case.py"],

@@ -1,5 +1,4 @@
-# WRF — Weather Research and Forecasting. Placeholder: not wired up yet.
-# Recorded here so the shape of what it needs is not lost.
+# WRF — Weather Research and Forecasting. placeholder, not wired up yet.
 name: WRF
 description: Weather Research and Forecasting model
 enabled: false
@@ -16,16 +15,15 @@ inputs:
   required: [namelist.input]
   optional: [namelist.wps, job.yml]
 
-# The reason /work exists. WRF is the only suite needing large static input
-# staged before a run can start.
+# large static input, staged before a run
 data:
   geog: /work/datasets/wrf/WPS_GEOG
   met:  /work/datasets/wrf/met
 
-# Unlike HPL and MFC, preprocessing is separate programs, not targets of one driver.
+# preprocessing is separate programs
 stages: [geogrid, ungrib, metgrid, real, wrf]
 
-# Pin the standard CONUS configurations so results compare across machines.
+# standard CONUS configs
 cases:
   - {slug: conus12km, description: "Standard CONUS 12 km benchmark"}
   - {slug: conus2.5km, description: "Standard CONUS 2.5 km benchmark"}
