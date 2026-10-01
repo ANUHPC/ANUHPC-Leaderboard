@@ -112,8 +112,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch --prune origin main && git checkout -B main && git pull --no-rebase --no-edit origin main
-          # Results only. The input spec stays put so every run is reproducible.
+          # results in, and the input folders of jobs that ran out (output/ keeps their files)
           git add -A output/$CLUSTER/
+          bash scripts/clean-inputs.sh "${STAGE:-/nonexistent}" "$CLUSTER"
           if git diff --cached --quiet; then echo "nothing to commit"; else
             git commit -m "$CLUSTER results from run ${GITHUB_RUN_ID} [skip ci]"
             for i in 1 2 3; do
@@ -127,4 +128,4 @@ jobs:
 
       - name: Clean scratch
         if: always()
-        run: rm -rf "${STAGE:-/nonexistent}"
+        run: rm -rf "${STAGE:-/nonexistent}" "${STAGE:-/nonexistent}.jobs.txt"

@@ -72,6 +72,10 @@ async function main() {
     }
   }
   console.log(`${selected.length} job(s) staged`);
+  // everything handled this run, ran or already done. clean-inputs.sh reads it after harvest.
+  // next to the stage dir, not in it, since the stage dir holds only suite folders
+  await fs.mkdir(path.dirname(stage), { recursive: true });
+  await fs.writeFile(`${stage}.jobs.txt`, [...selected.map(j => j.rel), ...skipped].map(r => r + '\n').join(''));
   if (process.env.GITHUB_ENV) await fs.appendFile(process.env.GITHUB_ENV, `STAGED=${selected.length}\n`);
 }
 

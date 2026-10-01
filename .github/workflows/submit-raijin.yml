@@ -468,7 +468,7 @@ jobs:
               "$node" "rm -rf '$SLURM_TMP_BASE'" || true
           done < "$nodes_file"
 
-      - name: Commit results and keep input specs
+      - name: Commit results and remove finished inputs
         if: always()
         run: |
           set -euo pipefail
@@ -485,6 +485,10 @@ jobs:
           git pull --no-rebase --no-edit origin "$BRANCH"
 
           git add -A output/raijin/
+          # remove input folders of jobs that have output (clean-inputs.sh checks each one)
+          find input/raijin/HPL -mindepth 2 -maxdepth 2 -type d -not -path '*/_TEMPLATE*' \
+            | sed 's|^input/raijin/||' > "$RUNNER_TEMP/raijin.jobs.txt"
+          bash scripts/clean-inputs.sh "$RUNNER_TEMP/raijin" raijin
           if git diff --cached --quiet; then
             echo "Nothing new to commit after staging."
           else
