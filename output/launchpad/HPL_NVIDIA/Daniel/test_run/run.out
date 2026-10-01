@@ -1,0 +1,206 @@
+node : scc-connect-03-gpu01
+gpus : 2 x NVIDIA H100 NVL
+ranks: 2
+
+================================================================================
+HPL-NVIDIA 26.2.1  -- NVIDIA accelerated HPL benchmark -- NVIDIA
+================================================================================
+HPLinpack 2.1  --  High-Performance Linpack benchmark  --   October 26, 2012
+Written by A. Petitet and R. Clint Whaley,  Innovative Computing Laboratory, UTK
+Modified by Piotr Luszczek, Innovative Computing Laboratory, UTK
+Modified by Julien Langou, University of Colorado Denver
+================================================================================
+
+An explanation of the input/output parameters follows:
+T/V    : Wall time / encoded variant.
+N      : The order of the coefficient matrix A.
+NB     : The partitioning blocking factor.
+P      : The number of process rows.
+Q      : The number of process columns.
+Time   : Time in seconds to solve the linear system.
+Gflops : Rate of execution for solving the linear system.
+
+The following parameter values will be used:
+
+N      :   10240 
+NB     :     512 
+PMAP   : Column-major process mapping
+P      :       1 
+Q      :       2 
+PFACT  :    Left 
+NBMIN  :       2 
+NDIV   :       2 
+RFACT  :    Left 
+BCAST  :  2ringM 
+DEPTH  :       1 
+SWAP   : Spread-roll (long)
+L1     : no-transposed form
+U      : transposed form
+EQUIL  : no
+ALIGN  : 8 double precision words
+
+--------------------------------------------------------------------------------
+
+- The matrix A is randomly generated for each test.
+- The following scaled residual check will be computed:
+      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+- The relative machine precision (eps) is taken to be               1.110223e-16
+- Computational tests pass if scaled residuals are less than                16.0
+
+
+HPL-NVIDIA ignores the following parameters from input file:
+	* Broadcast parameters
+	* Panel factorization parameters
+	* Look-ahead value
+	* L1 layout
+	* U layout
+	* Equilibration parameter
+	* Memory alignment parameter
+
+HPL-NVIDIA settings from environment variables:
+--- DEVICE INFO ---
+  Peak clock frequency: 1785 MHz
+  SM version          : 90
+  Number of SMs       : 132
+-------------------
+[HPL TRACE] cuda_nvshmem_init: max=0.8974 (1) min=0.8974 (0)
+[HPL TRACE] ncclCommInitRank: max=1.0971 (1) min=1.0971 (0)
+[HPL TRACE] cugetrfs_mp_init: max=1.1018 (1) min=1.1018 (0)
+--- MEMORY INFO ---
+DEVICE
+  System           =      4.80973 GiB (MIN)      4.80973 GiB (MAX)      4.80973 GiB (AVG)
+  HPL buffers      =      3.52411 GiB (MIN)      3.52411 GiB (MAX)      3.52411 GiB (AVG)
+  Used             =      8.33384 GiB (MIN)      8.33384 GiB (MAX)      8.33384 GiB (AVG)
+  Total            =     93.58398 GiB (MIN)     93.58398 GiB (MAX)     93.58398 GiB (AVG)
+HOST
+  HPL buffers      =      0.00009 GiB (MIN)      0.00009 GiB (MAX)      0.00009 GiB (AVG)
+-------------------
+
+ ... Testing HPL components ... 
+
+ **** Factorization, m = 9728, policy = 0 **** 
+avg time =     6.13 ms, avg =   416.21. min =   415.64 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =   416.78 GFLOPS
+
+ **** Factorization, m = 9728, policy = 1 **** 
+avg time =     7.74 ms, avg =   329.31. min =   327.97 [rank 0, host scc-connect-03-gpu01, gpuID 0000:17:00.0], max =   330.65 GFLOPS
+
+ **** Factorization, m = 5120, policy = 0 **** 
+avg time =     5.47 ms, avg =   245.26. min =   245.05 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =   245.46 GFLOPS
+
+ **** Factorization, m = 5120, policy = 1 **** 
+avg time =     7.59 ms, avg =   176.92. min =   176.15 [rank 0, host scc-connect-03-gpu01, gpuID 0000:17:00.0], max =   177.69 GFLOPS
+
+ **** Factorization, m = 2560, policy = 0 **** 
+avg time =     5.38 ms, avg =   124.70. min =   124.70 [rank 0, host scc-connect-03-gpu01, gpuID 0000:17:00.0], max =   124.70 GFLOPS
+
+ **** Factorization, m = 2560, policy = 1 **** 
+avg time =     7.51 ms, avg =    89.37. min =    89.05 [rank 0, host scc-connect-03-gpu01, gpuID 0000:17:00.0], max =    89.69 GFLOPS
+
+ **** Factorization, m = 512, policy = 0 **** 
+avg time =     5.17 ms, avg =    25.95. min =    25.94 [rank 0, host scc-connect-03-gpu01, gpuID 0000:17:00.0], max =    25.95 GFLOPS
+
+ **** Factorization, m = 512, policy = 1 **** 
+avg time =     7.46 ms, avg =    17.98. min =    17.78 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    18.18 GFLOPS
+
+ **** ncclBcast( Row ) **** 
+avg time =     0.19 ms, avg =   224.90. min =   224.00 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =   225.81 GBS
+
+ **** ncclAllGather( Col ) **** 
+avg time =     0.00 ms, avg = 44882.87. min = 35922.44 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max = 59799.03 GBS
+
+ **** Latency ncclAllGather, m = 1 **** 
+avg time =     0.12 ms, avg =     0.03. min =     0.03 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     0.04 GBS
+
+ **** Latency ncclAllGather, m = 2 **** 
+avg time =     0.09 ms, avg =     0.09. min =     0.07 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     0.12 GBS
+
+ **** Latency ncclAllGather, m = 32 **** 
+avg time =     0.09 ms, avg =     1.48. min =     1.20 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     1.94 GBS
+
+ **** Latency ncclAllGather, m = 512 **** 
+avg time =     0.09 ms, avg =    23.78. min =    19.36 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    30.80 GBS
+
+ **** Latency ncclAllGather, m = 1024 **** 
+avg time =     0.09 ms, avg =    47.76. min =    38.84 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    61.99 GBS
+
+ **** Latency Host MPI_Allgather, m = 1 **** 
+avg time =     0.01 ms, avg =     0.31. min =     0.26 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     0.40 GBS
+
+ **** Latency Host MPI_Allgather, m = 2 **** 
+avg time =     0.01 ms, avg =     0.64. min =     0.52 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     0.85 GBS
+
+ **** Latency Host MPI_Allgather, m = 32 **** 
+avg time =     0.01 ms, avg =    10.01. min =     7.94 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    13.53 GBS
+
+ **** Latency Host MPI_Allgather, m = 512 **** 
+avg time =     0.03 ms, avg =    64.97. min =    51.74 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    87.30 GBS
+
+ **** Latency Host MPI_Allgather, m = 1024 **** 
+avg time =     0.04 ms, avg =    95.46. min =    76.39 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =   127.20 GBS
+
+ **** Latency ncclBcast, m = 1 **** 
+avg time =     0.10 ms, avg =     0.04. min =     0.03 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     0.05 GBS
+
+ **** Latency ncclBcast, m = 32 **** 
+avg time =     0.13 ms, avg =     1.00. min =     0.83 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     1.27 GBS
+
+ **** Latency ncclBcast, m = 512 **** 
+avg time =     0.13 ms, avg =    16.05. min =    13.28 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    20.28 GBS
+
+ **** Latency Host MPI_Bcast, m = 1 **** 
+avg time =     0.00 ms, avg =     0.92. min =     0.72 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =     1.26 GBS
+
+ **** Latency Host MPI_Bcast, m = 32 **** 
+avg time =     0.00 ms, avg =    30.93. min =    24.91 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =    40.77 GBS
+
+ **** Latency Host MPI_Bcast, m = 512 **** 
+avg time =     0.00 ms, avg =   471.73. min =   379.34 [rank 1, host scc-connect-03-gpu01, gpuID 0000:63:00.0], max =   623.60 GBS
+
+ **** GEMM **** 
+avg time =     1.44 ms, avg = 37283.77. min = 36872.13 [rank 0, host scc-connect-03-gpu01, gpuID 0000:17:00.0], max = 37704.72 GFLOPS
+
+ ... End of Testing HPL components ... 
+
+[HPL TRACE] HPL_pdmatgen_gpu: max=0.0003 (1) min=0.0003 (0)
+[0;31m Prog= 14.26%	N_left=     9728	Time=   0.05	Time_left=   0.30	iGF=  2023.45	GF=  2023.45	iGF_per=  1011.73 	GF_per=  1011.73[0m
+[0;31m Prog= 27.10%	N_left=     9216	Time=   0.12	Time_left=   0.32	iGF=  1338.71	GF=  1628.80	iGF_per=   669.36 	GF_per=   814.40[0m
+[0;31m Prog= 38.59%	N_left=     8704	Time=   0.13	Time_left=   0.20	iGF= 12507.23	GF=  2197.90	iGF_per=  6253.62 	GF_per=  1098.95[0m
+[0;31m Prog= 48.80%	N_left=     8192	Time=   0.13	Time_left=   0.14	iGF= 10682.49	GF=  2636.06	iGF_per=  5341.25 	GF_per=  1318.03[0m
+[0;31m Prog= 57.81%	N_left=     7680	Time=   0.14	Time_left=   0.10	iGF= 10259.15	GF=  2981.41	iGF_per=  5129.57 	GF_per=  1490.71[0m
+[0;31m Prog= 65.70%	N_left=     7168	Time=   0.15	Time_left=   0.08	iGF=  8672.11	GF=  3236.37	iGF_per=  4336.05 	GF_per=  1618.19[0m
+[0;31m Prog= 72.54%	N_left=     6656	Time=   0.15	Time_left=   0.06	iGF=  8061.83	GF=  3429.89	iGF_per=  4030.92 	GF_per=  1714.94[0m
+[0;31m Prog= 78.40%	N_left=     6144	Time=   0.16	Time_left=   0.04	iGF=  6712.32	GF=  3560.07	iGF_per=  3356.16 	GF_per=  1780.04[0m
+[0;31m Prog= 83.36%	N_left=     5632	Time=   0.16	Time_left=   0.03	iGF=  5869.98	GF=  3645.47	iGF_per=  2934.99 	GF_per=  1822.73[0m
+[0;31m Prog= 87.50%	N_left=     5120	Time=   0.17	Time_left=   0.02	iGF=  4791.81	GF=  3687.18	iGF_per=  2395.91 	GF_per=  1843.59[0m
+[0;31m Prog= 90.89%	N_left=     4608	Time=   0.18	Time_left=   0.02	iGF=  4071.77	GF=  3700.20	iGF_per=  2035.89 	GF_per=  1850.10[0m
+[0;31m Prog= 93.60%	N_left=     4096	Time=   0.18	Time_left=   0.01	iGF=  3193.51	GF=  3683.27	iGF_per=  1596.75 	GF_per=  1841.63[0m
+[0;31m Prog= 95.71%	N_left=     3584	Time=   0.19	Time_left=   0.01	iGF=  2655.48	GF=  3652.07	iGF_per=  1327.74 	GF_per=  1826.03[0m
+[0;31m Prog= 97.30%	N_left=     3072	Time=   0.19	Time_left=   0.01	iGF=  1935.58	GF=  3599.98	iGF_per=   967.79 	GF_per=  1799.99[0m
+[0;31m Prog= 98.44%	N_left=     2560	Time=   0.20	Time_left=   0.00	iGF=  1441.07	GF=  3538.72	iGF_per=   720.54 	GF_per=  1769.36[0m
+[0;31m Prog= 99.20%	N_left=     2048	Time=   0.20	Time_left=   0.00	iGF=   945.39	GF=  3465.65	iGF_per=   472.69 	GF_per=  1732.82[0m
+[0;31m Prog= 99.66%	N_left=     1536	Time=   0.21	Time_left=   0.00	iGF=   601.65	GF=  3390.74	iGF_per=   300.82 	GF_per=  1695.37[0m
+[0;31m Prog= 99.90%	N_left=     1024	Time=   0.22	Time_left=   0.00	iGF=   304.34	GF=  3310.92	iGF_per=   152.17 	GF_per=  1655.46[0m
+================================================================================
+T/V                N    NB     P     Q         Time          Gflops (   per GPU)
+--------------------------------------------------------------------------------
+WC0            10240   512     1     2         0.63       1.139e+03 ( 5.696e+02)
+
+HPL_pdgesv() start time Thu Oct  1 00:39:08 2026
+HPL_pdgesv() end time   Thu Oct  1 00:39:09 2026
+
+--------------------------------------------------------------------------------
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   0.001027706724 ...... PASSED
+||Ax-b||_oo  . . . . . . . . . . . . . . . . . = 0.0000000000495438
+||A||_oo . . . . . . . . . . . . . . . . . . . = 2619.0706346027059226
+||x||_oo . . . . . . . . . . . . . . . . . . . = 16.1904051174114052
+||b||_oo . . . . . . . . . . . . . . . . . . . = 0.4999817624622144
+================================================================================
+
+Finished      1 tests with the following results:
+              1 tests completed and passed residual checks,
+              0 tests completed and failed residual checks,
+              0 tests skipped because of illegal input values.
+--------------------------------------------------------------------------------
+
+End of Tests.
+================================================================================
