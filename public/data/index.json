@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T04:54:22.717Z",
+  "generatedAt": "2026-10-01T05:14:03.662Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -37,7 +37,7 @@
         "gpu",
         "all"
       ],
-      "count": 22
+      "count": 23
     }
   ],
   "suites": [
@@ -115,11 +115,11 @@
       ],
       "available": true,
       "missing": null,
-      "count": 16,
+      "count": 17,
       "countByCluster": {
         "launchpad": 1,
         "raijin": 0,
-        "xenon": 15
+        "xenon": 16
       }
     }
   ],
@@ -9523,6 +9523,98 @@
         "nodes": 2,
         "tasks_per_node": 4,
         "ranks": 8,
+        "partition": "gpu",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": false,
+        "reason": "Custom or unverified case — unranked",
+        "group": "custom/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true
+    },
+    {
+      "id": "xenon/MFC/Flynn/2D_shockdroplet_new",
+      "suite": "MFC",
+      "group": "Flynn",
+      "run": "2D_shockdroplet_new",
+      "cluster": "xenon",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-01T05:13:33Z",
+      "dateSource": "run",
+      "submittedAt": "2026-10-01T15:10:12+10:00",
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": "Flynn Nyhf"
+      },
+      "metric": {
+        "key": "grind",
+        "value": 0.54552548,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 130.720825,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.001369,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 4,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "parameters": {
+        "grid": "1200 × 300",
+        "cells": 360000,
+        "dimensions": 2,
+        "dt": 1.9224554520679338e-7,
+        "steps": 28222,
+        "wenoOrder": 3,
+        "wenoEps": 1e-16,
+        "riemann": "HLLC",
+        "timeStepper": "RK3",
+        "modelEqns": 2,
+        "numFluids": 2,
+        "viscous": null,
+        "surfaceTension": null,
+        "bubbles": null,
+        "equations": null,
+        "equationSource": null
+      },
+      "verification": {
+        "kind": "custom",
+        "reason": "Successful run; staged custom case hash and MFC source pin match. Physics is user supplied."
+      },
+      "convergence": null,
+      "config": {
+        "case": null,
+        "args": [],
+        "nodes": 1,
+        "tasks_per_node": 4,
+        "ranks": 4,
         "partition": "gpu",
         "gpu": "acc",
         "case_optimization": null,
