@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T00:18:29.934Z",
+  "generatedAt": "2026-10-01T00:19:08.492Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 0
+      "count": 1
     },
     {
       "name": "raijin",
@@ -82,9 +82,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 4,
+      "count": 5,
       "countByCluster": {
-        "launchpad": 0,
+        "launchpad": 1,
         "raijin": 0,
         "xenon": 4
       }
@@ -123,6 +123,47 @@
     }
   ],
   "runs": [
+    {
+      "id": "launchpad/HPL_NVIDIA/baseline/h100-2gpu-smoke",
+      "suite": "HPL_NVIDIA",
+      "group": "baseline",
+      "run": "h100-2gpu-smoke",
+      "cluster": "launchpad",
+      "clusterSource": "path",
+      "date": "2026-10-01T00:18:41Z",
+      "dateSource": "git",
+      "submittedAt": "2026-09-24T14:29:09+10:00",
+      "submitter": {
+        "name": "baseline",
+        "house": true,
+        "by": "dehaansolo"
+      },
+      "metric": null,
+      "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 10240,
+        "NB": 512,
+        "P": 1,
+        "Q": 2,
+        "variant": "cpu",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "no-result",
+      "ranking": {
+        "eligible": false,
+        "reason": "No valid performance result"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": false
+    },
     {
       "id": "raijin/HPL/Ayush/ICX-2",
       "suite": "HPL",
