@@ -1,17 +1,17 @@
 {
-  "id": "launchpad/HPL_NVIDIA/Daniel/1",
+  "id": "launchpad/HPL_NVIDIA/Daniel/2",
   "suite": "HPL_NVIDIA",
   "group": "Daniel",
-  "run": "1",
+  "run": "2",
   "cluster": "launchpad",
   "clusterSource": "path (confirmed by output)",
-  "date": "2026-10-01T04:34:44Z",
+  "date": "2026-10-01T04:44:07Z",
   "dateSource": "git",
-  "submittedAt": null,
+  "submittedAt": "2026-10-01T00:38:46Z",
   "submitter": {
     "name": "Daniel",
     "house": false,
-    "by": null
+    "by": "dehaansolo"
   },
   "metric": null,
   "secondary": [],
@@ -20,7 +20,7 @@
   "convergence": null,
   "config": {
     "N": 1000000,
-    "NB": 512,
+    "NB": 1024,
     "P": 1,
     "Q": 2,
     "variant": "nvidia",
@@ -40,14 +40,14 @@
   },
   "notes": [],
   "raw": {
-    "HPL.dat": "raw/launchpad/HPL_NVIDIA/Daniel/1/HPL.dat",
-    "run.sh": "raw/launchpad/HPL_NVIDIA/Daniel/1/run.sh",
-    "run.out": "raw/launchpad/HPL_NVIDIA/Daniel/1/run.out",
-    "run.err": "raw/launchpad/HPL_NVIDIA/Daniel/1/run.err"
+    "HPL.dat": "raw/launchpad/HPL_NVIDIA/Daniel/2/HPL.dat",
+    "run.sh": "raw/launchpad/HPL_NVIDIA/Daniel/2/run.sh",
+    "run.out": "raw/launchpad/HPL_NVIDIA/Daniel/2/run.out",
+    "run.err": "raw/launchpad/HPL_NVIDIA/Daniel/2/run.err"
   },
   "best": null,
   "dat": {
-    "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n1000000        Ns\n1            # of NBs\n512          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+    "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n1000000        Ns\n1            # of NBs\n1024          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
     "parsed": {
       "header": [
         "HPLinpack benchmark input file",
@@ -61,7 +61,7 @@
       ],
       "numNBs": 1,
       "NBs": [
-        512
+        1024
       ],
       "pmap": 1,
       "numGrids": 1,
@@ -155,19 +155,19 @@
     "memInfo": {
       "DEVICE": {
         "System": {
-          "minGiB": 5.34816,
-          "maxGiB": 5.34816,
-          "avgGiB": 5.34816
+          "minGiB": 5.21726,
+          "maxGiB": 5.21726,
+          "avgGiB": 5.21726
         },
         "HPL buffers": {
-          "minGiB": 3735.53448,
-          "maxGiB": 3739.34894,
-          "avgGiB": 3737.44171
+          "minGiB": 3743.25912,
+          "maxGiB": 3743.25912,
+          "avgGiB": 3743.25912
         },
         "Used": {
-          "minGiB": 3740.88264,
-          "maxGiB": 3744.6971,
-          "avgGiB": 3742.78987
+          "minGiB": 3748.47638,
+          "maxGiB": 3748.47638,
+          "avgGiB": 3748.47638
         },
         "Total": {
           "minGiB": 93.58398,
@@ -177,16 +177,16 @@
       },
       "HOST": {
         "HPL buffers": {
-          "minGiB": 0.00747,
-          "maxGiB": 0.00747,
-          "avgGiB": 0.00747
+          "minGiB": 0.00748,
+          "maxGiB": 0.00748,
+          "avgGiB": 0.00748
         }
       }
     },
     "traces": [
-      "[HPL TRACE] cuda_nvshmem_init: max=0.8183 (0) min=0.8183 (1)",
-      "[HPL TRACE] ncclCommInitRank: max=0.8879 (1) min=0.8879 (0)",
-      "[HPL TRACE] cugetrfs_mp_init: max=1.0127 (0) min=1.0126 (1)"
+      "[HPL TRACE] cuda_nvshmem_init: max=0.8138 (0) min=0.8138 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=0.7039 (0) min=0.7039 (1)",
+      "[HPL TRACE] cugetrfs_mp_init: max=0.9677 (1) min=0.9677 (0)"
     ],
     "startTime": null,
     "endTime": null,
@@ -195,11 +195,11 @@
   },
   "err": {
     "file": "run.err",
-    "size": 928
+    "size": 929
   },
   "detail": {
     "dat": {
-      "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n1000000        Ns\n1            # of NBs\n512          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+      "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n1000000        Ns\n1            # of NBs\n1024          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n0            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
       "parsed": {
         "header": [
           "HPLinpack benchmark input file",
@@ -213,7 +213,7 @@
         ],
         "numNBs": 1,
         "NBs": [
-          512
+          1024
         ],
         "pmap": 1,
         "numGrids": 1,
@@ -307,19 +307,19 @@
       "memInfo": {
         "DEVICE": {
           "System": {
-            "minGiB": 5.34816,
-            "maxGiB": 5.34816,
-            "avgGiB": 5.34816
+            "minGiB": 5.21726,
+            "maxGiB": 5.21726,
+            "avgGiB": 5.21726
           },
           "HPL buffers": {
-            "minGiB": 3735.53448,
-            "maxGiB": 3739.34894,
-            "avgGiB": 3737.44171
+            "minGiB": 3743.25912,
+            "maxGiB": 3743.25912,
+            "avgGiB": 3743.25912
           },
           "Used": {
-            "minGiB": 3740.88264,
-            "maxGiB": 3744.6971,
-            "avgGiB": 3742.78987
+            "minGiB": 3748.47638,
+            "maxGiB": 3748.47638,
+            "avgGiB": 3748.47638
           },
           "Total": {
             "minGiB": 93.58398,
@@ -329,16 +329,16 @@
         },
         "HOST": {
           "HPL buffers": {
-            "minGiB": 0.00747,
-            "maxGiB": 0.00747,
-            "avgGiB": 0.00747
+            "minGiB": 0.00748,
+            "maxGiB": 0.00748,
+            "avgGiB": 0.00748
           }
         }
       },
       "traces": [
-        "[HPL TRACE] cuda_nvshmem_init: max=0.8183 (0) min=0.8183 (1)",
-        "[HPL TRACE] ncclCommInitRank: max=0.8879 (1) min=0.8879 (0)",
-        "[HPL TRACE] cugetrfs_mp_init: max=1.0127 (0) min=1.0126 (1)"
+        "[HPL TRACE] cuda_nvshmem_init: max=0.8138 (0) min=0.8138 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=0.7039 (0) min=0.7039 (1)",
+        "[HPL TRACE] cugetrfs_mp_init: max=0.9677 (1) min=0.9677 (0)"
       ],
       "startTime": null,
       "endTime": null,
@@ -347,7 +347,7 @@
     },
     "err": {
       "file": "run.err",
-      "size": 928
+      "size": 929
     },
     "best": null
   }
