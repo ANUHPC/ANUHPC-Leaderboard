@@ -216,7 +216,8 @@ async function main() {
         if (typeof job.preview !== "string" || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(job.preview)) err(where, "preview must name one output variable, for example alpha1 or pres");
         if (job.visualize !== true) err(where, "preview needs visualize: true to generate Silo data");
       }
-      if (pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
+      // only xenon's "all" mixes architectures, launchpad's is one node
+      if (cname === "xenon" && pname === "all") err(where, "MFC cannot mix Haswell and Zen 3 nodes; use cpu or gpu");
       // Was rejected here on the grounds that it modifies the shared build.
       // It does not: MFC hashes the generated source into the install path,
       // so a case-optimized build lands in its own directory. It is allowed,
@@ -241,7 +242,8 @@ async function main() {
       }
       const gpu = job.build?.gpu ?? "none";
       if (!["none", "acc"].includes(gpu)) err(where, "build.gpu must be none or acc");
-      const expected = gpu === "acc" ? "nvhpc-acc" : "gcc-ompi5";
+      // per cluster from the mfc: map in toolchains.yml, xenon doesn't have one
+      const expected = cluster.toolchains?.mfc?.[gpu] ?? (gpu === "acc" ? "nvhpc-acc" : "gcc-ompi5");
       if (job.build?.toolchain && job.build.toolchain !== expected) err(where, `build.gpu=${gpu} requires toolchain ${expected}`);
       if (!Number.isInteger(r.tasks_per_node ?? 1) || (r.tasks_per_node ?? 1) < 1) err(where, "tasks_per_node must be a positive integer");
       if (!Number.isInteger(r.nodes ?? 1) || (r.nodes ?? 1) < 1) err(where, "nodes must be a positive integer");
