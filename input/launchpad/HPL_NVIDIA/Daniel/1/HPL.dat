@@ -3,7 +3,7 @@ Launchpad smoke test - 2x H100 NVL, 1x2 grid
 HPL.out      output file name (if any)
 6            device out (6=stdout,7=stderr,file)
 1            # of problems sizes (N)
-10240        Ns
+1000000        Ns
 1            # of NBs
 512          NBs
 1            PMAP process mapping (0=Row-,1=Column-major)
