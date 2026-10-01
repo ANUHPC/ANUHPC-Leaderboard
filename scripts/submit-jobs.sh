@@ -202,6 +202,23 @@ fi
 total="$(wc -l < "$joblist")"
 ids="$(cut -d: -f2 "$joblist" | paste -sd,)"
 
+# live speed from HPL-NVIDIA's progress lines in run.out, e.g.
+#   Prog= 47.09%  N_left= 112640  Time= 11.72  Time_left= 13.17  iGF= 76237.86  GF= 72343.95 ...
+# iGF is the speed over the last step, GF the running average. Empty when there is no
+# progress line (start-up, CPU HPL), so the caller falls back to the output size.
+live_perf() {  # live_perf <jobdir>
+  local f line
+  for f in "$1"/*.out; do [ -f "$f" ] || continue
+    line=$(grep -a 'Prog=' "$f" 2>/dev/null | tail -1 | sed 's/\x1b\[[0-9;]*m//g')
+    [ -n "$line" ] && break
+  done
+  [ -n "${line:-}" ] || return 0
+  awk '{ for (i = 1; i < NF; i++) v[$i] = $(i+1)
+         gsub(/%/, "", v["Prog="])
+         printf "%s%% done, now %.2f TF, avg %.2f TF (%.2f TF/GPU), ~%ds left",
+           v["Prog="], v["iGF="]/1000, v["GF="]/1000, v["GF_per="]/1000, v["Time_left="] }' <<< "$line"
+}
+
 # ------------------------------------------------------------------- wait ---
 echo "Waiting for $total job(s): $ids  (polling every ${POLL}s)"
 start_ts=$(date +%s)
@@ -221,8 +238,14 @@ while squeue -h -j "$ids" -o '%i' 2>/dev/null | grep -q .; do
     delta=$(( sz - ${last_size[$jid]:-0} )); last_size[$jid]=$sz
     case "$st" in
       PENDING) printf '  [%3dm] job %-7s PENDING    %-38s reason=%s\n' "$mins" "$jid" "$label" "$(live_reason "$jid")" ;;
-      RUNNING) printf '  [%3dm] job %-7s RUNNING    %-38s on=%s elapsed=%s out=%sB(+%s)\n' \
-                 "$mins" "$jid" "$label" "$(live_node "$jid")" "$(live_time "$jid")" "$sz" "$delta" ;;
+      RUNNING) perf="$(live_perf "$dir")"
+               if [ -n "$perf" ]; then
+                 printf '  [%3dm] job %-7s RUNNING    %-38s elapsed=%s  %s\n' \
+                   "$mins" "$jid" "$label" "$(live_time "$jid")" "$perf"
+               else
+                 printf '  [%3dm] job %-7s RUNNING    %-38s on=%s elapsed=%s out=%sB(+%s)\n' \
+                   "$mins" "$jid" "$label" "$(live_node "$jid")" "$(live_time "$jid")" "$sz" "$delta"
+               fi ;;
       *)       printf '  [%3dm] job %-7s %-10s %s\n' "$mins" "$jid" "$st" "$label" ;;
     esac
   done < "$joblist"
