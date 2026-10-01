@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T04:44:27.166Z",
+  "generatedAt": "2026-10-01T04:54:22.717Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 4
+      "count": 5
     },
     {
       "name": "raijin",
@@ -115,9 +115,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 15,
+      "count": 16,
       "countByCluster": {
-        "launchpad": 0,
+        "launchpad": 1,
         "raijin": 0,
         "xenon": 15
       }
@@ -377,6 +377,99 @@
         "testsSkipped": null
       },
       "hasErr": true
+    },
+    {
+      "id": "launchpad/MFC/Ayush/h100-hllc-01",
+      "suite": "MFC",
+      "group": "Ayush",
+      "run": "h100-hllc-01",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-01T04:53:57Z",
+      "dateSource": "run",
+      "submittedAt": "2026-10-01T04:43:42Z",
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": "dehaansolo"
+      },
+      "metric": {
+        "key": "grind",
+        "value": 0.39652046,
+        "unit": "ns/gp/eq/rhs",
+        "label": "Grind time",
+        "direction": "lower"
+      },
+      "secondary": [
+        {
+          "key": "exec",
+          "value": 57.8151185,
+          "unit": "s",
+          "label": "Simulation wall time",
+          "direction": "lower"
+        },
+        {
+          "key": "s_step",
+          "value": 0.0499971,
+          "unit": "s/step",
+          "label": "Seconds per step",
+          "direction": "lower"
+        },
+        {
+          "key": "ranks",
+          "value": 2,
+          "unit": "",
+          "label": "MPI ranks",
+          "direction": "none"
+        }
+      ],
+      "parameters": {
+        "grid": "399 × 200 × 200",
+        "cells": 15960000,
+        "dimensions": 3,
+        "dt": 5.51841541022844e-9,
+        "steps": 20,
+        "wenoOrder": 3,
+        "wenoEps": 1e-16,
+        "riemann": "HLLC",
+        "timeStepper": "RK3",
+        "modelEqns": 2,
+        "numFluids": 2,
+        "viscous": null,
+        "surfaceTension": null,
+        "bubbles": null,
+        "equations": null,
+        "equationSource": null
+      },
+      "verification": {
+        "kind": "benchmark",
+        "reason": "Pinned benchmark case"
+      },
+      "convergence": null,
+      "config": {
+        "case": "5eq_rk3_weno3_hllc",
+        "args": [],
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "ranks": 2,
+        "partition": "all",
+        "gpu": "acc",
+        "case_optimization": null,
+        "gbpp": 16,
+        "toolchain": "nvhpc-acc",
+        "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": "Pinned benchmark case",
+        "group": "5eq_rk3_weno3_hllc/GPU"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": true,
+      "rank": 1
     },
     {
       "id": "raijin/HPL/Ayush/ICX-2",
