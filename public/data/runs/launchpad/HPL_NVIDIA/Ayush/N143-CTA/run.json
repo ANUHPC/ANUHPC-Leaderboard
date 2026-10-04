@@ -1,0 +1,571 @@
+{
+  "id": "launchpad/HPL_NVIDIA/Ayush/N143-CTA",
+  "suite": "HPL_NVIDIA",
+  "group": "Ayush",
+  "run": "N143-CTA",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-04T22:43:10.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 69270,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 28.36,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.001120337724,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 143360,
+    "NB": 2048,
+    "P": 1,
+    "Q": 2,
+    "variant": "nvidia",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "provenance": {
+    "started": "Sun Oct  4 22:43:10 2026",
+    "ended": "Sun Oct  4 22:43:38 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL_NVIDIA/Ayush/N143-CTA/HPL.dat",
+    "run.sh": "raw/launchpad/HPL_NVIDIA/Ayush/N143-CTA/run.sh",
+    "run.out": "raw/launchpad/HPL_NVIDIA/Ayush/N143-CTA/run.out",
+    "run.err": "raw/launchpad/HPL_NVIDIA/Ayush/N143-CTA/run.err"
+  },
+  "best": {
+    "tv": "WC0",
+    "N": 143360,
+    "NB": 2048,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 28.36,
+    "gflops": 69270,
+    "gflopsPerGpu": 34640,
+    "startTime": "Sun Oct  4 22:43:10 2026",
+    "endTime": "Sun Oct  4 22:43:38 2026",
+    "residual": 0.001120337724,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n143360       Ns\n1            # of NBs\n2048          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        143360
+      ],
+      "numNBs": 1,
+      "NBs": [
+        2048
+      ],
+      "pmap": 1,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        3,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 1,
+      "swapThreshold": 192,
+      "L1": 1,
+      "U": 0,
+      "equilibration": 0,
+      "memoryAlignment": 8
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-n143-cta\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n# N=143360 NB=2048 at max power, sweep HPL_CTA_PER_FCT (SMs for panel factorization)\nset -uo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc CUDA_VISIBLE_DEVICES=0,1\nulimit -l unlimited; ulimit -n 65536\n\nq() { nvidia-smi -i 0 --query-gpu=\"$1\" --format=csv,noheader,nounits | cut -d. -f1; }\nPL_START=$(q power.limit); PL_MAX=$(q power.max_limit)\necho \"node $(hostname -s): power limit ${PL_START} W, max ${PL_MAX} W\"\n\ntrap 'sudo -n nvidia-smi -pl \"$PL_START\" >/dev/null' EXIT\ntrap 'exit 143' TERM INT\nsudo -n nvidia-smi -pl \"$PL_MAX\" | grep 'set to' || echo \"power limit not changed\"\n\nHPL=(\"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\")\n\nrun() {\n  local name=$1; shift\n  echo \"=== $name ===\"\n  mpirun -np \"${SLURM_NTASKS}\" \"$@\" 2>&1 | tee \"hpl-$name.log\"\n  awk -v t=\"$name\" '/^ *W[RC]/{g=$7; s=$6} END{if(g) printf \"%-14s %8.0f GFLOP/s  %6.2f s\\n\", t, g, s; else print t \": FAILED, no result\"}' \\\n    \"hpl-$name.log\" | tee -a summary.txt\n}\n\n# Baseline at the bigger N (default 16 CTAs), check the memory fits\nrun cta16 \"${HPL[@]}\"\ngrep -a -A6 'MEMORY INFO' hpl-cta16.log\ngrep -q '^cta16 ' summary.txt || { cat summary.txt; exit 1; }\n\n# Skip the component tests from here\nNOTEST=(-x HPL_CUSOLVER_MP_TESTS=0)\nfor cta in 8 24 32; do\n  run \"cta$cta\" \"${NOTEST[@]}\" -x HPL_CTA_PER_FCT=$cta \"${HPL[@]}\"\ndone\n# Default again to see run to run noise\nrun cta16-again \"${NOTEST[@]}\" \"${HPL[@]}\"\n\necho \"=== summary ===\"; cat summary.txt\n",
+    "sbatch": {
+      "job-name": "hpl-n143-cta",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "gres": "gpu:2",
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "00:30:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 28.39,
+        "gflops": 69190,
+        "gflopsPerGpu": 34590,
+        "startTime": "Sun Oct  4 22:40:47 2026",
+        "endTime": "Sun Oct  4 22:41:15 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      },
+      {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.09,
+        "gflops": 67530,
+        "gflopsPerGpu": 33760,
+        "startTime": "Sun Oct  4 22:41:24 2026",
+        "endTime": "Sun Oct  4 22:41:53 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      },
+      {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 28.5,
+        "gflops": 68910,
+        "gflopsPerGpu": 34460,
+        "startTime": "Sun Oct  4 22:42:00 2026",
+        "endTime": "Sun Oct  4 22:42:28 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      },
+      {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 28.48,
+        "gflops": 68960,
+        "gflopsPerGpu": 34480,
+        "startTime": "Sun Oct  4 22:42:35 2026",
+        "endTime": "Sun Oct  4 22:43:03 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      },
+      {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 28.36,
+        "gflops": 69270,
+        "gflopsPerGpu": 34640,
+        "startTime": "Sun Oct  4 22:43:10 2026",
+        "endTime": "Sun Oct  4 22:43:38 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "deviceInfo": {
+      "peakClockMHz": 1785,
+      "smVersion": 90,
+      "numSms": 132
+    },
+    "memInfo": {
+      "DEVICE": {
+        "System": {
+          "minGiB": 5.40817,
+          "maxGiB": 5.40817,
+          "avgGiB": 5.40817
+        },
+        "HPL buffers": {
+          "minGiB": 85.60201,
+          "maxGiB": 85.60201,
+          "avgGiB": 85.60201
+        },
+        "Used": {
+          "minGiB": 91.01018,
+          "maxGiB": 91.01018,
+          "avgGiB": 91.01018
+        },
+        "Total": {
+          "minGiB": 93.58398,
+          "maxGiB": 93.58398,
+          "avgGiB": 93.58398
+        }
+      },
+      "HOST": {
+        "HPL buffers": {
+          "minGiB": 0.00113,
+          "maxGiB": 0.00113,
+          "avgGiB": 0.00113
+        }
+      }
+    },
+    "traces": [
+      "[HPL TRACE] cuda_nvshmem_init: max=1.0457 (0) min=1.0457 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.3878 (0) min=1.3878 (1)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.4842 (1) min=1.4842 (0)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0255 (0) min=0.0255 (1)",
+      "[HPL TRACE] cuda_nvshmem_init: max=1.0234 (0) min=1.0234 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.0361 (1) min=1.0361 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.0780 (1) min=1.0780 (0)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0270 (1) min=0.0270 (0)",
+      "[HPL TRACE] cuda_nvshmem_init: max=0.7927 (0) min=0.7927 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.0204 (1) min=1.0204 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.0593 (0) min=1.0592 (1)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0267 (0) min=0.0267 (1)",
+      "[HPL TRACE] cuda_nvshmem_init: max=0.7976 (0) min=0.7976 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=0.9163 (1) min=0.9162 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=0.9549 (1) min=0.9549 (0)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0268 (0) min=0.0268 (1)",
+      "[HPL TRACE] cuda_nvshmem_init: max=0.7960 (1) min=0.7960 (0)",
+      "[HPL TRACE] ncclCommInitRank: max=1.0471 (1) min=1.0471 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.0859 (0) min=1.0858 (1)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0272 (0) min=0.0272 (1)"
+    ],
+    "startTime": "Sun Oct  4 22:43:10 2026",
+    "endTime": "Sun Oct  4 22:43:38 2026",
+    "residual": 0.001120337724,
+    "residualPassed": true
+  },
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n143360       Ns\n1            # of NBs\n2048          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          143360
+        ],
+        "numNBs": 1,
+        "NBs": [
+          2048
+        ],
+        "pmap": 1,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          3,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 1,
+        "swapThreshold": 192,
+        "L1": 1,
+        "U": 0,
+        "equilibration": 0,
+        "memoryAlignment": 8
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-n143-cta\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n# N=143360 NB=2048 at max power, sweep HPL_CTA_PER_FCT (SMs for panel factorization)\nset -uo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc CUDA_VISIBLE_DEVICES=0,1\nulimit -l unlimited; ulimit -n 65536\n\nq() { nvidia-smi -i 0 --query-gpu=\"$1\" --format=csv,noheader,nounits | cut -d. -f1; }\nPL_START=$(q power.limit); PL_MAX=$(q power.max_limit)\necho \"node $(hostname -s): power limit ${PL_START} W, max ${PL_MAX} W\"\n\ntrap 'sudo -n nvidia-smi -pl \"$PL_START\" >/dev/null' EXIT\ntrap 'exit 143' TERM INT\nsudo -n nvidia-smi -pl \"$PL_MAX\" | grep 'set to' || echo \"power limit not changed\"\n\nHPL=(\"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\")\n\nrun() {\n  local name=$1; shift\n  echo \"=== $name ===\"\n  mpirun -np \"${SLURM_NTASKS}\" \"$@\" 2>&1 | tee \"hpl-$name.log\"\n  awk -v t=\"$name\" '/^ *W[RC]/{g=$7; s=$6} END{if(g) printf \"%-14s %8.0f GFLOP/s  %6.2f s\\n\", t, g, s; else print t \": FAILED, no result\"}' \\\n    \"hpl-$name.log\" | tee -a summary.txt\n}\n\n# Baseline at the bigger N (default 16 CTAs), check the memory fits\nrun cta16 \"${HPL[@]}\"\ngrep -a -A6 'MEMORY INFO' hpl-cta16.log\ngrep -q '^cta16 ' summary.txt || { cat summary.txt; exit 1; }\n\n# Skip the component tests from here\nNOTEST=(-x HPL_CUSOLVER_MP_TESTS=0)\nfor cta in 8 24 32; do\n  run \"cta$cta\" \"${NOTEST[@]}\" -x HPL_CTA_PER_FCT=$cta \"${HPL[@]}\"\ndone\n# Default again to see run to run noise\nrun cta16-again \"${NOTEST[@]}\" \"${HPL[@]}\"\n\necho \"=== summary ===\"; cat summary.txt\n",
+      "sbatch": {
+        "job-name": "hpl-n143-cta",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "gres": "gpu:2",
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "00:30:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WC0",
+          "N": 143360,
+          "NB": 2048,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 28.39,
+          "gflops": 69190,
+          "gflopsPerGpu": 34590,
+          "startTime": "Sun Oct  4 22:40:47 2026",
+          "endTime": "Sun Oct  4 22:41:15 2026",
+          "residual": 0.001120337724,
+          "residualPassed": true
+        },
+        {
+          "tv": "WC0",
+          "N": 143360,
+          "NB": 2048,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 29.09,
+          "gflops": 67530,
+          "gflopsPerGpu": 33760,
+          "startTime": "Sun Oct  4 22:41:24 2026",
+          "endTime": "Sun Oct  4 22:41:53 2026",
+          "residual": 0.001120337724,
+          "residualPassed": true
+        },
+        {
+          "tv": "WC0",
+          "N": 143360,
+          "NB": 2048,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 28.5,
+          "gflops": 68910,
+          "gflopsPerGpu": 34460,
+          "startTime": "Sun Oct  4 22:42:00 2026",
+          "endTime": "Sun Oct  4 22:42:28 2026",
+          "residual": 0.001120337724,
+          "residualPassed": true
+        },
+        {
+          "tv": "WC0",
+          "N": 143360,
+          "NB": 2048,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 28.48,
+          "gflops": 68960,
+          "gflopsPerGpu": 34480,
+          "startTime": "Sun Oct  4 22:42:35 2026",
+          "endTime": "Sun Oct  4 22:43:03 2026",
+          "residual": 0.001120337724,
+          "residualPassed": true
+        },
+        {
+          "tv": "WC0",
+          "N": 143360,
+          "NB": 2048,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 28.36,
+          "gflops": 69270,
+          "gflopsPerGpu": 34640,
+          "startTime": "Sun Oct  4 22:43:10 2026",
+          "endTime": "Sun Oct  4 22:43:38 2026",
+          "residual": 0.001120337724,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "deviceInfo": {
+        "peakClockMHz": 1785,
+        "smVersion": 90,
+        "numSms": 132
+      },
+      "memInfo": {
+        "DEVICE": {
+          "System": {
+            "minGiB": 5.40817,
+            "maxGiB": 5.40817,
+            "avgGiB": 5.40817
+          },
+          "HPL buffers": {
+            "minGiB": 85.60201,
+            "maxGiB": 85.60201,
+            "avgGiB": 85.60201
+          },
+          "Used": {
+            "minGiB": 91.01018,
+            "maxGiB": 91.01018,
+            "avgGiB": 91.01018
+          },
+          "Total": {
+            "minGiB": 93.58398,
+            "maxGiB": 93.58398,
+            "avgGiB": 93.58398
+          }
+        },
+        "HOST": {
+          "HPL buffers": {
+            "minGiB": 0.00113,
+            "maxGiB": 0.00113,
+            "avgGiB": 0.00113
+          }
+        }
+      },
+      "traces": [
+        "[HPL TRACE] cuda_nvshmem_init: max=1.0457 (0) min=1.0457 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.3878 (0) min=1.3878 (1)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.4842 (1) min=1.4842 (0)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0255 (0) min=0.0255 (1)",
+        "[HPL TRACE] cuda_nvshmem_init: max=1.0234 (0) min=1.0234 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.0361 (1) min=1.0361 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.0780 (1) min=1.0780 (0)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0270 (1) min=0.0270 (0)",
+        "[HPL TRACE] cuda_nvshmem_init: max=0.7927 (0) min=0.7927 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.0204 (1) min=1.0204 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.0593 (0) min=1.0592 (1)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0267 (0) min=0.0267 (1)",
+        "[HPL TRACE] cuda_nvshmem_init: max=0.7976 (0) min=0.7976 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=0.9163 (1) min=0.9162 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=0.9549 (1) min=0.9549 (0)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0268 (0) min=0.0268 (1)",
+        "[HPL TRACE] cuda_nvshmem_init: max=0.7960 (1) min=0.7960 (0)",
+        "[HPL TRACE] ncclCommInitRank: max=1.0471 (1) min=1.0471 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.0859 (0) min=1.0858 (1)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0272 (0) min=0.0272 (1)"
+      ],
+      "startTime": "Sun Oct  4 22:43:10 2026",
+      "endTime": "Sun Oct  4 22:43:38 2026",
+      "residual": 0.001120337724,
+      "residualPassed": true
+    },
+    "err": null,
+    "best": {
+      "tv": "WC0",
+      "N": 143360,
+      "NB": 2048,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 28.36,
+      "gflops": 69270,
+      "gflopsPerGpu": 34640,
+      "startTime": "Sun Oct  4 22:43:10 2026",
+      "endTime": "Sun Oct  4 22:43:38 2026",
+      "residual": 0.001120337724,
+      "residualPassed": true
+    }
+  }
+}
