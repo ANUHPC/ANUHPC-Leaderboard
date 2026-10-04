@@ -1,0 +1,356 @@
+{
+  "id": "launchpad/HPL_NVIDIA/Ayush/CPU-tuning",
+  "suite": "HPL_NVIDIA",
+  "group": "Ayush",
+  "run": "CPU-tuning",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-04T22:17:39Z",
+  "dateSource": "git",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": null,
+  "secondary": [],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 139264,
+    "NB": 2048,
+    "P": 1,
+    "Q": 2,
+    "variant": "nvidia",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "provenance": {
+    "started": null,
+    "ended": null
+  },
+  "status": "no-result",
+  "ranking": {
+    "eligible": false,
+    "reason": "No valid performance result"
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL_NVIDIA/Ayush/CPU-tuning/HPL.dat",
+    "run.sh": "raw/launchpad/HPL_NVIDIA/Ayush/CPU-tuning/run.sh",
+    "run.out": "raw/launchpad/HPL_NVIDIA/Ayush/CPU-tuning/run.out",
+    "run.err": "raw/launchpad/HPL_NVIDIA/Ayush/CPU-tuning/run.err"
+  },
+  "best": null,
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n139264       Ns\n1            # of NBs\n2048          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        139264
+      ],
+      "numNBs": 1,
+      "NBs": [
+        2048
+      ],
+      "pmap": 1,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        3,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 1,
+      "swapThreshold": 192,
+      "L1": 1,
+      "U": 0,
+      "equilibration": 0,
+      "memoryAlignment": 8
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-cpu-tuning\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n# CPU tuning: Test03 config at max power, CPU binding + comm settings\nset -uo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc CUDA_VISIBLE_DEVICES=0,1\nulimit -l unlimited; ulimit -n 65536\n\nq() { nvidia-smi -i 0 --query-gpu=\"$1\" --format=csv,noheader,nounits | cut -d. -f1; }\nPL_START=$(q power.limit); PL_MAX=$(q power.max_limit)\necho \"node $(hostname -s): power limit ${PL_START} W, max ${PL_MAX} W\"\nnvidia-smi topo -m\n\n# Put the power limit back to what it was before the job\ntrap 'sudo -n nvidia-smi -pl \"$PL_START\" >/dev/null' EXIT\ntrap 'exit 143' TERM INT\nsudo -n nvidia-smi -pl \"$PL_MAX\" | grep 'set to' || echo \"power limit not changed\"\n\nHPL=(\"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\")\n# Both GPUs are on NUMA 0 (cores 0-31), 16 cores each\nPIN=(--cpu-affinity 0-15:16-31 --mem-affinity 0:0 --gpu-affinity 0:1)\n\nrun() {\n  local name=$1; shift\n  echo \"=== $name ===\"\n  mpirun -np \"${SLURM_NTASKS}\" --report-bindings \"$@\" 2>&1 | tee \"hpl-$name.log\"\n  awk -v t=\"$name\" '/^ *W[RC]/{g=$7; s=$6} END{if(g) printf \"%-14s %8.0f GFLOP/s  %6.2f s\\n\", t, g, s; else print t \": FAILED, no result\"}' \\\n    \"hpl-$name.log\" | tee -a summary.txt\n}\n\n# Baseline, same as Test03\nrun default \"${HPL[@]}\"\ngrep -q '^default ' summary.txt || { cat summary.txt; exit 1; }\n\n# Skip the component tests from here, saves ~1 min a run\nNOTEST=(-x HPL_CUSOLVER_MP_TESTS=0)\nrun pinned        \"${NOTEST[@]}\" --bind-to none \"${HPL[@]}\" \"${PIN[@]}\"\nrun pinned-fct1   \"${NOTEST[@]}\" -x HPL_FCT_COMM_POLICY=1 --bind-to none \"${HPL[@]}\" \"${PIN[@]}\"\nrun pinned-swap   \"${NOTEST[@]}\" -x HPL_NVSHMEM_SWAP=1 --bind-to none \"${HPL[@]}\" \"${PIN[@]}\"\n# Default again to see run to run noise\nrun default-again \"${NOTEST[@]}\" \"${HPL[@]}\"\n\necho \"=== summary ===\"; cat summary.txt\n",
+    "sbatch": {
+      "job-name": "hpl-cpu-tuning",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "gres": "gpu:2",
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "00:30:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [],
+    "summary": {
+      "testsTotal": null,
+      "testsPassed": null,
+      "testsFailed": null,
+      "testsSkipped": null
+    },
+    "deviceInfo": {
+      "peakClockMHz": 1785,
+      "smVersion": 90,
+      "numSms": 132
+    },
+    "memInfo": {
+      "DEVICE": {
+        "System": {
+          "minGiB": 5.06451,
+          "maxGiB": 5.06451,
+          "avgGiB": 5.06451
+        },
+        "HPL buffers": {
+          "minGiB": 81.13303,
+          "maxGiB": 81.13303,
+          "avgGiB": 81.13303
+        },
+        "Used": {
+          "minGiB": 86.19754,
+          "maxGiB": 86.19754,
+          "avgGiB": 86.19754
+        },
+        "Total": {
+          "minGiB": 93.58398,
+          "maxGiB": 93.58398,
+          "avgGiB": 93.58398
+        }
+      },
+      "HOST": {
+        "HPL buffers": {
+          "minGiB": 0.0011,
+          "maxGiB": 0.0011,
+          "avgGiB": 0.0011
+        }
+      }
+    },
+    "traces": [
+      "[HPL TRACE] cuda_nvshmem_init: max=1.0284 (0) min=1.0284 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.4077 (1) min=1.4077 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.4960 (1) min=1.4959 (0)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0244 (0) min=0.0244 (1)"
+    ],
+    "startTime": null,
+    "endTime": null,
+    "residual": null,
+    "residualPassed": null
+  },
+  "err": {
+    "file": "run.err",
+    "size": 123
+  },
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n139264       Ns\n1            # of NBs\n2048          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          139264
+        ],
+        "numNBs": 1,
+        "NBs": [
+          2048
+        ],
+        "pmap": 1,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          3,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 1,
+        "swapThreshold": 192,
+        "L1": 1,
+        "U": 0,
+        "equilibration": 0,
+        "memoryAlignment": 8
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-cpu-tuning\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=00:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n# CPU tuning: Test03 config at max power, CPU binding + comm settings\nset -uo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc CUDA_VISIBLE_DEVICES=0,1\nulimit -l unlimited; ulimit -n 65536\n\nq() { nvidia-smi -i 0 --query-gpu=\"$1\" --format=csv,noheader,nounits | cut -d. -f1; }\nPL_START=$(q power.limit); PL_MAX=$(q power.max_limit)\necho \"node $(hostname -s): power limit ${PL_START} W, max ${PL_MAX} W\"\nnvidia-smi topo -m\n\n# Put the power limit back to what it was before the job\ntrap 'sudo -n nvidia-smi -pl \"$PL_START\" >/dev/null' EXIT\ntrap 'exit 143' TERM INT\nsudo -n nvidia-smi -pl \"$PL_MAX\" | grep 'set to' || echo \"power limit not changed\"\n\nHPL=(\"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\")\n# Both GPUs are on NUMA 0 (cores 0-31), 16 cores each\nPIN=(--cpu-affinity 0-15:16-31 --mem-affinity 0:0 --gpu-affinity 0:1)\n\nrun() {\n  local name=$1; shift\n  echo \"=== $name ===\"\n  mpirun -np \"${SLURM_NTASKS}\" --report-bindings \"$@\" 2>&1 | tee \"hpl-$name.log\"\n  awk -v t=\"$name\" '/^ *W[RC]/{g=$7; s=$6} END{if(g) printf \"%-14s %8.0f GFLOP/s  %6.2f s\\n\", t, g, s; else print t \": FAILED, no result\"}' \\\n    \"hpl-$name.log\" | tee -a summary.txt\n}\n\n# Baseline, same as Test03\nrun default \"${HPL[@]}\"\ngrep -q '^default ' summary.txt || { cat summary.txt; exit 1; }\n\n# Skip the component tests from here, saves ~1 min a run\nNOTEST=(-x HPL_CUSOLVER_MP_TESTS=0)\nrun pinned        \"${NOTEST[@]}\" --bind-to none \"${HPL[@]}\" \"${PIN[@]}\"\nrun pinned-fct1   \"${NOTEST[@]}\" -x HPL_FCT_COMM_POLICY=1 --bind-to none \"${HPL[@]}\" \"${PIN[@]}\"\nrun pinned-swap   \"${NOTEST[@]}\" -x HPL_NVSHMEM_SWAP=1 --bind-to none \"${HPL[@]}\" \"${PIN[@]}\"\n# Default again to see run to run noise\nrun default-again \"${NOTEST[@]}\" \"${HPL[@]}\"\n\necho \"=== summary ===\"; cat summary.txt\n",
+      "sbatch": {
+        "job-name": "hpl-cpu-tuning",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "gres": "gpu:2",
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "00:30:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [],
+      "summary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "deviceInfo": {
+        "peakClockMHz": 1785,
+        "smVersion": 90,
+        "numSms": 132
+      },
+      "memInfo": {
+        "DEVICE": {
+          "System": {
+            "minGiB": 5.06451,
+            "maxGiB": 5.06451,
+            "avgGiB": 5.06451
+          },
+          "HPL buffers": {
+            "minGiB": 81.13303,
+            "maxGiB": 81.13303,
+            "avgGiB": 81.13303
+          },
+          "Used": {
+            "minGiB": 86.19754,
+            "maxGiB": 86.19754,
+            "avgGiB": 86.19754
+          },
+          "Total": {
+            "minGiB": 93.58398,
+            "maxGiB": 93.58398,
+            "avgGiB": 93.58398
+          }
+        },
+        "HOST": {
+          "HPL buffers": {
+            "minGiB": 0.0011,
+            "maxGiB": 0.0011,
+            "avgGiB": 0.0011
+          }
+        }
+      },
+      "traces": [
+        "[HPL TRACE] cuda_nvshmem_init: max=1.0284 (0) min=1.0284 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.4077 (1) min=1.4077 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.4960 (1) min=1.4959 (0)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0244 (0) min=0.0244 (1)"
+      ],
+      "startTime": null,
+      "endTime": null,
+      "residual": null,
+      "residualPassed": null
+    },
+    "err": {
+      "file": "run.err",
+      "size": 123
+    },
+    "best": null
+  }
+}
