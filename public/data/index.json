@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T06:38:16.015Z",
+  "generatedAt": "2026-10-04T22:14:34.398Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 13
+      "count": 14
     },
     {
       "name": "raijin",
@@ -82,9 +82,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 16,
+      "count": 17,
       "countByCluster": {
-        "launchpad": 12,
+        "launchpad": 13,
         "raijin": 0,
         "xenon": 4
       }
@@ -368,6 +368,87 @@
       "rank": 3
     },
     {
+      "id": "launchpad/HPL_NVIDIA/Ayush/Power-sweep",
+      "suite": "HPL_NVIDIA",
+      "group": "Ayush",
+      "run": "Power-sweep",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-04T22:04:44.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 68690,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 26.21,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.001089464146,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 139264,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 139264,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 26.21,
+        "gflops": 68690,
+        "gflopsPerGpu": 34340,
+        "startTime": "Sun Oct  4 22:04:44 2026",
+        "endTime": "Sun Oct  4 22:05:10 2026",
+        "residual": 0.001089464146,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 4
+    },
+    {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test04",
       "suite": "HPL_NVIDIA",
       "group": "Ayush",
@@ -446,7 +527,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 4
+      "rank": 5
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test01",
@@ -527,7 +608,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 5
+      "rank": 6
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/4",
@@ -608,7 +689,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 6
+      "rank": 7
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Low-power-test",
@@ -689,7 +770,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 7
+      "rank": 8
     },
     {
       "id": "launchpad/HPL_NVIDIA/baseline/h100-2gpu-smoke",
@@ -770,7 +851,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 8
+      "rank": 9
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/test_run",
@@ -851,7 +932,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 9
+      "rank": 10
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Low-power",
