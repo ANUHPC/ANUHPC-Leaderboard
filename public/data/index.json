@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T00:03:53.173Z",
+  "generatedAt": "2026-10-05T01:21:41.497Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 24
+      "count": 26
     },
     {
       "name": "raijin",
@@ -82,9 +82,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 27,
+      "count": 29,
       "countByCluster": {
-        "launchpad": 23,
+        "launchpad": 25,
         "raijin": 0,
         "xenon": 4
       }
@@ -124,6 +124,168 @@
     }
   ],
   "runs": [
+    {
+      "id": "launchpad/HPL_NVIDIA/Ayush/UNM-Vboost",
+      "suite": "HPL_NVIDIA",
+      "group": "Ayush",
+      "run": "UNM-Vboost",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-05T00:46:27.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 71110,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 30.06,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 30.06,
+        "gflops": 71110,
+        "gflopsPerGpu": 35560,
+        "startTime": "Mon Oct  5 00:46:27 2026",
+        "endTime": "Mon Oct  5 00:46:57 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": true,
+      "rank": 1
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Ayush/Vboost-Sweep",
+      "suite": "HPL_NVIDIA",
+      "group": "Ayush",
+      "run": "Vboost-Sweep",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-05T01:13:21.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 70740,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 27.77,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.001120337724,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 27.77,
+        "gflops": 70740,
+        "gflopsPerGpu": 35370,
+        "startTime": "Mon Oct  5 01:13:21 2026",
+        "endTime": "Mon Oct  5 01:13:49 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 2
+    },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Fan-Full",
       "suite": "HPL_NVIDIA",
@@ -203,7 +365,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 1
+      "rank": 3
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/HPL-Params",
@@ -284,7 +446,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 2
+      "rank": 4
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Chunk-Sweep",
@@ -365,7 +527,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 3
+      "rank": 5
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Fan-OS",
@@ -446,7 +608,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 4
+      "rank": 6
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/NV-Layout",
@@ -527,7 +689,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 5
+      "rank": 7
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Mem-1593",
@@ -608,7 +770,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 6
+      "rank": 8
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/N143-CTA",
@@ -689,7 +851,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 7
+      "rank": 9
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Tune",
@@ -770,7 +932,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 8
+      "rank": 10
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Rankfile",
@@ -851,7 +1013,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 9
+      "rank": 11
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test03",
@@ -932,7 +1094,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 10
+      "rank": 12
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test02",
@@ -1013,7 +1175,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 11
+      "rank": 13
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test05",
@@ -1094,7 +1256,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 12
+      "rank": 14
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Power-sweep",
@@ -1175,7 +1337,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 13
+      "rank": 15
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test04",
@@ -1256,7 +1418,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 14
+      "rank": 16
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test01",
@@ -1337,7 +1499,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 15
+      "rank": 17
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/4",
@@ -1418,7 +1580,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 16
+      "rank": 18
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Low-power-test",
@@ -1499,7 +1661,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 17
+      "rank": 19
     },
     {
       "id": "launchpad/HPL_NVIDIA/baseline/h100-2gpu-smoke",
@@ -1580,7 +1742,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 18
+      "rank": 20
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/test_run",
@@ -1661,7 +1823,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 19
+      "rank": 21
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/CPU-tuning",
