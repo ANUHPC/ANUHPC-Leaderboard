@@ -16,7 +16,7 @@ interface LeaderboardTableProps {
     suite: string;
 }
 
-type SortField = 'gflops' | 'group' | 'run' | 'timeSec' | 'cluster';
+type SortField = 'gflops' | 'efficiency' | 'group' | 'run' | 'timeSec' | 'cluster';
 type SortDirection = 'asc' | 'desc';
 
 export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite }) => {
@@ -46,7 +46,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
         } else {
             setSortField(field);
-            setSortDirection(field === 'gflops' ? 'desc' : 'asc');
+            setSortDirection(field === 'gflops' || field === 'efficiency' ? 'desc' : 'asc');
         }
     };
 
@@ -69,6 +69,8 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
 
     // decide which runs to display
     const runsToDisplay = showBestPerGroup ? bestPerGroupRuns : runs;
+    // only clusters with CPU peak specs have one, so hide the column otherwise
+    const showEfficiency = runsToDisplay.some((r) => r.efficiency);
 
     const sortedRuns = [...runsToDisplay].sort((a, b) => {
         let aValue: string | number;
@@ -78,6 +80,10 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
             case 'gflops':
                 aValue = getPrimaryMetric(a);
                 bValue = getPrimaryMetric(b);
+                break;
+            case 'efficiency':
+                aValue = a.efficiency?.value ?? -Infinity;
+                bValue = b.efficiency?.value ?? -Infinity;
                 break;
             case 'timeSec':
                 aValue = (a.best && 'timeSec' in a.best ? a.best.timeSec : null) ?? 0;
@@ -156,6 +162,19 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                     {best.gflops.toLocaleString()} GFLOPS
                 </div>
             </>
+        );
+    };
+
+    const renderEfficiency = (run: BenchmarkRun) => {
+        const e = run.efficiency;
+        if (!e) return <span className="text-gray-400">N/A</span>;
+        return (
+            <div title={`Rmax / Rpeak, Rpeak = ${e.basis.ghz} GHz × ${e.basis.coresPerNode * e.basis.nodes} cores × ${e.basis.flopsPerCycle} FLOPs/cycle`}>
+                <div className="text-sm font-semibold text-gray-900">{(e.value * 100).toFixed(1)}%</div>
+                <div className="text-xs text-gray-500">
+                    of {formatGflops(e.rpeakGflops)} Rpeak
+                </div>
+            </div>
         );
     };
 
@@ -242,6 +261,17 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                     <SortIcon field="gflops" />
                                 </div>
                             </th>
+                            {showEfficiency && (
+                                <th
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                                    onClick={() => handleSort('efficiency')}
+                                >
+                                    <div className="flex items-center space-x-1">
+                                        <span>Efficiency</span>
+                                        <SortIcon field="efficiency" />
+                                    </div>
+                                </th>
+                            )}
                             <th
                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                                 onClick={() => handleSort('timeSec')}
@@ -285,6 +315,11 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ runs, suite 
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     {renderPrimaryMetric(run)}
                                 </td>
+                                {showEfficiency && (
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {renderEfficiency(run)}
+                                    </td>
+                                )}
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm text-gray-900">
                                         {run.best && 'timeSec' in run.best && (run.best.timeSec ?? 0) > 0

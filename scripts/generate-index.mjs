@@ -103,6 +103,8 @@ function scanRuns() {
                             verification: data.verification ?? null,
                             convergence: data.convergence ?? null,
                             config:      data.config ?? {},
+                            // HPL CPU Rmax / Rpeak, from collect.mjs on main
+                            efficiency:  data.efficiency ?? null,
                             status:      data.status ?? null,
                             ranking:     data.ranking,
                             raw:         data.raw ?? {},

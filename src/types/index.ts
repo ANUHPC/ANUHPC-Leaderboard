@@ -5,6 +5,16 @@ export interface HplBest {
     timeSec: number;
 }
 
+/** Rmax / Rpeak for CPU HPL, written by collect.mjs on main. */
+export interface HplEfficiency {
+    /** Fraction of Rpeak, 0..1. */
+    value: number;
+    rpeakGflops: number;
+    basis: { ghz: number; coresPerNode: number; nodes: number; flopsPerCycle: number };
+    /** The same run against the all-core clock it actually held, if measured. */
+    measuredClock: { ghz: number; rpeakGflops: number; value: number } | null;
+}
+
 export interface BenchmarkRun {
     id: string;
     suite: string;
@@ -12,6 +22,8 @@ export interface BenchmarkRun {
     run: string;
     cluster: string | null;
     best: HplBest | null;
+    /** null where the cluster has no CPU peak specs, and for GPU runs. */
+    efficiency?: HplEfficiency | null;
     outSummary: {
         testsTotal: number | null;
         testsPassed: number | null;

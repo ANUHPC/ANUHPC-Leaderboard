@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
-import {Clock, Cpu, Database, FileText, Play, Settings, X, Zap, Copy} from 'lucide-react';
+import {Clock, Cpu, Database, FileText, Gauge, Play, Settings, X, Zap, Copy} from 'lucide-react';
+import type {HplEfficiency} from '../types';
 
 interface RunDetailsData {
     id: string;
@@ -43,6 +44,7 @@ interface RunDetailsData {
         residualPassed?: boolean;
     };
     err?: any;
+    efficiency?: HplEfficiency | null;
     best: {
         gflops: number;
         N: number;
@@ -165,7 +167,7 @@ export const RunDetailsModal: React.FC<RunDetailsModalProps> = ({
                     {runData && !loading && !error && (
                         <div className="p-6 space-y-6">
                             {/* Overview */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className={`grid grid-cols-1 gap-4 ${runData.efficiency ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
                                 <div className="bg-blue-50 rounded-lg p-4">
                                     <div className="flex items-center space-x-2 mb-2">
                                         <Zap className="w-5 h-5 text-blue-600"/>
@@ -178,6 +180,31 @@ export const RunDetailsModal: React.FC<RunDetailsModalProps> = ({
                                         {runData.best.gflops.toLocaleString()} GFLOPS
                                     </div>
                                 </div>
+
+                                {runData.efficiency && (
+                                    <div className="bg-amber-50 rounded-lg p-4">
+                                        <div className="flex items-center space-x-2 mb-2">
+                                            <Gauge className="w-5 h-5 text-amber-600"/>
+                                            <span className="font-medium text-amber-900">Efficiency</span>
+                                        </div>
+                                        <div className="text-2xl font-bold text-amber-600">
+                                            {(runData.efficiency.value * 100).toFixed(1)}%
+                                        </div>
+                                        <div className="text-sm text-amber-700">
+                                            of {runData.efficiency.rpeakGflops.toLocaleString()} GFLOPS Rpeak
+                                        </div>
+                                        <div className="mt-1 text-xs text-amber-700/80">
+                                            {runData.efficiency.basis.ghz} GHz × {runData.efficiency.basis.coresPerNode * runData.efficiency.basis.nodes} cores
+                                            × {runData.efficiency.basis.flopsPerCycle} FLOPs/cycle
+                                        </div>
+                                        {runData.efficiency.measuredClock && (
+                                            <div className="mt-1 text-xs text-amber-700/80">
+                                                {(runData.efficiency.measuredClock.value * 100).toFixed(1)}% at the
+                                                {' '}{runData.efficiency.measuredClock.ghz.toFixed(2)} GHz it held
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
 
                                 <div className="bg-green-50 rounded-lg p-4">
                                     <div className="flex items-center space-x-2 mb-2">
