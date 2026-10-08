@@ -28,8 +28,9 @@ export function RunDetailsOverlay() {
             setRunData(null);
             try {
                 const res = await fetch(
-                    // collect.mjs writes data/runs/<cluster>/<suite>/<group>/<run>/run.json
-                    `${import.meta.env.BASE_URL}data/runs/${[cluster, suiteId, group, ...runPath.split('/')].map(encodeURIComponent).join('/')}/run.json`,
+                    // collect.mjs writes data/runs/<cluster>/<suite>/<group>/<run>/run.json.
+                    // Pages caches for 10 min; bust it like index.json so a redeploy shows at once
+                    `${import.meta.env.BASE_URL}data/runs/${[cluster, suiteId, group, ...runPath.split('/')].map(encodeURIComponent).join('/')}/run.json?t=${Date.now()}`,
                     { signal: controller.signal }
                 );
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
