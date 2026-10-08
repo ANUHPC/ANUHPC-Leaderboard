@@ -221,6 +221,8 @@ live_perf() {  # live_perf <jobdir>
 
 # cpu xhpl built with -DHPL_PROGRESS_REPORT (suites/HPL/build-launchpad.sh) prints per panel
 #   Column=000012288 Fraction= 3.7% Gflops=2.345e+03
+# intel's xhpl (HPL_LOG=1) prints the host first, fraction as 0-1 and Mflops
+#   scc-connect-03-gpu01 : Column=045696 Fraction=0.145 Kernel=4243366.24 Mflops=4294235.00
 # Fraction is columns, not work: the trailing matrix shrinks, so 19% of columns is ~46% of
 # the flops. N isn't on the line, so take the N from the header that matches the fraction
 # (a sweep has several). Gflops is the average since the solve started; time left assumes
@@ -232,11 +234,16 @@ live_cpu() {  # live_cpu <jobdir>
   for f in "$1"/*.out; do [ -f "$f" ] || continue
     awk -v mhz="$mhz" '
       /^N +:/   { for (i = 3; i <= NF; i++) if ($i ~ /^[0-9]+$/) ns[++k] = $i }
-      /^Column=/ { line = $0 }
+      /^Column=|^[^ ]+ : Column=/ { line = $0 }
       END {
         if (line) {
-          gsub(/[=%]/, " ", line); split(line, v, " ")
-          j = v[2] + 0; frac = v[4] + 0; gf = v[6] + 0
+          gsub(/[=%]/, " ", line); nv = split(line, v, " ")
+          for (i = 1; i < nv; i++) {
+            if (v[i] == "Column")   j = v[i+1] + 0
+            if (v[i] == "Fraction") frac = v[i+1] + 0
+            if (v[i] == "Gflops")   gf = v[i+1] + 0
+            if (v[i] == "Mflops") { gf = v[i+1] / 1000; frac *= 100 }
+          }
           for (i = 1; i <= k; i++) {
             if (ns[i] <= j) continue
             d = j * 100 / ns[i] - frac; if (d < 0) d = -d
