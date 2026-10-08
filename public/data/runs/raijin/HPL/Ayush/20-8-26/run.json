@@ -50,6 +50,7 @@
     "cpus_per_task": 1,
     "partition": "batch"
   },
+  "efficiency": null,
   "provenance": {
     "started": "Thu Aug 20 05:06:17 2026",
     "ended": "Thu Aug 20 05:44:42 2026"

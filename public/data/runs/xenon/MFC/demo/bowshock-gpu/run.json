@@ -62,6 +62,7 @@
     "toolchain": "nvhpc-acc",
     "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51"
   },
+  "efficiency": null,
   "provenance": {
     "case_source": "custom",
     "mfc_sha": "e2f0e267395487b72cc12f30fd77bcc4aa106d51",

@@ -50,6 +50,21 @@
     "cpus_per_task": 32,
     "partition": "all"
   },
+  "efficiency": {
+    "value": 0.64287109375,
+    "rpeakGflops": 5120,
+    "basis": {
+      "ghz": 2.5,
+      "coresPerNode": 64,
+      "nodes": 1,
+      "flopsPerCycle": 32
+    },
+    "measuredClock": {
+      "ghz": 2.297,
+      "rpeakGflops": 4704.256,
+      "value": 0.6996855613299956
+    }
+  },
   "provenance": {
     "started": "Thu Oct  8 09:45:56 2026",
     "ended": "Thu Oct  8 11:50:56 2026"

@@ -29,6 +29,7 @@
     "cpus_per_task": 8,
     "partition": "gpu"
   },
+  "efficiency": null,
   "provenance": {
     "started": null,
     "ended": null

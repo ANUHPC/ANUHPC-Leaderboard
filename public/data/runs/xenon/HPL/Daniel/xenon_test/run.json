@@ -50,6 +50,7 @@
     "cpus_per_task": 9,
     "partition": "cpu"
   },
+  "efficiency": null,
   "provenance": {
     "started": "Thu Sep 17 03:05:16 2026",
     "ended": "Thu Sep 17 03:05:26 2026"
