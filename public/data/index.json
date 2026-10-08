@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T00:33:04.077Z",
+  "generatedAt": "2026-10-08T00:41:21.090Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 28
+      "count": 29
     },
     {
       "name": "raijin",
@@ -82,9 +82,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 31,
+      "count": 32,
       "countByCluster": {
-        "launchpad": 27,
+        "launchpad": 28,
         "raijin": 0,
         "xenon": 4
       }
@@ -1826,6 +1826,87 @@
       "rank": 21
     },
     {
+      "id": "launchpad/HPL_NVIDIA/Aden/Single-GPU",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "Single-GPU",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T00:34:21.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 35640,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 20.39,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.001199784843,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 102912,
+        "NB": 1536,
+        "P": 1,
+        "Q": 1,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 1,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 102912,
+        "NB": 1536,
+        "P": 1,
+        "Q": 1,
+        "timeSec": 20.39,
+        "gflops": 35640,
+        "gflopsPerGpu": 35640,
+        "startTime": "Thu Oct  8 00:34:21 2026",
+        "endTime": "Thu Oct  8 00:34:41 2026",
+        "residual": 0.001199784843,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 22
+    },
+    {
       "id": "launchpad/HPL_NVIDIA/baseline/h100-2gpu-smoke",
       "suite": "HPL_NVIDIA",
       "group": "baseline",
@@ -1904,7 +1985,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 22
+      "rank": 23
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/test_run",
@@ -1985,7 +2066,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 23
+      "rank": 24
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/CPU-tuning",
