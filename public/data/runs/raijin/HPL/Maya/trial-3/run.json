@@ -195,7 +195,8 @@
       "testsPassed": 1,
       "testsFailed": 0,
       "testsSkipped": 0
-    }
+    },
+    "hostInfo": null
   },
   "err": {
     "file": "run.sh-68.err",
@@ -318,7 +319,8 @@
         "testsPassed": 1,
         "testsFailed": 0,
         "testsSkipped": 0
-      }
+      },
+      "hostInfo": null
     },
     "err": {
       "file": "run.sh-68.err",

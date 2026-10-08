@@ -242,7 +242,8 @@
     "startTime": "Thu Sep 24 04:25:45 2026",
     "endTime": "Thu Sep 24 04:26:26 2026",
     "residual": 0.000445944836,
-    "residualPassed": true
+    "residualPassed": true,
+    "hostInfo": null
   },
   "err": null,
   "detail": {
@@ -408,7 +409,8 @@
       "startTime": "Thu Sep 24 04:25:45 2026",
       "endTime": "Thu Sep 24 04:26:26 2026",
       "residual": 0.000445944836,
-      "residualPassed": true
+      "residualPassed": true,
+      "hostInfo": null
     },
     "err": null,
     "best": {

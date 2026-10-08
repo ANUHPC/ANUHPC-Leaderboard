@@ -264,7 +264,8 @@
     "startTime": "Mon Oct  5 00:46:27 2026",
     "endTime": "Mon Oct  5 00:46:57 2026",
     "residual": 0.000866088612,
-    "residualPassed": true
+    "residualPassed": true,
+    "hostInfo": null
   },
   "err": {
     "file": "run.err",
@@ -455,7 +456,8 @@
       "startTime": "Mon Oct  5 00:46:27 2026",
       "endTime": "Mon Oct  5 00:46:57 2026",
       "residual": 0.000866088612,
-      "residualPassed": true
+      "residualPassed": true,
+      "hostInfo": null
     },
     "err": {
       "file": "run.err",

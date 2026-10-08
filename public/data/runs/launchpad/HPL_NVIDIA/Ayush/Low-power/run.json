@@ -146,7 +146,8 @@
       "testsPassed": null,
       "testsFailed": null,
       "testsSkipped": null
-    }
+    },
+    "hostInfo": null
   },
   "err": null,
   "detail": {
@@ -250,7 +251,8 @@
         "testsPassed": null,
         "testsFailed": null,
         "testsSkipped": null
-      }
+      },
+      "hostInfo": null
     },
     "err": null,
     "best": null

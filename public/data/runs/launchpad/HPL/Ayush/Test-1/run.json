@@ -192,6 +192,18 @@
       "testsPassed": 1,
       "testsFailed": 0,
       "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+      "ranks": "2 x 32 threads",
+      "blas": "/data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so",
+      "mpi": "mpirun (Open MPI) 4.1.6",
+      "clockMHz": {
+        "avg": 2121,
+        "min": 1064,
+        "max": 4080,
+        "samples": 33
+      }
     }
   },
   "err": {
@@ -312,6 +324,18 @@
         "testsPassed": 1,
         "testsFailed": 0,
         "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+        "ranks": "2 x 32 threads",
+        "blas": "/data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so",
+        "mpi": "mpirun (Open MPI) 4.1.6",
+        "clockMHz": {
+          "avg": 2121,
+          "min": 1064,
+          "max": 4080,
+          "samples": 33
+        }
       }
     },
     "err": {

@@ -147,7 +147,8 @@
       "testsPassed": null,
       "testsFailed": null,
       "testsSkipped": null
-    }
+    },
+    "hostInfo": null
   },
   "err": {
     "file": "run.sh-24.err",
@@ -255,7 +256,8 @@
         "testsPassed": null,
         "testsFailed": null,
         "testsSkipped": null
-      }
+      },
+      "hostInfo": null
     },
     "err": {
       "file": "run.sh-24.err",

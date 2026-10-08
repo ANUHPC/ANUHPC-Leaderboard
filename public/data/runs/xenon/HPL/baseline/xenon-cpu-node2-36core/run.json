@@ -192,6 +192,13 @@
       "testsPassed": 1,
       "testsFailed": 0,
       "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": null,
+      "ranks": "4 x 9 threads",
+      "blas": null,
+      "mpi": null,
+      "clockMHz": null
     }
   },
   "err": {
@@ -312,6 +319,13 @@
         "testsPassed": 1,
         "testsFailed": 0,
         "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": null,
+        "ranks": "4 x 9 threads",
+        "blas": null,
+        "mpi": null,
+        "clockMHz": null
       }
     },
     "err": {

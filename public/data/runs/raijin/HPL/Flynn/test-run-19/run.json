@@ -148,7 +148,8 @@
       "testsPassed": null,
       "testsFailed": null,
       "testsSkipped": null
-    }
+    },
+    "hostInfo": null
   },
   "err": {
     "file": "run.sh-109.err",
@@ -257,7 +258,8 @@
         "testsPassed": null,
         "testsFailed": null,
         "testsSkipped": null
-      }
+      },
+      "hostInfo": null
     },
     "err": {
       "file": "run.sh-109.err",

@@ -191,7 +191,8 @@
     "startTime": null,
     "endTime": null,
     "residual": null,
-    "residualPassed": null
+    "residualPassed": null,
+    "hostInfo": null
   },
   "err": {
     "file": "run.err",
@@ -343,7 +344,8 @@
       "startTime": null,
       "endTime": null,
       "residual": null,
-      "residualPassed": null
+      "residualPassed": null,
+      "hostInfo": null
     },
     "err": {
       "file": "run.err",

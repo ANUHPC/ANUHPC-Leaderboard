@@ -441,7 +441,8 @@
       "testsPassed": 20,
       "testsFailed": 0,
       "testsSkipped": 0
-    }
+    },
+    "hostInfo": null
   },
   "err": {
     "file": "run.sh-57.err",
@@ -810,7 +811,8 @@
         "testsPassed": 20,
         "testsFailed": 0,
         "testsSkipped": 0
-      }
+      },
+      "hostInfo": null
     },
     "err": {
       "file": "run.sh-57.err",
