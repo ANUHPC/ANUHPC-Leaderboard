@@ -1,9 +1,9 @@
 HPLinpack benchmark input file
-Launchpad full run, 2 ranks x 32 threads, 1x2, NB=384
+Launchpad smoke test, Intel MKL HPL, 2 ranks (1 per socket), 1x2, NB=384
 HPL.out      output file name (if any)
 6            device out (6=stdout,7=stderr,file)
 1            # of problems sizes (N)
-333312       Ns
+60672        Ns
 1            # of NBs
 384          NBs
 0            PMAP process mapping (0=Row-,1=Column-major)
