@@ -163,7 +163,7 @@ async function processSuite(suite, index, clusters, clusterName) {
     // 2. suite's own parser, old runs have no result.json
     if (!result && suite.mod?.collect) {
       try {
-        result = await suite.mod.collect({ dir, files, read, readRepo, suite: suite.cfg });
+        result = await suite.mod.collect({ dir, files, read, readRepo, suite: suite.cfg, cluster: clusters[clusterName] });
         if (result) fromParser++;
       } catch (e) {
         console.warn(`[collect] ${id}: collector threw (${e.message})`);
@@ -230,6 +230,8 @@ async function processSuite(suite, index, clusters, clusterName) {
       verification: result.verification ?? null,
       convergence: result.convergence ?? null,
       config: result.config || {},
+      // HPL CPU: Rmax / Rpeak, null where the cluster has no peak specs
+      efficiency: result.efficiency ?? null,
       provenance: result.provenance || {},
       status: result.status || "ok",
       ranking: result.ranking,
@@ -263,6 +265,7 @@ async function processSuite(suite, index, clusters, clusterName) {
       verification: runJson.verification,
       convergence: runJson.convergence,
       config: runJson.config,
+      efficiency: runJson.efficiency,
       status: runJson.status,
       ranking: runJson.ranking,
       notes: runJson.notes,

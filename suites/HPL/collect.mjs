@@ -8,6 +8,8 @@
 // result tied to its own residual: another candidate passing cannot validate
 // a faster candidate that failed or never completed its check.
 
+import { hplEfficiency } from "../../scripts/lib/hpl-peak.mjs";
+
 function firstToken(line) {
     const m = line.trim().match(/^(\S+)/);
     return m ? m[1] : "";
@@ -473,6 +475,22 @@ export async function collect(ctx) {
   const best     = parsed ? bestFromRuns(parsed.runs) : null;
 
   const passed = best?.residualPassed ?? null;
+  const hostInfo = isNvidia ? null : parseHostInfo(normalizedOut);
+  const config = {
+    N: best?.N ?? dat?.Ns?.[0] ?? null,
+    NB: best?.NB ?? dat?.NBs?.[0] ?? null,
+    P: best?.P ?? dat?.Ps?.[0] ?? null,
+    Q: best?.Q ?? dat?.Qs?.[0] ?? null,
+    variant: isNvidia ? "nvidia" : "cpu",
+    nodes: sbatch?.nodes ?? null,
+    tasks_per_node: sbatch?.["ntasks-per-node"] ?? null,
+    cpus_per_task: sbatch?.["cpus-per-task"] ?? null,
+    partition: sbatch?.partition ?? null,
+  };
+  // HPL_NVIDIA reuses this collector; a CPU Rpeak means nothing for GPU runs
+  const efficiency = ctx.suite?.name === "HPL" && !isNvidia
+    ? hplEfficiency({ cluster: ctx.cluster, config, gflops: best?.gflops, clockMHz: hostInfo?.clockMHz })
+    : null;
   const status = !best ? "no-result" : passed === true ? "ok"
     : passed === false ? "failed-residual" : "unverified-residual";
 
@@ -482,17 +500,8 @@ export async function collect(ctx) {
       best?.timeSec != null ? { key: "time", value: best.timeSec } : null,
       best?.residual != null ? { key: "residual", value: best.residual } : null,
     ].filter(Boolean),
-    config: {
-      N: best?.N ?? dat?.Ns?.[0] ?? null,
-      NB: best?.NB ?? dat?.NBs?.[0] ?? null,
-      P: best?.P ?? dat?.Ps?.[0] ?? null,
-      Q: best?.Q ?? dat?.Qs?.[0] ?? null,
-      variant: isNvidia ? "nvidia" : "cpu",
-      nodes: sbatch?.nodes ?? null,
-      tasks_per_node: sbatch?.["ntasks-per-node"] ?? null,
-      cpus_per_task: sbatch?.["cpus-per-task"] ?? null,
-      partition: sbatch?.partition ?? null,
-    },
+    config,
+    efficiency,
     provenance: { started: best?.startTime ?? null,
                   ended: best?.endTime ?? null },
     // When the run happened, as the run itself reports it. HPL prints
@@ -513,7 +522,7 @@ export async function collect(ctx) {
     detail: {
       dat: datRaw ? { raw: datRaw, parsed: dat, file: datName } : null,
       job: shRaw ? { raw: shRaw, sbatch, file: shName } : null,
-      out: parsed ? { file: outName, ...parsed, hostInfo: isNvidia ? null : parseHostInfo(normalizedOut) } : null,
+      out: parsed ? { file: outName, ...parsed, hostInfo } : null,
       err: errRaw ? { file: errName, size: errRaw.length } : null,
       best,
     },

@@ -17,6 +17,11 @@ nodes:
     cores_total: 64
     cores_reserved: 0
     cores_available: 64
+    # HPL efficiency is Rmax / Rpeak, Rpeak = base_ghz x cores_total x flops_per_cycle
+    # = 2.5 x 64 x 32 = 5120 GFLOP/s. 32 is FP64 per core per cycle:
+    # AVX-512 holds 8 doubles, an FMA counts as 2, and each core has 2 FMA units
+    base_ghz: 2.5
+    flops_per_cycle: 32
     memory_mb: 1048576
     gpus: 2
     gpu_model: h100_nvl
