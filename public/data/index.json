@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T00:58:36.526Z",
+  "generatedAt": "2026-10-08T02:13:52.088Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 30
+      "count": 38
     },
     {
       "name": "raijin",
@@ -82,9 +82,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 33,
+      "count": 41,
       "countByCluster": {
-        "launchpad": 29,
+        "launchpad": 37,
         "raijin": 0,
         "xenon": 4
       }
@@ -124,6 +124,492 @@
     }
   ],
   "runs": [
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-4",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-4",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:15:12.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72280,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.57,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.57,
+        "gflops": 72280,
+        "gflopsPerGpu": 36140,
+        "startTime": "Thu Oct  8 01:15:12 2026",
+        "endTime": "Thu Oct  8 01:15:41 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 1
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-6",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-6",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:35:09.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72260,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.58,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.58,
+        "gflops": 72260,
+        "gflopsPerGpu": 36130,
+        "startTime": "Thu Oct  8 01:35:09 2026",
+        "endTime": "Thu Oct  8 01:35:39 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 2
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-7",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-7",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:45:06.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72250,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.59,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.59,
+        "gflops": 72250,
+        "gflopsPerGpu": 36120,
+        "startTime": "Thu Oct  8 01:45:06 2026",
+        "endTime": "Thu Oct  8 01:45:36 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 3
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-8",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-8",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:55:02.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72210,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.6,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.6,
+        "gflops": 72210,
+        "gflopsPerGpu": 36110,
+        "startTime": "Thu Oct  8 01:55:02 2026",
+        "endTime": "Thu Oct  8 01:55:32 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 4
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-5",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-5",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:25:08.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72200,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.61,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.61,
+        "gflops": 72200,
+        "gflopsPerGpu": 36100,
+        "startTime": "Thu Oct  8 01:25:08 2026",
+        "endTime": "Thu Oct  8 01:25:38 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 5
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-9",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-9",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T02:05:00.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72200,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.6,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.6,
+        "gflops": 72200,
+        "gflopsPerGpu": 36100,
+        "startTime": "Thu Oct  8 02:05:00 2026",
+        "endTime": "Thu Oct  8 02:05:29 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 6
+    },
     {
       "id": "launchpad/HPL_NVIDIA/Aden/UNM-Fans-Full",
       "suite": "HPL_NVIDIA",
@@ -203,7 +689,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 1
+      "rank": 7
     },
     {
       "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-2",
@@ -284,7 +770,169 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 2
+      "rank": 8
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-10",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-10",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:00:24.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 72150,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 29.62,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000866088612,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 29.62,
+        "gflops": 72150,
+        "gflopsPerGpu": 36080,
+        "startTime": "Thu Oct  8 01:00:24 2026",
+        "endTime": "Thu Oct  8 01:00:54 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 9
+    },
+    {
+      "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-3",
+      "suite": "HPL_NVIDIA",
+      "group": "Aden",
+      "run": "UNM-Vboost1-full-fans-3",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-08T01:10:59.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Aden",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 71960,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 27.88,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.000910904619,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 144384,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "variant": "nvidia",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WC0",
+        "N": 144384,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 27.88,
+        "gflops": 71960,
+        "gflopsPerGpu": 35980,
+        "startTime": "Thu Oct  8 01:10:59 2026",
+        "endTime": "Thu Oct  8 01:11:27 2026",
+        "residual": 0.000910904619,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 10
     },
     {
       "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1",
@@ -365,7 +1013,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 3
+      "rank": 11
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/UNM-Vboost",
@@ -446,7 +1094,7 @@
         "testsSkipped": 0
       },
       "hasErr": true,
-      "rank": 4
+      "rank": 12
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Vboost-Sweep",
@@ -527,7 +1175,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 5
+      "rank": 13
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Fan-Full",
@@ -608,7 +1256,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 6
+      "rank": 14
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/HPL-Params",
@@ -689,7 +1337,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 7
+      "rank": 15
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Chunk-Sweep",
@@ -770,7 +1418,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 8
+      "rank": 16
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Fan-OS",
@@ -851,7 +1499,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 9
+      "rank": 17
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/NV-Layout",
@@ -932,7 +1580,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 10
+      "rank": 18
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Mem-1593",
@@ -1013,7 +1661,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 11
+      "rank": 19
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/N143-CTA",
@@ -1094,7 +1742,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 12
+      "rank": 20
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Tune",
@@ -1175,7 +1823,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 13
+      "rank": 21
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Rankfile",
@@ -1256,7 +1904,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 14
+      "rank": 22
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test03",
@@ -1337,7 +1985,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 15
+      "rank": 23
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test02",
@@ -1418,7 +2066,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 16
+      "rank": 24
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test05",
@@ -1499,7 +2147,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 17
+      "rank": 25
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Power-sweep",
@@ -1580,7 +2228,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 18
+      "rank": 26
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test04",
@@ -1661,7 +2309,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 19
+      "rank": 27
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Test01",
@@ -1742,7 +2390,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 20
+      "rank": 28
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/4",
@@ -1823,7 +2471,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 21
+      "rank": 29
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/Low-power-test",
@@ -1904,7 +2552,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 22
+      "rank": 30
     },
     {
       "id": "launchpad/HPL_NVIDIA/Aden/Single-GPU",
@@ -1985,7 +2633,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 23
+      "rank": 31
     },
     {
       "id": "launchpad/HPL_NVIDIA/baseline/h100-2gpu-smoke",
@@ -2066,7 +2714,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 24
+      "rank": 32
     },
     {
       "id": "launchpad/HPL_NVIDIA/Daniel/test_run",
@@ -2147,7 +2795,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 25
+      "rank": 33
     },
     {
       "id": "launchpad/HPL_NVIDIA/Ayush/CPU-tuning",
