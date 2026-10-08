@@ -27,6 +27,14 @@ interface RunDetailsData {
             testsSkipped: number;
         };
         deviceInfo?: any;
+        // CPU runs whose run.sh prints the header (run.launchpad.sh), from collect.mjs
+        hostInfo?: {
+            cpu: string | null;
+            ranks: string | null;
+            blas: string | null;
+            mpi: string | null;
+            clockMHz: { avg: number; min: number; max: number; samples: number } | null;
+        } | null;
         memInfo?: any;
         traces?: string[];
         startTime?: string;
@@ -273,6 +281,40 @@ export const RunDetailsModal: React.FC<RunDetailsModalProps> = ({
                                             <div className="text-lg font-semibold">{runData.out.deviceInfo.numSms}</div>
                                         </div>
                                     </div>
+                                </div>
+                            )}
+
+                            {/* CPU Info (for CPU runs that print it) */}
+                            {runData.out?.hostInfo && (
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                    <h3 className="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
+                                        <Cpu className="w-5 h-5"/>
+                                        <span>CPU Information</span>
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        {([
+                                            ['Processor', runData.out.hostInfo.cpu],
+                                            ['MPI ranks', runData.out.hostInfo.ranks],
+                                            ['Clock under load', runData.out.hostInfo.clockMHz &&
+                                                `${runData.out.hostInfo.clockMHz.avg.toLocaleString()} MHz avg`],
+                                            // the full path is in run.out, the library name is what matters here
+                                            ['BLAS', runData.out.hostInfo.blas?.split('/').pop()],
+                                            ['MPI', runData.out.hostInfo.mpi],
+                                        ] as [string, string | null | undefined][]).filter(([, v]) => v).map(([label, v]) => (
+                                            <div key={label} className="min-w-0">
+                                                <div className="text-sm text-gray-600">{label}</div>
+                                                <div className="text-lg font-semibold break-words">{v}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {runData.out.hostInfo.clockMHz && (
+                                        <p className="mt-3 text-xs text-gray-500">
+                                            Mean over all physical cores, sampled every 10 s:
+                                            min {runData.out.hostInfo.clockMHz.min.toLocaleString()},
+                                            max {runData.out.hostInfo.clockMHz.max.toLocaleString()} MHz
+                                            over {runData.out.hostInfo.clockMHz.samples} samples.
+                                        </p>
+                                    )}
                                 </div>
                             )}
 
