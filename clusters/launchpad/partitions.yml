@@ -8,6 +8,8 @@ scheduler: slurm
 
 nodes:
   scc-connect-03-gpu01:
+    # emerald rapids, AVX-512 with 2 FMA units, 2.5 GHz base, 4.1 GHz turbo
+    cpu_model: Intel Xeon Gold 6548Y+
     sockets: 2
     cores_per_socket: 32
     threads_per_core: 2

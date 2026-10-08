@@ -40,7 +40,9 @@ env:
   CLUSTER: launchpad
   SCRATCH_BASE: /data/jobs
   PARTITION: all
-  ALLOWED_SUITES: HPL_NVIDIA
+  ALLOWED_SUITES: HPL,HPL_NVIDIA
+  # built by suites/HPL/build-launchpad.sh
+  HPL_BIN: /data/benchmarks/hpl/current/bin/xhpl
   HPL_NVIDIA_SH: /home/nvidia/PROGRAMS/nvidia_hpl_benchmarks/hpl.sh
 
 jobs:

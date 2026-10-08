@@ -32,9 +32,11 @@ artifacts:
 
 run:
   launcher: sbatch          # the user's own run.sh is submitted directly
+  # launchpad's is /data/benchmarks/hpl/current/bin/xhpl, see HPL_BIN in submit-launchpad.yml
   binary: /apps/benchmarks/hpl/current/bin/xhpl
 
-clusters: [raijin, xenon]
+# launchpad is cpu only here, the H100s are HPL_NVIDIA
+clusters: [raijin, xenon, launchpad]
 
 limits:
   max_nodes: 3

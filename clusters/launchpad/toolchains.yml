@@ -39,3 +39,6 @@ installed:
   nvhpc:    {version: "26.9", prefix: /opt/nvidia/hpc_sdk/Linux_x86_64/26.9}
   driver:   {version: "595.71.05", cuda: "13.2"}
   mfc:      {commit: e2f0e267, prefix: "/data/mfc/current/emr-{cpu,acc}"}
+  # cpu HPL, suites/HPL/build-launchpad.sh
+  openblas: {version: "0.3.34", target: SAPPHIRERAPIDS, threading: openmp, prefix: /data/benchmarks/openblas/0.3.34}
+  hpl:      {version: "2.3", prefix: /data/benchmarks/hpl/current}

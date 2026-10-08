@@ -122,7 +122,7 @@ for jobdir in "$STAGE"/*/*/*/; do
         fi
       else
         if [ ! -x "$HPL_BIN" ]; then
-          gh_error "$label: no xhpl at $HPL_BIN — publish it to /apps first"; rejected=$((rejected+1)); continue
+          gh_error "$label: no xhpl at $HPL_BIN — build or publish it first (launchpad: suites/HPL/build-launchpad.sh)"; rejected=$((rejected+1)); continue
         fi
         cp "$HPL_BIN" "$jobdir/xhpl" && chmod +x "$jobdir/xhpl"
       fi

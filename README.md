@@ -9,8 +9,9 @@ runs it, the result lands on the board.
 |---------|-------|-----------|------------------|
 | **Raijin** | 7 x `hpc-01..07`, 32 threads each | `batch` | HPL CPU |
 | **Xenon** | 2 CPU nodes + 2 GPU nodes (4x A100 each) | `cpu` `gpu` `all` | HPL CPU, HPL NVIDIA, MFC |
+| **Launchpad** | 1 node, 2x Xeon Gold 6548Y+ (64 cores) + 2x H100 NVL | `all` | HPL CPU, HPL NVIDIA, MFC |
 
-The two are separate machines with no network path between them, so each is
+They are separate machines with no network path between them, so each is
 driven by its own self-hosted runner and jobs route by runner label. **Results
 are ranked per cluster** — a Raijin number and a Xenon number measure different
 hardware and are not comparable.
@@ -23,9 +24,9 @@ a run filed under the wrong cluster would otherwise corrupt the board silently.
 
 | Suite | Metric | Better | Status |
 |-------|--------|--------|--------|
-| **HPL** | Rmax, GFLOP/s | higher | live |
-| **HPL_NVIDIA** | Rmax, GFLOP/s | higher | live on Xenon |
-| **MFC** | grind time, ns/gp/eq/rhs; accuracy and timing for studies | **lower** | live on Xenon; SCC26 tasks and simulation studies |
+| **HPL** | Rmax, GFLOP/s | higher | live on Raijin, Xenon, Launchpad |
+| **HPL_NVIDIA** | Rmax, GFLOP/s | higher | live on Xenon, Launchpad |
+| **MFC** | grind time, ns/gp/eq/rhs; accuracy and timing for studies | **lower** | live on Xenon, Launchpad; SCC26 tasks and simulation studies |
 | **WRF** | forecast throughput, sim-h/wall-h | higher | designed, not enabled |
 
 The two directions are why ranking is per suite and reads `metric.direction`
@@ -41,19 +42,23 @@ input/<cluster>/<suite>/<your-name>/<run-name>/
 
 **The directory selects the workflow and cluster.** Xenon HPL inputs trigger
 **Submit jobs (xenon)**; MFC inputs trigger **Submit MFC (xenon)**. Both use a
-runner labelled `xenon` and a shared queue. Raijin has its own runner and workflow.
+runner labelled `xenon` and a shared queue. Launchpad works the same way with
+**Submit jobs (launchpad)** and **Submit MFC (launchpad)**. Raijin has its own
+runner and workflow.
 
 ```
 input/
   _TEMPLATES/       HPL/  HPL_NVIDIA/  MFC/  copy these; not picked up as jobs
   raijin/           HPL/<user>/<run>/
   xenon/            <suite>/<user>/<run>/
+  launchpad/        <suite>/<user>/<run>/
 output/
-  raijin/  xenon/   same shape, results committed back by the runner
+  raijin/  xenon/  launchpad/   same shape, results committed back by the runner
 ```
 
-- **HPL** — `HPL.dat` plus your own `run.sh`. Choosing `N`, `NB` and the `P x Q`
-  grid *is* the exercise, so nothing is pinned.
+- **HPL** — `HPL.dat` plus your own `run.sh`, from [`run.<cluster>.sh`](input/_TEMPLATES/HPL/).
+  Choosing `N`, `NB` and the `P x Q` grid *is* the exercise, so nothing is
+  pinned; validation checks that `P x Q` fits the ranks `run.sh` starts.
 - **HPL NVIDIA** — copy [`HPL.dat` and `run.xenon.sh`](input/_TEMPLATES/HPL_NVIDIA/),
   renaming the script to `run.sh`. The template uses both Xenon GPU nodes,
   eight A100s, and a 4×2 MPI grid. See the [GPU guide](input/_TEMPLATES/HPL_NVIDIA/README.md).
@@ -113,6 +118,22 @@ to `/apps`, `/cluster`, `/work`, `/scratch` on every node.
 
 A 56 Gb/s FDR InfiniBand fabric carries MPI and NFS between cpu-node2 and the
 GPU nodes; cpu-node1 is not on it yet.
+
+## Launchpad
+
+One NVIDIA LaunchPad node, `scc-connect-03-gpu01`, Slurm partition `all`.
+
+| | |
+|---|---|
+| CPU | 2x Intel Xeon Gold 6548Y+ (Emerald Rapids), 32 cores each, 64 physical / 128 threads, AVX-512 |
+| GPU | 2x H100 NVL 94 GB, NVLink (`NV12`) |
+| Memory | 1 TiB |
+
+HPL CPU uses netlib HPL 2.3 with OpenBLAS 0.3.34 and Ubuntu OpenMPI 4.1.6,
+installed at `/data/benchmarks/hpl/current` by
+[`suites/HPL/build-launchpad.sh`](suites/HPL/build-launchpad.sh). The reservation
+is temporary; rerun that script to rebuild. MFC notes are in
+[docs/MFC-LAUNCHPAD.md](docs/MFC-LAUNCHPAD.md).
 
 ## Raijin
 

@@ -6,6 +6,7 @@
 
 import fs from "fs/promises";
 import { validateGpuHpl } from "./lib/hpl-gpu.mjs";
+import { validateCpuHpl, cpuRanks } from "./lib/hpl-cpu.mjs";
 import path from "path";
 import { parseYaml } from "./lib/yaml.mjs";
 import { mfcDecomposition, gridFromCase } from "./lib/mfc-decomp.mjs";
@@ -316,6 +317,10 @@ async function checkSbatch(rel, where, files, cluster, cname, suiteName) {
 
   if (suiteName === "HPL_NVIDIA") {
     for (const problem of validateGpuHpl(await readSafe(path.join(CWD, rel, "HPL.dat")), directive, cluster)) err(where, problem);
+  } else {
+    const { errors, warnings } = validateCpuHpl(await readSafe(path.join(CWD, rel, "HPL.dat")), cpuRanks(text, directive));
+    for (const problem of errors) err(where, problem);
+    for (const w of warnings) warn(where, w);
   }
   if (/CHANGE-ME/.test(text)) {
     warn(where, `${name} still has the template placeholder in --job-name; give the run a real name`);
