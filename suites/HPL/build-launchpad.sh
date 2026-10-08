@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Build cpu xhpl on launchpad: netlib HPL 2.3 + OpenBLAS + ubuntu OpenMPI 4.1.6.
 # OpenBLAS is built here, the ubuntu package is old (0.3.26).
+# HPL source is unmodified. -DHPL_PROGRESS_REPORT is HPL's own option, rank 0 prints
+# a Column=/Fraction=/Gflops= line per panel that submit-jobs.sh shows live.
 #
 #   sbatch -p all -c 32 -t 00:30:00 suites/HPL/build-launchpad.sh
 #
@@ -41,11 +43,15 @@ rm -rf "hpl-$HPL_VER" && tar xzf "hpl-$HPL_VER.tar.gz"
 ( cd "hpl-$HPL_VER"
   # rpath so the xhpl copied into a job dir still finds OpenBLAS
   ./configure --prefix="$HPL" CC=mpicc \
-      CFLAGS="-O3 -march=sapphirerapids -fopenmp" \
+      CFLAGS="-O3 -march=sapphirerapids -fopenmp -DHPL_PROGRESS_REPORT" \
       LDFLAGS="-L$OPENBLAS/lib -Wl,-rpath,$OPENBLAS/lib -fopenmp" \
       LIBS="-lopenblas" > ../hpl-configure.log 2>&1 \
     || { tail -40 ../hpl-configure.log; die "HPL configure failed"; }
-  make -j "$JOBS" > ../hpl-build.log 2>&1 || { tail -40 ../hpl-build.log; die "HPL build failed"; }
+  # the progress report calls HPL_timer_walltime, which only the old Make.<arch> build
+  # links. compile HPL's own testing/timer copy and add it to the link
+  mpicc -O3 -Iinclude -c testing/timer/HPL_timer_walltime.c -o HPL_timer_walltime.o
+  make -j "$JOBS" LIBS="-lopenblas $PWD/HPL_timer_walltime.o" > ../hpl-build.log 2>&1 \
+    || { tail -40 ../hpl-build.log; die "HPL build failed"; }
   make install > ../hpl-install.log 2>&1 )
 
 ln -sfn "$HPL" "$ROOT/hpl/current"

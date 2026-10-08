@@ -39,8 +39,13 @@ echo "blas    : $(ldd ./xhpl | awk '/openblas|mkl|blis/{print $3}' | xargs -r re
 echo "mpi     : $(mpirun --version | head -1)"
 
 # log the real clock under load for the peak calc.
-# max of the two SMT siblings per core, the idle one reads ~800 MHz
+# max of the two SMT siblings per core, the idle one reads ~800 MHz.
+# only while HPL is solving (it prints Column= lines then), matrix generation reads low.
+# a binary without the progress report gets every sample
+out=$(scontrol show job "$SLURM_JOB_ID" | sed -n 's/^ *StdOut=//p')
+solving=true; grep -q 'Column=%09d' ./xhpl && solving="grep -q ^Column= $out"
 ( while sleep 10; do
+    $solving 2>/dev/null || continue
     awk -F'\n' 'BEGIN{RS=""} {for (i=1; i<=NF; i++) {split($i, kv, /\t*: /); f[kv[1]]=kv[2]}
                 k=f["physical id"] "-" f["core id"]; if (f["cpu MHz"]+0 > m[k]) m[k]=f["cpu MHz"]+0}
                 END{for (k in m) {s+=m[k]; n++} if (n) printf "%.0f\n", s/n}' /proc/cpuinfo

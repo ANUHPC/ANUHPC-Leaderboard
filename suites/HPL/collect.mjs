@@ -407,6 +407,20 @@ function parseOutNvidia(raw) {
     };
 }
 
+// CPU details a run.sh prints before HPL starts (run.launchpad.sh), e.g.
+//   blas    : /data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so
+//   cpu MHz : avg 2349, min 1169, max 3401 over 5 samples 10 s apart (mean over the 64 cores)
+// the site shows it like deviceInfo for GPU runs. null if the script printed none of it
+function parseHostInfo(raw) {
+    const field = (k) => raw.match(new RegExp(`^${k}\\s+:\\s*(.+?)\\s*$`, "m"))?.[1] ?? null;
+    const clock = raw.match(/^cpu MHz\s*:\s*avg (\d+), min (\d+), max (\d+) over (\d+) samples/m);
+    const info = {
+        cpu: field("cpu"), ranks: field("ranks"), blas: field("blas"), mpi: field("mpi"),
+        clockMHz: clock ? { avg: +clock[1], min: +clock[2], max: +clock[3], samples: +clock[4] } : null,
+    };
+    return Object.values(info).some((v) => v != null) ? info : null;
+}
+
 // "Wed Apr  1 01:42:05 2026" -> "2026-04-01T01:42:05.000Z", or null if the
 // line was absent or unparseable. Date.parse handles asctime, but returns NaN
 // rather than throwing, so the result has to be checked.
@@ -499,7 +513,7 @@ export async function collect(ctx) {
     detail: {
       dat: datRaw ? { raw: datRaw, parsed: dat, file: datName } : null,
       job: shRaw ? { raw: shRaw, sbatch, file: shName } : null,
-      out: parsed ? { file: outName, ...parsed } : null,
+      out: parsed ? { file: outName, ...parsed, hostInfo: isNvidia ? null : parseHostInfo(normalizedOut) } : null,
       err: errRaw ? { file: errName, size: errRaw.length } : null,
       best,
     },

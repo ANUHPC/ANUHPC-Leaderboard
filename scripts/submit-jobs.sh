@@ -212,11 +212,44 @@ live_perf() {  # live_perf <jobdir>
     line=$(grep -a 'Prog=' "$f" 2>/dev/null | tail -1 | sed 's/\x1b\[[0-9;]*m//g')
     [ -n "$line" ] && break
   done
-  [ -n "${line:-}" ] || return 0
+  [ -n "${line:-}" ] || { live_cpu "$1"; return 0; }
   awk '{ for (i = 1; i < NF; i++) v[$i] = $(i+1)
          gsub(/%/, "", v["Prog="])
          printf "%s%% done, now %.2f TF, avg %.2f TF (%.2f TF/GPU), ~%ds left",
            v["Prog="], v["iGF="]/1000, v["GF="]/1000, v["GF_per="]/1000, v["Time_left="] }' <<< "$line"
+}
+
+# cpu xhpl built with -DHPL_PROGRESS_REPORT (suites/HPL/build-launchpad.sh) prints per panel
+#   Column=000012288 Fraction= 3.7% Gflops=2.345e+03
+# Fraction is columns, not work: the trailing matrix shrinks, so 19% of columns is ~46% of
+# the flops. N isn't on the line, so take the N from the header that matches the fraction
+# (a sweep has several). Gflops is the average since the solve started; time left assumes
+# it holds, the last panels are slower so it's a bit optimistic. clock is the last
+# cpufreq.log sample from run.launchpad.sh. prints nothing for builds without either.
+live_cpu() {  # live_cpu <jobdir>
+  local f mhz=""
+  [ -s "$1/cpufreq.log" ] && mhz=$(tail -1 "$1/cpufreq.log")
+  for f in "$1"/*.out; do [ -f "$f" ] || continue
+    awk -v mhz="$mhz" '
+      /^N +:/   { for (i = 3; i <= NF; i++) if ($i ~ /^[0-9]+$/) ns[++k] = $i }
+      /^Column=/ { line = $0 }
+      END {
+        if (line) {
+          gsub(/[=%]/, " ", line); split(line, v, " ")
+          j = v[2] + 0; frac = v[4] + 0; gf = v[6] + 0
+          for (i = 1; i <= k; i++) {
+            if (ns[i] <= j) continue
+            d = j * 100 / ns[i] - frac; if (d < 0) d = -d
+            if (!n || d < bd) { n = ns[i]; bd = d }
+          }
+          if (n) printf "%.1f%% of flops done, avg %.2f TF", 100 * (1 - ((n - j) / n) ^ 3), gf / 1000
+          else   printf "column %.1f%%, avg %.2f TF", frac, gf / 1000
+          if (n && gf > 0) printf ", ~%ds left", 2 * (n - j) ^ 3 / 3 / (gf * 1e9)
+          if (mhz) printf ", %.2f GHz", mhz / 1000
+        } else if (mhz) printf "%.2f GHz, no HPL progress yet", mhz / 1000
+      }' "$f"
+    return 0
+  done
 }
 
 # ------------------------------------------------------------------- wait ---

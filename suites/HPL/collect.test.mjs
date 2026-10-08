@@ -121,3 +121,26 @@ test('AOCL optional SWP field remains supported', async () => {
   assert.equal(r.config.NB, 512);
   assert.equal(r.status, 'ok');
 });
+
+test('launchpad CPU header reaches hostInfo, progress lines do not disturb the result', async () => {
+  const r = await run(`node    : scc-connect-03-gpu01
+cpu     : INTEL(R) XEON(R) GOLD 6548Y+
+ranks   : 2 x 32 threads
+blas    : /data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so
+mpi     : mpirun (Open MPI) 4.1.6
+N      :  100608
+Column=000000384 Fraction= 0.4% Gflops=1.580e+04
+Column=000100224 Fraction=99.6% Gflops=3.110e+03
+WR12C2C2      100608   384     1     2             218.61             3.1055e+03
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.88028129e-03 ...... PASSED
+cpu MHz : avg 2349, min 2301, max 2401 over 20 samples 10 s apart (mean over the 64 cores)
+`);
+  assert.equal(r.metric.value, 3105.5);
+  assert.equal(r.status, 'ok');
+  assert.deepEqual(r.detail.out.hostInfo, {
+    cpu: 'INTEL(R) XEON(R) GOLD 6548Y+', ranks: '2 x 32 threads',
+    blas: '/data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so',
+    mpi: 'mpirun (Open MPI) 4.1.6', clockMHz: { avg: 2349, min: 2301, max: 2401, samples: 20 },
+  });
+  assert.equal((await run(await fixture('netlib'))).detail.out.hostInfo, null);
+});
