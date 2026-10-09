@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T00:07:39.377Z",
+  "generatedAt": "2026-10-09T07:34:36.888Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -11,7 +11,7 @@
       "partitions": [
         "all"
       ],
-      "count": 43
+      "count": 44
     },
     {
       "name": "raijin",
@@ -59,9 +59,9 @@
       ],
       "available": true,
       "missing": null,
-      "count": 144,
+      "count": 145,
       "countByCluster": {
-        "launchpad": 4,
+        "launchpad": 5,
         "raijin": 137,
         "xenon": 3
       }
@@ -125,6 +125,101 @@
     }
   ],
   "runs": [
+    {
+      "id": "launchpad/HPL/Ayush/Intel-89%-N-NB-Sweep",
+      "suite": "HPL",
+      "group": "Ayush",
+      "run": "Intel-89%-N-NB-Sweep",
+      "cluster": "launchpad",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-09T06:00:46.000Z",
+      "dateSource": "run",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Ayush",
+        "house": false,
+        "by": null
+      },
+      "metric": {
+        "key": "gflops",
+        "value": 4277.45,
+        "unit": "GFLOP/s",
+        "label": "Rmax",
+        "direction": "higher"
+      },
+      "secondary": [
+        {
+          "key": "time",
+          "value": 5593.72,
+          "unit": "s",
+          "label": "Solve time",
+          "direction": "lower"
+        },
+        {
+          "key": "residual",
+          "value": 0.00119650459,
+          "unit": "",
+          "label": "Residual",
+          "direction": "lower"
+        }
+      ],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 329856,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "variant": "cpu",
+        "nodes": 1,
+        "tasks_per_node": 2,
+        "cpus_per_task": 32,
+        "partition": "all"
+      },
+      "efficiency": {
+        "value": 0.835439453125,
+        "rpeakGflops": 5120,
+        "basis": {
+          "ghz": 2.5,
+          "coresPerNode": 64,
+          "nodes": 1,
+          "flopsPerCycle": 32
+        },
+        "measuredClock": {
+          "ghz": 2.261,
+          "rpeakGflops": 4630.528,
+          "value": 0.9237499481700574
+        }
+      },
+      "status": "ok",
+      "ranking": {
+        "eligible": true,
+        "reason": null
+      },
+      "notes": [],
+      "best": {
+        "tv": "WR12C2C2",
+        "N": 329856,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 5593.72,
+        "gflops": 4277.45,
+        "startTime": "Fri Oct  9 06:00:46 2026",
+        "endTime": "Fri Oct  9 07:34:00 2026",
+        "residual": 0.00119650459,
+        "residualPassed": true
+      },
+      "outSummary": {
+        "testsTotal": 4,
+        "testsPassed": 4,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hasErr": false,
+      "rank": 1
+    },
     {
       "id": "launchpad/HPL/Ayush/Intel-Max-Fans-85%-N",
       "suite": "HPL",
@@ -218,7 +313,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 1
+      "rank": 2
     },
     {
       "id": "launchpad/HPL/Ayush/Intel-MPI&MKL",
@@ -313,7 +408,7 @@
         "testsSkipped": 0
       },
       "hasErr": false,
-      "rank": 2
+      "rank": 3
     },
     {
       "id": "launchpad/HPL/Ayush/Full-N",
@@ -408,7 +503,7 @@
         "testsSkipped": 0
       },
       "hasErr": true,
-      "rank": 3
+      "rank": 4
     },
     {
       "id": "launchpad/HPL/Ayush/Test-1",
@@ -503,7 +598,7 @@
         "testsSkipped": 0
       },
       "hasErr": true,
-      "rank": 4
+      "rank": 5
     },
     {
       "id": "launchpad/HPL_NVIDIA/Aden/UNM-Vboost1-full-fans-4",
