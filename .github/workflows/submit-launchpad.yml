@@ -92,6 +92,13 @@ jobs:
           echo "STAGE=$STAGE" >> "$GITHUB_ENV"
           node scripts/stage-submissions.mjs
 
+      # fans stay on full for every run, never put back to optimal
+      - name: Fans to full
+        if: env.STAGED != '0'
+        run: |
+          sudo -n ipmitool raw 0x30 0x45 0x01 0x01 || echo "::warning::could not set fans to full"
+          echo "fan mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)"
+
       - name: Submit and wait
         if: env.STAGED != '0'
         run: bash scripts/submit-jobs.sh "$STAGE" "$CLUSTER" "$GITHUB_RUN_ID"
