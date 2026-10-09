@@ -119,6 +119,11 @@ jobs:
           CI: true
           BASE_PATH: "/${{ github.event.repository.name }}/"
 
+      # force_orphan below deletes the old bundles, but browsers cache
+      # index.html for 10 min and would load a blank page without them
+      - name: Keep recently replaced bundles
+        run: bash scripts/keep-recent-bundles.sh website-branch/dist/assets
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
