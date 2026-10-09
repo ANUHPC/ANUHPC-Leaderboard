@@ -1,0 +1,482 @@
+{
+  "id": "launchpad/HPL_NVIDIA/Ayush/UNM-Vboost",
+  "suite": "HPL_NVIDIA",
+  "group": "Ayush",
+  "run": "UNM-Vboost",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-05T00:46:27.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 71110,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 30.06,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.000866088612,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 147456,
+    "NB": 1536,
+    "P": 1,
+    "Q": 2,
+    "variant": "nvidia",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "efficiency": null,
+  "provenance": {
+    "started": "Mon Oct  5 00:46:27 2026",
+    "ended": "Mon Oct  5 00:46:57 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL_NVIDIA/Ayush/UNM-Vboost/HPL.dat",
+    "run.sh": "raw/launchpad/HPL_NVIDIA/Ayush/UNM-Vboost/run.sh",
+    "run.out": "raw/launchpad/HPL_NVIDIA/Ayush/UNM-Vboost/run.out",
+    "run.err": "raw/launchpad/HPL_NVIDIA/Ayush/UNM-Vboost/run.err"
+  },
+  "best": {
+    "tv": "WC0",
+    "N": 147456,
+    "NB": 1536,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 30.06,
+    "gflops": 71110,
+    "gflopsPerGpu": 35560,
+    "startTime": "Mon Oct  5 00:46:27 2026",
+    "endTime": "Mon Oct  5 00:46:57 2026",
+    "residual": 0.000866088612,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n143360       Ns\n1            # of NBs\n2048          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        143360
+      ],
+      "numNBs": 1,
+      "NBs": [
+        2048
+      ],
+      "pmap": 1,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        3,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 1,
+      "swapThreshold": 192,
+      "L1": 1,
+      "U": 0,
+      "equilibration": 0,
+      "memoryAlignment": 8
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-unm-vboost\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=00:50:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n# UNM Easley settings (NB=1536, CTA 32, chunk 32, hugepages, warmup MPI) at 400 W, fans Full, then vboost 1-4\n# https://github.com/afasulo/HPL_GPU (2x H100 NVL, 73.12 TFLOPS)\nset -uo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc CUDA_VISIBLE_DEVICES=0,1\nulimit -l unlimited; ulimit -n 65536\n\nq() { nvidia-smi -i 0 --query-gpu=\"$1\" --format=csv,noheader,nounits | cut -d. -f1; }\nvb_now() { nvidia-smi boost-slider -l | awk '/vboost/{print $(NF-1); exit}'; }\nPL_START=$(q power.limit); PL_MAX=$(q power.max_limit); VB_START=$(vb_now)\necho \"node $(hostname -s): power limit ${PL_START} W, max ${PL_MAX} W, vboost ${VB_START}\"\n# Fan mode: 01 Full, 02 Optimal\necho \"fan mode: $(sudo -n ipmitool raw 0x30 0x45 0x00 2>&1)\"\necho \"THP: $(cat /sys/kernel/mm/transparent_hugepage/enabled)\"\n\n# Put power limit and vboost back to what they were\ntrap 'sudo -n nvidia-smi boost-slider --vboost \"$VB_START\" >/dev/null; sudo -n nvidia-smi -pl \"$PL_START\" >/dev/null' EXIT\ntrap 'exit 143' TERM INT\nsudo -n nvidia-smi -pl \"$PL_MAX\" | grep 'set to' || echo \"power limit not changed\"\n\nSMI=power.draw,clocks.sm,temperature.gpu,clocks_event_reasons.sw_power_cap,clocks_event_reasons.sw_thermal_slowdown,clocks_event_reasons.hw_slowdown\n\n# Copy HPL.dat with some lines changed: dat <name> <line>=<value> ...\ndat() {\n  local name=$1; shift; local e=()\n  for kv in \"$@\"; do e+=(-e \"${kv%%=*}s/^[^ ]*/${kv#*=}/\"); done\n  sed \"${e[@]}\" HPL.dat > \"HPL-$name.dat\"\n}\n\n# Only count samples from the solve (power > half of peak)\nbusy() { awk -F', *' 'NR==FNR{if($1>m)m=$1;next} $1>m/2' \"$1\" \"$1\"; }\nmedian_clock() { busy \"smi-$1.csv\" | awk -F', *' '{print $2+0}' | sort -n | awk '{a[NR]=$1} END{print a[int((NR+1)/2)]+0}'; }\n\n# run <name> <vboost> <mpirun args...>\nrun() {\n  local name=$1 vb=$2; shift 2\n  echo \"=== $name ===\"\n  # Start logging first so the settings stick (persistence mode is off)\n  nvidia-smi --query-gpu=\"$SMI\" --format=csv,noheader,nounits -lms 500 > \"smi-$name.csv\" & local smi=$!\n  sudo -n nvidia-smi boost-slider --vboost \"$vb\" >/dev/null\n  echo \"vboost: $(vb_now)\"\n  mpirun -np \"${SLURM_NTASKS}\" \"$@\" < /dev/null 2>&1 | tee \"hpl-$name.log\"\n  kill \"$smi\"; wait \"$smi\" 2>/dev/null\n  local g; g=$(awk '/^ *W[RC]/{g=$7} END{print g+0}' \"hpl-$name.log\")\n  if [ \"$g\" = 0 ]; then echo \"$name: FAILED, no result\" | tee -a summary.txt; return 1; fi\n  local gemm used\n  gemm=$(grep -a -A1 'GEMM \\*\\*\\*\\*' \"hpl-$name.log\" | sed -n 's/.*, avg = \\([0-9]*\\.[0-9]*\\).*/\\1/p' | head -1)\n  used=$(grep -a -m1 '^ *Used ' \"hpl-$name.log\" | awk '{print $3}')\n  busy \"smi-$name.csv\" | awk -F', *' -v t=\"$name\" -v vb=\"$(vb_now)\" -v g=\"$g\" -v gm=\"${gemm:-?}\" -v u=\"${used:-?}\" -v med=\"$(median_clock \"$name\")\" '\n    {w+=$1; if($3>tmax)tmax=$3; cap+=($4~/^Active/); hot+=($5~/^Active/ || $6~/^Active/); n++}\n    END{if(n) printf \"%-16s vb%s %6.0f GFLOP/s  %3.0f W/GPU  SM median %4d MHz  capped %3.0f%%  max %d C  GEMM/GPU %s  used %s GiB\\n\",\n        t, vb, g, w/n, med, 100*cap/n, tmax, gm, u}' | tee -a summary.txt\n}\n\n# UNM env (component tests stay on, no end-of-run stall)\nUNM=(-x HPL_CTA_PER_FCT=32 -x HPL_CHUNK_SIZE_NBS=32 -x HPL_FCT_CHUNK_SIZE=32 -x HPL_ALLOC_HUGEPAGES=1 -x HPL_WARMUP_MPI=1)\n\n# Lines: 6 N, 8 NB. 147456 and 148992 are UNM's sizes, 144384 is a safer fit\ndat unm-147456 6=147456 8=1536\ndat unm-148992 6=148992 8=1536\ndat unm-144384 6=144384 8=1536\n\n# Our best (N=143360 NB=2048), vboost 0\nrun best 0 \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\"\n\n# UNM settings, vboost 0\nfor n in 147456 148992 144384; do\n  run \"unm-$n\" 0 \"${UNM[@]}\" \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL-unm-$n.dat\"\ndone\n\n# vboost 1-4 on whichever UNM size was fastest\npick=$(awk '/^unm-/ && $3+0>0 {if($3+0>b){b=$3+0; n=$1}} END{print n}' summary.txt)\nif [ -n \"$pick\" ]; then\n  for vb in 1 2 3 4; do\n    run \"$pick-vb$vb\" \"$vb\" \"${UNM[@]}\" \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL-$pick.dat\"\n  done\nelse\n  echo \"no UNM size ran, skipping vboost\"\nfi\n# Our best again, vboost 0, to see run to run noise\nrun best-again 0 \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\"\n\necho \"=== summary ===\"; cat summary.txt\n",
+    "sbatch": {
+      "job-name": "hpl-unm-vboost",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "gres": "gpu:2",
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "00:50:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WC0",
+        "N": 143360,
+        "NB": 2048,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 28.1,
+        "gflops": 69910,
+        "gflopsPerGpu": 34950,
+        "startTime": "Mon Oct  5 00:44:33 2026",
+        "endTime": "Mon Oct  5 00:45:01 2026",
+        "residual": 0.001120337724,
+        "residualPassed": true
+      },
+      {
+        "tv": "WC0",
+        "N": 147456,
+        "NB": 1536,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 30.06,
+        "gflops": 71110,
+        "gflopsPerGpu": 35560,
+        "startTime": "Mon Oct  5 00:46:27 2026",
+        "endTime": "Mon Oct  5 00:46:57 2026",
+        "residual": 0.000866088612,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "deviceInfo": {
+      "peakClockMHz": 1785,
+      "smVersion": 90,
+      "numSms": 132
+    },
+    "memInfo": {
+      "DEVICE": {
+        "System": {
+          "minGiB": 5.07021,
+          "maxGiB": 5.07021,
+          "avgGiB": 5.07021
+        },
+        "HPL buffers": {
+          "minGiB": 89.72141,
+          "maxGiB": 91.42649,
+          "avgGiB": 90.57395
+        },
+        "Used": {
+          "minGiB": 94.79161,
+          "maxGiB": 96.4967,
+          "avgGiB": 95.64416
+        },
+        "Total": {
+          "minGiB": 93.58398,
+          "maxGiB": 93.58398,
+          "avgGiB": 93.58398
+        }
+      },
+      "HOST": {
+        "HPL buffers": {
+          "minGiB": 0.00116,
+          "maxGiB": 0.00116,
+          "avgGiB": 0.00116
+        }
+      }
+    },
+    "traces": [
+      "[HPL TRACE] cuda_nvshmem_init: max=1.0140 (0) min=1.0140 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.4275 (1) min=1.4275 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.5237 (0) min=1.5236 (1)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0247 (0) min=0.0247 (1)",
+      "[HPL TRACE] cuda_nvshmem_init: max=0.8921 (0) min=0.8921 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.0951 (0) min=1.0950 (1)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.1371 (0) min=1.1370 (1)",
+      "[HPL TRACE] MPI Warmup: max=0.0000 (1) min=0.0000 (0)",
+      "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0252 (0) min=0.0252 (1)",
+      "[HPL TRACE] cuda_nvshmem_init: max=1.0021 (0) min=1.0021 (1)",
+      "[HPL TRACE] ncclCommInitRank: max=1.2455 (1) min=1.2454 (0)",
+      "[HPL TRACE] cugetrfs_mp_init: max=1.2892 (1) min=1.2891 (0)",
+      "[HPL TRACE] MPI Warmup: max=0.0001 (0) min=0.0001 (1)"
+    ],
+    "startTime": "Mon Oct  5 00:46:27 2026",
+    "endTime": "Mon Oct  5 00:46:57 2026",
+    "residual": 0.000866088612,
+    "residualPassed": true,
+    "hostInfo": null
+  },
+  "err": {
+    "file": "run.err",
+    "size": 123
+  },
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad smoke test - 2x H100 NVL, 1x2 grid\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n143360       Ns\n1            # of NBs\n2048          NBs\n1            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n0            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n3            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n1            SWAP (0=bin-exch,1=long,2=mix)\n192          swapping threshold\n1            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n0            Equilibration (0=no,1=yes)\n8            memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad smoke test - 2x H100 NVL, 1x2 grid"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          143360
+        ],
+        "numNBs": 1,
+        "NBs": [
+          2048
+        ],
+        "pmap": 1,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          3,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 1,
+        "swapThreshold": 192,
+        "L1": 1,
+        "U": 0,
+        "equilibration": 0,
+        "memoryAlignment": 8
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n#SBATCH --job-name=hpl-unm-vboost\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --gres=gpu:2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=00:50:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n# UNM Easley settings (NB=1536, CTA 32, chunk 32, hugepages, warmup MPI) at 400 W, fans Full, then vboost 1-4\n# https://github.com/afasulo/HPL_GPU (2x H100 NVL, 73.12 TFLOPS)\nset -uo pipefail\n\nHPL_ROOT=/home/nvidia/PROGRAMS/nvidia_hpl_benchmarks\n\nsource \"$HPL_ROOT/hpc-benchmarks-gpu-env.sh\"\nexport UCX_TLS=sm,self,cuda_copy,cuda_ipc CUDA_VISIBLE_DEVICES=0,1\nulimit -l unlimited; ulimit -n 65536\n\nq() { nvidia-smi -i 0 --query-gpu=\"$1\" --format=csv,noheader,nounits | cut -d. -f1; }\nvb_now() { nvidia-smi boost-slider -l | awk '/vboost/{print $(NF-1); exit}'; }\nPL_START=$(q power.limit); PL_MAX=$(q power.max_limit); VB_START=$(vb_now)\necho \"node $(hostname -s): power limit ${PL_START} W, max ${PL_MAX} W, vboost ${VB_START}\"\n# Fan mode: 01 Full, 02 Optimal\necho \"fan mode: $(sudo -n ipmitool raw 0x30 0x45 0x00 2>&1)\"\necho \"THP: $(cat /sys/kernel/mm/transparent_hugepage/enabled)\"\n\n# Put power limit and vboost back to what they were\ntrap 'sudo -n nvidia-smi boost-slider --vboost \"$VB_START\" >/dev/null; sudo -n nvidia-smi -pl \"$PL_START\" >/dev/null' EXIT\ntrap 'exit 143' TERM INT\nsudo -n nvidia-smi -pl \"$PL_MAX\" | grep 'set to' || echo \"power limit not changed\"\n\nSMI=power.draw,clocks.sm,temperature.gpu,clocks_event_reasons.sw_power_cap,clocks_event_reasons.sw_thermal_slowdown,clocks_event_reasons.hw_slowdown\n\n# Copy HPL.dat with some lines changed: dat <name> <line>=<value> ...\ndat() {\n  local name=$1; shift; local e=()\n  for kv in \"$@\"; do e+=(-e \"${kv%%=*}s/^[^ ]*/${kv#*=}/\"); done\n  sed \"${e[@]}\" HPL.dat > \"HPL-$name.dat\"\n}\n\n# Only count samples from the solve (power > half of peak)\nbusy() { awk -F', *' 'NR==FNR{if($1>m)m=$1;next} $1>m/2' \"$1\" \"$1\"; }\nmedian_clock() { busy \"smi-$1.csv\" | awk -F', *' '{print $2+0}' | sort -n | awk '{a[NR]=$1} END{print a[int((NR+1)/2)]+0}'; }\n\n# run <name> <vboost> <mpirun args...>\nrun() {\n  local name=$1 vb=$2; shift 2\n  echo \"=== $name ===\"\n  # Start logging first so the settings stick (persistence mode is off)\n  nvidia-smi --query-gpu=\"$SMI\" --format=csv,noheader,nounits -lms 500 > \"smi-$name.csv\" & local smi=$!\n  sudo -n nvidia-smi boost-slider --vboost \"$vb\" >/dev/null\n  echo \"vboost: $(vb_now)\"\n  mpirun -np \"${SLURM_NTASKS}\" \"$@\" < /dev/null 2>&1 | tee \"hpl-$name.log\"\n  kill \"$smi\"; wait \"$smi\" 2>/dev/null\n  local g; g=$(awk '/^ *W[RC]/{g=$7} END{print g+0}' \"hpl-$name.log\")\n  if [ \"$g\" = 0 ]; then echo \"$name: FAILED, no result\" | tee -a summary.txt; return 1; fi\n  local gemm used\n  gemm=$(grep -a -A1 'GEMM \\*\\*\\*\\*' \"hpl-$name.log\" | sed -n 's/.*, avg = \\([0-9]*\\.[0-9]*\\).*/\\1/p' | head -1)\n  used=$(grep -a -m1 '^ *Used ' \"hpl-$name.log\" | awk '{print $3}')\n  busy \"smi-$name.csv\" | awk -F', *' -v t=\"$name\" -v vb=\"$(vb_now)\" -v g=\"$g\" -v gm=\"${gemm:-?}\" -v u=\"${used:-?}\" -v med=\"$(median_clock \"$name\")\" '\n    {w+=$1; if($3>tmax)tmax=$3; cap+=($4~/^Active/); hot+=($5~/^Active/ || $6~/^Active/); n++}\n    END{if(n) printf \"%-16s vb%s %6.0f GFLOP/s  %3.0f W/GPU  SM median %4d MHz  capped %3.0f%%  max %d C  GEMM/GPU %s  used %s GiB\\n\",\n        t, vb, g, w/n, med, 100*cap/n, tmax, gm, u}' | tee -a summary.txt\n}\n\n# UNM env (component tests stay on, no end-of-run stall)\nUNM=(-x HPL_CTA_PER_FCT=32 -x HPL_CHUNK_SIZE_NBS=32 -x HPL_FCT_CHUNK_SIZE=32 -x HPL_ALLOC_HUGEPAGES=1 -x HPL_WARMUP_MPI=1)\n\n# Lines: 6 N, 8 NB. 147456 and 148992 are UNM's sizes, 144384 is a safer fit\ndat unm-147456 6=147456 8=1536\ndat unm-148992 6=148992 8=1536\ndat unm-144384 6=144384 8=1536\n\n# Our best (N=143360 NB=2048), vboost 0\nrun best 0 \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\"\n\n# UNM settings, vboost 0\nfor n in 147456 148992 144384; do\n  run \"unm-$n\" 0 \"${UNM[@]}\" \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL-unm-$n.dat\"\ndone\n\n# vboost 1-4 on whichever UNM size was fastest\npick=$(awk '/^unm-/ && $3+0>0 {if($3+0>b){b=$3+0; n=$1}} END{print n}' summary.txt)\nif [ -n \"$pick\" ]; then\n  for vb in 1 2 3 4; do\n    run \"$pick-vb$vb\" \"$vb\" \"${UNM[@]}\" \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL-$pick.dat\"\n  done\nelse\n  echo \"no UNM size ran, skipping vboost\"\nfi\n# Our best again, vboost 0, to see run to run noise\nrun best-again 0 \"$HPL_ROOT/hpl.sh\" --dat \"$PWD/HPL.dat\"\n\necho \"=== summary ===\"; cat summary.txt\n",
+      "sbatch": {
+        "job-name": "hpl-unm-vboost",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "gres": "gpu:2",
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "00:50:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WC0",
+          "N": 143360,
+          "NB": 2048,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 28.1,
+          "gflops": 69910,
+          "gflopsPerGpu": 34950,
+          "startTime": "Mon Oct  5 00:44:33 2026",
+          "endTime": "Mon Oct  5 00:45:01 2026",
+          "residual": 0.001120337724,
+          "residualPassed": true
+        },
+        {
+          "tv": "WC0",
+          "N": 147456,
+          "NB": 1536,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 30.06,
+          "gflops": 71110,
+          "gflopsPerGpu": 35560,
+          "startTime": "Mon Oct  5 00:46:27 2026",
+          "endTime": "Mon Oct  5 00:46:57 2026",
+          "residual": 0.000866088612,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "deviceInfo": {
+        "peakClockMHz": 1785,
+        "smVersion": 90,
+        "numSms": 132
+      },
+      "memInfo": {
+        "DEVICE": {
+          "System": {
+            "minGiB": 5.07021,
+            "maxGiB": 5.07021,
+            "avgGiB": 5.07021
+          },
+          "HPL buffers": {
+            "minGiB": 89.72141,
+            "maxGiB": 91.42649,
+            "avgGiB": 90.57395
+          },
+          "Used": {
+            "minGiB": 94.79161,
+            "maxGiB": 96.4967,
+            "avgGiB": 95.64416
+          },
+          "Total": {
+            "minGiB": 93.58398,
+            "maxGiB": 93.58398,
+            "avgGiB": 93.58398
+          }
+        },
+        "HOST": {
+          "HPL buffers": {
+            "minGiB": 0.00116,
+            "maxGiB": 0.00116,
+            "avgGiB": 0.00116
+          }
+        }
+      },
+      "traces": [
+        "[HPL TRACE] cuda_nvshmem_init: max=1.0140 (0) min=1.0140 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.4275 (1) min=1.4275 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.5237 (0) min=1.5236 (1)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0247 (0) min=0.0247 (1)",
+        "[HPL TRACE] cuda_nvshmem_init: max=0.8921 (0) min=0.8921 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.0951 (0) min=1.0950 (1)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.1371 (0) min=1.1370 (1)",
+        "[HPL TRACE] MPI Warmup: max=0.0000 (1) min=0.0000 (0)",
+        "[HPL TRACE] HPL_pdmatgen_gpu: max=0.0252 (0) min=0.0252 (1)",
+        "[HPL TRACE] cuda_nvshmem_init: max=1.0021 (0) min=1.0021 (1)",
+        "[HPL TRACE] ncclCommInitRank: max=1.2455 (1) min=1.2454 (0)",
+        "[HPL TRACE] cugetrfs_mp_init: max=1.2892 (1) min=1.2891 (0)",
+        "[HPL TRACE] MPI Warmup: max=0.0001 (0) min=0.0001 (1)"
+      ],
+      "startTime": "Mon Oct  5 00:46:27 2026",
+      "endTime": "Mon Oct  5 00:46:57 2026",
+      "residual": 0.000866088612,
+      "residualPassed": true,
+      "hostInfo": null
+    },
+    "err": {
+      "file": "run.err",
+      "size": 123
+    },
+    "best": {
+      "tv": "WC0",
+      "N": 147456,
+      "NB": 1536,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 30.06,
+      "gflops": 71110,
+      "gflopsPerGpu": 35560,
+      "startTime": "Mon Oct  5 00:46:27 2026",
+      "endTime": "Mon Oct  5 00:46:57 2026",
+      "residual": 0.000866088612,
+      "residualPassed": true
+    }
+  }
+}

@@ -1,0 +1,50 @@
+invocation:
+- run
+- /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- post_process
+- -N
+- '2'
+- -n
+- '4'
+- -p
+- gpu
+- -w
+- 02:00:00
+- --name
+- mfc-bowshock-gpu
+- -o
+- /scratch/jobs/35186426864/MFC/demo/bowshock-gpu/summary.yaml
+- --no-build
+- --clean
+- --gpu
+- acc
+- --wait
+- --
+- --gbpp
+- '16'
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: acc
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  3.1509729
+pre_process:
+    exec:  8.5353110
+simulation:
+    exec:  8110.9059632
+    grind: 0.91248850
+post_process:
+    exec:  298.0874905

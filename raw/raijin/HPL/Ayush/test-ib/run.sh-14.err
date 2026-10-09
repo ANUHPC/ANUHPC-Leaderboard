@@ -1,0 +1,32 @@
+[hpc-02:27169] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-02:27169] MCW rank 1 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-04:44857] MCW rank 2 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-04:44857] MCW rank 3 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   hpc-02
+  Local device: mlx4_0
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+At least one pair of MPI processes are unable to reach each other for
+MPI communications.  This means that no Open MPI device has indicated
+that it can be used to communicate between these processes.  This is
+an error; Open MPI requires that all MPI processes be able to reach
+each other.  This error can sometimes be the result of forgetting to
+specify the "self" BTL.
+
+  Process 1 ([[65224,1],2]) is on host: hpc-04
+  Process 2 ([[65224,1],0]) is on host: unknown!
+  BTLs attempted: self vader
+
+Your MPI job is now going to abort; sorry.
+--------------------------------------------------------------------------
+[hpc-04:44859] *** An error occurred in MPI_Send
+[hpc-04:44859] *** reported by process [4274520065,2]
+[hpc-04:44859] *** on communicator MPI_COMM_WORLD
+[hpc-04:44859] *** MPI_ERR_INTERN: internal error
+[hpc-04:44859] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[hpc-04:44859] ***    and potentially your MPI job)
+[hpc-02:27169] 3 more processes have sent help message help-mpi-btl-openib.txt / error in device init
+[hpc-02:27169] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
