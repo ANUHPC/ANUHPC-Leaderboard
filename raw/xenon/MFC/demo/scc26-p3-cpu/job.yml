@@ -1,0 +1,16 @@
+# SCC26 Practice Problem 3: 2D shock-droplet (custom, UNRANKED).
+# Submit job.yml AND case.py together in a new directory:
+# input/xenon/MFC/<your-name>/scc26-p3-cpu-01/
+suite: MFC
+visualize: true
+preview: alpha1            # water volume fraction; creates MP4 + final PNG
+resources:
+  partition: cpu
+  nodes: 1
+  tasks_per_node: 4
+  walltime: "00:30:00"
+build:
+  gpu: none
+  toolchain: gcc-ompi5
+# No case: slug: this directory supplies its own case.py.
+# No tuning.gbpp: custom-case resolution is set in case.py.

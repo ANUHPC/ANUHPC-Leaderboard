@@ -1,0 +1,85 @@
++-----------------------------------------------------------------------------------------------------------+ 
+| MFC case # mfc-5eq-rk3-weno3-hllc-cpu @ /scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_hllc-cpu/case.py: |
++-----------------------------------------------------------------------------------------------------------+ 
+| * Start-time     08:10:36                            * Start-date     08:10:36                            |
+| * Partition      cpu                                 * Walltime       01:00:00                            |
+| * Account        N/A                                 * Nodes          1                                   |
+| * Job Name       mfc-5eq-rk3-weno3-hllc-cpu          * Engine         batch                               |
+| * QoS            N/A                                 * Binary         N/A                                 |
+| * Queue System   SLURM                               * Email          N/A                                 |
++-----------------------------------------------------------------------------------------------------------+ 
+
+host        : cpu-node1
+nodes/tasks : 1 x 4
+mpirun      : /work/openmpi/5.0.10/bin/mpirun
+fabric      : ibp129s0 (UCX_TLS=rc,sm,self)
+
+mfc: OK > :) Running syscheck:
+
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call assert(rank >= 0)
+ [TEST] MPI: call mpi_comm_size(MPI_COMM_WORLD, nRanks, ierr)
+ [TEST] MPI: call assert(nRanks > 0 .and. rank < nRanks)
+ [SKIP] ACC: devtype = acc_get_device_type()
+ [SKIP] ACC: num_devices = acc_get_num_devices(devtype)
+ [SKIP] ACC: call assert(num_devices > 0)
+ [SKIP] ACC: call acc_set_device_num(mod(rank, nRanks), devtype)
+ [SKIP] ACC: allocate(arr(1:N))
+ [SKIP] ACC: !$acc enter data create(arr(1:N))
+ [SKIP] ACC: !$acc parallel loop
+ [SKIP] ACC: !$acc update host(arr(1:N))
+ [SKIP] ACC: !$acc exit data delete(arr)
+ [SKIP] OMP: num_devices_omp = omp_get_num_devices()
+ [SKIP] OMP: call assert(num_devices_omp > 0)
+ [SKIP] OMP: call omp_set_default_device(mod(rank, nRanks))
+ [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)
+ [TEST] MPI: call mpi_finalize(ierr)
+ 
+ Syscheck: PASSED.
+
+mfc: OK > :) Running pre_process:
+
+ Pre-processing a 198x99x99 case on 4 rank(s)
+ Processing patch           1
+ Processing patch           2
+ Processing patch           3
+ Elapsed Time   10.537267000000000     
+
+mfc: OK > :) Running simulation:
+
+ Simulating a regular 198x99x99 case on 4 rank(s) on CPUs.
+ [  0%]  Time step        1 of 21 @ t_step =        0 Time Avg = 0.000000E+00 Time/step= 0.000000E+00 ETA (HH:MM:SS) = 0:00:00
+ [  5%]  Time step        2 of 21 @ t_step =        1 Time Avg = 0.000000E+00 Time/step= 4.917127E+00 ETA (HH:MM:SS) = 0:00:00
+ [ 10%]  Time step        3 of 21 @ t_step =        2 Time Avg = 0.000000E+00 Time/step= 4.667544E+00 ETA (HH:MM:SS) = 0:00:00
+ [ 15%]  Time step        4 of 21 @ t_step =        3 Time Avg = 4.599977E+00 Time/step= 4.599977E+00 ETA (HH:MM:SS) = 0:01:18
+ [ 20%]  Time step        5 of 21 @ t_step =        4 Time Avg = 4.584014E+00 Time/step= 4.568051E+00 ETA (HH:MM:SS) = 0:01:13
+ [ 24%]  Time step        6 of 21 @ t_step =        5 Time Avg = 4.552389E+00 Time/step= 4.489138E+00 ETA (HH:MM:SS) = 0:01:08
+ [ 29%]  Time step        7 of 21 @ t_step =        6 Time Avg = 4.537436E+00 Time/step= 4.492577E+00 ETA (HH:MM:SS) = 0:01:03
+ [ 34%]  Time step        8 of 21 @ t_step =        7 Time Avg = 4.528411E+00 Time/step= 4.492311E+00 ETA (HH:MM:SS) = 0:00:58
+ [ 39%]  Time step        9 of 21 @ t_step =        8 Time Avg = 4.522405E+00 Time/step= 4.492377E+00 ETA (HH:MM:SS) = 0:00:54
+ [ 43%]  Time step       10 of 21 @ t_step =        9 Time Avg = 4.532234E+00 Time/step= 4.591210E+00 ETA (HH:MM:SS) = 0:00:49
+ [ 48%]  Time step       11 of 21 @ t_step =       10 Time Avg = 4.531444E+00 Time/step= 4.525912E+00 ETA (HH:MM:SS) = 0:00:45
+ [ 53%]  Time step       12 of 21 @ t_step =       11 Time Avg = 4.537865E+00 Time/step= 4.589234E+00 ETA (HH:MM:SS) = 0:00:40
+ [ 58%]  Time step       13 of 21 @ t_step =       12 Time Avg = 4.545542E+00 Time/step= 4.614632E+00 ETA (HH:MM:SS) = 0:00:36
+ [ 62%]  Time step       14 of 21 @ t_step =       13 Time Avg = 4.567381E+00 Time/step= 4.785773E+00 ETA (HH:MM:SS) = 0:00:31
+ [ 67%]  Time step       15 of 21 @ t_step =       14 Time Avg = 4.593735E+00 Time/step= 4.883633E+00 ETA (HH:MM:SS) = 0:00:27
+ [ 72%]  Time step       16 of 21 @ t_step =       15 Time Avg = 4.617401E+00 Time/step= 4.901383E+00 ETA (HH:MM:SS) = 0:00:23
+ [ 77%]  Time step       17 of 21 @ t_step =       16 Time Avg = 4.638808E+00 Time/step= 4.917111E+00 ETA (HH:MM:SS) = 0:00:18
+ [ 81%]  Time step       18 of 21 @ t_step =       17 Time Avg = 4.642388E+00 Time/step= 4.692503E+00 ETA (HH:MM:SS) = 0:00:13
+ [ 86%]  Time step       19 of 21 @ t_step =       18 Time Avg = 4.645086E+00 Time/step= 4.685558E+00 ETA (HH:MM:SS) = 0:00:09
+ [ 91%]  Time step       20 of 21 @ t_step =       19 Time Avg = 4.647062E+00 Time/step= 4.678670E+00 ETA (HH:MM:SS) = 0:00:04
+ Performance:   96.271661879482508      ns/gp/eq/rhs
+
++-----------------------------------------------------------------------------------------------------------+ 
+| Finished mfc-5eq-rk3-weno3-hllc-cpu:                                                                      |
+| * Total-time:    174s                                * Exit Code:     0                                   |
+| * End-time:      08:13:30                            * End-date:      08:13:30                            |
++-----------------------------------------------------------------------------------------------------------+ 

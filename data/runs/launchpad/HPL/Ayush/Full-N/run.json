@@ -1,0 +1,374 @@
+{
+  "id": "launchpad/HPL/Ayush/Full-N",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "Full-N",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-08T09:45:56.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 3291.5,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 7500.09,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.0019930703,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 333312,
+    "NB": 384,
+    "P": 1,
+    "Q": 2,
+    "variant": "cpu",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "efficiency": {
+    "value": 0.64287109375,
+    "rpeakGflops": 5120,
+    "basis": {
+      "ghz": 2.5,
+      "coresPerNode": 64,
+      "nodes": 1,
+      "flopsPerCycle": 32
+    },
+    "measuredClock": {
+      "ghz": 2.297,
+      "rpeakGflops": 4704.256,
+      "value": 0.6996855613299956
+    }
+  },
+  "provenance": {
+    "started": "Thu Oct  8 09:45:56 2026",
+    "ended": "Thu Oct  8 11:50:56 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL/Ayush/Full-N/HPL.dat",
+    "run.sh": "raw/launchpad/HPL/Ayush/Full-N/run.sh",
+    "run.out": "raw/launchpad/HPL/Ayush/Full-N/run.out",
+    "run.err": "raw/launchpad/HPL/Ayush/Full-N/run.err"
+  },
+  "best": {
+    "tv": "WR12C2C2",
+    "N": 333312,
+    "NB": 384,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 7500.09,
+    "gflops": 3291.5,
+    "startTime": "Thu Oct  8 09:45:56 2026",
+    "endTime": "Thu Oct  8 11:50:56 2026",
+    "residual": 0.0019930703,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad full run, 2 ranks x 32 threads, 1x2, NB=384\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n333312       Ns\n1            # of NBs\n384          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad full run, 2 ranks x 32 threads, 1x2, NB=384"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        333312
+      ],
+      "numNBs": 1,
+      "NBs": [
+        384
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# full size cpu HPL on launchpad, N=333312 NB=384 P x Q = 1 x 2, one rank per socket\n\n#SBATCH --job-name=hpl-launchpad-full-n333312\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=04:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# OpenBLAS 0.3.34 (SAPPHIRERAPIDS, OpenMP), netlib HPL 2.3, ubuntu OpenMPI 4.1.6\nexport LD_LIBRARY_PATH=/data/benchmarks/openblas/0.3.34/lib:${LD_LIBRARY_PATH:-}\nexport UCX_TLS=sm,self\n\nexport OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-32}\nexport OPENBLAS_NUM_THREADS=${SLURM_CPUS_PER_TASK:-32}\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} threads\"\necho \"blas    : $(ldd ./xhpl | awk '/openblas|mkl|blis/{print $3}' | xargs -r readlink -f)\"\necho \"mpi     : $(mpirun --version | head -1)\"\n\n# each rank needs ~417 GiB on its own socket. without dropping the page cache\nsync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\necho \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n# clock under load for the peak calc, only sampled mid-solve (last line is a Column= line).\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q '^Column='; }\n( while sleep 10; do\n    solving || continue\n    [ -s numa.log ] || numastat -p xhpl > numa.log 2>&1\n    awk -F'\\n' 'BEGIN{RS=\"\"} {for (i=1; i<=NF; i++) {split($i, kv, /\\t*: /); f[kv[1]]=kv[2]}\n                k=f[\"physical id\"] \"-\" f[\"core id\"]; if (f[\"cpu MHz\"]+0 > m[k]) m[k]=f[\"cpu MHz\"]+0}\n                END{for (k in m) {s+=m[k]; n++} printf \"%.0f\\n\", s/n}' /proc/cpuinfo\n  done ) > cpufreq.log &\nsampler=$!\n\n# rank 0 on socket 0, rank 1 on socket 1, memory stays local\nmpirun -np \"${SLURM_NTASKS}\" --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core \\\n       --report-bindings ./xhpl\nrc=$?\n\nkill \"$sampler\"\nawk '{s+=$1; n++; if (n==1 || $1<lo) lo=$1; if ($1>hi) hi=$1}\n     END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples\\n\", s/n, lo, hi, n}' cpufreq.log\n[ -s numa.log ] && { echo \"numa placement while solving (MB):\"; cat numa.log; }\nexit $rc\n",
+    "sbatch": {
+      "job-name": "hpl-launchpad-full-n333312",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "04:00:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WR12C2C2",
+        "N": 333312,
+        "NB": 384,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 7500.09,
+        "gflops": 3291.5,
+        "startTime": "Thu Oct  8 09:45:56 2026",
+        "endTime": "Thu Oct  8 11:50:56 2026",
+        "residual": 0.0019930703,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+      "ranks": "2 x 32 threads",
+      "blas": "/data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so",
+      "mpi": "mpirun (Open MPI) 4.1.6",
+      "clockMHz": {
+        "avg": 2297,
+        "min": 1024,
+        "max": 4072,
+        "samples": 748
+      }
+    }
+  },
+  "err": {
+    "file": "run.err",
+    "size": 2274
+  },
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad full run, 2 ranks x 32 threads, 1x2, NB=384\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n333312       Ns\n1            # of NBs\n384          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad full run, 2 ranks x 32 threads, 1x2, NB=384"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          333312
+        ],
+        "numNBs": 1,
+        "NBs": [
+          384
+        ],
+        "pmap": 0,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 2,
+        "swapThreshold": 16,
+        "L1": 0,
+        "U": 0,
+        "equilibration": 1,
+        "memoryAlignment": 16
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# full size cpu HPL on launchpad, N=333312 NB=384 P x Q = 1 x 2, one rank per socket\n\n#SBATCH --job-name=hpl-launchpad-full-n333312\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=04:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# OpenBLAS 0.3.34 (SAPPHIRERAPIDS, OpenMP), netlib HPL 2.3, ubuntu OpenMPI 4.1.6\nexport LD_LIBRARY_PATH=/data/benchmarks/openblas/0.3.34/lib:${LD_LIBRARY_PATH:-}\nexport UCX_TLS=sm,self\n\nexport OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-32}\nexport OPENBLAS_NUM_THREADS=${SLURM_CPUS_PER_TASK:-32}\nexport OMP_PROC_BIND=close\nexport OMP_PLACES=cores\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} threads\"\necho \"blas    : $(ldd ./xhpl | awk '/openblas|mkl|blis/{print $3}' | xargs -r readlink -f)\"\necho \"mpi     : $(mpirun --version | head -1)\"\n\n# each rank needs ~417 GiB on its own socket. without dropping the page cache\nsync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\necho \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n# clock under load for the peak calc, only sampled mid-solve (last line is a Column= line).\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q '^Column='; }\n( while sleep 10; do\n    solving || continue\n    [ -s numa.log ] || numastat -p xhpl > numa.log 2>&1\n    awk -F'\\n' 'BEGIN{RS=\"\"} {for (i=1; i<=NF; i++) {split($i, kv, /\\t*: /); f[kv[1]]=kv[2]}\n                k=f[\"physical id\"] \"-\" f[\"core id\"]; if (f[\"cpu MHz\"]+0 > m[k]) m[k]=f[\"cpu MHz\"]+0}\n                END{for (k in m) {s+=m[k]; n++} printf \"%.0f\\n\", s/n}' /proc/cpuinfo\n  done ) > cpufreq.log &\nsampler=$!\n\n# rank 0 on socket 0, rank 1 on socket 1, memory stays local\nmpirun -np \"${SLURM_NTASKS}\" --map-by socket:PE=${SLURM_CPUS_PER_TASK} --bind-to core \\\n       --report-bindings ./xhpl\nrc=$?\n\nkill \"$sampler\"\nawk '{s+=$1; n++; if (n==1 || $1<lo) lo=$1; if ($1>hi) hi=$1}\n     END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples\\n\", s/n, lo, hi, n}' cpufreq.log\n[ -s numa.log ] && { echo \"numa placement while solving (MB):\"; cat numa.log; }\nexit $rc\n",
+      "sbatch": {
+        "job-name": "hpl-launchpad-full-n333312",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "04:00:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WR12C2C2",
+          "N": 333312,
+          "NB": 384,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 7500.09,
+          "gflops": 3291.5,
+          "startTime": "Thu Oct  8 09:45:56 2026",
+          "endTime": "Thu Oct  8 11:50:56 2026",
+          "residual": 0.0019930703,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+        "ranks": "2 x 32 threads",
+        "blas": "/data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so",
+        "mpi": "mpirun (Open MPI) 4.1.6",
+        "clockMHz": {
+          "avg": 2297,
+          "min": 1024,
+          "max": 4072,
+          "samples": 748
+        }
+      }
+    },
+    "err": {
+      "file": "run.err",
+      "size": 2274
+    },
+    "best": {
+      "tv": "WR12C2C2",
+      "N": 333312,
+      "NB": 384,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 7500.09,
+      "gflops": 3291.5,
+      "startTime": "Thu Oct  8 09:45:56 2026",
+      "endTime": "Thu Oct  8 11:50:56 2026",
+      "residual": 0.0019930703,
+      "residualPassed": true
+    }
+  }
+}
