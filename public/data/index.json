@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T02:04:02.984Z",
+  "generatedAt": "2026-10-15T02:28:07.916Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -23,7 +23,7 @@
       "partitions": [
         "batch"
       ],
-      "count": 138
+      "count": 139
     },
     {
       "name": "xenon",
@@ -59,10 +59,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 146,
+      "count": 147,
       "countByCluster": {
         "launchpad": 5,
-        "raijin": 138,
+        "raijin": 139,
         "xenon": 3
       }
     },
@@ -11762,6 +11762,53 @@
       "best": null,
       "outSummary": null,
       "hasErr": false
+    },
+    {
+      "id": "raijin/HPL/Flynn/test-run-next",
+      "suite": "HPL",
+      "group": "Flynn",
+      "run": "test-run-next",
+      "cluster": "raijin",
+      "clusterSource": "path (confirmed by output)",
+      "date": "2026-10-15T02:27:35Z",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
+      "metric": null,
+      "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 96000,
+        "NB": 192,
+        "P": 2,
+        "Q": 2,
+        "variant": "cpu",
+        "nodes": 2,
+        "tasks_per_node": 2,
+        "cpus_per_task": 8,
+        "partition": "batch"
+      },
+      "efficiency": null,
+      "status": "no-result",
+      "ranking": {
+        "eligible": false,
+        "reason": "No valid performance result"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": {
+        "testsTotal": null,
+        "testsPassed": null,
+        "testsFailed": null,
+        "testsSkipped": null
+      },
+      "hasErr": true
     },
     {
       "id": "raijin/HPL/Maya/folder",
