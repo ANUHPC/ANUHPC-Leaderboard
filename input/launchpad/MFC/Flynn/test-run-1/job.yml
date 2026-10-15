@@ -1,0 +1,16 @@
+# Ranked A100 benchmark. Copy this file as:
+# input/xenon/MFC/<your-name>/<new-run-name>/job.yml
+# No case.py or run.sh is needed.
+suite: MFC
+case: 5eq_rk3_weno3_hllc
+visualize: false
+resources:
+  partition: gpu
+  nodes: 1                # set 2 for eight A100s
+  tasks_per_node: 4        # one MPI rank per A100; four GPUs per node
+  walltime: "01:00:00"
+build:
+  gpu: acc
+  toolchain: nvhpc-acc
+tuning:
+  gbpp: 16                # grid sizing parameter, not a memory reservation
