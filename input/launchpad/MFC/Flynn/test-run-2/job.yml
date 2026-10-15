@@ -5,7 +5,7 @@ suite: MFC
 case: 5eq_rk3_weno3_hllc
 visualize: false
 resources:
-  partition: gpu
+  partition: cpu
   nodes: 1                # set 2 for eight A100s
   tasks_per_node: 4        # one MPI rank per A100; four GPUs per node
   walltime: "01:00:00"
