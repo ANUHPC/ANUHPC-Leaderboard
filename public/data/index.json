@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T07:34:36.888Z",
+  "generatedAt": "2026-10-15T02:04:02.984Z",
   "clusters": [
     {
       "name": "launchpad",
@@ -23,7 +23,7 @@
       "partitions": [
         "batch"
       ],
-      "count": 137
+      "count": 138
     },
     {
       "name": "xenon",
@@ -59,10 +59,10 @@
       ],
       "available": true,
       "missing": null,
-      "count": 145,
+      "count": 146,
       "countByCluster": {
         "launchpad": 5,
-        "raijin": 137,
+        "raijin": 138,
         "xenon": 3
       }
     },
@@ -11720,6 +11720,48 @@
       "best": null,
       "outSummary": null,
       "hasErr": true
+    },
+    {
+      "id": "raijin/HPL/Flynn/test-run-bajillion",
+      "suite": "HPL",
+      "group": "Flynn",
+      "run": "test-run-bajillion",
+      "cluster": "raijin",
+      "clusterSource": "path",
+      "date": "2026-10-15T13:02:23+11:00",
+      "dateSource": "git",
+      "submittedAt": null,
+      "submitter": {
+        "name": "Flynn",
+        "house": false,
+        "by": null
+      },
+      "metric": null,
+      "secondary": [],
+      "parameters": null,
+      "verification": null,
+      "convergence": null,
+      "config": {
+        "N": 96000,
+        "NB": 192,
+        "P": 2,
+        "Q": 2,
+        "variant": "cpu",
+        "nodes": 1,
+        "tasks_per_node": 4,
+        "cpus_per_task": 16,
+        "partition": "all"
+      },
+      "efficiency": null,
+      "status": "no-result",
+      "ranking": {
+        "eligible": false,
+        "reason": "No valid performance result"
+      },
+      "notes": [],
+      "best": null,
+      "outSummary": null,
+      "hasErr": false
     },
     {
       "id": "raijin/HPL/Maya/folder",
