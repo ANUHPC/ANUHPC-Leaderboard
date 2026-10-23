@@ -1,0 +1,394 @@
+{
+  "id": "launchpad/HPL/Ayush/Power-Limit",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "Power-Limit",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-23T08:02:08.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 4245.06,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 1723.84,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.00120205983,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 222240,
+    "NB": 480,
+    "P": 1,
+    "Q": 2,
+    "variant": "cpu",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "efficiency": {
+    "value": 0.8291132812500001,
+    "rpeakGflops": 5120,
+    "basis": {
+      "ghz": 2.5,
+      "coresPerNode": 64,
+      "nodes": 1,
+      "flopsPerCycle": 32
+    },
+    "measuredClock": {
+      "ghz": 2.237,
+      "rpeakGflops": 4581.376,
+      "value": 0.9265906138243183
+    }
+  },
+  "provenance": {
+    "started": "Fri Oct 23 08:02:08 2026",
+    "ended": "Fri Oct 23 08:30:52 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL/Ayush/Power-Limit/HPL.dat",
+    "run.sh": "raw/launchpad/HPL/Ayush/Power-Limit/run.sh",
+    "run.out": "raw/launchpad/HPL/Ayush/Power-Limit/run.out",
+    "run.err": "raw/launchpad/HPL/Ayush/Power-Limit/run.err"
+  },
+  "best": {
+    "tv": "WR12C2C2",
+    "N": 222240,
+    "NB": 480,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 1723.84,
+    "gflops": 4245.06,
+    "startTime": "Fri Oct 23 08:02:08 2026",
+    "endTime": "Fri Oct 23 08:30:52 2026",
+    "residual": 0.00120205983,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad 60% N, Intel MKL HPL, 1x2, NB=480: package power limit steps\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n222240       Ns\n1            # of NBs\n480          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad 60% N, Intel MKL HPL, 1x2, NB=480: package power limit steps"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        222240
+      ],
+      "numNBs": 1,
+      "NBs": [
+        480
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# intel HPL power limit steps, N=222240 (60% of max N) NB=480 1x2\n# PL1 250 -> 350 W per socket (SYS-221GE-NR is rated for 350 W cpus), fans full, turbo on\n# stops raising at 87 C, on throttling or a failed run. limits, fans, turbo put back on exit\n\n#SBATCH --job-name=hpl-launchpad-intel-power-limit\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=04:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# intel-oneapi-mkl-core-devel-2026.1, intel MPI 2021.18\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\nsteps=\"250 275 300 325 350\"\nbase=250\ntrip_c=87\n# SYSFS is only for dry runs\nsys=${SYSFS:-/sys}\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\necho \"governor: $(sort \"$sys\"/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_governor 2>/dev/null | uniq -c | awk '{printf \"%s%s x%s\", (NR > 1 ? \", \" : \"\"), $2, $1}')\"\necho \"epb     : $(cat \"$sys/devices/system/cpu/cpu0/power/energy_perf_bias\" 2>/dev/null || echo n/a) (0 performance, 6 balanced, 15 power saving)\"\necho \"load    : $(cut -d' ' -f1-3 /proc/loadavg 2>/dev/null) (1, 5, 15 min)\"\nsudo -n turbostat --debug --num_iterations 1 --interval 1 2>&1 | grep -E 'POWER_INFO|PKG Limit|DRAM_POWER_LIMIT|TEMPERATURE_TARGET' | sed 's/^/msr     : /'\n\nput() { sudo -n sh -c 'v=$1; shift; for f; do echo \"$v\" > \"$f\"; done' sh \"$@\"; }\nchange() { [ \"$(cat \"$2\")\" = \"$1\" ] || put \"$1\" \"$2\"; }\nzones=()\nfor z in \"$sys\"/class/powercap/intel-rapl:[0-9]; do grep -q '^package' \"$z/name\" 2>/dev/null && zones+=(\"$z\"); done\npl() { local z; for z in \"${zones[@]}\"; do printf '%s PL1 %d W PL2 %d W  ' \"$(cat \"$z/name\")\" $(($(cat \"$z/constraint_0_power_limit_uw\") / 1000000)) $(($(cat \"$z/constraint_1_power_limit_uw\") / 1000000)); done; }\ntemps=()\nfor f in \"$sys\"/class/hwmon/hwmon*/temp*_label; do grep -q '^Package id' \"$f\" 2>/dev/null && temps+=(\"${f%_label}_input\"); done\n[ ${#temps[@]} -gt 0 ] || for z in \"$sys\"/class/thermal/thermal_zone*; do [ \"$(cat \"$z/type\" 2>/dev/null)\" = x86_pkg_temp ] && temps+=(\"$z/temp\"); done\nhottest() { local f c m=0; for f in \"${temps[@]}\"; do c=$(cat \"$f\" 2>/dev/null); c=$((${c:-0} / 1000)); [ \"$c\" -gt \"$m\" ] && m=$c; done; echo \"$m\"; }\nthrottles() { cat \"$sys\"/devices/system/cpu/cpu[0-9]*/thermal_throttle/package_throttle_count 2>/dev/null | awk '{s += $1} END {print s + 0}'; }\nfan_mode() { sudo -n ipmitool raw 0x30 0x45 0x00 2>/dev/null | tr -d ' \\n'; }\n# fans ok, faulty (ns = not fitted), min and max RPM\nfans() { sudo -n ipmitool sdr type Fan 2>/dev/null | awk -F'|' '{gsub(/ /, \"\", $3); r = $5 + 0} $3 == \"ok\" {n++; if (!lo || r < lo) lo = r; if (r > hi) hi = r} $3 != \"ok\" && $3 != \"ns\" {bad++} END {printf \"%d %d %d %d\\n\", n, bad, lo, hi}'; }\nturbo=$sys/devices/system/cpu/intel_pstate/no_turbo\n\nsaved=$(for z in \"${zones[@]}\"; do echo \"$z $(cat \"$z/constraint_0_power_limit_uw\") $(cat \"$z/constraint_1_power_limit_uw\")\"; done)\nfan_found=$(fan_mode)\nturbo_found=$(cat \"$turbo\" 2>/dev/null)\nrestore() { local z a b; while read -r z a b; do [ -n \"$z\" ] && change \"$a\" \"$z/constraint_0_power_limit_uw\" && change \"$b\" \"$z/constraint_1_power_limit_uw\"; done <<<\"$saved\"; }\n# PL2 goes up with PL1 when it's lower\nset_limit() {\n  local uw=$(($1 * 1000000)) z a b p2\n  while read -r z a b; do\n    [ -n \"$z\" ] || continue\n    p2=$((b > uw ? b : uw))\n    change \"$p2\" \"$z/constraint_1_power_limit_uw\" && change \"$uw\" \"$z/constraint_0_power_limit_uw\" || return 1\n    [ \"$(cat \"$z/constraint_0_power_limit_uw\")\" = \"$uw\" ] && [ \"$(cat \"$z/constraint_1_power_limit_uw\")\" = \"$p2\" ] || return 1\n  done <<<\"$saved\"\n}\nput_back() {\n  restore\n  [ -n \"$fan_found\" ] && [ \"$(fan_mode)\" != \"$fan_found\" ] && sudo -n ipmitool raw 0x30 0x45 0x01 \"0x$fan_found\" > /dev/null\n  [ -n \"$turbo_found\" ] && change \"$turbo_found\" \"$turbo\"\n  echo \"restored: $(pl)fan mode $(fan_mode), no_turbo=$(cat \"$turbo\" 2>/dev/null || echo n/a)\"\n}\ntrap 'put_back; kill $(jobs -p) 2>/dev/null' EXIT\ntrap 'exit 143' TERM INT\n\n# fans full, turbo on\n[ \"$fan_found\" = 01 ] || { sudo -n ipmitool raw 0x30 0x45 0x01 0x01 > /dev/null; sleep 30; }\n[ \"$turbo_found\" = 1 ] && change 0 \"$turbo\"\nread -r fan_ok fan_bad fan_lo fan_hi < <(fans)\necho \"fan     : mode $(fan_mode) (01 full, 02 optimal), was ${fan_found:-?}, $fan_ok ok at $fan_lo-$fan_hi RPM, $fan_bad faulty\"\necho \"turbo   : no_turbo=$(cat \"$turbo\" 2>/dev/null || echo n/a), was ${turbo_found:-n/a}\"\necho \"limits  : $(pl)\"\necho \"temps   : ${#temps[@]} package sensors, hottest $(hottest) C, trip $trip_c C, $(throttles) throttles since boot\"\nawk -v b=$((base * 1000000)) 'NF && $2 != b {d = 1} END {exit d}' <<<\"$saved\" || echo \"warning : found $(pl)not $base W, put back on exit\"\n[ ${#zones[@]} -gt 0 ] && [ ${#temps[@]} -ge ${#zones[@]} ] || { echo \"warning : no power limits or package temps, $base W only\"; steps=$base; }\n[ \"$(fan_mode)\" = 01 ] && [ \"$fan_ok\" -gt 0 ] && [ \"$fan_bad\" -eq 0 ] || { echo \"warning : fans not full or one is faulty, $base W only\"; steps=$base; }\n[ \"$(cat \"$turbo\" 2>/dev/null)\" != 1 ] || { echo \"warning : turbo still off, $base W only\"; steps=$base; }\n\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nout=${out:-$PWD/run.out}\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\n# real clock from turbostat, not /proc/cpuinfo\nbusy() { awk '/Bzy_MHz/ {for (i = 1; i <= NF; i++) c[$i] = i; next} c[\"Bzy_MHz\"] && $1 + 0 > 0 {print $c[\"Bzy_MHz\"]}' \"$@\"; }\n\nsolve() {\n  local t=$1\n  echo\n  echo \"test    : $t | NB 480 | $(pl)| fan mode $(fan_mode)\"\n  sync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\n  echo \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n  # limits back if a package hits trip_c\n  ( while sleep 2; do\n      c=$(hottest)\n      [ \"$c\" -ge \"$trip_c\" ] || continue\n      restore; touch \"tripped.$t\"\n      echo \"tripped : $t at $c C, back to $(pl)\"\n      exit\n    done ) &\n  local watch=$!\n  # power, clock, temp + system watts, sampled only while solving\n  ( while :; do\n      solving || { sleep 10; continue; }\n      sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n      sudo -n ipmitool sdr get \"PW Consumption\" 2>/dev/null | sed -n 's/^ *Sensor Reading *: *\\([0-9.]*\\).*/wall \\1/p'\n    done ) > \"power.$t.log\" &\n  local power=$!\n\n  # rank 0 -> numa node 0, rank 1 -> numa node 1\n  mpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n    bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\"\n  local rc=$?\n  kill \"$watch\" \"$power\" 2>/dev/null\n\n  local watts mhz tmax wall gflops res\n  read -r watts mhz tmax < <(awk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n       c[\"PkgWatt\"] && $1 + 0 > 0 {s += $c[\"PkgWatt\"]; f += $c[\"Bzy_MHz\"]; if (c[\"PkgTmp\"] && $c[\"PkgTmp\"] > mt) mt = $c[\"PkgTmp\"]; n++}\n       END {if (n) printf \"%.0f %.0f %d\\n\", s/n, f/n, mt; else print \"- - -\"}' \"power.$t.log\")\n  wall=$(awk '$1 == \"wall\" && $2 + 0 > m {m = $2 + 0} END {if (m) printf \"%.0f\", m; else print \"-\"}' \"power.$t.log\")\n  echo \"power   : $t $watts W both packages, $mhz MHz, max $tmax C, system max $wall W\"\n  gflops=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && $1 ~ /^W[RC]/ && NF >= 7 {g = $7} END {print g}' \"$out\")\n  res=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && /\\.\\.\\.\\.\\.\\. (PASSED|FAILED)/ {r = $NF} END {print r}' \"$out\")\n  echo \"$t ${gflops:--} $mhz $watts $tmax $wall ${res:--}\" >> results.txt\n  [ \"$rc\" -eq 0 ] || { failed=\"$failed $t\"; echo \"failed  : $t exited $rc\"; return 1; }\n}\n\nfailed=\nfor w in $steps; do\n  t=pl$w\n  [ \"$w\" = \"$base\" ] || [ \"$(fan_mode)\" = 01 ] || { echo \"stop    : fans dropped out of full (now $(fan_mode))\"; break; }\n  set_limit \"$w\" || { echo \"skip    : $t and up, limit didn't take ($(pl))\"; restore; break; }\n  th=$(throttles)\n  stop=\n  solve \"$t\" || stop=\"run failed\"\n  read -r _ _ _ watts _ _ res < <(tail -n1 results.txt)\n  [ \"$res\" = PASSED ] || stop=\"${stop:+$stop, }residual ${res/#-/missing}\"\n  [ -e \"tripped.$t\" ] && stop=\"${stop:+$stop, }package hit $trip_c C\"\n  [ \"$(throttles)\" -gt \"$th\" ] && stop=\"${stop:+$stop, }throttling ($th -> $(throttles))\"\n  # not using the extra power = clock is maxed out\n  [ -z \"$stop\" ] && [ \"$watts\" != - ] && [ \"$watts\" -lt $((${#zones[@]} * (w - 10))) ] &&\n    stop=\"only using $watts of $((${#zones[@]} * w)) W, clock is maxed out\"\n  [ -n \"$stop\" ] && { echo \"stop    : $stop\"; break; }\ndone\nrestore\n\n# vs pl250\necho\nawk 'NR == 1 {b = $2 + 0}\n     {printf \"summary : %-6s %9s GFLOPS  %8s  %5s MHz  %4s W  %3s C  system %5s W  %s\\n\", $1, ($2 == \"-\" ? \"-\" : sprintf(\"%.2f\", $2)),\n             ($2 == \"-\" || b <= 0 ? \"-\" : sprintf(\"%+.2f%%\", ($2 / b - 1) * 100)), $3, $4, $5, $6, $7}' results.txt\n# site reads the first cpu MHz line, so use the best step's\nbest=$(awk '$2 != \"-\" && $2 + 0 > g {g = $2 + 0; t = $1} END {print t}' results.txt)\n[ -n \"$best\" ] && busy \"power.$best.log\" | sort -n | awk -v t=\"$best\" '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f (%s)\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)], t}'\n[ -z \"$failed\" ] || { echo \"failed  :$failed\"; exit 1; }\n",
+    "sbatch": {
+      "job-name": "hpl-launchpad-intel-power-limit",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "04:00:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WR12C2C2",
+        "N": 222240,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 1723.84,
+        "gflops": 4245.06,
+        "startTime": "Fri Oct 23 08:02:08 2026",
+        "endTime": "Fri Oct 23 08:30:52 2026",
+        "residual": 0.00120205983,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 222240,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 1723.98,
+        "gflops": 4244.71,
+        "startTime": "Fri Oct 23 08:31:27 2026",
+        "endTime": "Fri Oct 23 09:00:11 2026",
+        "residual": 0.00120205983,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+      "ranks": "2 x 32 cores",
+      "blas": "oneMKL 2026.1.0-236",
+      "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+      "clockMHz": {
+        "avg": 2237,
+        "min": 2134,
+        "max": 2578,
+        "samples": 162
+      }
+    }
+  },
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad 60% N, Intel MKL HPL, 1x2, NB=480: package power limit steps\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n222240       Ns\n1            # of NBs\n480          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad 60% N, Intel MKL HPL, 1x2, NB=480: package power limit steps"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          222240
+        ],
+        "numNBs": 1,
+        "NBs": [
+          480
+        ],
+        "pmap": 0,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 2,
+        "swapThreshold": 16,
+        "L1": 0,
+        "U": 0,
+        "equilibration": 1,
+        "memoryAlignment": 16
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# intel HPL power limit steps, N=222240 (60% of max N) NB=480 1x2\n# PL1 250 -> 350 W per socket (SYS-221GE-NR is rated for 350 W cpus), fans full, turbo on\n# stops raising at 87 C, on throttling or a failed run. limits, fans, turbo put back on exit\n\n#SBATCH --job-name=hpl-launchpad-intel-power-limit\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=04:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# intel-oneapi-mkl-core-devel-2026.1, intel MPI 2021.18\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\nsteps=\"250 275 300 325 350\"\nbase=250\ntrip_c=87\n# SYSFS is only for dry runs\nsys=${SYSFS:-/sys}\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\necho \"governor: $(sort \"$sys\"/devices/system/cpu/cpu[0-9]*/cpufreq/scaling_governor 2>/dev/null | uniq -c | awk '{printf \"%s%s x%s\", (NR > 1 ? \", \" : \"\"), $2, $1}')\"\necho \"epb     : $(cat \"$sys/devices/system/cpu/cpu0/power/energy_perf_bias\" 2>/dev/null || echo n/a) (0 performance, 6 balanced, 15 power saving)\"\necho \"load    : $(cut -d' ' -f1-3 /proc/loadavg 2>/dev/null) (1, 5, 15 min)\"\nsudo -n turbostat --debug --num_iterations 1 --interval 1 2>&1 | grep -E 'POWER_INFO|PKG Limit|DRAM_POWER_LIMIT|TEMPERATURE_TARGET' | sed 's/^/msr     : /'\n\nput() { sudo -n sh -c 'v=$1; shift; for f; do echo \"$v\" > \"$f\"; done' sh \"$@\"; }\nchange() { [ \"$(cat \"$2\")\" = \"$1\" ] || put \"$1\" \"$2\"; }\nzones=()\nfor z in \"$sys\"/class/powercap/intel-rapl:[0-9]; do grep -q '^package' \"$z/name\" 2>/dev/null && zones+=(\"$z\"); done\npl() { local z; for z in \"${zones[@]}\"; do printf '%s PL1 %d W PL2 %d W  ' \"$(cat \"$z/name\")\" $(($(cat \"$z/constraint_0_power_limit_uw\") / 1000000)) $(($(cat \"$z/constraint_1_power_limit_uw\") / 1000000)); done; }\ntemps=()\nfor f in \"$sys\"/class/hwmon/hwmon*/temp*_label; do grep -q '^Package id' \"$f\" 2>/dev/null && temps+=(\"${f%_label}_input\"); done\n[ ${#temps[@]} -gt 0 ] || for z in \"$sys\"/class/thermal/thermal_zone*; do [ \"$(cat \"$z/type\" 2>/dev/null)\" = x86_pkg_temp ] && temps+=(\"$z/temp\"); done\nhottest() { local f c m=0; for f in \"${temps[@]}\"; do c=$(cat \"$f\" 2>/dev/null); c=$((${c:-0} / 1000)); [ \"$c\" -gt \"$m\" ] && m=$c; done; echo \"$m\"; }\nthrottles() { cat \"$sys\"/devices/system/cpu/cpu[0-9]*/thermal_throttle/package_throttle_count 2>/dev/null | awk '{s += $1} END {print s + 0}'; }\nfan_mode() { sudo -n ipmitool raw 0x30 0x45 0x00 2>/dev/null | tr -d ' \\n'; }\n# fans ok, faulty (ns = not fitted), min and max RPM\nfans() { sudo -n ipmitool sdr type Fan 2>/dev/null | awk -F'|' '{gsub(/ /, \"\", $3); r = $5 + 0} $3 == \"ok\" {n++; if (!lo || r < lo) lo = r; if (r > hi) hi = r} $3 != \"ok\" && $3 != \"ns\" {bad++} END {printf \"%d %d %d %d\\n\", n, bad, lo, hi}'; }\nturbo=$sys/devices/system/cpu/intel_pstate/no_turbo\n\nsaved=$(for z in \"${zones[@]}\"; do echo \"$z $(cat \"$z/constraint_0_power_limit_uw\") $(cat \"$z/constraint_1_power_limit_uw\")\"; done)\nfan_found=$(fan_mode)\nturbo_found=$(cat \"$turbo\" 2>/dev/null)\nrestore() { local z a b; while read -r z a b; do [ -n \"$z\" ] && change \"$a\" \"$z/constraint_0_power_limit_uw\" && change \"$b\" \"$z/constraint_1_power_limit_uw\"; done <<<\"$saved\"; }\n# PL2 goes up with PL1 when it's lower\nset_limit() {\n  local uw=$(($1 * 1000000)) z a b p2\n  while read -r z a b; do\n    [ -n \"$z\" ] || continue\n    p2=$((b > uw ? b : uw))\n    change \"$p2\" \"$z/constraint_1_power_limit_uw\" && change \"$uw\" \"$z/constraint_0_power_limit_uw\" || return 1\n    [ \"$(cat \"$z/constraint_0_power_limit_uw\")\" = \"$uw\" ] && [ \"$(cat \"$z/constraint_1_power_limit_uw\")\" = \"$p2\" ] || return 1\n  done <<<\"$saved\"\n}\nput_back() {\n  restore\n  [ -n \"$fan_found\" ] && [ \"$(fan_mode)\" != \"$fan_found\" ] && sudo -n ipmitool raw 0x30 0x45 0x01 \"0x$fan_found\" > /dev/null\n  [ -n \"$turbo_found\" ] && change \"$turbo_found\" \"$turbo\"\n  echo \"restored: $(pl)fan mode $(fan_mode), no_turbo=$(cat \"$turbo\" 2>/dev/null || echo n/a)\"\n}\ntrap 'put_back; kill $(jobs -p) 2>/dev/null' EXIT\ntrap 'exit 143' TERM INT\n\n# fans full, turbo on\n[ \"$fan_found\" = 01 ] || { sudo -n ipmitool raw 0x30 0x45 0x01 0x01 > /dev/null; sleep 30; }\n[ \"$turbo_found\" = 1 ] && change 0 \"$turbo\"\nread -r fan_ok fan_bad fan_lo fan_hi < <(fans)\necho \"fan     : mode $(fan_mode) (01 full, 02 optimal), was ${fan_found:-?}, $fan_ok ok at $fan_lo-$fan_hi RPM, $fan_bad faulty\"\necho \"turbo   : no_turbo=$(cat \"$turbo\" 2>/dev/null || echo n/a), was ${turbo_found:-n/a}\"\necho \"limits  : $(pl)\"\necho \"temps   : ${#temps[@]} package sensors, hottest $(hottest) C, trip $trip_c C, $(throttles) throttles since boot\"\nawk -v b=$((base * 1000000)) 'NF && $2 != b {d = 1} END {exit d}' <<<\"$saved\" || echo \"warning : found $(pl)not $base W, put back on exit\"\n[ ${#zones[@]} -gt 0 ] && [ ${#temps[@]} -ge ${#zones[@]} ] || { echo \"warning : no power limits or package temps, $base W only\"; steps=$base; }\n[ \"$(fan_mode)\" = 01 ] && [ \"$fan_ok\" -gt 0 ] && [ \"$fan_bad\" -eq 0 ] || { echo \"warning : fans not full or one is faulty, $base W only\"; steps=$base; }\n[ \"$(cat \"$turbo\" 2>/dev/null)\" != 1 ] || { echo \"warning : turbo still off, $base W only\"; steps=$base; }\n\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nout=${out:-$PWD/run.out}\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\n# real clock from turbostat, not /proc/cpuinfo\nbusy() { awk '/Bzy_MHz/ {for (i = 1; i <= NF; i++) c[$i] = i; next} c[\"Bzy_MHz\"] && $1 + 0 > 0 {print $c[\"Bzy_MHz\"]}' \"$@\"; }\n\nsolve() {\n  local t=$1\n  echo\n  echo \"test    : $t | NB 480 | $(pl)| fan mode $(fan_mode)\"\n  sync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\n  echo \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n  # limits back if a package hits trip_c\n  ( while sleep 2; do\n      c=$(hottest)\n      [ \"$c\" -ge \"$trip_c\" ] || continue\n      restore; touch \"tripped.$t\"\n      echo \"tripped : $t at $c C, back to $(pl)\"\n      exit\n    done ) &\n  local watch=$!\n  # power, clock, temp + system watts, sampled only while solving\n  ( while :; do\n      solving || { sleep 10; continue; }\n      sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n      sudo -n ipmitool sdr get \"PW Consumption\" 2>/dev/null | sed -n 's/^ *Sensor Reading *: *\\([0-9.]*\\).*/wall \\1/p'\n    done ) > \"power.$t.log\" &\n  local power=$!\n\n  # rank 0 -> numa node 0, rank 1 -> numa node 1\n  mpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n    bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\"\n  local rc=$?\n  kill \"$watch\" \"$power\" 2>/dev/null\n\n  local watts mhz tmax wall gflops res\n  read -r watts mhz tmax < <(awk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n       c[\"PkgWatt\"] && $1 + 0 > 0 {s += $c[\"PkgWatt\"]; f += $c[\"Bzy_MHz\"]; if (c[\"PkgTmp\"] && $c[\"PkgTmp\"] > mt) mt = $c[\"PkgTmp\"]; n++}\n       END {if (n) printf \"%.0f %.0f %d\\n\", s/n, f/n, mt; else print \"- - -\"}' \"power.$t.log\")\n  wall=$(awk '$1 == \"wall\" && $2 + 0 > m {m = $2 + 0} END {if (m) printf \"%.0f\", m; else print \"-\"}' \"power.$t.log\")\n  echo \"power   : $t $watts W both packages, $mhz MHz, max $tmax C, system max $wall W\"\n  gflops=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && $1 ~ /^W[RC]/ && NF >= 7 {g = $7} END {print g}' \"$out\")\n  res=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && /\\.\\.\\.\\.\\.\\. (PASSED|FAILED)/ {r = $NF} END {print r}' \"$out\")\n  echo \"$t ${gflops:--} $mhz $watts $tmax $wall ${res:--}\" >> results.txt\n  [ \"$rc\" -eq 0 ] || { failed=\"$failed $t\"; echo \"failed  : $t exited $rc\"; return 1; }\n}\n\nfailed=\nfor w in $steps; do\n  t=pl$w\n  [ \"$w\" = \"$base\" ] || [ \"$(fan_mode)\" = 01 ] || { echo \"stop    : fans dropped out of full (now $(fan_mode))\"; break; }\n  set_limit \"$w\" || { echo \"skip    : $t and up, limit didn't take ($(pl))\"; restore; break; }\n  th=$(throttles)\n  stop=\n  solve \"$t\" || stop=\"run failed\"\n  read -r _ _ _ watts _ _ res < <(tail -n1 results.txt)\n  [ \"$res\" = PASSED ] || stop=\"${stop:+$stop, }residual ${res/#-/missing}\"\n  [ -e \"tripped.$t\" ] && stop=\"${stop:+$stop, }package hit $trip_c C\"\n  [ \"$(throttles)\" -gt \"$th\" ] && stop=\"${stop:+$stop, }throttling ($th -> $(throttles))\"\n  # not using the extra power = clock is maxed out\n  [ -z \"$stop\" ] && [ \"$watts\" != - ] && [ \"$watts\" -lt $((${#zones[@]} * (w - 10))) ] &&\n    stop=\"only using $watts of $((${#zones[@]} * w)) W, clock is maxed out\"\n  [ -n \"$stop\" ] && { echo \"stop    : $stop\"; break; }\ndone\nrestore\n\n# vs pl250\necho\nawk 'NR == 1 {b = $2 + 0}\n     {printf \"summary : %-6s %9s GFLOPS  %8s  %5s MHz  %4s W  %3s C  system %5s W  %s\\n\", $1, ($2 == \"-\" ? \"-\" : sprintf(\"%.2f\", $2)),\n             ($2 == \"-\" || b <= 0 ? \"-\" : sprintf(\"%+.2f%%\", ($2 / b - 1) * 100)), $3, $4, $5, $6, $7}' results.txt\n# site reads the first cpu MHz line, so use the best step's\nbest=$(awk '$2 != \"-\" && $2 + 0 > g {g = $2 + 0; t = $1} END {print t}' results.txt)\n[ -n \"$best\" ] && busy \"power.$best.log\" | sort -n | awk -v t=\"$best\" '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f (%s)\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)], t}'\n[ -z \"$failed\" ] || { echo \"failed  :$failed\"; exit 1; }\n",
+      "sbatch": {
+        "job-name": "hpl-launchpad-intel-power-limit",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "04:00:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WR12C2C2",
+          "N": 222240,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 1723.84,
+          "gflops": 4245.06,
+          "startTime": "Fri Oct 23 08:02:08 2026",
+          "endTime": "Fri Oct 23 08:30:52 2026",
+          "residual": 0.00120205983,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 222240,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 1723.98,
+          "gflops": 4244.71,
+          "startTime": "Fri Oct 23 08:31:27 2026",
+          "endTime": "Fri Oct 23 09:00:11 2026",
+          "residual": 0.00120205983,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+        "ranks": "2 x 32 cores",
+        "blas": "oneMKL 2026.1.0-236",
+        "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+        "clockMHz": {
+          "avg": 2237,
+          "min": 2134,
+          "max": 2578,
+          "samples": 162
+        }
+      }
+    },
+    "err": null,
+    "best": {
+      "tv": "WR12C2C2",
+      "N": 222240,
+      "NB": 480,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 1723.84,
+      "gflops": 4245.06,
+      "startTime": "Fri Oct 23 08:02:08 2026",
+      "endTime": "Fri Oct 23 08:30:52 2026",
+      "residual": 0.00120205983,
+      "residualPassed": true
+    }
+  }
+}
