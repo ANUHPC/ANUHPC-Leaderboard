@@ -1,0 +1,12 @@
+# SCC26 Task 2: small reference sweep submitted through GitHub Actions.
+suite: MFC
+case: advection_1d
+args: ["-N", "128", "--order", "5", "--cfl", "0.025"]
+resources:
+  partition: cpu
+  nodes: 1
+  tasks_per_node: 1
+  walltime: "00:20:00"
+build:
+  gpu: none
+  toolchain: gcc-ompi5

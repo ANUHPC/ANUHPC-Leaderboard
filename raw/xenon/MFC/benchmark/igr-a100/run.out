@@ -1,0 +1,91 @@
++-----------------------------------------------------------------------------------------------------------+ 
+| MFC case # mfc-igr-a100 @ /scratch/jobs/35187881911/MFC/benchmark/igr-a100/case.py:                       |
++-----------------------------------------------------------------------------------------------------------+ 
+| * Start-time     08:38:37                            * Start-date     08:38:37                            |
+| * Partition      gpu                                 * Walltime       01:00:00                            |
+| * Account        N/A                                 * Nodes          2                                   |
+| * Job Name       mfc-igr-a100                        * Engine         batch                               |
+| * QoS            N/A                                 * Binary         N/A                                 |
+| * Queue System   SLURM                               * Email          N/A                                 |
++-----------------------------------------------------------------------------------------------------------+ 
+
+host        : gpu-node1
+nodes/tasks : 2 x 4
+mpirun      : /work/nvhpc/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun
+fabric      : ibp161s0 (UCX_TLS=rc,sm,self,cuda_copy,cuda_ipc)
+
+mfc: OK > :) Running syscheck:
+
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_init(ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call mpi_comm_rank(MPI_COMM_WORLD, rank, ierr)
+ [TEST] MPI: call assert(rank >= 0)
+ [TEST] MPI: call mpi_comm_size(MPI_COMM_WORLD, nRanks, ierr)
+ [TEST] MPI: call assert(nRanks > 0 .and. rank < nRanks)
+ [TEST] ACC: devtype = acc_get_device_type()
+ [TEST] ACC: num_devices = acc_get_num_devices(devtype)
+ [TEST] ACC: call assert(num_devices > 0)
+ [TEST] ACC: call acc_set_device_num(mod(rank, nRanks), devtype)
+ [TEST] ACC: allocate(arr(1:N))
+ [TEST] ACC: !$acc enter data create(arr(1:N))
+ [TEST] ACC: !$acc parallel loop
+ [TEST] ACC: !$acc update host(arr(1:N))
+ [TEST] ACC: !$acc exit data delete(arr)
+ [SKIP] OMP: num_devices_omp = omp_get_num_devices()
+ [SKIP] OMP: call assert(num_devices_omp > 0)
+ [SKIP] OMP: call omp_set_default_device(mod(rank, nRanks))
+ [TEST] MPI: call mpi_barrier(MPI_COMM_WORLD, ierr)
+ [TEST] MPI: call mpi_finalize(ierr)
+ 
+ Syscheck: PASSED.
+
+mfc: OK > :) Running pre_process:
+
+ Pre-processing a 399x399x399 case on 8 rank(s)
+ Processing patch            1
+ Elapsed Time    35.96610188484192     
+
+mfc: OK > :) Running simulation:
+
+ Simulating a regular 399x399x399 case on 8 rank(s) with OpenACC offloading.
+ [  0%]  Time step        1 of 21 @ t_step =        0 Time Avg = 0.000000E+00 Time/step= 0.000000E+00 ETA (HH:MM:SS) = 0:00:00
+ [  5%]  Time step        2 of 21 @ t_step =        1 Time Avg = 0.000000E+00 Time/step= 5.617740E-01 ETA (HH:MM:SS) = 0:00:00
+ [ 10%]  Time step        3 of 21 @ t_step =        2 Time Avg = 0.000000E+00 Time/step= 4.959738E-01 ETA (HH:MM:SS) = 0:00:00
+ [ 15%]  Time step        4 of 21 @ t_step =        3 Time Avg = 5.633290E-01 Time/step= 5.633290E-01 ETA (HH:MM:SS) = 0:00:09
+ [ 20%]  Time step        5 of 21 @ t_step =        4 Time Avg = 5.490545E-01 Time/step= 5.347800E-01 ETA (HH:MM:SS) = 0:00:08
+ [ 24%]  Time step        6 of 21 @ t_step =        5 Time Avg = 5.459240E-01 Time/step= 5.396631E-01 ETA (HH:MM:SS) = 0:00:08
+ [ 29%]  Time step        7 of 21 @ t_step =        6 Time Avg = 5.582548E-01 Time/step= 5.952470E-01 ETA (HH:MM:SS) = 0:00:07
+ [ 34%]  Time step        8 of 21 @ t_step =        7 Time Avg = 5.700972E-01 Time/step= 6.174669E-01 ETA (HH:MM:SS) = 0:00:07
+ [ 39%]  Time step        9 of 21 @ t_step =        8 Time Avg = 5.752765E-01 Time/step= 6.011729E-01 ETA (HH:MM:SS) = 0:00:06
+ [ 43%]  Time step       10 of 21 @ t_step =        9 Time Avg = 5.721606E-01 Time/step= 5.534651E-01 ETA (HH:MM:SS) = 0:00:06
+ [ 48%]  Time step       11 of 21 @ t_step =       10 Time Avg = 5.714445E-01 Time/step= 5.664320E-01 ETA (HH:MM:SS) = 0:00:05
+ [ 53%]  Time step       12 of 21 @ t_step =       11 Time Avg = 5.685494E-01 Time/step= 5.453889E-01 ETA (HH:MM:SS) = 0:00:05
+ [ 58%]  Time step       13 of 21 @ t_step =       12 Time Avg = 5.667680E-01 Time/step= 5.507350E-01 ETA (HH:MM:SS) = 0:00:04
+ [ 62%]  Time step       14 of 21 @ t_step =       13 Time Avg = 5.672697E-01 Time/step= 5.722871E-01 ETA (HH:MM:SS) = 0:00:03
+ [ 67%]  Time step       15 of 21 @ t_step =       14 Time Avg = 5.700927E-01 Time/step= 6.011450E-01 ETA (HH:MM:SS) = 0:00:03
+ [ 72%]  Time step       16 of 21 @ t_step =       15 Time Avg = 5.692165E-01 Time/step= 5.587020E-01 ETA (HH:MM:SS) = 0:00:02
+ [ 77%]  Time step       17 of 21 @ t_step =       16 Time Avg = 5.714687E-01 Time/step= 6.007471E-01 ETA (HH:MM:SS) = 0:00:02
+ [ 81%]  Time step       18 of 21 @ t_step =       17 Time Avg = 5.687905E-01 Time/step= 5.312960E-01 ETA (HH:MM:SS) = 0:00:01
+ [ 86%]  Time step       19 of 21 @ t_step =       18 Time Avg = 5.679471E-01 Time/step= 5.552959E-01 ETA (HH:MM:SS) = 0:00:01
+ [ 91%]  Time step       20 of 21 @ t_step =       19 Time Avg = 5.645301E-01 Time/step= 5.098581E-01 ETA (HH:MM:SS) = 0:00:00
+ Performance:   0.5019713182680950      ns/gp/eq/rhs
+
++-----------------------------------------------------------------------------------------------------------+ 
+| Finished mfc-igr-a100:                                                                                    |
+| * Total-time:    118s                                * Exit Code:     0                                   |
+| * End-time:      08:40:35                            * End-date:      08:40:35                            |
++-----------------------------------------------------------------------------------------------------------+ 
