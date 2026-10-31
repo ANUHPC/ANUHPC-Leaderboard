@@ -1,0 +1,22 @@
+--------------------------------------------------------------------------
+The SLURM process starter for OpenMPI was unable to locate a
+usable "srun" command in its path. Please check your path
+and try again.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+An internal error has occurred in ORTE:
+
+[[48120,0],0] FORCE-TERMINATE AT (null):1 - error ../../../../../../orte/mca/plm/slurm/plm_slurm_module.c(475)
+
+This is something that should be reported to the developers.
+--------------------------------------------------------------------------
+/var/spool/slurmd/job00003/slurm_script: line 29: --bind-to: command not found
+/var/spool/slurmd/job00003/slurm_script: line 30: --report-bindings: command not found
+/var/spool/slurmd/job00003/slurm_script: line 31: -x: command not found
+/var/spool/slurmd/job00003/slurm_script: line 32: -x: command not found
+HPL ERROR from process # 0, on line 419 of function HPL_pdinfo:
+>>> Need at least 4 processes for these tests <<<
+
+HPL ERROR from process # 0, on line 621 of function HPL_pdinfo:
+>>> Illegal input in file HPL.dat. Exiting ... <<<
+

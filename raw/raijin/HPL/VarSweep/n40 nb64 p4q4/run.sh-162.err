@@ -1,0 +1,42 @@
+[hpc-02:207652] MCW rank 4 bound to socket 0[core 2[hwt 0-1]]: [../../BB/../../../../..][../../../../../../../..]
+[hpc-02:207652] MCW rank 5 bound to socket 1[core 10[hwt 0-1]]: [../../../../../../../..][../../BB/../../../../..]
+[hpc-02:207652] MCW rank 6 bound to socket 0[core 3[hwt 0-1]]: [../../../BB/../../../..][../../../../../../../..]
+[hpc-02:207652] MCW rank 7 bound to socket 1[core 11[hwt 0-1]]: [../../../../../../../..][../../../BB/../../../..]
+[hpc-02:207652] MCW rank 8 bound to socket 0[core 4[hwt 0-1]]: [../../../../BB/../../..][../../../../../../../..]
+[hpc-02:207652] MCW rank 9 bound to socket 1[core 12[hwt 0-1]]: [../../../../../../../..][../../../../BB/../../..]
+[hpc-02:207652] MCW rank 10 bound to socket 0[core 5[hwt 0-1]]: [../../../../../BB/../..][../../../../../../../..]
+[hpc-02:207652] MCW rank 11 bound to socket 1[core 13[hwt 0-1]]: [../../../../../../../..][../../../../../BB/../..]
+[hpc-02:207652] MCW rank 12 bound to socket 0[core 6[hwt 0-1]]: [../../../../../../BB/..][../../../../../../../..]
+[hpc-02:207652] MCW rank 13 bound to socket 1[core 14[hwt 0-1]]: [../../../../../../../..][../../../../../../BB/..]
+[hpc-02:207652] MCW rank 14 bound to socket 0[core 7[hwt 0-1]]: [../../../../../../../BB][../../../../../../../..]
+[hpc-02:207652] MCW rank 15 bound to socket 1[core 15[hwt 0-1]]: [../../../../../../../..][../../../../../../../BB]
+[hpc-02:207652] MCW rank 0 bound to socket 0[core 0[hwt 0-1]]: [BB/../../../../../../..][../../../../../../../..]
+[hpc-02:207652] MCW rank 1 bound to socket 1[core 8[hwt 0-1]]: [../../../../../../../..][BB/../../../../../../..]
+[hpc-02:207652] MCW rank 2 bound to socket 0[core 1[hwt 0-1]]: [../BB/../../../../../..][../../../../../../../..]
+[hpc-02:207652] MCW rank 3 bound to socket 1[core 9[hwt 0-1]]: [../../../../../../../..][../BB/../../../../../..]
+HPL ERROR from process # 0, on line 299 of function HPL_pdinfo:
+>>> cannot open file HPL.dat <<<
+
+[hpc-02:207655] *** Process received signal ***
+[hpc-02:207655] Signal: Segmentation fault (11)
+[hpc-02:207655] Signal code: Address not mapped (1)
+[hpc-02:207655] Failing at address: (nil)
+[hpc-02:207655] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x45330)[0x7e59dda45330]
+[hpc-02:207655] [ 1] /lib/x86_64-linux-gnu/libc.so.6(_IO_fclose+0x14)[0x7e59dda85384]
+[hpc-02:207655] [ 2] ./xhpl(+0x4a1a)[0x579ac0ce7a1a]
+[hpc-02:207655] [ 3] ./xhpl(+0x283a)[0x579ac0ce583a]
+[hpc-02:207655] [ 4] /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7e59dda2a1ca]
+[hpc-02:207655] [ 5] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7e59dda2a28b]
+[hpc-02:207655] [ 6] ./xhpl(+0x2625)[0x579ac0ce5625]
+[hpc-02:207655] *** End of error message ***
+[hpc-02][[49102,1],1][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(17) failed: Connection reset by peer (104)
+[hpc-02][[49102,1],4][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(19) failed: Connection reset by peer (104)
+[hpc-02][[49102,1],8][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(20) failed: Connection reset by peer (104)
+[hpc-02][[49102,1],2][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(18) failed: Connection reset by peer (104)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node hpc-02 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------

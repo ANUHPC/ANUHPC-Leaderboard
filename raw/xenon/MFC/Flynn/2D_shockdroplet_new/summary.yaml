@@ -1,0 +1,48 @@
+invocation:
+- run
+- /scratch/jobs/36818511480/MFC/Flynn/2D_shockdroplet_new/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- post_process
+- -N
+- '1'
+- -n
+- '4'
+- -p
+- gpu
+- -w
+- 02:00:00
+- --name
+- mfc-2D_shockdroplet_new
+- -o
+- /scratch/jobs/36818511480/MFC/Flynn/2D_shockdroplet_new/summary.yaml
+- --clean
+- --no-build
+- --gpu
+- acc
+- --wait
+- --
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: acc
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  2.8556352
+pre_process:
+    exec:  1.9689288
+simulation:
+    exec:  130.720825
+    grind: 0.54552548
+post_process:
+    exec:  7.5627566

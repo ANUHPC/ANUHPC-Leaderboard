@@ -1,0 +1,732 @@
+{
+  "id": "launchpad/HPL/Ayush/PL1-Sweep",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "PL1-Sweep",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-30T21:31:32.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 4136.98,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 165.05,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.00135379322,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 100800,
+    "NB": 480,
+    "P": 1,
+    "Q": 2,
+    "variant": "cpu",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "efficiency": {
+    "value": 0.80800390625,
+    "rpeakGflops": 5120,
+    "basis": {
+      "ghz": 2.5,
+      "coresPerNode": 64,
+      "nodes": 1,
+      "flopsPerCycle": 32
+    },
+    "measuredClock": {
+      "ghz": 2.248,
+      "rpeakGflops": 4603.904,
+      "value": 0.8985808565947507
+    }
+  },
+  "provenance": {
+    "started": "Fri Oct 30 21:31:32 2026",
+    "ended": "Fri Oct 30 21:34:17 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL/Ayush/PL1-Sweep/HPL.dat",
+    "run.sh": "raw/launchpad/HPL/Ayush/PL1-Sweep/run.sh",
+    "run.out": "raw/launchpad/HPL/Ayush/PL1-Sweep/run.out",
+    "run.err": "raw/launchpad/HPL/Ayush/PL1-Sweep/run.err"
+  },
+  "best": {
+    "tv": "WR12C2C2",
+    "N": 100800,
+    "NB": 480,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 165.05,
+    "gflops": 4136.98,
+    "startTime": "Fri Oct 30 21:31:32 2026",
+    "endTime": "Fri Oct 30 21:34:17 2026",
+    "residual": 0.00135379322,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad PL1 sweep, Intel MKL HPL, 1x2\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n100800       Ns\n1            # of NBs\n480          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad PL1 sweep, Intel MKL HPL, 1x2"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        100800
+      ],
+      "numNBs": 1,
+      "NBs": [
+        480
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# intel HPL 1x2, N=100800 NB=480. PL1 250 225 200 175 150 W per package, 3 solves each, against the power measured\n\n#SBATCH --job-name=hpl-launchpad-intel-pl1-sweep\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=03:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\nlevels=\"250 225 200 175 150 150 175 200 225 250 250 225 200 175 150\"\npl1=250000000\npl2=300000000\nC=/sys/devices/system/cpu\nP=/sys/class/powercap\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\necho \"fan     : mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)\"\necho \"governor: $(sort $C/cpu[0-9]*/cpufreq/scaling_governor 2>/dev/null | uniq -c | awk '{printf \"%s%s x%s\", (NR > 1 ? \", \" : \"\"), $2, $1}')\"\necho \"turbo   : no_turbo=$(cat $C/intel_pstate/no_turbo 2>/dev/null || echo n/a)\"\necho \"gpu     : $(nvidia-smi --query-gpu=pstate,power.draw,memory.used --format=csv,noheader 2>/dev/null | paste -sd';' -)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\np=$(pgrep -f 'vllm|ollama serve|wrf\\.exe|real\\.exe|\\.vscode-server/|code-server/.*extensionHost' | paste -sd' ' -)\n[ -z \"$p\" ] || echo \"warning : wrf, vllm, ollama or an editor window still running (pids $p)\"\n\nput() { sudo -n sh -c 'v=$1; shift; for f; do echo \"$v\" > \"$f\"; done' sh \"$@\"; }\nzones=()\nfor z in \"$P\"/intel-rapl:[0-9]; do grep -q '^package' \"$z/name\" 2>/dev/null && zones+=(\"$z\"); done\n[ ${#zones[@]} -eq 2 ] || { echo \"failed  : ${#zones[@]} package power zones, expected 2\"; exit 1; }\npl() { local z; for z in \"${zones[@]}\"; do printf '%s PL1 %d W PL2 %d W  ' \"$(cat \"$z/name\")\" $(($(cat \"$z/constraint_0_power_limit_uw\") / 1000000)) $(($(cat \"$z/constraint_1_power_limit_uw\") / 1000000)); done; }\nlimits_ok() { local z; for z in \"${zones[@]}\"; do [ \"$(cat \"$z/constraint_0_power_limit_uw\")-$(cat \"$z/constraint_1_power_limit_uw\")\" = \"$pl1-$pl2\" ] || return 1; done; }\nrestore() { local z; for z in \"${zones[@]}\"; do put $pl1 \"$z/constraint_0_power_limit_uw\"; put $pl2 \"$z/constraint_1_power_limit_uw\"; done; }\nsetpl() { local z uw=$(($1 * 1000000)); for z in \"${zones[@]}\"; do put $uw \"$z/constraint_0_power_limit_uw\"; [ \"$(cat \"$z/constraint_0_power_limit_uw\")\" = \"$uw\" ] || return 1; done; }\n\nlimits_ok || { echo \"guard   : found $(pl)reset to 250 and 300 W\"; restore; }\nlimits_ok || { echo \"failed  : could not reset the power limits, $(pl)\"; exit 1; }\necho \"limits  : $(pl)\"\necho \"uncore  : $(cat $C/intel_uncore_frequency/package_*_die_00/max_freq_khz 2>/dev/null | paste -sd' ' -) kHz max\"\n\nmsr() { sudo -n dd if=\"/dev/cpu/$1/msr\" bs=8 count=1 skip=$(($2)) iflag=skip_bytes status=none 2>/dev/null | od -An -tx8 | tr -d ' \\n'; }\nrapl() { local c u l i; for c in 0 32; do u=$(msr $c 0x606); l=$(msr $c 0x610); i=$(msr $c 0x614)\n    [ -n \"$u\" ] && [ -n \"$l\" ] && [ -n \"$i\" ] || { printf 'cpu%s msr unreadable  ' $c; continue; }\n    awk -v c=$c -v u=$(( 16#$u & 15 )) -v l1=$(( 16#$l & 32767 )) -v l2=$(( (16#$l >> 32) & 32767 )) -v lk=$(( (16#$l >> 63) & 1 )) \\\n        -v td=$(( 16#$i & 32767 )) -v mx=$(( (16#$i >> 32) & 32767 )) \\\n      'BEGIN {s = 2 ^ -u; printf \"cpu%s PL1 %.0f W PL2 %.0f W lock %s, TDP %.0f W max %.0f W  \", c, l1 * s, l2 * s, (lk ? \"on\" : \"off\"), td * s, (mx ? mx * s : 0)}'\n  done; }\necho \"rapl    : $(rapl)\"\n\nwd=hpl-pl1-$SLURM_JOB_ID\nif sudo -n systemd-run --quiet --unit=\"$wd\" --on-active=11100s /bin/sh -c \\\n     \"for z in ${zones[*]}; do echo $pl1 > \\$z/constraint_0_power_limit_uw; echo $pl2 > \\$z/constraint_1_power_limit_uw; done\"; then\n  echo \"watchdog: $wd restores the power limits in 11100 s if the job dies\"\nelse\n  echo \"warning : no restore watchdog, systemd-run failed\"\nfi\ntrap 'restore; limits_ok && sudo -n systemctl stop \"$wd.timer\" 2>/dev/null; pkill -P $$ 2>/dev/null; echo \"restored: $(pl)msr 0x610 $(msr 0 0x610) $(msr 32 0x610)\"' EXIT\ntrap 'exit 143' TERM INT\n\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nout=${out:-$PWD/run.out}\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\nbusy() { awk '$1 == \"cpu\" {printf \"%.2f\\n\", ($2 + $3 + $4 + $7 + $8 + $9) / 100}' /proc/stat 2>/dev/null; }\nkids() { awk 'NR == 2 {for (i = 1; i <= 2; i++) {split($i, v, \"m\"); s += 60 * v[1] + v[2]}} END {printf \"%.2f\\n\", s}' \"$1\"; }\nsnap() { ps -eo pid=,times=,comm= 2>/dev/null > \"$1\"; }\nhogs() { awk -v dt=\"$3\" 'FNR == NR {s[$1] = $2; next} {d = $2 - ($1 in s ? s[$1] : 0); c = $3; for (i = 4; i <= NF; i++) c = c \" \" $i; if (d > 0) g[c] += d}\n  END {for (c in g) if (dt > 0 && g[c] / dt >= 0.02) printf \"%.2f %s\\n\", g[c] / dt, c}' \"$1\" \"$2\" | sort -rn | head -4 | awk '{printf \"%s%s %s\", (NR > 1 ? \", \" : \"\"), $2, $1}'; }\nenergy() { local z; for z in \"${zones[@]}\"; do sudo -n cat \"$z/energy_uj\" 2>/dev/null; done | paste -sd' ' -; }\nmhzs() { awk '/Bzy_MHz/ {for (i = 1; i <= NF; i++) c[$i] = i; next} c[\"Bzy_MHz\"] && $1 + 0 > 0 {print $c[\"Bzy_MHz\"]}' \"$@\"; }\n\nb0=$(busy); snap ps.0; sleep 10; snap ps.1\necho \"load    : $(awk -v b=\"$(busy)\" -v b0=\"$b0\" 'BEGIN {printf \"%.2f\", (b > b0 ? (b - b0) / 10 : 0)}') cores busy before the first solve, k8s alone is ~0.6 | $(hogs ps.0 ps.1 10)\"\n\nfailed=\nsolve() {\n  local t=$1 w=$2 rc power b0 k0 k1 st e0 ol watts mhz tmax wall gflops res\n  mkdir -p \"$t\"\n  cp HPL.dat \"$t/\"\n  echo\n  echo \"test    : $t | PL1 $w W | N 100800 | NB 480 | $(pl)| msr 0x610 $(msr 0 0x610) $(msr 32 0x610)\"\n  sync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\n  b0=$(busy); times > tm; k0=$(kids tm); snap \"ps0.$t\"; st=$(date +%s); e0=$(energy)\n  ( while :; do\n      solving || { sleep 10; continue; }\n      sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n      sudo -n ipmitool sdr get \"PW Consumption\" 2>/dev/null | sed -n 's/^ *Sensor Reading *: *\\([0-9.]*\\).*/wall \\1/p'\n      echo \"limits $(msr 0 0x64f) $(msr 32 0x64f)\"\n    done ) > \"power.$t.log\" 2>/dev/null & power=$!\n  ( cd \"$t\" && exec mpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n      bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\" ) &\n  wait $!; rc=$?\n  echo \"energy  : $t $e0 to $(energy) uJ in $(( $(date +%s) - st )) s\"\n  pkill -P $power 2>/dev/null; kill $power 2>/dev/null; wait $power 2>/dev/null\n  times > tm; k1=$(kids tm); snap \"ps1.$t\"\n  ol=$(awk -v b=\"$(busy)\" -v b0=\"$b0\" -v k=\"$k1\" -v k0=\"$k0\" -v dt=$(( $(date +%s) - st )) 'BEGIN {printf \"%.2f\", (dt > 0 && b > b0 ? (b - b0 - k + k0) / dt : 0)}')\n  echo \"after   : $t other processes $ol cores\"\n  echo \"busiest : $t $(hogs \"ps0.$t\" \"ps1.$t\" $(( $(date +%s) - st ))) (cores, by process name)\"\n  read -r watts mhz tmax < <(awk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n       c[\"PkgWatt\"] && $1 + 0 > 0 {s += $c[\"PkgWatt\"]; f += $c[\"Bzy_MHz\"]; if (c[\"PkgTmp\"] && $c[\"PkgTmp\"] > mt) mt = $c[\"PkgTmp\"]; n++}\n       END {if (n) printf \"%.0f %.0f %d\\n\", s/n, f/n, mt; else print \"- - -\"}' \"power.$t.log\")\n  wall=$(awk '$1 == \"wall\" && $2 + 0 > m {m = $2 + 0} END {if (m) printf \"%.0f\", m; else print \"-\"}' \"power.$t.log\")\n  echo \"power   : $t $watts W both packages, $mhz MHz, max $tmax C, system max $wall W\"\n  gflops=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && $1 ~ /^W[RC]/ && NF >= 7 {g = $7} END {print g}' \"$out\")\n  res=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && /\\.\\.\\.\\.\\.\\. (PASSED|FAILED)/ {r = $NF} END {print r}' \"$out\")\n  echo \"$t ${gflops:--} $mhz $watts $tmax $wall ${res:--} $w $ol\" >> results.txt\n  [ \"$rc\" -eq 0 ] || { failed=\"$failed $t\"; echo \"failed  : $t exited $rc\"; }\n}\n\n: > results.txt\ni=0\nfor w in $levels; do\n  i=$((i + 1)); t=$(printf '%02d' $i)-${w}W\n  setpl \"$w\" || { echo; echo \"failed  : $t, PL1 did not take, $(pl)\"; failed=\"$failed $t\"; restore; continue; }\n  solve \"$t\" \"$w\"\ndone\nrestore\n\necho\nawk '{printf \"summary : %-8s PL1 %3s W %9s GFLOPS  %5s MHz  %4s W  %6s W a package  %3s C  system %5s W  %s  other %s cores\\n\", $1, $8, ($2 == \"-\" ? \"-\" : sprintf(\"%.2f\", $2)), $3, $4, ($4 == \"-\" ? \"-\" : sprintf(\"%.1f\", $4 / 2)), $5, $6, $7, $9}' results.txt\nawk '$2 != \"-\" && $4 != \"-\" && $7 == \"PASSED\" {w = $8; g = $2 + 0; s[w] += g; p[w] += $4; m[w] += $3; c[w]++; if (!(w in lo) || g < lo[w]) lo[w] = g; if (g > hi[w]) hi[w] = g}\n  END {for (w in c) printf \"level   : PL1 %3d W, %d solves, %8.2f GFLOPS, spread %.2f%%, %5.1f W a package, %4.0f MHz\\n\", w, c[w], s[w] / c[w], (hi[w] - lo[w]) / (s[w] / c[w]) * 100, p[w] / c[w] / 2, m[w] / c[w]}' results.txt | sort -k4,4rn\nbest=$(awk '$7 == \"PASSED\" && $2 + 0 > g {g = $2 + 0; t = $1} END {print t}' results.txt)\n[ -n \"$best\" ] && mhzs \"power.$best.log\" | sort -n | awk -v t=\"$best\" '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f (%s)\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)], t}'\nfor f in power.*.log; do echo \"== $f\"; cat \"$f\"; done\n[ -z \"$failed\" ] || { echo \"failed  :$failed\"; exit 1; }\n",
+    "sbatch": {
+      "job-name": "hpl-launchpad-intel-pl1-sweep",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "03:00:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 165.37,
+        "gflops": 4128.98,
+        "startTime": "Fri Oct 30 20:55:38 2026",
+        "endTime": "Fri Oct 30 20:58:24 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 183.29,
+        "gflops": 3725.22,
+        "startTime": "Fri Oct 30 20:58:32 2026",
+        "endTime": "Fri Oct 30 21:01:36 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 207.76,
+        "gflops": 3286.53,
+        "startTime": "Fri Oct 30 21:01:44 2026",
+        "endTime": "Fri Oct 30 21:05:12 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 250.26,
+        "gflops": 2728.36,
+        "startTime": "Fri Oct 30 21:05:21 2026",
+        "endTime": "Fri Oct 30 21:09:31 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 312.95,
+        "gflops": 2181.88,
+        "startTime": "Fri Oct 30 21:09:40 2026",
+        "endTime": "Fri Oct 30 21:14:53 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 313.99,
+        "gflops": 2174.61,
+        "startTime": "Fri Oct 30 21:15:02 2026",
+        "endTime": "Fri Oct 30 21:20:16 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 250.92,
+        "gflops": 2721.17,
+        "startTime": "Fri Oct 30 21:20:24 2026",
+        "endTime": "Fri Oct 30 21:24:35 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 207.64,
+        "gflops": 3288.36,
+        "startTime": "Fri Oct 30 21:24:44 2026",
+        "endTime": "Fri Oct 30 21:28:12 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 182.41,
+        "gflops": 3743.34,
+        "startTime": "Fri Oct 30 21:28:20 2026",
+        "endTime": "Fri Oct 30 21:31:23 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 165.05,
+        "gflops": 4136.98,
+        "startTime": "Fri Oct 30 21:31:32 2026",
+        "endTime": "Fri Oct 30 21:34:17 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 165.06,
+        "gflops": 4136.64,
+        "startTime": "Fri Oct 30 21:34:25 2026",
+        "endTime": "Fri Oct 30 21:37:10 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 182.34,
+        "gflops": 3744.64,
+        "startTime": "Fri Oct 30 21:37:19 2026",
+        "endTime": "Fri Oct 30 21:40:21 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 207.07,
+        "gflops": 3297.55,
+        "startTime": "Fri Oct 30 21:40:30 2026",
+        "endTime": "Fri Oct 30 21:43:57 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 250.67,
+        "gflops": 2723.98,
+        "startTime": "Fri Oct 30 21:44:06 2026",
+        "endTime": "Fri Oct 30 21:48:17 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 100800,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 312.87,
+        "gflops": 2182.4,
+        "startTime": "Fri Oct 30 21:48:25 2026",
+        "endTime": "Fri Oct 30 21:53:38 2026",
+        "residual": 0.00135379322,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+      "ranks": "2 x 32 cores",
+      "blas": "oneMKL 2026.1.0-236",
+      "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+      "clockMHz": {
+        "avg": 2248,
+        "min": 2197,
+        "max": 2412,
+        "samples": 14
+      }
+    }
+  },
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad PL1 sweep, Intel MKL HPL, 1x2\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n100800       Ns\n1            # of NBs\n480          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad PL1 sweep, Intel MKL HPL, 1x2"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          100800
+        ],
+        "numNBs": 1,
+        "NBs": [
+          480
+        ],
+        "pmap": 0,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 2,
+        "swapThreshold": 16,
+        "L1": 0,
+        "U": 0,
+        "equilibration": 1,
+        "memoryAlignment": 16
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# intel HPL 1x2, N=100800 NB=480. PL1 250 225 200 175 150 W per package, 3 solves each, against the power measured\n\n#SBATCH --job-name=hpl-launchpad-intel-pl1-sweep\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=03:00:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\nlevels=\"250 225 200 175 150 150 175 200 225 250 250 225 200 175 150\"\npl1=250000000\npl2=300000000\nC=/sys/devices/system/cpu\nP=/sys/class/powercap\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\necho \"fan     : mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)\"\necho \"governor: $(sort $C/cpu[0-9]*/cpufreq/scaling_governor 2>/dev/null | uniq -c | awk '{printf \"%s%s x%s\", (NR > 1 ? \", \" : \"\"), $2, $1}')\"\necho \"turbo   : no_turbo=$(cat $C/intel_pstate/no_turbo 2>/dev/null || echo n/a)\"\necho \"gpu     : $(nvidia-smi --query-gpu=pstate,power.draw,memory.used --format=csv,noheader 2>/dev/null | paste -sd';' -)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\np=$(pgrep -f 'vllm|ollama serve|wrf\\.exe|real\\.exe|\\.vscode-server/|code-server/.*extensionHost' | paste -sd' ' -)\n[ -z \"$p\" ] || echo \"warning : wrf, vllm, ollama or an editor window still running (pids $p)\"\n\nput() { sudo -n sh -c 'v=$1; shift; for f; do echo \"$v\" > \"$f\"; done' sh \"$@\"; }\nzones=()\nfor z in \"$P\"/intel-rapl:[0-9]; do grep -q '^package' \"$z/name\" 2>/dev/null && zones+=(\"$z\"); done\n[ ${#zones[@]} -eq 2 ] || { echo \"failed  : ${#zones[@]} package power zones, expected 2\"; exit 1; }\npl() { local z; for z in \"${zones[@]}\"; do printf '%s PL1 %d W PL2 %d W  ' \"$(cat \"$z/name\")\" $(($(cat \"$z/constraint_0_power_limit_uw\") / 1000000)) $(($(cat \"$z/constraint_1_power_limit_uw\") / 1000000)); done; }\nlimits_ok() { local z; for z in \"${zones[@]}\"; do [ \"$(cat \"$z/constraint_0_power_limit_uw\")-$(cat \"$z/constraint_1_power_limit_uw\")\" = \"$pl1-$pl2\" ] || return 1; done; }\nrestore() { local z; for z in \"${zones[@]}\"; do put $pl1 \"$z/constraint_0_power_limit_uw\"; put $pl2 \"$z/constraint_1_power_limit_uw\"; done; }\nsetpl() { local z uw=$(($1 * 1000000)); for z in \"${zones[@]}\"; do put $uw \"$z/constraint_0_power_limit_uw\"; [ \"$(cat \"$z/constraint_0_power_limit_uw\")\" = \"$uw\" ] || return 1; done; }\n\nlimits_ok || { echo \"guard   : found $(pl)reset to 250 and 300 W\"; restore; }\nlimits_ok || { echo \"failed  : could not reset the power limits, $(pl)\"; exit 1; }\necho \"limits  : $(pl)\"\necho \"uncore  : $(cat $C/intel_uncore_frequency/package_*_die_00/max_freq_khz 2>/dev/null | paste -sd' ' -) kHz max\"\n\nmsr() { sudo -n dd if=\"/dev/cpu/$1/msr\" bs=8 count=1 skip=$(($2)) iflag=skip_bytes status=none 2>/dev/null | od -An -tx8 | tr -d ' \\n'; }\nrapl() { local c u l i; for c in 0 32; do u=$(msr $c 0x606); l=$(msr $c 0x610); i=$(msr $c 0x614)\n    [ -n \"$u\" ] && [ -n \"$l\" ] && [ -n \"$i\" ] || { printf 'cpu%s msr unreadable  ' $c; continue; }\n    awk -v c=$c -v u=$(( 16#$u & 15 )) -v l1=$(( 16#$l & 32767 )) -v l2=$(( (16#$l >> 32) & 32767 )) -v lk=$(( (16#$l >> 63) & 1 )) \\\n        -v td=$(( 16#$i & 32767 )) -v mx=$(( (16#$i >> 32) & 32767 )) \\\n      'BEGIN {s = 2 ^ -u; printf \"cpu%s PL1 %.0f W PL2 %.0f W lock %s, TDP %.0f W max %.0f W  \", c, l1 * s, l2 * s, (lk ? \"on\" : \"off\"), td * s, (mx ? mx * s : 0)}'\n  done; }\necho \"rapl    : $(rapl)\"\n\nwd=hpl-pl1-$SLURM_JOB_ID\nif sudo -n systemd-run --quiet --unit=\"$wd\" --on-active=11100s /bin/sh -c \\\n     \"for z in ${zones[*]}; do echo $pl1 > \\$z/constraint_0_power_limit_uw; echo $pl2 > \\$z/constraint_1_power_limit_uw; done\"; then\n  echo \"watchdog: $wd restores the power limits in 11100 s if the job dies\"\nelse\n  echo \"warning : no restore watchdog, systemd-run failed\"\nfi\ntrap 'restore; limits_ok && sudo -n systemctl stop \"$wd.timer\" 2>/dev/null; pkill -P $$ 2>/dev/null; echo \"restored: $(pl)msr 0x610 $(msr 0 0x610) $(msr 32 0x610)\"' EXIT\ntrap 'exit 143' TERM INT\n\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nout=${out:-$PWD/run.out}\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\nbusy() { awk '$1 == \"cpu\" {printf \"%.2f\\n\", ($2 + $3 + $4 + $7 + $8 + $9) / 100}' /proc/stat 2>/dev/null; }\nkids() { awk 'NR == 2 {for (i = 1; i <= 2; i++) {split($i, v, \"m\"); s += 60 * v[1] + v[2]}} END {printf \"%.2f\\n\", s}' \"$1\"; }\nsnap() { ps -eo pid=,times=,comm= 2>/dev/null > \"$1\"; }\nhogs() { awk -v dt=\"$3\" 'FNR == NR {s[$1] = $2; next} {d = $2 - ($1 in s ? s[$1] : 0); c = $3; for (i = 4; i <= NF; i++) c = c \" \" $i; if (d > 0) g[c] += d}\n  END {for (c in g) if (dt > 0 && g[c] / dt >= 0.02) printf \"%.2f %s\\n\", g[c] / dt, c}' \"$1\" \"$2\" | sort -rn | head -4 | awk '{printf \"%s%s %s\", (NR > 1 ? \", \" : \"\"), $2, $1}'; }\nenergy() { local z; for z in \"${zones[@]}\"; do sudo -n cat \"$z/energy_uj\" 2>/dev/null; done | paste -sd' ' -; }\nmhzs() { awk '/Bzy_MHz/ {for (i = 1; i <= NF; i++) c[$i] = i; next} c[\"Bzy_MHz\"] && $1 + 0 > 0 {print $c[\"Bzy_MHz\"]}' \"$@\"; }\n\nb0=$(busy); snap ps.0; sleep 10; snap ps.1\necho \"load    : $(awk -v b=\"$(busy)\" -v b0=\"$b0\" 'BEGIN {printf \"%.2f\", (b > b0 ? (b - b0) / 10 : 0)}') cores busy before the first solve, k8s alone is ~0.6 | $(hogs ps.0 ps.1 10)\"\n\nfailed=\nsolve() {\n  local t=$1 w=$2 rc power b0 k0 k1 st e0 ol watts mhz tmax wall gflops res\n  mkdir -p \"$t\"\n  cp HPL.dat \"$t/\"\n  echo\n  echo \"test    : $t | PL1 $w W | N 100800 | NB 480 | $(pl)| msr 0x610 $(msr 0 0x610) $(msr 32 0x610)\"\n  sync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\n  b0=$(busy); times > tm; k0=$(kids tm); snap \"ps0.$t\"; st=$(date +%s); e0=$(energy)\n  ( while :; do\n      solving || { sleep 10; continue; }\n      sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n      sudo -n ipmitool sdr get \"PW Consumption\" 2>/dev/null | sed -n 's/^ *Sensor Reading *: *\\([0-9.]*\\).*/wall \\1/p'\n      echo \"limits $(msr 0 0x64f) $(msr 32 0x64f)\"\n    done ) > \"power.$t.log\" 2>/dev/null & power=$!\n  ( cd \"$t\" && exec mpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n      bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\" ) &\n  wait $!; rc=$?\n  echo \"energy  : $t $e0 to $(energy) uJ in $(( $(date +%s) - st )) s\"\n  pkill -P $power 2>/dev/null; kill $power 2>/dev/null; wait $power 2>/dev/null\n  times > tm; k1=$(kids tm); snap \"ps1.$t\"\n  ol=$(awk -v b=\"$(busy)\" -v b0=\"$b0\" -v k=\"$k1\" -v k0=\"$k0\" -v dt=$(( $(date +%s) - st )) 'BEGIN {printf \"%.2f\", (dt > 0 && b > b0 ? (b - b0 - k + k0) / dt : 0)}')\n  echo \"after   : $t other processes $ol cores\"\n  echo \"busiest : $t $(hogs \"ps0.$t\" \"ps1.$t\" $(( $(date +%s) - st ))) (cores, by process name)\"\n  read -r watts mhz tmax < <(awk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n       c[\"PkgWatt\"] && $1 + 0 > 0 {s += $c[\"PkgWatt\"]; f += $c[\"Bzy_MHz\"]; if (c[\"PkgTmp\"] && $c[\"PkgTmp\"] > mt) mt = $c[\"PkgTmp\"]; n++}\n       END {if (n) printf \"%.0f %.0f %d\\n\", s/n, f/n, mt; else print \"- - -\"}' \"power.$t.log\")\n  wall=$(awk '$1 == \"wall\" && $2 + 0 > m {m = $2 + 0} END {if (m) printf \"%.0f\", m; else print \"-\"}' \"power.$t.log\")\n  echo \"power   : $t $watts W both packages, $mhz MHz, max $tmax C, system max $wall W\"\n  gflops=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && $1 ~ /^W[RC]/ && NF >= 7 {g = $7} END {print g}' \"$out\")\n  res=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && /\\.\\.\\.\\.\\.\\. (PASSED|FAILED)/ {r = $NF} END {print r}' \"$out\")\n  echo \"$t ${gflops:--} $mhz $watts $tmax $wall ${res:--} $w $ol\" >> results.txt\n  [ \"$rc\" -eq 0 ] || { failed=\"$failed $t\"; echo \"failed  : $t exited $rc\"; }\n}\n\n: > results.txt\ni=0\nfor w in $levels; do\n  i=$((i + 1)); t=$(printf '%02d' $i)-${w}W\n  setpl \"$w\" || { echo; echo \"failed  : $t, PL1 did not take, $(pl)\"; failed=\"$failed $t\"; restore; continue; }\n  solve \"$t\" \"$w\"\ndone\nrestore\n\necho\nawk '{printf \"summary : %-8s PL1 %3s W %9s GFLOPS  %5s MHz  %4s W  %6s W a package  %3s C  system %5s W  %s  other %s cores\\n\", $1, $8, ($2 == \"-\" ? \"-\" : sprintf(\"%.2f\", $2)), $3, $4, ($4 == \"-\" ? \"-\" : sprintf(\"%.1f\", $4 / 2)), $5, $6, $7, $9}' results.txt\nawk '$2 != \"-\" && $4 != \"-\" && $7 == \"PASSED\" {w = $8; g = $2 + 0; s[w] += g; p[w] += $4; m[w] += $3; c[w]++; if (!(w in lo) || g < lo[w]) lo[w] = g; if (g > hi[w]) hi[w] = g}\n  END {for (w in c) printf \"level   : PL1 %3d W, %d solves, %8.2f GFLOPS, spread %.2f%%, %5.1f W a package, %4.0f MHz\\n\", w, c[w], s[w] / c[w], (hi[w] - lo[w]) / (s[w] / c[w]) * 100, p[w] / c[w] / 2, m[w] / c[w]}' results.txt | sort -k4,4rn\nbest=$(awk '$7 == \"PASSED\" && $2 + 0 > g {g = $2 + 0; t = $1} END {print t}' results.txt)\n[ -n \"$best\" ] && mhzs \"power.$best.log\" | sort -n | awk -v t=\"$best\" '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f (%s)\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)], t}'\nfor f in power.*.log; do echo \"== $f\"; cat \"$f\"; done\n[ -z \"$failed\" ] || { echo \"failed  :$failed\"; exit 1; }\n",
+      "sbatch": {
+        "job-name": "hpl-launchpad-intel-pl1-sweep",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "03:00:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 165.37,
+          "gflops": 4128.98,
+          "startTime": "Fri Oct 30 20:55:38 2026",
+          "endTime": "Fri Oct 30 20:58:24 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 183.29,
+          "gflops": 3725.22,
+          "startTime": "Fri Oct 30 20:58:32 2026",
+          "endTime": "Fri Oct 30 21:01:36 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 207.76,
+          "gflops": 3286.53,
+          "startTime": "Fri Oct 30 21:01:44 2026",
+          "endTime": "Fri Oct 30 21:05:12 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 250.26,
+          "gflops": 2728.36,
+          "startTime": "Fri Oct 30 21:05:21 2026",
+          "endTime": "Fri Oct 30 21:09:31 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 312.95,
+          "gflops": 2181.88,
+          "startTime": "Fri Oct 30 21:09:40 2026",
+          "endTime": "Fri Oct 30 21:14:53 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 313.99,
+          "gflops": 2174.61,
+          "startTime": "Fri Oct 30 21:15:02 2026",
+          "endTime": "Fri Oct 30 21:20:16 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 250.92,
+          "gflops": 2721.17,
+          "startTime": "Fri Oct 30 21:20:24 2026",
+          "endTime": "Fri Oct 30 21:24:35 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 207.64,
+          "gflops": 3288.36,
+          "startTime": "Fri Oct 30 21:24:44 2026",
+          "endTime": "Fri Oct 30 21:28:12 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 182.41,
+          "gflops": 3743.34,
+          "startTime": "Fri Oct 30 21:28:20 2026",
+          "endTime": "Fri Oct 30 21:31:23 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 165.05,
+          "gflops": 4136.98,
+          "startTime": "Fri Oct 30 21:31:32 2026",
+          "endTime": "Fri Oct 30 21:34:17 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 165.06,
+          "gflops": 4136.64,
+          "startTime": "Fri Oct 30 21:34:25 2026",
+          "endTime": "Fri Oct 30 21:37:10 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 182.34,
+          "gflops": 3744.64,
+          "startTime": "Fri Oct 30 21:37:19 2026",
+          "endTime": "Fri Oct 30 21:40:21 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 207.07,
+          "gflops": 3297.55,
+          "startTime": "Fri Oct 30 21:40:30 2026",
+          "endTime": "Fri Oct 30 21:43:57 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 250.67,
+          "gflops": 2723.98,
+          "startTime": "Fri Oct 30 21:44:06 2026",
+          "endTime": "Fri Oct 30 21:48:17 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 100800,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 312.87,
+          "gflops": 2182.4,
+          "startTime": "Fri Oct 30 21:48:25 2026",
+          "endTime": "Fri Oct 30 21:53:38 2026",
+          "residual": 0.00135379322,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+        "ranks": "2 x 32 cores",
+        "blas": "oneMKL 2026.1.0-236",
+        "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+        "clockMHz": {
+          "avg": 2248,
+          "min": 2197,
+          "max": 2412,
+          "samples": 14
+        }
+      }
+    },
+    "err": null,
+    "best": {
+      "tv": "WR12C2C2",
+      "N": 100800,
+      "NB": 480,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 165.05,
+      "gflops": 4136.98,
+      "startTime": "Fri Oct 30 21:31:32 2026",
+      "endTime": "Fri Oct 30 21:34:17 2026",
+      "residual": 0.00135379322,
+      "residualPassed": true
+    }
+  }
+}

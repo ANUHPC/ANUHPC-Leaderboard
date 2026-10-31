@@ -1,0 +1,19 @@
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node1 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node1 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node1 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node1 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node2 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node2 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node2 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+HPL ERROR: CUDART Error: cudaMalloc((void**)&A_dev, mat_bytes) = 2 (out of memory) on gpu-node2 at (/var/tmp/hpl-gpu/src/ptest/HPL_pdtest.c:464)
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[50073,1],7]
+  Exit code:    1
+--------------------------------------------------------------------------
