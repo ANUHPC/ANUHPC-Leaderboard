@@ -1,0 +1,47 @@
+invocation:
+- run
+- /scratch/jobs/35187881911/MFC/benchmark/igr-a100/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- -N
+- '2'
+- -n
+- '4'
+- -p
+- gpu
+- -w
+- 01:00:00
+- --name
+- mfc-igr-a100
+- -o
+- /scratch/jobs/35187881911/MFC/benchmark/igr-a100/summary.yaml
+- --no-build
+- --clean
+- --gpu
+- acc
+- --wait
+- --
+- --gbpp
+- '16'
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: acc
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  3.2043981
+pre_process:
+    exec:  40.1164167
+simulation:
+    exec:  75.1549189
+    grind: 0.50197132

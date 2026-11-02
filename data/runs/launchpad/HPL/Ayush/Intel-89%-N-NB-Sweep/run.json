@@ -1,0 +1,452 @@
+{
+  "id": "launchpad/HPL/Ayush/Intel-89%-N-NB-Sweep",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "Intel-89%-N-NB-Sweep",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-09T06:00:46.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 4277.45,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 5593.72,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.00119650459,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 329856,
+    "NB": 480,
+    "P": 1,
+    "Q": 2,
+    "variant": "cpu",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "efficiency": {
+    "value": 0.835439453125,
+    "rpeakGflops": 5120,
+    "basis": {
+      "ghz": 2.5,
+      "coresPerNode": 64,
+      "nodes": 1,
+      "flopsPerCycle": 32
+    },
+    "measuredClock": {
+      "ghz": 2.261,
+      "rpeakGflops": 4630.528,
+      "value": 0.9237499481700574
+    }
+  },
+  "provenance": {
+    "started": "Fri Oct  9 06:00:46 2026",
+    "ended": "Fri Oct  9 07:34:00 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL/Ayush/Intel-89%-N-NB-Sweep/HPL.dat",
+    "run.sh": "raw/launchpad/HPL/Ayush/Intel-89%-N-NB-Sweep/run.sh",
+    "run.out": "raw/launchpad/HPL/Ayush/Intel-89%-N-NB-Sweep/run.out",
+    "run.err": "raw/launchpad/HPL/Ayush/Intel-89%-N-NB-Sweep/run.err"
+  },
+  "best": {
+    "tv": "WR12C2C2",
+    "N": 329856,
+    "NB": 480,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 5593.72,
+    "gflops": 4277.45,
+    "startTime": "Fri Oct  9 06:00:46 2026",
+    "endTime": "Fri Oct  9 07:34:00 2026",
+    "residual": 0.00119650459,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad NB sweep, 89% N, Intel MKL HPL, 2 ranks (1 per socket), 1x2, NBs that fit the 2 MiB L2\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n329856       Ns\n4            # of NBs\n320 384 448 480  NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad NB sweep, 89% N, Intel MKL HPL, 2 ranks (1 per socket), 1x2, NBs that fit the 2 MiB L2"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        329856
+      ],
+      "numNBs": 4,
+      "NBs": [
+        320,
+        384,
+        448,
+        480
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# intel HPL NB sweep, N=329856 (89% of max N) 1x2, from Intel-Max-Fans-85%-N\n# NB 320 384 448 480: NB*NB*8 bytes = 0.78-1.76 MiB, inside the 2 MiB L2 per core\n\n#SBATCH --job-name=hpl-launchpad-intel-n89-nb-sweep\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=07:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# intel-oneapi-mkl-core-devel-2026.1, intel MPI 2021.18\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\necho \"fan     : mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)\"\necho \"governor: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null || echo unknown), epp $(cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference 2>/dev/null || echo n/a)\"\n\necho \"pkg cap : $(for z in /sys/class/powercap/intel-rapl:[0-9]; do awk -v n=\"$(cat \"$z/name\")\" '{printf \"%s %.0f W  \", n, $1/1e6}' \"$z/constraint_0_power_limit_uw\"; done 2>/dev/null)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\n\nsync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\necho \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n# clock + numa placement, sampled only while solving\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\n( while sleep 10; do\n    solving || continue\n    [ -s numa.log ] || numastat -p xhpl > numa.log 2>&1\n    awk -F'\\n' 'BEGIN{RS=\"\"} {for (i=1; i<=NF; i++) {split($i, kv, /\\t*: /); f[kv[1]]=kv[2]}\n                k=f[\"physical id\"] \"-\" f[\"core id\"]; if (f[\"cpu MHz\"]+0 > m[k]) m[k]=f[\"cpu MHz\"]+0}\n                END{for (k in m) {s+=m[k]; n++} printf \"%.0f\\n\", s/n}' /proc/cpuinfo\n  done ) > cpufreq.log &\nsampler=$!\n\n\n( while :; do\n    solving || { sleep 10; continue; }\n    sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n  done ) > power.log &\npower=$!\n\n# rank 0 -> numa node 0, rank 1 -> numa node 1\nmpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n       bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\"\nrc=$?\n\nkill \"$sampler\" \"$power\"\nawk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n     c[\"PkgWatt\"] && $1 + 0 > 0 {w = $c[\"PkgWatt\"]; s += w; if (w > mw) mw = w; if (c[\"PkgTmp\"]) {t = $c[\"PkgTmp\"]; if (t > mt) mt = t}; f += $c[\"Bzy_MHz\"]; n++}\n     END {if (n) printf \"power   : avg %.0f W, max %.0f W over both packages; pkg temp max %d C; busy %.0f MHz avg over %d samples\\n\", s/n, mw, mt, f/n, n\n          else print \"power   : not measured (turbostat unavailable)\"}' power.log\nsort -n cpufreq.log | awk '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)]}'\n[ -s numa.log ] && { echo \"numa placement while solving (MB):\"; cat numa.log; }\nexit $rc\n",
+    "sbatch": {
+      "job-name": "hpl-launchpad-intel-n89-nb-sweep",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "07:30:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WR12C2C2",
+        "N": 329856,
+        "NB": 320,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 5675.88,
+        "gflops": 4215.52,
+        "startTime": "Fri Oct  9 01:13:13 2026",
+        "endTime": "Fri Oct  9 02:47:49 2026",
+        "residual": 0.00120359528,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 329856,
+        "NB": 384,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 5754.84,
+        "gflops": 4157.69,
+        "startTime": "Fri Oct  9 02:49:03 2026",
+        "endTime": "Fri Oct  9 04:24:58 2026",
+        "residual": 0.00115131448,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 329856,
+        "NB": 448,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 5599.42,
+        "gflops": 4273.09,
+        "startTime": "Fri Oct  9 04:26:12 2026",
+        "endTime": "Fri Oct  9 05:59:32 2026",
+        "residual": 0.00120093044,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 329856,
+        "NB": 480,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 5593.72,
+        "gflops": 4277.45,
+        "startTime": "Fri Oct  9 06:00:46 2026",
+        "endTime": "Fri Oct  9 07:34:00 2026",
+        "residual": 0.00119650459,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 4,
+      "testsPassed": 4,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+      "ranks": "2 x 32 cores",
+      "blas": "oneMKL 2026.1.0-236",
+      "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+      "clockMHz": {
+        "avg": 2261,
+        "min": 1242,
+        "max": 3460,
+        "samples": 2228
+      }
+    }
+  },
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad NB sweep, 89% N, Intel MKL HPL, 2 ranks (1 per socket), 1x2, NBs that fit the 2 MiB L2\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n329856       Ns\n4            # of NBs\n320 384 448 480  NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad NB sweep, 89% N, Intel MKL HPL, 2 ranks (1 per socket), 1x2, NBs that fit the 2 MiB L2"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          329856
+        ],
+        "numNBs": 4,
+        "NBs": [
+          320,
+          384,
+          448,
+          480
+        ],
+        "pmap": 0,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 2,
+        "swapThreshold": 16,
+        "L1": 0,
+        "U": 0,
+        "equilibration": 1,
+        "memoryAlignment": 16
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# intel HPL NB sweep, N=329856 (89% of max N) 1x2, from Intel-Max-Fans-85%-N\n# NB 320 384 448 480: NB*NB*8 bytes = 0.78-1.76 MiB, inside the 2 MiB L2 per core\n\n#SBATCH --job-name=hpl-launchpad-intel-n89-nb-sweep\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n#SBATCH --time=07:30:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# intel-oneapi-mkl-core-devel-2026.1, intel MPI 2021.18\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\necho \"fan     : mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)\"\necho \"governor: $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null || echo unknown), epp $(cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference 2>/dev/null || echo n/a)\"\n\necho \"pkg cap : $(for z in /sys/class/powercap/intel-rapl:[0-9]; do awk -v n=\"$(cat \"$z/name\")\" '{printf \"%s %.0f W  \", n, $1/1e6}' \"$z/constraint_0_power_limit_uw\"; done 2>/dev/null)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\n\nsync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\necho \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n# clock + numa placement, sampled only while solving\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\n( while sleep 10; do\n    solving || continue\n    [ -s numa.log ] || numastat -p xhpl > numa.log 2>&1\n    awk -F'\\n' 'BEGIN{RS=\"\"} {for (i=1; i<=NF; i++) {split($i, kv, /\\t*: /); f[kv[1]]=kv[2]}\n                k=f[\"physical id\"] \"-\" f[\"core id\"]; if (f[\"cpu MHz\"]+0 > m[k]) m[k]=f[\"cpu MHz\"]+0}\n                END{for (k in m) {s+=m[k]; n++} printf \"%.0f\\n\", s/n}' /proc/cpuinfo\n  done ) > cpufreq.log &\nsampler=$!\n\n\n( while :; do\n    solving || { sleep 10; continue; }\n    sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n  done ) > power.log &\npower=$!\n\n# rank 0 -> numa node 0, rank 1 -> numa node 1\nmpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n       bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\"\nrc=$?\n\nkill \"$sampler\" \"$power\"\nawk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n     c[\"PkgWatt\"] && $1 + 0 > 0 {w = $c[\"PkgWatt\"]; s += w; if (w > mw) mw = w; if (c[\"PkgTmp\"]) {t = $c[\"PkgTmp\"]; if (t > mt) mt = t}; f += $c[\"Bzy_MHz\"]; n++}\n     END {if (n) printf \"power   : avg %.0f W, max %.0f W over both packages; pkg temp max %d C; busy %.0f MHz avg over %d samples\\n\", s/n, mw, mt, f/n, n\n          else print \"power   : not measured (turbostat unavailable)\"}' power.log\nsort -n cpufreq.log | awk '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)]}'\n[ -s numa.log ] && { echo \"numa placement while solving (MB):\"; cat numa.log; }\nexit $rc\n",
+      "sbatch": {
+        "job-name": "hpl-launchpad-intel-n89-nb-sweep",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "07:30:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WR12C2C2",
+          "N": 329856,
+          "NB": 320,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 5675.88,
+          "gflops": 4215.52,
+          "startTime": "Fri Oct  9 01:13:13 2026",
+          "endTime": "Fri Oct  9 02:47:49 2026",
+          "residual": 0.00120359528,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 329856,
+          "NB": 384,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 5754.84,
+          "gflops": 4157.69,
+          "startTime": "Fri Oct  9 02:49:03 2026",
+          "endTime": "Fri Oct  9 04:24:58 2026",
+          "residual": 0.00115131448,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 329856,
+          "NB": 448,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 5599.42,
+          "gflops": 4273.09,
+          "startTime": "Fri Oct  9 04:26:12 2026",
+          "endTime": "Fri Oct  9 05:59:32 2026",
+          "residual": 0.00120093044,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 329856,
+          "NB": 480,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 5593.72,
+          "gflops": 4277.45,
+          "startTime": "Fri Oct  9 06:00:46 2026",
+          "endTime": "Fri Oct  9 07:34:00 2026",
+          "residual": 0.00119650459,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 4,
+        "testsPassed": 4,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+        "ranks": "2 x 32 cores",
+        "blas": "oneMKL 2026.1.0-236",
+        "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+        "clockMHz": {
+          "avg": 2261,
+          "min": 1242,
+          "max": 3460,
+          "samples": 2228
+        }
+      }
+    },
+    "err": null,
+    "best": {
+      "tv": "WR12C2C2",
+      "N": 329856,
+      "NB": 480,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 5593.72,
+      "gflops": 4277.45,
+      "startTime": "Fri Oct  9 06:00:46 2026",
+      "endTime": "Fri Oct  9 07:34:00 2026",
+      "residual": 0.00119650459,
+      "residualPassed": true
+    }
+  }
+}

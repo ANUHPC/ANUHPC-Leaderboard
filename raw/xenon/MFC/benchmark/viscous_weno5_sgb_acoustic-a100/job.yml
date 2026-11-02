@@ -1,0 +1,12 @@
+suite: MFC
+case: viscous_weno5_sgb_acoustic
+resources:
+  partition: gpu
+  nodes: 2
+  tasks_per_node: 4
+  walltime: "01:00:00"
+build:
+  gpu: acc
+  toolchain: nvhpc-acc
+tuning:
+  gbpp: 16

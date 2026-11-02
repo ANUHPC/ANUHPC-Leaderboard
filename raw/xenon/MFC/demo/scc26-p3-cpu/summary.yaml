@@ -1,0 +1,48 @@
+invocation:
+- run
+- /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- post_process
+- -N
+- '1'
+- -n
+- '4'
+- -p
+- cpu
+- -w
+- 00:30:00
+- --name
+- mfc-scc26-p3-cpu
+- -o
+- /scratch/jobs/35187881911/MFC/demo/scc26-p3-cpu/summary.yaml
+- --no-build
+- --clean
+- --gpu
+- 'no'
+- --wait
+- --
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: 'no'
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  .7160673
+pre_process:
+    exec:  1.2992406
+simulation:
+    exec:  52.6983500
+    grind: 55.96868510
+post_process:
+    exec:  4.0312922

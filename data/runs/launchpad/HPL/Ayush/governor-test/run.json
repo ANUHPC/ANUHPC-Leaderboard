@@ -1,0 +1,420 @@
+{
+  "id": "launchpad/HPL/Ayush/governor-test",
+  "suite": "HPL",
+  "group": "Ayush",
+  "run": "governor-test",
+  "cluster": "launchpad",
+  "clusterSource": "path (confirmed by output)",
+  "date": "2026-10-22T10:52:10.000Z",
+  "dateSource": "run",
+  "submittedAt": null,
+  "submitter": {
+    "name": "Ayush",
+    "house": false,
+    "by": null
+  },
+  "metric": {
+    "key": "gflops",
+    "value": 4244.43,
+    "unit": "GFLOP/s",
+    "label": "Rmax",
+    "direction": "higher"
+  },
+  "secondary": [
+    {
+      "key": "time",
+      "value": 4903.75,
+      "unit": "s",
+      "label": "Solve time",
+      "direction": "lower"
+    },
+    {
+      "key": "residual",
+      "value": 0.00121731564,
+      "unit": "",
+      "label": "Residual",
+      "direction": "lower"
+    }
+  ],
+  "parameters": null,
+  "verification": null,
+  "convergence": null,
+  "config": {
+    "N": 314880,
+    "NB": 384,
+    "P": 1,
+    "Q": 2,
+    "variant": "cpu",
+    "nodes": 1,
+    "tasks_per_node": 2,
+    "cpus_per_task": 32,
+    "partition": "all"
+  },
+  "efficiency": {
+    "value": 0.8289902343750001,
+    "rpeakGflops": 5120,
+    "basis": {
+      "ghz": 2.5,
+      "coresPerNode": 64,
+      "nodes": 1,
+      "flopsPerCycle": 32
+    },
+    "measuredClock": {
+      "ghz": 2.602,
+      "rpeakGflops": 5328.896,
+      "value": 0.7964933074317834
+    }
+  },
+  "provenance": {
+    "started": "Thu Oct 22 10:52:10 2026",
+    "ended": "Thu Oct 22 12:13:54 2026"
+  },
+  "status": "ok",
+  "ranking": {
+    "eligible": true,
+    "reason": null
+  },
+  "notes": [],
+  "raw": {
+    "HPL.dat": "raw/launchpad/HPL/Ayush/governor-test/HPL.dat",
+    "run.sh": "raw/launchpad/HPL/Ayush/governor-test/run.sh",
+    "run.out": "raw/launchpad/HPL/Ayush/governor-test/run.out",
+    "run.err": "raw/launchpad/HPL/Ayush/governor-test/run.err"
+  },
+  "best": {
+    "tv": "WR12C2C2",
+    "N": 314880,
+    "NB": 384,
+    "P": 1,
+    "Q": 2,
+    "timeSec": 4903.75,
+    "gflops": 4244.43,
+    "startTime": "Thu Oct 22 10:52:10 2026",
+    "endTime": "Thu Oct 22 12:13:54 2026",
+    "residual": 0.00121731564,
+    "residualPassed": true
+  },
+  "dat": {
+    "raw": "HPLinpack benchmark input file\nLaunchpad settings tests, 85% N config of Intel-Max-Fans-85%-N, 1x2, NB=384\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n314880       Ns\n1            # of NBs\n384          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+    "parsed": {
+      "header": [
+        "HPLinpack benchmark input file",
+        "Launchpad settings tests, 85% N config of Intel-Max-Fans-85%-N, 1x2, NB=384"
+      ],
+      "outputFilename": "HPL.out",
+      "deviceOut": 6,
+      "numProblemSizes": 1,
+      "Ns": [
+        314880
+      ],
+      "numNBs": 1,
+      "NBs": [
+        384
+      ],
+      "pmap": 0,
+      "numGrids": 1,
+      "Ps": [
+        1
+      ],
+      "Qs": [
+        2
+      ],
+      "threshold": 16,
+      "numPFACT": 1,
+      "PFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numNBMIN": 1,
+      "NBMINs": [
+        2,
+        1
+      ],
+      "numPanelsInRecursion": 1,
+      "NDIVs": [
+        2
+      ],
+      "numRFACT": 1,
+      "RFACTs": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "numBCAST": 1,
+      "BCASTs": [
+        2,
+        0,
+        1,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        4,
+        5
+      ],
+      "numDEPTH": 1,
+      "DEPTHs": [
+        1,
+        0
+      ],
+      "swapMode": 2,
+      "swapThreshold": 16,
+      "L1": 0,
+      "U": 0,
+      "equilibration": 1,
+      "memoryAlignment": 16
+    },
+    "file": "HPL.dat"
+  },
+  "job": {
+    "raw": "#!/bin/bash\n# intel HPL system-settings tests, solved back to back in one job. every solve uses\n# the exact config of the best 85% run (Intel-Max-Fans-85%-N: N=314880 NB=384 1x2,\n# same binary, MPI and binding) and changes one thing, so each is compared with the\n# baseline solved first in this same job:\n#   1-baseline   nothing changed\n#   2-governor   scaling_governor=performance on every cpu\n#   3-no-turbo   turbo off (intel_pstate no_turbo, or cpufreq boost)\n#   4-largepage  HPL_LARGEPAGE=1, Intel HPL maps its memory with 2 MB pages\n#   5-combined   governor + large pages\n# no EPP test: this node has no energy_performance_preference (the sweep logged \"epp n/a\").\n# no huge page reservation: the matrix is 739 GiB, which 4 GiB of hugetlb pages can't\n# hold, so each solve records how much of its memory actually landed on huge pages.\n# every test starts from the node's normal state (schedutil, turbo on), and whatever\n# state the job found is put back on exit, however it ends.\n# ~83 min a solve, ~7 h in all\n\n#SBATCH --job-name=hpl-launchpad-intel-settings\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n# the submit workflow gives up at 8 h; end the job first so the results still get harvested\n#SBATCH --time=07:45:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# intel-oneapi-mkl-core-devel-2026.1, intel MPI 2021.18\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\necho \"fan     : mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\n\n# cpufreq knobs. CPU_SYSFS is only ever set to dry-run this script off the node\ncpu=${CPU_SYSFS:-/sys/devices/system/cpu}\ngovs=(\"$cpu\"/cpu[0-9]*/cpufreq/scaling_governor)\n[ -e \"${govs[0]}\" ] || govs=()\n# intel_pstate turns turbo off with no_turbo=1, acpi-cpufreq with boost=0\nif [ -e \"$cpu/intel_pstate/no_turbo\" ]; then turbo=$cpu/intel_pstate/no_turbo turbo_off=1\nelif [ -e \"$cpu/cpufreq/boost\" ]; then turbo=$cpu/cpufreq/boost turbo_off=0\nelse turbo= turbo_off=; fi\ngov_now() { [ ${#govs[@]} -gt 0 ] && sort \"${govs[@]}\" | uniq -c | awk '{printf \"%s%s x%s\", (NR > 1 ? \", \" : \"\"), $2, $1}'; }\nturbo_now() { if [ -n \"$turbo\" ]; then echo \"${turbo##*/}=$(cat \"$turbo\")\"; else echo none; fi; }\n# put <value> <file>...: one sudo call, the value passed as an argument rather than on stdin\nput() { sudo -n sh -c 'v=$1; shift; for f; do echo \"$v\" > \"$f\"; done' sh \"$@\"; }\n\necho \"cpufreq : driver $(cat \"$cpu/cpu0/cpufreq/scaling_driver\" 2>/dev/null || echo unknown); governors $(cat \"$cpu/cpu0/cpufreq/scaling_available_governors\" 2>/dev/null || echo unknown)\"\necho \"governor: $(gov_now)\"\necho \"turbo   : $(turbo_now) (no_turbo=1 or boost=0 means off)\"\necho \"thp     : enabled $(cat /sys/kernel/mm/transparent_hugepage/enabled 2>/dev/null || echo unknown); defrag $(cat /sys/kernel/mm/transparent_hugepage/defrag 2>/dev/null || echo unknown); hugetlb $(awk '/^HugePages_Total/ {print $2}' /proc/meminfo 2>/dev/null) pages reserved\"\necho \"load    : $(cut -d' ' -f1-3 /proc/loadavg 2>/dev/null) (1, 5, 15 min, before the first solve)\"\n# the long-term package power cap; a package pinned at it under load is power limited, not thermal\necho \"pkg cap : $(for z in /sys/class/powercap/intel-rapl:[0-9]; do awk -v n=\"$(cat \"$z/name\")\" '{printf \"%s %.0f W  \", n, $1/1e6}' \"$z/constraint_0_power_limit_uw\"; done 2>/dev/null)\"\n\n# the 85% run ran on the node's normal state, schedutil with turbo on, so every test starts\n# from that. the node is shared: whatever is found here is put back on exit, however it ends\nfound=\"governor $(gov_now), turbo $(turbo_now)\"\ngov_saved=$(for f in \"${govs[@]}\"; do printf '%s %s\\n' \"$f\" \"$(cat \"$f\")\"; done)\nturbo_saved=${turbo:+$(cat \"$turbo\")}\ndef_gov=schedutil\ngrep -qw \"$def_gov\" \"$cpu/cpu0/cpufreq/scaling_available_governors\" 2>/dev/null || def_gov=$(cat \"${govs[0]}\" 2>/dev/null)\nturbo_on=${turbo:+$((1 - turbo_off))}\ndefaults() {\n  [ ${#govs[@]} -gt 0 ] && put \"$def_gov\" \"${govs[@]}\"\n  [ -n \"$turbo\" ] && put \"$turbo_on\" \"$turbo\"\n}\nrestore() {\n  local g\n  for g in $(awk 'NF == 2 {print $2}' <<<\"$gov_saved\" | sort -u); do\n    put \"$g\" $(awk -v g=\"$g\" '$2 == g {print $1}' <<<\"$gov_saved\")\n  done\n  [ -n \"$turbo\" ] && put \"$turbo_saved\" \"$turbo\"\n}\ntrap 'restore; echo \"restored: governor $(gov_now), turbo $(turbo_now)\"; kill $(jobs -p) 2>/dev/null' EXIT\ntrap 'exit 143' TERM INT\ndefaults\n[ \"governor $(gov_now), turbo $(turbo_now)\" = \"$found\" ] ||\n  echo \"warning : the node was left at $found; the tests run from governor $(gov_now), turbo $(turbo_now), and the found state is put back on exit\"\n\n# each returns non-zero unless the setting reads back as changed, so a solve never\n# runs on a setting that silently failed to apply\nset_governor() {\n  grep -qw performance \"$cpu/cpu0/cpufreq/scaling_available_governors\" 2>/dev/null || return 1\n  put performance \"${govs[@]}\"\n  [ \"$(gov_now)\" = \"performance x${#govs[@]}\" ]\n}\nset_no_turbo() {\n  [ -n \"$turbo\" ] || return 1\n  put \"$turbo_off\" \"$turbo\"\n  [ \"$(cat \"$turbo\")\" = \"$turbo_off\" ]\n}\n\n# clock, power, numa and huge pages, sampled only while solving\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\n# submit-jobs.sh sends stdout to run.out in the job dir: the fallback if scontrol says nothing\nout=${out:-$PWD/run.out}\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\nfailed=\n\n# solve <test> [VAR=value ...]: one HPL run with the settings already applied\nsolve() {\n  local t=$1; shift\n  echo\n  echo \"test    : $t | governor $(gov_now) | turbo $(turbo_now) | env ${*:-none}\"\n  sync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\n  echo \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n  ( while sleep 10; do\n      solving || continue\n      [ -s \"numa.$t.log\" ] || numastat -p xhpl > \"numa.$t.log\" 2>&1\n      # once the matrix is allocated: how much of each rank is on 2 MB pages (THP or hugetlb)\n      # and whether HPL_LARGEPAGE actually reached the rank\n      [ -s \"pages.$t.log\" ] || for p in $(pgrep xhpl_intel64); do\n        lp=$(tr '\\0' '\\n' < \"/proc/$p/environ\" | sed -n 's/^HPL_LARGEPAGE=//p')\n        awk -v p=\"$p\" -v lp=\"${lp:-unset}\" '{v[$1] = $2} END {printf \"pid %s HPL_LARGEPAGE=%s, rss %.0f GiB, thp %.0f GiB, hugetlb %.0f GiB\\n\",\n                       p, lp, v[\"Rss:\"]/1048576, v[\"AnonHugePages:\"]/1048576, (v[\"Private_Hugetlb:\"] + v[\"Shared_Hugetlb:\"])/1048576}' \"/proc/$p/smaps_rollup\"\n      done > \"pages.$t.log\" 2>/dev/null\n      awk -F'\\n' 'BEGIN{RS=\"\"} {for (i=1; i<=NF; i++) {split($i, kv, /\\t*: /); f[kv[1]]=kv[2]}\n                  k=f[\"physical id\"] \"-\" f[\"core id\"]; if (f[\"cpu MHz\"]+0 > m[k]) m[k]=f[\"cpu MHz\"]+0}\n                  END{for (k in m) {s+=m[k]; n++} printf \"%.0f\\n\", s/n}' /proc/cpuinfo\n    done ) > \"cpufreq.$t.log\" &\n  local sampler=$!\n  # turbostat's summary row sums PkgWatt over both packages and reports the hotter one's PkgTmp\n  ( while :; do\n      solving || { sleep 10; continue; }\n      sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n    done ) > \"power.$t.log\" &\n  local power=$!\n\n  # rank 0 -> numa node 0, rank 1 -> numa node 1, as in the baseline\n  env \"$@\" mpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n       bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\"\n  local rc=$?\n  kill \"$sampler\" \"$power\"\n  defaults\n\n  local mhz watts gflops\n  mhz=$(sort -n \"cpufreq.$t.log\" | awk '{v[++n]=$1; s+=$1} END{if (n) printf \"%.0f\", s/n}')\n  sort -n \"cpufreq.$t.log\" | awk -v t=\"$t\" '{v[++n]=$1; s+=$1} END{if (n) printf \"clock   : %s avg %.0f MHz, min %.0f, max %.0f over %d samples, median %.0f\\n\", t, s/n, v[1], v[n], n, v[int((n+1)/2)]}'\n  watts=$(awk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next} c[\"PkgWatt\"] && $1 + 0 > 0 {s += $c[\"PkgWatt\"]; n++} END {if (n) printf \"%.0f\", s/n}' \"power.$t.log\")\n  awk -v t=\"$t\" '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n       c[\"PkgWatt\"] && $1 + 0 > 0 {w = $c[\"PkgWatt\"]; s += w; if (w > mw) mw = w; if (c[\"PkgTmp\"]) {x = $c[\"PkgTmp\"]; if (x > mt) mt = x}; f += $c[\"Bzy_MHz\"]; n++}\n       END {if (n) printf \"power   : %s avg %.0f W, max %.0f W over both packages; pkg temp max %d C; busy %.0f MHz avg over %d samples\\n\", t, s/n, mw, mt, f/n, n\n            else printf \"power   : %s not measured (turbostat unavailable)\\n\", t}' \"power.$t.log\"\n  [ -s \"pages.$t.log\" ] && sed \"s/^/pages   : $t /\" \"pages.$t.log\"\n  [ -s \"numa.$t.log\" ] && { echo \"numa placement while solving, $t (MB):\"; cat \"numa.$t.log\"; }\n  # this test's result is the WR line after its own \"test    :\" marker\n  gflops=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && $1 ~ /^W[RC]/ && NF >= 7 {g = $7} END {print g}' \"$out\")\n  echo \"$t ${gflops:--} ${mhz:--} ${watts:--}\" >> results.txt\n  [ \"$rc\" -eq 0 ] || { failed=\"$failed $t\"; echo \"failed  : $t exited $rc\"; }\n}\n\nsolve 1-baseline\n\nif set_governor; then solve 2-governor\nelse echo \"skip    : 2-governor, the governor did not change ($(gov_now))\"; defaults; fi\n\nif set_no_turbo; then solve 3-no-turbo\nelse echo \"skip    : 3-no-turbo, turbo could not be turned off (${turbo:-no control found})\"; defaults; fi\n\nsolve 4-largepage HPL_LARGEPAGE=1\n\nif set_governor; then solve 5-combined HPL_LARGEPAGE=1\nelse echo \"skip    : 5-combined, the governor did not change ($(gov_now))\"; defaults; fi\n\n# one table to read, every test against the baseline solved first\necho\nawk 'NR == 1 {b = $2 + 0}\n     {printf \"summary : %-12s %9s GFLOPS  %8s  %5s MHz  %4s W\\n\", $1, ($2 == \"-\" ? \"-\" : sprintf(\"%.2f\", $2)),\n             ($2 == \"-\" || b <= 0 ? \"-\" : sprintf(\"%+.2f%%\", ($2 / b - 1) * 100)), $3, $4}' results.txt\n# the site reads the first \"cpu MHz :\" line: the mean over every test's samples\ncat cpufreq.*.log 2>/dev/null | sort -n | awk '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)]}'\n[ -z \"$failed\" ] || { echo \"failed  :$failed\"; exit 1; }\n",
+    "sbatch": {
+      "job-name": "hpl-launchpad-intel-settings",
+      "nodes": 1,
+      "ntasks-per-node": 2,
+      "cpus-per-task": 32,
+      "partition": "all",
+      "time": "07:45:00",
+      "exclusive": true,
+      "hint": "nomultithread"
+    },
+    "file": "run.sh"
+  },
+  "out": {
+    "file": "run.out",
+    "runs": [
+      {
+        "tv": "WR12C2C2",
+        "N": 314880,
+        "NB": 384,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 4903.75,
+        "gflops": 4244.43,
+        "startTime": "Thu Oct 22 10:52:10 2026",
+        "endTime": "Thu Oct 22 12:13:54 2026",
+        "residual": 0.00121731564,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 314880,
+        "NB": 384,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 4909.09,
+        "gflops": 4239.81,
+        "startTime": "Thu Oct 22 12:15:04 2026",
+        "endTime": "Thu Oct 22 13:36:53 2026",
+        "residual": 0.00121731564,
+        "residualPassed": true
+      },
+      {
+        "tv": "WR12C2C2",
+        "N": 314880,
+        "NB": 384,
+        "P": 1,
+        "Q": 2,
+        "timeSec": 4911.65,
+        "gflops": 4237.6,
+        "startTime": "Thu Oct 22 13:38:13 2026",
+        "endTime": "Thu Oct 22 15:00:05 2026",
+        "residual": 0.00121731564,
+        "residualPassed": true
+      }
+    ],
+    "summary": {
+      "testsTotal": 1,
+      "testsPassed": 1,
+      "testsFailed": 0,
+      "testsSkipped": 0
+    },
+    "hostInfo": {
+      "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+      "ranks": "2 x 32 cores",
+      "blas": "oneMKL 2026.1.0-236",
+      "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+      "clockMHz": {
+        "avg": 2602,
+        "min": 2085,
+        "max": 3740,
+        "samples": 1446
+      }
+    }
+  },
+  "err": null,
+  "detail": {
+    "dat": {
+      "raw": "HPLinpack benchmark input file\nLaunchpad settings tests, 85% N config of Intel-Max-Fans-85%-N, 1x2, NB=384\nHPL.out      output file name (if any)\n6            device out (6=stdout,7=stderr,file)\n1            # of problems sizes (N)\n314880       Ns\n1            # of NBs\n384          NBs\n0            PMAP process mapping (0=Row-,1=Column-major)\n1            # of process grids (P x Q)\n1            Ps\n2            Qs\n16.0         threshold\n1            # of panel fact\n1            PFACTs (0=left, 1=Crout, 2=Right)\n1            # of recursive stopping criterium\n2            NBMINs (>= 1)\n1            # of panels in recursion\n2            NDIVs\n1            # of recursive panel fact.\n1            RFACTs (0=left, 1=Crout, 2=Right)\n1            # of broadcast\n2            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)\n1            # of lookahead depth\n1            DEPTHs (>=0)\n2            SWAP (0=bin-exch,1=long,2=mix)\n16           swapping threshold\n0            L1 in (0=transposed,1=no-transposed) form\n0            U  in (0=transposed,1=no-transposed) form\n1            Equilibration (0=no,1=yes)\n16           memory alignment in double (> 0)\n",
+      "parsed": {
+        "header": [
+          "HPLinpack benchmark input file",
+          "Launchpad settings tests, 85% N config of Intel-Max-Fans-85%-N, 1x2, NB=384"
+        ],
+        "outputFilename": "HPL.out",
+        "deviceOut": 6,
+        "numProblemSizes": 1,
+        "Ns": [
+          314880
+        ],
+        "numNBs": 1,
+        "NBs": [
+          384
+        ],
+        "pmap": 0,
+        "numGrids": 1,
+        "Ps": [
+          1
+        ],
+        "Qs": [
+          2
+        ],
+        "threshold": 16,
+        "numPFACT": 1,
+        "PFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numNBMIN": 1,
+        "NBMINs": [
+          2,
+          1
+        ],
+        "numPanelsInRecursion": 1,
+        "NDIVs": [
+          2
+        ],
+        "numRFACT": 1,
+        "RFACTs": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "numBCAST": 1,
+        "BCASTs": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          2,
+          2,
+          3,
+          2,
+          4,
+          5
+        ],
+        "numDEPTH": 1,
+        "DEPTHs": [
+          1,
+          0
+        ],
+        "swapMode": 2,
+        "swapThreshold": 16,
+        "L1": 0,
+        "U": 0,
+        "equilibration": 1,
+        "memoryAlignment": 16
+      },
+      "file": "HPL.dat"
+    },
+    "job": {
+      "raw": "#!/bin/bash\n# intel HPL system-settings tests, solved back to back in one job. every solve uses\n# the exact config of the best 85% run (Intel-Max-Fans-85%-N: N=314880 NB=384 1x2,\n# same binary, MPI and binding) and changes one thing, so each is compared with the\n# baseline solved first in this same job:\n#   1-baseline   nothing changed\n#   2-governor   scaling_governor=performance on every cpu\n#   3-no-turbo   turbo off (intel_pstate no_turbo, or cpufreq boost)\n#   4-largepage  HPL_LARGEPAGE=1, Intel HPL maps its memory with 2 MB pages\n#   5-combined   governor + large pages\n# no EPP test: this node has no energy_performance_preference (the sweep logged \"epp n/a\").\n# no huge page reservation: the matrix is 739 GiB, which 4 GiB of hugetlb pages can't\n# hold, so each solve records how much of its memory actually landed on huge pages.\n# every test starts from the node's normal state (schedutil, turbo on), and whatever\n# state the job found is put back on exit, however it ends.\n# ~83 min a solve, ~7 h in all\n\n#SBATCH --job-name=hpl-launchpad-intel-settings\n#SBATCH --nodes=1\n#SBATCH --ntasks-per-node=2\n#SBATCH --cpus-per-task=32\n#SBATCH --partition=all\n# the submit workflow gives up at 8 h; end the job first so the results still get harvested\n#SBATCH --time=07:45:00\n#SBATCH --exclusive\n#SBATCH --hint=nomultithread\n\n# intel-oneapi-mkl-core-devel-2026.1, intel MPI 2021.18\nIHPL=/opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic\nsource /opt/intel/oneapi/mpi/2021.18/env/vars.sh\n\nexport I_MPI_FABRICS=shm\nexport I_MPI_HYDRA_BOOTSTRAP=fork\nexport I_MPI_PIN_DOMAIN=numa\nexport I_MPI_DEBUG=4\nexport HPL_LOG=1\n\nulimit -l unlimited\nulimit -n 65536\n\necho \"cpu     : $(lscpu | sed -n 's/^Model name: *//p')\"\necho \"ranks   : ${SLURM_NTASKS} x ${SLURM_CPUS_PER_TASK} cores\"\necho \"binary  : $IHPL\"\necho \"sha256  : $(sha256sum \"$IHPL\" | cut -c1-64)\"\necho \"blas    : oneMKL $(dpkg-query -W -f='${Version}' intel-oneapi-mkl-core-devel-2026.1)\"\necho \"mpi     : $(mpirun --version | head -1)\"\necho \"fan     : mode $(sudo -n ipmitool raw 0x30 0x45 0x00 | tr -d ' ') (01 full, 02 optimal)\"\nenv | grep -E '^(I_MPI_|HPL_LOG=|HPL_LARGEPAGE=|HPL_HOST_)' | sort | sed 's/^/env     : /'\n\n# cpufreq knobs. CPU_SYSFS is only ever set to dry-run this script off the node\ncpu=${CPU_SYSFS:-/sys/devices/system/cpu}\ngovs=(\"$cpu\"/cpu[0-9]*/cpufreq/scaling_governor)\n[ -e \"${govs[0]}\" ] || govs=()\n# intel_pstate turns turbo off with no_turbo=1, acpi-cpufreq with boost=0\nif [ -e \"$cpu/intel_pstate/no_turbo\" ]; then turbo=$cpu/intel_pstate/no_turbo turbo_off=1\nelif [ -e \"$cpu/cpufreq/boost\" ]; then turbo=$cpu/cpufreq/boost turbo_off=0\nelse turbo= turbo_off=; fi\ngov_now() { [ ${#govs[@]} -gt 0 ] && sort \"${govs[@]}\" | uniq -c | awk '{printf \"%s%s x%s\", (NR > 1 ? \", \" : \"\"), $2, $1}'; }\nturbo_now() { if [ -n \"$turbo\" ]; then echo \"${turbo##*/}=$(cat \"$turbo\")\"; else echo none; fi; }\n# put <value> <file>...: one sudo call, the value passed as an argument rather than on stdin\nput() { sudo -n sh -c 'v=$1; shift; for f; do echo \"$v\" > \"$f\"; done' sh \"$@\"; }\n\necho \"cpufreq : driver $(cat \"$cpu/cpu0/cpufreq/scaling_driver\" 2>/dev/null || echo unknown); governors $(cat \"$cpu/cpu0/cpufreq/scaling_available_governors\" 2>/dev/null || echo unknown)\"\necho \"governor: $(gov_now)\"\necho \"turbo   : $(turbo_now) (no_turbo=1 or boost=0 means off)\"\necho \"thp     : enabled $(cat /sys/kernel/mm/transparent_hugepage/enabled 2>/dev/null || echo unknown); defrag $(cat /sys/kernel/mm/transparent_hugepage/defrag 2>/dev/null || echo unknown); hugetlb $(awk '/^HugePages_Total/ {print $2}' /proc/meminfo 2>/dev/null) pages reserved\"\necho \"load    : $(cut -d' ' -f1-3 /proc/loadavg 2>/dev/null) (1, 5, 15 min, before the first solve)\"\n# the long-term package power cap; a package pinned at it under load is power limited, not thermal\necho \"pkg cap : $(for z in /sys/class/powercap/intel-rapl:[0-9]; do awk -v n=\"$(cat \"$z/name\")\" '{printf \"%s %.0f W  \", n, $1/1e6}' \"$z/constraint_0_power_limit_uw\"; done 2>/dev/null)\"\n\n# the 85% run ran on the node's normal state, schedutil with turbo on, so every test starts\n# from that. the node is shared: whatever is found here is put back on exit, however it ends\nfound=\"governor $(gov_now), turbo $(turbo_now)\"\ngov_saved=$(for f in \"${govs[@]}\"; do printf '%s %s\\n' \"$f\" \"$(cat \"$f\")\"; done)\nturbo_saved=${turbo:+$(cat \"$turbo\")}\ndef_gov=schedutil\ngrep -qw \"$def_gov\" \"$cpu/cpu0/cpufreq/scaling_available_governors\" 2>/dev/null || def_gov=$(cat \"${govs[0]}\" 2>/dev/null)\nturbo_on=${turbo:+$((1 - turbo_off))}\ndefaults() {\n  [ ${#govs[@]} -gt 0 ] && put \"$def_gov\" \"${govs[@]}\"\n  [ -n \"$turbo\" ] && put \"$turbo_on\" \"$turbo\"\n}\nrestore() {\n  local g\n  for g in $(awk 'NF == 2 {print $2}' <<<\"$gov_saved\" | sort -u); do\n    put \"$g\" $(awk -v g=\"$g\" '$2 == g {print $1}' <<<\"$gov_saved\")\n  done\n  [ -n \"$turbo\" ] && put \"$turbo_saved\" \"$turbo\"\n}\ntrap 'restore; echo \"restored: governor $(gov_now), turbo $(turbo_now)\"; kill $(jobs -p) 2>/dev/null' EXIT\ntrap 'exit 143' TERM INT\ndefaults\n[ \"governor $(gov_now), turbo $(turbo_now)\" = \"$found\" ] ||\n  echo \"warning : the node was left at $found; the tests run from governor $(gov_now), turbo $(turbo_now), and the found state is put back on exit\"\n\n# each returns non-zero unless the setting reads back as changed, so a solve never\n# runs on a setting that silently failed to apply\nset_governor() {\n  grep -qw performance \"$cpu/cpu0/cpufreq/scaling_available_governors\" 2>/dev/null || return 1\n  put performance \"${govs[@]}\"\n  [ \"$(gov_now)\" = \"performance x${#govs[@]}\" ]\n}\nset_no_turbo() {\n  [ -n \"$turbo\" ] || return 1\n  put \"$turbo_off\" \"$turbo\"\n  [ \"$(cat \"$turbo\")\" = \"$turbo_off\" ]\n}\n\n# clock, power, numa and huge pages, sampled only while solving\nout=$(scontrol show job \"$SLURM_JOB_ID\" | sed -n 's/^ *StdOut=//p')\n# submit-jobs.sh sends stdout to run.out in the job dir: the fallback if scontrol says nothing\nout=${out:-$PWD/run.out}\nsolving() { tail -n1 \"$out\" 2>/dev/null | grep -q 'Column='; }\nfailed=\n\n# solve <test> [VAR=value ...]: one HPL run with the settings already applied\nsolve() {\n  local t=$1; shift\n  echo\n  echo \"test    : $t | governor $(gov_now) | turbo $(turbo_now) | env ${*:-none}\"\n  sync; sudo -n sh -c 'echo 3 > /proc/sys/vm/drop_caches' || echo \"warning : could not drop the page cache\"\n  echo \"numa    : $(numactl -H | awk '/free:/{printf \"node %s %d GiB free  \", $2, $4/1024}')\"\n\n  ( while sleep 10; do\n      solving || continue\n      [ -s \"numa.$t.log\" ] || numastat -p xhpl > \"numa.$t.log\" 2>&1\n      # once the matrix is allocated: how much of each rank is on 2 MB pages (THP or hugetlb)\n      # and whether HPL_LARGEPAGE actually reached the rank\n      [ -s \"pages.$t.log\" ] || for p in $(pgrep xhpl_intel64); do\n        lp=$(tr '\\0' '\\n' < \"/proc/$p/environ\" | sed -n 's/^HPL_LARGEPAGE=//p')\n        awk -v p=\"$p\" -v lp=\"${lp:-unset}\" '{v[$1] = $2} END {printf \"pid %s HPL_LARGEPAGE=%s, rss %.0f GiB, thp %.0f GiB, hugetlb %.0f GiB\\n\",\n                       p, lp, v[\"Rss:\"]/1048576, v[\"AnonHugePages:\"]/1048576, (v[\"Private_Hugetlb:\"] + v[\"Shared_Hugetlb:\"])/1048576}' \"/proc/$p/smaps_rollup\"\n      done > \"pages.$t.log\" 2>/dev/null\n      awk -F'\\n' 'BEGIN{RS=\"\"} {for (i=1; i<=NF; i++) {split($i, kv, /\\t*: /); f[kv[1]]=kv[2]}\n                  k=f[\"physical id\"] \"-\" f[\"core id\"]; if (f[\"cpu MHz\"]+0 > m[k]) m[k]=f[\"cpu MHz\"]+0}\n                  END{for (k in m) {s+=m[k]; n++} printf \"%.0f\\n\", s/n}' /proc/cpuinfo\n    done ) > \"cpufreq.$t.log\" &\n  local sampler=$!\n  # turbostat's summary row sums PkgWatt over both packages and reports the hotter one's PkgTmp\n  ( while :; do\n      solving || { sleep 10; continue; }\n      sudo -n turbostat --quiet --Summary --show Bzy_MHz,PkgWatt,PkgTmp --interval 10 --num_iterations 1 2>/dev/null || sleep 10\n    done ) > \"power.$t.log\" &\n  local power=$!\n\n  # rank 0 -> numa node 0, rank 1 -> numa node 1, as in the baseline\n  env \"$@\" mpirun -np \"${SLURM_NTASKS}\" -ppn \"${SLURM_NTASKS_PER_NODE}\" \\\n       bash -c 'export HPL_HOST_NODE=$((PMI_RANK % SLURM_NTASKS_PER_NODE)); exec numactl --localalloc \"$0\"' \"$IHPL\"\n  local rc=$?\n  kill \"$sampler\" \"$power\"\n  defaults\n\n  local mhz watts gflops\n  mhz=$(sort -n \"cpufreq.$t.log\" | awk '{v[++n]=$1; s+=$1} END{if (n) printf \"%.0f\", s/n}')\n  sort -n \"cpufreq.$t.log\" | awk -v t=\"$t\" '{v[++n]=$1; s+=$1} END{if (n) printf \"clock   : %s avg %.0f MHz, min %.0f, max %.0f over %d samples, median %.0f\\n\", t, s/n, v[1], v[n], n, v[int((n+1)/2)]}'\n  watts=$(awk '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next} c[\"PkgWatt\"] && $1 + 0 > 0 {s += $c[\"PkgWatt\"]; n++} END {if (n) printf \"%.0f\", s/n}' \"power.$t.log\")\n  awk -v t=\"$t\" '/PkgWatt/ {for (i = 1; i <= NF; i++) c[$i] = i; next}\n       c[\"PkgWatt\"] && $1 + 0 > 0 {w = $c[\"PkgWatt\"]; s += w; if (w > mw) mw = w; if (c[\"PkgTmp\"]) {x = $c[\"PkgTmp\"]; if (x > mt) mt = x}; f += $c[\"Bzy_MHz\"]; n++}\n       END {if (n) printf \"power   : %s avg %.0f W, max %.0f W over both packages; pkg temp max %d C; busy %.0f MHz avg over %d samples\\n\", t, s/n, mw, mt, f/n, n\n            else printf \"power   : %s not measured (turbostat unavailable)\\n\", t}' \"power.$t.log\"\n  [ -s \"pages.$t.log\" ] && sed \"s/^/pages   : $t /\" \"pages.$t.log\"\n  [ -s \"numa.$t.log\" ] && { echo \"numa placement while solving, $t (MB):\"; cat \"numa.$t.log\"; }\n  # this test's result is the WR line after its own \"test    :\" marker\n  gflops=$(awk -v t=\"$t\" '/^test    : / {cur = $3} cur == t && $1 ~ /^W[RC]/ && NF >= 7 {g = $7} END {print g}' \"$out\")\n  echo \"$t ${gflops:--} ${mhz:--} ${watts:--}\" >> results.txt\n  [ \"$rc\" -eq 0 ] || { failed=\"$failed $t\"; echo \"failed  : $t exited $rc\"; }\n}\n\nsolve 1-baseline\n\nif set_governor; then solve 2-governor\nelse echo \"skip    : 2-governor, the governor did not change ($(gov_now))\"; defaults; fi\n\nif set_no_turbo; then solve 3-no-turbo\nelse echo \"skip    : 3-no-turbo, turbo could not be turned off (${turbo:-no control found})\"; defaults; fi\n\nsolve 4-largepage HPL_LARGEPAGE=1\n\nif set_governor; then solve 5-combined HPL_LARGEPAGE=1\nelse echo \"skip    : 5-combined, the governor did not change ($(gov_now))\"; defaults; fi\n\n# one table to read, every test against the baseline solved first\necho\nawk 'NR == 1 {b = $2 + 0}\n     {printf \"summary : %-12s %9s GFLOPS  %8s  %5s MHz  %4s W\\n\", $1, ($2 == \"-\" ? \"-\" : sprintf(\"%.2f\", $2)),\n             ($2 == \"-\" || b <= 0 ? \"-\" : sprintf(\"%+.2f%%\", ($2 / b - 1) * 100)), $3, $4}' results.txt\n# the site reads the first \"cpu MHz :\" line: the mean over every test's samples\ncat cpufreq.*.log 2>/dev/null | sort -n | awk '{v[++n]=$1; s+=$1} END{if (n) printf \"cpu MHz : avg %.0f, min %.0f, max %.0f over %d samples, median %.0f\\n\", s/n, v[1], v[n], n, v[int((n+1)/2)]}'\n[ -z \"$failed\" ] || { echo \"failed  :$failed\"; exit 1; }\n",
+      "sbatch": {
+        "job-name": "hpl-launchpad-intel-settings",
+        "nodes": 1,
+        "ntasks-per-node": 2,
+        "cpus-per-task": 32,
+        "partition": "all",
+        "time": "07:45:00",
+        "exclusive": true,
+        "hint": "nomultithread"
+      },
+      "file": "run.sh"
+    },
+    "out": {
+      "file": "run.out",
+      "runs": [
+        {
+          "tv": "WR12C2C2",
+          "N": 314880,
+          "NB": 384,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 4903.75,
+          "gflops": 4244.43,
+          "startTime": "Thu Oct 22 10:52:10 2026",
+          "endTime": "Thu Oct 22 12:13:54 2026",
+          "residual": 0.00121731564,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 314880,
+          "NB": 384,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 4909.09,
+          "gflops": 4239.81,
+          "startTime": "Thu Oct 22 12:15:04 2026",
+          "endTime": "Thu Oct 22 13:36:53 2026",
+          "residual": 0.00121731564,
+          "residualPassed": true
+        },
+        {
+          "tv": "WR12C2C2",
+          "N": 314880,
+          "NB": 384,
+          "P": 1,
+          "Q": 2,
+          "timeSec": 4911.65,
+          "gflops": 4237.6,
+          "startTime": "Thu Oct 22 13:38:13 2026",
+          "endTime": "Thu Oct 22 15:00:05 2026",
+          "residual": 0.00121731564,
+          "residualPassed": true
+        }
+      ],
+      "summary": {
+        "testsTotal": 1,
+        "testsPassed": 1,
+        "testsFailed": 0,
+        "testsSkipped": 0
+      },
+      "hostInfo": {
+        "cpu": "INTEL(R) XEON(R) GOLD 6548Y+",
+        "ranks": "2 x 32 cores",
+        "blas": "oneMKL 2026.1.0-236",
+        "mpi": "Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)",
+        "clockMHz": {
+          "avg": 2602,
+          "min": 2085,
+          "max": 3740,
+          "samples": 1446
+        }
+      }
+    },
+    "err": null,
+    "best": {
+      "tv": "WR12C2C2",
+      "N": 314880,
+      "NB": 384,
+      "P": 1,
+      "Q": 2,
+      "timeSec": 4903.75,
+      "gflops": 4244.43,
+      "startTime": "Thu Oct 22 10:52:10 2026",
+      "endTime": "Thu Oct 22 12:13:54 2026",
+      "residual": 0.00121731564,
+      "residualPassed": true
+    }
+  }
+}

@@ -1,0 +1,31 @@
+&user_inputs
+x_domain%beg = 0.0
+x_domain%end = 1.0
+m = 63
+n = 0
+p = 0
+t_step_start = 0
+num_patches = 1
+model_eqns = 2
+num_fluids = 2
+mpp_lim = F
+bc_x%beg = -1
+bc_x%end = -1
+precision = 2
+parallel_io = F
+patch_icpp(1)%geometry = 1
+patch_icpp(1)%x_centroid = 0.5
+patch_icpp(1)%length_x = 1.0
+patch_icpp(1)%vel(1) = 1.0
+patch_icpp(1)%pres = 1.0
+patch_icpp(1)%alpha_rho(1) = 0d0
+patch_icpp(1)%alpha_rho(2) = 0d0
+patch_icpp(1)%alpha(1) = 0d0
+patch_icpp(1)%alpha(2) = 0d0
+fluid_pp(1)%gamma = 2.5000000000000004
+fluid_pp(1)%pi_inf = 0.0
+fluid_pp(2)%gamma = 2.5000000000000004
+fluid_pp(2)%pi_inf = 0.0
+recon_type = 1
+weno_order = 5
+&end/

@@ -1,0 +1,414 @@
+cpu     : INTEL(R) XEON(R) GOLD 6548Y+
+ranks   : 2 x 32 cores
+binary  : /opt/intel/oneapi/mkl/2026.1/share/mkl/benchmarks/mp_linpack/xhpl_intel64_dynamic
+sha256  : 2b8dee1953c3d6c5080668643f877d1bd4c49ea427ff1923e8d65a2cfb4e67e9
+blas    : oneMKL 2026.1.0-236
+mpi     : Intel(R) MPI Library for Linux* OS, Version 2021.18.1 Build 20260626 (id: b44796a)
+env     : HPL_LOG=1
+env     : I_MPI_DEBUG=4
+env     : I_MPI_FABRICS=shm
+env     : I_MPI_HYDRA_BOOTSTRAP_EXEC_EXTRA_ARGS=--external-launcher
+env     : I_MPI_HYDRA_BOOTSTRAP=fork
+env     : I_MPI_PIN_DOMAIN=numa
+env     : I_MPI_ROOT=/opt/intel/oneapi/mpi/2021.18
+governor: schedutil x128
+epb     : 6 (0 performance, 6 balanced, 15 power saving)
+load    : 1.04 0.78 0.80 (1, 5, 15 min)
+msr     : cpu0: MSR_PKG_POWER_INFO: 0xf11d003d807d0 (250 W TDP, RAPL 123 - 570 W, 0.014648 sec.)
+msr     : cpu0: PKG Limit #1: ENabled (250.000 Watts, 1.000000 sec, clamp ENabled)
+msr     : cpu0: PKG Limit #2: ENabled (300.000 Watts, 0.011719* sec, clamp ENabled)
+msr     : cpu0: PKG Limit #4: 430.000000 Watts (locked)
+msr     : cpu0: MSR_DRAM_POWER_INFO,: 0x802803e000780368 (109 W TDP, RAPL 15 - 124 W, 0.039062 sec.)
+msr     : cpu0: MSR_DRAM_POWER_LIMIT: 0x00000000 (UNlocked)
+msr     : cpu32: MSR_PKG_POWER_INFO: 0xf11d003d807d0 (250 W TDP, RAPL 123 - 570 W, 0.014648 sec.)
+msr     : cpu32: PKG Limit #1: ENabled (250.000 Watts, 1.000000 sec, clamp ENabled)
+msr     : cpu32: PKG Limit #2: ENabled (300.000 Watts, 0.011719* sec, clamp ENabled)
+msr     : cpu32: PKG Limit #4: 430.000000 Watts (locked)
+msr     : cpu32: MSR_DRAM_POWER_INFO,: 0x802803e000780368 (109 W TDP, RAPL 15 - 124 W, 0.039062 sec.)
+msr     : cpu32: MSR_DRAM_POWER_LIMIT: 0x00000000 (UNlocked)
+msr     : cpu0: MSR_IA32_TEMPERATURE_TARGET: 0x80610800 (97 C)
+msr     : cpu32: MSR_IA32_TEMPERATURE_TARGET: 0x80610800 (97 C)
+fan     : mode 01 (01 full, 02 optimal), was 01, 6 ok at 22800-23400 RPM, 0 faulty
+turbo   : no_turbo=0, was 0
+limits  : package-0 PL1 250 W PL2 300 W  package-1 PL1 250 W PL2 300 W  
+temps   : 2 package sensors, hottest 30 C, trip 87 C, 576 throttles since boot
+
+test    : pl250 | NB 480 | package-0 PL1 250 W PL2 300 W  package-1 PL1 250 W PL2 300 W  | fan mode 01
+numa    : node 0 484 GiB free  node 1 486 GiB free  
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.1  Build 20260626 (id: b44796a)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_spr_shm.dat"
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name             Pin cpu
+[0] MPI startup(): 0       408520   scc-connect-03-gpu01  {0-31,64-95}
+[0] MPI startup(): 1       408521   scc-connect-03-gpu01  {32-63,96-127}
+================================================================================
+HPLinpack 2.3  --  High-Performance Linpack benchmark  --   December 2, 2018
+Written by A. Petitet and R. Clint Whaley,  Innovative Computing Laboratory, UTK
+Modified by Piotr Luszczek, Innovative Computing Laboratory, UTK
+Modified by Julien Langou, University of Colorado Denver
+================================================================================
+
+An explanation of the input/output parameters follows:
+T/V    : Wall time / encoded variant.
+N      : The order of the coefficient matrix A.
+NB     : The partitioning blocking factor.
+P      : The number of process rows.
+Q      : The number of process columns.
+Time   : Time in seconds to solve the linear system.
+Gflops : Rate of execution for solving the linear system.
+
+The following parameter values will be used:
+
+N        :  222240 
+NB       :     480 
+PMAP     : Row-major process mapping
+P        :       1 
+Q        :       2 
+PFACT    :   Crout 
+NBMIN    :       2 
+NDIV     :       2 
+RFACT    :   Crout 
+BCAST    :   2ring 
+DEPTH    :       1 
+SWAP     : Mix (threshold = 16)
+L1       : transposed form
+U        : transposed form
+EQUIL    : yes
+ALIGN    :   16 double precision words
+
+--------------------------------------------------------------------------------
+
+- The matrix A is randomly generated for each test.
+- The following scaled residual check will be computed:
+      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+- The relative machine precision (eps) is taken to be               1.110223e-16
+- Computational tests pass if scaled residuals are less than                16.0
+
+scc-connect-03-gpu01 : Column=001440 Fraction=0.005 Kernel=    4.00 Mflops=6315185.23
+scc-connect-03-gpu01 : Column=002400 Fraction=0.010 Kernel=4213546.67 Mflops=5270501.81
+scc-connect-03-gpu01 : Column=003360 Fraction=0.015 Kernel=4297587.59 Mflops=4953578.30
+scc-connect-03-gpu01 : Column=004800 Fraction=0.020 Kernel=4214287.30 Mflops=4643993.62
+scc-connect-03-gpu01 : Column=005760 Fraction=0.025 Kernel=4241165.58 Mflops=4573179.21
+scc-connect-03-gpu01 : Column=006720 Fraction=0.030 Kernel=4202412.72 Mflops=4517731.18
+scc-connect-03-gpu01 : Column=008160 Fraction=0.035 Kernel=4222537.09 Mflops=4539095.54
+scc-connect-03-gpu01 : Column=009120 Fraction=0.040 Kernel=4298862.94 Mflops=4513534.75
+scc-connect-03-gpu01 : Column=010080 Fraction=0.045 Kernel=4240899.79 Mflops=4487207.62
+scc-connect-03-gpu01 : Column=011520 Fraction=0.050 Kernel=4218076.13 Mflops=4386938.32
+scc-connect-03-gpu01 : Column=012480 Fraction=0.055 Kernel=4203776.76 Mflops=4373056.72
+scc-connect-03-gpu01 : Column=013440 Fraction=0.060 Kernel=4254248.48 Mflops=4364849.32
+scc-connect-03-gpu01 : Column=014880 Fraction=0.065 Kernel=4261868.56 Mflops=4415496.53
+scc-connect-03-gpu01 : Column=015840 Fraction=0.070 Kernel=4274713.72 Mflops=4407303.47
+scc-connect-03-gpu01 : Column=016800 Fraction=0.075 Kernel=4241879.84 Mflops=4398219.52
+scc-connect-03-gpu01 : Column=018240 Fraction=0.080 Kernel=4232752.27 Mflops=4336724.18
+scc-connect-03-gpu01 : Column=019200 Fraction=0.085 Kernel=4204615.78 Mflops=4330496.28
+scc-connect-03-gpu01 : Column=020160 Fraction=0.090 Kernel=4259094.27 Mflops=4327349.61
+scc-connect-03-gpu01 : Column=021120 Fraction=0.095 Kernel=4213447.14 Mflops=4322535.97
+scc-connect-03-gpu01 : Column=022560 Fraction=0.100 Kernel=4223190.15 Mflops=4359555.34
+scc-connect-03-gpu01 : Column=023520 Fraction=0.105 Kernel=4244856.25 Mflops=4355257.50
+scc-connect-03-gpu01 : Column=024480 Fraction=0.110 Kernel=4236801.76 Mflops=4351011.09
+scc-connect-03-gpu01 : Column=025920 Fraction=0.115 Kernel=4218751.49 Mflops=4305278.45
+scc-connect-03-gpu01 : Column=026880 Fraction=0.120 Kernel=4242239.53 Mflops=4303272.14
+scc-connect-03-gpu01 : Column=027840 Fraction=0.125 Kernel=4238150.17 Mflops=4301280.65
+scc-connect-03-gpu01 : Column=029280 Fraction=0.130 Kernel=4222541.56 Mflops=4334329.60
+scc-connect-03-gpu01 : Column=030240 Fraction=0.135 Kernel=4247514.32 Mflops=4331906.41
+scc-connect-03-gpu01 : Column=031200 Fraction=0.140 Kernel=4238046.45 Mflops=4329376.93
+scc-connect-03-gpu01 : Column=032640 Fraction=0.145 Kernel=4243704.73 Mflops=4292972.46
+scc-connect-03-gpu01 : Column=033600 Fraction=0.150 Kernel=4235624.24 Mflops=4291568.72
+scc-connect-03-gpu01 : Column=034560 Fraction=0.155 Kernel=4222271.37 Mflops=4289924.32
+scc-connect-03-gpu01 : Column=036000 Fraction=0.160 Kernel=4251977.22 Mflops=4319343.48
+scc-connect-03-gpu01 : Column=036960 Fraction=0.165 Kernel=4272316.15 Mflops=4318320.14
+scc-connect-03-gpu01 : Column=037920 Fraction=0.170 Kernel=4285136.82 Mflops=4317622.61
+scc-connect-03-gpu01 : Column=039360 Fraction=0.175 Kernel=4251217.26 Mflops=4285421.60
+scc-connect-03-gpu01 : Column=040320 Fraction=0.180 Kernel=4239076.95 Mflops=4284515.98
+scc-connect-03-gpu01 : Column=041280 Fraction=0.185 Kernel=4247490.40 Mflops=4283815.01
+scc-connect-03-gpu01 : Column=042240 Fraction=0.190 Kernel=4247987.67 Mflops=4283156.29
+scc-connect-03-gpu01 : Column=043680 Fraction=0.195 Kernel=4232361.15 Mflops=4309693.67
+scc-connect-03-gpu01 : Column=044640 Fraction=0.200 Kernel=4233469.87 Mflops=4308375.50
+scc-connect-03-gpu01 : Column=045600 Fraction=0.205 Kernel=4242581.94 Mflops=4307271.20
+scc-connect-03-gpu01 : Column=047040 Fraction=0.210 Kernel=4241246.46 Mflops=4280162.96
+scc-connect-03-gpu01 : Column=048000 Fraction=0.215 Kernel=4250294.75 Mflops=4279698.00
+scc-connect-03-gpu01 : Column=048960 Fraction=0.220 Kernel=4247881.16 Mflops=4279215.28
+scc-connect-03-gpu01 : Column=050400 Fraction=0.225 Kernel=4220613.63 Mflops=4301879.80
+scc-connect-03-gpu01 : Column=051360 Fraction=0.230 Kernel=4232951.20 Mflops=4300890.50
+scc-connect-03-gpu01 : Column=052320 Fraction=0.235 Kernel=4233424.84 Mflops=4299946.52
+scc-connect-03-gpu01 : Column=053760 Fraction=0.240 Kernel=4241193.03 Mflops=4277035.96
+scc-connect-03-gpu01 : Column=054720 Fraction=0.245 Kernel=4252119.20 Mflops=4276711.35
+scc-connect-03-gpu01 : Column=055680 Fraction=0.250 Kernel=4235785.24 Mflops=4276188.97
+scc-connect-03-gpu01 : Column=057120 Fraction=0.255 Kernel=4199894.15 Mflops=4295446.26
+scc-connect-03-gpu01 : Column=058080 Fraction=0.260 Kernel=4262035.89 Mflops=4295045.13
+scc-connect-03-gpu01 : Column=059040 Fraction=0.265 Kernel=4229700.36 Mflops=4294273.04
+scc-connect-03-gpu01 : Column=060480 Fraction=0.270 Kernel=4246456.66 Mflops=4274733.48
+scc-connect-03-gpu01 : Column=061440 Fraction=0.275 Kernel=4228146.90 Mflops=4274216.10
+scc-connect-03-gpu01 : Column=062400 Fraction=0.280 Kernel=4292760.45 Mflops=4274414.40
+scc-connect-03-gpu01 : Column=063360 Fraction=0.285 Kernel=4246133.50 Mflops=4274115.50
+scc-connect-03-gpu01 : Column=064800 Fraction=0.290 Kernel=4101380.07 Mflops=4290194.77
+scc-connect-03-gpu01 : Column=065760 Fraction=0.295 Kernel=4235019.55 Mflops=4289639.78
+scc-connect-03-gpu01 : Column=066720 Fraction=0.300 Kernel=4219601.09 Mflops=4288948.24
+scc-connect-03-gpu01 : Column=068160 Fraction=0.305 Kernel=4225128.04 Mflops=4272812.04
+scc-connect-03-gpu01 : Column=069120 Fraction=0.310 Kernel=4284856.60 Mflops=4272922.53
+scc-connect-03-gpu01 : Column=070080 Fraction=0.315 Kernel=4244942.70 Mflops=4272669.00
+scc-connect-03-gpu01 : Column=071520 Fraction=0.320 Kernel=4171108.48 Mflops=4286518.73
+scc-connect-03-gpu01 : Column=072480 Fraction=0.325 Kernel=4254183.86 Mflops=4286240.71
+scc-connect-03-gpu01 : Column=073440 Fraction=0.330 Kernel=4269195.87 Mflops=4286097.74
+scc-connect-03-gpu01 : Column=074880 Fraction=0.335 Kernel=4258358.40 Mflops=4272546.21
+scc-connect-03-gpu01 : Column=075840 Fraction=0.340 Kernel=4269673.55 Mflops=4272523.43
+scc-connect-03-gpu01 : Column=076800 Fraction=0.345 Kernel=4249510.02 Mflops=4272343.83
+scc-connect-03-gpu01 : Column=078240 Fraction=0.350 Kernel=4115760.04 Mflops=4283912.74
+scc-connect-03-gpu01 : Column=079200 Fraction=0.355 Kernel=4242160.21 Mflops=4283602.05
+scc-connect-03-gpu01 : Column=080160 Fraction=0.360 Kernel=4199313.82 Mflops=4282981.49
+scc-connect-03-gpu01 : Column=081120 Fraction=0.365 Kernel=4209464.81 Mflops=4282452.61
+scc-connect-03-gpu01 : Column=082560 Fraction=0.370 Kernel=4239130.01 Mflops=4271289.16
+scc-connect-03-gpu01 : Column=083520 Fraction=0.375 Kernel=4237902.60 Mflops=4271063.12
+scc-connect-03-gpu01 : Column=084480 Fraction=0.380 Kernel=4243013.64 Mflops=4270877.29
+scc-connect-03-gpu01 : Column=085920 Fraction=0.385 Kernel=4051326.96 Mflops=4280379.19
+scc-connect-03-gpu01 : Column=086880 Fraction=0.390 Kernel=4201783.37 Mflops=4279878.46
+scc-connect-03-gpu01 : Column=087840 Fraction=0.395 Kernel=4220836.46 Mflops=4279511.56
+scc-connect-03-gpu01 : Column=089280 Fraction=0.400 Kernel=4208356.12 Mflops=4269573.30
+scc-connect-03-gpu01 : Column=090240 Fraction=0.405 Kernel=4225659.81 Mflops=4269314.84
+scc-connect-03-gpu01 : Column=091200 Fraction=0.410 Kernel=4253632.55 Mflops=4269224.98
+scc-connect-03-gpu01 : Column=092640 Fraction=0.415 Kernel=4136699.77 Mflops=4277483.38
+scc-connect-03-gpu01 : Column=093600 Fraction=0.420 Kernel=4175635.97 Mflops=4276917.26
+scc-connect-03-gpu01 : Column=094560 Fraction=0.425 Kernel=4239118.34 Mflops=4276714.47
+scc-connect-03-gpu01 : Column=096000 Fraction=0.430 Kernel=4260479.24 Mflops=4268519.60
+scc-connect-03-gpu01 : Column=096960 Fraction=0.435 Kernel=4237885.00 Mflops=4268363.62
+scc-connect-03-gpu01 : Column=097920 Fraction=0.440 Kernel=4239249.90 Mflops=4268218.42
+scc-connect-03-gpu01 : Column=099360 Fraction=0.445 Kernel=4046805.37 Mflops=4275014.90
+scc-connect-03-gpu01 : Column=100320 Fraction=0.450 Kernel=4231658.60 Mflops=4274808.68
+scc-connect-03-gpu01 : Column=101280 Fraction=0.455 Kernel=4191597.81 Mflops=4274417.22
+scc-connect-03-gpu01 : Column=102240 Fraction=0.460 Kernel=4204087.34 Mflops=4274094.03
+scc-connect-03-gpu01 : Column=103680 Fraction=0.465 Kernel=4235091.82 Mflops=4267233.85
+scc-connect-03-gpu01 : Column=104640 Fraction=0.470 Kernel=4204097.36 Mflops=4266958.65
+scc-connect-03-gpu01 : Column=105600 Fraction=0.475 Kernel=4232976.99 Mflops=4266814.53
+scc-connect-03-gpu01 : Column=107040 Fraction=0.480 Kernel=4118030.38 Mflops=4272384.21
+scc-connect-03-gpu01 : Column=108000 Fraction=0.485 Kernel=4198494.91 Mflops=4272083.78
+scc-connect-03-gpu01 : Column=108960 Fraction=0.490 Kernel=4193146.96 Mflops=4271769.04
+scc-connect-03-gpu01 : Column=110400 Fraction=0.495 Kernel=4201302.53 Mflops=4265858.12
+scc-connect-03-gpu01 : Column=114720 Fraction=0.515 Kernel=4136745.40 Mflops=4269891.98
+scc-connect-03-gpu01 : Column=119040 Fraction=0.535 Kernel=4218369.52 Mflops=4264467.62
+scc-connect-03-gpu01 : Column=123360 Fraction=0.555 Kernel=4113053.71 Mflops=4267642.97
+scc-connect-03-gpu01 : Column=128160 Fraction=0.575 Kernel=4183884.00 Mflops=4266514.08
+scc-connect-03-gpu01 : Column=132480 Fraction=0.595 Kernel=4213036.69 Mflops=4262735.66
+scc-connect-03-gpu01 : Column=136800 Fraction=0.615 Kernel=4105755.12 Mflops=4264640.56
+scc-connect-03-gpu01 : Column=141600 Fraction=0.635 Kernel=4169920.32 Mflops=4263720.20
+scc-connect-03-gpu01 : Column=145920 Fraction=0.655 Kernel=4180702.37 Mflops=4261072.82
+scc-connect-03-gpu01 : Column=150240 Fraction=0.675 Kernel=4069532.02 Mflops=4261880.70
+scc-connect-03-gpu01 : Column=154560 Fraction=0.695 Kernel=4202865.35 Mflops=4260048.72
+scc-connect-03-gpu01 : Column=177120 Fraction=0.795 Kernel=4068822.56 Mflops=4257710.02
+scc-connect-03-gpu01 : Column=199200 Fraction=0.895 Kernel=3658858.38 Mflops=4252655.24
+scc-connect-03-gpu01 : Column=221280 Fraction=0.995 Kernel=1812053.84 Mflops=4246283.11
+================================================================================
+T/V                N    NB     P     Q               Time                 Gflops
+--------------------------------------------------------------------------------
+WR12C2C2      222240   480     1     2            1723.84            4.24506e+03
+HPL_pdgesv() start time Fri Oct 23 08:02:08 2026
+
+HPL_pdgesv() end time   Fri Oct 23 08:30:52 2026
+
+--------------------------------------------------------------------------------
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.20205983e-03 ...... PASSED
+================================================================================
+
+Finished      1 tests with the following results:
+              1 tests completed and passed residual checks,
+              0 tests completed and failed residual checks,
+              0 tests skipped because of illegal input values.
+--------------------------------------------------------------------------------
+
+End of Tests.
+================================================================================
+power   : pl250 499 W both packages, 2235 MHz, max 54 C, system max 1612 W
+
+test    : pl275 | NB 480 | package-0 PL1 275 W PL2 300 W  package-1 PL1 275 W PL2 300 W  | fan mode 01
+numa    : node 0 485 GiB free  node 1 486 GiB free  
+[0] MPI startup(): Intel(R) MPI Library, Version 2021.18.1  Build 20260626 (id: b44796a)
+[0] MPI startup(): Copyright (C) 2003-2026 Intel Corporation.  All rights reserved.
+[0] MPI startup(): library kind: release
+[0] MPI startup(): Load tuning file: "/opt/intel/oneapi/mpi/2021.18/opt/mpi/etc/tuning_spr_shm.dat"
+[0] MPI startup(): ===== CPU pinning =====
+[0] MPI startup(): Rank    Pid      Node name             Pin cpu
+[0] MPI startup(): 0       439643   scc-connect-03-gpu01  {0-31,64-95}
+[0] MPI startup(): 1       439644   scc-connect-03-gpu01  {32-63,96-127}
+================================================================================
+HPLinpack 2.3  --  High-Performance Linpack benchmark  --   December 2, 2018
+Written by A. Petitet and R. Clint Whaley,  Innovative Computing Laboratory, UTK
+Modified by Piotr Luszczek, Innovative Computing Laboratory, UTK
+Modified by Julien Langou, University of Colorado Denver
+================================================================================
+
+An explanation of the input/output parameters follows:
+T/V    : Wall time / encoded variant.
+N      : The order of the coefficient matrix A.
+NB     : The partitioning blocking factor.
+P      : The number of process rows.
+Q      : The number of process columns.
+Time   : Time in seconds to solve the linear system.
+Gflops : Rate of execution for solving the linear system.
+
+The following parameter values will be used:
+
+N        :  222240 
+NB       :     480 
+PMAP     : Row-major process mapping
+P        :       1 
+Q        :       2 
+PFACT    :   Crout 
+NBMIN    :       2 
+NDIV     :       2 
+RFACT    :   Crout 
+BCAST    :   2ring 
+DEPTH    :       1 
+SWAP     : Mix (threshold = 16)
+L1       : transposed form
+U        : transposed form
+EQUIL    : yes
+ALIGN    :   16 double precision words
+
+--------------------------------------------------------------------------------
+
+- The matrix A is randomly generated for each test.
+- The following scaled residual check will be computed:
+      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+- The relative machine precision (eps) is taken to be               1.110223e-16
+- Computational tests pass if scaled residuals are less than                16.0
+
+scc-connect-03-gpu01 : Column=001440 Fraction=0.005 Kernel=    4.00 Mflops=6311731.97
+scc-connect-03-gpu01 : Column=002400 Fraction=0.010 Kernel=4195810.06 Mflops=5258006.56
+scc-connect-03-gpu01 : Column=003360 Fraction=0.015 Kernel=4268175.73 Mflops=4934594.81
+scc-connect-03-gpu01 : Column=004800 Fraction=0.020 Kernel=4208202.03 Mflops=4655083.88
+scc-connect-03-gpu01 : Column=005760 Fraction=0.025 Kernel=4253172.90 Mflops=4584456.41
+scc-connect-03-gpu01 : Column=006720 Fraction=0.030 Kernel=4212865.91 Mflops=4528886.17
+scc-connect-03-gpu01 : Column=008160 Fraction=0.035 Kernel=4299407.23 Mflops=4537330.35
+scc-connect-03-gpu01 : Column=009120 Fraction=0.040 Kernel=4279000.93 Mflops=4509739.69
+scc-connect-03-gpu01 : Column=010080 Fraction=0.045 Kernel=4286749.38 Mflops=4488431.03
+scc-connect-03-gpu01 : Column=011520 Fraction=0.050 Kernel=4225928.57 Mflops=4402533.78
+scc-connect-03-gpu01 : Column=012480 Fraction=0.055 Kernel=4207105.25 Mflops=4387684.69
+scc-connect-03-gpu01 : Column=013440 Fraction=0.060 Kernel=4239193.52 Mflops=4377360.83
+scc-connect-03-gpu01 : Column=014880 Fraction=0.065 Kernel=4225903.43 Mflops=4413267.22
+scc-connect-03-gpu01 : Column=015840 Fraction=0.070 Kernel=4220498.48 Mflops=4401918.53
+scc-connect-03-gpu01 : Column=016800 Fraction=0.075 Kernel=4251388.74 Mflops=4393679.45
+scc-connect-03-gpu01 : Column=018240 Fraction=0.080 Kernel=4230949.43 Mflops=4335841.47
+scc-connect-03-gpu01 : Column=019200 Fraction=0.085 Kernel=4213245.97 Mflops=4330074.43
+scc-connect-03-gpu01 : Column=020160 Fraction=0.090 Kernel=4213571.85 Mflops=4324887.68
+scc-connect-03-gpu01 : Column=021120 Fraction=0.095 Kernel=4215898.33 Mflops=4320286.75
+scc-connect-03-gpu01 : Column=022560 Fraction=0.100 Kernel=4248720.83 Mflops=4359093.75
+scc-connect-03-gpu01 : Column=023520 Fraction=0.105 Kernel=4230607.27 Mflops=4354264.17
+scc-connect-03-gpu01 : Column=024480 Fraction=0.110 Kernel=4253547.74 Mflops=4350668.18
+scc-connect-03-gpu01 : Column=025920 Fraction=0.115 Kernel=4235498.40 Mflops=4304533.05
+scc-connect-03-gpu01 : Column=026880 Fraction=0.120 Kernel=4230625.40 Mflops=4302174.97
+scc-connect-03-gpu01 : Column=027840 Fraction=0.125 Kernel=4242244.69 Mflops=4300344.42
+scc-connect-03-gpu01 : Column=029280 Fraction=0.130 Kernel=4223128.87 Mflops=4334253.89
+scc-connect-03-gpu01 : Column=030240 Fraction=0.135 Kernel=4266001.47 Mflops=4332356.88
+scc-connect-03-gpu01 : Column=031200 Fraction=0.140 Kernel=4242339.69 Mflops=4329933.10
+scc-connect-03-gpu01 : Column=032640 Fraction=0.145 Kernel=4230796.25 Mflops=4291499.85
+scc-connect-03-gpu01 : Column=033600 Fraction=0.150 Kernel=4248035.38 Mflops=4290439.33
+scc-connect-03-gpu01 : Column=034560 Fraction=0.155 Kernel=4253934.19 Mflops=4289579.59
+scc-connect-03-gpu01 : Column=036000 Fraction=0.160 Kernel=4264413.86 Mflops=4322062.29
+scc-connect-03-gpu01 : Column=036960 Fraction=0.165 Kernel=4263822.06 Mflops=4320791.70
+scc-connect-03-gpu01 : Column=037920 Fraction=0.170 Kernel=4251275.92 Mflops=4319318.23
+scc-connect-03-gpu01 : Column=039360 Fraction=0.175 Kernel=4244595.07 Mflops=4284994.21
+scc-connect-03-gpu01 : Column=040320 Fraction=0.180 Kernel=4239289.91 Mflops=4284101.23
+scc-connect-03-gpu01 : Column=041280 Fraction=0.185 Kernel=4244116.51 Mflops=4283343.72
+scc-connect-03-gpu01 : Column=042240 Fraction=0.190 Kernel=4252882.93 Mflops=4282784.36
+scc-connect-03-gpu01 : Column=043680 Fraction=0.195 Kernel=4207304.12 Mflops=4310063.59
+scc-connect-03-gpu01 : Column=044640 Fraction=0.200 Kernel=4243595.44 Mflops=4308916.73
+scc-connect-03-gpu01 : Column=045600 Fraction=0.205 Kernel=4226871.71 Mflops=4307534.46
+scc-connect-03-gpu01 : Column=047040 Fraction=0.210 Kernel=4234486.85 Mflops=4279289.63
+scc-connect-03-gpu01 : Column=048000 Fraction=0.215 Kernel=4260462.92 Mflops=4278997.30
+scc-connect-03-gpu01 : Column=048960 Fraction=0.220 Kernel=4247736.74 Mflops=4278523.08
+scc-connect-03-gpu01 : Column=050400 Fraction=0.225 Kernel=4118113.87 Mflops=4302198.48
+scc-connect-03-gpu01 : Column=051360 Fraction=0.230 Kernel=4229144.16 Mflops=4301148.97
+scc-connect-03-gpu01 : Column=052320 Fraction=0.235 Kernel=4220619.03 Mflops=4300018.75
+scc-connect-03-gpu01 : Column=053760 Fraction=0.240 Kernel=4236061.92 Mflops=4276068.30
+scc-connect-03-gpu01 : Column=054720 Fraction=0.245 Kernel=4242617.45 Mflops=4275631.65
+scc-connect-03-gpu01 : Column=055680 Fraction=0.250 Kernel=4256916.21 Mflops=4275393.99
+scc-connect-03-gpu01 : Column=057120 Fraction=0.255 Kernel=4119580.00 Mflops=4294689.86
+scc-connect-03-gpu01 : Column=058080 Fraction=0.260 Kernel=4234596.16 Mflops=4293963.89
+scc-connect-03-gpu01 : Column=059040 Fraction=0.265 Kernel=4248482.29 Mflops=4293428.97
+scc-connect-03-gpu01 : Column=060480 Fraction=0.270 Kernel=4246361.10 Mflops=4273489.39
+scc-connect-03-gpu01 : Column=061440 Fraction=0.275 Kernel=4232421.70 Mflops=4273033.88
+scc-connect-03-gpu01 : Column=062400 Fraction=0.280 Kernel=4254609.88 Mflops=4272835.17
+scc-connect-03-gpu01 : Column=063360 Fraction=0.285 Kernel=4230824.39 Mflops=4272389.75
+scc-connect-03-gpu01 : Column=064800 Fraction=0.290 Kernel=4078548.64 Mflops=4288456.42
+scc-connect-03-gpu01 : Column=065760 Fraction=0.295 Kernel=4222006.11 Mflops=4287786.26
+scc-connect-03-gpu01 : Column=066720 Fraction=0.300 Kernel=4215915.30 Mflops=4287076.32
+scc-connect-03-gpu01 : Column=068160 Fraction=0.305 Kernel=4245435.20 Mflops=4270995.47
+scc-connect-03-gpu01 : Column=069120 Fraction=0.310 Kernel=4262741.77 Mflops=4270919.40
+scc-connect-03-gpu01 : Column=070080 Fraction=0.315 Kernel=4224896.19 Mflops=4270500.60
+scc-connect-03-gpu01 : Column=071520 Fraction=0.320 Kernel=4140288.92 Mflops=4284162.60
+scc-connect-03-gpu01 : Column=072480 Fraction=0.325 Kernel=4212742.73 Mflops=4283542.88
+scc-connect-03-gpu01 : Column=073440 Fraction=0.330 Kernel=4230243.69 Mflops=4283092.02
+scc-connect-03-gpu01 : Column=074880 Fraction=0.335 Kernel=4229501.75 Mflops=4269284.32
+scc-connect-03-gpu01 : Column=075840 Fraction=0.340 Kernel=4271955.01 Mflops=4269305.47
+scc-connect-03-gpu01 : Column=076800 Fraction=0.345 Kernel=4246371.25 Mflops=4269126.50
+scc-connect-03-gpu01 : Column=078240 Fraction=0.350 Kernel=4116985.43 Mflops=4280773.63
+scc-connect-03-gpu01 : Column=079200 Fraction=0.355 Kernel=4201538.19 Mflops=4280178.79
+scc-connect-03-gpu01 : Column=080160 Fraction=0.360 Kernel=4193623.43 Mflops=4279541.18
+scc-connect-03-gpu01 : Column=081120 Fraction=0.365 Kernel=4206973.00 Mflops=4279019.24
+scc-connect-03-gpu01 : Column=082560 Fraction=0.370 Kernel=4232290.30 Mflops=4267676.61
+scc-connect-03-gpu01 : Column=083520 Fraction=0.375 Kernel=4255452.32 Mflops=4267594.26
+scc-connect-03-gpu01 : Column=084480 Fraction=0.380 Kernel=4224564.05 Mflops=4267308.18
+scc-connect-03-gpu01 : Column=085920 Fraction=0.385 Kernel=4045590.87 Mflops=4276892.67
+scc-connect-03-gpu01 : Column=086880 Fraction=0.390 Kernel=4219394.74 Mflops=4276528.16
+scc-connect-03-gpu01 : Column=087840 Fraction=0.395 Kernel=4200654.55 Mflops=4276054.80
+scc-connect-03-gpu01 : Column=089280 Fraction=0.400 Kernel=4224181.40 Mflops=4266289.43
+scc-connect-03-gpu01 : Column=090240 Fraction=0.405 Kernel=4232229.47 Mflops=4266089.42
+scc-connect-03-gpu01 : Column=091200 Fraction=0.410 Kernel=4228686.40 Mflops=4265874.02
+scc-connect-03-gpu01 : Column=092640 Fraction=0.415 Kernel=4104337.23 Mflops=4274062.43
+scc-connect-03-gpu01 : Column=093600 Fraction=0.420 Kernel=4166080.54 Mflops=4273461.33
+scc-connect-03-gpu01 : Column=094560 Fraction=0.425 Kernel=4250372.67 Mflops=4273337.88
+scc-connect-03-gpu01 : Column=096000 Fraction=0.430 Kernel=4285497.74 Mflops=4265391.78
+scc-connect-03-gpu01 : Column=096960 Fraction=0.435 Kernel=4251740.25 Mflops=4265322.54
+scc-connect-03-gpu01 : Column=097920 Fraction=0.440 Kernel=4263188.43 Mflops=4265311.97
+scc-connect-03-gpu01 : Column=099360 Fraction=0.445 Kernel=4099158.56 Mflops=4272376.80
+scc-connect-03-gpu01 : Column=100320 Fraction=0.450 Kernel=4236901.08 Mflops=4272208.38
+scc-connect-03-gpu01 : Column=101280 Fraction=0.455 Kernel=4222854.19 Mflops=4271978.05
+scc-connect-03-gpu01 : Column=102240 Fraction=0.460 Kernel=4219250.44 Mflops=4271736.75
+scc-connect-03-gpu01 : Column=103680 Fraction=0.465 Kernel=4238315.96 Mflops=4264955.57
+scc-connect-03-gpu01 : Column=104640 Fraction=0.470 Kernel=4201239.19 Mflops=4264677.80
+scc-connect-03-gpu01 : Column=105600 Fraction=0.475 Kernel=4258671.95 Mflops=4264652.49
+scc-connect-03-gpu01 : Column=107040 Fraction=0.480 Kernel=4125183.10 Mflops=4270253.49
+scc-connect-03-gpu01 : Column=108000 Fraction=0.485 Kernel=4192447.91 Mflops=4269936.84
+scc-connect-03-gpu01 : Column=108960 Fraction=0.490 Kernel=4221229.41 Mflops=4269744.02
+scc-connect-03-gpu01 : Column=110400 Fraction=0.495 Kernel=4239313.16 Mflops=4264191.68
+scc-connect-03-gpu01 : Column=114720 Fraction=0.515 Kernel=4143694.11 Mflops=4268251.82
+scc-connect-03-gpu01 : Column=119040 Fraction=0.535 Kernel=4246648.80 Mflops=4263211.47
+scc-connect-03-gpu01 : Column=123360 Fraction=0.555 Kernel=4125783.97 Mflops=4266625.13
+scc-connect-03-gpu01 : Column=128160 Fraction=0.575 Kernel=4189474.00 Mflops=4265586.92
+scc-connect-03-gpu01 : Column=132480 Fraction=0.595 Kernel=4199768.39 Mflops=4261686.18
+scc-connect-03-gpu01 : Column=136800 Fraction=0.615 Kernel=4108621.12 Mflops=4263718.19
+scc-connect-03-gpu01 : Column=141600 Fraction=0.635 Kernel=4172403.89 Mflops=4262831.65
+scc-connect-03-gpu01 : Column=145920 Fraction=0.655 Kernel=4173799.74 Mflops=4260110.96
+scc-connect-03-gpu01 : Column=150240 Fraction=0.675 Kernel=4078519.00 Mflops=4261064.42
+scc-connect-03-gpu01 : Column=154560 Fraction=0.695 Kernel=4179647.23 Mflops=4259152.52
+scc-connect-03-gpu01 : Column=177120 Fraction=0.795 Kernel=4080629.96 Mflops=4257074.87
+scc-connect-03-gpu01 : Column=199200 Fraction=0.895 Kernel=3680365.91 Mflops=4252235.91
+scc-connect-03-gpu01 : Column=221280 Fraction=0.995 Kernel=1815172.42 Mflops=4245884.55
+================================================================================
+T/V                N    NB     P     Q               Time                 Gflops
+--------------------------------------------------------------------------------
+WR12C2C2      222240   480     1     2            1723.98            4.24471e+03
+HPL_pdgesv() start time Fri Oct 23 08:31:27 2026
+
+HPL_pdgesv() end time   Fri Oct 23 09:00:11 2026
+
+--------------------------------------------------------------------------------
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.20205983e-03 ...... PASSED
+================================================================================
+
+Finished      1 tests with the following results:
+              1 tests completed and passed residual checks,
+              0 tests completed and failed residual checks,
+              0 tests skipped because of illegal input values.
+--------------------------------------------------------------------------------
+
+End of Tests.
+================================================================================
+power   : pl275 498 W both packages, 2244 MHz, max 54 C, system max 1627 W
+stop    : only using 498 of 550 W, clock is maxed out
+
+summary : pl250    4245.06 GFLOPS    +0.00%   2235 MHz   499 W   54 C  system  1612 W  PASSED
+summary : pl275    4244.71 GFLOPS    -0.01%   2244 MHz   498 W   54 C  system  1627 W  PASSED
+cpu MHz : avg 2237, min 2134, max 2578 over 162 samples, median 2219 (pl250)
+restored: package-0 PL1 250 W PL2 300 W  package-1 PL1 250 W PL2 300 W  fan mode 01, no_turbo=0

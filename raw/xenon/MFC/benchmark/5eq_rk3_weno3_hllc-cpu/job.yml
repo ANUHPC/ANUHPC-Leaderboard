@@ -1,0 +1,12 @@
+suite: MFC
+case: 5eq_rk3_weno3_hllc
+resources:
+  partition: cpu
+  nodes: 1
+  tasks_per_node: 4
+  walltime: "01:00:00"
+build:
+  gpu: none
+  toolchain: gcc-ompi5
+tuning:
+  gbpp: 1

@@ -1,0 +1,47 @@
+invocation:
+- run
+- /scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_lf-a100/case.py
+- -e
+- batch
+- -c
+- /cluster/runner/_work/ANUHPC-Leaderboard/ANUHPC-Leaderboard/suites/MFC/xenon.mako
+- -t
+- pre_process
+- simulation
+- -N
+- '2'
+- -n
+- '4'
+- -p
+- gpu
+- -w
+- 01:00:00
+- --name
+- mfc-5eq_rk3_weno3_lf-a100
+- -o
+- /scratch/jobs/35187881911/MFC/benchmark/5eq_rk3_weno3_lf-a100/summary.yaml
+- --no-build
+- --clean
+- --gpu
+- acc
+- --wait
+- --
+- --gbpp
+- '16'
+lock:
+  debug: false
+  fastmath: false
+  gcov: false
+  gpu: acc
+  mixed: false
+  mpi: true
+  reldebug: false
+  single: false
+  unified: false
+syscheck:
+    exec:  3.2008577
+pre_process:
+    exec:  49.3183518
+simulation:
+    exec:  249.2816041
+    grind: 0.17167647

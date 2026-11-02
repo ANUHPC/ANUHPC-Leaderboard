@@ -1,0 +1,70 @@
+node    : scc-connect-03-gpu01
+cpu     : INTEL(R) XEON(R) GOLD 6548Y+
+ranks   : 2 x 32 threads
+binary  : /data/jobs/37754475652/HPL/Ayush/Test-1/xhpl (from /data/benchmarks/hpl/2.3-openblas0.3.34-ompi4.1.6)
+blas    : /data/benchmarks/openblas/0.3.34/lib/libopenblas_sapphirerapidsp-r0.3.34.so
+mpi     : mpirun (Open MPI) 4.1.6
+================================================================================
+HPLinpack 2.3  --  High-Performance Linpack benchmark  --   December 2, 2018
+Written by A. Petitet and R. Clint Whaley,  Innovative Computing Laboratory, UTK
+Modified by Piotr Luszczek, Innovative Computing Laboratory, UTK
+Modified by Julien Langou, University of Colorado Denver
+================================================================================
+
+An explanation of the input/output parameters follows:
+T/V    : Wall time / encoded variant.
+N      : The order of the coefficient matrix A.
+NB     : The partitioning blocking factor.
+P      : The number of process rows.
+Q      : The number of process columns.
+Time   : Time in seconds to solve the linear system.
+Gflops : Rate of execution for solving the linear system.
+
+The following parameter values will be used:
+
+N      :  100608 
+NB     :     384 
+PMAP   : Row-major process mapping
+P      :       1 
+Q      :       2 
+PFACT  :   Crout 
+NBMIN  :       2 
+NDIV   :       2 
+RFACT  :   Crout 
+BCAST  :   2ring 
+DEPTH  :       1 
+SWAP   : Mix (threshold = 16)
+L1     : transposed form
+U      : transposed form
+EQUIL  : yes
+ALIGN  : 16 double precision words
+
+--------------------------------------------------------------------------------
+
+- The matrix A is randomly generated for each test.
+- The following scaled residual check will be computed:
+      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+- The relative machine precision (eps) is taken to be               1.110223e-16
+- Computational tests pass if scaled residuals are less than                16.0
+
+================================================================================
+T/V                N    NB     P     Q               Time                 Gflops
+--------------------------------------------------------------------------------
+WR12C2C2      100608   384     1     2             218.61             3.1055e+03
+HPL_pdgesv() start time Thu Oct  8 09:09:27 2026
+
+HPL_pdgesv() end time   Thu Oct  8 09:13:05 2026
+
+--------------------------------------------------------------------------------
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.88028129e-03 ...... PASSED
+================================================================================
+
+Finished      1 tests with the following results:
+              1 tests completed and passed residual checks,
+              0 tests completed and failed residual checks,
+              0 tests skipped because of illegal input values.
+--------------------------------------------------------------------------------
+
+End of Tests.
+================================================================================
+cpu MHz : avg 2121, min 1064, max 4080 over 33 samples 10 s apart (mean over the 64 cores)

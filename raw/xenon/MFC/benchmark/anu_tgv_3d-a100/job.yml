@@ -1,0 +1,20 @@
+# Taylor-Green vortex on all eight A100s.
+#
+# The first contributed case (source: repo — suites/MFC/cases/anu_tgv_3d).
+# Smooth, periodic and viscous, where the seven upstream benchmarks are
+# shock-driven and all but one inviscid: WENO takes its no-discontinuity
+# branch and the viscous fluxes add a halo exchange per stage, so this
+# stresses communication rather than the Riemann solver.
+suite: MFC
+case: anu_tgv_3d
+visualize: false
+resources:
+  partition: gpu
+  nodes: 2                 # gpu-node1 + gpu-node2
+  tasks_per_node: 4        # one rank per A100
+  walltime: "01:00:00"
+build:
+  gpu: acc
+  toolchain: nvhpc-acc
+tuning:
+  gbpp: 16                 # 399^3 = 63.5M cells over 8 ranks
